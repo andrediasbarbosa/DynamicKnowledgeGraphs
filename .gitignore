@@ -1,0 +1,48 @@
+# Build directories
+build/
+cmake-build-*/
+
+# Output files
+output_json/
+*.json
+*.dot
+*.png
+
+# API keys and sensitive config (keep examples)
+.llm_config.json
+!.llm_config*.example
+
+# Compiled objects
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+
+# Executables
+*.exe
+*.out
+bin/
+lib/
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+Makefile
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test outputs
+Testing/
+CTestTestfile.cmake
