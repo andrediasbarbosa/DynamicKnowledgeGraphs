@@ -226,6 +226,7 @@ std::set<std::string> Hypergraph::get_neighborhood(
     int hops,
     int min_intersection_size
 ) const {
+    (void)min_intersection_size;
     if (!has_node(node_id) || hops < 0) {
         return {};
     }
@@ -854,6 +855,52 @@ void Hypergraph::export_to_html(const std::string& filename,
             links: )" << links_json.dump() << R"(
         };
 
+        // --- PATCH START: Hyperedge Flattening Logic ---
+        // The visualization library requires 1-to-1 links (source -> target).
+        // The raw data contains "hyperedges" (sources[...] -> targets[...]).
+        // We must expand these into individual links.
+
+        const processLinks = (rawLinks) => {
+            const expandedLinks = [];
+
+            rawLinks.forEach(link => {
+                // Check if this is a hyperedge with arrays for sources/targets
+                if (Array.isArray(link.sources) && Array.isArray(link.targets)) {
+                    link.sources.forEach(source => {
+                        link.targets.forEach(target => {
+                            expandedLinks.push({
+                                source: source,
+                                target: target,
+                                label: link.label,
+                                type: link.type || 'relation',
+                                confidence: link.confidence,
+                                // Copy any other necessary properties from the original link
+                                id: link.id ? `${link.id}_${source}_${target}` : undefined
+                            });
+                        });
+                    });
+                } else if (link.source && link.target) {
+                    // If it's already a simple link, keep it
+                    expandedLinks.push(link);
+                }
+            });
+
+            return expandedLinks;
+        };
+
+        // Apply the processing to the data object
+        // Note: Adjust 'data.links' or 'data.edges' depending on the exact property name in the raw JSON.
+        // Based on standard graph JSON structures, it is likely 'data.links' or implied as the second array.
+        if (data.links) {
+            data.links = processLinks(data.links);
+        } else if (data.edges) {
+            // Some formats use 'edges' instead of 'links'
+            data.links = processLinks(data.edges);
+        }
+
+        console.log(`Patch applied: Generated ${data.links.length} simple links from hyperedges.`);
+        // --- PATCH END ---
+
         // --- 3D Renderer (WebGL): ForceGraph3D + filtered subgraph + clustering ---
         // Interaction: left-drag rotates (built-in), right-drag pans, wheel zooms.
 
@@ -1002,6 +1049,7 @@ void Hypergraph::export_to_html(const std::string& filename,
           const depthEl = document.getElementById('kgDepth');
           const depthValEl = document.getElementById('kgDepthVal');
           const detailsEl = document.getElementById('kgDetails');
+          console.log('detailsEl found:', detailsEl);
 
           // Clustering controls
           const clusterOnEl = document.getElementById('kgClusterOn');
@@ -1219,7 +1267,9 @@ void Hypergraph::export_to_html(const std::string& filename,
             .showNavInfo(false)
             .enableNodeDrag(true)
             .linkSource('source')
-            .linkTarget('target');
+            .linkTarget('target')
+            .cooldownTime(2000)  // Prevent runaway physics simulation
+            .warmupTicks(0);     // Don't pre-calculate - let rebuildAndRender handle it
 
           // -------------------- CLUSTERING --------------------
 
@@ -1585,9 +1635,9 @@ void Hypergraph::export_to_html(const std::string& filename,
           }
 
           function applyForces() {
-            Graph.d3Force('charge').strength(-state.repulsion);
-            Graph.d3Force('link').strength(state.linkStrength);
-            Graph.d3Force('center', d3.forceCenter(0, 0, 0));
+            // ForceGraph3D has built-in center force, only set charge and link
+            if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+            if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength);
           }
 
           function applyFreeze() {
@@ -1661,9 +1711,11 @@ void Hypergraph::export_to_html(const std::string& filename,
 
           // ---- Events ----
           Graph.onNodeClick((node) => {
+            console.log('Node clicked:', node);
             if (!node) return;
             state.selectedGid = node.gid;
             state.visible.add(node.gid);
+            console.log('Calling updateDetails with node:', node.label, node.type, node.degree);
             updateDetails(node);
             applyLabels();
             focusNode(node);

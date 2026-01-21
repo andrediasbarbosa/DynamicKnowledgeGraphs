@@ -5,10 +5,53 @@
 #include <chrono>
 #include <thread>
 #include <algorithm>
+#include <cctype>
 #include <cstdlib>
 #include <sys/stat.h>
 
 using json = nlohmann::json;
+
+namespace {
+
+bool is_ascii_alpha_word(const std::string& text) {
+    if (text.empty()) return false;
+    for (unsigned char c : text) {
+        if (c >= 128 || !std::isalpha(c)) return false;
+    }
+    return true;
+}
+
+std::string singularize_ascii_word(const std::string& word) {
+    if (word.size() <= 3) return word;
+    if (!is_ascii_alpha_word(word)) return word;
+
+    if (word.size() >= 4 && word.compare(word.size() - 3, 3, "ies") == 0) {
+        return word.substr(0, word.size() - 3) + "y";
+    }
+    if (word.size() >= 4 &&
+        (word.compare(word.size() - 4, 4, "ches") == 0 ||
+         word.compare(word.size() - 4, 4, "shes") == 0 ||
+         word.compare(word.size() - 3, 3, "xes") == 0 ||
+         word.compare(word.size() - 3, 3, "ses") == 0 ||
+         word.compare(word.size() - 3, 3, "zes") == 0)) {
+        return word.substr(0, word.size() - 2);
+    }
+    if (word.size() >= 2 && word.compare(word.size() - 2, 2, "ss") == 0) {
+        return word;
+    }
+    if (!word.empty() && word.back() == 's') {
+        return word.substr(0, word.size() - 1);
+    }
+    return word;
+}
+
+std::string normalize_entity_label(const std::string& label) {
+    if (label.empty()) return label;
+    if (label.find(' ') != std::string::npos) return label;
+    return singularize_ascii_word(label);
+}
+
+}  // namespace
 
 namespace kg {
 
@@ -471,9 +514,15 @@ Hypergraph ExtractionPipeline::build_graph_from_results(
             if (rel.sources.empty() || rel.targets.empty()) continue;
 
             HyperEdge edge;
-            edge.sources = rel.sources;
+            edge.sources.reserve(rel.sources.size());
+            for (const auto& src : rel.sources) {
+                edge.sources.push_back(normalize_entity_label(src));
+            }
             edge.relation = rel.relation;
-            edge.targets = rel.targets;
+            edge.targets.reserve(rel.targets.size());
+            for (const auto& tgt : rel.targets) {
+                edge.targets.push_back(normalize_entity_label(tgt));
+            }
             edge.confidence = rel.confidence;
             edge.source_document = document_id;
             edge.source_chunk_id = result.chunk_id;
