@@ -226,6 +226,7 @@ std::set<std::string> Hypergraph::get_neighborhood(
     int hops,
     int min_intersection_size
 ) const {
+    (void)min_intersection_size;
     if (!has_node(node_id) || hops < 0) {
         return {};
     }
@@ -497,6 +498,52 @@ void Hypergraph::export_to_html(const std::string& filename,
     // Collect statistics for display
     auto stats = compute_statistics();
 
+    // Calculate optimal minimum degree for ~1000 hyperedges max
+    const int MAX_INITIAL_EDGES = 1000;
+    int optimal_min_degree = 1;
+    int max_degree = 1;
+
+    if (static_cast<int>(hyperedges_.size()) > MAX_INITIAL_EDGES) {
+        // Build degree distribution
+        std::map<int, std::set<std::string>> nodes_by_degree;
+        for (const auto& [id, node] : nodes_) {
+            nodes_by_degree[node.degree].insert(id);
+            if (node.degree > max_degree) max_degree = node.degree;
+        }
+
+        // Try increasing min_degree until we get <= MAX_INITIAL_EDGES hyperedges
+        for (int test_degree = 1; test_degree <= max_degree; ++test_degree) {
+            // Collect nodes with degree >= test_degree
+            std::set<std::string> visible_nodes;
+            for (int d = test_degree; d <= max_degree; ++d) {
+                if (nodes_by_degree.count(d)) {
+                    visible_nodes.insert(nodes_by_degree[d].begin(), nodes_by_degree[d].end());
+                }
+            }
+
+            // Count hyperedges that connect to at least one visible node
+            int visible_edges = 0;
+            for (const auto& [id, edge] : hyperedges_) {
+                bool has_visible = false;
+                for (const auto& src : edge.sources) {
+                    if (visible_nodes.count(src)) { has_visible = true; break; }
+                }
+                if (!has_visible) {
+                    for (const auto& tgt : edge.targets) {
+                        if (visible_nodes.count(tgt)) { has_visible = true; break; }
+                    }
+                }
+                if (has_visible) visible_edges++;
+            }
+
+            if (visible_edges <= MAX_INITIAL_EDGES) {
+                optimal_min_degree = test_degree;
+                break;
+            }
+            optimal_min_degree = test_degree;
+        }
+    }
+
     // Build JSON data for D3.js
     nlohmann::json nodes_json = nlohmann::json::array();
     nlohmann::json edges_json = nlohmann::json::array();
@@ -556,7 +603,7 @@ void Hypergraph::export_to_html(const std::string& filename,
         edge_idx++;
     }
 
-    // Write HTML file
+    // Write HTML file with optimized Canvas renderer
     file << R"(<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -564,6 +611,9 @@ void Hypergraph::export_to_html(const std::string& filename,
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>)" << title << R"(</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.75.0/dist/3d-force-graph.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -664,30 +714,84 @@ void Hypergraph::export_to_html(const std::string& filename,
             border-radius: 3px;
             margin-right: 10px;
         }
-        .node-entity {
-            fill: #4fc3f7;
-            stroke: #0288d1;
-            stroke-width: 2px;
+        /* --- Performance UI additions (Canvas optimization) --- */
+        #graph canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
-        .node-relation {
-            fill: #ff9800;
-            stroke: #f57c00;
-            stroke-width: 2px;
+        .kg-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
         }
-        .link-source {
-            stroke: #4fc3f7;
-            stroke-opacity: 0.6;
+        .kg-input {
+            width: 220px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #eee;
+            outline: none;
         }
-        .link-target {
-            stroke: #ff9800;
-            stroke-opacity: 0.6;
+        .kg-input::placeholder { color: rgba(255,255,255,0.55); }
+        .kg-btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #eee;
+            cursor: pointer;
+            user-select: none;
         }
-        text {
-            fill: #fff;
-            font-size: 11px;
+        .kg-btn:hover { background: rgba(255,255,255,0.12); }
+        .kg-btn:active { transform: translateY(1px); }
+        #kgHud {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            z-index: 120;
             pointer-events: none;
-            text-shadow: 0 0 3px rgba(0,0,0,0.8);
         }
+        #kgOverlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        #kgOverlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #kgOverlay .panel {
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 18px;
+            width: min(520px, 92vw);
+            color: #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        #kgOverlay .title {
+            font-size: 14px;
+            color: #4fc3f7;
+            margin-bottom: 8px;
+        }
+        #kgOverlay .sub { font-size: 12px; color: rgba(255,255,255,0.75); }
     </style>
 </head>
 <body>
@@ -704,6 +808,10 @@ void Hypergraph::export_to_html(const std::string& filename,
 
     <div id="controls">
         <label>
+            Min Entity Degree: <span id="degreeValue">)" << optimal_min_degree << R"(</span>
+            <input type="range" id="minDegree" min="1" max=")" << std::max(20, max_degree) << R"(" step="1" value=")" << optimal_min_degree << R"(">
+        </label>
+        <label>
             Link Strength:
             <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="0.5">
         </label>
@@ -714,6 +822,9 @@ void Hypergraph::export_to_html(const std::string& filename,
         <label>
             <input type="checkbox" id="showLabels" checked> Show Labels
         </label>
+        <div id="filterStats" style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            Showing: <span id="visibleNodes">0</span> nodes, <span id="visibleLinks">0</span> links
+        </div>
     </div>
 
     <div id="legend">
@@ -744,172 +855,1092 @@ void Hypergraph::export_to_html(const std::string& filename,
             links: )" << links_json.dump() << R"(
         };
 
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+        // --- PATCH START: Hyperedge Flattening Logic ---
+        // The visualization library requires 1-to-1 links (source -> target).
+        // The raw data contains "hyperedges" (sources[...] -> targets[...]).
+        // We must expand these into individual links.
 
-        const svg = d3.select("#graph")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
+        const processLinks = (rawLinks) => {
+            const expandedLinks = [];
 
-        // Add zoom behavior
-        const g = svg.append("g");
-
-        svg.call(d3.zoom()
-            .scaleExtent([0.1, 4])
-            .on("zoom", (event) => {
-                g.attr("transform", event.transform);
-            }));
-
-        // Arrow markers for directed edges
-        svg.append("defs").selectAll("marker")
-            .data(["source", "target"])
-            .join("marker")
-            .attr("id", d => `arrow-${d}`)
-            .attr("viewBox", "0 -5 10 10")
-            .attr("refX", 20)
-            .attr("refY", 0)
-            .attr("markerWidth", 6)
-            .attr("markerHeight", 6)
-            .attr("orient", "auto")
-            .append("path")
-            .attr("fill", d => d === "source" ? "#4fc3f7" : "#ff9800")
-            .attr("d", "M0,-5L10,0L0,5");
-
-        // Create force simulation
-        const simulation = d3.forceSimulation(data.nodes)
-            .force("link", d3.forceLink(data.links).id((d, i) => i).distance(80).strength(0.5))
-            .force("charge", d3.forceManyBody().strength(-400))
-            .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collision", d3.forceCollide().radius(30));
-
-        // Create links
-        const link = g.append("g")
-            .selectAll("line")
-            .data(data.links)
-            .join("line")
-            .attr("class", d => `link-${d.type}`)
-            .attr("stroke-width", 2)
-            .attr("marker-end", d => `url(#arrow-${d.type})`);
-
-        // Create nodes
-        const node = g.append("g")
-            .selectAll("g")
-            .data(data.nodes)
-            .join("g")
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
-
-        // Add circles for entities, rectangles for relations
-        node.each(function(d) {
-            const el = d3.select(this);
-            if (d.type === "entity") {
-                el.append("circle")
-                    .attr("r", Math.max(8, Math.min(20, 6 + d.degree * 2)))
-                    .attr("class", "node-entity");
-            } else {
-                el.append("rect")
-                    .attr("width", 24)
-                    .attr("height", 16)
-                    .attr("x", -12)
-                    .attr("y", -8)
-                    .attr("rx", 3)
-                    .attr("class", "node-relation");
-            }
-        });
-
-        // Add labels
-        const labels = node.append("text")
-            .attr("dx", d => d.type === "entity" ? 15 : 18)
-            .attr("dy", 4)
-            .text(d => d.label.length > 20 ? d.label.substring(0, 17) + "..." : d.label);
-
-        // Tooltip
-        const tooltip = d3.select("#tooltip");
-
-        node.on("mouseover", function(event, d) {
-            let content = `<h3>${d.label}</h3>`;
-            content += `<div class="detail">Type: ${d.type === "entity" ? "Entity" : "Relation"}</div>`;
-
-            if (d.type === "entity") {
-                content += `<div class="detail">Degree: ${d.degree}</div>`;
-            } else {
-                content += `<div class="detail">Confidence: ${(d.confidence * 100).toFixed(0)}%</div>`;
-                if (d.sources && d.sources.length > 0) {
-                    content += `<div class="detail">Sources: ${d.sources.join(", ")}</div>`;
+            rawLinks.forEach(link => {
+                // Check if this is a hyperedge with arrays for sources/targets
+                if (Array.isArray(link.sources) && Array.isArray(link.targets)) {
+                    link.sources.forEach(source => {
+                        link.targets.forEach(target => {
+                            expandedLinks.push({
+                                source: source,
+                                target: target,
+                                label: link.label,
+                                type: link.type || 'relation',
+                                confidence: link.confidence,
+                                // Copy any other necessary properties from the original link
+                                id: link.id ? `${link.id}_${source}_${target}` : undefined
+                            });
+                        });
+                    });
+                } else if (link.source && link.target) {
+                    // If it's already a simple link, keep it
+                    expandedLinks.push(link);
                 }
-                if (d.targets && d.targets.length > 0) {
-                    content += `<div class="detail">Targets: ${d.targets.join(", ")}</div>`;
-                }
+            });
+
+            return expandedLinks;
+        };
+
+        // Apply the processing to the data object
+        // Note: Adjust 'data.links' or 'data.edges' depending on the exact property name in the raw JSON.
+        // Based on standard graph JSON structures, it is likely 'data.links' or implied as the second array.
+        if (data.links) {
+            data.links = processLinks(data.links);
+        } else if (data.edges) {
+            // Some formats use 'edges' instead of 'links'
+            data.links = processLinks(data.edges);
+        }
+
+        console.log(`Patch applied: Generated ${data.links.length} simple links from hyperedges.`);
+        // --- PATCH END ---
+
+        // --- 3D Renderer (WebGL): ForceGraph3D + filtered subgraph + clustering ---
+        // Interaction: left-drag rotates (built-in), right-drag pans, wheel zooms.
+
+        (() => {
+          const graphDiv = document.getElementById('graph');
+          const controls = document.getElementById('controls');
+
+          // Safety: ensure libs loaded
+          if (typeof ForceGraph3D !== 'function' || typeof THREE === 'undefined') {
+            const msg = 'Missing WebGL libs. Serve this file via http://localhost and ensure CDN access.';
+            console.error(msg);
+            alert(msg);
+            return;
+          }
+
+          // --- small helpers ---
+          const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+          const rafThrottle = (fn) => {
+            let scheduled = false;
+            return (...args) => {
+              if (scheduled) return;
+              scheduled = true;
+              requestAnimationFrame(() => {
+                scheduled = false;
+                fn(...args);
+              });
+            };
+          };
+          const ric = window.requestIdleCallback || ((cb) => setTimeout(() => cb({ timeRemaining: () => 0, didTimeout: true }), 16));
+
+          // --- Overlay + HUD (create if missing) ---
+          let overlay = document.getElementById('kgOverlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'kgOverlay';
+            overlay.innerHTML = '<div class="panel"><div class="title" id="kgOverlayTitle">Working...</div><div class="sub" id="kgOverlaySub">Building subgraph</div></div>';
+            document.body.appendChild(overlay);
+          }
+          const overlayTitle = overlay.querySelector('#kgOverlayTitle') || overlay.querySelector('.title');
+          const overlaySub = overlay.querySelector('#kgOverlaySub') || overlay.querySelector('.sub');
+
+          function showOverlay(title, sub) {
+            if (overlayTitle) overlayTitle.textContent = title || 'Working...';
+            if (overlaySub) overlaySub.textContent = sub || '';
+            overlay.classList.add('show');
+          }
+          function hideOverlay() { overlay.classList.remove('show'); }
+
+          let hud = document.getElementById('kgHud');
+          if (!hud) {
+            hud = document.createElement('div');
+            hud.id = 'kgHud';
+            hud.textContent = '3D: initializing...';
+            document.body.appendChild(hud);
+          }
+
+          // --- Inject extra controls ---
+          if (!document.getElementById('kgSearch')) {
+            controls.insertAdjacentHTML('beforeend', `
+              <div class="kg-row">
+                <input class="kg-input" id="kgSearch" placeholder="Search node (press /)..." />
+                <button class="kg-btn" id="kgGo">Go</button>
+              </div>
+              <div class="kg-row">
+                <button class="kg-btn" id="kgExpand1">+ 1 hop</button>
+                <button class="kg-btn" id="kgExpand2">+ 2 hops</button>
+                <button class="kg-btn" id="kgReset">Reset</button>
+                <button class="kg-btn" id="kgCamReset">Reset camera</button>
+              </div>
+              <label style="margin-top:10px;">
+                <input type="checkbox" id="kgAutoFreeze" checked> Auto-freeze physics
+              </label>
+              <label>
+                <input type="checkbox" id="kgArrows"> Directional arrows
+              </label>
+              <label>
+                Max nodes: <span id="kgMaxNodesVal">2500</span>
+                <input type="range" id="kgMaxNodes" min="200" max="8000" step="100" value="2500">
+              </label>
+              <label>
+                Depth spread: <span id="kgDepthVal">120</span>
+                <input type="range" id="kgDepth" min="0" max="600" step="10" value="120">
+              </label>
+
+              <div style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                <label style="font-weight:600; color:#4fc3f7;">Clustering</label>
+                <label style="margin-top:6px;">
+                  <input type="checkbox" id="kgClusterOn" checked> Cluster coloring
+                </label>
+                <label>
+                  Clustering mode:
+                  <select id="kgClusterMode" class="kg-input" style="width: 180px;">
+                    <option value="topology" selected>Topology (Louvain)</option>
+                    <option value="spatial">Spatial (DBSCAN)</option>
+                  </select>
+                </label>
+                <label id="kgTopoResRow">
+                  Resolution: <span id="kgTopoResVal">1.00</span>
+                  <input type="range" id="kgTopoRes" min="0.20" max="3.00" step="0.05" value="1.00">
+                </label>
+                <label id="kgSpatialRadiusRow" style="display:none;">
+                  Cluster radius: <span id="kgClusterRadiusVal">40</span>
+                  <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
+                </label>
+                <label id="kgSpatialMinRow" style="display:none;">
+                  Min cluster size: <span id="kgMinClusterVal">12</span>
+                  <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="12">
+                </label>
+                <label>
+                  Palette:
+                  <select id="kgPalette" class="kg-input" style="width: 180px;">
+                    <option value="classic" selected>Classic</option>
+                    <option value="pastel">Pastel</option>
+                    <option value="neon">Neon</option>
+                    <option value="mono">Mono + accent</option>
+                  </select>
+                </label>
+                <div class="kg-row">
+                  <button class="kg-btn" id="kgRecluster">Cluster now</button>
+                  <label style="margin:0;">
+                    <input type="checkbox" id="kgAutoCluster" checked> Auto (on freeze)
+                  </label>
+                </div>
+              </div>
+
+              <div id="kgDetails" style="margin-top:10px; font-size:0.82em; color:#cfcfcf; line-height:1.35;"></div>
+            `);
+          }
+
+          const minDegreeEl = document.getElementById('minDegree');
+          const degreeValueEl = document.getElementById('degreeValue');
+          const linkStrengthEl = document.getElementById('linkStrength');
+          const repulsionEl = document.getElementById('repulsion');
+          const showLabelsEl = document.getElementById('showLabels');
+
+          const searchEl = document.getElementById('kgSearch');
+          const goBtn = document.getElementById('kgGo');
+          const exp1Btn = document.getElementById('kgExpand1');
+          const exp2Btn = document.getElementById('kgExpand2');
+          const resetBtn = document.getElementById('kgReset');
+          const camResetBtn = document.getElementById('kgCamReset');
+          const autoFreezeEl = document.getElementById('kgAutoFreeze');
+          const arrowsEl = document.getElementById('kgArrows');
+          const maxNodesEl = document.getElementById('kgMaxNodes');
+          const maxNodesValEl = document.getElementById('kgMaxNodesVal');
+          const depthEl = document.getElementById('kgDepth');
+          const depthValEl = document.getElementById('kgDepthVal');
+          const detailsEl = document.getElementById('kgDetails');
+          console.log('detailsEl found:', detailsEl);
+
+          // Clustering controls
+          const clusterOnEl = document.getElementById('kgClusterOn');
+          const clusterModeEl = document.getElementById('kgClusterMode');
+          const clusterRadiusEl = document.getElementById('kgClusterRadius');
+          const clusterRadiusValEl = document.getElementById('kgClusterRadiusVal');
+          const minClusterEl = document.getElementById('kgMinCluster');
+          const minClusterValEl = document.getElementById('kgMinClusterVal');
+          const topoResEl = document.getElementById('kgTopoRes');
+          const topoResValEl = document.getElementById('kgTopoResVal');
+          const paletteEl = document.getElementById('kgPalette');
+          const reclusterBtn = document.getElementById('kgRecluster');
+          const autoClusterEl = document.getElementById('kgAutoCluster');
+          const topoResRow = document.getElementById('kgTopoResRow');
+          const spatialRadiusRow = document.getElementById('kgSpatialRadiusRow');
+          const spatialMinRow = document.getElementById('kgSpatialMinRow');
+
+          // ---- Index nodes/edges ----
+          showOverlay('Indexing nodes & edges...', 'Preparing 3D graph');
+
+          const N = data.nodes.length;
+          for (let i = 0; i < N; i++) {
+            const n = data.nodes[i];
+            n.gid = i;
+            if (typeof n.x !== 'number') n.x = (window.innerWidth / 2) + (Math.random() - 0.5) * 40;
+            if (typeof n.y !== 'number') n.y = (window.innerHeight / 2) + (Math.random() - 0.5) * 40;
+          }
+
+          const edges = new Array(data.links.length);
+          const incident = Array.from({ length: N }, () => []);
+          for (let i = 0; i < data.links.length; i++) {
+            const l = data.links[i];
+            const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+            const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+            const e = { s, t, type: l.type };
+            edges[i] = e;
+            incident[s].push(i);
+            incident[t].push(i);
+          }
+
+          const entityByDegree = [];
+          for (let i = 0; i < N; i++) if (data.nodes[i].type === 'entity') entityByDegree.push(i);
+          entityByDegree.sort((a, b) => ((data.nodes[b].degree || 0) - (data.nodes[a].degree || 0)));
+
+          const labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+
+          // ---- State ----
+          const state = {
+            minDegree: +minDegreeEl.value,
+            linkStrength: +linkStrengthEl.value,
+            repulsion: +repulsionEl.value,
+            showLabels: !!showLabelsEl.checked,
+            autoFreeze: true,
+            showArrows: false,
+            maxNodes: +maxNodesEl.value,
+            depthSpread: +depthEl.value,
+            selectedGid: null,
+            visible: new Set(),
+            subNodes: [],
+            subLinks: [],
+            subNodesByGid: new Map(),
+            graph: null,
+            fps: { t0: performance.now(), frames: 0, value: 0 },
+            // Clustering state
+            clusterOn: true,
+            clusterMode: 'topology',
+            clusterRadius: 40,
+            minClusterSize: 12,
+            topoResolution: 1.0,
+            palette: 'classic',
+            autoCluster: true,
+            clusters: [],
+            clusterLabels: []
+          };
+
+          // Apply depth spread (z assignment)
+          function applyDepth() {
+            const spread = state.depthSpread;
+            for (let i = 0; i < N; i++) {
+              const n = data.nodes[i];
+              const base = (n.type === 'relation') ? 0.45 : 1.0;
+              n.z = (Math.random() - 0.5) * spread * base;
+            }
+          }
+
+          // ---- Visible subgraph ----
+          function seedVisibleByDegree(minDegree, maxNodes) {
+            const vis = new Set();
+
+            for (let k = 0; k < entityByDegree.length && vis.size < maxNodes; k++) {
+              const idx = entityByDegree[k];
+              const n = data.nodes[idx];
+              if ((n.degree || 0) >= minDegree) vis.add(idx);
+              else break;
             }
 
-            tooltip.html(content)
-                .style("left", (event.pageX + 15) + "px")
-                .style("top", (event.pageY - 10) + "px")
-                .style("opacity", 1);
-        })
-        .on("mouseout", function() {
-            tooltip.style("opacity", 0);
-        });
+            if (vis.size < 50) {
+              for (let k = 0; k < Math.min(200, entityByDegree.length) && vis.size < Math.min(maxNodes, 200); k++) {
+                vis.add(entityByDegree[k]);
+              }
+            }
 
-        // Update positions on tick
-        simulation.on("tick", () => {
-            link
-                .attr("x1", d => d.source.x)
-                .attr("y1", d => d.source.y)
-                .attr("x2", d => d.target.x)
-                .attr("y2", d => d.target.y);
+            const relQueue = [];
+            for (const idx of vis) {
+              for (const ei of incident[idx]) {
+                const e = edges[ei];
+                const other = (e.s === idx) ? e.t : e.s;
+                if (data.nodes[other].type === 'relation' && !vis.has(other)) relQueue.push(other);
+              }
+            }
+            for (let i = 0; i < relQueue.length && vis.size < maxNodes; i++) vis.add(relQueue[i]);
 
-            node.attr("transform", d => `translate(${d.x},${d.y})`);
-        });
+            if (state.selectedGid != null) vis.add(state.selectedGid);
+            return vis;
+          }
 
-        // Drag functions
-        function dragstarted(event) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            event.subject.fx = event.subject.x;
-            event.subject.fy = event.subject.y;
-        }
+          function buildSubgraphFromVisible() {
+            const subNodes = [];
+            state.visible.forEach(i => subNodes.push(data.nodes[i]));
 
-        function dragged(event) {
-            event.subject.fx = event.x;
-            event.subject.fy = event.y;
-        }
+            const edgeIds = new Set();
+            for (const i of state.visible) for (const ei of incident[i]) edgeIds.add(ei);
 
-        function dragended(event) {
-            if (!event.active) simulation.alphaTarget(0);
-            event.subject.fx = null;
-            event.subject.fy = null;
-        }
+            const subLinks = [];
+            edgeIds.forEach(ei => {
+              const e = edges[ei];
+              if (state.visible.has(e.s) && state.visible.has(e.t)) subLinks.push(e);
+            });
 
-        // Controls
-        d3.select("#linkStrength").on("input", function() {
-            simulation.force("link").strength(+this.value);
-            simulation.alpha(0.3).restart();
-        });
+            state.subNodes = subNodes;
+            state.subLinks = subLinks;
 
-        d3.select("#repulsion").on("input", function() {
-            simulation.force("charge").strength(-this.value);
-            simulation.alpha(0.3).restart();
-        });
+            const vn = document.getElementById('visibleNodes');
+            const vl = document.getElementById('visibleLinks');
+            if (vn) vn.textContent = String(subNodes.length);
+            if (vl) vl.textContent = String(subLinks.length);
+          }
 
-        d3.select("#showLabels").on("change", function() {
-            labels.style("opacity", this.checked ? 1 : 0);
-        });
+          function rebuildSubgraphIndex() {
+            state.subNodesByGid = new Map();
+            for (const n of state.subNodes) state.subNodesByGid.set(n.gid, n);
+          }
 
-        // Resize handler
-        window.addEventListener("resize", () => {
-            svg.attr("width", window.innerWidth)
-               .attr("height", window.innerHeight);
-            simulation.force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2));
-            simulation.alpha(0.3).restart();
-        });
+          function updateDetails(node) {
+            if (!detailsEl) return;
+            if (!node) {
+              detailsEl.innerHTML = '<span style="opacity:0.8;">Click a node to see details.</span>';
+              return;
+            }
+            const lines = [];
+            lines.push(`<div><b>${escapeHtml(node.label || node.id || 'Node')}</b></div>`);
+            lines.push(`<div style="opacity:0.85;">type: <code>${escapeHtml(node.type || '')}</code></div>`);
+            if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+            if (node.type === 'relation') {
+              if (node.label) lines.push(`<div style="opacity:0.85;">relation: <code>${escapeHtml(node.label)}</code></div>`);
+              if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+              if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+              if (typeof node.confidence === 'number') lines.push(`<div style="opacity:0.85;">confidence: <code>${node.confidence}</code></div>`);
+            }
+            detailsEl.innerHTML = lines.join('');
+          }
+
+          function escapeHtml(s) {
+            return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+          }
+
+          // ---- Expand hops ----
+          function expandSelected(hops) {
+            if (state.selectedGid == null) return;
+
+            const maxNodes = state.maxNodes;
+            const q = [state.selectedGid];
+            const dist = new Map([[state.selectedGid, 0]]);
+
+            while (q.length) {
+              const u = q.shift();
+              const d = dist.get(u) || 0;
+              if (d >= hops) continue;
+
+              for (const ei of incident[u]) {
+                const e = edges[ei];
+                const v = (e.s === u) ? e.t : e.s;
+                if (!dist.has(v)) {
+                  dist.set(v, d + 1);
+                  q.push(v);
+                }
+                if (state.visible.size < maxNodes) state.visible.add(v);
+              }
+              if (state.visible.size >= maxNodes) break;
+            }
+
+            const addRel = [];
+            for (const idx of state.visible) {
+              if (data.nodes[idx].type !== 'entity') continue;
+              for (const ei of incident[idx]) {
+                const e = edges[ei];
+                const other = (e.s === idx) ? e.t : e.s;
+                if (data.nodes[other].type === 'relation' && !state.visible.has(other) && state.visible.size < maxNodes) {
+                  addRel.push(other);
+                }
+              }
+            }
+            for (let i = 0; i < addRel.length && state.visible.size < maxNodes; i++) state.visible.add(addRel[i]);
+
+            rebuildAndRender('Expanding neighborhood...');
+          }
+
+          // ---- Graph init ----
+          graphDiv.innerHTML = '';
+
+          const Graph = ForceGraph3D()(graphDiv)
+            .nodeId('gid')
+            .nodeLabel(n => (n.label || n.id || ''))
+            .backgroundColor('rgba(0,0,0,0)')
+            .showNavInfo(false)
+            .enableNodeDrag(true)
+            .linkSource('source')
+            .linkTarget('target')
+            .cooldownTime(2000)  // Prevent runaway physics simulation
+            .warmupTicks(0);     // Don't pre-calculate - let rebuildAndRender handle it
+
+          // -------------------- CLUSTERING --------------------
+
+          const PALETTES = {
+            classic: ['#4fc3f7','#ff9800','#ab47bc','#66bb6a','#ef5350','#ffa726','#26c6da','#8d6e63','#78909c','#d4e157'],
+            pastel:  ['#a3d5ff','#ffd6a5','#bdb2ff','#caffbf','#ffadad','#fdffb6','#9bf6ff','#ffc6ff','#b8f2e6','#f1c0e8'],
+            neon:    ['#00e5ff','#ffea00','#ff1744','#76ff03','#e040fb','#ff9100','#1de9b6','#f500ff','#00c853','#2979ff'],
+            mono:    ['#4fc3f7','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc']
+          };
+
+          function getClusterColor(cid) {
+            if (cid == null || cid < 0) return '#4fc3f7';
+            const pal = PALETTES[state.palette] || PALETTES.classic;
+            return pal[cid % pal.length];
+          }
+
+          function applyClusterStyling() {
+            const clusteringEnabled = !!state.clusterOn;
+
+            Graph
+              .nodeColor(n => {
+                if (!clusteringEnabled) return (n.type === 'relation' ? '#ff9800' : '#4fc3f7');
+                const cid = n.__cluster ?? -1;
+                return getClusterColor(cid);
+              })
+              .linkColor(l => {
+                if (!clusteringEnabled) return (l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)');
+                const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                const ca = a ? (a.__cluster ?? -1) : -1;
+                const cb = b ? (b.__cluster ?? -1) : -1;
+
+                if (ca >= 0 && ca === cb) return getClusterColor(ca);
+                return 'rgba(255,255,255,0.10)';
+              })
+              .linkWidth(l => {
+                if (!clusteringEnabled) return 0.6;
+                const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                const ca = a ? (a.__cluster ?? -1) : -1;
+                const cb = b ? (b.__cluster ?? -1) : -1;
+                return (ca >= 0 && ca === cb) ? 0.9 : 0.35;
+              });
+
+            Graph.refresh();
+          }
+
+          function clearClusterLabels() {
+            if (!state.clusterLabels?.length) return;
+            const scene = Graph.scene();
+            for (const s of state.clusterLabels) scene.remove(s);
+            state.clusterLabels = [];
+          }
+
+          function drawClusterLabels() {
+            clearClusterLabels();
+            if (!state.clusterOn || typeof SpriteText === 'undefined') return;
+
+            const scene = Graph.scene();
+            for (const cl of state.clusters) {
+              const rep = state.subNodesByGid.get(cl.repGid);
+              if (!rep) continue;
+
+              const labelTxt = (rep.label || rep.id || `Cluster ${cl.id}`);
+              const sprite = new SpriteText(labelTxt);
+              sprite.fontFace = 'Arial Black';
+              sprite.textHeight = 10;
+              sprite.color = 'rgba(255,255,255,0.95)';
+              sprite.backgroundColor = 'rgba(0,0,0,0.50)';
+              sprite.padding = 6;
+              sprite.borderRadius = 10;
+              sprite.material.depthWrite = false;
+
+              sprite.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+              scene.add(sprite);
+              state.clusterLabels.push(sprite);
+            }
+          }
+
+          function chooseRepresentative(clusterNodeGids) {
+            let cx = 0, cy = 0, cz = 0, cnt = 0;
+            for (const gid of clusterNodeGids) {
+              const n = state.subNodesByGid.get(gid);
+              if (!n) continue;
+              cx += (n.x || 0); cy += (n.y || 0); cz += (n.z || 0);
+              cnt++;
+            }
+            if (!cnt) return clusterNodeGids[0] ?? null;
+            cx /= cnt; cy /= cnt; cz /= cnt;
+
+            let bestGid = null;
+            let bestD = Infinity;
+            for (const gid of clusterNodeGids) {
+              const n = state.subNodesByGid.get(gid);
+              if (!n || n.type !== 'entity') continue;
+              const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+              const d2 = dx*dx + dy*dy + dz*dz;
+              if (d2 < bestD) { bestD = d2; bestGid = gid; }
+            }
+            if (bestGid != null) return bestGid;
+
+            for (const gid of clusterNodeGids) {
+              const n = state.subNodesByGid.get(gid);
+              if (!n) continue;
+              const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+              const d2 = dx*dx + dy*dy + dz*dz;
+              if (d2 < bestD) { bestD = d2; bestGid = gid; }
+            }
+            return bestGid;
+          }
+
+          // DBSCAN spatial clustering
+          function clusterSpatialDBSCAN() {
+            const eps = state.clusterRadius;
+            const minPts = state.minClusterSize;
+
+            const nodes = state.subNodes;
+            const n = nodes.length;
+            const labels = new Array(n).fill(0);
+            let cid = 0;
+
+            const eps2 = eps * eps;
+            function regionQuery(i) {
+              const ni = nodes[i];
+              const xi = ni.x || 0, yi = ni.y || 0, zi = ni.z || 0;
+              const res = [];
+              for (let j = 0; j < n; j++) {
+                const nj = nodes[j];
+                const dx = (nj.x || 0) - xi, dy = (nj.y || 0) - yi, dz = (nj.z || 0) - zi;
+                if ((dx*dx + dy*dy + dz*dz) <= eps2) res.push(j);
+              }
+              return res;
+            }
+
+            function expandCluster(i, neighbors, cid) {
+              labels[i] = cid;
+              for (let k = 0; k < neighbors.length; k++) {
+                const j = neighbors[k];
+                if (labels[j] === -1) labels[j] = cid;
+                if (labels[j] !== 0) continue;
+                labels[j] = cid;
+                const n2 = regionQuery(j);
+                if (n2.length >= minPts) {
+                  for (const x of n2) neighbors.push(x);
+                }
+              }
+            }
+
+            for (let i = 0; i < n; i++) {
+              if (labels[i] !== 0) continue;
+              const neighbors = regionQuery(i);
+              if (neighbors.length < minPts) {
+                labels[i] = -1;
+              } else {
+                cid++;
+                expandCluster(i, neighbors, cid);
+              }
+            }
+
+            for (let i = 0; i < n; i++) {
+              nodes[i].__cluster = labels[i] > 0 ? (labels[i] - 1) : -1;
+            }
+
+            const groups = new Map();
+            for (const node of nodes) {
+              const c = node.__cluster ?? -1;
+              if (c < 0) continue;
+              if (!groups.has(c)) groups.set(c, []);
+              groups.get(c).push(node.gid);
+            }
+
+            state.clusters = [];
+            for (const [id, gids] of groups.entries()) {
+              const rep = chooseRepresentative(gids);
+              state.clusters.push({ id, nodes: gids, repGid: rep });
+            }
+          }
+
+          // Louvain-style topology clustering
+          function clusterTopologyLouvain() {
+            const nodes = state.subNodes;
+            const links = state.subLinks;
+            const idxByGid = new Map();
+            for (let i = 0; i < nodes.length; i++) idxByGid.set(nodes[i].gid, i);
+
+            const adj = Array.from({ length: nodes.length }, () => new Map());
+            for (const e of links) {
+              const a = idxByGid.get(e.s);
+              const b = idxByGid.get(e.t);
+              if (a == null || b == null || a === b) continue;
+              const w = 1;
+              adj[a].set(b, (adj[a].get(b) || 0) + w);
+              adj[b].set(a, (adj[b].get(a) || 0) + w);
+            }
+
+            const resolution = state.topoResolution;
+            const n = nodes.length;
+            let community = new Array(n);
+            for (let i = 0; i < n; i++) community[i] = i;
+
+            let k = new Array(n).fill(0);
+            let m2 = 0;
+            for (let i = 0; i < n; i++) {
+              let sum = 0;
+              for (const w of adj[i].values()) sum += w;
+              k[i] = sum;
+              m2 += sum;
+            }
+            if (m2 === 0) {
+              for (const node of nodes) node.__cluster = -1;
+              state.clusters = [];
+              return;
+            }
+
+            let tot = new Array(n).fill(0);
+            for (let i = 0; i < n; i++) tot[community[i]] += k[i];
+
+            function neighCommWeights(i) {
+              const map = new Map();
+              for (const [j, w] of adj[i].entries()) {
+                const cj = community[j];
+                map.set(cj, (map.get(cj) || 0) + w);
+              }
+              return map;
+            }
+
+            function modularityGain(i, c, ki_in, totc) {
+              return (resolution * (ki_in / m2)) - ((k[i] * totc) / (m2 * m2));
+            }
+
+            let improved = true;
+            let passes = 0;
+            while (improved && passes < 15) {
+              improved = false;
+              passes++;
+
+              for (let i = 0; i < n; i++) {
+                const ci = community[i];
+                const neigh = neighCommWeights(i);
+                tot[ci] -= k[i];
+
+                let bestC = ci;
+                let bestGain = 0;
+
+                for (const [c, ki_in] of neigh.entries()) {
+                  const gain = modularityGain(i, c, ki_in, tot[c]);
+                  if (gain > bestGain) {
+                    bestGain = gain;
+                    bestC = c;
+                  }
+                }
+
+                if (bestC !== ci) {
+                  community[i] = bestC;
+                  improved = true;
+                }
+
+                tot[community[i]] += k[i];
+              }
+            }
+
+            const remap = new Map();
+            let nextId = 0;
+            for (let i = 0; i < n; i++) {
+              const c = community[i];
+              if (!remap.has(c)) remap.set(c, nextId++);
+              community[i] = remap.get(c);
+            }
+
+            const groups = new Map();
+            for (let i = 0; i < n; i++) {
+              const cid = community[i];
+              if (!groups.has(cid)) groups.set(cid, []);
+              groups.get(cid).push(nodes[i].gid);
+            }
+
+            for (const node of nodes) node.__cluster = -1;
+            state.clusters = [];
+            let keptId = 0;
+            for (const [cid, gids] of groups.entries()) {
+              if (gids.length < state.minClusterSize) continue;
+              for (const gid of gids) {
+                const nd = state.subNodesByGid.get(gid);
+                if (nd) nd.__cluster = keptId;
+              }
+              const rep = chooseRepresentative(gids);
+              state.clusters.push({ id: keptId, nodes: gids, repGid: rep });
+              keptId++;
+            }
+          }
+
+          function recomputeClustering() {
+            rebuildSubgraphIndex();
+
+            for (const n of state.subNodes) n.__cluster = -1;
+            state.clusters = [];
+
+            if (!state.clusterOn) {
+              clearClusterLabels();
+              applyClusterStyling();
+              return;
+            }
+
+            if (state.clusterMode === 'spatial') clusterSpatialDBSCAN();
+            else clusterTopologyLouvain();
+
+            applyClusterStyling();
+            drawClusterLabels();
+          }
+
+          function updateClusterLabelPositions() {
+            if (!state.clusterLabels?.length) return;
+            for (let i = 0; i < state.clusters.length; i++) {
+              const cl = state.clusters[i];
+              const rep = state.subNodesByGid.get(cl.repGid);
+              const lab = state.clusterLabels[i];
+              if (!rep || !lab) continue;
+              lab.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+            }
+          }
+
+          // -------------------- END CLUSTERING --------------------
+
+          // Styling
+          Graph
+            .nodeRelSize(3)
+            .nodeVal(n => (n.type === 'relation' ? 1.5 : clamp(1 + (n.degree || 0) * 0.06, 1.2, 6)))
+            .nodeColor(n => (n.type === 'relation' ? '#ff9800' : '#4fc3f7'))
+            .linkColor(l => (l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)'))
+            .linkWidth(l => (l.type === 'source' ? 0.6 : 0.6));
+
+          function applyArrows() {
+            const on = !!state.showArrows;
+            Graph
+              .linkDirectionalArrowLength(on ? 3.5 : 0)
+              .linkDirectionalArrowRelPos(1)
+              .linkDirectionalArrowColor(() => 'rgba(255,255,255,0.55)');
+          }
+
+          function applyLabels() {
+            state.showLabels = !!showLabelsEl.checked;
+            if (typeof SpriteText === 'undefined') return;
+
+            Graph.nodeThreeObject(node => {
+              if (!state.showLabels) return null;
+
+              const isSelected = (state.selectedGid != null && node.gid === state.selectedGid);
+              const important = (node.type === 'entity' && (node.degree || 0) >= Math.max(40, state.minDegree));
+              if (!isSelected && !important) return null;
+
+              const sprite = new SpriteText(node.label || node.id || '');
+              sprite.textHeight = isSelected ? 6 : 4;
+              sprite.color = 'rgba(255,255,255,0.9)';
+              sprite.backgroundColor = 'rgba(0,0,0,0.35)';
+              sprite.padding = 2;
+              sprite.borderRadius = 6;
+              sprite.material.depthWrite = false;
+              sprite.position.y = 8;
+              return sprite;
+            }).nodeThreeObjectExtend(true);
+
+            Graph.refresh();
+          }
+
+          function applyForces() {
+            // ForceGraph3D has built-in center force, only set charge and link
+            if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+            if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength);
+          }
+
+          function applyFreeze() {
+            state.autoFreeze = !!autoFreezeEl.checked;
+            if (state.autoFreeze) {
+              Graph.cooldownTime(1500);
+            } else {
+              Graph.cooldownTime(3.6e9);
+            }
+          }
+
+          function resetCamera() {
+            Graph.cameraPosition(
+              { x: 0, y: 0, z: 420 },
+              { x: 0, y: 0, z: 0 },
+              700
+            );
+          }
+
+          function focusNode(node) {
+            if (!node) return;
+            const dist = 180;
+            const ratio = 1 + dist / Math.hypot(node.x || 0, node.y || 0, node.z || 0);
+            Graph.cameraPosition(
+              { x: (node.x || 0) * ratio, y: (node.y || 0) * ratio, z: (node.z || 0) * ratio },
+              { x: node.x || 0, y: node.y || 0, z: node.z || 0 },
+              700
+            );
+          }
+
+          // ---- Render / rebuild orchestration ----
+          function rebuildAndRender(message) {
+            showOverlay(message || 'Updating...', 'Filtering & rebuilding visible subgraph');
+
+            ric(() => {
+              buildSubgraphFromVisible();
+
+              const gData = {
+                nodes: state.subNodes,
+                links: state.subLinks.map(e => ({ source: e.s, target: e.t, type: e.type }))
+              };
+
+              Graph.graphData(gData);
+              applyForces();
+              applyFreeze();
+              applyArrows();
+              applyLabels();
+
+              Graph.d3ReheatSimulation();
+
+              // Cluster after a short delay for layout to settle
+              if (state.autoCluster) {
+                setTimeout(() => recomputeClustering(), 1400);
+              } else {
+                recomputeClustering();
+              }
+
+              hideOverlay();
+              updateHud();
+            });
+          }
+
+          function rebuildFromDegree() {
+            showOverlay('Seeding visible subgraph...', 'Using degree threshold + caps');
+            ric(() => {
+              state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+              if (state.selectedGid != null) state.visible.add(state.selectedGid);
+              rebuildAndRender('Rendering subgraph...');
+            });
+          }
+
+          // ---- Events ----
+          Graph.onNodeClick((node) => {
+            console.log('Node clicked:', node);
+            if (!node) return;
+            state.selectedGid = node.gid;
+            state.visible.add(node.gid);
+            console.log('Calling updateDetails with node:', node.label, node.type, node.degree);
+            updateDetails(node);
+            applyLabels();
+            focusNode(node);
+          });
+
+          Graph.onNodeHover(rafThrottle((node) => {
+            const tt = document.getElementById('tooltip');
+            if (!tt) return;
+            if (!node) {
+              tt.style.opacity = 0;
+              return;
+            }
+            tt.style.opacity = 1;
+            tt.innerHTML = `<strong>${escapeHtml(node.label || node.id || '')}</strong><br/><span style="opacity:0.85;">${escapeHtml(node.type || '')}${typeof node.degree==='number' ? ` deg ${node.degree}` : ''}</span>`;
+          }));
+
+          // Controls wiring
+          let degTimer = null;
+          minDegreeEl.addEventListener('input', () => {
+            state.minDegree = +minDegreeEl.value;
+            if (degreeValueEl) degreeValueEl.textContent = String(state.minDegree);
+            if (degTimer) clearTimeout(degTimer);
+            degTimer = setTimeout(rebuildFromDegree, 150);
+          });
+
+          linkStrengthEl.addEventListener('input', () => {
+            state.linkStrength = +linkStrengthEl.value;
+            applyForces();
+            Graph.d3ReheatSimulation();
+          });
+
+          repulsionEl.addEventListener('input', () => {
+            state.repulsion = +repulsionEl.value;
+            applyForces();
+            Graph.d3ReheatSimulation();
+          });
+
+          showLabelsEl.addEventListener('change', () => {
+            state.showLabels = !!showLabelsEl.checked;
+            applyLabels();
+          });
+
+          autoFreezeEl.addEventListener('change', () => {
+            applyFreeze();
+            Graph.d3ReheatSimulation();
+          });
+
+          arrowsEl.addEventListener('change', () => {
+            state.showArrows = !!arrowsEl.checked;
+            applyArrows();
+            Graph.refresh();
+          });
+
+          maxNodesEl.addEventListener('input', () => {
+            state.maxNodes = +maxNodesEl.value;
+            if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+          });
+          maxNodesEl.addEventListener('change', () => {
+            rebuildFromDegree();
+          });
+
+          depthEl.addEventListener('input', () => {
+            state.depthSpread = +depthEl.value;
+            if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+          });
+          depthEl.addEventListener('change', () => {
+            applyDepth();
+            rebuildFromDegree();
+          });
+
+          exp1Btn.addEventListener('click', () => expandSelected(1));
+          exp2Btn.addEventListener('click', () => expandSelected(2));
+
+          resetBtn.addEventListener('click', () => {
+            state.selectedGid = null;
+            updateDetails(null);
+            rebuildFromDegree();
+            resetCamera();
+          });
+
+          camResetBtn.addEventListener('click', () => resetCamera());
+
+          function findNodeByQuery(q) {
+            q = (q || '').trim().toLowerCase();
+            if (!q) return null;
+            let idx = labelsLower.indexOf(q);
+            if (idx !== -1) return data.nodes[idx];
+            for (let i = 0; i < labelsLower.length; i++) {
+              if (labelsLower[i] && labelsLower[i].includes(q)) return data.nodes[i];
+            }
+            return null;
+          }
+
+          function goSearch() {
+            const node = findNodeByQuery(searchEl.value);
+            if (!node) return;
+            state.selectedGid = node.gid;
+            state.visible.add(node.gid);
+            updateDetails(node);
+            rebuildAndRender('Jumping to node...');
+            setTimeout(() => focusNode(node), 50);
+          }
+
+          goBtn.addEventListener('click', goSearch);
+          searchEl.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter') goSearch();
+          });
+
+          // Clustering controls
+          function updateClusterModeUI() {
+            const mode = clusterModeEl.value;
+            state.clusterMode = mode;
+            if (mode === 'spatial') {
+              spatialRadiusRow.style.display = '';
+              spatialMinRow.style.display = '';
+              topoResRow.style.display = 'none';
+            } else {
+              spatialRadiusRow.style.display = 'none';
+              spatialMinRow.style.display = '';
+              topoResRow.style.display = '';
+            }
+            recomputeClustering();
+          }
+
+          clusterOnEl.addEventListener('change', () => {
+            state.clusterOn = !!clusterOnEl.checked;
+            recomputeClustering();
+          });
+
+          clusterModeEl.addEventListener('change', updateClusterModeUI);
+
+          clusterRadiusEl.addEventListener('input', () => {
+            state.clusterRadius = +clusterRadiusEl.value;
+            clusterRadiusValEl.textContent = String(state.clusterRadius);
+          });
+          clusterRadiusEl.addEventListener('change', recomputeClustering);
+
+          minClusterEl.addEventListener('input', () => {
+            state.minClusterSize = +minClusterEl.value;
+            minClusterValEl.textContent = String(state.minClusterSize);
+          });
+          minClusterEl.addEventListener('change', recomputeClustering);
+
+          topoResEl.addEventListener('input', () => {
+            state.topoResolution = +topoResEl.value;
+            topoResValEl.textContent = state.topoResolution.toFixed(2);
+          });
+          topoResEl.addEventListener('change', recomputeClustering);
+
+          paletteEl.addEventListener('change', () => {
+            state.palette = paletteEl.value;
+            applyClusterStyling();
+            drawClusterLabels();
+          });
+
+          autoClusterEl.addEventListener('change', () => {
+            state.autoCluster = !!autoClusterEl.checked;
+          });
+
+          reclusterBtn.addEventListener('click', recomputeClustering);
+
+          // Keyboard shortcuts
+          window.addEventListener('keydown', (ev) => {
+            if (ev.key === '/') {
+              ev.preventDefault();
+              searchEl.focus();
+            }
+          });
+
+          // HUD (FPS + counts)
+          function updateHud() {
+            const now = performance.now();
+            state.fps.frames += 1;
+            const dt = now - state.fps.t0;
+            if (dt >= 800) {
+              state.fps.value = Math.round((state.fps.frames * 1000) / dt);
+              state.fps.frames = 0;
+              state.fps.t0 = now;
+            }
+            hud.textContent = `3D | ${state.subNodes.length} nodes | ${state.subLinks.length} links | ${state.fps.value} fps`;
+          }
+          if (Graph.onRenderFramePost) {
+            Graph.onRenderFramePost(() => {
+              updateHud();
+              updateClusterLabelPositions();
+            });
+          } else {
+            setInterval(() => {
+              updateHud();
+              updateClusterLabelPositions();
+            }, 250);
+          }
+
+          window.addEventListener('resize', () => {
+            Graph.width(window.innerWidth);
+            Graph.height(window.innerHeight);
+          });
+
+          // ---- Boot sequence ----
+          updateDetails(null);
+          if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+          if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+          clusterRadiusValEl.textContent = String(state.clusterRadius);
+          minClusterValEl.textContent = String(state.minClusterSize);
+          topoResValEl.textContent = state.topoResolution.toFixed(2);
+          updateClusterModeUI();
+
+          applyDepth();
+          resetCamera();
+          state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+          buildSubgraphFromVisible();
+
+          hideOverlay();
+          rebuildAndRender('Rendering initial 3D view...');
+        })();
     </script>
 </body>
 </html>
 )";
 
+    // Ensure all data is written before closing
+    file.flush();
+    if (file.fail()) {
+        throw std::runtime_error("Failed to write HTML file: " + filename);
+    }
     file.close();
 }
 

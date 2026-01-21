@@ -29,7 +29,7 @@ struct PipelineConfig {
     int llm_timeout_seconds = 60;           ///< Request timeout
 
     // Chunking Configuration
-    std::string chunking_strategy = "sentence";  ///< "fixed", "page", "paragraph", "sentence"
+    std::string chunking_strategy = "page";  ///< "fixed", "page", "paragraph", "sentence"
     int chunk_size = 500;                   ///< For fixed-size chunking
     int chunk_overlap = 100;                ///< For fixed-size chunking
     int max_paragraphs = 3;                 ///< For paragraph chunking
