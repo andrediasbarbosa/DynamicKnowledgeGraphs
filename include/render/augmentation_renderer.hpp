@@ -110,11 +110,40 @@ private:
     std::string make_aug_node_id();
     std::string get_node_label(const std::string& node_id) const;
 
+    // Normalize a node ID to match the graph's normalized storage
+    // This ensures augmentation links correctly reference existing nodes
+    std::string normalize_graph_ref(const std::string& node_id) const;
+
+    // Check if two nodes are already connected in the base graph
+    // Used to filter out discoveries that duplicate existing relationships
+    bool nodes_already_connected(const std::string& node_a, const std::string& node_b) const;
+
+    // Check if a node ID refers to an existing graph node (not an augmentation node)
+    bool is_existing_node(const std::string& node_id) const;
+
     // Conversion helpers for each insight type
     void convert_bridge(const Insight& insight, AugmentationData& data);
     void convert_completion(const Insight& insight, AugmentationData& data);
     void convert_motif(const Insight& insight, AugmentationData& data);
     void convert_substitution(const Insight& insight, AugmentationData& data);
+    void convert_contradiction(const Insight& insight, AugmentationData& data);
+    void convert_entity_resolution(const Insight& insight, AugmentationData& data);
+    void convert_core_periphery(const Insight& insight, AugmentationData& data);
+    void convert_text_similarity(const Insight& insight, AugmentationData& data);
+    void convert_argument_support(const Insight& insight, AugmentationData& data);
+    void convert_active_learning(const Insight& insight, AugmentationData& data);
+    void convert_method_outcome(const Insight& insight, AugmentationData& data);
+    void convert_centrality(const Insight& insight, AugmentationData& data);
+    void convert_community_detection(const Insight& insight, AugmentationData& data);
+    void convert_k_core(const Insight& insight, AugmentationData& data);
+    void convert_k_truss(const Insight& insight, AugmentationData& data);
+    void convert_claim_stance(const Insight& insight, AugmentationData& data);
+    void convert_relation_induction(const Insight& insight, AugmentationData& data);
+    void convert_analogical_transfer(const Insight& insight, AugmentationData& data);
+    void convert_uncertainty_sampling(const Insight& insight, AugmentationData& data);
+    void convert_counterfactual(const Insight& insight, AugmentationData& data);
+    void convert_hyperedge_prediction(const Insight& insight, AugmentationData& data);
+    void convert_constrained_rule(const Insight& insight, AugmentationData& data);
     void convert_diffusion(const Insight& insight, AugmentationData& data);
     void convert_surprise(const Insight& insight, AugmentationData& data);
     void convert_community_link(const Insight& insight, AugmentationData& data);

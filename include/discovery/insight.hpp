@@ -15,6 +15,24 @@ enum class InsightType {
     COMPLETION,
     MOTIF,
     SUBSTITUTION,
+    CONTRADICTION,
+    ENTITY_RESOLUTION,
+    CORE_PERIPHERY,
+    TEXT_SIMILARITY,
+    ARGUMENT_SUPPORT,
+    ACTIVE_LEARNING,
+    METHOD_OUTCOME,
+    CENTRALITY,
+    COMMUNITY_DETECTION,
+    K_CORE,
+    K_TRUSS,
+    CLAIM_STANCE,
+    RELATION_INDUCTION,
+    ANALOGICAL_TRANSFER,
+    UNCERTAINTY_SAMPLING,
+    COUNTERFACTUAL,
+    HYPEREDGE_PREDICTION,
+    CONSTRAINED_RULE,
     DIFFUSION,
     SURPRISE,
     COMMUNITY_LINK,
@@ -31,6 +49,24 @@ inline std::string insight_type_to_string(InsightType type) {
         case InsightType::COMPLETION: return "completion";
         case InsightType::MOTIF: return "motif";
         case InsightType::SUBSTITUTION: return "substitution";
+        case InsightType::CONTRADICTION: return "contradiction";
+        case InsightType::ENTITY_RESOLUTION: return "entity_resolution";
+        case InsightType::CORE_PERIPHERY: return "core_periphery";
+        case InsightType::TEXT_SIMILARITY: return "text_similarity";
+        case InsightType::ARGUMENT_SUPPORT: return "argument_support";
+        case InsightType::ACTIVE_LEARNING: return "active_learning";
+        case InsightType::METHOD_OUTCOME: return "method_outcome";
+        case InsightType::CENTRALITY: return "centrality";
+        case InsightType::COMMUNITY_DETECTION: return "community_detection";
+        case InsightType::K_CORE: return "k_core";
+        case InsightType::K_TRUSS: return "k_truss";
+        case InsightType::CLAIM_STANCE: return "claim_stance";
+        case InsightType::RELATION_INDUCTION: return "relation_induction";
+        case InsightType::ANALOGICAL_TRANSFER: return "analogical_transfer";
+        case InsightType::UNCERTAINTY_SAMPLING: return "uncertainty_sampling";
+        case InsightType::COUNTERFACTUAL: return "counterfactual";
+        case InsightType::HYPEREDGE_PREDICTION: return "hyperedge_prediction";
+        case InsightType::CONSTRAINED_RULE: return "constrained_rule";
         case InsightType::DIFFUSION: return "diffusion";
         case InsightType::SURPRISE: return "surprise";
         case InsightType::COMMUNITY_LINK: return "community_link";
@@ -48,6 +84,24 @@ inline InsightType string_to_insight_type(const std::string& s) {
     if (s == "completion") return InsightType::COMPLETION;
     if (s == "motif") return InsightType::MOTIF;
     if (s == "substitution") return InsightType::SUBSTITUTION;
+    if (s == "contradiction" || s == "contradictions") return InsightType::CONTRADICTION;
+    if (s == "entity_resolution" || s == "entity-resolution" || s == "entityresolution" || s == "dedup") return InsightType::ENTITY_RESOLUTION;
+    if (s == "core_periphery" || s == "core-periphery" || s == "coreperiphery" || s == "hub_authority" || s == "hub-authority") return InsightType::CORE_PERIPHERY;
+    if (s == "text_similarity" || s == "text-similarity" || s == "textsimilarity" || s == "semantic" || s == "semantic_similarity") return InsightType::TEXT_SIMILARITY;
+    if (s == "argument_support" || s == "argument-support" || s == "argument") return InsightType::ARGUMENT_SUPPORT;
+    if (s == "active_learning" || s == "active-learning" || s == "active") return InsightType::ACTIVE_LEARNING;
+    if (s == "method_outcome" || s == "method-outcome" || s == "method" || s == "outcome") return InsightType::METHOD_OUTCOME;
+    if (s == "centrality" || s == "centrality_rank" || s == "centrality_rankings") return InsightType::CENTRALITY;
+    if (s == "community_detection" || s == "community-detection" || s == "communities") return InsightType::COMMUNITY_DETECTION;
+    if (s == "k_core" || s == "k-core" || s == "core") return InsightType::K_CORE;
+    if (s == "k_truss" || s == "k-truss" || s == "truss") return InsightType::K_TRUSS;
+    if (s == "claim_stance" || s == "claim-stance" || s == "stance") return InsightType::CLAIM_STANCE;
+    if (s == "relation_induction" || s == "relation-induction" || s == "relation_type") return InsightType::RELATION_INDUCTION;
+    if (s == "analogical_transfer" || s == "analogical-transfer" || s == "analogy") return InsightType::ANALOGICAL_TRANSFER;
+    if (s == "uncertainty_sampling" || s == "uncertainty-sampling" || s == "uncertainty") return InsightType::UNCERTAINTY_SAMPLING;
+    if (s == "counterfactual" || s == "counterfactual-probing") return InsightType::COUNTERFACTUAL;
+    if (s == "hyperedge_prediction" || s == "hyperedge-prediction" || s == "hyperedge") return InsightType::HYPEREDGE_PREDICTION;
+    if (s == "constrained_rule" || s == "constrained-rule" || s == "rule_constrained") return InsightType::CONSTRAINED_RULE;
     if (s == "diffusion") return InsightType::DIFFUSION;
     if (s == "surprise") return InsightType::SURPRISE;
     if (s == "community_link" || s == "community") return InsightType::COMMUNITY_LINK;

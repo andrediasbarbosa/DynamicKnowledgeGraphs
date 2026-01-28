@@ -1,13 +1,13 @@
 # Project Status Report
 
-**Date**: January 14, 2026
+**Date**: January 28, 2026
 **Document**: Knowledge Graph Extraction System Implementation Progress
 
 ---
 
 ## Executive Summary
 
-We have successfully completed **Phases 1-7** of the original 10-phase implementation plan, with some components exceeding the original design specifications. The system is now **production-ready** for basic extraction pipelines and ready for advanced features.
+We have successfully completed **Phases 1-7** of the original 10-phase implementation plan, with substantial post-plan enhancements. The system is **production-ready** for full extraction → discovery → reporting workflows, including optional preprocessing and advanced discovery operators.
 
 ---
 
@@ -174,6 +174,8 @@ Not Yet Implemented:
 - ✅ Configuration system (JSON files + environment variables)
 - ✅ Intermediate result saving
 - ✅ Integration tests (examples demonstrating full pipeline)
+- ✅ Optional preprocessing stage (relation normalization + alias merging)
+- ✅ Expanded discovery operator integration and reporting
 
 **Implementation Details**:
 - [include/pipeline/extraction_pipeline.hpp](include/pipeline/extraction_pipeline.hpp)
@@ -242,6 +244,11 @@ Future enhancements:
 - Additional document formats
 - Graph database integration
 
+Recent post-plan enhancements (already implemented):
+- LLM-assisted discovery operators (claim stance, relation induction, analogical transfer)
+- Active learning enhancements (uncertainty sampling, counterfactual probes, hyperedge prediction)
+- Structural operators (centrality, community detection, k-core, k-truss)
+
 ---
 
 ## Current Capabilities
@@ -277,10 +284,21 @@ Future enhancements:
 
 5. **End-to-End Pipeline**
    - PDF → Text → LLM → Hypergraph
+   - Optional preprocessing (normalize relations + merge aliases)
    - Progress tracking
    - Statistics collection
    - Intermediate saves
    - Multiple output formats
+
+6. **Discovery & Reporting**
+   - 20+ discovery operators across structural, semantic, and active-learning signals
+   - LLM-assisted synthesis for selected findings
+   - HTML/Markdown reports with method explanations and evidence links
+   - Operator catalog:
+     - Structural: bridges, completions, motifs, substitutions, core_periphery, centrality, community_detection, k_core, k_truss, diffusion, surprise
+     - Semantic/LLM: contradictions, entity_resolution, text_similarity, argument_support, claim_stance, relation_induction, analogical_transfer, hypotheses
+     - Active learning + completion: active_learning, uncertainty_sampling, counterfactual, hyperedge_prediction
+     - Other: rules, community, pathrank, embedding, author_chain
 
 6. **Export Formats**
    - JSON (complete hypergraph)
@@ -391,7 +409,7 @@ Future enhancements:
 
 ## Summary
 
-### Overall Progress: **85% Complete**
+### Overall Progress: **87% Complete**
 
 **Phase Breakdown**:
 - Phase 1 (Foundation): ✅ 100%
@@ -403,7 +421,7 @@ Future enhancements:
 - Phase 7 (Pipeline): ✅ 100%
 - Phase 8 (Testing/Docs): 🔄 80%
 - Phase 9 (Agentic): ⏳ 0%
-- Phase 10 (Advanced): ⏳ 0%
+- Phase 10 (Advanced): ⏳ 0% (core enhancements already integrated)
 
 ### System Status: **PRODUCTION READY** ✅
 

@@ -244,6 +244,11 @@ public:
     void merge_similar_nodes(double similarity_threshold = 0.95);
 
     /**
+     * @brief Merge two nodes (used in deduplication)
+     */
+    void merge_nodes(const std::string& keep_id, const std::string& remove_id);
+
+    /**
      * @brief Remove self-loop hyperedges where source == target
      */
     size_t remove_self_loops();
@@ -500,6 +505,14 @@ public:
         const std::vector<float>& vec2
     );
 
+    /**
+     * @brief Normalize a string for case-insensitive node ID comparison
+     *
+     * Converts to lowercase and trims whitespace to ensure that entities
+     * like "Knowledge Graph" and "knowledge graph" map to the same node.
+     */
+    static std::string normalize_node_id(const std::string& label);
+
 private:
     // ==========================================
     // Internal Data Structures
@@ -557,11 +570,6 @@ private:
         const std::string& edge_id,
         int min_intersection_size
     ) const;
-
-    /**
-     * @brief Merge two nodes (used in deduplication)
-     */
-    void merge_nodes(const std::string& keep_id, const std::string& remove_id);
 
     /**
      * @brief Find connected components in similarity graph

@@ -195,18 +195,42 @@ std::string Hypergraph::add_hyperedge(const HyperEdge& edge) {
         new_edge.id = generate_edge_id();
     }
 
-    // Add edge to storage
-    hyperedges_[new_edge.id] = new_edge;
+    // Normalize node IDs in sources and targets for case-insensitive matching
+    // This ensures "Knowledge Graph" and "knowledge graph" map to the same node
+    for (auto& src : new_edge.sources) {
+        std::string original_label = src;
+        std::string normalized_id = normalize_node_id(src);
 
-    // Create nodes if they don't exist and update indices
-    for (const auto& node_id : new_edge.get_all_nodes()) {
-        if (!has_node(node_id)) {
+        // Create node if it doesn't exist, preserving original label for display
+        if (!has_node(normalized_id)) {
             HyperNode node;
-            node.id = node_id;
-            node.label = node_id;  // Default: use ID as label
+            node.id = normalized_id;
+            node.label = original_label;  // Keep original for display
             add_node(node);
         }
+
+        // Update edge to use normalized ID
+        src = normalized_id;
     }
+
+    for (auto& tgt : new_edge.targets) {
+        std::string original_label = tgt;
+        std::string normalized_id = normalize_node_id(tgt);
+
+        // Create node if it doesn't exist, preserving original label for display
+        if (!has_node(normalized_id)) {
+            HyperNode node;
+            node.id = normalized_id;
+            node.label = original_label;  // Keep original for display
+            add_node(node);
+        }
+
+        // Update edge to use normalized ID
+        tgt = normalized_id;
+    }
+
+    // Add edge to storage
+    hyperedges_[new_edge.id] = new_edge;
 
     update_indices(new_edge);
 
@@ -220,6 +244,7 @@ std::string Hypergraph::add_hyperedge(
     const std::string& source_chunk_id
 ) {
     HyperEdge edge;
+    // Pass original labels - normalization happens in add_hyperedge(const HyperEdge&)
     edge.sources = sources;
     edge.relation = relation;
     edge.targets = targets;
@@ -229,14 +254,19 @@ std::string Hypergraph::add_hyperedge(
 }
 
 void Hypergraph::add_node(const HyperNode& node) {
-    if (nodes_.find(node.id) != nodes_.end()) {
-        // Node exists, update it
-        nodes_[node.id].label = node.label;
-        nodes_[node.id].properties = node.properties;
-        nodes_[node.id].embedding = node.embedding;
+    std::string normalized_id = normalize_node_id(node.id);
+
+    if (nodes_.find(normalized_id) != nodes_.end()) {
+        // Node exists, update properties and embedding but keep existing label
+        // (preserves the first label seen for display)
+        nodes_[normalized_id].properties = node.properties;
+        nodes_[normalized_id].embedding = node.embedding;
     } else {
-        // New node
-        nodes_[node.id] = node;
+        // New node - use normalized ID but original label
+        HyperNode new_node = node;
+        new_node.id = normalized_id;
+        // Keep the original label for display purposes
+        nodes_[normalized_id] = new_node;
     }
 }
 
@@ -253,30 +283,33 @@ bool Hypergraph::remove_hyperedge(const std::string& edge_id) {
 }
 
 bool Hypergraph::remove_node(const std::string& node_id) {
-    auto it = nodes_.find(node_id);
+    std::string normalized = normalize_node_id(node_id);
+    auto it = nodes_.find(normalized);
     if (it == nodes_.end()) {
         return false;
     }
 
     // Remove all incident edges
-    auto incident = get_incident_edges(node_id);
+    auto incident = get_incident_edges(normalized);
     for (const auto& edge : incident) {
         remove_hyperedge(edge.id);
     }
 
     nodes_.erase(it);
-    node_to_edges_.erase(node_id);
+    node_to_edges_.erase(normalized);
 
     return true;
 }
 
 const HyperNode* Hypergraph::get_node(const std::string& node_id) const {
-    auto it = nodes_.find(node_id);
+    std::string normalized = normalize_node_id(node_id);
+    auto it = nodes_.find(normalized);
     return it != nodes_.end() ? &it->second : nullptr;
 }
 
 HyperNode* Hypergraph::get_node(const std::string& node_id) {
-    auto it = nodes_.find(node_id);
+    std::string normalized = normalize_node_id(node_id);
+    auto it = nodes_.find(normalized);
     return it != nodes_.end() ? &it->second : nullptr;
 }
 
@@ -293,7 +326,8 @@ HyperEdge* Hypergraph::get_hyperedge(const std::string& edge_id) {
 std::vector<HyperEdge> Hypergraph::get_incident_edges(const std::string& node_id) const {
     std::vector<HyperEdge> result;
 
-    auto it = node_to_edges_.find(node_id);
+    std::string normalized = normalize_node_id(node_id);
+    auto it = node_to_edges_.find(normalized);
     if (it != node_to_edges_.end()) {
         for (const auto& edge_id : it->second) {
             auto edge_it = hyperedges_.find(edge_id);
@@ -329,7 +363,8 @@ std::vector<HyperEdge> Hypergraph::get_all_edges() const {
 }
 
 bool Hypergraph::has_node(const std::string& node_id) const {
-    return nodes_.find(node_id) != nodes_.end();
+    std::string normalized = normalize_node_id(node_id);
+    return nodes_.find(normalized) != nodes_.end();
 }
 
 bool Hypergraph::has_edge(const std::string& edge_id) const {
@@ -455,7 +490,8 @@ size_t Hypergraph::merge_duplicate_edges() {
 }
 
 int Hypergraph::get_node_degree(const std::string& node_id) const {
-    auto it = node_to_edges_.find(node_id);
+    std::string normalized = normalize_node_id(node_id);
+    auto it = node_to_edges_.find(normalized);
     return it != node_to_edges_.end() ? static_cast<int>(it->second.size()) : 0;
 }
 
@@ -803,26 +839,29 @@ std::vector<std::string> Hypergraph::get_s_connected_neighbors(
 }
 
 void Hypergraph::merge_nodes(const std::string& keep_id, const std::string& remove_id) {
-    if (!has_node(keep_id) || !has_node(remove_id)) return;
+    std::string normalized_keep = normalize_node_id(keep_id);
+    std::string normalized_remove = normalize_node_id(remove_id);
+
+    if (!has_node(normalized_keep) || !has_node(normalized_remove)) return;
 
     // Transfer incident edges
-    auto incident = get_incident_edges(remove_id);
+    auto incident = get_incident_edges(normalized_remove);
     for (const auto& edge : incident) {
         auto* mutable_edge = get_hyperedge(edge.id);
         if (mutable_edge) {
             // Replace remove_id with keep_id in sources
             for (auto& src : mutable_edge->sources) {
-                if (src == remove_id) src = keep_id;
+                if (src == normalized_remove) src = normalized_keep;
             }
             // Replace in targets
             for (auto& tgt : mutable_edge->targets) {
-                if (tgt == remove_id) tgt = keep_id;
+                if (tgt == normalized_remove) tgt = normalized_keep;
             }
         }
     }
 
     // Remove the node
-    remove_node(remove_id);
+    remove_node(normalized_remove);
 }
 
 std::vector<std::vector<std::string>> Hypergraph::find_similarity_components(
@@ -893,6 +932,83 @@ double Hypergraph::cosine_similarity(
     }
 
     return dot_product / (std::sqrt(norm1) * std::sqrt(norm2));
+}
+
+// Helper: check if string is pure ASCII alphabetic
+static bool is_ascii_alpha_word(const std::string& text) {
+    if (text.empty()) return false;
+    for (unsigned char c : text) {
+        if (c >= 128 || !std::isalpha(c)) return false;
+    }
+    return true;
+}
+
+// Helper: singularize a single ASCII word (basic English rules)
+static std::string singularize_word(const std::string& word) {
+    if (word.size() <= 3) return word;
+    if (!is_ascii_alpha_word(word)) return word;
+
+    // "ies" -> "y" (e.g., "studies" -> "study")
+    if (word.size() >= 4 && word.compare(word.size() - 3, 3, "ies") == 0) {
+        return word.substr(0, word.size() - 3) + "y";
+    }
+    // "ches", "shes", "xes", "ses", "zes" -> remove "es"
+    if (word.size() >= 4 &&
+        (word.compare(word.size() - 4, 4, "ches") == 0 ||
+         word.compare(word.size() - 4, 4, "shes") == 0 ||
+         word.compare(word.size() - 3, 3, "xes") == 0 ||
+         word.compare(word.size() - 3, 3, "ses") == 0 ||
+         word.compare(word.size() - 3, 3, "zes") == 0)) {
+        return word.substr(0, word.size() - 2);
+    }
+    // Don't singularize words ending in "ss" (e.g., "class", "process")
+    if (word.size() >= 2 && word.compare(word.size() - 2, 2, "ss") == 0) {
+        return word;
+    }
+    // Remove trailing "s"
+    if (!word.empty() && word.back() == 's') {
+        return word.substr(0, word.size() - 1);
+    }
+    return word;
+}
+
+std::string Hypergraph::normalize_node_id(const std::string& label) {
+    std::string result;
+    result.reserve(label.size());
+
+    // Trim leading whitespace
+    size_t start = 0;
+    while (start < label.size() && std::isspace(static_cast<unsigned char>(label[start]))) {
+        ++start;
+    }
+
+    // Trim trailing whitespace
+    size_t end = label.size();
+    while (end > start && std::isspace(static_cast<unsigned char>(label[end - 1]))) {
+        --end;
+    }
+
+    // Convert to lowercase
+    for (size_t i = start; i < end; ++i) {
+        result += static_cast<char>(std::tolower(static_cast<unsigned char>(label[i])));
+    }
+
+    // Singularize: for multi-word entities, singularize the last word
+    // For single-word entities, singularize the whole word
+    // e.g., "knowledge graphs" -> "knowledge graph"
+    //       "houses" -> "house"
+    size_t last_space = result.rfind(' ');
+    if (last_space != std::string::npos) {
+        // Multi-word: singularize last word only
+        std::string prefix = result.substr(0, last_space + 1);
+        std::string last_word = result.substr(last_space + 1);
+        result = prefix + singularize_word(last_word);
+    } else {
+        // Single word: singularize the whole thing
+        result = singularize_word(result);
+    }
+
+    return result;
 }
 
 void Hypergraph::clear() {

@@ -109,10 +109,13 @@ struct HypergraphIndex {
         }
     }
 
-    // Get co-occurrence count for a pair
+    // Get co-occurrence count for a pair (uses normalized IDs for case-insensitive matching)
     int get_cooccurrence(const std::string& a, const std::string& b) const {
-        std::string min_id = a < b ? a : b;
-        std::string max_id = a < b ? b : a;
+        // Normalize IDs to match how the graph stores them
+        std::string norm_a = Hypergraph::normalize_node_id(a);
+        std::string norm_b = Hypergraph::normalize_node_id(b);
+        std::string min_id = norm_a < norm_b ? norm_a : norm_b;
+        std::string max_id = norm_a < norm_b ? norm_b : norm_a;
         std::string key = min_id + "|" + max_id;
         auto it = entity_cooccurrence.find(key);
         return it != entity_cooccurrence.end() ? it->second : 0;
