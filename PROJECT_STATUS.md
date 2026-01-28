@@ -291,7 +291,7 @@ Recent post-plan enhancements (already implemented):
    - Multiple output formats
 
 6. **Discovery & Reporting**
-   - 20+ discovery operators across structural, semantic, and active-learning signals
+   - 29 discovery operators across structural, semantic, and active-learning signals
    - LLM-assisted synthesis for selected findings
    - HTML/Markdown reports with method explanations and evidence links
    - Operator catalog:

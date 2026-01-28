@@ -39,7 +39,7 @@ After the pipeline completes:
 ```bash
 cd runs/run_YYYYMMDD_HHMMSS
 python3 -m http.server 8080
-# Open http://localhost:8080/final_graph_augmented.html in browser
+# Open http://localhost:8080/graph_augmented.html in browser
 ```
 
 ---
@@ -247,8 +247,10 @@ kg render -i graph.json -n insights.json -o ./viz -t "Augmented Graph"
 
 **Output Files:**
 
-- `final_graph.html` - Baseline interactive 3D viewer
-- `final_graph_augmented.html` - Augmented view with discovery insights
+- `final_graph.html` - Baseline interactive 3D viewer (standalone `kg render`)
+- `final_graph_augmented.html` - Augmented view with discovery insights (standalone `kg render`)
+- `graph.html` - Baseline viewer (when using `kg run` pipeline)
+- `graph_augmented.html` - Augmented viewer (when using `kg run` pipeline)
 - `augmentation.json` - Overlay data for augmented nodes/links
 - `viewer_bundle.json` - Full insight metadata
 
@@ -358,8 +360,8 @@ A typical run produces the following in `runs/run_YYYYMMDD_HHMMSS/`:
 | `extraction_stats.json` | Extraction statistics |
 | `index.json` | S-component index |
 | `insights.json` | Discovery insights |
-| `final_graph.html` | Interactive 3D baseline viewer |
-| `final_graph_augmented.html` | Augmented viewer with insights |
+| `graph.html` | Interactive 3D baseline viewer |
+| `graph_augmented.html` | Augmented viewer with insights |
 | `augmentation.json` | Augmentation overlay data |
 | `graph.dot` | GraphViz DOT format |
 | `report.md` | Markdown report |
@@ -451,7 +453,7 @@ Error: Failed to extract text from PDF
 
 If the HTML viewer is unresponsive:
 
-1. Try the baseline viewer (`final_graph.html`) first
+1. Try the baseline viewer (`graph.html` or `final_graph.html`) first
 2. Increase "Min Entity Degree" slider to reduce visible nodes
 3. Disable "Show Labels" checkbox
 4. Use a WebGL-capable browser (Chrome/Firefox recommended)
