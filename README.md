@@ -327,6 +327,42 @@ Runs without API keys to demonstrate the workflow with sample data.
 PDF → Text Chunks → LLM Extraction → Relations → Hypergraph
 ```
 
+### KG CLI Pipeline (Recommended)
+
+The `kg` CLI runs the full extraction → discovery → reporting pipeline and supports optional preprocessing.
+
+**Full pipeline (default operators):**
+```bash
+./build/bin/kg run -i document.pdf -t "My Knowledge Graph"
+```
+
+**Enable preprocessing (normalize relations + merge aliases):**
+```bash
+./build/bin/kg run -i document.pdf -t "My Knowledge Graph" --preprocess
+```
+
+**Custom operators:**
+```bash
+./build/bin/kg run -i document.pdf -p "bridges,completions,core_periphery,centrality,claim_stance,uncertainty_sampling"
+```
+
+**Output Structure:**
+```
+runs/run_YYYYMMDD_HHMMSS/
+├── graph.json              # Extracted (or preprocessed) hypergraph
+├── graph_raw.json          # Raw graph before preprocessing (if enabled)
+├── index.json              # S-component index
+├── insights.json           # Discovery insights
+├── augmentation.json       # Augmentation overlay
+├── graph.html              # Baseline viewer
+├── graph_augmented.html    # Augmented viewer
+├── graph.dot               # GraphViz DOT
+├── report.md               # Markdown report
+└── report.html             # HTML report
+```
+
+See [PIPELINE.md](PIPELINE.md) for the full operator list and CLI usage.
+
 ### End-to-End Pipeline Example
 
 ```bash
