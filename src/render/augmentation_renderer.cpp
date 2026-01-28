@@ -21,6 +21,39 @@ std::string AugmentationRenderer::get_node_label(const std::string& node_id) con
     return node ? node->label : "";
 }
 
+std::string AugmentationRenderer::normalize_graph_ref(const std::string& node_id) const {
+    // Normalize node ID to match how the graph stores nodes
+    // This ensures augmentation links correctly connect to existing graph nodes
+    return Hypergraph::normalize_node_id(node_id);
+}
+
+bool AugmentationRenderer::is_existing_node(const std::string& node_id) const {
+    // Augmentation nodes have IDs starting with "aug:"
+    if (node_id.find("aug:") == 0) return false;
+    return graph_.has_node(node_id);
+}
+
+bool AugmentationRenderer::nodes_already_connected(const std::string& node_a, const std::string& node_b) const {
+    // Check if two nodes are already connected via any edge in the base graph
+    std::string norm_a = normalize_graph_ref(node_a);
+    std::string norm_b = normalize_graph_ref(node_b);
+
+    if (norm_a == norm_b) return true;  // Same node after normalization
+
+    // Get edges incident to node_a
+    auto edges = graph_.get_incident_edges(norm_a);
+    for (const auto& edge : edges) {
+        // Check if node_b is in this edge's sources or targets
+        for (const auto& src : edge.sources) {
+            if (src == norm_b) return true;
+        }
+        for (const auto& tgt : edge.targets) {
+            if (tgt == norm_b) return true;
+        }
+    }
+    return false;
+}
+
 AugmentationData AugmentationRenderer::convert(const InsightCollection& insights) {
     AugmentationData data;
     data.run_id = insights.run_id;
@@ -34,6 +67,31 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
     data.created_utc = ss.str();
 
     for (const auto& insight : insights.insights) {
+        // Skip insights where the primary seed nodes are already connected
+        // (only for link-suggestion operators)
+        bool skip_insight = false;
+        bool check_existing = (insight.type == InsightType::COMPLETION ||
+                               insight.type == InsightType::SUBSTITUTION ||
+                               insight.type == InsightType::TEXT_SIMILARITY ||
+                               insight.type == InsightType::ARGUMENT_SUPPORT ||
+                               insight.type == InsightType::COMMUNITY_LINK ||
+                               insight.type == InsightType::PATH_RANK ||
+                               insight.type == InsightType::EMBEDDING_LINK ||
+                               insight.type == InsightType::ANALOGICAL_TRANSFER ||
+                               insight.type == InsightType::HYPEREDGE_PREDICTION);
+        if (check_existing && insight.seed_nodes.size() >= 2) {
+            std::string norm_a = normalize_graph_ref(insight.seed_nodes[0]);
+            std::string norm_b = normalize_graph_ref(insight.seed_nodes[1]);
+
+            if (norm_a == norm_b) {
+                skip_insight = true;
+            } else if (nodes_already_connected(norm_a, norm_b)) {
+                skip_insight = true;
+            }
+        }
+
+        if (skip_insight) continue;
+
         switch (insight.type) {
             case InsightType::BRIDGE:
                 convert_bridge(insight, data);
@@ -46,6 +104,60 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
                 break;
             case InsightType::SUBSTITUTION:
                 convert_substitution(insight, data);
+                break;
+            case InsightType::CONTRADICTION:
+                convert_contradiction(insight, data);
+                break;
+            case InsightType::ENTITY_RESOLUTION:
+                convert_entity_resolution(insight, data);
+                break;
+            case InsightType::CORE_PERIPHERY:
+                convert_core_periphery(insight, data);
+                break;
+            case InsightType::TEXT_SIMILARITY:
+                convert_text_similarity(insight, data);
+                break;
+            case InsightType::ARGUMENT_SUPPORT:
+                convert_argument_support(insight, data);
+                break;
+            case InsightType::ACTIVE_LEARNING:
+                convert_active_learning(insight, data);
+                break;
+            case InsightType::METHOD_OUTCOME:
+                convert_method_outcome(insight, data);
+                break;
+            case InsightType::CENTRALITY:
+                convert_centrality(insight, data);
+                break;
+            case InsightType::COMMUNITY_DETECTION:
+                convert_community_detection(insight, data);
+                break;
+            case InsightType::K_CORE:
+                convert_k_core(insight, data);
+                break;
+            case InsightType::K_TRUSS:
+                convert_k_truss(insight, data);
+                break;
+            case InsightType::CLAIM_STANCE:
+                convert_claim_stance(insight, data);
+                break;
+            case InsightType::RELATION_INDUCTION:
+                convert_relation_induction(insight, data);
+                break;
+            case InsightType::ANALOGICAL_TRANSFER:
+                convert_analogical_transfer(insight, data);
+                break;
+            case InsightType::UNCERTAINTY_SAMPLING:
+                convert_uncertainty_sampling(insight, data);
+                break;
+            case InsightType::COUNTERFACTUAL:
+                convert_counterfactual(insight, data);
+                break;
+            case InsightType::HYPEREDGE_PREDICTION:
+                convert_hyperedge_prediction(insight, data);
+                break;
+            case InsightType::CONSTRAINED_RULE:
+                convert_constrained_rule(insight, data);
                 break;
             case InsightType::DIFFUSION:
                 convert_diffusion(insight, data);
@@ -94,7 +206,7 @@ void AugmentationRenderer::convert_bridge(const Insight& insight, AugmentationDa
 
     for (const auto& seed : insight.seed_nodes) {
         AugmentationLink link;
-        link.source = seed;
+        link.source = normalize_graph_ref(seed);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -103,12 +215,18 @@ void AugmentationRenderer::convert_bridge(const Insight& insight, AugmentationDa
 
     int link_count = 0;
     for (const auto& wn : insight.witness_nodes) {
-        bool is_seed = std::find(insight.seed_nodes.begin(), insight.seed_nodes.end(), wn)
-                      != insight.seed_nodes.end();
+        std::string norm_wn = normalize_graph_ref(wn);
+        bool is_seed = false;
+        for (const auto& seed : insight.seed_nodes) {
+            if (normalize_graph_ref(seed) == norm_wn) {
+                is_seed = true;
+                break;
+            }
+        }
         if (!is_seed && link_count < 3) {
             AugmentationLink link;
             link.source = rel_node.id;
-            link.target = wn;
+            link.target = norm_wn;
             link.type = "target";
             link.is_new = true;
             data.links.push_back(link);
@@ -140,7 +258,7 @@ void AugmentationRenderer::convert_completion(const Insight& insight, Augmentati
 
     for (size_t i = 0; i < insight.seed_nodes.size() && i < 2; ++i) {
         AugmentationLink link;
-        link.source = insight.seed_nodes[i];
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -151,7 +269,7 @@ void AugmentationRenderer::convert_completion(const Insight& insight, Augmentati
     for (size_t i = 2; i < insight.witness_nodes.size() && filler_count < 3; ++i) {
         AugmentationLink link;
         link.source = rel_node.id;
-        link.target = insight.witness_nodes[i];
+        link.target = normalize_graph_ref(insight.witness_nodes[i]);
         link.type = "target";
         link.is_new = true;
         data.links.push_back(link);
@@ -184,7 +302,7 @@ void AugmentationRenderer::convert_motif(const Insight& insight, AugmentationDat
 
     for (const auto& member : insight.seed_nodes) {
         AugmentationLink link;
-        link.source = member;
+        link.source = normalize_graph_ref(member);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -215,7 +333,7 @@ void AugmentationRenderer::convert_substitution(const Insight& insight, Augmenta
 
     for (size_t i = 0; i < 2 && i < insight.seed_nodes.size(); ++i) {
         AugmentationLink link;
-        link.source = insight.seed_nodes[i];
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -226,12 +344,496 @@ void AugmentationRenderer::convert_substitution(const Insight& insight, Augmenta
     for (size_t i = 2; i < insight.witness_nodes.size() && ctx_count < 2; ++i) {
         AugmentationLink link;
         link.source = rel_node.id;
-        link.target = insight.witness_nodes[i];
+        link.target = normalize_graph_ref(insight.witness_nodes[i]);
         link.type = "target";
         link.is_new = true;
         data.links.push_back(link);
         ctx_count++;
     }
+}
+
+void AugmentationRenderer::convert_contradiction(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Contradiction: ";
+    for (size_t i = 0; i < insight.seed_labels.size() && i < 2; ++i) {
+        if (i > 0) label += " + ";
+        label += insight.seed_labels[i];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 3; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_entity_resolution(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Resolve: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " ≈ " + insight.seed_labels[1];
+    }
+
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2 && i < insight.seed_nodes.size(); ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_core_periphery(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string role = "Core";
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "periphery") {
+            role = "Periphery";
+            break;
+        }
+    }
+
+    std::string label = role + ": ";
+    label += insight.seed_labels.empty() ? "" : insight.seed_labels[0];
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    AugmentationLink link;
+    link.source = normalize_graph_ref(insight.seed_nodes[0]);
+    link.target = rel_node.id;
+    link.type = "source";
+    link.is_new = true;
+    data.links.push_back(link);
+}
+
+void AugmentationRenderer::convert_text_similarity(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Text Similar: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " ~ " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_argument_support(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    std::string label = "Argument: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " -> " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_active_learning(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "Query: " + (insight.description.empty() ? "Validate relation" : insight.description);
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    int linked = 0;
+    for (const auto& node_id : insight.seed_nodes) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(node_id);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+        if (++linked >= 3) break;
+    }
+}
+
+void AugmentationRenderer::convert_method_outcome(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    std::string role = "Method";
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "outcome") {
+            role = "Outcome";
+            break;
+        }
+    }
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = role + ": " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    AugmentationLink link;
+    link.source = normalize_graph_ref(insight.seed_nodes[0]);
+    link.target = rel_node.id;
+    link.type = "source";
+    link.is_new = true;
+    data.links.push_back(link);
+}
+
+void AugmentationRenderer::convert_centrality(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "Centrality: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    AugmentationLink link;
+    link.source = normalize_graph_ref(insight.seed_nodes[0]);
+    link.target = rel_node.id;
+    link.type = "source";
+    link.is_new = true;
+    data.links.push_back(link);
+}
+
+void AugmentationRenderer::convert_community_detection(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "Community: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 3; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_k_core(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "k-Core: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    AugmentationLink link;
+    link.source = normalize_graph_ref(insight.seed_nodes[0]);
+    link.target = rel_node.id;
+    link.type = "source";
+    link.is_new = true;
+    data.links.push_back(link);
+}
+
+void AugmentationRenderer::convert_k_truss(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    std::string label = "k-Truss: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " — " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_claim_stance(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    std::string stance = "Neutral";
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "supports") stance = "Supports";
+        if (tag == "opposes") stance = "Opposes";
+        if (tag == "neutral") stance = "Neutral";
+    }
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    std::string label = "Claim (" + stance + "): ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " → " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_relation_induction(const Insight& insight, AugmentationData& data) {
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "Relation Induction";
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    if (!insight.seed_nodes.empty()) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[0]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_analogical_transfer(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    std::string label = "Analogy: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " → " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_uncertainty_sampling(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    std::string label = "Uncertain: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " → " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_counterfactual(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "Counterfactual";
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (const auto& node_id : insight.seed_nodes) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(node_id);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_hyperedge_prediction(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    std::string label = "Predicted: ";
+    if (insight.seed_labels.size() >= 2) {
+        label += insight.seed_labels[0] + " → " + insight.seed_labels[1];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_constrained_rule(const Insight& insight, AugmentationData& data) {
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = "Constrained Rule";
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
 }
 
 void AugmentationRenderer::convert_diffusion(const Insight& insight, AugmentationData& data) {
@@ -255,7 +857,7 @@ void AugmentationRenderer::convert_diffusion(const Insight& insight, Augmentatio
 
     if (insight.seed_nodes.size() >= 2) {
         AugmentationLink link1;
-        link1.source = insight.seed_nodes[0];
+        link1.source = normalize_graph_ref(insight.seed_nodes[0]);
         link1.target = rel_node.id;
         link1.type = "source";
         link1.is_new = true;
@@ -263,7 +865,7 @@ void AugmentationRenderer::convert_diffusion(const Insight& insight, Augmentatio
 
         AugmentationLink link2;
         link2.source = rel_node.id;
-        link2.target = insight.seed_nodes[1];
+        link2.target = normalize_graph_ref(insight.seed_nodes[1]);
         link2.type = "target";
         link2.is_new = true;
         data.links.push_back(link2);
@@ -296,7 +898,7 @@ void AugmentationRenderer::convert_surprise(const Insight& insight, Augmentation
 
     for (const auto& member : insight.seed_nodes) {
         AugmentationLink link;
-        link.source = member;
+        link.source = normalize_graph_ref(member);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -327,7 +929,7 @@ void AugmentationRenderer::convert_community_link(const Insight& insight, Augmen
 
     for (size_t i = 0; i < 2 && i < insight.seed_nodes.size(); ++i) {
         AugmentationLink link;
-        link.source = insight.seed_nodes[i];
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -336,12 +938,19 @@ void AugmentationRenderer::convert_community_link(const Insight& insight, Augmen
 
     int ctx_count = 0;
     for (const auto& wn : insight.witness_nodes) {
-        if (std::find(insight.seed_nodes.begin(), insight.seed_nodes.end(), wn) != insight.seed_nodes.end()) {
-            continue;
+        std::string norm_wn = normalize_graph_ref(wn);
+        bool is_seed = false;
+        for (const auto& seed : insight.seed_nodes) {
+            if (normalize_graph_ref(seed) == norm_wn) {
+                is_seed = true;
+                break;
+            }
         }
+        if (is_seed) continue;
+
         AugmentationLink link;
         link.source = rel_node.id;
-        link.target = wn;
+        link.target = norm_wn;
         link.type = "target";
         link.is_new = true;
         data.links.push_back(link);
@@ -372,7 +981,7 @@ void AugmentationRenderer::convert_path_rank(const Insight& insight, Augmentatio
 
     for (size_t i = 0; i < 2 && i < insight.seed_nodes.size(); ++i) {
         AugmentationLink link;
-        link.source = insight.seed_nodes[i];
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -381,12 +990,19 @@ void AugmentationRenderer::convert_path_rank(const Insight& insight, Augmentatio
 
     int ctx_count = 0;
     for (const auto& wn : insight.witness_nodes) {
-        if (std::find(insight.seed_nodes.begin(), insight.seed_nodes.end(), wn) != insight.seed_nodes.end()) {
-            continue;
+        std::string norm_wn = normalize_graph_ref(wn);
+        bool is_seed = false;
+        for (const auto& seed : insight.seed_nodes) {
+            if (normalize_graph_ref(seed) == norm_wn) {
+                is_seed = true;
+                break;
+            }
         }
+        if (is_seed) continue;
+
         AugmentationLink link;
         link.source = rel_node.id;
-        link.target = wn;
+        link.target = norm_wn;
         link.type = "target";
         link.is_new = true;
         data.links.push_back(link);
@@ -419,7 +1035,7 @@ void AugmentationRenderer::convert_hypothesis(const Insight& insight, Augmentati
 
     for (size_t i = 0; i < insight.seed_nodes.size() && i < 2; ++i) {
         AugmentationLink link;
-        link.source = insight.seed_nodes[i];
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -428,12 +1044,19 @@ void AugmentationRenderer::convert_hypothesis(const Insight& insight, Augmentati
 
     int ctx_count = 0;
     for (const auto& wn : insight.witness_nodes) {
-        if (std::find(insight.seed_nodes.begin(), insight.seed_nodes.end(), wn) != insight.seed_nodes.end()) {
-            continue;
+        std::string norm_wn = normalize_graph_ref(wn);
+        bool is_seed = false;
+        for (const auto& seed : insight.seed_nodes) {
+            if (normalize_graph_ref(seed) == norm_wn) {
+                is_seed = true;
+                break;
+            }
         }
+        if (is_seed) continue;
+
         AugmentationLink link;
         link.source = rel_node.id;
-        link.target = wn;
+        link.target = norm_wn;
         link.type = "target";
         link.is_new = true;
         data.links.push_back(link);
@@ -466,7 +1089,7 @@ void AugmentationRenderer::convert_rule(const Insight& insight, AugmentationData
     // Link example entities to the rule node
     for (const auto& member : insight.seed_nodes) {
         AugmentationLink link;
-        link.source = member;
+        link.source = normalize_graph_ref(member);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;
@@ -507,7 +1130,7 @@ void AugmentationRenderer::convert_embedding_link(const Insight& insight, Augmen
     // Link the two predicted entities through the relation node
     if (insight.seed_nodes.size() >= 2) {
         AugmentationLink link1;
-        link1.source = insight.seed_nodes[0];
+        link1.source = normalize_graph_ref(insight.seed_nodes[0]);
         link1.target = rel_node.id;
         link1.type = "source";
         link1.is_new = true;
@@ -515,7 +1138,7 @@ void AugmentationRenderer::convert_embedding_link(const Insight& insight, Augmen
 
         AugmentationLink link2;
         link2.source = rel_node.id;
-        link2.target = insight.seed_nodes[1];
+        link2.target = normalize_graph_ref(insight.seed_nodes[1]);
         link2.type = "target";
         link2.is_new = true;
         data.links.push_back(link2);
@@ -546,7 +1169,7 @@ void AugmentationRenderer::convert_author_chain(const Insight& insight, Augmenta
 
     for (const auto& seed : insight.seed_nodes) {
         AugmentationLink link;
-        link.source = seed;
+        link.source = normalize_graph_ref(seed);
         link.target = rel_node.id;
         link.type = "source";
         link.is_new = true;

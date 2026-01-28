@@ -150,6 +150,40 @@ if(HAVE_POPPLER)
 endif()
 
 # ==============================================================================
+# Discovery Library
+# ==============================================================================
+
+add_library(discovery
+    src/discovery/discovery_engine.cpp
+    src/discovery/report_generator.cpp
+    src/render/augmentation_renderer.cpp
+)
+
+target_include_directories(discovery PUBLIC
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(discovery PUBLIC
+    hypergraph
+    nlohmann_json::nlohmann_json
+)
+
+# ==============================================================================
+# Knowledge Graph CLI (kg)
+# ==============================================================================
+
+add_executable(kg
+    src/main.cpp
+)
+
+target_link_libraries(kg PRIVATE
+    hypergraph
+    discovery
+    extraction_pipeline
+    nlohmann_json::nlohmann_json
+)
+
+# ==============================================================================
 # Example executables
 # ==============================================================================
 
@@ -342,11 +376,15 @@ message(STATUS "  Tests: ${BUILD_TESTS}")
 message(STATUS "  Documentation: ${BUILD_DOCS}")
 message(STATUS "")
 message(STATUS "Executables:")
+message(STATUS "  kg (CLI): ON")
 message(STATUS "  hypergraph_example: ON")
+message(STATUS "  json_to_html: ON")
 if(HAVE_POPPLER)
     message(STATUS "  hg_agent_poc: ON")
+    message(STATUS "  pipeline_example: ON")
 else()
     message(STATUS "  hg_agent_poc: OFF (requires Poppler)")
+    message(STATUS "  pipeline_example: OFF (requires Poppler)")
 endif()
 message(STATUS "")
 message(STATUS "===============================================")

@@ -693,6 +693,26 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **Design & Implementation**: Based on Stewart & Buehler (2026)
 - **Development**: Your Team
 
+## References
+
+### Books
+
+1. **Building Knowledge Graphs: A Practitioner's Guide**
+   - Authors: Jesus Barrasa, Jim Webber
+   - Publisher: O'Reilly Media, 2023
+   - ISBN: 978-1-098-12711-4
+   - A comprehensive guide to building knowledge graphs in practice
+
+2. **Knowledge Graphs and LLMs in Action**
+   - Authors: Alessandro Negro, Vlastimil Kus, Giuseppe Futia, Fabio
+   - Publisher: Manning Publications, 2025
+   - ISBN: 978-1-633-43989-4
+   - Practical techniques for combining knowledge graphs with large language models
+
+### Papers
+
+- Stewart, I. A. & Buehler, M. J. (2026). "Higher-Order Knowledge Representations for Agentic Scientific Reasoning". arXiv:2601.04878
+
 ## Acknowledgments
 
 - Original paper: Stewart & Buehler, "Higher-Order Knowledge Representations for Agentic Scientific Reasoning"

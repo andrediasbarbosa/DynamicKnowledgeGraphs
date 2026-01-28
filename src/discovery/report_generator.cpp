@@ -54,6 +54,24 @@ std::string ReportGenerator::get_insight_type_name(InsightType type) const {
         case InsightType::COMPLETION: return "Completion";
         case InsightType::MOTIF: return "Motif";
         case InsightType::SUBSTITUTION: return "Substitution";
+        case InsightType::CONTRADICTION: return "Contradiction";
+        case InsightType::ENTITY_RESOLUTION: return "Entity Resolution";
+        case InsightType::CORE_PERIPHERY: return "Core-Periphery";
+        case InsightType::TEXT_SIMILARITY: return "Text Similarity";
+        case InsightType::ARGUMENT_SUPPORT: return "Argument Support";
+        case InsightType::ACTIVE_LEARNING: return "Active Learning";
+        case InsightType::METHOD_OUTCOME: return "Method/Outcome";
+        case InsightType::CENTRALITY: return "Centrality";
+        case InsightType::COMMUNITY_DETECTION: return "Community Detection";
+        case InsightType::K_CORE: return "k-Core";
+        case InsightType::K_TRUSS: return "k-Truss";
+        case InsightType::CLAIM_STANCE: return "Claim Stance";
+        case InsightType::RELATION_INDUCTION: return "Relation Induction";
+        case InsightType::ANALOGICAL_TRANSFER: return "Analogical Transfer";
+        case InsightType::UNCERTAINTY_SAMPLING: return "Uncertainty Sampling";
+        case InsightType::COUNTERFACTUAL: return "Counterfactual";
+        case InsightType::HYPEREDGE_PREDICTION: return "Hyperedge Prediction";
+        case InsightType::CONSTRAINED_RULE: return "Constrained Rule";
         case InsightType::DIFFUSION: return "Diffusion";
         case InsightType::SURPRISE: return "Surprise";
         case InsightType::COMMUNITY_LINK: return "Community Link";
@@ -189,6 +207,35 @@ std::string ReportGenerator::generate_llm_narrative(const Insight& insight, cons
         case InsightType::SUBSTITUTION:
             prompt << "A substitution identifies entities that appear interchangeable in context, potentially "
                    << "indicating synonyms or closely related concepts.\n\n";
+            break;
+        case InsightType::CONTRADICTION:
+            prompt << "A contradiction highlights a conflict where the graph contains both affirmed and negated "
+                   << "claims about the same relationship, warranting manual review.\n\n";
+            break;
+        case InsightType::ENTITY_RESOLUTION:
+            prompt << "Entity resolution findings suggest that two entities are likely duplicates or aliases "
+                   << "based on similar labels and graph context.\n\n";
+            break;
+        case InsightType::CORE_PERIPHERY:
+            prompt << "Core-periphery analysis highlights entities that form the structural backbone of the graph "
+                   << "versus those that sit on the periphery. Hub/authority scores indicate how often a node "
+                   << "acts as a source or target within relations.\n\n";
+            break;
+        case InsightType::TEXT_SIMILARITY:
+            prompt << "Text similarity links connect entities with highly similar labels or descriptions, "
+                   << "suggesting related concepts or near-duplicate naming.\n\n";
+            break;
+        case InsightType::ARGUMENT_SUPPORT:
+            prompt << "Argument-supported relations are candidate links grounded in evidence paths through the graph, "
+                   << "indicating a plausible relationship supported by intermediate entities and relations.\n\n";
+            break;
+        case InsightType::ACTIVE_LEARNING:
+            prompt << "Active learning queries highlight uncertain or high-impact relations that should be verified "
+                   << "to improve graph quality.\n\n";
+            break;
+        case InsightType::METHOD_OUTCOME:
+            prompt << "Method/outcome findings classify entities as methods or outcomes based on their labels and "
+                   << "context in the graph.\n\n";
             break;
         case InsightType::DIFFUSION:
             prompt << "Diffusion analysis reveals influence pathways showing how concepts relate through the "
@@ -364,6 +411,266 @@ std::string ReportGenerator::describe_substitution(const Insight& insight) const
     ss << "This could indicate that they are synonyms, closely related concepts, "
        << "or represent the same entity under different names.";
 
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_contradiction(const Insight& insight) const {
+    std::stringstream ss;
+
+    if (insight.seed_labels.empty()) return "";
+
+    ss << "A contradiction was detected involving ";
+    for (size_t i = 0; i < std::min(size_t(3), insight.seed_labels.size()); ++i) {
+        if (i > 0) ss << (i == std::min(size_t(3), insight.seed_labels.size()) - 1 ? " and " : ", ");
+        ss << "**" << insight.seed_labels[i] << "**";
+    }
+    ss << ". ";
+
+    if (!insight.description.empty()) {
+        ss << insight.description << " ";
+    }
+
+    ss << "These conflicting claims should be reviewed to resolve ambiguity or extraction errors.";
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_entity_resolution(const Insight& insight) const {
+    std::stringstream ss;
+
+    if (insight.seed_labels.size() < 2) return "";
+
+    ss << "The entities **" << insight.seed_labels[0] << "** and **" << insight.seed_labels[1]
+       << "** appear to be duplicate or alias entries. ";
+
+    auto it_label = insight.score_breakdown.find("label_similarity");
+    auto it_neighbor = insight.score_breakdown.find("neighbor_overlap");
+    if (it_label != insight.score_breakdown.end()) {
+        ss << "Label similarity is " << std::fixed << std::setprecision(2) << it_label->second << ", ";
+    }
+    if (it_neighbor != insight.score_breakdown.end()) {
+        ss << "neighbor overlap is " << std::fixed << std::setprecision(2) << it_neighbor->second << ". ";
+    }
+
+    ss << "Merging or linking these entities could reduce duplication and improve graph consistency.";
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_core_periphery(const Insight& insight) const {
+    std::stringstream ss;
+
+    if (insight.seed_labels.empty()) return "";
+
+    std::string role = "core";
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "periphery") {
+            role = "periphery";
+            break;
+        }
+    }
+
+    ss << "The entity **" << insight.seed_labels[0] << "** sits in the " << role
+       << " of the graph structure. ";
+
+    auto it_deg = insight.score_breakdown.find("degree_norm");
+    auto it_hub = insight.score_breakdown.find("hub_score");
+    auto it_auth = insight.score_breakdown.find("authority_score");
+    auto it_int = insight.score_breakdown.find("integration_score");
+    if (it_deg != insight.score_breakdown.end()) {
+        ss << "Degree centrality: " << std::fixed << std::setprecision(2) << it_deg->second << ". ";
+    }
+    if (it_hub != insight.score_breakdown.end()) {
+        ss << "Hub score: " << std::fixed << std::setprecision(2) << it_hub->second << ". ";
+    }
+    if (it_auth != insight.score_breakdown.end()) {
+        ss << "Authority score: " << std::fixed << std::setprecision(2) << it_auth->second << ". ";
+    }
+    if (it_int != insight.score_breakdown.end()) {
+        ss << "Core integration: " << std::fixed << std::setprecision(2) << it_int->second << ". ";
+    }
+
+    ss << "These signals summarize how central this entity is to the knowledge graph.";
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_text_similarity(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+
+    ss << "The labels **" << insight.seed_labels[0] << "** and **" << insight.seed_labels[1]
+       << "** are textually similar based on token overlap and TF-IDF weighting. ";
+
+    auto it = insight.score_breakdown.find("text_similarity");
+    if (it != insight.score_breakdown.end()) {
+        ss << "Cosine similarity: " << std::fixed << std::setprecision(2) << it->second << ". ";
+    }
+
+    ss << "These entities may represent closely related concepts, variants, or aliases.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_argument_support(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+
+    ss << "A candidate relation is supported by an evidence path between **"
+       << insight.seed_labels[0] << "** and **" << insight.seed_labels[1] << "**. ";
+    if (!insight.description.empty()) {
+        ss << insight.description;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_active_learning(const Insight& insight) const {
+    std::stringstream ss;
+    if (!insight.description.empty()) {
+        ss << "Validation query: " << insight.description;
+    } else if (!insight.seed_labels.empty()) {
+        ss << "Validate relation involving " << format_entity_list(insight.seed_labels, 4) << ".";
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_method_outcome(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+
+    std::string role = "method/outcome";
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "method") role = "method";
+        if (tag == "outcome") role = "outcome";
+    }
+
+    ss << "The entity **" << insight.seed_labels[0] << "** is classified as a " << role << ". ";
+    if (!insight.description.empty()) {
+        ss << insight.description;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_centrality(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "The entity **" << insight.seed_labels[0] << "** is structurally central in the bipartite projection. ";
+    auto it = insight.score_breakdown.find("centrality");
+    if (it != insight.score_breakdown.end()) {
+        ss << "Centrality score: " << std::fixed << std::setprecision(2) << it->second << ". ";
+    }
+    ss << "Highly central entities often connect many relationship contexts.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_community_detection(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "A dense community is centered around " << format_entity_list(insight.seed_labels, 3) << ". ";
+    auto it = insight.score_breakdown.find("size");
+    if (it != insight.score_breakdown.end()) {
+        ss << "Relative size score: " << std::fixed << std::setprecision(2) << it->second << ". ";
+    }
+    ss << "These nodes likely share thematic or structural overlap.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_k_core(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "The entity **" << insight.seed_labels[0] << "** appears in a dense k-core. ";
+    auto it = insight.score_breakdown.find("core");
+    if (it != insight.score_breakdown.end()) {
+        ss << "Core number: " << std::fixed << std::setprecision(0) << it->second << ". ";
+    }
+    ss << "High k-core nodes participate in tightly connected regions.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_k_truss(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "The pair **" << insight.seed_labels[0] << "** – **" << insight.seed_labels[1]
+       << "** lies in a dense k-truss subgraph. ";
+    auto it = insight.score_breakdown.find("support");
+    if (it != insight.score_breakdown.end()) {
+        ss << "Triangle support: " << std::fixed << std::setprecision(0) << it->second << ". ";
+    }
+    ss << "Truss edges are reinforced by shared neighbors.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_claim_stance(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    std::string stance = "neutral";
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "supports" || tag == "opposes" || tag == "neutral") {
+            stance = tag;
+            break;
+        }
+    }
+    ss << "Claim stance is **" << stance << "** for **" << insight.seed_labels[0]
+       << "** → **" << insight.seed_labels[1] << "**. ";
+    if (!insight.description.empty()) {
+        ss << insight.description;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_relation_induction(const Insight& insight) const {
+    std::stringstream ss;
+    ss << "Relation type induction suggests: " << insight.description;
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_analogical_transfer(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "Analogical transfer proposes a relation between **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1] << "** based on similar relational patterns. ";
+    if (!insight.description.empty()) {
+        ss << insight.description;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_uncertainty_sampling(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    double uncertainty = 0.0;
+    auto it = insight.score_breakdown.find("uncertainty");
+    if (it != insight.score_breakdown.end()) uncertainty = it->second;
+    ss << "Low-confidence relation between **" << insight.seed_labels[0] << "** and **"
+       << insight.seed_labels[1] << "**. ";
+    ss << "Uncertainty score: " << std::fixed << std::setprecision(2) << uncertainty << ".";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_counterfactual(const Insight& insight) const {
+    std::stringstream ss;
+    if (!insight.description.empty()) {
+        ss << insight.description;
+    } else {
+        ss << "Counterfactual probe for relation involving " << format_entity_list(insight.seed_labels, 2) << ".";
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_hyperedge_prediction(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "Predicted relation between **" << insight.seed_labels[0] << "** and **"
+       << insight.seed_labels[1] << "** based on similar target sets. ";
+    auto it = insight.score_breakdown.find("overlap");
+    if (it != insight.score_breakdown.end()) {
+        ss << "Overlap score: " << std::fixed << std::setprecision(2) << it->second << ".";
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_constrained_rule(const Insight& insight) const {
+    std::stringstream ss;
+    ss << insight.description;
     return ss.str();
 }
 
@@ -631,6 +938,72 @@ std::string ReportGenerator::generate_executive_summary(const InsightCollection&
            << "interchangeable in context.\n";
     }
 
+    if (counts[InsightType::CONTRADICTION] > 0) {
+        ss << "- **" << counts[InsightType::CONTRADICTION] << " contradictions** flag conflicts where both affirmed "
+           << "and negated claims appear for the same relationship.\n";
+    }
+
+    if (counts[InsightType::ENTITY_RESOLUTION] > 0) {
+        ss << "- **" << counts[InsightType::ENTITY_RESOLUTION] << " entity resolution candidates** suggest likely "
+           << "duplicate or alias entities.\n";
+    }
+
+    if (counts[InsightType::CORE_PERIPHERY] > 0) {
+        ss << "- **" << counts[InsightType::CORE_PERIPHERY] << " core-periphery roles** highlight which entities sit "
+           << "at the structural core versus the periphery.\n";
+    }
+
+    if (counts[InsightType::TEXT_SIMILARITY] > 0) {
+        ss << "- **" << counts[InsightType::TEXT_SIMILARITY] << " text similarity links** connect entities with "
+           << "highly similar labels.\n";
+    }
+
+    if (counts[InsightType::ARGUMENT_SUPPORT] > 0) {
+        ss << "- **" << counts[InsightType::ARGUMENT_SUPPORT] << " argument-supported relations** propose links "
+           << "grounded in evidence paths through the graph.\n";
+    }
+
+    if (counts[InsightType::ACTIVE_LEARNING] > 0) {
+        ss << "- **" << counts[InsightType::ACTIVE_LEARNING] << " active learning queries** prioritize uncertain or "
+           << "high-impact relations for verification.\n";
+    }
+
+    if (counts[InsightType::METHOD_OUTCOME] > 0) {
+        ss << "- **" << counts[InsightType::METHOD_OUTCOME] << " method/outcome classifications** identify methods "
+           << "and outcomes in the graph.\n";
+    }
+    if (counts[InsightType::CENTRALITY] > 0) {
+        ss << "- **" << counts[InsightType::CENTRALITY] << " centrality findings** rank entities by structural importance.\n";
+    }
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0) {
+        ss << "- **" << counts[InsightType::COMMUNITY_DETECTION] << " community clusters** summarize dense regions of the graph.\n";
+    }
+    if (counts[InsightType::K_CORE] > 0) {
+        ss << "- **" << counts[InsightType::K_CORE] << " k-core nodes** identify entities in tightly connected cores.\n";
+    }
+    if (counts[InsightType::K_TRUSS] > 0) {
+        ss << "- **" << counts[InsightType::K_TRUSS] << " k-truss edges** highlight triangle-reinforced relationships.\n";
+    }
+    if (counts[InsightType::CLAIM_STANCE] > 0) {
+        ss << "- **" << counts[InsightType::CLAIM_STANCE] << " claim stance classifications** label extracted claims as supportive, opposing, or neutral.\n";
+    }
+    if (counts[InsightType::RELATION_INDUCTION] > 0) {
+        ss << "- **" << counts[InsightType::RELATION_INDUCTION] << " relation inductions** suggest canonical relation types.\n";
+    }
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0) {
+        ss << "- **" << counts[InsightType::ANALOGICAL_TRANSFER] << " analogical transfers** propose new links by analogy.\n";
+    }
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0) {
+        ss << "- **" << counts[InsightType::UNCERTAINTY_SAMPLING] << " uncertainty samples** highlight low-confidence relations.\n";
+    }
+    if (counts[InsightType::COUNTERFACTUAL] > 0) {
+        ss << "- **" << counts[InsightType::COUNTERFACTUAL] << " counterfactual probes** generate falsification questions.\n";
+    }
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0) {
+        ss << "- **" << counts[InsightType::HYPEREDGE_PREDICTION] << " hyperedge predictions** propose new relations from overlap.\n";
+    }
+    // Constrained rules removed from pipeline
+
     if (counts[InsightType::SURPRISE] > 0) {
         ss << "- **" << counts[InsightType::SURPRISE] << " surprising connections** were discovered that represent "
            << "statistically unusual or novel relationships.\n";
@@ -707,18 +1080,36 @@ std::string ReportGenerator::generate_augmentation_overview(const ReportConfig& 
 
     if (config.markdown_format) {
         ss << "## Augmentation Methods\n\n";
-        ss << "This report uses twelve augmentation signals derived from the graph structure and local patterns:\n";
+        ss << "This report uses twenty-nine augmentation signals derived from the graph structure and local patterns:\n";
         ss << "- **Bridge**: identifies entities that connect otherwise separate regions of the graph.\n";
         ss << "- **Completion**: suggests missing relations based on similar neighborhood patterns.\n";
         ss << "- **Motif**: highlights recurring subgraph structures that indicate repeated concepts.\n";
         ss << "- **Substitution**: proposes interchangeable entities in similar contexts.\n";
+        ss << "- **Contradiction**: flags conflicts where affirmed and negated claims both appear.\n";
+        ss << "- **Entity Resolution**: detects likely duplicate or alias entities.\n";
+        ss << "- **Core-Periphery**: maps central hubs versus peripheral entities.\n";
+        ss << "- **Text Similarity**: links entities with highly similar labels.\n";
+        ss << "- **Argument Support**: proposes relations grounded in evidence paths.\n";
+        ss << "- **Active Learning**: surfaces high-value verification queries.\n";
+        ss << "- **Method/Outcome**: identifies method or outcome entities.\n";
+        ss << "- **Centrality**: ranks entities by structural importance in the bipartite graph.\n";
+        ss << "- **Community Detection**: groups entities into dense clusters.\n";
+        ss << "- **k-Core**: highlights nodes in tightly connected cores.\n";
+        ss << "- **k-Truss**: identifies edges reinforced by shared triangles.\n";
+        ss << "- **Claim Stance**: classifies claims as supporting/opposing/neutral.\n";
+        ss << "- **Relation Induction**: proposes canonical relation type names.\n";
+        ss << "- **Analogical Transfer**: suggests new links by analogy.\n";
+        ss << "- **Uncertainty Sampling**: highlights low-confidence relations for verification.\n";
+        ss << "- **Counterfactual**: asks falsification questions for key claims.\n";
+        ss << "- **Hyperedge Prediction**: predicts relations using overlap patterns.\n";
+        // Constrained rules removed from pipeline
         ss << "- **Diffusion**: maps likely influence pathways over the graph.\n";
         ss << "- **Surprise**: flags statistically unusual or novel connections.\n";
         ss << "- **Community Link**: proposes cross-cluster links with similar relation signatures.\n";
         ss << "- **Path Rank**: proposes links supported by multiple short graph paths.\n";
         ss << "- **Author Chain**: traces citation chains across authors.\n";
         ss << "- **Hypothesis**: synthesizes testable claims from combined discovery findings.\n";
-        ss << "- **Rule**: mines association rules between relation types (e.g., if R1(X,Y) then R2(X,Z)).\n\n";
+        ss << "- **Rule**: mines association rules between relation types (e.g., if R1(X,Y) then R2(X,Z)).\n";
         ss << "- **Embedding Link**: predicts missing relations using TransE embeddings.\n\n";
         ss << "Alternatives to consider:\n";
         ss << "- Embedding-based link prediction (TransE, RotatE, ComplEx).\n";
@@ -728,19 +1119,36 @@ std::string ReportGenerator::generate_augmentation_overview(const ReportConfig& 
     } else {
         ss << "AUGMENTATION METHODS\n";
         ss << "--------------------\n";
-        ss << "This report uses twelve augmentation signals derived from the graph structure and local patterns:\n";
+        ss << "This report uses thirty augmentation signals derived from the graph structure and local patterns:\n";
         ss << "1) Bridge: identifies entities that connect otherwise separate regions of the graph.\n";
         ss << "2) Completion: suggests missing relations based on similar neighborhood patterns.\n";
         ss << "3) Motif: highlights recurring subgraph structures that indicate repeated concepts.\n";
         ss << "4) Substitution: proposes interchangeable entities in similar contexts.\n";
-        ss << "5) Diffusion: maps likely influence pathways over the graph.\n";
-        ss << "6) Surprise: flags statistically unusual or novel connections.\n";
-        ss << "7) Community Link: proposes cross-cluster links with similar relation signatures.\n";
-        ss << "8) Path Rank: proposes links supported by multiple short graph paths.\n";
-        ss << "9) Author Chain: traces citation chains across authors.\n";
-        ss << "10) Hypothesis: synthesizes testable claims from combined findings.\n";
-        ss << "11) Rule: mines association rules between relation types.\n";
-        ss << "12) Embedding Link: predicts missing relations using TransE embeddings.\n\n";
+        ss << "5) Contradiction: flags conflicts where the graph includes both affirmed and negated claims.\n";
+        ss << "6) Entity Resolution: detects likely duplicate or alias entities.\n";
+        ss << "7) Core-Periphery: maps central hubs versus peripheral entities.\n";
+        ss << "8) Text Similarity: links entities with highly similar labels.\n";
+        ss << "9) Argument Support: proposes relations grounded in evidence paths.\n";
+        ss << "10) Active Learning: surfaces high-value verification queries.\n";
+        ss << "11) Method/Outcome: identifies method or outcome entities.\n";
+        ss << "12) Centrality: ranks entities by structural importance.\n";
+        ss << "13) Community Detection: groups entities into dense clusters.\n";
+        ss << "14) k-Core: highlights nodes in tightly connected cores.\n";
+        ss << "15) k-Truss: identifies edges reinforced by triangles.\n";
+        ss << "16) Claim Stance: classifies claims as supporting/opposing/neutral.\n";
+        ss << "17) Relation Induction: proposes canonical relation type names.\n";
+        ss << "18) Analogical Transfer: suggests new links by analogy.\n";
+        ss << "19) Uncertainty Sampling: highlights low-confidence relations.\n";
+        ss << "20) Counterfactual: generates falsification questions.\n";
+        ss << "21) Hyperedge Prediction: predicts relations using overlap patterns.\n";
+        ss << "22) Diffusion: maps likely influence pathways over the graph.\n";
+        ss << "23) Surprise: flags statistically unusual or novel connections.\n";
+        ss << "24) Community Link: proposes cross-cluster links with similar relation signatures.\n";
+        ss << "25) Path Rank: proposes links supported by multiple short graph paths.\n";
+        ss << "26) Author Chain: traces citation chains across authors.\n";
+        ss << "27) Hypothesis: synthesizes testable claims from combined findings.\n";
+        ss << "28) Rule: mines association rules between relation types.\n";
+        ss << "29) Embedding Link: predicts missing relations using TransE embeddings.\n\n";
         ss << "Alternatives to consider:\n";
         ss << "- Embedding-based link prediction (TransE, RotatE, ComplEx).\n";
         ss << "- GNN-based link prediction (GraphSAGE, GAT, RGCN).\n";
@@ -804,6 +1212,60 @@ std::string ReportGenerator::get_graph_context_summary(const Insight& insight, b
         case InsightType::SUBSTITUTION:
             summary = describe_substitution(insight);
             break;
+        case InsightType::CONTRADICTION:
+            summary = describe_contradiction(insight);
+            break;
+        case InsightType::ENTITY_RESOLUTION:
+            summary = describe_entity_resolution(insight);
+            break;
+        case InsightType::CORE_PERIPHERY:
+            summary = describe_core_periphery(insight);
+            break;
+        case InsightType::TEXT_SIMILARITY:
+            summary = describe_text_similarity(insight);
+            break;
+        case InsightType::ARGUMENT_SUPPORT:
+            summary = describe_argument_support(insight);
+            break;
+        case InsightType::ACTIVE_LEARNING:
+            summary = describe_active_learning(insight);
+            break;
+        case InsightType::METHOD_OUTCOME:
+            summary = describe_method_outcome(insight);
+            break;
+        case InsightType::CENTRALITY:
+            summary = describe_centrality(insight);
+            break;
+        case InsightType::COMMUNITY_DETECTION:
+            summary = describe_community_detection(insight);
+            break;
+        case InsightType::K_CORE:
+            summary = describe_k_core(insight);
+            break;
+        case InsightType::K_TRUSS:
+            summary = describe_k_truss(insight);
+            break;
+        case InsightType::CLAIM_STANCE:
+            summary = describe_claim_stance(insight);
+            break;
+        case InsightType::RELATION_INDUCTION:
+            summary = describe_relation_induction(insight);
+            break;
+        case InsightType::ANALOGICAL_TRANSFER:
+            summary = describe_analogical_transfer(insight);
+            break;
+        case InsightType::UNCERTAINTY_SAMPLING:
+            summary = describe_uncertainty_sampling(insight);
+            break;
+        case InsightType::COUNTERFACTUAL:
+            summary = describe_counterfactual(insight);
+            break;
+        case InsightType::HYPEREDGE_PREDICTION:
+            summary = describe_hyperedge_prediction(insight);
+            break;
+        case InsightType::CONSTRAINED_RULE:
+            summary = describe_constrained_rule(insight);
+            break;
         case InsightType::DIFFUSION:
             summary = describe_diffusion(insight);
             break;
@@ -858,6 +1320,23 @@ std::string ReportGenerator::generate_llm_examples_section(
         InsightType::COMPLETION,
         InsightType::MOTIF,
         InsightType::SUBSTITUTION,
+        InsightType::CONTRADICTION,
+        InsightType::ENTITY_RESOLUTION,
+        InsightType::CORE_PERIPHERY,
+        InsightType::TEXT_SIMILARITY,
+        InsightType::ARGUMENT_SUPPORT,
+        InsightType::ACTIVE_LEARNING,
+        InsightType::METHOD_OUTCOME,
+        InsightType::CENTRALITY,
+        InsightType::COMMUNITY_DETECTION,
+        InsightType::K_CORE,
+        InsightType::K_TRUSS,
+        InsightType::CLAIM_STANCE,
+        InsightType::RELATION_INDUCTION,
+        InsightType::ANALOGICAL_TRANSFER,
+        InsightType::UNCERTAINTY_SAMPLING,
+        InsightType::COUNTERFACTUAL,
+        InsightType::HYPEREDGE_PREDICTION,
         InsightType::DIFFUSION,
         InsightType::SURPRISE,
         InsightType::COMMUNITY_LINK,
@@ -928,6 +1407,23 @@ std::string ReportGenerator::generate_llm_examples_section_html(
         InsightType::COMPLETION,
         InsightType::MOTIF,
         InsightType::SUBSTITUTION,
+        InsightType::CONTRADICTION,
+        InsightType::ENTITY_RESOLUTION,
+        InsightType::CORE_PERIPHERY,
+        InsightType::TEXT_SIMILARITY,
+        InsightType::ARGUMENT_SUPPORT,
+        InsightType::ACTIVE_LEARNING,
+        InsightType::METHOD_OUTCOME,
+        InsightType::CENTRALITY,
+        InsightType::COMMUNITY_DETECTION,
+        InsightType::K_CORE,
+        InsightType::K_TRUSS,
+        InsightType::CLAIM_STANCE,
+        InsightType::RELATION_INDUCTION,
+        InsightType::ANALOGICAL_TRANSFER,
+        InsightType::UNCERTAINTY_SAMPLING,
+        InsightType::COUNTERFACTUAL,
+        InsightType::HYPEREDGE_PREDICTION,
         InsightType::DIFFUSION,
         InsightType::SURPRISE,
         InsightType::COMMUNITY_LINK,
@@ -1142,6 +1638,492 @@ std::string ReportGenerator::generate_substitutions_section(const std::vector<In
         count++;
     }
 
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_contradictions_section(const std::vector<Insight>& contradictions, const ReportConfig& config) {
+    if (contradictions.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Contradictions\n\n";
+        ss << "These findings highlight conflicting claims where both affirmed and negated relationships appear. "
+           << "They often indicate extraction inconsistencies or ambiguous evidence that warrants review.\n\n";
+    }
+
+    std::vector<Insight> sorted = contradictions;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Conflict\n\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_contradiction(insight);
+        }
+        ss << narrative << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_entity_resolutions_section(const std::vector<Insight>& resolutions, const ReportConfig& config) {
+    if (resolutions.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Entity Resolution Candidates\n\n";
+        ss << "These pairs of entities are likely duplicates or aliases based on label similarity and shared context. "
+           << "Merging or linking them can reduce redundancy in the graph.\n\n";
+    }
+
+    std::vector<Insight> sorted = resolutions;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " ≈ " << insight.seed_labels[1] << "\n\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_entity_resolution(insight);
+        }
+        ss << narrative << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_core_periphery_section(const std::vector<Insight>& cores, const ReportConfig& config) {
+    if (cores.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Core–Periphery / Hub–Authority Analysis\n\n";
+        ss << "These findings highlight entities that form the structural core of the graph "
+           << "as well as those in the periphery. Hub/authority scores reflect whether an entity "
+           << "tends to act as a source (hub) or target (authority) in relations.\n\n";
+    }
+
+    std::vector<Insight> sorted = cores;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_core_periphery(insight);
+        }
+        ss << narrative << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_text_similarity_section(const std::vector<Insight>& links, const ReportConfig& config) {
+    if (links.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Text-Semantic Similarity Links\n\n";
+        ss << "These links connect entities whose labels are highly similar based on TF-IDF token similarity. "
+           << "They can surface related concepts or naming variants.\n\n";
+    }
+
+    std::vector<Insight> sorted = links;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " ~ " << insight.seed_labels[1] << "\n\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_text_similarity(insight);
+        }
+        ss << narrative << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_argument_support_section(const std::vector<Insight>& links, const ReportConfig& config) {
+    if (links.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Argument-Supported Relations\n\n";
+        ss << "These candidate links are grounded in evidence paths through the hypergraph.\n\n";
+    }
+
+    std::vector<Insight> sorted = links;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " ↔ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = config.use_llm_narratives && llm_provider_
+            ? generate_llm_narrative(insight, config)
+            : describe_argument_support(insight);
+        ss << narrative << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_active_learning_section(const std::vector<Insight>& queries, const ReportConfig& config) {
+    if (queries.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Active Learning Queries\n\n";
+        ss << "These questions prioritize high-impact or low-confidence relations for verification.\n\n";
+    }
+
+    int count = 0;
+    for (const auto& insight : queries) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Verification Question\n\n";
+        }
+        ss << describe_active_learning(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_method_outcome_section(const std::vector<Insight>& nodes, const ReportConfig& config) {
+    if (nodes.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Method/Outcome Entities\n\n";
+        ss << "These entities are classified as methods or outcomes based on label and context.\n\n";
+    }
+
+    std::vector<Insight> sorted = nodes;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        ss << describe_method_outcome(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_centrality_section(const std::vector<Insight>& nodes, const ReportConfig& config) {
+    if (nodes.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Centrality Rankings\n\n";
+        ss << "These entities are structurally central in the bipartite projection of the hypergraph.\n\n";
+    }
+
+    std::vector<Insight> sorted = nodes;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        ss << describe_centrality(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_community_detection_section(const std::vector<Insight>& communities, const ReportConfig& config) {
+    if (communities.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Community Detection\n\n";
+        ss << "These clusters are dense groups discovered via Louvain on the projected graph.\n\n";
+    }
+
+    std::vector<Insight> sorted = communities;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Community Cluster\n\n";
+        }
+        ss << describe_community_detection(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_k_core_section(const std::vector<Insight>& nodes, const ReportConfig& config) {
+    if (nodes.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## k-Core Nodes\n\n";
+        ss << "These nodes reside in dense k-core regions of the projected graph.\n\n";
+    }
+
+    std::vector<Insight> sorted = nodes;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        ss << describe_k_core(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_k_truss_section(const std::vector<Insight>& links, const ReportConfig& config) {
+    if (links.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## k-Truss Edges\n\n";
+        ss << "These edges lie inside dense triangle-reinforced subgraphs.\n\n";
+    }
+
+    std::vector<Insight> sorted = links;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " — " << insight.seed_labels[1] << "\n\n";
+        }
+        ss << describe_k_truss(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_claim_stance_section(const std::vector<Insight>& claims, const ReportConfig& config) {
+    if (claims.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Claim Stance\n\n";
+        ss << "These findings classify the stance (supports/opposes/neutral) of extracted claims.\n\n";
+    }
+
+    int count = 0;
+    for (const auto& insight : claims) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → "
+               << insight.seed_labels[1] << "\n\n";
+        }
+        ss << describe_claim_stance(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_relation_induction_section(const std::vector<Insight>& relations, const ReportConfig& config) {
+    if (relations.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Relation Type Induction\n\n";
+        ss << "These suggestions propose canonical relation types based on observed usage.\n\n";
+    }
+
+    int count = 0;
+    for (const auto& insight : relations) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Suggested Type\n\n";
+        }
+        ss << describe_relation_induction(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_analogical_transfer_section(const std::vector<Insight>& links, const ReportConfig& config) {
+    if (links.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Analogical Transfer\n\n";
+        ss << "These candidates are inferred by analogy between similar relation patterns.\n\n";
+    }
+
+    int count = 0;
+    for (const auto& insight : links) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " → " << insight.seed_labels[1] << "\n\n";
+        }
+        ss << describe_analogical_transfer(insight) << "\n\n";
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_uncertainty_sampling_section(const std::vector<Insight>& samples, const ReportConfig& config) {
+    if (samples.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Uncertainty Sampling\n\n";
+        ss << "These low-confidence relations are prioritized for verification.\n\n";
+    }
+    int count = 0;
+    for (const auto& insight : samples) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → "
+               << insight.seed_labels[1] << "\n\n";
+        }
+        ss << describe_uncertainty_sampling(insight) << "\n\n";
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_counterfactual_section(const std::vector<Insight>& probes, const ReportConfig& config) {
+    if (probes.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Counterfactual Probing\n\n";
+        ss << "These questions probe how claims could be falsified or reversed.\n\n";
+    }
+    int count = 0;
+    for (const auto& insight : probes) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Counterfactual Question\n\n";
+        }
+        ss << describe_counterfactual(insight) << "\n\n";
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_hyperedge_prediction_section(const std::vector<Insight>& links, const ReportConfig& config) {
+    if (links.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Hyperedge Prediction\n\n";
+        ss << "These candidates are predicted by overlapping target sets under the same relation.\n\n";
+    }
+    int count = 0;
+    for (const auto& insight : links) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → "
+               << insight.seed_labels[1] << "\n\n";
+        }
+        ss << describe_hyperedge_prediction(insight) << "\n\n";
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_constrained_rule_section(const std::vector<Insight>& rules, const ReportConfig& config) {
+    if (rules.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Constrained Rules\n\n";
+        ss << "These rules satisfy stricter support, confidence, and lift constraints.\n\n";
+    }
+    int count = 0;
+    for (const auto& insight : rules) {
+        if (count >= config.max_examples_per_type) break;
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Rule\n\n";
+        }
+        ss << describe_constrained_rule(insight) << "\n\n";
+        count++;
+    }
     return ss.str();
 }
 
@@ -1514,49 +2496,122 @@ std::string ReportGenerator::generate_conclusions(const InsightCollection& insig
     }
 
     if (counts[InsightType::SUBSTITUTION] > 0) {
-        ss << "3. **Resolve Duplicates**: The " << counts[InsightType::SUBSTITUTION]
-           << " potential substitutions may indicate duplicate or synonymous entities "
-           << "that could be merged for consistency.\n\n";
+        ss << "3. **Review Substitutions**: The " << counts[InsightType::SUBSTITUTION]
+           << " potential substitutions highlight entities with interchangeable context. "
+           << "Evaluate whether they represent synonyms or closely related concepts.\n\n";
+    }
+
+    if (counts[InsightType::ENTITY_RESOLUTION] > 0) {
+        ss << "4. **Merge Likely Duplicates**: The " << counts[InsightType::ENTITY_RESOLUTION]
+           << " entity resolution candidates suggest duplicate or alias entities "
+           << "that could be linked or merged to improve consistency.\n\n";
+    }
+
+    if (counts[InsightType::CORE_PERIPHERY] > 0) {
+        ss << "5. **Review Core–Periphery Roles**: The " << counts[InsightType::CORE_PERIPHERY]
+           << " core-periphery insights highlight which entities anchor the graph "
+           << "versus those on the periphery.\n\n";
+    }
+
+    if (counts[InsightType::TEXT_SIMILARITY] > 0) {
+        ss << "6. **Review Text Similarity Links**: The " << counts[InsightType::TEXT_SIMILARITY]
+           << " text similarity links surface entities with near-duplicate or closely related labels.\n\n";
+    }
+
+    if (counts[InsightType::ARGUMENT_SUPPORT] > 0) {
+        ss << "7. **Validate Argument-Supported Relations**: The " << counts[InsightType::ARGUMENT_SUPPORT]
+           << " proposed relations are backed by evidence paths and should be reviewed for correctness.\n\n";
+    }
+
+    if (counts[InsightType::ACTIVE_LEARNING] > 0) {
+        ss << "8. **Answer Active Learning Queries**: The " << counts[InsightType::ACTIVE_LEARNING]
+           << " validation questions target the most uncertain or high-impact relations.\n\n";
+    }
+
+    if (counts[InsightType::METHOD_OUTCOME] > 0) {
+        ss << "9. **Confirm Method/Outcome Roles**: The " << counts[InsightType::METHOD_OUTCOME]
+           << " classifications can clarify the graph’s conceptual structure.\n\n";
+    }
+
+    if (counts[InsightType::CENTRALITY] > 0) {
+        ss << "10. **Review Central Entities**: The " << counts[InsightType::CENTRALITY]
+           << " centrality findings highlight influential entities to prioritize for curation.\n\n";
+    }
+
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0) {
+        ss << "11. **Inspect Community Clusters**: The " << counts[InsightType::COMMUNITY_DETECTION]
+           << " detected communities can guide topic segmentation or subgraph analysis.\n\n";
+    }
+
+    if (counts[InsightType::K_CORE] > 0) {
+        ss << "12. **Assess k-Core Nodes**: The " << counts[InsightType::K_CORE]
+           << " k-core entities represent dense cores worth validating or expanding.\n\n";
+    }
+
+    if (counts[InsightType::K_TRUSS] > 0) {
+        ss << "13. **Validate k-Truss Links**: The " << counts[InsightType::K_TRUSS]
+           << " k-truss edges reflect strong local cohesion and should be verified.\n\n";
+    }
+
+    if (counts[InsightType::CLAIM_STANCE] > 0) {
+        ss << "14. **Review Claim Stance**: The " << counts[InsightType::CLAIM_STANCE]
+           << " stance classifications help identify supporting vs. opposing claims.\n\n";
+    }
+
+    if (counts[InsightType::RELATION_INDUCTION] > 0) {
+        ss << "15. **Normalize Relation Types**: The " << counts[InsightType::RELATION_INDUCTION]
+           << " induced relation types can guide ontology cleanup.\n\n";
+    }
+
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0) {
+        ss << "16. **Validate Analogical Links**: The " << counts[InsightType::ANALOGICAL_TRANSFER]
+           << " analogical transfers suggest new links worth verification.\n\n";
+    }
+
+    if (counts[InsightType::CONTRADICTION] > 0) {
+        ss << "17. **Resolve Contradictions**: The " << counts[InsightType::CONTRADICTION]
+           << " contradictions indicate conflicting claims that require manual review "
+           << "to determine the correct relationship.\n\n";
     }
 
     if (counts[InsightType::SURPRISE] > 0) {
-        ss << "4. **Investigate Surprises**: The " << counts[InsightType::SURPRISE]
+        ss << "18. **Investigate Surprises**: The " << counts[InsightType::SURPRISE]
            << " surprising connections warrant manual review to determine if they represent "
            << "genuine discoveries or potential data quality issues.\n\n";
     }
 
     if (counts[InsightType::PATH_RANK] > 0) {
-        ss << "5. **Validate Path-Ranked Links**: The " << counts[InsightType::PATH_RANK]
+        ss << "19. **Validate Path-Ranked Links**: The " << counts[InsightType::PATH_RANK]
            << " path-ranked links are supported by multiple short graph paths. "
            << "Prioritize high-confidence candidates for validation or targeted data collection.\n\n";
     }
 
     if (counts[InsightType::AUTHOR_CHAIN] > 0) {
-        ss << "6. **Track Citation Trails**: The " << counts[InsightType::AUTHOR_CHAIN]
+        ss << "20. **Track Citation Trails**: The " << counts[InsightType::AUTHOR_CHAIN]
            << " author reference chains reveal how scholarship propagates through citations. "
            << "Use these chains to map influence or identify key scholarly bridges.\n\n";
     }
 
     if (counts[InsightType::COMMUNITY_LINK] > 0) {
-        ss << "7. **Review Community Links**: The " << counts[InsightType::COMMUNITY_LINK]
+        ss << "21. **Review Community Links**: The " << counts[InsightType::COMMUNITY_LINK]
            << " cross-cluster links highlight structurally similar entities across communities. "
            << "Validate candidates that bridge distinct topic areas.\n\n";
     }
 
     if (counts[InsightType::HYPOTHESIS] > 0) {
-        ss << "8. **Test Hypotheses**: The " << counts[InsightType::HYPOTHESIS]
+        ss << "22. **Test Hypotheses**: The " << counts[InsightType::HYPOTHESIS]
            << " synthesized hypotheses translate graph discoveries into testable claims. "
            << "Prioritize those with strong supporting evidence.\n\n";
     }
 
     if (counts[InsightType::RULE] > 0) {
-        ss << "9. **Leverage Association Rules**: The " << counts[InsightType::RULE]
+        ss << "23. **Leverage Association Rules**: The " << counts[InsightType::RULE]
            << " discovered rules can be used for automated knowledge inference, "
            << "consistency checking, or to guide further data collection.\n\n";
     }
 
     if (counts[InsightType::EMBEDDING_LINK] > 0) {
-        ss << "10. **Review Embedding Predictions**: The " << counts[InsightType::EMBEDDING_LINK]
+        ss << "24. **Review Embedding Predictions**: The " << counts[InsightType::EMBEDDING_LINK]
            << " TransE-based link predictions suggest plausible missing relationships. "
            << "Higher plausibility scores indicate stronger evidence for the predicted link.\n\n";
     }
@@ -1589,6 +2644,24 @@ std::string ReportGenerator::generate(const InsightCollection& insights, const R
     report << generate_completions_section(by_type[InsightType::COMPLETION], config);
     report << generate_motifs_section(by_type[InsightType::MOTIF], config);
     report << generate_substitutions_section(by_type[InsightType::SUBSTITUTION], config);
+    report << generate_contradictions_section(by_type[InsightType::CONTRADICTION], config);
+    report << generate_entity_resolutions_section(by_type[InsightType::ENTITY_RESOLUTION], config);
+    report << generate_core_periphery_section(by_type[InsightType::CORE_PERIPHERY], config);
+    report << generate_text_similarity_section(by_type[InsightType::TEXT_SIMILARITY], config);
+    report << generate_argument_support_section(by_type[InsightType::ARGUMENT_SUPPORT], config);
+    report << generate_active_learning_section(by_type[InsightType::ACTIVE_LEARNING], config);
+    report << generate_method_outcome_section(by_type[InsightType::METHOD_OUTCOME], config);
+    report << generate_centrality_section(by_type[InsightType::CENTRALITY], config);
+    report << generate_community_detection_section(by_type[InsightType::COMMUNITY_DETECTION], config);
+    report << generate_k_core_section(by_type[InsightType::K_CORE], config);
+    report << generate_k_truss_section(by_type[InsightType::K_TRUSS], config);
+    report << generate_claim_stance_section(by_type[InsightType::CLAIM_STANCE], config);
+    report << generate_relation_induction_section(by_type[InsightType::RELATION_INDUCTION], config);
+    report << generate_analogical_transfer_section(by_type[InsightType::ANALOGICAL_TRANSFER], config);
+    report << generate_uncertainty_sampling_section(by_type[InsightType::UNCERTAINTY_SAMPLING], config);
+    report << generate_counterfactual_section(by_type[InsightType::COUNTERFACTUAL], config);
+    report << generate_hyperedge_prediction_section(by_type[InsightType::HYPEREDGE_PREDICTION], config);
+    // Constrained rules removed from pipeline
     report << generate_surprise_section(by_type[InsightType::SURPRISE], config);
     report << generate_diffusion_section(by_type[InsightType::DIFFUSION], config);
     report << generate_community_links_section(by_type[InsightType::COMMUNITY_LINK], config);
@@ -1656,6 +2729,24 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             --theme-community: #f97316;
             --theme-hypothesis: #22d3ee;
             --theme-author: #facc15;
+            --theme-contradiction: #f87171;
+            --theme-resolution: #34d399;
+            --theme-core: #60a5fa;
+            --theme-text: #a78bfa;
+            --theme-argument: #38bdf8;
+            --theme-active: #f59e0b;
+            --theme-method: #10b981;
+            --theme-centrality: #14b8a6;
+            --theme-community-detect: #3b82f6;
+            --theme-k-core: #f59e0b;
+            --theme-k-truss: #84cc16;
+            --theme-claim: #ec4899;
+            --theme-relation: #0ea5e9;
+            --theme-analogy: #a855f7;
+            --theme-uncertainty: #f97316;
+            --theme-counterfactual: #64748b;
+            --theme-hyperedge: #22c55e;
+            --theme-constrained: #eab308;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -1729,6 +2820,24 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         .card.embedding .value { color: var(--secondary); }
         .card.hypothesis .value { color: var(--theme-hypothesis); }
         .card.authorchain .value { color: var(--theme-author); }
+        .card.contradiction .value { color: var(--theme-contradiction); }
+        .card.resolution .value { color: var(--theme-resolution); }
+        .card.coreperiphery .value { color: var(--theme-core); }
+        .card.textsimilarity .value { color: var(--theme-text); }
+        .card.argumentsupport .value { color: var(--theme-argument); }
+        .card.activelearning .value { color: var(--theme-active); }
+        .card.methodoutcome .value { color: var(--theme-method); }
+        .card.centrality .value { color: var(--theme-centrality); }
+        .card.communitydetect .value { color: var(--theme-community-detect); }
+        .card.kcore .value { color: var(--theme-k-core); }
+        .card.ktruss .value { color: var(--theme-k-truss); }
+        .card.claimstance .value { color: var(--theme-claim); }
+        .card.relationinduction .value { color: var(--theme-relation); }
+        .card.analogical .value { color: var(--theme-analogy); }
+        .card.uncertainty .value { color: var(--theme-uncertainty); }
+        .card.counterfactual .value { color: var(--theme-counterfactual); }
+        .card.hyperedge .value { color: var(--theme-hyperedge); }
+        .card.constrainedrule .value { color: var(--theme-constrained); }
         section {
             margin: 40px 0;
         }
@@ -1754,12 +2863,26 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         .insight.completion { border-left-color: var(--secondary); }
         .insight.motif { border-left-color: #66bb6a; }
         .insight.rule { border-left-color: #ab47bc; }
+        .insight.contradiction { border-left-color: var(--theme-contradiction); }
+        .insight.entity-resolution { border-left-color: var(--theme-resolution); }
+        .insight.core-periphery { border-left-color: var(--theme-core); }
+        .insight.text-similarity { border-left-color: var(--theme-text); }
+        .insight.argument-support { border-left-color: var(--theme-argument); }
+        .insight.active-learning { border-left-color: var(--theme-active); }
+        .insight.method-outcome { border-left-color: var(--theme-method); }
         .insight h4 {
             color: var(--primary);
             margin-bottom: 10px;
             font-size: 1.1em;
         }
         .insight.surprise h4 { color: var(--accent); }
+        .insight.contradiction h4 { color: var(--theme-contradiction); }
+        .insight.entity-resolution h4 { color: var(--theme-resolution); }
+        .insight.core-periphery h4 { color: var(--theme-core); }
+        .insight.text-similarity h4 { color: var(--theme-text); }
+        .insight.argument-support h4 { color: var(--theme-argument); }
+        .insight.active-learning h4 { color: var(--theme-active); }
+        .insight.method-outcome h4 { color: var(--theme-method); }
         .insight p { margin-bottom: 10px; }
         .evidence {
             font-size: 0.85em;
@@ -1993,6 +3116,178 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     }
 
+    if (counts[InsightType::CONTRADICTION] > 0) {
+        html << R"(                <a class="card-link" href="#module-contradictions">
+                    <div class="card contradiction">
+                        <h3>Contradictions</h3>
+                        <div class="value">)" << counts[InsightType::CONTRADICTION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::ENTITY_RESOLUTION] > 0) {
+        html << R"(                <a class="card-link" href="#module-entity-resolution">
+                    <div class="card resolution">
+                        <h3>Entity Resolutions</h3>
+                        <div class="value">)" << counts[InsightType::ENTITY_RESOLUTION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CORE_PERIPHERY] > 0) {
+        html << R"(                <a class="card-link" href="#module-core-periphery">
+                    <div class="card coreperiphery">
+                        <h3>Core–Periphery</h3>
+                        <div class="value">)" << counts[InsightType::CORE_PERIPHERY] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::TEXT_SIMILARITY] > 0) {
+        html << R"(                <a class="card-link" href="#module-text-similarity">
+                    <div class="card textsimilarity">
+                        <h3>Text Similarity</h3>
+                        <div class="value">)" << counts[InsightType::TEXT_SIMILARITY] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::ARGUMENT_SUPPORT] > 0) {
+        html << R"(                <a class="card-link" href="#module-argument-support">
+                    <div class="card argumentsupport">
+                        <h3>Argument Support</h3>
+                        <div class="value">)" << counts[InsightType::ARGUMENT_SUPPORT] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::ACTIVE_LEARNING] > 0) {
+        html << R"(                <a class="card-link" href="#module-active-learning">
+                    <div class="card activelearning">
+                        <h3>Active Learning</h3>
+                        <div class="value">)" << counts[InsightType::ACTIVE_LEARNING] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::METHOD_OUTCOME] > 0) {
+        html << R"(                <a class="card-link" href="#module-method-outcome">
+                    <div class="card methodoutcome">
+                        <h3>Method/Outcome</h3>
+                        <div class="value">)" << counts[InsightType::METHOD_OUTCOME] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CENTRALITY] > 0) {
+        html << R"(                <a class="card-link" href="#module-centrality">
+                    <div class="card centrality">
+                        <h3>Centrality</h3>
+                        <div class="value">)" << counts[InsightType::CENTRALITY] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0) {
+        html << R"(                <a class="card-link" href="#module-community-detection">
+                    <div class="card communitydetect">
+                        <h3>Communities</h3>
+                        <div class="value">)" << counts[InsightType::COMMUNITY_DETECTION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::K_CORE] > 0) {
+        html << R"(                <a class="card-link" href="#module-k-core">
+                    <div class="card kcore">
+                        <h3>k-Core</h3>
+                        <div class="value">)" << counts[InsightType::K_CORE] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::K_TRUSS] > 0) {
+        html << R"(                <a class="card-link" href="#module-k-truss">
+                    <div class="card ktruss">
+                        <h3>k-Truss</h3>
+                        <div class="value">)" << counts[InsightType::K_TRUSS] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CLAIM_STANCE] > 0) {
+        html << R"(                <a class="card-link" href="#module-claim-stance">
+                    <div class="card claimstance">
+                        <h3>Claim Stance</h3>
+                        <div class="value">)" << counts[InsightType::CLAIM_STANCE] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::RELATION_INDUCTION] > 0) {
+        html << R"(                <a class="card-link" href="#module-relation-induction">
+                    <div class="card relationinduction">
+                        <h3>Relation Induction</h3>
+                        <div class="value">)" << counts[InsightType::RELATION_INDUCTION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0) {
+        html << R"(                <a class="card-link" href="#module-analogical-transfer">
+                    <div class="card analogical">
+                        <h3>Analogical Transfer</h3>
+                        <div class="value">)" << counts[InsightType::ANALOGICAL_TRANSFER] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0) {
+        html << R"(                <a class="card-link" href="#module-uncertainty-sampling">
+                    <div class="card uncertainty">
+                        <h3>Uncertainty</h3>
+                        <div class="value">)" << counts[InsightType::UNCERTAINTY_SAMPLING] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::COUNTERFACTUAL] > 0) {
+        html << R"(                <a class="card-link" href="#module-counterfactual">
+                    <div class="card counterfactual">
+                        <h3>Counterfactual</h3>
+                        <div class="value">)" << counts[InsightType::COUNTERFACTUAL] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0) {
+        html << R"(                <a class="card-link" href="#module-hyperedge-prediction">
+                    <div class="card hyperedge">
+                        <h3>Hyperedge Prediction</h3>
+                        <div class="value">)" << counts[InsightType::HYPEREDGE_PREDICTION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    // Constrained rules removed from pipeline
+
     if (counts[InsightType::COMMUNITY_LINK] > 0) {
         html << R"(                <a class="card-link" href="#module-community">
                     <div class="card community">
@@ -2077,6 +3372,58 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
     if (counts[InsightType::MOTIF] > 0)
         html << R"(                <li><a href="#module-motifs">Recurring Patterns</a> <span class="count">()" << counts[InsightType::MOTIF] << R"()</span></li>
 )";
+    if (counts[InsightType::CONTRADICTION] > 0)
+        html << R"(                <li><a href="#module-contradictions">Contradictions</a> <span class="count">()" << counts[InsightType::CONTRADICTION] << R"()</span></li>
+)";
+    if (counts[InsightType::ENTITY_RESOLUTION] > 0)
+        html << R"(                <li><a href="#module-entity-resolution">Entity Resolution</a> <span class="count">()" << counts[InsightType::ENTITY_RESOLUTION] << R"()</span></li>
+)";
+    if (counts[InsightType::CORE_PERIPHERY] > 0)
+        html << R"(                <li><a href="#module-core-periphery">Core–Periphery</a> <span class="count">()" << counts[InsightType::CORE_PERIPHERY] << R"()</span></li>
+)";
+    if (counts[InsightType::TEXT_SIMILARITY] > 0)
+        html << R"(                <li><a href="#module-text-similarity">Text Similarity</a> <span class="count">()" << counts[InsightType::TEXT_SIMILARITY] << R"()</span></li>
+)";
+    if (counts[InsightType::ARGUMENT_SUPPORT] > 0)
+        html << R"(                <li><a href="#module-argument-support">Argument Support</a> <span class="count">()" << counts[InsightType::ARGUMENT_SUPPORT] << R"()</span></li>
+)";
+    if (counts[InsightType::ACTIVE_LEARNING] > 0)
+        html << R"(                <li><a href="#module-active-learning">Active Learning</a> <span class="count">()" << counts[InsightType::ACTIVE_LEARNING] << R"()</span></li>
+)";
+    if (counts[InsightType::METHOD_OUTCOME] > 0)
+        html << R"(                <li><a href="#module-method-outcome">Method/Outcome</a> <span class="count">()" << counts[InsightType::METHOD_OUTCOME] << R"()</span></li>
+)";
+    if (counts[InsightType::CENTRALITY] > 0)
+        html << R"(                <li><a href="#module-centrality">Centrality</a> <span class="count">()" << counts[InsightType::CENTRALITY] << R"()</span></li>
+)";
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0)
+        html << R"(                <li><a href="#module-community-detection">Community Detection</a> <span class="count">()" << counts[InsightType::COMMUNITY_DETECTION] << R"()</span></li>
+)";
+    if (counts[InsightType::K_CORE] > 0)
+        html << R"(                <li><a href="#module-k-core">k-Core</a> <span class="count">()" << counts[InsightType::K_CORE] << R"()</span></li>
+)";
+    if (counts[InsightType::K_TRUSS] > 0)
+        html << R"(                <li><a href="#module-k-truss">k-Truss</a> <span class="count">()" << counts[InsightType::K_TRUSS] << R"()</span></li>
+)";
+    if (counts[InsightType::CLAIM_STANCE] > 0)
+        html << R"(                <li><a href="#module-claim-stance">Claim Stance</a> <span class="count">()" << counts[InsightType::CLAIM_STANCE] << R"()</span></li>
+)";
+    if (counts[InsightType::RELATION_INDUCTION] > 0)
+        html << R"(                <li><a href="#module-relation-induction">Relation Induction</a> <span class="count">()" << counts[InsightType::RELATION_INDUCTION] << R"()</span></li>
+)";
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0)
+        html << R"(                <li><a href="#module-analogical-transfer">Analogical Transfer</a> <span class="count">()" << counts[InsightType::ANALOGICAL_TRANSFER] << R"()</span></li>
+)";
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0)
+        html << R"(                <li><a href="#module-uncertainty-sampling">Uncertainty Sampling</a> <span class="count">()" << counts[InsightType::UNCERTAINTY_SAMPLING] << R"()</span></li>
+)";
+    if (counts[InsightType::COUNTERFACTUAL] > 0)
+        html << R"(                <li><a href="#module-counterfactual">Counterfactual</a> <span class="count">()" << counts[InsightType::COUNTERFACTUAL] << R"()</span></li>
+)";
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0)
+        html << R"(                <li><a href="#module-hyperedge-prediction">Hyperedge Prediction</a> <span class="count">()" << counts[InsightType::HYPEREDGE_PREDICTION] << R"()</span></li>
+)";
+    // Constrained rules removed from pipeline
     if (counts[InsightType::COMMUNITY_LINK] > 0)
         html << R"(                <li><a href="#module-community">Community Links</a> <span class="count">()" << counts[InsightType::COMMUNITY_LINK] << R"()</span></li>
 )";
@@ -2561,6 +3908,808 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         html << R"HTML(        </section>
 )HTML";
     }
+
+    auto& contradictions = by_type[InsightType::CONTRADICTION];
+    if (!contradictions.empty()) {
+        std::vector<Insight> sorted = contradictions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-contradictions" class="module" style="border-left-color: var(--theme-contradiction)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-contradiction)">Contradictions</h2>
+                <p class="definition">Flags conflicts where affirmed and negated claims both appear.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-contradiction);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Contradiction Detector</strong> scans relation labels for negation cues and checks whether the same entity pairs appear with both negated and affirmed relations. It groups evidence by relation base and entity sets to surface conflicts.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Contradictions often indicate ambiguous evidence, conflicting sources, or extraction errors. Resolving them improves graph reliability.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Score</th><th>Source</th>)HTML";
+        bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
+        if (include_explanation) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+            std::string explanation;
+            if (include_explanation) {
+                if (config.use_llm_narratives) {
+                    explanation = generate_llm_narrative(insight, config);
+                } else {
+                    explanation = get_graph_context_summary(insight, false);
+                }
+            }
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                        <td>)" << escape_html(source) << R"(</td>)";
+            if (include_explanation) {
+                html << R"(
+                        <td>)" << escape_html(explanation) << R"(</td>)";
+            }
+            html << R"(
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& resolutions = by_type[InsightType::ENTITY_RESOLUTION];
+    if (!resolutions.empty()) {
+        std::vector<Insight> sorted = resolutions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-entity-resolution" class="module" style="border-left-color: var(--theme-resolution)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-resolution)">Entity Resolution</h2>
+                <p class="definition">Detects likely duplicate or alias entities based on label and context similarity.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-resolution);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Entity Resolution</strong> operator compares node labels and neighborhood overlap to detect likely duplicates. High token similarity combined with shared neighbors suggests two nodes represent the same underlying entity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Resolving duplicates reduces redundancy and improves graph consistency, which can improve downstream discovery quality.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Similarity</th><th>Neighbor Overlap</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double label_sim = 0.0;
+            double neighbor_overlap = 0.0;
+            auto lit = insight.score_breakdown.find("label_similarity");
+            if (lit != insight.score_breakdown.end()) label_sim = lit->second;
+            auto nit = insight.score_breakdown.find("neighbor_overlap");
+            if (nit != insight.score_breakdown.end()) neighbor_overlap = nit->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << label_sim << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << neighbor_overlap << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& core_periphery = by_type[InsightType::CORE_PERIPHERY];
+    if (!core_periphery.empty()) {
+        std::vector<Insight> sorted = core_periphery;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-core-periphery" class="module" style="border-left-color: var(--theme-core)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-core)">Core–Periphery / Hub–Authority</h2>
+                <p class="definition">Maps central hubs versus peripheral entities using degree, hub/authority, and integration signals.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-core);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Core–Periphery</strong> operator combines degree centrality, hub/authority balance (source vs. target roles), and hub integration scores to identify structurally central entities. Low-scoring nodes are treated as peripheral.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Core nodes anchor the graph’s structure, while peripheral nodes may represent niche concepts or sparse evidence. Understanding both helps prioritize validation and curation.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Role</th><th>Degree</th><th>Hub</th><th>Authority</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            std::string role = "core";
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag == "periphery") {
+                    role = "periphery";
+                    break;
+                }
+            }
+            double degree = 0.0;
+            double hub = 0.0;
+            double auth = 0.0;
+            auto dit = insight.score_breakdown.find("degree_norm");
+            if (dit != insight.score_breakdown.end()) degree = dit->second;
+            auto hit = insight.score_breakdown.find("hub_score");
+            if (hit != insight.score_breakdown.end()) hub = hit->second;
+            auto ait = insight.score_breakdown.find("authority_score");
+            if (ait != insight.score_breakdown.end()) auth = ait->second;
+
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << escape_html(role) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << degree << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << hub << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << auth << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& text_links = by_type[InsightType::TEXT_SIMILARITY];
+    if (!text_links.empty()) {
+        std::vector<Insight> sorted = text_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-text-similarity" class="module" style="border-left-color: var(--theme-text)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-text)">Text-Semantic Similarity Links</h2>
+                <p class="definition">Links entities with highly similar labels based on TF-IDF cosine similarity.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-text);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Text Similarity</strong> operator tokenizes entity labels, builds TF-IDF vectors, and computes cosine similarity. Pairs above a threshold are suggested as semantically related.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Similar labels often indicate related concepts, synonyms, or naming variants that can inform curation.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Similarity</th><th>Source</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+            double sim = 0.0;
+            auto it = insight.score_breakdown.find("text_similarity");
+            if (it != insight.score_breakdown.end()) sim = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << sim << R"(</td>
+                        <td>)" << escape_html(source) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& argument_links = by_type[InsightType::ARGUMENT_SUPPORT];
+    if (!argument_links.empty()) {
+        std::vector<Insight> sorted = argument_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-argument-support" class="module" style="border-left-color: var(--theme-argument)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-argument)">Argument-Supported Relations</h2>
+                <p class="definition">Proposes links grounded in evidence paths through the graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-argument);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Argument Support</strong> operator finds short evidence paths between entity pairs and uses them to justify a plausible relation. Longer or weaker paths reduce confidence.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Path-grounded suggestions provide interpretable support for candidate edges.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Support</th><th>Source</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                        <td>)" << escape_html(source) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& active_queries = by_type[InsightType::ACTIVE_LEARNING];
+    if (!active_queries.empty()) {
+        std::vector<Insight> sorted = active_queries;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-active-learning" class="module" style="border-left-color: var(--theme-active)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-active)">Active Learning Queries</h2>
+                <p class="definition">Questions to verify high-impact or uncertain relations.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-active);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Active Learning</strong> operator prioritizes low-confidence edges attached to high-degree nodes, yielding the most informative human validation questions.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Targeted validation improves graph quality with minimal expert effort.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Query</th><th>Entities</th><th>Confidence</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double conf = 0.0;
+            auto it = insight.score_breakdown.find("confidence");
+            if (it != insight.score_breakdown.end()) conf = it->second;
+            html << R"(                    <tr>
+                        <td>)" << escape_html(insight.description) << R"(</td>
+                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& method_nodes = by_type[InsightType::METHOD_OUTCOME];
+    if (!method_nodes.empty()) {
+        std::vector<Insight> sorted = method_nodes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-method-outcome" class="module" style="border-left-color: var(--theme-method)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-method)">Method/Outcome Entities</h2>
+                <p class="definition">Identifies entities likely representing methods or outcomes.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-method);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Method/Outcome</strong> operator classifies nodes using label cues and local relation context. LLM assistance refines ambiguous cases.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explicit method/outcome roles support clearer reasoning and downstream analysis.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Role</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            std::string role = "method";
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag == "outcome") role = "outcome";
+            }
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << escape_html(role) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& centrality_nodes = by_type[InsightType::CENTRALITY];
+    if (!centrality_nodes.empty()) {
+        std::vector<Insight> sorted = centrality_nodes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-centrality" class="module" style="border-left-color: var(--theme-centrality)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-centrality)">Centrality</h2>
+                <p class="definition">Ranks entities by structural importance in the bipartite projection.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-centrality);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Centrality</strong> operator runs PageRank on the bipartite graph formed by entities and hyperedges, highlighting structurally influential nodes.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Central entities are often critical for connecting multiple relationship contexts.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Centrality</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double score = insight.score;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& communities = by_type[InsightType::COMMUNITY_DETECTION];
+    if (!communities.empty()) {
+        std::vector<Insight> sorted = communities;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-community-detection" class="module" style="border-left-color: var(--theme-community-detect)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-community-detect)">Community Detection</h2>
+                <p class="definition">Finds dense clusters via Louvain on the projected graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-community-detect);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Community Detection</strong> operator clusters entities using a Louvain-style modularity optimization on the projected graph.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Communities represent topic or subdomain structure in the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Representative Entities</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& k_core_nodes = by_type[InsightType::K_CORE];
+    if (!k_core_nodes.empty()) {
+        std::vector<Insight> sorted = k_core_nodes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-k-core" class="module" style="border-left-color: var(--theme-k-core)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-k-core)">k-Core Nodes</h2>
+                <p class="definition">Highlights entities in tightly connected cores.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-k-core);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>k-Core</strong> operator computes the core number of each node on the projected graph, identifying the largest k for which the node remains connected to at least k neighbors. Higher core numbers indicate denser local connectivity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> k-cores reveal robust, tightly knit regions that often represent stable conceptual hubs or well-supported areas of the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Core Number</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double core = 0.0;
+            auto it = insight.score_breakdown.find("core");
+            if (it != insight.score_breakdown.end()) core = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(0) << core << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& k_truss_links = by_type[InsightType::K_TRUSS];
+    if (!k_truss_links.empty()) {
+        std::vector<Insight> sorted = k_truss_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-k-truss" class="module" style="border-left-color: var(--theme-k-truss)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-k-truss)">k-Truss Edges</h2>
+                <p class="definition">Finds triangle-reinforced edges in the projected graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-k-truss);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>k-Truss</strong> operator scores edges by the number of shared neighbors (triangles) in the projected graph. Edges supported by many triangles are retained in higher-order trusses.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Triangle-reinforced edges often indicate cohesive substructures and more reliable associations.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Triangle Support</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double support_val = 0.0;
+            auto it = insight.score_breakdown.find("support");
+            if (it != insight.score_breakdown.end()) support_val = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(0) << support_val << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& claim_stances = by_type[InsightType::CLAIM_STANCE];
+    if (!claim_stances.empty()) {
+        std::vector<Insight> sorted = claim_stances;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-claim-stance" class="module" style="border-left-color: var(--theme-claim)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-claim)">Claim Stance</h2>
+                <p class="definition">Classifies extracted claims as supporting, opposing, or neutral.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-claim);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Claim Stance</strong> operator summarizes each relation as a claim and uses LLM-assisted classification to label it as supporting, opposing, or neutral. Confidence scores reflect model certainty.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Stance labels help disambiguate contradictory statements and prioritize evidence review.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Claim</th><th>Stance</th><th>Confidence</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            std::string stance = "neutral";
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag == "supports" || tag == "opposes" || tag == "neutral") stance = tag;
+            }
+            double conf = 0.0;
+            auto it = insight.score_breakdown.find("confidence");
+            if (it != insight.score_breakdown.end()) conf = it->second;
+            std::string claim = insight.description.empty() ? format_entities(insight.seed_labels, 2) : insight.description;
+            html << R"(                    <tr>
+                        <td>)" << escape_html(claim) << R"(</td>
+                        <td>)" << escape_html(stance) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& relation_inductions = by_type[InsightType::RELATION_INDUCTION];
+    if (!relation_inductions.empty()) {
+        std::vector<Insight> sorted = relation_inductions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-relation-induction" class="module" style="border-left-color: var(--theme-relation)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-relation)">Relation Induction</h2>
+                <p class="definition">Suggests canonical relation type names and descriptions.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-relation);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Relation Induction</strong> operator clusters examples of a relation label and uses an LLM to propose a canonical type name plus a short description.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Normalized relation types improve consistency and enable cleaner downstream analytics.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Suggestion</th><th>Confidence</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double conf = 0.0;
+            auto it = insight.score_breakdown.find("confidence");
+            if (it != insight.score_breakdown.end()) conf = it->second;
+            html << R"(                    <tr>
+                        <td>)" << escape_html(insight.description) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& analogical_links = by_type[InsightType::ANALOGICAL_TRANSFER];
+    if (!analogical_links.empty()) {
+        std::vector<Insight> sorted = analogical_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-analogical-transfer" class="module" style="border-left-color: var(--theme-analogy)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-analogy)">Analogical Transfer</h2>
+                <p class="definition">Proposes new links by analogy between relation patterns.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-analogy);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Analogical Transfer</strong> operator finds pairs of relations with similar source and target labels, then proposes a cross-combination (A relates to D) by analogy.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Analogies can surface plausible missing links that are structurally supported but not yet recorded.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Proposed Link</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& uncertainty_samples = by_type[InsightType::UNCERTAINTY_SAMPLING];
+    if (!uncertainty_samples.empty()) {
+        std::vector<Insight> sorted = uncertainty_samples;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-uncertainty-sampling" class="module" style="border-left-color: var(--theme-uncertainty)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-uncertainty)">Uncertainty Sampling</h2>
+                <p class="definition">Highlights low-confidence relations for verification.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-uncertainty);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Uncertainty Sampling</strong> operator ranks relations by low extraction confidence and surfaces the most uncertain items for review.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Focusing on high-uncertainty edges improves graph quality with minimal expert effort.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Relation</th><th>Uncertainty</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            double uncertainty = 0.0;
+            auto it = insight.score_breakdown.find("uncertainty");
+            if (it != insight.score_breakdown.end()) uncertainty = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << uncertainty << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& counterfactuals = by_type[InsightType::COUNTERFACTUAL];
+    if (!counterfactuals.empty()) {
+        std::vector<Insight> sorted = counterfactuals;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-counterfactual" class="module" style="border-left-color: var(--theme-counterfactual)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-counterfactual)">Counterfactual Probing</h2>
+                <p class="definition">Generates falsification questions for extracted claims.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-counterfactual);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Counterfactual</strong> operator converts claims into targeted questions asking what evidence would refute or reverse them.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Counterfactual queries make validation explicit and help identify missing evidence.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Question</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            html << R"(                    <tr>
+                        <td>)" << escape_html(describe_counterfactual(insight)) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& hyperedge_links = by_type[InsightType::HYPEREDGE_PREDICTION];
+    if (!hyperedge_links.empty()) {
+        std::vector<Insight> sorted = hyperedge_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-hyperedge-prediction" class="module" style="border-left-color: var(--theme-hyperedge)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-hyperedge)">Hyperedge Prediction</h2>
+                <p class="definition">Predicts relations using overlap patterns under the same relation type.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-hyperedge);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Hyperedge Prediction</strong> operator compares source entities that share similar target sets under the same relation and proposes missing links based on overlap.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Overlap-based predictions capture consistent relational patterns that often indicate missing knowledge.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Proposed Link</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= config.max_examples_per_type) break;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    // Constrained rules removed from pipeline
 
     auto& community_links = by_type[InsightType::COMMUNITY_LINK];
     if (!community_links.empty()) {
@@ -3152,7 +5301,83 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
     }
 
     if (counts[InsightType::SUBSTITUTION] > 0) {
-        html << R"(                    <li><strong>Resolve Duplicates:</strong> The )" << counts[InsightType::SUBSTITUTION] << R"( potential substitutions may indicate duplicate or synonymous entities that could be merged.</li>
+        html << R"(                    <li><strong>Review Substitutions:</strong> The )" << counts[InsightType::SUBSTITUTION] << R"( potential substitutions highlight interchangeable entities that may be synonyms or closely related concepts.</li>
+)";
+    }
+
+    if (counts[InsightType::ENTITY_RESOLUTION] > 0) {
+        html << R"(                    <li><strong>Merge Likely Duplicates:</strong> The )" << counts[InsightType::ENTITY_RESOLUTION] << R"( entity resolution candidates suggest duplicate or alias entities that could be linked or merged.</li>
+)";
+    }
+
+    if (counts[InsightType::CORE_PERIPHERY] > 0) {
+        html << R"(                    <li><strong>Review Core–Periphery Roles:</strong> The )" << counts[InsightType::CORE_PERIPHERY] << R"( core-periphery insights highlight which entities anchor the graph versus those on the periphery.</li>
+)";
+    }
+
+    if (counts[InsightType::TEXT_SIMILARITY] > 0) {
+        html << R"(                    <li><strong>Review Text Similarity Links:</strong> The )" << counts[InsightType::TEXT_SIMILARITY] << R"( text similarity links surface entities with near-duplicate or closely related labels.</li>
+)";
+    }
+
+    if (counts[InsightType::ARGUMENT_SUPPORT] > 0) {
+        html << R"(                    <li><strong>Validate Argument-Supported Relations:</strong> The )" << counts[InsightType::ARGUMENT_SUPPORT] << R"( proposed relations are backed by evidence paths and should be reviewed.</li>
+)";
+    }
+
+    if (counts[InsightType::ACTIVE_LEARNING] > 0) {
+        html << R"(                    <li><strong>Answer Active Learning Queries:</strong> The )" << counts[InsightType::ACTIVE_LEARNING] << R"( validation questions target the most uncertain or high-impact relations.</li>
+)";
+    }
+
+    if (counts[InsightType::METHOD_OUTCOME] > 0) {
+        html << R"(                    <li><strong>Confirm Method/Outcome Roles:</strong> The )" << counts[InsightType::METHOD_OUTCOME] << R"( classifications clarify which entities are methods or outcomes.</li>
+)";
+    }
+    if (counts[InsightType::CENTRALITY] > 0) {
+        html << R"(                    <li><strong>Review Central Entities:</strong> The )" << counts[InsightType::CENTRALITY] << R"( centrality findings highlight influential entities to prioritize for curation.</li>
+)";
+    }
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0) {
+        html << R"(                    <li><strong>Inspect Community Clusters:</strong> The )" << counts[InsightType::COMMUNITY_DETECTION] << R"( detected communities can guide topic segmentation or subgraph analysis.</li>
+)";
+    }
+    if (counts[InsightType::K_CORE] > 0) {
+        html << R"(                    <li><strong>Assess k-Core Nodes:</strong> The )" << counts[InsightType::K_CORE] << R"( k-core entities represent dense cores worth validating or expanding.</li>
+)";
+    }
+    if (counts[InsightType::K_TRUSS] > 0) {
+        html << R"(                    <li><strong>Validate k-Truss Links:</strong> The )" << counts[InsightType::K_TRUSS] << R"( k-truss edges reflect strong local cohesion and should be verified.</li>
+)";
+    }
+    if (counts[InsightType::CLAIM_STANCE] > 0) {
+        html << R"(                    <li><strong>Review Claim Stance:</strong> The )" << counts[InsightType::CLAIM_STANCE] << R"( stance classifications help identify supporting vs. opposing claims.</li>
+)";
+    }
+    if (counts[InsightType::RELATION_INDUCTION] > 0) {
+        html << R"(                    <li><strong>Normalize Relation Types:</strong> The )" << counts[InsightType::RELATION_INDUCTION] << R"( induced relation types can guide ontology cleanup.</li>
+)";
+    }
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0) {
+        html << R"(                    <li><strong>Validate Analogical Links:</strong> The )" << counts[InsightType::ANALOGICAL_TRANSFER] << R"( analogical transfers suggest new links worth verification.</li>
+)";
+    }
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0) {
+        html << R"(                    <li><strong>Verify Uncertain Relations:</strong> The )" << counts[InsightType::UNCERTAINTY_SAMPLING] << R"( low-confidence relations are prime candidates for validation.</li>
+)";
+    }
+    if (counts[InsightType::COUNTERFACTUAL] > 0) {
+        html << R"(                    <li><strong>Answer Counterfactual Probes:</strong> The )" << counts[InsightType::COUNTERFACTUAL] << R"( questions help test claim robustness.</li>
+)";
+    }
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0) {
+        html << R"(                    <li><strong>Review Hyperedge Predictions:</strong> The )" << counts[InsightType::HYPEREDGE_PREDICTION] << R"( predicted links should be validated before insertion.</li>
+)";
+    }
+    // Constrained rules removed from pipeline
+
+    if (counts[InsightType::CONTRADICTION] > 0) {
+        html << R"(                    <li><strong>Resolve Contradictions:</strong> The )" << counts[InsightType::CONTRADICTION] << R"( contradictions indicate conflicting claims that require manual review.</li>
 )";
     }
 

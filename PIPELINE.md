@@ -46,17 +46,17 @@ python3 -m http.server 8080
 
 ## Pipeline Overview
 
-The `kg` tool processes documents through 5 sequential stages:
+The `kg` tool processes documents through 5 sequential stages, with an optional preprocessing step between extract and index:
 
 ```
-┌─────────────┐     ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  1. EXTRACT │───▶│  2. INDE    │───▶│ 3. DISCOVER │───▶│  4. RENDER  │───▶│  5. REPORT  │
-│             │     │             │    │             │    │             │    │             │
-│ PDF → Graph │     │ Build       │    │ Find        │    │ Generate    │    │ Generate    │
-│ (LLM-based) │     │ S-component │    │ Insights    │    │ Interactive │    │ Markdown &  │
-│             │     │ Index       │    │ (bridges,   │    │ 3D HTML     │    │ HTML Report │
-│             │     │             │    │ patterns)   │    │ Viewer      │    │             │
-└─────────────┘     └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+┌─────────────┐     ┌──────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ 1. EXTRACT  │───▶│ 1.5 PREPROC  │───▶│  2. INDEX   │──▶│ 3. DISCOVER │───▶│ 4. RENDER   │──▶│  5. REPORT  │
+│             │     │ (optional)   │    │             │    │             │    │             │    │             │
+│ PDF → Graph │     │ Normalize    │    │ Build       │    │ Find        │    │ Generate    │    │ Generate    │
+│ (LLM-based) │     │ + Merge      │    │ S-component │    │ Insights    │    │ Interactive │    │ Markdown &  │
+│             │     │ Aliases      │    │ Index       │    │ (bridges,   │    │ 3D HTML     │    │ HTML Report │
+│             │     │              │    │             │    │ patterns)   │    │ Viewer      │    │             │
+└─────────────┘     └──────────────┘    └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
 ---
@@ -120,11 +120,12 @@ Options:
   --input, -i <value>       Input PDF file or directory containing PDFs
   --output, -o <value>      Base output directory (default: runs/)
   --config, -c <value>      Path to LLM config file (optional)
-  --operators, -p <value>   Discovery operators (default: bridges,surprise)
+  --operators, -p <value>   Discovery operators (default: all)
   --title, -t <value>       Title for reports and visualizations
   --max-examples, -m <value> Max examples per insight type (default: 10)
   --from-stage, -f <value>  Start from stage 1-5 (default: 1)
   --run-dir, -d <value>     Existing run directory to resume
+  --preprocess, -P          Normalize relations and merge aliases before indexing
 ```
 
 **Examples:**
@@ -187,11 +188,35 @@ Options:
 | `motifs` | Detect recurring structural patterns |
 | `substitutions` | Find potentially interchangeable entities |
 | `surprise` | Identify statistically unexpected connections |
+| `contradictions` | Flag conflicts where affirmed and negated claims both appear |
+| `entity_resolution` | Detect likely duplicate or alias entities |
+| `core_periphery` | Identify core vs peripheral entities and hub/authority roles |
+| `text_similarity` | Link entities with similar labels using text semantics |
+| `argument_support` | Propose relations supported by argument/evidence paths |
+| `active_learning` | Generate high-value verification queries for the graph |
+| `method_outcome` | Identify method or outcome entities in the graph |
+| `centrality` | Rank entities by structural centrality in a bipartite projection |
+| `community_detection` | Detect dense communities (Louvain on projection) |
+| `k_core` | Highlight nodes in dense k-core regions |
+| `k_truss` | Identify triangle-reinforced edges in dense subgraphs |
+| `claim_stance` | Classify claim stance (supports/opposes/neutral) |
+| `relation_induction` | Suggest canonical relation type names |
+| `analogical_transfer` | Propose new links by analogy |
+| `uncertainty_sampling` | Surface low-confidence relations for verification |
+| `counterfactual` | Generate falsification probes for claims |
+| `hyperedge_prediction` | Predict relations using overlap patterns |
+| `diffusion` | Map influence pathways via random-walk diffusion |
+| `rules` | Mine association rules between relation types |
+| `community` | Propose cross-cluster links with similar relation signatures |
+| `pathrank` | Rank link candidates using short-path evidence |
+| `embedding` | Predict missing links using embeddings |
+| `author_chain` | Trace citation chains across authors |
+| `hypotheses` | Synthesize testable hypotheses from findings |
 
 **Example:**
 
 ```bash
-kg discover -i graph.json -o insights.json -p "bridges,surprise,motifs"
+kg discover -i graph.json -o insights.json -p "bridges,completions,motifs,contradictions,entity_resolution,core_periphery,text_similarity,argument_support,active_learning,method_outcome,centrality,community_detection,k_core,k_truss,claim_stance,relation_induction,analogical_transfer,uncertainty_sampling,counterfactual,hyperedge_prediction"
 ```
 
 ---
@@ -288,6 +313,12 @@ kg stats -i graph.json
 
 **Requires:** LLM API key configured
 
+### Stage 1.5: Preprocess (optional)
+
+- Normalizes relation labels to canonical forms
+- Merges likely aliases (entity resolution + exact label normalization)
+- Saves `graph_raw.json` and overwrites `graph.json` with the preprocessed graph
+
 ### Stage 2: Index
 
 - Computes s-components (connected components at various overlap levels)
@@ -322,6 +353,7 @@ A typical run produces the following in `runs/run_YYYYMMDD_HHMMSS/`:
 | File | Description |
 |------|-------------|
 | `graph.json` | Full hypergraph in JSON format |
+| `graph_raw.json` | Raw graph prior to preprocessing (if enabled) |
 | `*_extractions.json` | Raw LLM extraction results |
 | `extraction_stats.json` | Extraction statistics |
 | `index.json` | S-component index |
@@ -370,7 +402,7 @@ If extraction completed but you want to re-run discovery with different operator
 ./build/bin/kg run \
   -f 3 \
   -d runs/run_20260118_164315 \
-  -p "bridges,motifs,substitutions,surprise"
+  -p "bridges,motifs,substitutions,contradictions,entity_resolution,core_periphery,text_similarity,argument_support,active_learning,method_outcome,surprise"
 ```
 
 ### Example 4: Re-render with New Title

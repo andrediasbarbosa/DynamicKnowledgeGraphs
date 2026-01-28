@@ -13,6 +13,10 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+#include <memory>
+#include <unordered_map>
+#include <unordered_set>
+#include <cctype>
 
 namespace fs = std::filesystem;
 
@@ -62,6 +66,11 @@ std::vector<std::string> find_pdfs(const std::string& path) {
 // All available discovery operators
 const std::vector<std::string> ALL_OPERATORS = {
     "bridges", "completions", "motifs", "substitutions",
+    "contradictions", "entity_resolution", "core_periphery", "text_similarity",
+    "argument_support", "active_learning", "method_outcome",
+    "centrality", "community_detection", "k_core", "k_truss",
+    "claim_stance", "relation_induction", "analogical_transfer",
+    "uncertainty_sampling", "counterfactual", "hyperedge_prediction",
     "diffusion", "surprise", "rules", "community", "pathrank", "embedding", "author_chain", "hypotheses"
 };
 
@@ -84,6 +93,166 @@ std::string format_duration(std::chrono::steady_clock::duration d) {
         ss << ms << "ms";
     }
     return ss.str();
+}
+
+struct PreprocessStats {
+    size_t relations_normalized = 0;
+    size_t nodes_merged = 0;
+};
+
+std::string normalize_relation_label(const std::string& relation) {
+    std::string lower;
+    lower.reserve(relation.size());
+    for (unsigned char c : relation) {
+        if (std::isalnum(c) || c == ' ') {
+            lower.push_back(static_cast<char>(std::tolower(c)));
+        } else if (c == '_' || c == '-') {
+            lower.push_back(' ');
+        }
+    }
+    // collapse spaces
+    std::string collapsed;
+    bool last_space = false;
+    for (char c : lower) {
+        if (std::isspace(static_cast<unsigned char>(c))) {
+            if (!last_space) collapsed.push_back(' ');
+            last_space = true;
+        } else {
+            collapsed.push_back(c);
+            last_space = false;
+        }
+    }
+    if (!collapsed.empty() && collapsed.front() == ' ') collapsed.erase(collapsed.begin());
+    if (!collapsed.empty() && collapsed.back() == ' ') collapsed.pop_back();
+
+    static const std::unordered_map<std::string, std::string> synonym_map = {
+        {"uses", "uses"},
+        {"utilizes", "uses"},
+        {"employs", "uses"},
+        {"applies", "uses"},
+        {"leverages", "uses"},
+        {"is a", "is_a"},
+        {"is an", "is_a"},
+        {"type of", "is_a"},
+        {"kind of", "is_a"},
+        {"part of", "part_of"},
+        {"component of", "part_of"},
+        {"belongs to", "part_of"},
+        {"causes", "causes"},
+        {"leads to", "causes"},
+        {"results in", "causes"},
+        {"induces", "causes"},
+        {"affects", "affects"},
+        {"influences", "affects"},
+        {"impacts", "affects"},
+        {"associated with", "related_to"},
+        {"related to", "related_to"},
+        {"linked to", "related_to"},
+        {"connects to", "related_to"},
+        {"requires", "requires"},
+        {"needs", "requires"},
+        {"depends on", "requires"},
+        {"produces", "produces"},
+        {"yields", "produces"},
+        {"generates", "produces"},
+        {"creates", "produces"},
+        {"improves", "improves"},
+        {"enhances", "improves"},
+        {"increases", "improves"},
+        {"reduces", "reduces"},
+        {"decreases", "reduces"},
+        {"lowers", "reduces"}
+    };
+
+    auto it = synonym_map.find(collapsed);
+    if (it != synonym_map.end()) return it->second;
+    return collapsed.empty() ? relation : collapsed;
+}
+
+void normalize_relations(Hypergraph& graph, PreprocessStats& stats) {
+    auto edges = graph.get_all_edges();
+    for (const auto& edge : edges) {
+        auto* mutable_edge = graph.get_hyperedge(edge.id);
+        if (!mutable_edge) continue;
+        std::string canonical = normalize_relation_label(mutable_edge->relation);
+        if (!canonical.empty() && canonical != mutable_edge->relation) {
+            mutable_edge->properties["original_relation"] = mutable_edge->relation;
+            mutable_edge->relation = canonical;
+            stats.relations_normalized++;
+        }
+    }
+}
+
+std::string normalize_label_key_simple(const std::string& label) {
+    std::string out;
+    out.reserve(label.size());
+    for (unsigned char c : label) {
+        if (std::isalnum(c)) {
+            out.push_back(static_cast<char>(std::tolower(c)));
+        } else {
+            out.push_back(' ');
+        }
+    }
+    std::string collapsed;
+    bool last_space = false;
+    for (char c : out) {
+        if (std::isspace(static_cast<unsigned char>(c))) {
+            if (!last_space) collapsed.push_back(' ');
+            last_space = true;
+        } else {
+            collapsed.push_back(c);
+            last_space = false;
+        }
+    }
+    if (!collapsed.empty() && collapsed.front() == ' ') collapsed.erase(collapsed.begin());
+    if (!collapsed.empty() && collapsed.back() == ' ') collapsed.pop_back();
+    return collapsed;
+}
+
+void merge_aliases(Hypergraph& graph, PreprocessStats& stats) {
+    HypergraphIndex dummy_index;
+    DiscoveryEngine engine(graph, dummy_index);
+    DiscoveryConfig cfg;
+    cfg.entity_resolution_min_label_similarity = 0.9;
+    cfg.entity_resolution_min_neighbor_overlap = 0.1;
+    cfg.entity_resolution_max_candidates = 500;
+    engine.set_config(cfg);
+
+    auto candidates = engine.find_entity_resolutions();
+    std::unordered_set<std::string> merged;
+    for (const auto& ins : candidates) {
+        if (ins.seed_nodes.size() < 2) continue;
+        std::string a = ins.seed_nodes[0];
+        std::string b = ins.seed_nodes[1];
+        std::string key = a < b ? a + "|" + b : b + "|" + a;
+        if (merged.find(key) != merged.end()) continue;
+        merged.insert(key);
+
+        const auto* na = graph.get_node(a);
+        const auto* nb = graph.get_node(b);
+        if (!na || !nb) continue;
+
+        std::string keep = (na->degree >= nb->degree) ? a : b;
+        std::string remove = (keep == a) ? b : a;
+        graph.merge_nodes(keep, remove);
+        stats.nodes_merged++;
+    }
+
+    // Fallback: exact normalized label matches
+    auto nodes = graph.get_all_nodes();
+    std::unordered_map<std::string, std::vector<std::string>> by_norm;
+    for (const auto& node : nodes) {
+        std::string norm = normalize_label_key_simple(node.label);
+        if (!norm.empty()) by_norm[norm].push_back(node.id);
+    }
+    for (auto& [norm, ids] : by_norm) {
+        if (ids.size() < 2) continue;
+        std::string keep = ids[0];
+        for (size_t i = 1; i < ids.size(); ++i) {
+            graph.merge_nodes(keep, ids[i]);
+            stats.nodes_merged++;
+        }
+    }
 }
 
 // ============== kg index ==============
@@ -164,6 +333,10 @@ int cmd_discover(const Args& args) {
     DiscoveryEngine engine(graph, index);
     if (!run_id.empty()) {
         engine.set_run_id(run_id);
+    }
+    auto discovery_llm = LLMProviderFactory::create_from_config_file();
+    if (discovery_llm) {
+        engine.set_llm_provider(std::shared_ptr<LLMProvider>(std::move(discovery_llm)));
     }
 
     engine.set_progress_callback([](const std::string& stage, int current, int total) {
@@ -363,6 +536,26 @@ int cmd_report(const Args& args) {
         std::cout << "  - " << counts[InsightType::AUTHOR_CHAIN] << " author reference chains\n";
     if (counts[InsightType::COMMUNITY_LINK] > 0)
         std::cout << "  - " << counts[InsightType::COMMUNITY_LINK] << " community links\n";
+    if (counts[InsightType::CENTRALITY] > 0)
+        std::cout << "  - " << counts[InsightType::CENTRALITY] << " centrality findings\n";
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0)
+        std::cout << "  - " << counts[InsightType::COMMUNITY_DETECTION] << " community clusters\n";
+    if (counts[InsightType::K_CORE] > 0)
+        std::cout << "  - " << counts[InsightType::K_CORE] << " k-core nodes\n";
+    if (counts[InsightType::K_TRUSS] > 0)
+        std::cout << "  - " << counts[InsightType::K_TRUSS] << " k-truss edges\n";
+    if (counts[InsightType::CLAIM_STANCE] > 0)
+        std::cout << "  - " << counts[InsightType::CLAIM_STANCE] << " claim stance insights\n";
+    if (counts[InsightType::RELATION_INDUCTION] > 0)
+        std::cout << "  - " << counts[InsightType::RELATION_INDUCTION] << " relation inductions\n";
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0)
+        std::cout << "  - " << counts[InsightType::ANALOGICAL_TRANSFER] << " analogical transfers\n";
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0)
+        std::cout << "  - " << counts[InsightType::UNCERTAINTY_SAMPLING] << " uncertainty samples\n";
+    if (counts[InsightType::COUNTERFACTUAL] > 0)
+        std::cout << "  - " << counts[InsightType::COUNTERFACTUAL] << " counterfactual probes\n";
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0)
+        std::cout << "  - " << counts[InsightType::HYPEREDGE_PREDICTION] << " hyperedge predictions\n";
     if (counts[InsightType::RULE] > 0)
         std::cout << "  - " << counts[InsightType::RULE] << " association rules\n";
     if (counts[InsightType::EMBEDDING_LINK] > 0)
@@ -409,16 +602,23 @@ int cmd_run(const Args& args) {
     std::string input_path = args.get("input", "").value;
     std::string output_base = args.get("output", "runs/").value;
     std::string config_path = args.get("config", "").value;
-    auto operators = expand_operators(args.get("operators", "bridges,surprise").as_list());
+    auto operators = expand_operators(args.get("operators", "all").as_list());
     std::string title = args.get("title", "").value;
     int max_examples = args.get("max-examples", "10").as_int();
     int from_stage = args.get("from-stage", "1").as_int();
     std::string existing_run_dir = args.get("run-dir", "").value;
+    bool preprocess = args.has("preprocess");
 
     // Validate stage range
     if (from_stage < 1 || from_stage > 5) {
         std::cerr << "Error: --from-stage must be between 1 and 5\n";
         std::cerr << "  1 = extraction, 2 = indexing, 3 = discovery, 4 = render, 5 = report\n";
+        return 1;
+    }
+
+    if (preprocess && from_stage > 2) {
+        std::cerr << "Error: --preprocess can only be used with --from-stage 1 or 2\n";
+        std::cerr << "  Preprocessing changes the graph and requires rebuilding the index.\n";
         return 1;
     }
 
@@ -524,6 +724,7 @@ int cmd_run(const Args& args) {
 
     // Define paths for all artifacts
     std::string graph_path = run_dir + "/graph.json";
+    std::string graph_raw_path = run_dir + "/graph_raw.json";
     std::string index_path = run_dir + "/index.json";
     std::string insights_path = run_dir + "/insights.json";
 
@@ -532,6 +733,11 @@ int cmd_run(const Args& args) {
     HypergraphIndex index;
     InsightCollection insights;
     HypergraphStatistics graph_stats;
+    PreprocessStats preprocess_stats;
+    bool preprocess_ran = false;
+
+    // Track total pipeline runtime
+    auto pipeline_start = std::chrono::steady_clock::now();
 
     // =========================================================================
     // Stage 1: Extract Knowledge Graph
@@ -588,9 +794,14 @@ int cmd_run(const Args& args) {
         std::cout << "\n  Extracted: " << graph_stats.num_nodes << " entities, "
                   << graph_stats.num_edges << " relationships\n";
 
-        // Save graph
-        graph.export_to_json(graph_path, true);
-        std::cout << "  Saved: graph.json\n";
+        // Save graph (raw if preprocessing enabled)
+        if (preprocess) {
+            graph.export_to_json(graph_raw_path, true);
+            std::cout << "  Saved: graph_raw.json\n";
+        } else {
+            graph.export_to_json(graph_path, true);
+            std::cout << "  Saved: graph.json\n";
+        }
 
         // Save pipeline stats
         auto pipeline_stats = pipeline.get_statistics();
@@ -618,6 +829,36 @@ int cmd_run(const Args& args) {
                   << graph_stats.num_edges << " relationships\n";
     }
     std::cout << "  Stage 1 time: " << format_duration(std::chrono::steady_clock::now() - stage1_start) << "\n";
+
+    // =========================================================================
+    // Stage 1.5: Preprocess (normalize relations + merge aliases)
+    // =========================================================================
+    if (preprocess && from_stage <= 2) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.5: Preprocess Graph\n";
+        std::cout << "----------------------------------------------------------------------\n";
+
+        if (!fs::exists(graph_raw_path)) {
+            graph.export_to_json(graph_raw_path, true);
+            std::cout << "  Saved: graph_raw.json\n";
+        } else {
+            std::cout << "  Found existing: graph_raw.json\n";
+        }
+
+        normalize_relations(graph, preprocess_stats);
+        merge_aliases(graph, preprocess_stats);
+        preprocess_ran = true;
+
+        graph_stats = graph.compute_statistics();
+        graph.export_to_json(graph_path, true);
+
+        std::cout << "  Normalized relations: " << preprocess_stats.relations_normalized << "\n";
+        std::cout << "  Merged nodes:         " << preprocess_stats.nodes_merged << "\n";
+        std::cout << "  Preprocessed graph:   " << graph_stats.num_nodes << " entities, "
+                  << graph_stats.num_edges << " relationships\n";
+        std::cout << "  Saved: graph.json\n";
+    }
 
     // =========================================================================
     // Stage 2: Build Index
@@ -674,6 +915,10 @@ int cmd_run(const Args& args) {
 
         DiscoveryEngine engine(graph, index);
         engine.set_run_id(run_id);
+        auto discovery_llm = LLMProviderFactory::create_from_config_file(config_path);
+        if (discovery_llm) {
+            engine.set_llm_provider(std::shared_ptr<LLMProvider>(std::move(discovery_llm)));
+        }
         engine.set_progress_callback([](const std::string& stage, int current, int total) {
             std::cout << "  [" << stage << "] " << current << "/" << total << "\r" << std::flush;
         });
@@ -871,6 +1116,12 @@ int cmd_run(const Args& args) {
 
     // Artifacts
     manifest["artifacts"]["graph"] = "graph.json";
+    if (preprocess) {
+        manifest["artifacts"]["graph_raw"] = "graph_raw.json";
+        manifest["preprocess"]["enabled"] = preprocess_ran;
+        manifest["preprocess"]["relations_normalized"] = preprocess_stats.relations_normalized;
+        manifest["preprocess"]["nodes_merged"] = preprocess_stats.nodes_merged;
+    }
     manifest["artifacts"]["index"] = "index.json";
     manifest["artifacts"]["insights"] = "insights.json";
     manifest["artifacts"]["augmentation"] = "augmentation.json";
@@ -895,6 +1146,9 @@ int cmd_run(const Args& args) {
     readme << "Artifacts:\n";
     readme << "  Data:\n";
     readme << "    graph.json           - Extracted knowledge graph\n";
+    if (preprocess) {
+        readme << "    graph_raw.json       - Raw graph prior to preprocessing\n";
+    }
     readme << "    index.json           - S-component index\n";
     readme << "    insights.json        - Discovered insights\n";
     readme << "    augmentation.json    - Augmentation overlay data\n";
@@ -939,6 +1193,13 @@ int cmd_run(const Args& args) {
     std::cout << "  Or:   http://localhost:8080/report.html\n";
     std::cout << "\n";
 
+    // Display total runtime in minutes
+    auto pipeline_end = std::chrono::steady_clock::now();
+    auto total_duration = std::chrono::duration_cast<std::chrono::seconds>(pipeline_end - pipeline_start);
+    double total_minutes = total_duration.count() / 60.0;
+    std::cout << "Total runtime: " << std::fixed << std::setprecision(2) << total_minutes << " minutes\n";
+    std::cout << "\n";
+
     return 0;
 }
 
@@ -966,7 +1227,7 @@ int main(int argc, char** argv) {
             {"input", "i", "Input hypergraph JSON file", "", true, false},
             {"index", "x", "Index directory (optional, will build if not provided)", "", false, false},
             {"output", "o", "Output path for insights JSON", "", true, false},
-            {"operators", "p", "Operators: bridges,completions,motifs,substitutions,diffusion,surprise,rules,community,pathrank,embedding,author_chain,hypotheses (or 'all')", "bridges,completions,motifs", false, false},
+            {"operators", "p", "Operators: bridges,completions,motifs,substitutions,contradictions,entity_resolution,core_periphery,text_similarity,argument_support,active_learning,method_outcome,centrality,community_detection,k_core,k_truss,claim_stance,relation_induction,analogical_transfer,uncertainty_sampling,counterfactual,hyperedge_prediction,diffusion,surprise,rules,community,pathrank,embedding,author_chain,hypotheses (or 'all')", "bridges,completions,motifs", false, false},
             {"run-id", "r", "Run ID for tracking", "", false, false}
         },
         cmd_discover
@@ -1019,11 +1280,12 @@ int main(int argc, char** argv) {
             {"input", "i", "Input PDF file or directory containing PDFs", "", false, false},
             {"output", "o", "Base output directory (run folder will be created inside)", "runs/", false, false},
             {"config", "c", "Path to LLM config file (optional)", "", false, false},
-            {"operators", "p", "Discovery operators (e.g., bridges,diffusion,surprise,community,pathrank,embedding,author_chain,hypotheses or 'all')", "bridges,surprise", false, false},
+            {"operators", "p", "Discovery operators (e.g., bridges,completions,motifs,substitutions,contradictions,entity_resolution,core_periphery,text_similarity,argument_support,active_learning,method_outcome,centrality,community_detection,k_core,k_truss,claim_stance,relation_induction,analogical_transfer,uncertainty_sampling,counterfactual,hyperedge_prediction,diffusion,surprise,rules,community,pathrank,embedding,author_chain,hypotheses or 'all')", "all", false, false},
             {"title", "t", "Title for reports and visualizations", "", false, false},
             {"max-examples", "m", "Max examples per insight type in reports", "10", false, false},
             {"from-stage", "f", "Start from stage (1=extract, 2=index, 3=discover, 4=render, 5=report)", "1", false, false},
-            {"run-dir", "d", "Existing run directory to resume (required if from-stage > 1)", "", false, false}
+            {"run-dir", "d", "Existing run directory to resume (required if from-stage > 1)", "", false, false},
+            {"preprocess", "P", "Normalize relations and merge aliases before indexing", "", false, true}
         },
         cmd_run
     });
