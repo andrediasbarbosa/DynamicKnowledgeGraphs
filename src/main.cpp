@@ -4,6 +4,7 @@
 #include "discovery/discovery_engine.hpp"
 #include "discovery/report_generator.hpp"
 #include "render/augmentation_renderer.hpp"
+#include "discovery/operator_registry.hpp"
 #include "pipeline/extraction_pipeline.hpp"
 #include "llm/llm_provider.hpp"
 #include <iostream>
@@ -63,22 +64,27 @@ std::vector<std::string> find_pdfs(const std::string& path) {
     return pdfs;
 }
 
-// All available discovery operators
-const std::vector<std::string> ALL_OPERATORS = {
-    "bridges", "completions", "motifs", "substitutions",
-    "contradictions", "entity_resolution", "core_periphery", "text_similarity",
-    "argument_support", "active_learning", "method_outcome",
-    "centrality", "community_detection", "k_core", "k_truss",
-    "claim_stance", "relation_induction", "analogical_transfer",
-    "uncertainty_sampling", "counterfactual", "hyperedge_prediction",
-    "diffusion", "surprise", "rules", "community", "pathrank", "embedding", "author_chain", "hypotheses"
-};
+std::string join_operators(const std::vector<std::string>& ops) {
+    std::ostringstream ss;
+    for (size_t i = 0; i < ops.size(); ++i) {
+        if (i > 0) ss << ",";
+        ss << ops[i];
+    }
+    return ss.str();
+}
+
+std::string build_operator_help(const std::string& prefix) {
+    std::ostringstream ss;
+    ss << prefix << join_operators(kg::all_discovery_operators())
+       << " (or 'all'); legacy: constrained_rule";
+    return ss.str();
+}
 
 // Expand "all" to all operators
 std::vector<std::string> expand_operators(const std::vector<std::string>& ops) {
     for (const auto& op : ops) {
         if (op == "all") {
-            return ALL_OPERATORS;
+            return kg::all_discovery_operators();
         }
     }
     return ops;
@@ -184,12 +190,16 @@ void normalize_relations(Hypergraph& graph, PreprocessStats& stats) {
 }
 
 std::string normalize_label_key_simple(const std::string& label) {
+    // Lowercase and convert separators/punctuation to spaces.
     std::string out;
     out.reserve(label.size());
     for (unsigned char c : label) {
         if (std::isalnum(c)) {
             out.push_back(static_cast<char>(std::tolower(c)));
+        } else if (c == '_' || c == '-' || c == '/' || c == '\\') {
+            out.push_back(' ');
         } else {
+            // Treat any other punctuation as a space
             out.push_back(' ');
         }
     }
@@ -206,6 +216,21 @@ std::string normalize_label_key_simple(const std::string& label) {
     }
     if (!collapsed.empty() && collapsed.front() == ' ') collapsed.erase(collapsed.begin());
     if (!collapsed.empty() && collapsed.back() == ' ') collapsed.pop_back();
+
+    // Strip leading/trailing punctuation-like remnants
+    auto strip_edge_punct = [](std::string& s) {
+        auto is_punct_like = [](unsigned char ch) {
+            return !std::isalnum(ch) && !std::isspace(ch);
+        };
+        while (!s.empty() && is_punct_like(static_cast<unsigned char>(s.front()))) {
+            s.erase(s.begin());
+        }
+        while (!s.empty() && is_punct_like(static_cast<unsigned char>(s.back()))) {
+            s.pop_back();
+        }
+    };
+    strip_edge_punct(collapsed);
+
     return collapsed;
 }
 
@@ -393,7 +418,22 @@ int cmd_render(const Args& args) {
     std::cout << "Exporting baseline HTML to: " << baseline_html << "\n";
     graph.export_to_html(baseline_html, title);
 
-    // If insights provided, create augmented view
+    // Load LLM config once (used for Graph-RAG embedding)
+    std::string rag_provider, rag_key, rag_model, rag_base;
+    {
+        std::string cfg_file = ".llm_config.json";
+        if (fs::exists(cfg_file)) {
+            try {
+                std::ifstream f(cfg_file);
+                auto j = nlohmann::json::parse(f);
+                rag_provider = j.value("provider", "openai");
+                rag_key      = j.value("api_key",  "");
+                rag_model    = j.value("model",     "gpt-4o-mini");
+            } catch (...) {}
+        }
+    }
+
+    // If insights provided, create augmented views
     if (!insights_path.empty() && fs::exists(insights_path)) {
         std::cout << "Loading insights from: " << insights_path << "\n";
         InsightCollection insights = InsightCollection::load_from_json(insights_path);
@@ -417,9 +457,21 @@ int cmd_render(const Args& args) {
         std::cout << "Exporting augmented HTML to: " << aug_html << "\n";
         renderer.export_augmented_html(aug_html, title, augmentation);
 
+        // Graph-RAG viewer with insight nodes included
+        std::string rag_html = out_base + "final_graph_rag.html";
+        std::cout << "Exporting Graph-RAG HTML (with " << augmentation.nodes.size()
+                  << " insight nodes) to: " << rag_html << "\n";
+        graph.export_to_html_rag(rag_html, title, rag_provider, rag_key, rag_model,
+                                 rag_base, augmentation.to_json());
+
         std::cout << "\nAugmentation summary:\n";
         std::cout << "  New nodes: " << augmentation.nodes.size() << "\n";
         std::cout << "  New links: " << augmentation.links.size() << "\n";
+    } else {
+        // No insights — export Graph-RAG with base graph only
+        std::string rag_html = out_base + "final_graph_rag.html";
+        std::cout << "Exporting Graph-RAG HTML (base graph only) to: " << rag_html << "\n";
+        graph.export_to_html_rag(rag_html, title, rag_provider, rag_key, rag_model, rag_base);
     }
 
     // Write README
@@ -429,6 +481,7 @@ int cmd_render(const Args& args) {
     readme << "======================\n\n";
     readme << "Files:\n";
     readme << "  final_graph.html          - Baseline graph viewer\n";
+    readme << "  final_graph_rag.html      - Graph-RAG viewer with LLM chat window\n";
     if (!insights_path.empty()) {
         readme << "  final_graph_augmented.html - Augmented view with discovery insights\n";
         readme << "  augmentation.json         - Overlay data for augmented nodes/links\n";
@@ -534,6 +587,8 @@ int cmd_report(const Args& args) {
         std::cout << "  - " << counts[InsightType::PATH_RANK] << " path-ranked links\n";
     if (counts[InsightType::AUTHOR_CHAIN] > 0)
         std::cout << "  - " << counts[InsightType::AUTHOR_CHAIN] << " author reference chains\n";
+    if (counts[InsightType::META_PATH_PATTERN] > 0)
+        std::cout << "  - " << counts[InsightType::META_PATH_PATTERN] << " meta-path patterns\n";
     if (counts[InsightType::COMMUNITY_LINK] > 0)
         std::cout << "  - " << counts[InsightType::COMMUNITY_LINK] << " community links\n";
     if (counts[InsightType::CENTRALITY] > 0)
@@ -560,8 +615,24 @@ int cmd_report(const Args& args) {
         std::cout << "  - " << counts[InsightType::RULE] << " association rules\n";
     if (counts[InsightType::EMBEDDING_LINK] > 0)
         std::cout << "  - " << counts[InsightType::EMBEDDING_LINK] << " embedding predictions\n";
-    if (counts[InsightType::HYPOTHESIS] > 0)
-        std::cout << "  - " << counts[InsightType::HYPOTHESIS] << " hypotheses\n";
+    if (counts[InsightType::HYPOTHESES_1] > 0)
+        std::cout << "  - " << counts[InsightType::HYPOTHESES_1] << " hypotheses (v1)\n";
+    if (counts[InsightType::HYPOTHESES_2] > 0)
+        std::cout << "  - " << counts[InsightType::HYPOTHESES_2] << " mechanistic hypotheses (v2)\n";
+    if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0)
+        std::cout << "  - " << counts[InsightType::MECHANISM_CONSOLIDATION] << " mechanism consolidations\n";
+    if (counts[InsightType::EVIDENCE_FUSION_LINK] > 0)
+        std::cout << "  - " << counts[InsightType::EVIDENCE_FUSION_LINK] << " evidence-fusion links\n";
+    if (counts[InsightType::META_PATH_ANOMALY] > 0)
+        std::cout << "  - " << counts[InsightType::META_PATH_ANOMALY] << " meta-path anomalies\n";
+    if (counts[InsightType::INTERVENTION_BOTTLENECK] > 0)
+        std::cout << "  - " << counts[InsightType::INTERVENTION_BOTTLENECK] << " intervention bottlenecks\n";
+    if (counts[InsightType::COMPETING_MECHANISM] > 0)
+        std::cout << "  - " << counts[InsightType::COMPETING_MECHANISM] << " competing mechanisms\n";
+    if (counts[InsightType::SCHEMA_REPAIR] > 0)
+        std::cout << "  - " << counts[InsightType::SCHEMA_REPAIR] << " schema repairs\n";
+    if (counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] > 0)
+        std::cout << "  - " << counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] << " cross-community bridges\n";
 
     std::cout << "\nReport generation complete!\n";
     return 0;
@@ -594,6 +665,17 @@ int cmd_stats(const Args& args) {
         std::cout << "  " << label << " (degree " << degree << ")\n";
     }
 
+    return 0;
+}
+
+// ============== kg list-operators ==============
+int cmd_list_operators(const Args& /*args*/) {
+    const auto& ops = kg::all_discovery_operators();
+    std::cout << "Discovery operators (" << ops.size() << "):\n";
+    for (const auto& op : ops) {
+        std::cout << "  - " << op << "\n";
+    }
+    std::cout << "\nLegacy/experimental (not in list): constrained_rule\n";
     return 0;
 }
 
@@ -979,7 +1061,7 @@ int cmd_run(const Args& args) {
         graph.export_to_html(baseline_html, title);
         std::cout << "  Saved: graph.html (baseline viewer)\n";
 
-        // Augmented HTML with insights
+        // Augmented HTML with insights (must come before Graph-RAG so we can pass augmentation)
         AugmentationRenderer renderer(graph);
         augmentation = renderer.convert(insights);
 
@@ -992,6 +1074,29 @@ int cmd_run(const Args& args) {
         std::cout << "  Saved: graph_augmented.html (with " << augmentation.nodes.size()
                   << " augmented nodes)\n";
 
+        // Graph-RAG HTML viewer — includes base graph + all insight-operator nodes/links
+        // Read LLM config here so this works even when resuming from --from-stage 4
+        std::string rag_provider, rag_key, rag_model;
+        {
+            std::string cfg_file = ".llm_config.json";
+            if (!config_path.empty() && fs::exists(config_path)) cfg_file = config_path;
+            if (fs::exists(cfg_file)) {
+                try {
+                    std::ifstream rf(cfg_file);
+                    auto rj = nlohmann::json::parse(rf);
+                    rag_provider = rj.value("provider", "openai");
+                    rag_key      = rj.value("api_key",  "");
+                    rag_model    = rj.value("model",    "gpt-4o-mini");
+                } catch (...) {}
+            }
+        }
+        std::string rag_html = run_dir + "/graph_rag.html";
+        graph.export_to_html_rag(rag_html, title,
+            rag_provider, rag_key, rag_model,
+            /*base_url=*/"",
+            augmentation.to_json());
+        std::cout << "  Saved: graph_rag.html (Graph-RAG chat viewer, "
+                  << augmentation.nodes.size() << " insight nodes included)\n";
 
         // DOT visualization
         std::string dot_path = run_dir + "/graph.dot";
@@ -1052,6 +1157,11 @@ int cmd_run(const Args& args) {
         std::string html_path = run_dir + "/report.html";
         report_gen.save_to_file(html_path, html_report);
         std::cout << "  Saved: report.html\n";
+
+        // Pattern library export
+        std::string pattern_lib_path = run_dir + "/pattern_library.json";
+        report_gen.export_pattern_library(insights, pattern_lib_path);
+        std::cout << "  Saved: pattern_library.json\n";
     } else {
         std::cout << "\n";
         std::cout << "----------------------------------------------------------------------\n";
@@ -1227,7 +1337,7 @@ int main(int argc, char** argv) {
             {"input", "i", "Input hypergraph JSON file", "", true, false},
             {"index", "x", "Index directory (optional, will build if not provided)", "", false, false},
             {"output", "o", "Output path for insights JSON", "", true, false},
-            {"operators", "p", "Operators: bridges,completions,motifs,substitutions,contradictions,entity_resolution,core_periphery,text_similarity,argument_support,active_learning,method_outcome,centrality,community_detection,k_core,k_truss,claim_stance,relation_induction,analogical_transfer,uncertainty_sampling,counterfactual,hyperedge_prediction,diffusion,surprise,rules,community,pathrank,embedding,author_chain,hypotheses (or 'all')", "bridges,completions,motifs", false, false},
+            {"operators", "p", build_operator_help("Operators: "), "bridges,completions,motifs", false, false},
             {"run-id", "r", "Run ID for tracking", "", false, false}
         },
         cmd_discover
@@ -1256,6 +1366,14 @@ int main(int argc, char** argv) {
         cmd_stats
     });
 
+    // kg list-operators
+    cli.register_command({
+        "list-operators",
+        "List all discovery operators available at runtime",
+        {},
+        cmd_list_operators
+    });
+
     // kg report
     cli.register_command({
         "report",
@@ -1280,7 +1398,7 @@ int main(int argc, char** argv) {
             {"input", "i", "Input PDF file or directory containing PDFs", "", false, false},
             {"output", "o", "Base output directory (run folder will be created inside)", "runs/", false, false},
             {"config", "c", "Path to LLM config file (optional)", "", false, false},
-            {"operators", "p", "Discovery operators (e.g., bridges,completions,motifs,substitutions,contradictions,entity_resolution,core_periphery,text_similarity,argument_support,active_learning,method_outcome,centrality,community_detection,k_core,k_truss,claim_stance,relation_induction,analogical_transfer,uncertainty_sampling,counterfactual,hyperedge_prediction,diffusion,surprise,rules,community,pathrank,embedding,author_chain,hypotheses or 'all')", "all", false, false},
+            {"operators", "p", build_operator_help("Discovery operators (e.g., ") + ")", "all", false, false},
             {"title", "t", "Title for reports and visualizations", "", false, false},
             {"max-examples", "m", "Max examples per insight type in reports", "10", false, false},
             {"from-stage", "f", "Start from stage (1=extract, 2=index, 3=discover, 4=render, 5=report)", "1", false, false},

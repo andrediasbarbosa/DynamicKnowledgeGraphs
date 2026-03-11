@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
+#include <cmath>
 
 namespace kg {
 
@@ -76,6 +77,7 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
                                insight.type == InsightType::ARGUMENT_SUPPORT ||
                                insight.type == InsightType::COMMUNITY_LINK ||
                                insight.type == InsightType::PATH_RANK ||
+                               insight.type == InsightType::META_PATH ||
                                insight.type == InsightType::EMBEDDING_LINK ||
                                insight.type == InsightType::ANALOGICAL_TRANSFER ||
                                insight.type == InsightType::HYPEREDGE_PREDICTION);
@@ -156,9 +158,6 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
             case InsightType::HYPEREDGE_PREDICTION:
                 convert_hyperedge_prediction(insight, data);
                 break;
-            case InsightType::CONSTRAINED_RULE:
-                convert_constrained_rule(insight, data);
-                break;
             case InsightType::DIFFUSION:
                 convert_diffusion(insight, data);
                 break;
@@ -171,8 +170,49 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
             case InsightType::PATH_RANK:
                 convert_path_rank(insight, data);
                 break;
-            case InsightType::HYPOTHESIS:
+            case InsightType::LONG_CHAIN:
+                convert_long_chain(insight, data);
+                break;
+            case InsightType::META_PATH:
+                convert_meta_path(insight, data);
+                break;
+            case InsightType::META_PATH_PATTERN:
+                convert_meta_path(insight, data);
+                break;
+            case InsightType::HYPOTHESES_1:
+            case InsightType::HYPOTHESES_2:
+            case InsightType::HYPOTHESES_3:
                 convert_hypothesis(insight, data);
+                break;
+            case InsightType::MECHANISM_CONSOLIDATION:
+                convert_hypothesis(insight, data);
+                break;
+            case InsightType::EVIDENCE_FUSION_LINK:
+                convert_argument_support(insight, data);
+                break;
+            case InsightType::META_PATH_ANOMALY:
+                convert_meta_path(insight, data);
+                break;
+            case InsightType::INTERVENTION_BOTTLENECK:
+                convert_intervention_point(insight, data);
+                break;
+            case InsightType::COMPETING_MECHANISM:
+                convert_hypothesis(insight, data);
+                break;
+            case InsightType::SCHEMA_REPAIR:
+                convert_rule(insight, data);
+                break;
+            case InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE:
+                convert_community_link(insight, data);
+                break;
+            case InsightType::TAXONOMY:
+            case InsightType::DOMAIN_BRIDGE:
+            case InsightType::LOGICAL_ENTAILMENT:
+            case InsightType::COMPOSITIONAL_REASONING:
+            case InsightType::EXPLANATORY_CHAIN:
+            case InsightType::SCHEMA_VIOLATION:
+            case InsightType::TRANSITIVE_CLOSURE:
+                convert_rule(insight, data);
                 break;
             case InsightType::RULE:
                 convert_rule(insight, data);
@@ -182,6 +222,19 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
                 break;
             case InsightType::AUTHOR_CHAIN:
                 convert_author_chain(insight, data);
+                break;
+            // Category 3: Causal & Mechanistic Discovery
+            case InsightType::CAUSAL_CHAIN:
+                convert_causal_chain(insight, data);
+                break;
+            case InsightType::INTERVENTION_POINT:
+                convert_intervention_point(insight, data);
+                break;
+            case InsightType::FEEDBACK_LOOP:
+                convert_feedback_loop(insight, data);
+                break;
+            case InsightType::CONFOUNDER:
+                convert_confounder(insight, data);
                 break;
         }
     }
@@ -823,19 +876,6 @@ void AugmentationRenderer::convert_hyperedge_prediction(const Insight& insight, 
     }
 }
 
-void AugmentationRenderer::convert_constrained_rule(const Insight& insight, AugmentationData& data) {
-    AugmentationNode rel_node;
-    rel_node.id = make_aug_node_id();
-    rel_node.label = "Constrained Rule";
-    rel_node.type = "relation";
-    rel_node.is_new = true;
-    rel_node.insight_id = insight.insight_id;
-    rel_node.confidence = insight.score;
-    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
-    rel_node.witness_edges = insight.witness_edges;
-    data.nodes.push_back(rel_node);
-}
-
 void AugmentationRenderer::convert_diffusion(const Insight& insight, AugmentationData& data) {
     if (insight.seed_nodes.size() < 2) return;
 
@@ -969,6 +1009,145 @@ void AugmentationRenderer::convert_path_rank(const Insight& insight, Augmentatio
         if (i > 0) label += " <-> ";
         label += insight.seed_labels[i];
     }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2 && i < insight.seed_nodes.size(); ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+
+    int ctx_count = 0;
+    for (const auto& wn : insight.witness_nodes) {
+        std::string norm_wn = normalize_graph_ref(wn);
+        bool is_seed = false;
+        for (const auto& seed : insight.seed_nodes) {
+            if (normalize_graph_ref(seed) == norm_wn) {
+                is_seed = true;
+                break;
+            }
+        }
+        if (is_seed) continue;
+
+        AugmentationLink link;
+        link.source = rel_node.id;
+        link.target = norm_wn;
+        link.type = "target";
+        link.is_new = true;
+        data.links.push_back(link);
+        if (++ctx_count >= 2) break;
+    }
+}
+
+void AugmentationRenderer::convert_long_chain(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    int hops = 0;
+    auto hop_it = insight.score_breakdown.find("hops");
+    if (hop_it != insight.score_breakdown.end()) {
+        hops = static_cast<int>(std::round(hop_it->second));
+    } else {
+        for (const auto& tag : insight.novelty_tags) {
+            if (tag.rfind("hops=", 0) == 0) {
+                try {
+                    hops = std::stoi(tag.substr(5));
+                } catch (...) {
+                    hops = 0;
+                }
+                break;
+            }
+        }
+    }
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "LongChain";
+    if (hops > 0) label += " (" + std::to_string(hops) + "h)";
+    label += ": ";
+    for (size_t i = 0; i < 2 && i < insight.seed_labels.size(); ++i) {
+        if (i > 0) label += " <-> ";
+        label += insight.seed_labels[i];
+    }
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < 2 && i < insight.seed_nodes.size(); ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+
+    int ctx_count = 0;
+    for (const auto& wn : insight.witness_nodes) {
+        std::string norm_wn = normalize_graph_ref(wn);
+        bool is_seed = false;
+        for (const auto& seed : insight.seed_nodes) {
+            if (normalize_graph_ref(seed) == norm_wn) {
+                is_seed = true;
+                break;
+            }
+        }
+        if (is_seed) continue;
+
+        AugmentationLink link;
+        link.source = rel_node.id;
+        link.target = norm_wn;
+        link.type = "target";
+        link.is_new = true;
+        data.links.push_back(link);
+        if (++ctx_count >= 2) break;
+    }
+}
+
+void AugmentationRenderer::convert_meta_path(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string pattern;
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag.find("pattern=") == 0) {
+            pattern = tag.substr(std::string("pattern=").size());
+            break;
+        }
+    }
+
+    std::string label = "MetaPath: ";
+    for (size_t i = 0; i < 2 && i < insight.seed_labels.size(); ++i) {
+        if (i > 0) label += " <-> ";
+        label += insight.seed_labels[i];
+    }
+    if (!pattern.empty()) {
+        label += " [" + pattern + "]";
+    }
+
+    if (label.length() > 80) {
+        label = label.substr(0, 77) + "...";
+    }
+
     rel_node.label = label;
     rel_node.type = "relation";
     rel_node.is_new = true;
@@ -1174,6 +1353,184 @@ void AugmentationRenderer::convert_author_chain(const Insight& insight, Augmenta
         link.type = "source";
         link.is_new = true;
         data.links.push_back(link);
+    }
+}
+
+// ============== Category 3: Causal & Mechanistic Discovery ==============
+
+void AugmentationRenderer::convert_causal_chain(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Causal chain: ";
+    for (size_t i = 0; i < std::min(insight.seed_labels.size(), size_t(4)); ++i) {
+        if (i > 0) label += " → ";
+        label += insight.seed_labels[i];
+    }
+    if (insight.seed_labels.size() > 4) {
+        label += " → ...";
+    }
+
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    // Link all chain nodes sequentially
+    for (size_t i = 0; i < insight.seed_nodes.size(); ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = (i == 0) ? "source" : "member";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_intervention_point(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Intervention: " + (insight.seed_labels.empty() ? "?" : insight.seed_labels[0]);
+    if (insight.score_breakdown.count("criticality")) {
+        label += " (" + std::to_string(static_cast<int>(insight.score_breakdown.at("criticality") * 100)) + "% critical)";
+    }
+
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    // Link the intervention point
+    AugmentationLink link;
+    link.source = normalize_graph_ref(insight.seed_nodes[0]);
+    link.target = rel_node.id;
+    link.type = "source";
+    link.is_new = true;
+    data.links.push_back(link);
+
+    // Link a few witness nodes
+    int link_count = 0;
+    for (const auto& wn : insight.witness_nodes) {
+        std::string norm_wn = normalize_graph_ref(wn);
+        if (norm_wn != normalize_graph_ref(insight.seed_nodes[0]) && link_count < 3) {
+            AugmentationLink wlink;
+            wlink.source = rel_node.id;
+            wlink.target = norm_wn;
+            wlink.type = "target";
+            wlink.is_new = true;
+            data.links.push_back(wlink);
+            link_count++;
+        }
+    }
+}
+
+void AugmentationRenderer::convert_feedback_loop(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 2) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Feedback loop: ";
+    for (size_t i = 0; i < std::min(insight.seed_labels.size(), size_t(3)); ++i) {
+        if (i > 0) label += " → ";
+        label += insight.seed_labels[i];
+    }
+    label += " → ...";
+
+    // Check if it's a reinforcing or balancing loop
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag == "reinforcing_loop") {
+            label += " (reinforcing)";
+            break;
+        } else if (tag == "balancing_loop") {
+            label += " (balancing)";
+            break;
+        }
+    }
+
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    // Link all loop nodes
+    for (const auto& seed : insight.seed_nodes) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(seed);
+        link.target = rel_node.id;
+        link.type = "member";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_confounder(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.size() < 3) return;  // confounder, cause, effect
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    std::string label = "Confounder: ";
+    if (insight.seed_labels.size() >= 3) {
+        label += insight.seed_labels[0] + " confounds " +
+                 insight.seed_labels[1] + " → " + insight.seed_labels[2];
+    }
+
+    rel_node.label = label;
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+
+    data.nodes.push_back(rel_node);
+
+    // Link confounder node (first seed)
+    AugmentationLink link1;
+    link1.source = normalize_graph_ref(insight.seed_nodes[0]);
+    link1.target = rel_node.id;
+    link1.type = "source";
+    link1.is_new = true;
+    data.links.push_back(link1);
+
+    // Link cause and effect nodes
+    if (insight.seed_nodes.size() >= 2) {
+        AugmentationLink link2;
+        link2.source = rel_node.id;
+        link2.target = normalize_graph_ref(insight.seed_nodes[1]);
+        link2.type = "confounded";
+        link2.is_new = true;
+        data.links.push_back(link2);
+    }
+
+    if (insight.seed_nodes.size() >= 3) {
+        AugmentationLink link3;
+        link3.source = rel_node.id;
+        link3.target = normalize_graph_ref(insight.seed_nodes[2]);
+        link3.type = "confounded";
+        link3.is_new = true;
+        data.links.push_back(link3);
     }
 }
 

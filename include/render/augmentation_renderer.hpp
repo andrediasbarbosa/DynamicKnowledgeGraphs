@@ -143,15 +143,21 @@ private:
     void convert_uncertainty_sampling(const Insight& insight, AugmentationData& data);
     void convert_counterfactual(const Insight& insight, AugmentationData& data);
     void convert_hyperedge_prediction(const Insight& insight, AugmentationData& data);
-    void convert_constrained_rule(const Insight& insight, AugmentationData& data);
     void convert_diffusion(const Insight& insight, AugmentationData& data);
     void convert_surprise(const Insight& insight, AugmentationData& data);
     void convert_community_link(const Insight& insight, AugmentationData& data);
     void convert_path_rank(const Insight& insight, AugmentationData& data);
+    void convert_long_chain(const Insight& insight, AugmentationData& data);
+    void convert_meta_path(const Insight& insight, AugmentationData& data);
     void convert_hypothesis(const Insight& insight, AugmentationData& data);
     void convert_rule(const Insight& insight, AugmentationData& data);
     void convert_embedding_link(const Insight& insight, AugmentationData& data);
     void convert_author_chain(const Insight& insight, AugmentationData& data);
+    // Category 3: Causal & Mechanistic Discovery
+    void convert_causal_chain(const Insight& insight, AugmentationData& data);
+    void convert_intervention_point(const Insight& insight, AugmentationData& data);
+    void convert_feedback_loop(const Insight& insight, AugmentationData& data);
+    void convert_confounder(const Insight& insight, AugmentationData& data);
 };
 
 } // namespace kg
