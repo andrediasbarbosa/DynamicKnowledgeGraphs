@@ -1,4 +1,5 @@
 #include "discovery/discovery_engine.hpp"
+#include "discovery/operator_registry.hpp"
 #include "llm/llm_provider.hpp"
 #include <algorithm>
 #include <unordered_set>
@@ -14,6 +15,7 @@
 #include <cctype>
 #include <numeric>  // for std::iota
 #include <cstdint>
+#include <tuple>
 
 namespace kg {
 
@@ -62,6 +64,16 @@ bool looks_like_reference_relation(const std::string& relation) {
            lower.find("refer") != std::string::npos ||
            lower.find("bibliograph") != std::string::npos ||
            lower.find("works cited") != std::string::npos;
+}
+
+bool looks_like_authorship_relation(const std::string& relation) {
+    if (relation.empty()) return false;
+    std::string lower = to_lower_copy(relation);
+    return lower.find("author") != std::string::npos ||
+           lower.find("wrote") != std::string::npos ||
+           lower.find("written by") != std::string::npos ||
+           lower.find("published by") != std::string::npos ||
+           lower.find("contributor") != std::string::npos;
 }
 
 bool looks_like_work(const std::string& label) {
@@ -305,6 +317,22 @@ double label_token_similarity(const Hypergraph& graph, const std::string& a, con
     return token_jaccard(ta, tb);
 }
 
+bool is_mechanistic_relation_text(const std::string& relation) {
+    if (relation.empty()) return false;
+    std::string rel = to_lower_copy(relation);
+    for (auto& c : rel) {
+        if (c == '_' || c == '-') c = ' ';
+    }
+    static const std::vector<std::string> keywords = {
+        "cause", "causal", "lead", "result", "trigger", "induce", "drive", "mediate",
+        "mechanis", "pathway", "regulat", "activate", "inhibit", "modulat", "effect", "impact"
+    };
+    for (const auto& kw : keywords) {
+        if (rel.find(kw) != std::string::npos) return true;
+    }
+    return false;
+}
+
 std::string normalize_relation_base(const std::string& relation, bool* negated) {
     if (negated) *negated = false;
     if (relation.empty()) return "";
@@ -406,6 +434,17 @@ std::vector<std::string> DiscoveryEngine::get_chunk_ids(const std::vector<std::s
         }
     }
     return std::vector<std::string>(chunks.begin(), chunks.end());
+}
+
+std::vector<std::string> DiscoveryEngine::get_source_documents(const std::vector<std::string>& edge_ids) const {
+    std::unordered_set<std::string> docs;
+    for (const auto& eid : edge_ids) {
+        const auto* edge = graph_.get_hyperedge(eid);
+        if (edge && !edge->source_document.empty()) {
+            docs.insert(edge->source_document);
+        }
+    }
+    return std::vector<std::string>(docs.begin(), docs.end());
 }
 
 bool DiscoveryEngine::is_author_reference_insight(const Insight& insight) const {
@@ -528,7 +567,7 @@ std::vector<Insight> DiscoveryEngine::find_bridges() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::BRIDGE);
-        ins.type = InsightType::BRIDGE;
+        ins.set_type(InsightType::BRIDGE);
         ins.seed_nodes = {node_id};
         ins.seed_labels = {get_node_label(node_id)};
 
@@ -551,6 +590,7 @@ std::vector<Insight> DiscoveryEngine::find_bridges() {
         }
 
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"cross_s" + std::to_string(s) + "_components"};
         ins.description = "Bridge node connecting " + std::to_string(comps.size()) +
                          " s=" + std::to_string(s) + " components";
@@ -629,7 +669,7 @@ std::vector<Insight> DiscoveryEngine::find_completions() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::COMPLETION);
-        ins.type = InsightType::COMPLETION;
+        ins.set_type(InsightType::COMPLETION);
         ins.seed_nodes = {n1, n2};
         ins.seed_labels = {get_node_label(n1), get_node_label(n2)};
 
@@ -642,6 +682,7 @@ std::vector<Insight> DiscoveryEngine::find_completions() {
 
         ins.witness_edges = edges;
         ins.evidence_chunk_ids = get_chunk_ids(edges);
+        ins.source_documents = get_source_documents(edges);
         ins.novelty_tags = {"slot_filling"};
         ins.description = "Completion pattern: " + get_node_label(n1) + " + " +
                          get_node_label(n2) + " with " + std::to_string(third.size()) +
@@ -720,7 +761,7 @@ std::vector<Insight> DiscoveryEngine::find_motifs() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::MOTIF);
-        ins.type = InsightType::MOTIF;
+        ins.set_type(InsightType::MOTIF);
         ins.seed_nodes = std::vector<std::string>(pattern.begin(), pattern.end());
         for (const auto& n : ins.seed_nodes) {
             ins.seed_labels.push_back(get_node_label(n));
@@ -833,7 +874,7 @@ std::vector<Insight> DiscoveryEngine::find_substitutions() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::SUBSTITUTION);
-        ins.type = InsightType::SUBSTITUTION;
+        ins.set_type(InsightType::SUBSTITUTION);
         ins.seed_nodes = {from, to};
         ins.seed_labels = {get_node_label(from), get_node_label(to)};
         ins.witness_edges = {e1, e2};
@@ -851,6 +892,7 @@ std::vector<Insight> DiscoveryEngine::find_substitutions() {
         ins.witness_nodes.push_back(to);
 
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"entity_substitution"};
         ins.description = "Substitution: " + get_node_label(from) + " <-> " +
                          get_node_label(to) + " in relation '" +
@@ -924,7 +966,7 @@ std::vector<Insight> DiscoveryEngine::find_contradictions() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::CONTRADICTION);
-        ins.type = InsightType::CONTRADICTION;
+        ins.set_type(InsightType::CONTRADICTION);
 
         std::vector<std::string> witness_edges;
         size_t max_evidence = std::max<size_t>(2, config_.contradiction_max_evidence_edges);
@@ -952,6 +994,7 @@ std::vector<Insight> DiscoveryEngine::find_contradictions() {
         ins.witness_nodes = ins.seed_nodes;
 
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"contradiction", "relation=" + group.base_relation};
 
         std::string pos_rel = group.pos_relation.empty() ? "affirmed" : group.pos_relation;
@@ -1124,7 +1167,7 @@ std::vector<Insight> DiscoveryEngine::find_entity_resolutions() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::ENTITY_RESOLUTION);
-        ins.type = InsightType::ENTITY_RESOLUTION;
+        ins.set_type(InsightType::ENTITY_RESOLUTION);
         ins.seed_nodes = {node_a.id, node_b.id};
         ins.seed_labels = {node_a.label, node_b.label};
 
@@ -1173,6 +1216,7 @@ std::vector<Insight> DiscoveryEngine::find_entity_resolutions() {
         ins.witness_nodes.assign(node_set.begin(), node_set.end());
 
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"entity_resolution", "possible_duplicate"};
         std::stringstream desc;
         desc << "Entity resolution: '" << node_a.label << "' and '" << node_b.label
@@ -1278,7 +1322,7 @@ std::vector<Insight> DiscoveryEngine::find_core_periphery() {
     auto build_insight = [&](const NodeScore& ns, bool is_core) {
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::CORE_PERIPHERY);
-        ins.type = InsightType::CORE_PERIPHERY;
+        ins.set_type(InsightType::CORE_PERIPHERY);
         ins.seed_nodes = {ns.id};
         ins.seed_labels = {ns.label.empty() ? ns.id : ns.label};
 
@@ -1290,6 +1334,7 @@ std::vector<Insight> DiscoveryEngine::find_core_periphery() {
             }
         }
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         std::unordered_set<std::string> witness_nodes;
         for (const auto& eid : ins.witness_edges) {
@@ -1479,7 +1524,7 @@ std::vector<Insight> DiscoveryEngine::find_text_similarity_links() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::TEXT_SIMILARITY);
-        ins.type = InsightType::TEXT_SIMILARITY;
+        ins.set_type(InsightType::TEXT_SIMILARITY);
         ins.seed_nodes = {a.id, b.id};
         ins.seed_labels = {a.label.empty() ? a.id : a.label, b.label.empty() ? b.id : b.label};
 
@@ -1510,6 +1555,7 @@ std::vector<Insight> DiscoveryEngine::find_text_similarity_links() {
         ins.witness_nodes.assign(witness_nodes.begin(), witness_nodes.end());
 
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"text_similarity"};
         std::stringstream desc;
         desc << "Text similarity link: '" << ins.seed_labels[0] << "' ~ '" << ins.seed_labels[1]
@@ -1572,7 +1618,7 @@ std::vector<Insight> DiscoveryEngine::find_argument_support_relations() {
     for (const auto& cand : candidates) {
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::ARGUMENT_SUPPORT);
-        ins.type = InsightType::ARGUMENT_SUPPORT;
+        ins.set_type(InsightType::ARGUMENT_SUPPORT);
         ins.seed_nodes = {cand.a, cand.b};
         ins.seed_labels = {get_node_label(cand.a), get_node_label(cand.b)};
 
@@ -1591,6 +1637,7 @@ std::vector<Insight> DiscoveryEngine::find_argument_support_relations() {
         ins.witness_nodes.assign(witness_nodes.begin(), witness_nodes.end());
 
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"argument_support"};
 
         std::stringstream path_desc;
@@ -1691,7 +1738,7 @@ std::vector<Insight> DiscoveryEngine::find_active_learning_queries() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::ACTIVE_LEARNING);
-        ins.type = InsightType::ACTIVE_LEARNING;
+        ins.set_type(InsightType::ACTIVE_LEARNING);
         ins.seed_nodes = cand.nodes;
         ins.seed_labels = {};
         for (const auto& n : cand.nodes) {
@@ -1700,6 +1747,7 @@ std::vector<Insight> DiscoveryEngine::find_active_learning_queries() {
         ins.witness_edges = {cand.edge_id};
         ins.witness_nodes = cand.nodes;
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.score_breakdown["confidence"] = cand.confidence;
         ins.score_breakdown["impact"] = cand.impact;
         ins.score = 1.0 - cand.confidence;
@@ -1789,7 +1837,7 @@ std::vector<Insight> DiscoveryEngine::find_method_outcome_nodes() {
         const auto& cand = candidates[i];
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::METHOD_OUTCOME);
-        ins.type = InsightType::METHOD_OUTCOME;
+        ins.set_type(InsightType::METHOD_OUTCOME);
         ins.seed_nodes = {cand.id};
         ins.seed_labels = {cand.label};
 
@@ -1802,6 +1850,7 @@ std::vector<Insight> DiscoveryEngine::find_method_outcome_nodes() {
         }
         ins.witness_nodes = ins.seed_nodes;
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         std::string default_role = cand.method_hint ? "method" : "outcome";
         std::string default_desc = "Entity '" + cand.label + "' appears to be a " + default_role + " in the domain.";
@@ -1933,7 +1982,7 @@ std::vector<Insight> DiscoveryEngine::find_centrality_nodes() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::CENTRALITY);
-        ins.type = InsightType::CENTRALITY;
+        ins.set_type(InsightType::CENTRALITY);
         ins.seed_nodes = {node_id};
         ins.seed_labels = {get_node_label(node_id)};
 
@@ -1953,6 +2002,7 @@ std::vector<Insight> DiscoveryEngine::find_centrality_nodes() {
         }
         ins.witness_nodes.assign(witness_nodes.begin(), witness_nodes.end());
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         ins.score_breakdown["centrality"] = score;
         ins.score = score;
@@ -2079,7 +2129,7 @@ std::vector<Insight> DiscoveryEngine::find_community_structures() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::COMMUNITY_DETECTION);
-        ins.type = InsightType::COMMUNITY_DETECTION;
+        ins.set_type(InsightType::COMMUNITY_DETECTION);
 
         size_t seed_count = std::min<size_t>(3, ranked.size());
         for (size_t j = 0; j < seed_count; ++j) {
@@ -2104,6 +2154,7 @@ std::vector<Insight> DiscoveryEngine::find_community_structures() {
         }
         ins.witness_edges.assign(witness_edges.begin(), witness_edges.end());
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         double size_score = static_cast<double>(nodes.size()) / static_cast<double>(max_size);
         ins.score_breakdown["size"] = size_score;
@@ -2176,7 +2227,7 @@ std::vector<Insight> DiscoveryEngine::find_k_core_nodes() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::K_CORE);
-        ins.type = InsightType::K_CORE;
+        ins.set_type(InsightType::K_CORE);
         ins.seed_nodes = {node_id};
         ins.seed_labels = {get_node_label(node_id)};
 
@@ -2185,6 +2236,7 @@ std::vector<Insight> DiscoveryEngine::find_k_core_nodes() {
             ins.witness_edges.push_back(incident[j].id);
         }
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         for (const auto& [nbr, _] : proj.adj[idx]) {
             ins.witness_nodes.push_back(proj.node_ids[nbr]);
@@ -2308,12 +2360,13 @@ std::vector<Insight> DiscoveryEngine::find_k_truss_edges() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::K_TRUSS);
-        ins.type = InsightType::K_TRUSS;
+        ins.set_type(InsightType::K_TRUSS);
         ins.seed_nodes = {a, b};
         ins.seed_labels = {get_node_label(a), get_node_label(b)};
 
         ins.witness_edges = shared_incident_edges(graph_, a, b, config_.centrality_max_evidence_edges);
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         std::vector<std::string> common;
         size_t small = nbrs[e.u].size() < nbrs[e.v].size() ? e.u : e.v;
@@ -2385,12 +2438,13 @@ std::vector<Insight> DiscoveryEngine::find_claim_stances() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::CLAIM_STANCE);
-        ins.type = InsightType::CLAIM_STANCE;
+        ins.set_type(InsightType::CLAIM_STANCE);
         ins.seed_nodes = {edge.sources[0], edge.targets[0]};
         ins.seed_labels = {get_node_label(edge.sources[0]), get_node_label(edge.targets[0])};
         ins.witness_edges = {edge.id};
         ins.witness_nodes = {edge.sources[0], edge.targets[0]};
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.score_breakdown["confidence"] = confidence;
         ins.score = confidence;
         ins.novelty_tags = {"claim_stance", stance};
@@ -2475,7 +2529,7 @@ std::vector<Insight> DiscoveryEngine::find_relation_induction() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::RELATION_INDUCTION);
-        ins.type = InsightType::RELATION_INDUCTION;
+        ins.set_type(InsightType::RELATION_INDUCTION);
         if (!list.empty() && !list[0]->sources.empty() && !list[0]->targets.empty()) {
             ins.seed_nodes = {list[0]->sources[0], list[0]->targets[0]};
             ins.seed_labels = {get_node_label(list[0]->sources[0]), get_node_label(list[0]->targets[0])};
@@ -2484,6 +2538,7 @@ std::vector<Insight> DiscoveryEngine::find_relation_induction() {
             ins.witness_edges.push_back(list[j]->id);
         }
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.score_breakdown["confidence"] = confidence;
         ins.score = confidence;
         ins.novelty_tags = {"relation_induction", "type=" + type};
@@ -2548,12 +2603,13 @@ std::vector<Insight> DiscoveryEngine::find_analogical_transfers() {
 
                 Insight ins;
                 ins.insight_id = make_insight_id(InsightType::ANALOGICAL_TRANSFER);
-                ins.type = InsightType::ANALOGICAL_TRANSFER;
+                ins.set_type(InsightType::ANALOGICAL_TRANSFER);
                 ins.seed_nodes = {a, d};
                 ins.seed_labels = {get_node_label(a), get_node_label(d)};
                 ins.witness_edges = {e1->id, e2->id};
                 ins.witness_nodes = {a, b, c, d};
                 ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
                 ins.score_breakdown["similarity_source"] = sim_src;
                 ins.score_breakdown["similarity_target"] = sim_tgt;
                 ins.score = score;
@@ -2643,12 +2699,13 @@ std::vector<Insight> DiscoveryEngine::find_uncertainty_samples() {
         const auto& cand = candidates[i];
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::UNCERTAINTY_SAMPLING);
-        ins.type = InsightType::UNCERTAINTY_SAMPLING;
+        ins.set_type(InsightType::UNCERTAINTY_SAMPLING);
         ins.seed_nodes = {cand.src, cand.tgt};
         ins.seed_labels = {get_node_label(cand.src), get_node_label(cand.tgt)};
         ins.witness_edges = {cand.edge_id};
         ins.witness_nodes = {cand.src, cand.tgt};
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.score_breakdown["uncertainty"] = cand.uncertainty;
         ins.score = cand.uncertainty;
         ins.novelty_tags = {"uncertainty_sampling"};
@@ -2679,12 +2736,13 @@ std::vector<Insight> DiscoveryEngine::find_counterfactual_probes() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::COUNTERFACTUAL);
-        ins.type = InsightType::COUNTERFACTUAL;
+        ins.set_type(InsightType::COUNTERFACTUAL);
         ins.seed_nodes = {src, tgt};
         ins.seed_labels = {get_node_label(src), get_node_label(tgt)};
         ins.witness_edges = {edge.id};
         ins.witness_nodes = {src, tgt};
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
         ins.novelty_tags = {"counterfactual"};
 
         std::string question = "What evidence would refute the claim that **" +
@@ -2776,7 +2834,7 @@ std::vector<Insight> DiscoveryEngine::find_hyperedge_predictions() {
         const auto& cand = candidates[i];
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::HYPEREDGE_PREDICTION);
-        ins.type = InsightType::HYPEREDGE_PREDICTION;
+        ins.set_type(InsightType::HYPEREDGE_PREDICTION);
         ins.seed_nodes = {cand.src, cand.tgt};
         ins.seed_labels = {get_node_label(cand.src), get_node_label(cand.tgt)};
         ins.witness_nodes = {cand.src, cand.tgt};
@@ -2793,122 +2851,6 @@ std::vector<Insight> DiscoveryEngine::find_hyperedge_predictions() {
 }
 
 // ============== CONSTRAINED RULE MINING ==============
-std::vector<Insight> DiscoveryEngine::find_constrained_rules() {
-    std::vector<Insight> results;
-    report_progress("Constrained rule mining", 0, 100);
-
-    auto edges = graph_.get_all_edges();
-    double total_edges = static_cast<double>(graph_.num_edges());
-    if (total_edges == 0) return results;
-
-    std::map<std::string, std::vector<std::pair<std::set<std::string>, std::set<std::string>>>> relation_instances;
-    for (const auto& edge : edges) {
-        if (edge.relation.empty()) continue;
-        std::set<std::string> sources(edge.sources.begin(), edge.sources.end());
-        std::set<std::string> targets(edge.targets.begin(), edge.targets.end());
-        relation_instances[edge.relation].emplace_back(sources, targets);
-    }
-
-    std::vector<std::string> relation_types;
-    for (const auto& [rel, _] : relation_instances) {
-        relation_types.push_back(rel);
-    }
-
-    struct RuleCandidate {
-        std::string body_relation;
-        std::string head_relation;
-        std::string shared_role;
-        int support;
-        double confidence;
-        double lift;
-        std::vector<std::string> witness_edges;
-    };
-
-    std::vector<RuleCandidate> candidates;
-    int processed = 0;
-    int total_pairs = static_cast<int>(relation_types.size() * relation_types.size());
-
-    for (const auto& body_rel : relation_types) {
-        for (const auto& head_rel : relation_types) {
-            if (body_rel == head_rel) continue;
-
-            int support = 0;
-            int body_count = relation_instances[body_rel].size();
-            int head_count = relation_instances[head_rel].size();
-            if (body_count < config_.constrained_rule_min_support) continue;
-            if (head_count < config_.constrained_rule_min_support) continue;
-
-            for (const auto& body_inst : relation_instances[body_rel]) {
-                for (const auto& head_inst : relation_instances[head_rel]) {
-                    bool share_source = false;
-                    bool share_target = false;
-                    for (const auto& s : body_inst.first) {
-                        if (head_inst.first.find(s) != head_inst.first.end()) { share_source = true; break; }
-                    }
-                    for (const auto& t : body_inst.second) {
-                        if (head_inst.second.find(t) != head_inst.second.end()) { share_target = true; break; }
-                    }
-                    if (share_source || share_target) {
-                        support++;
-                        if (support >= config_.constrained_rule_min_support) break;
-                    }
-                }
-                if (support >= config_.constrained_rule_min_support) break;
-            }
-
-            if (support < config_.constrained_rule_min_support) continue;
-
-            double confidence = static_cast<double>(support) / static_cast<double>(body_count);
-            double lift = confidence / (static_cast<double>(head_count) / total_edges);
-
-            if (confidence < config_.constrained_rule_min_confidence) continue;
-            if (lift < config_.constrained_rule_min_lift) continue;
-
-            RuleCandidate cand;
-            cand.body_relation = body_rel;
-            cand.head_relation = head_rel;
-            cand.shared_role = "shared_entity";
-            cand.support = support;
-            cand.confidence = confidence;
-            cand.lift = lift;
-            candidates.push_back(std::move(cand));
-        }
-        processed++;
-        if (processed % 5 == 0) {
-            int pct = static_cast<int>(100.0 * processed / std::max(1, total_pairs));
-            report_progress("Constrained rule mining", pct, 100);
-        }
-    }
-
-    std::sort(candidates.begin(), candidates.end(),
-              [](const auto& a, const auto& b) {
-                  if (a.confidence != b.confidence) return a.confidence > b.confidence;
-                  return a.lift > b.lift;
-              });
-
-    size_t limit = std::min(candidates.size(), config_.constrained_rule_max_candidates);
-    for (size_t i = 0; i < limit; ++i) {
-        const auto& cand = candidates[i];
-        Insight ins;
-        ins.insight_id = make_insight_id(InsightType::CONSTRAINED_RULE);
-        ins.type = InsightType::CONSTRAINED_RULE;
-        ins.score_breakdown["support"] = cand.support;
-        ins.score_breakdown["confidence"] = cand.confidence;
-        ins.score_breakdown["lift"] = cand.lift;
-        ins.score = cand.confidence;
-        ins.novelty_tags = {"constrained_rule"};
-        std::stringstream desc;
-        desc << "Constrained rule: if " << cand.body_relation << "(X, Y) then "
-             << cand.head_relation << "(X, Z) [confidence=" << std::fixed << std::setprecision(2)
-             << cand.confidence << ", lift=" << cand.lift << "]";
-        ins.description = desc.str();
-        results.push_back(std::move(ins));
-    }
-
-    report_progress("Constrained rule mining", 100, 100);
-    return results;
-}
-
 // ============== DIFFUSION RELEVANCE ==============
 std::vector<Insight> DiscoveryEngine::compute_diffusion_relevance(const std::string& seed_node) {
     std::vector<Insight> results;
@@ -2975,7 +2917,7 @@ std::vector<Insight> DiscoveryEngine::compute_diffusion_relevance(const std::str
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::DIFFUSION);
-        ins.type = InsightType::DIFFUSION;
+        ins.set_type(InsightType::DIFFUSION);
         ins.seed_nodes = {seed_node, target};
         ins.seed_labels = {get_node_label(seed_node), get_node_label(target)};
         ins.witness_nodes = {seed_node, target};
@@ -3080,7 +3022,7 @@ std::vector<Insight> DiscoveryEngine::find_surprise_edges() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::SURPRISE);
-        ins.type = InsightType::SURPRISE;
+        ins.set_type(InsightType::SURPRISE);
         ins.seed_nodes = std::vector<std::string>(entities.begin(), entities.end());
         for (const auto& n : ins.seed_nodes) {
             ins.seed_labels.push_back(get_node_label(n));
@@ -3088,6 +3030,7 @@ std::vector<Insight> DiscoveryEngine::find_surprise_edges() {
         ins.witness_edges = {edge_id};
         ins.witness_nodes = ins.seed_nodes;
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         ins.novelty_tags = {"surprising_combination"};
 
@@ -3274,7 +3217,7 @@ std::vector<Insight> DiscoveryEngine::find_rules() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::RULE);
-        ins.type = InsightType::RULE;
+        ins.set_type(InsightType::RULE);
 
         // Seed nodes are the example entities that satisfy the rule
         ins.seed_nodes = rule.example_entities;
@@ -3394,7 +3337,7 @@ std::vector<Insight> DiscoveryEngine::find_path_rankings() {
 
             Insight ins;
             ins.insight_id = make_insight_id(InsightType::PATH_RANK);
-            ins.type = InsightType::PATH_RANK;
+            ins.set_type(InsightType::PATH_RANK);
             ins.seed_nodes = {a, b};
             std::string label_a = get_node_label(a);
             std::string label_b = get_node_label(b);
@@ -3405,6 +3348,7 @@ std::vector<Insight> DiscoveryEngine::find_path_rankings() {
             }
             ins.witness_nodes.assign(node_ids.begin(), node_ids.end());
             ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
             ins.novelty_tags = {"path_rank", "paths=" + std::to_string(path_count)};
 
             std::stringstream desc;
@@ -3433,257 +3377,613 @@ std::vector<Insight> DiscoveryEngine::find_path_rankings() {
     return results;
 }
 
-// ============== HYPOTHESIS SYNTHESIS ==============
-std::vector<Insight> DiscoveryEngine::find_hypotheses(const InsightCollection& collection) {
+// ============== INTERSECTION-CONSTRAINED HYPOTHESIS BRIDGES ==============
+std::vector<Insight> DiscoveryEngine::find_intersection_hypothesis_bridges() {
     std::vector<Insight> results;
-    if (collection.insights.empty() || config_.hypothesis_count == 0) return results;
+    report_progress("Intersection-constrained traversal", 0, 100);
 
-    struct HypothesisCandidate {
-        std::vector<std::string> nodes;
-        std::vector<std::string> labels;
-        std::unordered_set<InsightType> signals;
-        std::vector<std::string> witness_edges;
-        std::vector<std::string> witness_nodes;
-        std::vector<std::string> evidence_chunk_ids;
-        std::vector<std::string> tags;
-        std::map<std::string, double> scores;
-        double score = 0.0;
-        bool is_merge = false;
-        bool has_contradiction = false;
-    };
-
-    auto make_pair_key = [](const std::string& a, const std::string& b) {
-        return a < b ? a + "|" + b : b + "|" + a;
-    };
-
-    std::unordered_map<std::string, double> core_scores;
-    std::unordered_map<std::string, double> degree_norm;
-    int max_degree = 1;
-    auto all_nodes = graph_.get_all_nodes();
-    for (const auto& node : all_nodes) {
-        max_degree = std::max(max_degree, node.degree);
-    }
-    for (const auto& node : all_nodes) {
-        degree_norm[node.id] = static_cast<double>(node.degree) / max_degree;
+    std::vector<std::string> seed_nodes;
+    if (!index_.degree_ranked_nodes.empty()) {
+        size_t limit = std::min(config_.intersection_bridge_max_seed_nodes, index_.degree_ranked_nodes.size());
+        for (size_t i = 0; i < limit; ++i) {
+            seed_nodes.push_back(index_.degree_ranked_nodes[i].first);
+        }
+    } else {
+        auto nodes = graph_.get_all_nodes();
+        std::sort(nodes.begin(), nodes.end(), [](const auto& a, const auto& b) {
+            return a.degree > b.degree;
+        });
+        size_t limit = std::min(config_.intersection_bridge_max_seed_nodes, nodes.size());
+        for (size_t i = 0; i < limit; ++i) {
+            seed_nodes.push_back(nodes[i].id);
+        }
     }
 
-    std::unordered_set<std::string> contradiction_pairs;
-    std::unordered_map<std::string, double> text_similarity_pairs;
+    if (seed_nodes.size() < 2) {
+        report_progress("Intersection-constrained traversal", 100, 100);
+        return results;
+    }
 
-    for (const auto& ins : collection.insights) {
-        if (ins.type == InsightType::CORE_PERIPHERY && !ins.seed_nodes.empty()) {
-            double core_score = ins.score;
-            for (const auto& tag : ins.novelty_tags) {
-                if (tag == "periphery") {
-                    core_score = 0.0;
-                    break;
+    size_t total_pairs = seed_nodes.size() * (seed_nodes.size() - 1) / 2;
+    size_t max_pairs = std::min(config_.intersection_bridge_max_pairs, total_pairs);
+    if (max_pairs == 0) {
+        report_progress("Intersection-constrained traversal", 100, 100);
+        return results;
+    }
+
+    const int min_intersection = std::max(1, config_.intersection_bridge_min_intersection);
+    const int k_paths = std::max(1, config_.intersection_bridge_k_paths);
+    size_t checked = 0;
+
+    auto find_shortest_intersection_paths =
+        [&](const std::string& start_node, const std::string& end_node, int max_paths) {
+            std::vector<std::vector<std::string>> collected_paths;
+            if (!graph_.has_node(start_node) || !graph_.has_node(end_node) || max_paths <= 0) {
+                return collected_paths;
+            }
+
+            auto start_edges = graph_.get_incident_edges(start_node);
+            if (start_edges.empty()) return collected_paths;
+
+            std::queue<std::string> q;
+            std::unordered_map<std::string, int> depth;
+            std::unordered_map<std::string, std::vector<std::string>> parents;
+            std::set<std::string> goal_edges;
+            int goal_depth = std::numeric_limits<int>::max();
+
+            for (const auto& edge : start_edges) {
+                q.push(edge.id);
+                depth[edge.id] = 0;
+                parents[edge.id] = {};
+            }
+
+            while (!q.empty()) {
+                std::string current_id = q.front();
+                q.pop();
+
+                auto depth_it = depth.find(current_id);
+                if (depth_it == depth.end()) continue;
+                int d = depth_it->second;
+                if (d > goal_depth) continue;
+
+                const auto* current_edge = graph_.get_hyperedge(current_id);
+                if (!current_edge) continue;
+
+                if (current_edge->contains_node(end_node)) {
+                    goal_depth = d;
+                    goal_edges.insert(current_id);
+                    continue;
+                }
+                if (d >= goal_depth) continue;
+
+                std::set<std::string> candidate_neighbors;
+                for (const auto& node_id : current_edge->get_all_nodes()) {
+                    auto incident = graph_.get_incident_edges(node_id);
+                    for (const auto& incident_edge : incident) {
+                        if (incident_edge.id != current_id) {
+                            candidate_neighbors.insert(incident_edge.id);
+                        }
+                    }
+                }
+
+                for (const auto& neighbor_id : candidate_neighbors) {
+                    const auto* neighbor_edge = graph_.get_hyperedge(neighbor_id);
+                    if (!neighbor_edge) continue;
+                    if (static_cast<int>(current_edge->intersection(*neighbor_edge).size()) < min_intersection) {
+                        continue;
+                    }
+
+                    int nd = d + 1;
+                    auto nd_it = depth.find(neighbor_id);
+                    if (nd_it == depth.end()) {
+                        depth[neighbor_id] = nd;
+                        parents[neighbor_id].push_back(current_id);
+                        q.push(neighbor_id);
+                    } else if (nd == nd_it->second) {
+                        parents[neighbor_id].push_back(current_id);
+                    }
                 }
             }
-            core_scores[ins.seed_nodes[0]] = core_score;
-        }
 
-        if (ins.type == InsightType::CONTRADICTION) {
-            for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
-                for (size_t j = i + 1; j < ins.seed_nodes.size(); ++j) {
-                    contradiction_pairs.insert(make_pair_key(ins.seed_nodes[i], ins.seed_nodes[j]));
+            if (goal_edges.empty()) return collected_paths;
+
+            std::vector<std::string> rev_path;
+            std::function<void(const std::string&)> backtrack = [&](const std::string& edge_id) {
+                if (collected_paths.size() >= static_cast<size_t>(max_paths)) return;
+                rev_path.push_back(edge_id);
+
+                auto pit = parents.find(edge_id);
+                if (pit == parents.end() || pit->second.empty()) {
+                    collected_paths.emplace_back(rev_path.rbegin(), rev_path.rend());
+                } else {
+                    for (const auto& parent_id : pit->second) {
+                        if (collected_paths.size() >= static_cast<size_t>(max_paths)) break;
+                        backtrack(parent_id);
+                    }
                 }
-            }
-        }
 
-        if (ins.type == InsightType::TEXT_SIMILARITY && ins.seed_nodes.size() >= 2) {
-            text_similarity_pairs[make_pair_key(ins.seed_nodes[0], ins.seed_nodes[1])] = ins.score;
-        }
-    }
-
-    std::unordered_map<std::string, HypothesisCandidate> candidates;
-    std::unordered_map<std::string, HypothesisCandidate> merge_candidates;
-
-    auto add_evidence = [&](HypothesisCandidate& cand, const Insight& ins) {
-        for (const auto& eid : ins.witness_edges) {
-            if (cand.witness_edges.size() >= 12) break;
-            cand.witness_edges.push_back(eid);
-        }
-        for (const auto& nid : ins.witness_nodes) {
-            if (cand.witness_nodes.size() >= 20) break;
-            cand.witness_nodes.push_back(nid);
-        }
-        for (const auto& cid : ins.evidence_chunk_ids) {
-            if (cand.evidence_chunk_ids.size() >= 10) break;
-            cand.evidence_chunk_ids.push_back(cid);
-        }
-    };
-
-    auto register_pair = [&](const Insight& ins, bool is_merge) {
-        if (ins.seed_nodes.size() < 2) return;
-        std::string key = make_pair_key(ins.seed_nodes[0], ins.seed_nodes[1]);
-        auto& cand = is_merge ? merge_candidates[key] : candidates[key];
-        if (cand.nodes.empty()) {
-            cand.nodes = {ins.seed_nodes[0], ins.seed_nodes[1]};
-            cand.labels = {get_node_label(ins.seed_nodes[0]), get_node_label(ins.seed_nodes[1])};
-            cand.is_merge = is_merge;
-        }
-        cand.signals.insert(ins.type);
-        add_evidence(cand, ins);
-        if (ins.type == InsightType::ENTITY_RESOLUTION) {
-            auto it_label = ins.score_breakdown.find("label_similarity");
-            if (it_label != ins.score_breakdown.end()) {
-                cand.scores["label_similarity"] = it_label->second;
-            }
-            auto it_neighbor = ins.score_breakdown.find("neighbor_overlap");
-            if (it_neighbor != ins.score_breakdown.end()) {
-                cand.scores["neighbor_overlap"] = it_neighbor->second;
-            }
-        }
-    };
-
-    const std::unordered_set<InsightType> link_signals = {
-        InsightType::COMPLETION,
-        InsightType::PATH_RANK,
-        InsightType::EMBEDDING_LINK,
-        InsightType::COMMUNITY_LINK,
-        InsightType::TEXT_SIMILARITY,
-        InsightType::SURPRISE
-    };
-
-    for (const auto& ins : collection.insights) {
-        if (link_signals.find(ins.type) != link_signals.end()) {
-            register_pair(ins, false);
-        }
-        if (ins.type == InsightType::ENTITY_RESOLUTION) {
-            register_pair(ins, true);
-        }
-    }
-
-    auto finalize_candidate = [&](HypothesisCandidate& cand) {
-        std::string key = make_pair_key(cand.nodes[0], cand.nodes[1]);
-        cand.has_contradiction = contradiction_pairs.find(key) != contradiction_pairs.end();
-
-        double semantic = 0.0;
-        auto it_sem = text_similarity_pairs.find(key);
-        if (it_sem != text_similarity_pairs.end()) semantic = it_sem->second;
-
-        double centrality = 0.0;
-        double c1 = core_scores.count(cand.nodes[0]) ? core_scores[cand.nodes[0]] : degree_norm[cand.nodes[0]];
-        double c2 = core_scores.count(cand.nodes[1]) ? core_scores[cand.nodes[1]] : degree_norm[cand.nodes[1]];
-        centrality = 0.5 * (c1 + c2);
-
-        double consistency = cand.has_contradiction ? 0.3 : 1.0;
-
-        double support = 0.0;
-        double max_signals = static_cast<double>(link_signals.size());
-        support = max_signals > 0 ? cand.signals.size() / max_signals : 0.0;
-
-        cand.scores["support"] = support;
-        cand.scores["semantic"] = semantic;
-        cand.scores["centrality"] = centrality;
-        cand.scores["consistency"] = consistency;
-
-        if (cand.is_merge) {
-            double label_sim = 0.0;
-            auto it_label = cand.scores.find("label_similarity");
-            if (it_label != cand.scores.end()) label_sim = it_label->second;
-            cand.score = 0.5 * label_sim + 0.3 * semantic + 0.2 * centrality;
-        } else {
-            cand.score = 0.35 * support + 0.25 * consistency + 0.2 * centrality + 0.2 * semantic;
-        }
-    };
-
-    for (auto& [key, cand] : candidates) {
-        finalize_candidate(cand);
-    }
-    for (auto& [key, cand] : merge_candidates) {
-        finalize_candidate(cand);
-    }
-
-    std::vector<HypothesisCandidate> all_candidates;
-    all_candidates.reserve(candidates.size() + merge_candidates.size());
-    for (auto& [key, cand] : candidates) all_candidates.push_back(cand);
-    for (auto& [key, cand] : merge_candidates) all_candidates.push_back(cand);
-
-    std::sort(all_candidates.begin(), all_candidates.end(),
-              [](const HypothesisCandidate& a, const HypothesisCandidate& b) { return a.score > b.score; });
-
-    size_t limit = std::min(config_.hypothesis_count, all_candidates.size());
-    for (size_t i = 0; i < limit; ++i) {
-        auto& cand = all_candidates[i];
-        Insight hyp;
-        hyp.insight_id = make_insight_id(InsightType::HYPOTHESIS);
-        hyp.type = InsightType::HYPOTHESIS;
-        hyp.seed_nodes = cand.nodes;
-        hyp.seed_labels = cand.labels;
-        hyp.witness_edges = cand.witness_edges;
-        hyp.witness_nodes = cand.witness_nodes;
-        hyp.evidence_chunk_ids = cand.evidence_chunk_ids;
-        hyp.score_breakdown = cand.scores;
-        hyp.score = cand.score;
-        hyp.novelty_tags = {"hypothesis", cand.is_merge ? "merge_candidate" : "relation_candidate"};
-        if (cand.has_contradiction) {
-            hyp.novelty_tags.push_back("conflict");
-        }
-
-        std::stringstream default_desc;
-        if (cand.is_merge) {
-            default_desc << "Hypothesis: " << hyp.seed_labels[0] << " and " << hyp.seed_labels[1]
-                         << " may refer to the same underlying entity based on label and context similarity.";
-        } else {
-            default_desc << "Hypothesis: " << hyp.seed_labels[0] << " is meaningfully related to "
-                         << hyp.seed_labels[1] << " based on multiple structural signals.";
-        }
-
-        if (llm_provider_) {
-            std::stringstream prompt;
-            prompt << "You are a scientific analyst. Synthesize a testable hypothesis based on graph evidence.\n";
-            prompt << "Entities: " << hyp.seed_labels[0] << " | " << hyp.seed_labels[1] << "\n";
-            prompt << "Candidate type: " << (cand.is_merge ? "merge/alias" : "relationship") << "\n";
-            prompt << "Signals: ";
-            bool first = true;
-            for (const auto& sig : cand.signals) {
-                if (!first) prompt << ", ";
-                prompt << insight_type_to_string(sig);
-                first = false;
-            }
-            if (cand.signals.empty()) prompt << "none";
-            prompt << "\n";
-            prompt << "Scores: support=" << std::fixed << std::setprecision(2) << cand.scores["support"]
-                   << ", semantic=" << cand.scores["semantic"]
-                   << ", centrality=" << cand.scores["centrality"]
-                   << ", consistency=" << cand.scores["consistency"] << "\n";
-            if (cand.has_contradiction) {
-                prompt << "Note: contradictory evidence exists.\n";
-            }
-            prompt << "Write 2-3 concise sentences. Sentence 1 states the hypothesis. "
-                   << "Sentence 2 notes supporting evidence. Sentence 3 (optional) notes uncertainty. "
-                   << "No bullet points or markdown.\n";
-
-            std::vector<Message> messages = {
-                Message(Message::Role::System, "You write precise, testable scientific hypotheses."),
-                Message(Message::Role::User, prompt.str())
+                rev_path.pop_back();
             };
 
-            LLMResponse response = llm_provider_->chat(messages);
-            if (response.success && !response.content.empty()) {
-                hyp.description = response.content;
-                hyp.llm = nlohmann::json{
-                    {"hypothesis", response.content},
-                    {"signals", nlohmann::json::array()}
-                };
-                for (const auto& sig : cand.signals) {
-                    hyp.llm["signals"].push_back(insight_type_to_string(sig));
-                }
-            } else {
-                hyp.description = default_desc.str();
+            for (const auto& goal_edge_id : goal_edges) {
+                if (collected_paths.size() >= static_cast<size_t>(max_paths)) break;
+                backtrack(goal_edge_id);
             }
-        } else {
-            hyp.description = default_desc.str();
-        }
 
-        results.push_back(std::move(hyp));
+            std::set<std::string> seen;
+            std::vector<std::vector<std::string>> unique_paths;
+            for (const auto& path_ids : collected_paths) {
+                std::ostringstream key;
+                for (size_t i = 0; i < path_ids.size(); ++i) {
+                    if (i > 0) key << "->";
+                    key << path_ids[i];
+                }
+                if (seen.insert(key.str()).second) {
+                    unique_paths.push_back(path_ids);
+                }
+            }
+            return unique_paths;
+        };
+
+    for (size_t i = 0; i < seed_nodes.size(); ++i) {
+        for (size_t j = i + 1; j < seed_nodes.size(); ++j) {
+            if (checked >= max_pairs) break;
+            checked++;
+
+            if (checked % 50 == 0 || checked == max_pairs) {
+                int pct = 5 + static_cast<int>(90.0 * checked / std::max<size_t>(1, max_pairs));
+                report_progress("Intersection-constrained traversal", pct, 100);
+            }
+
+            const std::string& a = seed_nodes[i];
+            const std::string& b = seed_nodes[j];
+
+            // Semantically distant only; skip pairs that already co-occur directly.
+            if (index_.get_cooccurrence(a, b) > 0 || nodes_share_edge(graph_, a, b)) {
+                continue;
+            }
+
+            double semantic_similarity = std::clamp(label_token_similarity(graph_, a, b), 0.0, 1.0);
+            double semantic_distance = 1.0 - semantic_similarity;
+            if (semantic_distance < config_.intersection_bridge_min_semantic_distance) {
+                continue;
+            }
+
+            auto shortest_paths = find_shortest_intersection_paths(a, b, k_paths);
+            if (shortest_paths.empty()) {
+                continue;
+            }
+
+            size_t valid_paths = 0;
+            int shortest_len = std::numeric_limits<int>::max();
+            double intersection_sum = 0.0;
+            double grounding_sum = 0.0;
+            double mechanistic_sum = 0.0;
+
+            std::set<std::string> witness_edges_set;
+            std::set<std::string> witness_nodes_set;
+            std::unordered_map<std::string, int> bridge_hits;
+
+            for (const auto& path_edge_ids : shortest_paths) {
+                if (path_edge_ids.empty()) continue;
+                if (static_cast<int>(path_edge_ids.size()) > config_.intersection_bridge_max_hops) continue;
+
+                valid_paths++;
+                shortest_len = std::min(shortest_len, static_cast<int>(path_edge_ids.size()));
+
+                double path_confidence = 0.0;
+                double path_mechanistic = 0.0;
+                double path_intersection = 0.0;
+                size_t pairwise_steps = 0;
+
+                for (size_t p = 0; p < path_edge_ids.size(); ++p) {
+                    const HyperEdge* edge_ptr = graph_.get_hyperedge(path_edge_ids[p]);
+                    if (!edge_ptr) continue;
+                    const HyperEdge& edge = *edge_ptr;
+
+                    path_confidence += std::clamp(edge.confidence, 0.0, 1.0);
+                    if (is_mechanistic_relation_text(edge.relation)) {
+                        path_mechanistic += 1.0;
+                    }
+
+                    if (witness_edges_set.size() < config_.intersection_bridge_max_witness_edges) {
+                        witness_edges_set.insert(edge.id);
+                    }
+
+                    if (witness_nodes_set.size() < config_.intersection_bridge_max_witness_nodes) {
+                        for (const auto& src : edge.sources) {
+                            if (witness_nodes_set.size() >= config_.intersection_bridge_max_witness_nodes) break;
+                            witness_nodes_set.insert(src);
+                        }
+                    }
+                    if (witness_nodes_set.size() < config_.intersection_bridge_max_witness_nodes) {
+                        for (const auto& tgt : edge.targets) {
+                            if (witness_nodes_set.size() >= config_.intersection_bridge_max_witness_nodes) break;
+                            witness_nodes_set.insert(tgt);
+                        }
+                    }
+
+                    if (p + 1 < path_edge_ids.size()) {
+                        const HyperEdge* next_ptr = graph_.get_hyperedge(path_edge_ids[p + 1]);
+                        if (!next_ptr) continue;
+                        const HyperEdge& next_edge = *next_ptr;
+                        auto intersection_nodes = edge.intersection(next_edge);
+                        if (static_cast<int>(intersection_nodes.size()) < min_intersection) {
+                            continue;
+                        }
+                        path_intersection += static_cast<double>(intersection_nodes.size());
+                        pairwise_steps++;
+
+                        for (const auto& node : intersection_nodes) {
+                            bridge_hits[node]++;
+                            if (witness_nodes_set.size() < config_.intersection_bridge_max_witness_nodes) {
+                                witness_nodes_set.insert(node);
+                            }
+                        }
+                    }
+                }
+
+                if (!path_edge_ids.empty()) {
+                    path_confidence /= static_cast<double>(path_edge_ids.size());
+                    path_mechanistic /= static_cast<double>(path_edge_ids.size());
+                }
+
+                double normalized_intersection = 0.0;
+                if (pairwise_steps > 0) {
+                    double avg_intersection = path_intersection / static_cast<double>(pairwise_steps);
+                    normalized_intersection = std::min(
+                        1.0,
+                        avg_intersection / static_cast<double>(std::max(1, min_intersection))
+                    );
+                }
+
+                grounding_sum += path_confidence;
+                mechanistic_sum += path_mechanistic;
+                intersection_sum += normalized_intersection;
+            }
+
+            if (valid_paths == 0 || bridge_hits.empty() || witness_edges_set.empty()) {
+                continue;
+            }
+
+            double path_support = std::min(1.0, static_cast<double>(valid_paths) / static_cast<double>(k_paths));
+            double intersection_strength = intersection_sum / static_cast<double>(valid_paths);
+            double grounding = grounding_sum / static_cast<double>(valid_paths);
+            double mechanistic = mechanistic_sum / static_cast<double>(valid_paths);
+            double parsimony = shortest_len > 0 ? (1.0 / static_cast<double>(shortest_len)) : 0.0;
+
+            double score =
+                0.30 * semantic_distance +
+                0.25 * intersection_strength +
+                0.20 * grounding +
+                0.15 * mechanistic +
+                0.10 * path_support;
+            score = 0.85 * score + 0.15 * parsimony;
+
+            if (score < config_.intersection_bridge_min_score) {
+                continue;
+            }
+
+            std::vector<std::pair<std::string, int>> ranked_bridges(bridge_hits.begin(), bridge_hits.end());
+            std::sort(ranked_bridges.begin(), ranked_bridges.end(),
+                      [](const auto& lhs, const auto& rhs) {
+                          if (lhs.second != rhs.second) return lhs.second > rhs.second;
+                          return lhs.first < rhs.first;
+                      });
+
+            Insight ins;
+            ins.insight_id = make_insight_id(InsightType::HYPOTHESES_2);
+            ins.set_type(InsightType::HYPOTHESES_2);
+            ins.seed_nodes = {a, b};
+
+            std::string label_a = get_node_label(a);
+            std::string label_b = get_node_label(b);
+            ins.seed_labels = {label_a.empty() ? a : label_a, label_b.empty() ? b : label_b};
+
+            auto push_witness_node = [&](const std::string& node_id) {
+                if (ins.witness_nodes.size() >= config_.intersection_bridge_max_witness_nodes) return;
+                if (std::find(ins.witness_nodes.begin(), ins.witness_nodes.end(), node_id) != ins.witness_nodes.end()) return;
+                ins.witness_nodes.push_back(node_id);
+            };
+
+            push_witness_node(a);
+            for (const auto& [bridge_node, _count] : ranked_bridges) {
+                if (bridge_node == a || bridge_node == b) continue;
+                push_witness_node(bridge_node);
+                if (ins.witness_nodes.size() >= config_.intersection_bridge_max_witness_nodes - 1) break;
+            }
+            push_witness_node(b);
+            for (const auto& node : witness_nodes_set) {
+                if (ins.witness_nodes.size() >= config_.intersection_bridge_max_witness_nodes) break;
+                push_witness_node(node);
+            }
+
+            ins.witness_edges.assign(witness_edges_set.begin(), witness_edges_set.end());
+            ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+
+            std::ostringstream desc;
+            desc << "Intersection-constrained mechanistic hypothesis (IS>=" << min_intersection
+                 << "): '" << ins.seed_labels[0] << "' may influence '" << ins.seed_labels[1]
+                 << "' through " << valid_paths << " higher-order pathway(s)";
+            if (!ranked_bridges.empty()) {
+                desc << " via bridge node(s) ";
+                for (size_t r = 0; r < std::min<size_t>(3, ranked_bridges.size()); ++r) {
+                    if (r > 0) desc << ", ";
+                    desc << "'" << get_node_label(ranked_bridges[r].first) << "'";
+                }
+                if (ranked_bridges.size() > 3) desc << " and others";
+            }
+            desc << ".";
+            ins.description = desc.str();
+
+            ins.score_breakdown["semantic_distance"] = semantic_distance;
+            ins.score_breakdown["intersection_strength"] = intersection_strength;
+            ins.score_breakdown["grounding"] = grounding;
+            ins.score_breakdown["mechanistic_support"] = mechanistic;
+            ins.score_breakdown["path_support"] = path_support;
+            ins.score_breakdown["path_parsimony"] = parsimony;
+            ins.score_breakdown["bridge_nodes"] = static_cast<double>(bridge_hits.size());
+            ins.score = score;
+            ins.novelty_tags = {
+                "intersection_bridge",
+                "is>=" + std::to_string(min_intersection),
+                "paths=" + std::to_string(valid_paths)
+            };
+
+            results.push_back(std::move(ins));
+        }
+        if (checked >= max_pairs) break;
     }
 
+    std::sort(results.begin(), results.end(), [](const Insight& lhs, const Insight& rhs) {
+        return lhs.score > rhs.score;
+    });
+    if (results.size() > config_.intersection_bridge_count) {
+        results.resize(config_.intersection_bridge_count);
+    }
+
+    report_progress("Intersection-constrained traversal", 100, 100);
     return results;
 }
 
-// ============== EMBEDDING LINK PREDICTION (TransE) ==============
+// ============== LONG-CHAIN REASONING (MULTI-HOP PATHS) ==============
+std::vector<Insight> DiscoveryEngine::find_long_chains() {
+    std::vector<Insight> results;
+    report_progress("Long-chain reasoning", 0, 100);
+
+    struct EdgeInfo {
+        std::string tgt;
+        std::string edge_id;
+        std::string relation;
+        double confidence;
+    };
+
+    auto normalize_text = [](std::string s) {
+        std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return std::tolower(c); });
+        for (auto& c : s) {
+            if (c == '_' || c == '-') c = ' ';
+        }
+        return s;
+    };
+
+    std::unordered_map<std::string, std::vector<EdgeInfo>> adj;
+    std::unordered_map<std::string, std::string> edge_chunk;
+    std::unordered_map<std::string, double> edge_confidence;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (edge.sources.empty() || edge.targets.empty()) continue;
+        std::string rel = normalize_text(edge.relation);
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                adj[src].push_back(EdgeInfo{tgt, edge.id, rel, edge.confidence});
+                edge_confidence[edge.id] = edge.confidence;
+            }
+        }
+        if (!edge.source_chunk_id.empty()) {
+            edge_chunk[edge.id] = edge.source_chunk_id;
+        }
+    }
+
+    if (adj.empty()) {
+        report_progress("Long-chain reasoning", 100, 100);
+        return results;
+    }
+
+    std::vector<std::string> seeds;
+    if (config_.long_chain_max_seed_nodes > 0) {
+        auto hubs = graph_.get_top_hubs(static_cast<int>(config_.long_chain_max_seed_nodes));
+        for (const auto& [node_id, _] : hubs) {
+            seeds.push_back(node_id);
+        }
+    } else {
+        auto nodes = graph_.get_all_nodes();
+        for (const auto& node : nodes) seeds.push_back(node.id);
+    }
+
+    if (seeds.empty()) {
+        report_progress("Long-chain reasoning", 100, 100);
+        return results;
+    }
+
+    int min_hops = std::max(2, config_.long_chain_min_hops);
+    int max_hops = std::max(min_hops, config_.long_chain_max_hops);
+
+    struct ChainCandidate {
+        std::vector<std::string> nodes;
+        std::vector<std::string> edge_ids;
+        std::vector<std::string> relations;
+        std::string pattern_key;
+        int hops = 0;
+        double avg_confidence = 0.0;
+        double length_score = 0.0;
+        double support = 0.0;
+        double novelty = 0.0;
+        double final_score = 0.0;
+    };
+
+    std::vector<ChainCandidate> candidates;
+    std::unordered_map<std::string, int> pattern_counts;
+    std::unordered_set<std::string> seen_paths;
+
+    auto join_tokens = [](const std::vector<std::string>& parts, const std::string& sep) {
+        std::ostringstream ss;
+        for (size_t i = 0; i < parts.size(); ++i) {
+            if (i > 0) ss << sep;
+            ss << parts[i];
+        }
+        return ss.str();
+    };
+
+    bool stop = false;
+    for (const auto& seed : seeds) {
+        if (stop) break;
+        std::vector<std::string> path_nodes = {seed};
+        std::vector<std::string> path_edges;
+        std::vector<std::string> path_rels;
+        std::unordered_set<std::string> visited = {seed};
+
+        std::function<void(const std::string&)> dfs = [&](const std::string& node) {
+            if (stop) return;
+            if (static_cast<int>(path_rels.size()) >= max_hops) return;
+
+            auto it = adj.find(node);
+            if (it == adj.end()) return;
+            const auto& edges = it->second;
+            size_t degree_checked = 0;
+
+            for (const auto& e : edges) {
+                if (degree_checked++ >= config_.long_chain_degree_cap) break;
+                if (visited.count(e.tgt)) continue;
+
+                visited.insert(e.tgt);
+                path_nodes.push_back(e.tgt);
+                path_edges.push_back(e.edge_id);
+                path_rels.push_back(e.relation);
+
+                int hops = static_cast<int>(path_rels.size());
+                if (hops >= min_hops) {
+                    std::string path_key = join_tokens(path_nodes, "->");
+                    if (seen_paths.insert(path_key).second) {
+                        ChainCandidate cand;
+                        cand.nodes = path_nodes;
+                        cand.edge_ids = path_edges;
+                        cand.relations = path_rels;
+                        cand.hops = hops;
+                        cand.pattern_key = join_tokens(path_rels, "->");
+                        double conf_sum = 0.0;
+                        for (const auto& edge_id : path_edges) {
+                            auto conf_it = edge_confidence.find(edge_id);
+                            if (conf_it != edge_confidence.end()) {
+                                conf_sum += conf_it->second;
+                            }
+                        }
+                        cand.avg_confidence = path_edges.empty() ? 0.0 : (conf_sum / path_edges.size());
+                        pattern_counts[cand.pattern_key]++;
+                        candidates.push_back(std::move(cand));
+                        if (candidates.size() >= config_.long_chain_max_candidates) {
+                            stop = true;
+                        }
+                    }
+                }
+
+                if (!stop) {
+                    dfs(e.tgt);
+                }
+
+                path_rels.pop_back();
+                path_edges.pop_back();
+                path_nodes.pop_back();
+                visited.erase(e.tgt);
+
+                if (stop) break;
+            }
+        };
+
+        dfs(seed);
+    }
+
+    if (candidates.empty()) {
+        report_progress("Long-chain reasoning", 100, 100);
+        return results;
+    }
+
+    int max_pattern = 0;
+    for (const auto& entry : pattern_counts) {
+        if (entry.second > max_pattern) max_pattern = entry.second;
+    }
+
+    for (auto& cand : candidates) {
+        cand.support = (max_pattern > 0) ? static_cast<double>(pattern_counts[cand.pattern_key]) / max_pattern : 0.0;
+        cand.novelty = 1.0 - cand.support;
+        if (max_hops > min_hops) {
+            cand.length_score = static_cast<double>(cand.hops - min_hops + 1) /
+                                static_cast<double>(max_hops - min_hops + 1);
+        } else {
+            cand.length_score = 1.0;
+        }
+
+        cand.final_score =
+            config_.long_chain_weight_confidence * cand.avg_confidence +
+            config_.long_chain_weight_length * cand.length_score +
+            config_.long_chain_weight_novelty * cand.novelty;
+    }
+
+    candidates.erase(std::remove_if(candidates.begin(), candidates.end(),
+        [this](const ChainCandidate& c) {
+            return c.avg_confidence < config_.long_chain_min_avg_confidence;
+        }), candidates.end());
+
+    std::sort(candidates.begin(), candidates.end(), [](const ChainCandidate& a, const ChainCandidate& b) {
+        return a.final_score > b.final_score;
+    });
+
+    size_t limit = std::min(candidates.size(), config_.long_chain_max_candidates);
+    for (size_t i = 0; i < limit; ++i) {
+        const auto& cand = candidates[i];
+        if (cand.nodes.size() < 2) continue;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::LONG_CHAIN);
+        ins.set_type(InsightType::LONG_CHAIN);
+        ins.seed_nodes = {cand.nodes.front(), cand.nodes.back()};
+        ins.seed_labels = {get_node_label(cand.nodes.front()), get_node_label(cand.nodes.back())};
+        ins.witness_nodes = cand.nodes;
+        ins.witness_edges = cand.edge_ids;
+
+        std::ostringstream desc;
+        desc << "Long-chain (" << cand.hops << " hops): ";
+        for (size_t n = 0; n < cand.nodes.size(); ++n) {
+            if (n > 0 && n - 1 < cand.relations.size()) {
+                desc << " --" << cand.relations[n - 1] << "--> ";
+            }
+            desc << "'" << get_node_label(cand.nodes[n]) << "'";
+        }
+        ins.description = desc.str();
+
+        ins.score_breakdown["avg_confidence"] = cand.avg_confidence;
+        ins.score_breakdown["length_score"] = cand.length_score;
+        ins.score_breakdown["pattern_support"] = cand.support;
+        ins.score_breakdown["novelty"] = cand.novelty;
+        ins.score_breakdown["hops"] = static_cast<double>(cand.hops);
+        ins.score = cand.final_score;
+        ins.novelty_tags = {"long_chain", "hops=" + std::to_string(cand.hops)};
+
+        std::unordered_set<std::string> chunks;
+        for (const auto& edge_id : ins.witness_edges) {
+            auto it = edge_chunk.find(edge_id);
+            if (it != edge_chunk.end()) chunks.insert(it->second);
+        }
+        for (const auto& chunk : chunks) ins.evidence_chunk_ids.push_back(chunk);
+
+        results.push_back(std::move(ins));
+    }
+
+    report_progress("Long-chain reasoning", 100, 100);
+    return results;
+}
+
+// ============== HYPOTHESIS SYNTHESIS ==============
 
 // L2 normalize a vector
 void DiscoveryEngine::normalize_vector(std::vector<double>& vec) const {
@@ -4036,7 +4336,7 @@ std::vector<Insight> DiscoveryEngine::find_embedding_links() {
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::EMBEDDING_LINK);
-        ins.type = InsightType::EMBEDDING_LINK;
+        ins.set_type(InsightType::EMBEDDING_LINK);
 
         // Get entity and relation labels
         const std::string& head_id = model.idx_to_entity[pred_triple.head];
@@ -4081,6 +4381,7 @@ std::vector<Insight> DiscoveryEngine::find_embedding_links() {
         }
         ins.witness_nodes = ins.seed_nodes;
         ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
         if (config_.embedding_min_neighbor_overlap > 0.0) {
             auto head_neighbors = collect_neighbors(graph_, head_id, 200);
@@ -4201,7 +4502,7 @@ std::vector<Insight> DiscoveryEngine::find_community_links() {
 
                     Insight ins;
                     ins.insight_id = make_insight_id(InsightType::COMMUNITY_LINK);
-                    ins.type = InsightType::COMMUNITY_LINK;
+                    ins.set_type(InsightType::COMMUNITY_LINK);
                     ins.seed_nodes = {a, b};
                     std::string label_a = get_node_label(a);
                     std::string label_b = get_node_label(b);
@@ -4224,6 +4525,7 @@ std::vector<Insight> DiscoveryEngine::find_community_links() {
                     ins.witness_edges = std::vector<std::string>(witness_set.begin(), witness_set.end());
                     if (ins.witness_edges.size() < 2) continue;
                     ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
 
                     std::stringstream desc;
                     desc << "Community link: " << ins.seed_labels[0] << " <-> " << ins.seed_labels[1]
@@ -4289,12 +4591,13 @@ std::vector<Insight> DiscoveryEngine::find_author_reference_chains() {
 
                 Insight ins;
                 ins.insight_id = make_insight_id(InsightType::AUTHOR_CHAIN);
-                ins.type = InsightType::AUTHOR_CHAIN;
+                ins.set_type(InsightType::AUTHOR_CHAIN);
                 ins.seed_nodes = {author, mid, dst};
                 ins.seed_labels = {get_node_label(author), get_node_label(mid), get_node_label(dst)};
                 ins.witness_edges.assign(witness_set.begin(), witness_set.end());
                 ins.witness_nodes = ins.seed_nodes;
                 ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
                 ins.score_breakdown["support"] =
                     (static_cast<double>(edges_ab.size()) + static_cast<double>(edges_bc.size())) / 2.0;
                 ins.score = ins.score_breakdown["support"];
@@ -4307,6 +4610,1063 @@ std::vector<Insight> DiscoveryEngine::find_author_reference_chains() {
                 }
             }
         }
+    }
+
+    return insights;
+}
+
+// ============== CO-AUTHORSHIP NETWORKS ==============
+std::vector<Insight> DiscoveryEngine::find_co_authorship_networks() {
+    std::vector<Insight> insights;
+
+    // Map: (author1, author2) -> number of shared works/documents
+    std::map<std::pair<std::string, std::string>, int> collaboration_counts;
+    std::map<std::pair<std::string, std::string>, std::vector<std::string>> collaboration_edges;
+    std::map<std::pair<std::string, std::string>, std::vector<std::string>> collaboration_docs;
+
+    // METHOD 1: Explicit co-authorship edges in the graph
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (!looks_like_authorship_relation(edge.relation)) continue;
+
+        // Check for co-authored edges: author1 <-[co-authored]-> author2
+        if (edge.sources.size() >= 2) {
+            for (size_t i = 0; i < edge.sources.size(); ++i) {
+                for (size_t j = i + 1; j < edge.sources.size(); ++j) {
+                    const auto& author1 = edge.sources[i];
+                    const auto& author2 = edge.sources[j];
+                    if (!looks_like_person(get_node_label(author1)) ||
+                        !looks_like_person(get_node_label(author2))) continue;
+
+                    auto key = author1 < author2 ? std::make_pair(author1, author2)
+                                                  : std::make_pair(author2, author1);
+                    collaboration_counts[key]++;
+                    collaboration_edges[key].push_back(edge.id);
+                }
+            }
+        }
+
+        // Check for shared works: both authors connect to same work
+        // author1 -[authored]-> work <-[authored]- author2
+        for (const auto& work : edge.targets) {
+            if (!looks_like_work(get_node_label(work))) continue;
+
+            std::vector<std::string> work_authors;
+            for (const auto& src : edge.sources) {
+                if (looks_like_person(get_node_label(src))) {
+                    work_authors.push_back(src);
+                }
+            }
+
+            for (size_t i = 0; i < work_authors.size(); ++i) {
+                for (size_t j = i + 1; j < work_authors.size(); ++j) {
+                    const auto& author1 = work_authors[i];
+                    const auto& author2 = work_authors[j];
+                    auto key = author1 < author2 ? std::make_pair(author1, author2)
+                                                  : std::make_pair(author2, author1);
+                    collaboration_counts[key]++;
+                    collaboration_edges[key].push_back(edge.id);
+                }
+            }
+        }
+    }
+
+    // METHOD 2: Document co-occurrence (authors appearing together in same chunks)
+    std::unordered_map<std::string, std::unordered_set<std::string>> author_documents;
+
+    // First pass: build author->documents map
+    for (const auto& edge : graph_.get_all_edges()) {
+        for (const auto& src : edge.sources) {
+            if (looks_like_person(get_node_label(src))) {
+                // Get chunk IDs for this edge to determine documents
+                auto chunks = get_chunk_ids({edge.id});
+                for (const auto& chunk : chunks) {
+                    author_documents[src].insert(chunk);
+                }
+            }
+        }
+        for (const auto& tgt : edge.targets) {
+            if (looks_like_person(get_node_label(tgt))) {
+                auto chunks = get_chunk_ids({edge.id});
+                for (const auto& chunk : chunks) {
+                    author_documents[tgt].insert(chunk);
+                }
+            }
+        }
+    }
+
+    // Second pass: find co-authorship (authors appearing in same documents)
+    std::vector<std::string> authors;
+    for (const auto& [author, docs] : author_documents) {
+        authors.push_back(author);
+    }
+
+    for (size_t i = 0; i < authors.size(); ++i) {
+        for (size_t j = i + 1; j < authors.size(); ++j) {
+            const auto& author1 = authors[i];
+            const auto& author2 = authors[j];
+            const auto& docs1 = author_documents[author1];
+            const auto& docs2 = author_documents[author2];
+
+            // Find shared documents
+            std::vector<std::string> shared_docs;
+            for (const auto& doc : docs1) {
+                if (docs2.find(doc) != docs2.end()) {
+                    shared_docs.push_back(doc);
+                }
+            }
+
+            if (shared_docs.size() > 0) {
+                auto key = author1 < author2 ? std::make_pair(author1, author2)
+                                              : std::make_pair(author2, author1);
+                collaboration_counts[key] += static_cast<int>(shared_docs.size());
+                collaboration_docs[key] = shared_docs;
+            }
+        }
+    }
+
+    // Sort by collaboration strength
+    std::vector<std::pair<std::pair<std::string, std::string>, int>> sorted_collabs(
+        collaboration_counts.begin(), collaboration_counts.end());
+    std::sort(sorted_collabs.begin(), sorted_collabs.end(),
+              [](const auto& a, const auto& b) { return a.second > b.second; });
+
+    // Generate insights for top collaborations
+    for (const auto& [author_pair, count] : sorted_collabs) {
+        if (count < config_.co_authorship_min_collaborations) continue;
+        if (insights.size() >= config_.co_authorship_max_candidates) break;
+
+        const auto& author1 = author_pair.first;
+        const auto& author2 = author_pair.second;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CO_AUTHORSHIP);
+        ins.set_type(InsightType::CO_AUTHORSHIP);
+        ins.seed_nodes = {author1, author2};
+        ins.seed_labels = {get_node_label(author1), get_node_label(author2)};
+
+        // Add witness edges from graph
+        if (collaboration_edges.find(author_pair) != collaboration_edges.end()) {
+            ins.witness_edges = collaboration_edges[author_pair];
+        }
+
+        // Add evidence from documents
+        if (collaboration_docs.find(author_pair) != collaboration_docs.end()) {
+            ins.evidence_chunk_ids = collaboration_docs[author_pair];
+        }
+
+        ins.score_breakdown["collaborations"] = static_cast<double>(count);
+        ins.score = std::min(static_cast<double>(count) / 5.0, 1.0); // Normalize score
+        ins.description = "Co-authors: " + ins.seed_labels[0] + " & " +
+                         ins.seed_labels[1] + " (" + std::to_string(count) + " joint works)";
+
+        insights.push_back(std::move(ins));
+    }
+
+    return insights;
+}
+
+// ============== CITATION IMPACT ANALYSIS ==============
+std::vector<Insight> DiscoveryEngine::find_citation_impact() {
+    std::vector<Insight> insights;
+
+    // Map: author/work -> incoming citation/authorship count
+    std::unordered_map<std::string, int> impact_counts;
+    std::unordered_map<std::string, std::vector<std::string>> contributors;  // citers or authors
+    std::unordered_map<std::string, std::string> impact_type;  // "citations" or "authorships"
+
+    // Count incoming citations
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (looks_like_reference_relation(edge.relation)) {
+            // edge.sources cite edge.targets
+            for (const auto& cited : edge.targets) {
+                if (looks_like_person(get_node_label(cited)) || looks_like_work(get_node_label(cited))) {
+                    impact_counts[cited]++;
+                    impact_type[cited] = "citations";
+                    for (const auto& citer : edge.sources) {
+                        if (looks_like_person(get_node_label(citer))) {
+                            contributors[cited].push_back(citer);
+                        }
+                    }
+                }
+            }
+        }
+        // Also count authorship relations (highly authored works = influential)
+        else if (looks_like_authorship_relation(edge.relation)) {
+            // edge.sources authored edge.targets
+            for (const auto& work : edge.targets) {
+                if (looks_like_work(get_node_label(work))) {
+                    impact_counts[work]++;
+                    if (impact_type.find(work) == impact_type.end()) {
+                        impact_type[work] = "authorships";
+                    }
+                    for (const auto& author : edge.sources) {
+                        if (looks_like_person(get_node_label(author))) {
+                            contributors[work].push_back(author);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Sort by impact count
+    std::vector<std::pair<std::string, int>> sorted_impact(
+        impact_counts.begin(), impact_counts.end());
+    std::sort(sorted_impact.begin(), sorted_impact.end(),
+              [](const auto& a, const auto& b) { return a.second > b.second; });
+
+    // Generate insights for highly cited/authored entities
+    size_t count = 0;
+    for (const auto& [entity_id, impact_count] : sorted_impact) {
+        if (count >= config_.citation_impact_top_k) break;
+        if (impact_count < config_.citation_impact_min_citations) continue;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CITATION_IMPACT);
+        ins.set_type(InsightType::CITATION_IMPACT);
+        ins.seed_nodes = {entity_id};
+        ins.seed_labels = {get_node_label(entity_id)};
+
+        // Add citing authors or authors as witness nodes
+        if (contributors.find(entity_id) != contributors.end()) {
+            const auto& contribs = contributors[entity_id];
+            ins.witness_nodes.assign(contribs.begin(), contribs.end());
+            // Limit to top 10 for description
+            size_t max_contribs = std::min(size_t(10), contribs.size());
+            for (size_t i = 0; i < max_contribs; ++i) {
+                ins.seed_labels.push_back(get_node_label(contribs[i]));
+            }
+        }
+
+        std::string metric_type = impact_type[entity_id];  // "citations" or "authorships"
+        ins.score_breakdown[metric_type] = static_cast<double>(impact_count);
+        ins.score = std::min(static_cast<double>(impact_count) / 10.0, 1.0); // Normalize score
+
+        std::string entity_type = looks_like_person(get_node_label(entity_id)) ? "Author" : "Work";
+        ins.description = entity_type + ": " + get_node_label(entity_id) +
+                         " (" + std::to_string(impact_count) + " " + metric_type + ")";
+
+        insights.push_back(std::move(ins));
+        count++;
+    }
+
+    return insights;
+}
+
+// ============== MULTI-RESOLUTION COMMUNITY DETECTION ==============
+std::vector<Insight> DiscoveryEngine::find_multi_resolution_communities() {
+    std::vector<Insight> insights;
+
+    // Build node-to-node projected graph from hypergraph
+    std::unordered_map<std::string, std::unordered_set<std::string>> adjacency;
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::vector<std::string> all_nodes;
+        all_nodes.insert(all_nodes.end(), edge.sources.begin(), edge.sources.end());
+        all_nodes.insert(all_nodes.end(), edge.targets.begin(), edge.targets.end());
+
+        for (size_t i = 0; i < all_nodes.size(); ++i) {
+            for (size_t j = i + 1; j < all_nodes.size(); ++j) {
+                adjacency[all_nodes[i]].insert(all_nodes[j]);
+                adjacency[all_nodes[j]].insert(all_nodes[i]);
+            }
+        }
+    }
+
+    if (adjacency.empty()) return insights;
+
+    // Store communities at each resolution level
+    struct CommunityLevel {
+        double resolution;
+        std::unordered_map<std::string, int> node_to_community;
+        std::map<int, std::vector<std::string>> community_members;
+        int num_communities;
+    };
+
+    std::vector<CommunityLevel> levels;
+
+    // Run community detection at multiple resolutions
+    for (double resolution : config_.multi_resolution_scales) {
+        CommunityLevel level;
+        level.resolution = resolution;
+
+        // Simple modularity-based community detection (simplified Louvain)
+        // Initialize: each node in its own community
+        int next_community_id = 0;
+        for (const auto& [node, neighbors] : adjacency) {
+            level.node_to_community[node] = next_community_id++;
+        }
+
+        // Iteratively merge communities to maximize modularity (simplified)
+        bool changed = true;
+        int iterations = 0;
+        while (changed && iterations < 10) {
+            changed = false;
+            for (const auto& [node, neighbors] : adjacency) {
+                // Find best community for this node
+                std::map<int, int> community_links;
+                for (const auto& neighbor : neighbors) {
+                    if (level.node_to_community.find(neighbor) != level.node_to_community.end()) {
+                        community_links[level.node_to_community[neighbor]]++;
+                    }
+                }
+
+                // Move to community with most links (weighted by resolution)
+                int best_community = level.node_to_community[node];
+                int best_links = 0;
+                for (const auto& [comm_id, link_count] : community_links) {
+                    if (link_count > best_links) {
+                        best_links = link_count;
+                        best_community = comm_id;
+                    }
+                }
+
+                if (best_community != level.node_to_community[node]) {
+                    level.node_to_community[node] = best_community;
+                    changed = true;
+                }
+            }
+            iterations++;
+        }
+
+        // Build community member lists
+        for (const auto& [node, comm_id] : level.node_to_community) {
+            level.community_members[comm_id].push_back(node);
+        }
+
+        // Remove small communities
+        for (auto it = level.community_members.begin(); it != level.community_members.end(); ) {
+            if (it->second.size() < config_.multi_resolution_min_community_size) {
+                it = level.community_members.erase(it);
+            } else {
+                ++it;
+            }
+        }
+
+        level.num_communities = static_cast<int>(level.community_members.size());
+        levels.push_back(level);
+    }
+
+    // Generate insights showing hierarchical structure
+    for (size_t i = 0; i < levels.size(); ++i) {
+        const auto& level = levels[i];
+
+        for (const auto& [comm_id, members] : level.community_members) {
+            if (insights.size() >= config_.multi_resolution_max_levels) break;
+
+            Insight ins;
+            ins.insight_id = make_insight_id(InsightType::MULTI_RESOLUTION_COMMUNITY);
+            ins.set_type(InsightType::MULTI_RESOLUTION_COMMUNITY);
+
+            // Sample up to 10 members
+            size_t sample_size = std::min(size_t(10), members.size());
+            for (size_t j = 0; j < sample_size; ++j) {
+                ins.seed_nodes.push_back(members[j]);
+                ins.seed_labels.push_back(get_node_label(members[j]));
+            }
+
+            ins.score_breakdown["resolution"] = level.resolution;
+            ins.score_breakdown["size"] = static_cast<double>(members.size());
+            ins.score_breakdown["level"] = static_cast<double>(i);
+            ins.score = std::min(static_cast<double>(members.size()) / 20.0, 1.0);
+
+            ins.description = "Community at resolution " + std::to_string(level.resolution) +
+                            " with " + std::to_string(members.size()) + " members";
+
+            insights.push_back(std::move(ins));
+        }
+    }
+
+    return insights;
+}
+
+// ============== CROSS-COMMUNITY BRIDGE MAPPING ==============
+std::vector<Insight> DiscoveryEngine::find_cross_community_bridge_maps(const InsightCollection& collection) {
+    std::vector<Insight> insights;
+
+    // Extract bridges from previous insights
+    std::unordered_set<std::string> bridge_nodes;
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::BRIDGE || insight.type == InsightType::DOMAIN_BRIDGE) {
+            for (const auto& node : insight.seed_nodes) {
+                bridge_nodes.insert(node);
+            }
+        }
+    }
+
+    if (bridge_nodes.empty()) return insights;
+
+    // Extract community assignments from previous insights
+    std::unordered_map<std::string, std::unordered_set<int>> node_to_communities;
+    int insight_idx = 0;
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::COMMUNITY_DETECTION ||
+            insight.type == InsightType::MULTI_RESOLUTION_COMMUNITY) {
+            for (const auto& node : insight.seed_nodes) {
+                node_to_communities[node].insert(insight_idx);
+            }
+            insight_idx++;
+        }
+    }
+
+    // Map bridges to communities they connect
+    for (const auto& bridge : bridge_nodes) {
+        // Find neighbors of this bridge
+        std::unordered_set<int> connected_communities;
+
+        for (const auto& edge : graph_.get_all_edges()) {
+            bool bridge_in_sources = std::find(edge.sources.begin(), edge.sources.end(), bridge) != edge.sources.end();
+            bool bridge_in_targets = std::find(edge.targets.begin(), edge.targets.end(), bridge) != edge.targets.end();
+
+            if (!bridge_in_sources && !bridge_in_targets) continue;
+
+            // Find communities of connected nodes
+            for (const auto& src : edge.sources) {
+                if (src != bridge && node_to_communities.find(src) != node_to_communities.end()) {
+                    for (int comm_id : node_to_communities[src]) {
+                        connected_communities.insert(comm_id);
+                    }
+                }
+            }
+            for (const auto& tgt : edge.targets) {
+                if (tgt != bridge && node_to_communities.find(tgt) != node_to_communities.end()) {
+                    for (int comm_id : node_to_communities[tgt]) {
+                        connected_communities.insert(comm_id);
+                    }
+                }
+            }
+        }
+
+        if (connected_communities.size() >= config_.cross_community_bridge_map_min_communities) {
+            Insight ins;
+            ins.insight_id = make_insight_id(InsightType::CROSS_COMMUNITY_BRIDGE_MAP);
+            ins.set_type(InsightType::CROSS_COMMUNITY_BRIDGE_MAP);
+            ins.seed_nodes = {bridge};
+            ins.seed_labels = {get_node_label(bridge)};
+
+            ins.score_breakdown["communities_connected"] = static_cast<double>(connected_communities.size());
+            ins.score = std::min(static_cast<double>(connected_communities.size()) / 5.0, 1.0);
+
+            ins.description = "Bridge '" + get_node_label(bridge) + "' connects " +
+                            std::to_string(connected_communities.size()) + " communities";
+
+            insights.push_back(std::move(ins));
+
+            if (insights.size() >= config_.cross_community_bridge_map_max_candidates) break;
+        }
+    }
+
+    return insights;
+}
+
+// ============== META-PATTERN DISCOVERY ==============
+std::vector<Insight> DiscoveryEngine::find_meta_patterns(const InsightCollection& collection) {
+    std::vector<Insight> insights;
+
+    // Extract existing patterns (motifs, k-truss)
+    struct Pattern {
+        std::vector<std::string> nodes;
+        std::string type;
+        int size;
+    };
+
+    std::vector<Pattern> patterns;
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::MOTIF || insight.type == InsightType::K_TRUSS) {
+            Pattern p;
+            p.nodes = insight.seed_nodes;
+            p.type = insight_type_to_string(insight.type);
+            p.size = static_cast<int>(insight.seed_nodes.size());
+            patterns.push_back(p);
+        }
+    }
+
+    if (patterns.size() < config_.meta_pattern_min_occurrences) return insights;
+
+    // Group patterns by size
+    std::map<int, std::vector<Pattern>> patterns_by_size;
+    for (const auto& pattern : patterns) {
+        patterns_by_size[pattern.size].push_back(pattern);
+    }
+
+    // Find structural similarities (simplified: same size patterns)
+    for (const auto& [size, size_patterns] : patterns_by_size) {
+        if (size_patterns.size() < config_.meta_pattern_min_occurrences) continue;
+        if (size > static_cast<int>(config_.meta_pattern_max_size)) continue;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::META_PATTERN);
+        ins.set_type(InsightType::META_PATTERN);
+
+        // Sample representative patterns
+        size_t sample_size = std::min(size_t(5), size_patterns.size());
+        for (size_t i = 0; i < sample_size; ++i) {
+            for (const auto& node : size_patterns[i].nodes) {
+                if (ins.seed_nodes.size() < 20) {  // Limit total nodes
+                    ins.seed_nodes.push_back(node);
+                    ins.seed_labels.push_back(get_node_label(node));
+                }
+            }
+        }
+
+        ins.score_breakdown["occurrences"] = static_cast<double>(size_patterns.size());
+        ins.score_breakdown["pattern_size"] = static_cast<double>(size);
+        ins.score = std::min(static_cast<double>(size_patterns.size()) / 10.0, 1.0);
+
+        ins.description = "Meta-pattern: " + std::to_string(size_patterns.size()) +
+                        " similar " + std::to_string(size) + "-node structures detected";
+
+        insights.push_back(std::move(ins));
+
+        if (insights.size() >= config_.meta_pattern_max_patterns) break;
+    }
+
+    return insights;
+}
+
+// ============== BRIDGE ANALOGY GENERATION ==============
+std::vector<Insight> DiscoveryEngine::find_bridge_analogies(const InsightCollection& collection) {
+    std::vector<Insight> insights;
+
+    // Extract bridges and communities from previous insights
+    std::vector<std::string> bridge_entities;
+    std::map<std::string, std::set<std::string>> bridge_to_communities;
+    std::map<std::string, std::set<std::string>> community_members;
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::BRIDGE) {
+            if (!insight.seed_nodes.empty()) {
+                bridge_entities.push_back(insight.seed_nodes[0]);
+            }
+        }
+        if (insight.type == InsightType::CROSS_COMMUNITY_BRIDGE_MAP) {
+            if (!insight.seed_nodes.empty()) {
+                std::string bridge = insight.seed_nodes[0];
+                // Extract community IDs from score_breakdown or novelty_tags
+                for (const auto& tag : insight.novelty_tags) {
+                    if (tag.find("community_") == 0) {
+                        bridge_to_communities[bridge].insert(tag);
+                    }
+                }
+            }
+        }
+        if (insight.type == InsightType::COMMUNITY_DETECTION) {
+            // Community members are in seed_nodes
+            std::string community_id = "community_" + std::to_string(community_members.size());
+            for (const auto& member : insight.seed_nodes) {
+                community_members[community_id].insert(member);
+            }
+        }
+    }
+
+    if (bridge_entities.empty()) {
+        return insights; // No bridges found
+    }
+
+    // For each bridge, analyze relation patterns across connected communities
+    struct RelationPattern {
+        std::string relation_type;
+        std::vector<std::string> source_nodes;
+        std::vector<std::string> target_nodes;
+        std::string community_id;
+    };
+
+    std::map<std::string, std::vector<RelationPattern>> bridge_patterns;
+
+    for (const auto& bridge : bridge_entities) {
+        const auto* bridge_node = graph_.get_node(bridge);
+        if (!bridge_node) continue;
+
+        // Get all edges involving this bridge
+        std::map<std::string, std::vector<RelationPattern>> patterns_by_community;
+
+        for (const auto& edge_id : bridge_node->incident_edges) {
+            const auto* edge = graph_.get_hyperedge(edge_id);
+            if (!edge) continue;
+
+            // Determine which entities in this edge belong to which communities
+            for (const auto& [comm_id, members] : community_members) {
+                bool bridge_in_sources = false;
+                bool bridge_in_targets = false;
+
+                for (const auto& src : edge->sources) {
+                    if (src == bridge) bridge_in_sources = true;
+                }
+                for (const auto& tgt : edge->targets) {
+                    if (tgt == bridge) bridge_in_targets = true;
+                }
+
+                if (bridge_in_sources || bridge_in_targets) {
+                    RelationPattern pattern;
+                    pattern.relation_type = edge->relation;
+                    pattern.source_nodes = edge->sources;
+                    pattern.target_nodes = edge->targets;
+                    pattern.community_id = comm_id;
+                    patterns_by_community[comm_id].push_back(pattern);
+                }
+            }
+        }
+
+        bridge_patterns[bridge] = {};
+        for (const auto& [comm, patterns] : patterns_by_community) {
+            for (const auto& p : patterns) {
+                bridge_patterns[bridge].push_back(p);
+            }
+        }
+    }
+
+    // Generate analogies by finding shared relation patterns
+    int analogy_count = 0;
+    for (const auto& bridge : bridge_entities) {
+        if (analogy_count >= static_cast<int>(config_.bridge_analogy_max_candidates)) break;
+
+        const auto& patterns = bridge_patterns[bridge];
+        if (patterns.size() < 2) continue;
+
+        // Group patterns by relation type
+        std::map<std::string, std::vector<RelationPattern>> by_relation;
+        for (const auto& pattern : patterns) {
+            by_relation[pattern.relation_type].push_back(pattern);
+        }
+
+        // For each relation type, find cross-community analogies
+        for (const auto& [relation_type, rel_patterns] : by_relation) {
+            if (rel_patterns.size() < config_.bridge_analogy_min_shared_patterns) continue;
+
+            // Find patterns from different communities
+            for (size_t i = 0; i < rel_patterns.size() && i < 3; ++i) {
+                for (size_t j = i + 1; j < rel_patterns.size() && j < 4; ++j) {
+                    if (rel_patterns[i].community_id == rel_patterns[j].community_id) continue;
+
+                    // Create analogy insight
+                    Insight ins;
+                    ins.insight_id = make_insight_id(InsightType::ANALOGICAL_TRANSFER);
+                    ins.set_type(InsightType::ANALOGICAL_TRANSFER);
+
+                    // Collect unique entities from both patterns
+                    std::set<std::string> all_entities;
+                    for (const auto& src : rel_patterns[i].source_nodes) all_entities.insert(src);
+                    for (const auto& tgt : rel_patterns[i].target_nodes) all_entities.insert(tgt);
+                    for (const auto& src : rel_patterns[j].source_nodes) all_entities.insert(src);
+                    for (const auto& tgt : rel_patterns[j].target_nodes) all_entities.insert(tgt);
+
+                    for (const auto& e : all_entities) {
+                        if (ins.seed_nodes.size() < 10) {  // Limit entities
+                            ins.seed_nodes.push_back(e);
+                            ins.seed_labels.push_back(get_node_label(e));
+                        }
+                    }
+
+                    // Score based on pattern complexity and bridging strength
+                    double complexity_score = std::min(1.0, all_entities.size() / 8.0);
+                    double pattern_score = std::min(1.0, by_relation.size() / 3.0);
+                    ins.score = (complexity_score + pattern_score) / 2.0;
+
+                    if (ins.score < config_.bridge_analogy_min_confidence) continue;
+
+                    ins.score_breakdown["complexity"] = complexity_score;
+                    ins.score_breakdown["pattern_strength"] = pattern_score;
+                    ins.score_breakdown["shared_patterns"] = static_cast<double>(by_relation.size());
+
+                    ins.novelty_tags = {"bridge_analogy", "bridge=" + bridge, "relation=" + relation_type};
+
+                    // Generate description
+                    std::string domain_a = rel_patterns[i].community_id;
+                    std::string domain_b = rel_patterns[j].community_id;
+
+                    std::ostringstream desc;
+                    desc << "Bridge analogy via '" << get_node_label(bridge) << "': ";
+                    desc << "In " << domain_a << ", entities use '" << relation_type << "' relations. ";
+                    desc << "Similarly, in " << domain_b << ", entities also use '" << relation_type << "' relations. ";
+                    desc << "This cross-domain pattern suggests analogical reasoning: ";
+                    desc << "if X " << relation_type << " Y in " << domain_a << ", ";
+                    desc << "then similar entities might " << relation_type << " in " << domain_b << ".";
+
+                    ins.description = desc.str();
+
+                    insights.push_back(std::move(ins));
+                    analogy_count++;
+
+                    if (analogy_count >= static_cast<int>(config_.bridge_analogy_max_candidates)) break;
+                }
+                if (analogy_count >= static_cast<int>(config_.bridge_analogy_max_candidates)) break;
+            }
+            if (analogy_count >= static_cast<int>(config_.bridge_analogy_max_candidates)) break;
+        }
+    }
+
+    return insights;
+}
+
+// ============== BIAS AUDIT ==============
+std::vector<Insight> DiscoveryEngine::compute_bias_audit(const InsightCollection& collection) {
+    std::vector<Insight> insights;
+
+    if (collection.insights.size() < config_.bias_audit_min_insights) {
+        // Not enough data for meaningful audit
+        return insights;
+    }
+
+    // ===== 1. Source Document Distribution Analysis =====
+    std::map<std::string, int> source_counts;
+    std::map<std::string, std::set<InsightType>> source_insight_types;
+
+    for (const auto& insight : collection.insights) {
+        for (const auto& source : insight.source_documents) {
+            source_counts[source]++;
+            source_insight_types[source].insert(insight.type);
+        }
+    }
+
+    // Calculate statistics
+    double total_citations = 0;
+    for (const auto& [source, count] : source_counts) {
+        total_citations += count;
+    }
+    double mean_citations = total_citations / source_counts.size();
+
+    // Calculate Gini coefficient (inequality measure)
+    std::vector<int> sorted_counts;
+    for (const auto& [source, count] : source_counts) {
+        sorted_counts.push_back(count);
+    }
+    std::sort(sorted_counts.begin(), sorted_counts.end());
+
+    double gini = 0.0;
+    double sum_of_ranks = 0.0;
+    for (size_t i = 0; i < sorted_counts.size(); ++i) {
+        sum_of_ranks += (i + 1) * sorted_counts[i];
+    }
+    if (total_citations > 0) {
+        gini = (2.0 * sum_of_ranks) / (sorted_counts.size() * total_citations) -
+               (sorted_counts.size() + 1.0) / sorted_counts.size();
+    }
+
+    // ===== 2. Insight Type Distribution Analysis =====
+    std::map<InsightType, int> type_counts;
+    for (const auto& insight : collection.insights) {
+        type_counts[insight.type]++;
+    }
+
+    // ===== 3. Entity Coverage Analysis =====
+    std::map<std::string, int> entity_mentions;
+    for (const auto& insight : collection.insights) {
+        for (const auto& entity : insight.seed_nodes) {
+            entity_mentions[entity]++;
+        }
+    }
+
+    double total_entity_mentions = 0;
+    for (const auto& [entity, count] : entity_mentions) {
+        total_entity_mentions += count;
+    }
+    double mean_entity_mentions = total_entity_mentions / entity_mentions.size();
+
+    // ===== 4. Generate Bias Audit Insight =====
+    Insight audit;
+    audit.insight_id = make_insight_id(InsightType::BIAS_AUDIT);
+    audit.set_type(InsightType::BIAS_AUDIT);
+    audit.score = 1.0 - gini; // Higher score = better fairness (lower inequality)
+
+    // Store metrics in score_breakdown
+    audit.score_breakdown["gini_coefficient"] = gini;
+    audit.score_breakdown["source_diversity"] = static_cast<double>(source_counts.size());
+    audit.score_breakdown["mean_citations_per_source"] = mean_citations;
+    audit.score_breakdown["total_sources"] = static_cast<double>(source_counts.size());
+    audit.score_breakdown["total_insights"] = static_cast<double>(collection.insights.size());
+    audit.score_breakdown["entity_diversity"] = static_cast<double>(entity_mentions.size());
+    audit.score_breakdown["mean_entity_mentions"] = mean_entity_mentions;
+
+    // Identify over-represented sources
+    std::vector<std::string> over_represented;
+    std::vector<std::string> under_represented;
+
+    for (const auto& [source, count] : source_counts) {
+        if (count > mean_citations * config_.bias_audit_overrepresentation_threshold) {
+            over_represented.push_back(source);
+            audit.score_breakdown["overrep_" + source] = static_cast<double>(count);
+        }
+        if (count < mean_citations / config_.bias_audit_overrepresentation_threshold) {
+            under_represented.push_back(source);
+            audit.score_breakdown["underrep_" + source] = static_cast<double>(count);
+        }
+    }
+
+    // Identify over-represented entities
+    std::vector<std::string> dominant_entities;
+    for (const auto& [entity, count] : entity_mentions) {
+        if (count > mean_entity_mentions * config_.bias_audit_overrepresentation_threshold) {
+            dominant_entities.push_back(entity);
+            if (dominant_entities.size() < 10) {  // Limit to top 10
+                audit.seed_nodes.push_back(entity);
+                audit.seed_labels.push_back(get_node_label(entity));
+            }
+        }
+    }
+
+    // Build description
+    std::ostringstream desc;
+    desc << "Bias Audit: Analyzed " << collection.insights.size() << " insights across "
+         << source_counts.size() << " source documents. ";
+
+    // Gini interpretation
+    if (gini < 0.3) {
+        desc << "Distribution is relatively balanced (Gini: " << std::fixed << std::setprecision(2) << gini << "). ";
+    } else if (gini < 0.5) {
+        desc << "Distribution shows moderate inequality (Gini: " << std::fixed << std::setprecision(2) << gini << "). ";
+    } else {
+        desc << "Distribution shows high inequality (Gini: " << std::fixed << std::setprecision(2) << gini << "). ";
+    }
+
+    // Over-representation warnings
+    if (!over_represented.empty()) {
+        desc << over_represented.size() << " source(s) are over-represented (>"
+             << std::fixed << std::setprecision(1) << config_.bias_audit_overrepresentation_threshold
+             << "x mean): ";
+        for (size_t i = 0; i < std::min(size_t(3), over_represented.size()); ++i) {
+            if (i > 0) desc << ", ";
+            desc << over_represented[i] << " (" << source_counts[over_represented[i]] << " insights)";
+        }
+        if (over_represented.size() > 3) {
+            desc << " and " << (over_represented.size() - 3) << " others";
+        }
+        desc << ". ";
+    }
+
+    // Under-representation warnings
+    if (!under_represented.empty() && under_represented.size() > source_counts.size() / 4) {
+        desc << under_represented.size() << " source(s) are under-represented (<"
+             << std::fixed << std::setprecision(1) << (1.0 / config_.bias_audit_overrepresentation_threshold)
+             << "x mean). ";
+    }
+
+    // Entity concentration
+    if (!dominant_entities.empty()) {
+        desc << dominant_entities.size() << " entities dominate the insights (>"
+             << std::fixed << std::setprecision(1) << config_.bias_audit_overrepresentation_threshold
+             << "x mean mentions): ";
+        for (size_t i = 0; i < std::min(size_t(5), dominant_entities.size()); ++i) {
+            if (i > 0) desc << ", ";
+            desc << get_node_label(dominant_entities[i]);
+        }
+        if (dominant_entities.size() > 5) {
+            desc << " and " << (dominant_entities.size() - 5) << " others";
+        }
+        desc << ". ";
+    }
+
+    // Recommendations
+    desc << "Recommendation: ";
+    if (gini > 0.5) {
+        desc << "Consider weighting insights inversely by source frequency to balance representation. ";
+    }
+    if (!over_represented.empty()) {
+        desc << "Validate that over-represented sources reflect true importance rather than sampling bias. ";
+    }
+    if (dominant_entities.size() > entity_mentions.size() / 10) {
+        desc << "High entity concentration suggests narrow focus; consider broadening extraction scope.";
+    } else {
+        desc << "Distribution is reasonable; no major bias concerns detected.";
+    }
+
+    audit.description = desc.str();
+    audit.novelty_tags = {"bias_audit", "fairness", "representation_analysis"};
+
+    insights.push_back(std::move(audit));
+    return insights;
+}
+
+// ============== COMMUNITY RECOMMENDATIONS ==============
+std::vector<Insight> DiscoveryEngine::generate_community_recommendations(const InsightCollection& collection) {
+    std::vector<Insight> insights;
+
+    // Extract community assignments from previous insights
+    std::map<std::string, std::string> entity_to_community;
+    std::map<std::string, std::set<std::string>> community_members;
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::COMMUNITY_DETECTION) {
+            // Community ID from insight
+            std::string community_id = "comm_" + std::to_string(community_members.size());
+            for (const auto& entity : insight.seed_nodes) {
+                entity_to_community[entity] = community_id;
+                community_members[community_id].insert(entity);
+            }
+        }
+    }
+
+    if (entity_to_community.empty()) {
+        // No community structure available
+        return insights;
+    }
+
+    // Build entity similarity scores based on shared edges
+    std::map<std::string, std::map<std::string, double>> entity_similarity;
+
+    auto all_nodes = graph_.get_all_nodes();
+    for (const auto& node1 : all_nodes) {
+        std::set<std::string> neighbors1;
+        for (const auto& edge_id : node1.incident_edges) {
+            const auto* edge = graph_.get_hyperedge(edge_id);
+            if (edge) {
+                for (const auto& src : edge->sources) neighbors1.insert(src);
+                for (const auto& tgt : edge->targets) neighbors1.insert(tgt);
+            }
+        }
+
+        for (const auto& node2 : all_nodes) {
+            if (node1.id == node2.id) continue;
+
+            std::set<std::string> neighbors2;
+            for (const auto& edge_id : node2.incident_edges) {
+                const auto* edge = graph_.get_hyperedge(edge_id);
+                if (edge) {
+                    for (const auto& src : edge->sources) neighbors2.insert(src);
+                    for (const auto& tgt : edge->targets) neighbors2.insert(tgt);
+                }
+            }
+
+            // Jaccard similarity of neighborhoods
+            std::set<std::string> intersection;
+            std::set_intersection(neighbors1.begin(), neighbors1.end(),
+                                neighbors2.begin(), neighbors2.end(),
+                                std::inserter(intersection, intersection.begin()));
+
+            std::set<std::string> union_set;
+            std::set_union(neighbors1.begin(), neighbors1.end(),
+                         neighbors2.begin(), neighbors2.end(),
+                         std::inserter(union_set, union_set.begin()));
+
+            double similarity = union_set.empty() ? 0.0 :
+                              static_cast<double>(intersection.size()) / union_set.size();
+
+            if (similarity >= config_.community_recommendation_min_similarity) {
+                entity_similarity[node1.id][node2.id] = similarity;
+            }
+        }
+    }
+
+    // Generate recommendations for top entities (by degree)
+    std::vector<std::pair<std::string, int>> entity_degrees;
+    for (const auto& node : all_nodes) {
+        entity_degrees.push_back({node.id, static_cast<int>(node.incident_edges.size())});
+    }
+    std::sort(entity_degrees.begin(), entity_degrees.end(),
+             [](const auto& a, const auto& b) { return a.second > b.second; });
+
+    // Recommend for top entities
+    size_t max_seed_entities = std::min(size_t(20), entity_degrees.size());
+    for (size_t i = 0; i < max_seed_entities; ++i) {
+        const std::string& seed_entity = entity_degrees[i].first;
+
+        auto it_comm = entity_to_community.find(seed_entity);
+        if (it_comm == entity_to_community.end()) continue;
+
+        std::string seed_community = it_comm->second;
+
+        // Collect recommendations with scores
+        struct Recommendation {
+            std::string entity;
+            double similarity;
+            bool same_community;
+            double final_score;
+        };
+        std::vector<Recommendation> recommendations;
+
+        for (const auto& [other_entity, sim] : entity_similarity[seed_entity]) {
+            auto it_other = entity_to_community.find(other_entity);
+            bool same_comm = (it_other != entity_to_community.end() &&
+                            it_other->second == seed_community);
+
+            // Score: combine similarity + novelty bonus for cross-community
+            double novelty_bonus = same_comm ? 0.0 : config_.community_recommendation_novelty_weight;
+            double final_score = sim * (1.0 + novelty_bonus);
+
+            recommendations.push_back({other_entity, sim, same_comm, final_score});
+        }
+
+        // Sort by final score
+        std::sort(recommendations.begin(), recommendations.end(),
+                 [](const auto& a, const auto& b) { return a.final_score > b.final_score; });
+
+        // Create insight for this entity
+        if (recommendations.empty()) continue;
+
+        Insight rec;
+        rec.insight_id = make_insight_id(InsightType::COMMUNITY_RECOMMENDATION);
+        rec.set_type(InsightType::COMMUNITY_RECOMMENDATION);
+
+        rec.seed_nodes.push_back(seed_entity);
+        rec.seed_labels.push_back(get_node_label(seed_entity));
+
+        // Add top recommendations
+        size_t count = std::min(recommendations.size(), config_.community_recommendation_max_per_entity);
+        for (size_t j = 0; j < count; ++j) {
+            rec.witness_nodes.push_back(recommendations[j].entity);
+            std::string label = get_node_label(recommendations[j].entity);
+            if (label.size() > 50) label = label.substr(0, 47) + "...";
+
+            std::string key = "rec_" + std::to_string(j) + "_score";
+            rec.score_breakdown[key] = recommendations[j].final_score;
+
+            if (recommendations[j].same_community) {
+                rec.score_breakdown["rec_" + std::to_string(j) + "_type"] = 1.0; // same community
+            } else {
+                rec.score_breakdown["rec_" + std::to_string(j) + "_type"] = 2.0; // cross community
+            }
+        }
+
+        rec.score = recommendations[0].final_score; // Use top recommendation score
+
+        // Build description
+        std::ostringstream desc;
+        desc << "Recommendations for '" << get_node_label(seed_entity) << "': ";
+
+        // Categorize recommendations
+        std::vector<std::string> within_community;
+        std::vector<std::string> cross_community;
+
+        for (size_t j = 0; j < count; ++j) {
+            if (recommendations[j].same_community) {
+                within_community.push_back(get_node_label(recommendations[j].entity));
+            } else {
+                cross_community.push_back(get_node_label(recommendations[j].entity));
+            }
+        }
+
+        if (!within_community.empty()) {
+            desc << "Within-community (familiar): ";
+            for (size_t j = 0; j < std::min(size_t(3), within_community.size()); ++j) {
+                if (j > 0) desc << ", ";
+                desc << within_community[j];
+            }
+            if (within_community.size() > 3) {
+                desc << " and " << (within_community.size() - 3) << " others";
+            }
+            desc << ". ";
+        }
+
+        if (!cross_community.empty()) {
+            desc << "Cross-community (novel): ";
+            for (size_t j = 0; j < std::min(size_t(3), cross_community.size()); ++j) {
+                if (j > 0) desc << ", ";
+                desc << cross_community[j];
+            }
+            if (cross_community.size() > 3) {
+                desc << " and " << (cross_community.size() - 3) << " others";
+            }
+            desc << ". ";
+        }
+
+        desc << "Recommendations ranked by similarity + novelty (cross-community bonus: "
+             << std::fixed << std::setprecision(1) << (config_.community_recommendation_novelty_weight * 100)
+             << "%).";
+
+        rec.description = desc.str();
+        rec.novelty_tags = {"community_recommendation", "similarity", "entity=" + seed_entity};
+
+        insights.push_back(std::move(rec));
+
+        if (insights.size() >= 50) break; // Limit total recommendations
     }
 
     return insights;
@@ -4372,8 +5732,6 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
             insights = find_counterfactual_probes();
         } else if (op == "hyperedge_prediction" || op == "hyperedge-prediction" || op == "hyperedge") {
             insights = find_hyperedge_predictions();
-        } else if (op == "constrained_rule" || op == "constrained-rule" || op == "rule_constrained") {
-            insights = find_constrained_rules();
         } else if (op == "diffusion" || op == "diffusions") {
             insights = find_diffusions();
         } else if (op == "surprise" || op == "surprises") {
@@ -4382,14 +5740,86 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
             insights = find_rules();
         } else if (op == "community" || op == "community_link" || op == "community-links") {
             insights = find_community_links();
+        } else if (op == "hypotheses_1" || op == "hypotheses-1" || op == "bayesian_hypotheses") {
+            insights = find_hypotheses_1(collection);
+        } else if (op == "hypotheses_2" || op == "hypotheses-2" || op == "mechanistic_hypotheses") {
+            insights = find_hypotheses_2(collection);
+        } else if (op == "hypotheses_3" || op == "hypotheses-3" || op == "counterfactual_hypotheses") {
+            insights = find_hypotheses_3(collection);
+        } else if (op == "causal_chain" || op == "causal-chain" || op == "causal_chains" || op == "causal-chains") {
+            insights = find_causal_chains();
+        } else if (op == "intervention_point" || op == "intervention-point" || op == "intervention_points" || op == "intervention-points") {
+            insights = find_intervention_points();
+        } else if (op == "feedback_loop" || op == "feedback-loop" || op == "feedback_loops" || op == "feedback-loops") {
+            insights = find_feedback_loops();
+        } else if (op == "confounder" || op == "confounders") {
+            insights = find_confounders();
+        } else if (op == "taxonomy" || op == "taxonomy_induction" || op == "taxonomy-induction") {
+            insights = find_taxonomy_induction();
+        } else if (op == "domain_bridge" || op == "domain-bridge" || op == "domain_bridges" || op == "domain-bridges") {
+            insights = find_domain_bridges();
+        } else if (op == "logical_entailment" || op == "logical-entailment" || op == "logical_entailments" || op == "logical-entailments") {
+            insights = find_logical_entailments();
+        } else if (op == "compositional_reasoning" || op == "compositional-reasoning" || op == "composition") {
+            insights = find_compositional_reasoning();
+        } else if (op == "explanatory_chain" || op == "explanatory-chain" || op == "explanatory_chains" || op == "explanatory-chains" || op == "explanation") {
+            insights = find_explanatory_chains();
+        } else if (op == "schema_violation" || op == "schema-violation" || op == "schema_violations" || op == "schema-violations" || op == "schema") {
+            insights = find_schema_violations();
+        } else if (op == "transitive_closure" || op == "transitive-closure" || op == "transitive" || op == "closure") {
+            insights = find_transitive_closure_gaps();
+        } else if (op == "meta_path" || op == "meta-path" || op == "meta_paths" || op == "meta-paths" || op == "metapath") {
+            insights = find_meta_path_links();
+        } else if (op == "meta_path_pattern" || op == "meta-path-pattern" || op == "meta_path_patterns" || op == "meta-path-patterns") {
+            insights = find_meta_path_patterns();
         } else if (op == "hypothesis" || op == "hypotheses") {
-            insights = find_hypotheses(collection);
+            // Old find_hypotheses replaced with find_hypotheses_1, _2, _3
+            // Use run_all() or specify individual operators
         } else if (op == "pathrank" || op == "path_rank" || op == "path-ranking") {
             insights = find_path_rankings();
+        } else if (op == "intersection_bridge" || op == "intersection-bridge" ||
+                   op == "intersection_hypothesis_bridge" || op == "intersection-hypothesis-bridge" ||
+                   op == "higher_order_bridge" || op == "higher-order-bridge" ||
+                   op == "hypergraph_traversal" || op == "hypergraph-traversal") {
+            insights = find_intersection_hypothesis_bridges();
+        } else if (op == "long_chain" || op == "long-chain" || op == "longchain") {
+            insights = find_long_chains();
         } else if (op == "embedding" || op == "embedding_link" || op == "transe" || op == "embeddings") {
             insights = find_embedding_links();
         } else if (is_author_chain_op) {
             insights = find_author_reference_chains();
+        } else if (op == "co_authorship" || op == "co-authorship" || op == "coauthorship" || op == "collaboration") {
+            insights = find_co_authorship_networks();
+        } else if (op == "citation_impact" || op == "citation-impact" || op == "citations" || op == "impact") {
+            insights = find_citation_impact();
+        } else if (op == "multi_resolution_community" || op == "multi-resolution-community" || op == "multiresolution" || op == "hierarchical_community") {
+            insights = find_multi_resolution_communities();
+        } else if (op == "cross_community_bridge_map" || op == "cross-community-bridge-map" || op == "community_bridge_map" || op == "bridge_map") {
+            insights = find_cross_community_bridge_maps(collection);
+        } else if (op == "meta_pattern" || op == "meta-pattern" || op == "metapattern" || op == "pattern_of_patterns") {
+            insights = find_meta_patterns(collection);
+        } else if (op == "bridge_analogies" || op == "bridge-analogies" || op == "bridge_analogy" || op == "analogy" || op == "analogies") {
+            insights = find_bridge_analogies(collection);
+        } else if (op == "bias_audit" || op == "bias-audit" || op == "bias" || op == "fairness" || op == "representation") {
+            insights = compute_bias_audit(collection);
+        } else if (op == "community_recommendation" || op == "community-recommendation" || op == "recommend" || op == "recommendations") {
+            insights = generate_community_recommendations(collection);
+        } else if (op == "mechanism_consolidation" || op == "mechanism-consolidation" || op == "mechanism_cluster" || op == "mechanism-cluster") {
+            insights = find_mechanism_consolidations(collection);
+        } else if (op == "evidence_fusion" || op == "evidence-fusion" || op == "evidence_fusion_link" || op == "evidence-fusion-link") {
+            insights = find_evidence_fusion_links(collection);
+        } else if (op == "meta_path_anomaly" || op == "meta-path-anomaly" || op == "metapath_anomaly" || op == "metapath-anomaly") {
+            insights = find_meta_path_anomalies(collection);
+        } else if (op == "intervention_bottleneck" || op == "intervention-bottleneck") {
+            insights = find_intervention_bottlenecks(collection);
+        } else if (op == "competing_mechanism" || op == "competing-mechanism" ||
+                   op == "competing_mechanisms" || op == "competing-mechanisms") {
+            insights = find_competing_mechanisms(collection);
+        } else if (op == "schema_repair" || op == "schema-repair" || op == "schema_repairs" || op == "schema-repairs") {
+            insights = find_schema_repairs(collection);
+        } else if (op == "cross_community_mechanism_bridge" || op == "cross-community-mechanism-bridge" ||
+                   op == "cross_community_bridge" || op == "cross-community-bridge") {
+            insights = find_cross_community_mechanism_bridges(collection);
         }
 
         if (!is_author_chain_op) {
@@ -4420,13 +5850,3958 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
 }
 
 InsightCollection DiscoveryEngine::run_all() {
-    return run_operators({"bridges", "completions", "motifs", "substitutions", "contradictions",
-                          "entity_resolution", "core_periphery", "text_similarity", "argument_support",
-                          "active_learning", "method_outcome", "centrality", "community_detection",
-                          "k_core", "k_truss", "claim_stance", "relation_induction", "analogical_transfer",
-                          "uncertainty_sampling", "counterfactual", "hyperedge_prediction",
-                          "diffusion", "surprise", "rules", "community",
-                          "pathrank", "embedding", "author_chain", "hypotheses"});
+    return run_operators(all_discovery_operators());
+}
+
+// =============================================================================
+// HYPOTHESES_1: Bayesian Hypothesis Network (Probabilistic Belief Propagation)
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_hypotheses_1(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Generating Bayesian hypotheses", 0, 100);
+
+    // Stage 1: Build Bayesian Network from insights
+    // Nodes = entities, Edges = evidential relationships
+    std::map<std::string, std::set<std::string>> evidence_graph;
+    std::map<std::pair<std::string, std::string>, std::vector<std::string>> evidence_sources; // Track which insights support each pair
+    std::map<std::string, int> node_frequency;
+
+    for (const auto& insight : collection.insights) {
+        // Extract entity pairs from various insight types
+        if (insight.seed_nodes.size() >= 2) {
+            for (size_t i = 0; i < insight.seed_nodes.size(); ++i) {
+                for (size_t j = i + 1; j < insight.seed_nodes.size(); ++j) {
+                    std::string n1 = insight.seed_nodes[i];
+                    std::string n2 = insight.seed_nodes[j];
+                    evidence_graph[n1].insert(n2);
+                    evidence_graph[n2].insert(n1);
+                    evidence_sources[{n1, n2}].push_back(insight.insight_id);
+                    node_frequency[n1]++;
+                    node_frequency[n2]++;
+                }
+            }
+        }
+    }
+
+    report_progress("Generating Bayesian hypotheses", 20, 100);
+
+    // Stage 2: Estimate Conditional Probabilities
+    // Compute P(B|A) from co-occurrence patterns
+    std::map<std::pair<std::string, std::string>, double> conditional_probs;
+    std::map<std::string, double> prior_probs;
+
+    int total_observations = 0;
+    for (const auto& [node, freq] : node_frequency) {
+        total_observations += freq;
+    }
+
+    if (total_observations == 0) {
+        std::cerr << "[WARNING] hypotheses_1 requires existing insights with entity pairs.\n";
+        std::cerr << "          Found 0 insights with 2+ seed_nodes in the collection.\n";
+        std::cerr << "          Run other discovery operators first (e.g., -p \"all\")\n";
+        report_progress("Generating Bayesian hypotheses", 100, 100);
+        return results;
+    }
+
+    // Compute priors P(A) = freq(A) / total
+    for (const auto& [node, freq] : node_frequency) {
+        prior_probs[node] = static_cast<double>(freq) / total_observations;
+    }
+
+    // Compute conditionals P(B|A) = co-occur(A,B) / freq(A)
+    for (const auto& [pair, sources] : evidence_sources) {
+        std::string n1 = pair.first;
+        std::string n2 = pair.second;
+        if (node_frequency[n1] > 0) {
+            conditional_probs[{n1, n2}] = static_cast<double>(sources.size()) / node_frequency[n1];
+        }
+        if (node_frequency[n2] > 0) {
+            conditional_probs[{n2, n1}] = static_cast<double>(sources.size()) / node_frequency[n2];
+        }
+    }
+
+    report_progress("Generating Bayesian hypotheses", 40, 100);
+
+    // Stage 3: Belief Propagation (Iterative Message Passing)
+    // Initialize beliefs with conditional probabilities
+    std::map<std::pair<std::string, std::string>, double> posterior_beliefs;
+    for (const auto& [pair, prob] : conditional_probs) {
+        posterior_beliefs[pair] = prob;
+    }
+
+    // Iterative belief propagation
+    for (size_t iter = 0; iter < config_.bayesian_max_iterations; ++iter) {
+        std::map<std::pair<std::string, std::string>, double> new_beliefs;
+        double max_change = 0.0;
+
+        // Update beliefs using Bayes' rule: P(H|E) ∝ P(E|H) × P(H)
+        for (const auto& [pair, likelihood] : conditional_probs) {
+            std::string n1 = pair.first;
+            std::string n2 = pair.second;
+
+            double prior = prior_probs[n2];
+            double evidence_diversity = static_cast<double>(evidence_sources[pair].size()) / 10.0; // Normalize
+            evidence_diversity = std::min(evidence_diversity, 1.0);
+
+            // Posterior ∝ likelihood × prior × evidence_diversity
+            double posterior = likelihood * prior * (0.5 + 0.5 * evidence_diversity);
+            posterior = std::min(posterior, 1.0);
+
+            new_beliefs[pair] = posterior;
+            max_change = std::max(max_change, std::abs(posterior - posterior_beliefs[pair]));
+        }
+
+        posterior_beliefs = new_beliefs;
+
+        // Check convergence
+        if (max_change < config_.bayesian_convergence_threshold) {
+            break;
+        }
+    }
+
+    report_progress("Generating Bayesian hypotheses", 70, 100);
+
+    // Stage 4: Identify High-Posterior Candidates
+    struct HypothesisCandidate {
+        std::string node1;
+        std::string node2;
+        double posterior;
+        double prior;
+        double prior_surprise; // log(posterior/prior)
+        double evidence_diversity;
+        double uncertainty_reduction;
+        std::vector<std::string> supporting_insights;
+        double score;
+    };
+
+    std::vector<HypothesisCandidate> candidates;
+
+    for (const auto& [pair, posterior] : posterior_beliefs) {
+        if (posterior < config_.bayesian_min_posterior) continue;
+
+        std::string n1 = pair.first;
+        std::string n2 = pair.second;
+
+        // Skip if already directly connected in graph
+        if (evidence_graph[n1].count(n2) > 0) continue;
+
+        HypothesisCandidate cand;
+        cand.node1 = n1;
+        cand.node2 = n2;
+        cand.posterior = posterior;
+        cand.prior = prior_probs[n2];
+
+        // Compute prior surprise: log(posterior/prior)
+        if (cand.prior > 0.001) {
+            cand.prior_surprise = std::log(posterior / cand.prior);
+        } else {
+            cand.prior_surprise = std::log(posterior / 0.001);
+        }
+
+        // Evidence diversity: number of independent signal types
+        cand.evidence_diversity = static_cast<double>(evidence_sources[pair].size()) / config_.bayesian_top_evidence_per_hypothesis;
+        cand.evidence_diversity = std::min(cand.evidence_diversity, 1.0);
+
+        // Uncertainty reduction: entropy decrease
+        double prior_entropy = -cand.prior * std::log2(cand.prior + 1e-10);
+        double posterior_entropy = -posterior * std::log2(posterior + 1e-10);
+        cand.uncertainty_reduction = std::max(0.0, prior_entropy - posterior_entropy);
+
+        cand.supporting_insights = evidence_sources[pair];
+
+        // Weighted score
+        cand.score = config_.bayesian_weight_posterior * posterior +
+                     config_.bayesian_weight_evidence_diversity * cand.evidence_diversity +
+                     config_.bayesian_weight_prior_surprise * std::min(cand.prior_surprise / 5.0, 1.0) +
+                     config_.bayesian_weight_uncertainty_reduction * cand.uncertainty_reduction;
+
+        candidates.push_back(cand);
+    }
+
+    // Sort by score
+    std::sort(candidates.begin(), candidates.end(), [](const HypothesisCandidate& a, const HypothesisCandidate& b) {
+        return a.score > b.score;
+    });
+
+    // Take top candidates
+    size_t num_hypotheses = std::min(candidates.size(), config_.hypothesis_count);
+
+    for (size_t i = 0; i < num_hypotheses; ++i) {
+        const auto& cand = candidates[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::HYPOTHESES_1);
+        ins.set_type(InsightType::HYPOTHESES_1);
+
+        ins.seed_nodes = {cand.node1, cand.node2};
+        ins.seed_labels = {get_node_label(cand.node1), get_node_label(cand.node2)};
+
+        ins.witness_nodes = ins.seed_nodes;
+        ins.witness_edges = cand.supporting_insights;
+
+        ins.description = "Bayesian hypothesis: '" + get_node_label(cand.node1) + "' → '" + get_node_label(cand.node2) +
+                         "' (posterior=" + std::to_string(cand.posterior) + ")";
+
+        ins.score_breakdown["posterior"] = cand.posterior;
+        ins.score_breakdown["prior_surprise"] = cand.prior_surprise;
+        ins.score_breakdown["evidence_diversity"] = cand.evidence_diversity;
+        ins.score_breakdown["uncertainty_reduction"] = cand.uncertainty_reduction;
+        ins.score = cand.score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Generating Bayesian hypotheses", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// HYPOTHESES_2: Typed Mechanistic Chains + Explanation Subgraphs
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_hypotheses_2(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Generating mechanistic hypotheses", 0, 100);
+    (void)collection;
+
+    struct EdgeInfo {
+        std::string src;
+        std::string tgt;
+        std::string edge_id;
+        std::string relation;
+        double confidence;
+    };
+
+    auto normalize_text = [](std::string s) {
+        std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return std::tolower(c); });
+        for (auto& c : s) {
+            if (c == '_' || c == '-') c = ' ';
+        }
+        return s;
+    };
+
+    auto get_node_type = [&](const std::string& node_id) {
+        const auto* node = graph_.get_node(node_id);
+        if (!node) return std::string();
+        const std::vector<std::string> keys = {"type", "category", "entity_type", "class", "role"};
+        for (const auto& key : keys) {
+            auto it = node->properties.find(key);
+            if (it != node->properties.end() && !it->second.empty()) {
+                return normalize_text(it->second);
+            }
+        }
+        return std::string();
+    };
+
+    auto matches_role_type = [&](const std::string& node_id,
+                                 const std::vector<std::string>& allowed_types) {
+        if (allowed_types.empty()) return true;
+        std::string node_type = get_node_type(node_id);
+        if (node_type.empty()) return config_.hypothesis_2_allow_unknown_types;
+        for (const auto& t : allowed_types) {
+            if (t == "any") return true;
+            if (node_type.find(t) != std::string::npos) return true;
+        }
+        return false;
+    };
+
+    auto relation_matches = [&](const std::string& relation,
+                                const std::vector<std::string>& keywords) {
+        if (keywords.empty()) return true;
+        for (const auto& kw : keywords) {
+            if (relation.find(kw) != std::string::npos) return true;
+        }
+        return false;
+    };
+
+    // Build directed edges from hyperedges
+    std::vector<EdgeInfo> edges;
+    edges.reserve(graph_.get_all_edges().size());
+    std::unordered_map<std::string, std::vector<EdgeInfo>> out_edges;
+    std::unordered_map<std::string, std::vector<EdgeInfo>> in_edges;
+    std::unordered_map<std::string, std::string> edge_chunk;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (edge.sources.empty() || edge.targets.empty()) continue;
+        std::string rel = normalize_text(edge.relation);
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                EdgeInfo info{src, tgt, edge.id, rel, edge.confidence};
+                out_edges[src].push_back(info);
+                in_edges[tgt].push_back(info);
+                edges.push_back(info);
+            }
+        }
+        if (!edge.source_chunk_id.empty()) {
+            edge_chunk[edge.id] = edge.source_chunk_id;
+        }
+    }
+
+    if (edges.empty()) {
+        std::cerr << "[WARNING] hypotheses_2 requires graph edges with typed relations.\n";
+        std::cerr << "          Found 0 edges in the graph.\n";
+        std::cerr << "          Ensure the graph has hyperedges with source and target nodes.\n";
+        report_progress("Generating mechanistic hypotheses", 100, 100);
+        return results;
+    }
+
+    struct ChainTemplate {
+        std::string name;
+        std::vector<std::string> role_labels;
+        std::vector<std::vector<std::string>> role_types;
+        std::vector<std::vector<std::string>> relation_keywords;
+    };
+
+    std::vector<std::string> causal_keywords = {
+        "causes", "cause", "leads to", "results in", "produces", "triggers",
+        "influences", "affects", "determines", "drives", "enables", "increases", "decreases"
+    };
+
+    std::vector<ChainTemplate> templates;
+    templates.push_back({
+        "driver_hazard_exposure_impact",
+        {"Driver", "Hazard", "Exposure", "Impact"},
+        {{"driver"}, {"hazard"}, {"exposure"}, {"impact"}},
+        {causal_keywords, causal_keywords, causal_keywords}
+    });
+
+    templates.push_back({
+        "method_dataset_metric_outcome",
+        {"Method", "Dataset", "Metric", "Outcome"},
+        {{"method"}, {"dataset", "data"}, {"metric", "score"}, {"outcome", "result", "performance"}},
+        {
+            {"applies", "uses", "trained on", "applied to"},
+            {"measured by", "evaluated by", "benchmark", "metric", "score"},
+            {"improves", "yields", "achieves", "outperforms", "results in"}
+        }
+    });
+
+    templates.push_back({
+        "cause_mediator_effect",
+        {"Cause", "Mediator", "Effect"},
+        {},
+        {causal_keywords, causal_keywords}
+    });
+
+    report_progress("Generating mechanistic hypotheses", 15, 100);
+
+    struct ChainCandidate {
+        std::string template_name;
+        std::vector<std::string> role_labels;
+        std::vector<std::string> nodes;
+        std::vector<std::string> edge_ids;
+        std::vector<std::string> relations;
+        std::string pattern_key;
+        double relation_strength = 0.0;
+        double type_fidelity = 0.0;
+        double support = 0.0;
+        double novelty = 0.0;
+        double coherence = 0.0;
+        double chain_score = 0.0;
+        double explanation_score = 0.0;
+        std::vector<std::string> explanation_nodes;
+        std::vector<std::string> explanation_edges;
+        double explanation_alignment = 0.0;
+        double explanation_confidence = 0.0;
+        double explanation_density = 0.0;
+        double explanation_connectivity = 0.0;
+        double final_score = 0.0;
+    };
+
+    std::vector<std::string> seed_nodes;
+    if (config_.hypothesis_2_max_seed_nodes > 0) {
+        auto hubs = graph_.get_top_hubs(static_cast<int>(config_.hypothesis_2_max_seed_nodes));
+        for (const auto& [node_id, _] : hubs) {
+            seed_nodes.push_back(node_id);
+        }
+    } else {
+        auto nodes = graph_.get_all_nodes();
+        seed_nodes.reserve(nodes.size());
+        for (const auto& node : nodes) seed_nodes.push_back(node.id);
+    }
+
+    std::vector<ChainCandidate> candidates;
+    std::unordered_map<std::string, int> pattern_counts;
+
+    auto build_candidates = [&](const ChainTemplate& tmpl) {
+        const size_t chain_len = tmpl.role_labels.size();
+        if (chain_len < static_cast<size_t>(config_.hypothesis_2_chain_min_length) ||
+            chain_len > static_cast<size_t>(config_.hypothesis_2_chain_max_length)) {
+            return;
+        }
+
+        bool stop = false;
+        for (const auto& start : seed_nodes) {
+            if (stop) break;
+            if (!matches_role_type(start, tmpl.role_types.empty() ? std::vector<std::string>() : tmpl.role_types[0])) {
+                continue;
+            }
+
+            std::vector<std::string> path_nodes = {start};
+            std::vector<EdgeInfo> path_edges;
+            std::unordered_set<std::string> visited = {start};
+
+            std::function<void(size_t, const std::string&)> dfs = [&](size_t depth, const std::string& node) {
+                if (stop) return;
+                if (depth + 1 == chain_len) {
+                    ChainCandidate cand;
+                    cand.template_name = tmpl.name;
+                    cand.role_labels = tmpl.role_labels;
+                    cand.nodes = path_nodes;
+                    cand.edge_ids.reserve(path_edges.size());
+                    cand.relations.reserve(path_edges.size());
+
+                    double conf_sum = 0.0;
+                    for (const auto& e : path_edges) {
+                        cand.edge_ids.push_back(e.edge_id);
+                        cand.relations.push_back(e.relation);
+                        conf_sum += e.confidence;
+                    }
+                    cand.relation_strength = path_edges.empty() ? 0.0 : (conf_sum / path_edges.size());
+
+                    std::ostringstream pattern;
+                    for (size_t i = 0; i < cand.relations.size(); ++i) {
+                        if (i > 0) pattern << "->";
+                        pattern << cand.relations[i];
+                    }
+                    cand.pattern_key = pattern.str();
+                    pattern_counts[cand.pattern_key]++;
+
+                    // Type fidelity
+                    double type_hits = 0.0;
+                    for (size_t i = 0; i < cand.nodes.size(); ++i) {
+                        const auto& allowed = tmpl.role_types.size() > i ? tmpl.role_types[i] : std::vector<std::string>();
+                        if (matches_role_type(cand.nodes[i], allowed)) {
+                            type_hits += 1.0;
+                        }
+                    }
+                    cand.type_fidelity = cand.nodes.empty() ? 0.0 : type_hits / cand.nodes.size();
+
+                    // Coherence based on relation keyword matches
+                    double rel_hits = 0.0;
+                    for (size_t i = 0; i < cand.relations.size(); ++i) {
+                        const auto& kws = tmpl.relation_keywords.size() > i ? tmpl.relation_keywords[i] : std::vector<std::string>();
+                        if (relation_matches(cand.relations[i], kws)) rel_hits += 1.0;
+                    }
+                    cand.coherence = cand.relations.empty() ? 0.0 : rel_hits / cand.relations.size();
+
+                    candidates.push_back(std::move(cand));
+                    if (candidates.size() >= config_.hypothesis_2_max_candidates) {
+                        stop = true;
+                    }
+                    return;
+                }
+
+                auto out_it = out_edges.find(node);
+                if (out_it == out_edges.end()) return;
+                const auto& next_edges = out_it->second;
+                size_t degree_checked = 0;
+                for (const auto& e : next_edges) {
+                    if (degree_checked++ >= config_.hypothesis_2_explanation_degree_cap) break;
+                    if (visited.count(e.tgt)) continue;
+                    const auto& rel_kws = tmpl.relation_keywords.size() > depth ? tmpl.relation_keywords[depth] : std::vector<std::string>();
+                    if (!relation_matches(e.relation, rel_kws)) continue;
+                    const auto& allowed_types = tmpl.role_types.size() > (depth + 1) ? tmpl.role_types[depth + 1] : std::vector<std::string>();
+                    if (!matches_role_type(e.tgt, allowed_types)) continue;
+
+                    visited.insert(e.tgt);
+                    path_nodes.push_back(e.tgt);
+                    path_edges.push_back(e);
+                    dfs(depth + 1, e.tgt);
+                    path_nodes.pop_back();
+                    path_edges.pop_back();
+                    visited.erase(e.tgt);
+
+                    if (stop) break;
+                }
+            };
+
+            dfs(0, start);
+        }
+    };
+
+    for (const auto& tmpl : templates) {
+        build_candidates(tmpl);
+        if (candidates.size() >= config_.hypothesis_2_max_candidates) break;
+    }
+
+    if (candidates.empty() && config_.hypothesis_2_enable_untyped_fallback) {
+        ChainTemplate fallback{
+            "generic_chain",
+            {"Entity A", "Entity B", "Entity C"},
+            {},
+            {}
+        };
+        build_candidates(fallback);
+    }
+
+    if (candidates.empty()) {
+        report_progress("Generating mechanistic hypotheses", 100, 100);
+        return results;
+    }
+
+    int max_pattern = 0;
+    for (const auto& entry : pattern_counts) {
+        if (entry.second > max_pattern) max_pattern = entry.second;
+    }
+
+    report_progress("Generating mechanistic hypotheses", 40, 100);
+
+    for (auto& cand : candidates) {
+        cand.support = (max_pattern > 0) ? static_cast<double>(pattern_counts[cand.pattern_key]) / max_pattern : 0.0;
+        cand.novelty = 1.0 - cand.support;
+
+        cand.chain_score =
+            config_.hypothesis_2_weight_support * cand.support +
+            config_.hypothesis_2_weight_relation_strength * cand.relation_strength +
+            config_.hypothesis_2_weight_type_fidelity * cand.type_fidelity +
+            config_.hypothesis_2_weight_novelty * cand.novelty +
+            config_.hypothesis_2_weight_coherence * cand.coherence;
+
+        std::unordered_set<std::string> expl_nodes(cand.nodes.begin(), cand.nodes.end());
+        std::unordered_set<std::string> expl_edges(cand.edge_ids.begin(), cand.edge_ids.end());
+        std::vector<EdgeInfo> evidence_candidates;
+
+        std::vector<std::string> keyword_union;
+        keyword_union.reserve(cand.relations.size());
+        for (const auto& rel : cand.relations) {
+            keyword_union.push_back(rel);
+        }
+
+        for (const auto& node : cand.nodes) {
+            size_t degree_checked = 0;
+            auto out_it = out_edges.find(node);
+            if (out_it != out_edges.end()) {
+                for (const auto& e : out_it->second) {
+                    if (degree_checked++ >= config_.hypothesis_2_explanation_degree_cap) break;
+                    if (e.confidence < config_.hypothesis_2_explanation_min_confidence) continue;
+                    evidence_candidates.push_back(e);
+                }
+            }
+            degree_checked = 0;
+            auto in_it = in_edges.find(node);
+            if (in_it != in_edges.end()) {
+                for (const auto& e : in_it->second) {
+                    if (degree_checked++ >= config_.hypothesis_2_explanation_degree_cap) break;
+                    if (e.confidence < config_.hypothesis_2_explanation_min_confidence) continue;
+                    evidence_candidates.push_back(e);
+                }
+            }
+        }
+
+        auto candidate_score = [&](const EdgeInfo& e) {
+            bool aligned = relation_matches(e.relation, keyword_union);
+            double align_score = aligned ? 1.0 : 0.4;
+            return align_score * 0.6 + e.confidence * 0.4;
+        };
+
+        std::sort(evidence_candidates.begin(), evidence_candidates.end(),
+                  [&](const EdgeInfo& a, const EdgeInfo& b) {
+                      return candidate_score(a) > candidate_score(b);
+                  });
+
+        double align_sum = 0.0;
+        double conf_sum = 0.0;
+        size_t added_edges = 0;
+
+        for (const auto& e : evidence_candidates) {
+            if (expl_edges.size() >= config_.hypothesis_2_explanation_max_edges) break;
+            if (expl_edges.count(e.edge_id)) continue;
+
+            size_t new_nodes = 0;
+            if (!expl_nodes.count(e.src)) new_nodes++;
+            if (!expl_nodes.count(e.tgt)) new_nodes++;
+            if (expl_nodes.size() + new_nodes > config_.hypothesis_2_explanation_max_nodes) continue;
+
+            expl_edges.insert(e.edge_id);
+            expl_nodes.insert(e.src);
+            expl_nodes.insert(e.tgt);
+
+            bool aligned = relation_matches(e.relation, keyword_union);
+            align_sum += aligned ? 1.0 : 0.0;
+            conf_sum += e.confidence;
+            added_edges++;
+        }
+
+        cand.explanation_nodes.assign(expl_nodes.begin(), expl_nodes.end());
+        cand.explanation_edges.assign(expl_edges.begin(), expl_edges.end());
+
+        cand.explanation_alignment = added_edges > 0 ? align_sum / added_edges : 0.0;
+        cand.explanation_confidence = added_edges > 0 ? conf_sum / added_edges : 0.0;
+        cand.explanation_density = expl_nodes.empty() ? 0.0 : static_cast<double>(expl_edges.size()) / expl_nodes.size();
+        cand.explanation_connectivity = cand.nodes.empty() ? 0.0 : 1.0;
+
+        cand.explanation_score =
+            0.35 * cand.explanation_alignment +
+            0.35 * cand.explanation_confidence +
+            0.20 * std::min(1.0, cand.explanation_density / 1.5) +
+            0.10 * cand.explanation_connectivity;
+
+        cand.final_score =
+            config_.hypothesis_2_weight_chain * cand.chain_score +
+            config_.hypothesis_2_weight_explanation * cand.explanation_score;
+    }
+
+    candidates.erase(std::remove_if(candidates.begin(), candidates.end(),
+        [this](const ChainCandidate& c) {
+            return c.chain_score < config_.hypothesis_2_min_chain_score ||
+                   c.explanation_score < config_.hypothesis_2_min_explanation_score ||
+                   c.final_score < config_.hypothesis_2_min_final_score;
+        }), candidates.end());
+
+    if (candidates.empty()) {
+        report_progress("Generating mechanistic hypotheses", 100, 100);
+        return results;
+    }
+
+    std::sort(candidates.begin(), candidates.end(), [](const ChainCandidate& a, const ChainCandidate& b) {
+        return a.final_score > b.final_score;
+    });
+
+    size_t num_hypotheses = std::min(candidates.size(), config_.hypothesis_2_count);
+
+    for (size_t i = 0; i < num_hypotheses; ++i) {
+        const auto& cand = candidates[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::HYPOTHESES_2);
+        ins.set_type(InsightType::HYPOTHESES_2);
+
+        if (!cand.nodes.empty()) {
+            ins.seed_nodes = {cand.nodes.front(), cand.nodes.back()};
+            ins.seed_labels = {get_node_label(cand.nodes.front()), get_node_label(cand.nodes.back())};
+        }
+
+        ins.witness_nodes = cand.explanation_nodes;
+        ins.witness_edges = cand.explanation_edges;
+
+        std::ostringstream desc;
+        desc << "Mechanistic chain (" << cand.template_name << "): ";
+        for (size_t n = 0; n < cand.nodes.size(); ++n) {
+            if (n > 0 && n - 1 < cand.relations.size()) {
+                desc << " --" << cand.relations[n - 1] << "--> ";
+            }
+            if (n < cand.role_labels.size()) {
+                desc << cand.role_labels[n] << " ";
+            }
+            desc << "'" << get_node_label(cand.nodes[n]) << "'";
+        }
+        size_t extra_nodes = cand.explanation_nodes.size() > cand.nodes.size() ?
+                             (cand.explanation_nodes.size() - cand.nodes.size()) : 0;
+        size_t extra_edges = cand.explanation_edges.size() > cand.edge_ids.size() ?
+                             (cand.explanation_edges.size() - cand.edge_ids.size()) : 0;
+        desc << ". Explanation subgraph adds " << extra_nodes << " nodes and "
+             << extra_edges << " edges.";
+        ins.description = desc.str();
+
+        ins.score_breakdown["chain_support"] = cand.support;
+        ins.score_breakdown["relation_strength"] = cand.relation_strength;
+        ins.score_breakdown["type_fidelity"] = cand.type_fidelity;
+        ins.score_breakdown["novelty"] = cand.novelty;
+        ins.score_breakdown["coherence"] = cand.coherence;
+        ins.score_breakdown["chain_score"] = cand.chain_score;
+        ins.score_breakdown["explanation_alignment"] = cand.explanation_alignment;
+        ins.score_breakdown["explanation_confidence"] = cand.explanation_confidence;
+        ins.score_breakdown["explanation_density"] = cand.explanation_density;
+        ins.score_breakdown["explanation_score"] = cand.explanation_score;
+        ins.score = cand.final_score;
+
+        std::unordered_set<std::string> chunks;
+        for (const auto& edge_id : ins.witness_edges) {
+            auto it = edge_chunk.find(edge_id);
+            if (it != edge_chunk.end()) chunks.insert(it->second);
+        }
+        for (const auto& chunk : chunks) ins.evidence_chunk_ids.push_back(chunk);
+
+        results.push_back(ins);
+    }
+
+    report_progress("Generating mechanistic hypotheses", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// HYPOTHESES_3: Counterfactual Causal Hypothesis Generation
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_hypotheses_3(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Generating counterfactual hypotheses", 0, 100);
+
+    // Step 1: Identify causal chains and intervention points from collection
+    std::vector<Insight> causal_chains;
+    std::vector<Insight> intervention_points;
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::CAUSAL_CHAIN) {
+            causal_chains.push_back(insight);
+        } else if (insight.type == InsightType::INTERVENTION_POINT) {
+            intervention_points.push_back(insight);
+        }
+    }
+
+    if (causal_chains.empty() || intervention_points.empty()) {
+        std::cerr << "[WARNING] hypotheses_3 requires causal_chain and intervention_point insights.\n";
+        std::cerr << "          Found " << causal_chains.size() << " causal_chain(s) and "
+                  << intervention_points.size() << " intervention_point(s).\n";
+        std::cerr << "          Run with operators: -p \"causal_chains,intervention_points,hypotheses_3\"\n";
+        report_progress("Generating counterfactual hypotheses", 100, 100);
+        return results; // Need causal infrastructure
+    }
+
+    report_progress("Generating counterfactual hypotheses", 20, 100);
+
+    // Step 2: Generate counterfactual candidates
+    struct CounterfactualCandidate {
+        std::string intervention_node;
+        std::vector<std::string> affected_nodes;
+        std::vector<std::string> causal_path;
+        double effect_size;
+        double centrality_score;
+        double mechanism_coherence;
+        double testability;
+        double confounding_risk;
+        std::vector<std::string> evidence_edges;
+        double final_score;
+    };
+
+    std::vector<CounterfactualCandidate> candidates;
+
+    // For each intervention point
+    for (const auto& intervention : intervention_points) {
+        if (intervention.seed_nodes.empty()) continue;
+
+        std::string int_node = intervention.seed_nodes[0];
+
+        // Find causal chains containing this node (not just starting with it)
+        for (const auto& chain : causal_chains) {
+            if (chain.seed_nodes.empty()) continue;
+
+            // Find if intervention node appears anywhere in the chain
+            auto node_it = std::find(chain.seed_nodes.begin(), chain.seed_nodes.end(), int_node);
+            if (node_it == chain.seed_nodes.end()) continue;
+
+            // Get position of intervention node in chain
+            size_t int_pos = std::distance(chain.seed_nodes.begin(), node_it);
+
+            CounterfactualCandidate cand;
+            cand.intervention_node = int_node;
+            cand.causal_path = chain.seed_nodes;
+            // Affected nodes are everything AFTER the intervention point
+            cand.affected_nodes = std::vector<std::string>(chain.seed_nodes.begin() + int_pos + 1, chain.seed_nodes.end());
+            cand.evidence_edges = chain.witness_edges;
+
+            // Estimate effect size based on chain length and centrality
+            cand.effect_size = std::min(static_cast<double>(cand.affected_nodes.size()) / 5.0, 1.0);
+
+            // Centrality score from intervention point
+            auto it = intervention.score_breakdown.find("criticality");
+            cand.centrality_score = (it != intervention.score_breakdown.end()) ? it->second : 0.5;
+
+            // Mechanism coherence (simplified - would use LLM)
+            cand.mechanism_coherence = chain.score;
+
+            // Testability based on observability
+            cand.testability = std::min(static_cast<double>(cand.evidence_edges.size()) / 5.0, 1.0);
+
+            // Confounding risk (check for common causes)
+            cand.confounding_risk = 0.3; // Placeholder
+
+            // Final weighted score
+            cand.final_score = config_.hypothesis_3_weight_centrality * cand.centrality_score +
+                              config_.hypothesis_3_weight_effect_size * cand.effect_size +
+                              config_.hypothesis_3_weight_mechanism * cand.mechanism_coherence +
+                              config_.hypothesis_3_weight_testability * cand.testability -
+                              config_.hypothesis_3_weight_confounding * cand.confounding_risk;
+
+            candidates.push_back(cand);
+        }
+    }
+
+    if (candidates.empty()) {
+        report_progress("Generating counterfactual hypotheses", 100, 100);
+        return results;
+    }
+
+    report_progress("Generating counterfactual hypotheses", 60, 100);
+
+    // Filter by minimum thresholds
+    candidates.erase(std::remove_if(candidates.begin(), candidates.end(),
+        [this](const CounterfactualCandidate& c) {
+            return c.effect_size < config_.hypothesis_3_min_effect_size;
+        }), candidates.end());
+
+    // Sort by final score
+    std::sort(candidates.begin(), candidates.end(), [](const CounterfactualCandidate& a, const CounterfactualCandidate& b) {
+        return a.final_score > b.final_score;
+    });
+
+    // Take top candidates
+    size_t num_hypotheses = std::min(candidates.size(), config_.hypothesis_3_count);
+
+    for (size_t i = 0; i < num_hypotheses; ++i) {
+        const auto& cand = candidates[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::HYPOTHESES_3);
+        ins.set_type(InsightType::HYPOTHESES_3);
+
+        ins.seed_nodes = cand.causal_path;
+        for (const auto& node : ins.seed_nodes) {
+            ins.seed_labels.push_back(get_node_label(node));
+        }
+
+        ins.witness_nodes = cand.causal_path;
+        ins.witness_edges = cand.evidence_edges;
+
+        std::string effect_desc = (cand.affected_nodes.size() == 1) ? " 1 downstream effect" :
+                                 " " + std::to_string(cand.affected_nodes.size()) + " downstream effects";
+
+        ins.description = "Counterfactual hypothesis: Intervene on '" + get_node_label(cand.intervention_node) +
+                         "' → predicts" + effect_desc;
+
+        ins.score_breakdown["centrality"] = cand.centrality_score;
+        ins.score_breakdown["effect_size"] = cand.effect_size;
+        ins.score_breakdown["mechanism"] = cand.mechanism_coherence;
+        ins.score_breakdown["testability"] = cand.testability;
+        ins.score_breakdown["confounding_risk"] = cand.confounding_risk;
+        ins.score = cand.final_score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Generating counterfactual hypotheses", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// MECHANISM CONSOLIDATION: Cluster related mechanistic hypotheses and chains
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_mechanism_consolidations(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Consolidating mechanisms", 0, 100);
+
+    struct Candidate {
+        Insight insight;
+        std::unordered_set<std::string> nodes;
+    };
+
+    std::vector<Candidate> candidates;
+    candidates.reserve(collection.insights.size());
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::HYPOTHESES_2 &&
+            insight.type != InsightType::LONG_CHAIN &&
+            insight.type != InsightType::EXPLANATORY_CHAIN) {
+            continue;
+        }
+
+        std::unordered_set<std::string> nodes;
+        for (const auto& n : insight.seed_nodes) nodes.insert(n);
+        for (const auto& n : insight.witness_nodes) nodes.insert(n);
+        if (nodes.empty()) continue;
+
+        candidates.push_back({insight, std::move(nodes)});
+    }
+
+    if (candidates.empty()) {
+        report_progress("Consolidating mechanisms", 100, 100);
+        return results;
+    }
+
+    std::sort(candidates.begin(), candidates.end(), [](const Candidate& a, const Candidate& b) {
+        return a.insight.score > b.insight.score;
+    });
+
+    if (candidates.size() > config_.mechanism_consolidation_max_sources) {
+        candidates.resize(config_.mechanism_consolidation_max_sources);
+    }
+
+    size_t n = candidates.size();
+    std::vector<int> parent(n);
+    std::vector<int> rank(n, 0);
+    for (size_t i = 0; i < n; ++i) parent[i] = static_cast<int>(i);
+
+    auto find_root = [&](int x) {
+        while (parent[x] != x) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    };
+
+    auto union_sets = [&](int a, int b) {
+        int ra = find_root(a);
+        int rb = find_root(b);
+        if (ra == rb) return;
+        if (rank[ra] < rank[rb]) {
+            parent[ra] = rb;
+        } else if (rank[ra] > rank[rb]) {
+            parent[rb] = ra;
+        } else {
+            parent[rb] = ra;
+            rank[ra]++;
+        }
+    };
+
+    auto jaccard = [](const std::unordered_set<std::string>& a,
+                      const std::unordered_set<std::string>& b) {
+        if (a.empty() || b.empty()) return 0.0;
+        const auto* small = &a;
+        const auto* large = &b;
+        if (a.size() > b.size()) {
+            small = &b;
+            large = &a;
+        }
+        size_t intersect = 0;
+        for (const auto& v : *small) {
+            if (large->count(v)) intersect++;
+        }
+        size_t uni = a.size() + b.size() - intersect;
+        return uni > 0 ? static_cast<double>(intersect) / static_cast<double>(uni) : 0.0;
+    };
+
+    std::vector<std::vector<double>> similarity(n, std::vector<double>(n, 0.0));
+    for (size_t i = 0; i < n; ++i) {
+        for (size_t j = i + 1; j < n; ++j) {
+            double sim = jaccard(candidates[i].nodes, candidates[j].nodes);
+            similarity[i][j] = sim;
+            similarity[j][i] = sim;
+            if (sim >= config_.mechanism_consolidation_min_similarity) {
+                union_sets(static_cast<int>(i), static_cast<int>(j));
+            }
+        }
+    }
+
+    std::unordered_map<int, std::vector<size_t>> clusters;
+    for (size_t i = 0; i < n; ++i) {
+        clusters[find_root(static_cast<int>(i))].push_back(i);
+    }
+
+    struct ClusterResult {
+        Insight insight;
+        double score = 0.0;
+    };
+    std::vector<ClusterResult> consolidated;
+
+    for (const auto& entry : clusters) {
+        const auto& members = entry.second;
+        if (members.size() < config_.mechanism_consolidation_min_cluster_size) continue;
+
+        std::unordered_map<std::string, int> node_counts;
+        std::unordered_set<std::string> edge_set;
+        std::unordered_set<std::string> chunk_set;
+        std::map<InsightType, int> type_counts;
+        double score_sum = 0.0;
+
+        for (size_t idx : members) {
+            const auto& cand = candidates[idx];
+            score_sum += cand.insight.score;
+            type_counts[cand.insight.type]++;
+            for (const auto& node : cand.nodes) node_counts[node]++;
+            for (const auto& edge : cand.insight.witness_edges) {
+                if (edge_set.size() >= config_.mechanism_consolidation_max_edges) break;
+                edge_set.insert(edge);
+            }
+            for (const auto& chunk : cand.insight.evidence_chunk_ids) {
+                chunk_set.insert(chunk);
+            }
+        }
+
+        double avg_score = members.empty() ? 0.0 : (score_sum / members.size());
+
+        double cohesion = 1.0;
+        if (members.size() > 1) {
+            double sum = 0.0;
+            size_t pairs = 0;
+            for (size_t i = 0; i < members.size(); ++i) {
+                for (size_t j = i + 1; j < members.size(); ++j) {
+                    sum += similarity[members[i]][members[j]];
+                    pairs++;
+                }
+            }
+            cohesion = pairs > 0 ? (sum / pairs) : 1.0;
+        }
+
+        double size_score = std::min(1.0, static_cast<double>(members.size()) / 5.0);
+        double final_score =
+            config_.mechanism_consolidation_weight_size * size_score +
+            config_.mechanism_consolidation_weight_cohesion * cohesion +
+            config_.mechanism_consolidation_weight_score * avg_score;
+
+        std::vector<std::pair<std::string, int>> ranked_nodes(node_counts.begin(), node_counts.end());
+        std::sort(ranked_nodes.begin(), ranked_nodes.end(),
+                  [](const auto& a, const auto& b) { return a.second > b.second; });
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::MECHANISM_CONSOLIDATION);
+        ins.set_type(InsightType::MECHANISM_CONSOLIDATION);
+
+        size_t seed_count = std::min<size_t>(2, ranked_nodes.size());
+        for (size_t i = 0; i < seed_count; ++i) {
+            ins.seed_nodes.push_back(ranked_nodes[i].first);
+            ins.seed_labels.push_back(get_node_label(ranked_nodes[i].first));
+        }
+
+        size_t max_nodes = std::min(ranked_nodes.size(), config_.mechanism_consolidation_max_nodes);
+        for (size_t i = 0; i < max_nodes; ++i) {
+            ins.witness_nodes.push_back(ranked_nodes[i].first);
+        }
+
+        ins.witness_edges.assign(edge_set.begin(), edge_set.end());
+        if (ins.witness_edges.size() > config_.mechanism_consolidation_max_edges) {
+            ins.witness_edges.resize(config_.mechanism_consolidation_max_edges);
+        }
+
+        ins.evidence_chunk_ids.assign(chunk_set.begin(), chunk_set.end());
+        if (ins.evidence_chunk_ids.size() > 10) {
+            ins.evidence_chunk_ids.resize(10);
+        }
+
+        std::ostringstream desc;
+        desc << "Mechanism consolidation: clustered " << members.size() << " insights ("
+             << type_counts[InsightType::HYPOTHESES_2] << " mechanistic hypotheses, "
+             << type_counts[InsightType::LONG_CHAIN] << " long-chain links, "
+             << type_counts[InsightType::EXPLANATORY_CHAIN] << " explanatory chains).";
+        if (!ranked_nodes.empty()) {
+            desc << " Core nodes: ";
+            size_t list_max = std::min<size_t>(3, ranked_nodes.size());
+            for (size_t i = 0; i < list_max; ++i) {
+                if (i > 0) desc << ", ";
+                desc << "'" << get_node_label(ranked_nodes[i].first) << "'";
+            }
+            if (ranked_nodes.size() > list_max) desc << ", ...";
+        }
+        ins.description = desc.str();
+
+        ins.score_breakdown["cluster_size"] = static_cast<double>(members.size());
+        ins.score_breakdown["cohesion"] = cohesion;
+        ins.score_breakdown["avg_member_score"] = avg_score;
+        ins.score = final_score;
+
+        ins.novelty_tags = {"mechanism_consolidation", "cluster_size=" + std::to_string(members.size())};
+
+        consolidated.push_back({ins, final_score});
+    }
+
+    if (consolidated.empty()) {
+        report_progress("Consolidating mechanisms", 100, 100);
+        return results;
+    }
+
+    std::sort(consolidated.begin(), consolidated.end(), [](const ClusterResult& a, const ClusterResult& b) {
+        return a.score > b.score;
+    });
+
+    size_t limit = std::min(consolidated.size(), config_.mechanism_consolidation_max_clusters);
+    for (size_t i = 0; i < limit; ++i) {
+        results.push_back(std::move(consolidated[i].insight));
+    }
+
+    report_progress("Consolidating mechanisms", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// CAUSAL_CHAIN: Directed Causal Path Detection
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_causal_chains() {
+    std::vector<Insight> results;
+    report_progress("Finding causal chains", 0, 100);
+
+    // Identify causal keywords in edge relations
+    std::set<std::string> causal_keywords = {
+        "causes", "leads to", "results in", "produces", "triggers",
+        "influences", "affects", "determines", "drives", "enables"
+    };
+
+    // Build directed causal graph
+    std::map<std::string, std::vector<std::string>> causal_edges;
+    std::map<std::pair<std::string, std::string>, std::string> edge_relation;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string rel = edge.relation;
+        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+        bool is_causal = false;
+        for (const auto& keyword : causal_keywords) {
+            if (rel.find(keyword) != std::string::npos) {
+                is_causal = true;
+                break;
+            }
+        }
+
+        if (is_causal && !edge.sources.empty() && !edge.targets.empty()) {
+            std::string src = edge.sources[0];
+            std::string tgt = edge.targets[0];
+            causal_edges[src].push_back(tgt);
+            edge_relation[{src, tgt}] = edge.id;
+        }
+    }
+
+    report_progress("Finding causal chains", 30, 100);
+
+    // Find causal chains (paths of length 2+)
+    struct CausalChain {
+        std::vector<std::string> path;
+        std::vector<std::string> edge_ids;
+        double chain_strength;
+    };
+
+    std::vector<CausalChain> chains;
+    const size_t max_chain_length = 5;
+
+    // DFS to find chains
+    for (const auto& [start, _] : causal_edges) {
+        std::function<void(std::string, std::vector<std::string>, std::vector<std::string>, std::set<std::string>&)>
+        dfs = [&](std::string node, std::vector<std::string> path, std::vector<std::string> edges, std::set<std::string>& visited) {
+            if (path.size() >= max_chain_length) return;
+
+            for (const auto& next : causal_edges[node]) {
+                if (visited.count(next)) continue; // Avoid cycles in chain detection
+
+                std::vector<std::string> new_path = path;
+                new_path.push_back(next);
+
+                std::vector<std::string> new_edges = edges;
+                auto it = edge_relation.find({node, next});
+                if (it != edge_relation.end()) {
+                    new_edges.push_back(it->second);
+                }
+
+                if (new_path.size() >= 3) { // Chain of at least 3 nodes
+                    CausalChain chain;
+                    chain.path = new_path;
+                    chain.edge_ids = new_edges;
+                    chain.chain_strength = 1.0 / new_path.size(); // Longer chains = weaker
+                    chains.push_back(chain);
+                }
+
+                std::set<std::string> new_visited = visited;
+                new_visited.insert(next);
+                dfs(next, new_path, new_edges, new_visited);
+            }
+        };
+
+        std::vector<std::string> initial_path = {start};
+        std::set<std::string> visited = {start};
+        dfs(start, initial_path, {}, visited);
+
+        if (chains.size() > 200) break; // Limit total chains
+    }
+
+    report_progress("Finding causal chains", 70, 100);
+
+    // Sort by chain strength and length
+    std::sort(chains.begin(), chains.end(), [](const CausalChain& a, const CausalChain& b) {
+        return a.path.size() > b.path.size(); // Prefer longer chains
+    });
+
+    // Create insights
+    size_t max_chains = std::min(chains.size(), static_cast<size_t>(config_.max_total_insights / 5));
+    for (size_t i = 0; i < max_chains; ++i) {
+        const auto& chain = chains[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CAUSAL_CHAIN);
+        ins.set_type(InsightType::CAUSAL_CHAIN);
+        ins.seed_nodes = chain.path;
+        for (const auto& node : chain.path) {
+            ins.seed_labels.push_back(get_node_label(node));
+        }
+        ins.witness_nodes = chain.path;
+        ins.witness_edges = chain.edge_ids;
+
+        ins.description = "Causal chain: " + get_node_label(chain.path[0]) + " → ... → " +
+                         get_node_label(chain.path.back()) + " (" + std::to_string(chain.path.size()) + " steps)";
+
+        ins.score = chain.chain_strength * 0.5 + (static_cast<double>(chain.path.size()) / max_chain_length) * 0.5;
+        ins.score_breakdown["chain_length"] = chain.path.size();
+        ins.score_breakdown["chain_strength"] = chain.chain_strength;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding causal chains", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// INTERVENTION_POINT: Critical Control Points in Causal Pathways
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_intervention_points() {
+    std::vector<Insight> results;
+    report_progress("Finding intervention points", 0, 100);
+
+    // Build causal graph (same as causal_chains)
+    std::set<std::string> causal_keywords = {
+        "causes", "leads to", "results in", "produces", "triggers",
+        "influences", "affects", "determines", "drives", "enables"
+    };
+
+    std::map<std::string, std::vector<std::string>> causal_edges;
+    std::set<std::string> causal_nodes;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string rel = edge.relation;
+        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+        bool is_causal = false;
+        for (const auto& keyword : causal_keywords) {
+            if (rel.find(keyword) != std::string::npos) {
+                is_causal = true;
+                break;
+            }
+        }
+
+        if (is_causal && !edge.sources.empty() && !edge.targets.empty()) {
+            std::string src = edge.sources[0];
+            std::string tgt = edge.targets[0];
+            causal_edges[src].push_back(tgt);
+            causal_nodes.insert(src);
+            causal_nodes.insert(tgt);
+        }
+    }
+
+    report_progress("Finding intervention points", 30, 100);
+
+    // Calculate betweenness centrality in causal graph
+    std::map<std::string, double> betweenness;
+
+    for (const auto& node : causal_nodes) {
+        betweenness[node] = 0.0;
+    }
+
+    // Simple betweenness: count paths that go through each node
+    for (const auto& start : causal_nodes) {
+        std::map<std::string, int> path_count;
+
+        // BFS from start node
+        std::queue<std::string> q;
+        std::set<std::string> visited;
+        q.push(start);
+        visited.insert(start);
+
+        while (!q.empty()) {
+            std::string current = q.front();
+            q.pop();
+
+            for (const auto& next : causal_edges[current]) {
+                if (!visited.count(next)) {
+                    visited.insert(next);
+                    q.push(next);
+                    path_count[next]++;
+                }
+            }
+        }
+
+        // Add to betweenness scores
+        for (const auto& [node, count] : path_count) {
+            if (node != start) {
+                betweenness[node] += count;
+            }
+        }
+    }
+
+    report_progress("Finding intervention points", 70, 100);
+
+    // Also consider out-degree (how many downstream effects)
+    std::map<std::string, int> out_degree;
+    for (const auto& [src, targets] : causal_edges) {
+        out_degree[src] = targets.size();
+    }
+
+    // Create insights for high-betweenness nodes
+    std::vector<std::pair<std::string, double>> ranked;
+    for (const auto& [node, score] : betweenness) {
+        if (score > 0) {
+            double combined = score * 0.7 + out_degree[node] * 0.3;
+            ranked.push_back({node, combined});
+        }
+    }
+
+    std::sort(ranked.begin(), ranked.end(), [](const auto& a, const auto& b) {
+        return a.second > b.second;
+    });
+
+    size_t max_results = std::min(ranked.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_results; ++i) {
+        const auto& [node, score] = ranked[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::INTERVENTION_POINT);
+        ins.set_type(InsightType::INTERVENTION_POINT);
+        ins.seed_nodes = {node};
+        ins.seed_labels = {get_node_label(node)};
+        ins.witness_nodes = {node};
+
+        ins.description = "Intervention point: '" + get_node_label(node) +
+                         "' controls " + std::to_string(static_cast<int>(betweenness[node])) + " causal paths";
+
+        double normalized_score = std::min(score / 10.0, 1.0);
+        ins.score = normalized_score;
+        ins.score_breakdown["betweenness"] = betweenness[node];
+        ins.score_breakdown["out_degree"] = out_degree[node];
+        ins.score_breakdown["criticality"] = normalized_score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding intervention points", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// FEEDBACK_LOOP: Causal Cycles Detection
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_feedback_loops() {
+    std::vector<Insight> results;
+    report_progress("Finding feedback loops", 0, 100);
+
+    // Build causal/directional graph
+    std::set<std::string> directional_keywords = {
+        "causes", "leads to", "results in", "produces", "triggers",
+        "influences", "affects", "determines", "drives", "enables",
+        "feeds into", "reinforces", "amplifies"
+    };
+
+    std::map<std::string, std::vector<std::string>> directed_edges;
+    std::map<std::pair<std::string, std::string>, std::string> edge_ids;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string rel = edge.relation;
+        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+        bool is_directional = false;
+        for (const auto& keyword : directional_keywords) {
+            if (rel.find(keyword) != std::string::npos) {
+                is_directional = true;
+                break;
+            }
+        }
+
+        if (is_directional && !edge.sources.empty() && !edge.targets.empty()) {
+            std::string src = edge.sources[0];
+            std::string tgt = edge.targets[0];
+            directed_edges[src].push_back(tgt);
+            edge_ids[{src, tgt}] = edge.id;
+        }
+    }
+
+    report_progress("Finding feedback loops", 30, 100);
+
+    // Find cycles using DFS
+    struct FeedbackLoop {
+        std::vector<std::string> cycle;
+        std::vector<std::string> edges;
+        bool is_positive; // reinforcing vs balancing
+    };
+
+    std::vector<FeedbackLoop> loops;
+    std::set<std::string> processed_cycles; // Avoid duplicates
+
+    std::function<void(std::string, std::vector<std::string>, std::vector<std::string>, std::set<std::string>&)>
+    find_cycles = [&](std::string start, std::vector<std::string> path, std::vector<std::string> edges, std::set<std::string>& visited) {
+        if (path.size() > 8) return; // Limit cycle length
+
+        for (const auto& next : directed_edges[path.back()]) {
+            // Check if we've completed a cycle back to start
+            if (next == start && path.size() >= 3) {
+                // Found a cycle
+                FeedbackLoop loop;
+                loop.cycle = path;
+                loop.edges = edges;
+
+                auto it = edge_ids.find({path.back(), start});
+                if (it != edge_ids.end()) {
+                    loop.edges.push_back(it->second);
+                }
+
+                // Check if reinforcing (all positive) or balancing
+                loop.is_positive = true; // Simplified
+
+                // Create a canonical representation to avoid duplicates
+                std::vector<std::string> sorted_cycle = path;
+                std::sort(sorted_cycle.begin(), sorted_cycle.end());
+                std::string cycle_key;
+                for (const auto& n : sorted_cycle) cycle_key += n + ",";
+
+                if (!processed_cycles.count(cycle_key)) {
+                    processed_cycles.insert(cycle_key);
+                    loops.push_back(loop);
+                }
+                continue;
+            }
+
+            if (visited.count(next) || next == start) continue;
+
+            std::vector<std::string> new_path = path;
+            new_path.push_back(next);
+
+            std::vector<std::string> new_edges = edges;
+            auto it = edge_ids.find({path.back(), next});
+            if (it != edge_ids.end()) {
+                new_edges.push_back(it->second);
+            }
+
+            std::set<std::string> new_visited = visited;
+            new_visited.insert(next);
+            find_cycles(start, new_path, new_edges, new_visited);
+        }
+    };
+
+    int node_count = 0;
+    for (const auto& [start, _] : directed_edges) {
+        std::set<std::string> visited = {start};
+        find_cycles(start, {start}, {}, visited);
+
+        if (++node_count > 50 || loops.size() > 100) break; // Limit search
+    }
+
+    report_progress("Finding feedback loops", 70, 100);
+
+    // Sort by cycle length (prefer shorter, more direct cycles)
+    std::sort(loops.begin(), loops.end(), [](const FeedbackLoop& a, const FeedbackLoop& b) {
+        return a.cycle.size() < b.cycle.size();
+    });
+
+    // Create insights
+    size_t max_loops = std::min(loops.size(), static_cast<size_t>(15));
+    for (size_t i = 0; i < max_loops; ++i) {
+        const auto& loop = loops[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::FEEDBACK_LOOP);
+        ins.set_type(InsightType::FEEDBACK_LOOP);
+        ins.seed_nodes = loop.cycle;
+        for (const auto& node : loop.cycle) {
+            ins.seed_labels.push_back(get_node_label(node));
+        }
+        ins.witness_nodes = loop.cycle;
+        ins.witness_edges = loop.edges;
+
+        std::string loop_type = loop.is_positive ? "reinforcing" : "balancing";
+        ins.description = "Feedback loop (" + loop_type + "): " +
+                         get_node_label(loop.cycle[0]) + " ⟲ (" +
+                         std::to_string(loop.cycle.size()) + " nodes)";
+
+        ins.score = 1.0 / (loop.cycle.size() + 1); // Shorter loops = higher score
+        ins.score_breakdown["cycle_length"] = loop.cycle.size();
+        ins.score_breakdown["loop_type"] = loop.is_positive ? 1.0 : 0.5;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding feedback loops", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// CONFOUNDER: Common Cause Detection
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_confounders() {
+    std::vector<Insight> results;
+    report_progress("Finding confounders", 0, 100);
+
+    // Find pairs of nodes that might have a causal relationship
+    std::map<std::string, std::set<std::string>> neighbors;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                neighbors[src].insert(tgt);
+                neighbors[tgt].insert(src);
+            }
+        }
+    }
+
+    report_progress("Finding confounders", 20, 100);
+
+    // Look for nodes that connect to both ends of potential causal pairs
+    struct ConfounderCandidate {
+        std::string confounder_node;
+        std::string node1;
+        std::string node2;
+        int shared_connections;
+        double confounding_strength;
+    };
+
+    std::vector<ConfounderCandidate> candidates;
+    auto all_nodes = graph_.get_all_nodes();
+
+    for (size_t i = 0; i < all_nodes.size() && i < 100; ++i) {
+        for (size_t j = i + 1; j < all_nodes.size() && j < 100; ++j) {
+            std::string n1 = all_nodes[i].id;
+            std::string n2 = all_nodes[j].id;
+
+            // Find common neighbors (potential confounders)
+            std::vector<std::string> common;
+            std::set_intersection(neighbors[n1].begin(), neighbors[n1].end(),
+                                neighbors[n2].begin(), neighbors[n2].end(),
+                                std::back_inserter(common));
+
+            for (const auto& confounder : common) {
+                ConfounderCandidate cand;
+                cand.confounder_node = confounder;
+                cand.node1 = n1;
+                cand.node2 = n2;
+                cand.shared_connections = common.size();
+
+                // Confounding strength: how many connections does the confounder have
+                double degree = neighbors[confounder].size();
+                cand.confounding_strength = std::min(degree / 10.0, 1.0);
+
+                candidates.push_back(cand);
+
+                if (candidates.size() > 200) break;
+            }
+            if (candidates.size() > 200) break;
+        }
+        if (candidates.size() > 200) break;
+    }
+
+    report_progress("Finding confounders", 70, 100);
+
+    // Sort by confounding strength
+    std::sort(candidates.begin(), candidates.end(), [](const ConfounderCandidate& a, const ConfounderCandidate& b) {
+        return a.confounding_strength > b.confounding_strength;
+    });
+
+    // Create insights
+    size_t max_confounders = std::min(candidates.size(), static_cast<size_t>(15));
+    for (size_t i = 0; i < max_confounders; ++i) {
+        const auto& cand = candidates[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CONFOUNDER);
+        ins.set_type(InsightType::CONFOUNDER);
+        ins.seed_nodes = {cand.confounder_node, cand.node1, cand.node2};
+        ins.seed_labels = {
+            get_node_label(cand.confounder_node),
+            get_node_label(cand.node1),
+            get_node_label(cand.node2)
+        };
+        ins.witness_nodes = ins.seed_nodes;
+
+        ins.description = "Potential confounder: '" + get_node_label(cand.confounder_node) +
+                         "' affects both '" + get_node_label(cand.node1) +
+                         "' and '" + get_node_label(cand.node2) + "'";
+
+        ins.score = cand.confounding_strength;
+        ins.score_breakdown["confounding_strength"] = cand.confounding_strength;
+        ins.score_breakdown["shared_connections"] = cand.shared_connections;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding confounders", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// TAXONOMY: Hierarchical Relationship Induction
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_taxonomy_induction() {
+    std::vector<Insight> results;
+    report_progress("Finding taxonomy relationships", 0, 100);
+
+    // Keywords indicating hierarchical relationships
+    std::set<std::string> taxonomy_keywords = {
+        "is a", "is an", "type of", "kind of", "subclass of",
+        "part of", "contains", "includes", "has a", "category"
+    };
+
+    std::vector<std::tuple<std::string, std::string, std::string, std::string>> hierarchical_rels; // child, parent, relation, edge_id
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string rel = edge.relation;
+        std::string rel_lower = rel;
+        std::transform(rel_lower.begin(), rel_lower.end(), rel_lower.begin(), ::tolower);
+
+        bool is_taxonomic = false;
+        std::string match_type;
+        for (const auto& keyword : taxonomy_keywords) {
+            if (rel_lower.find(keyword) != std::string::npos) {
+                is_taxonomic = true;
+                match_type = keyword;
+                break;
+            }
+        }
+
+        if (is_taxonomic && !edge.sources.empty() && !edge.targets.empty()) {
+            // Determine parent-child direction based on keyword
+            bool sources_are_children = (match_type.find("is a") != std::string::npos ||
+                                        match_type.find("type of") != std::string::npos ||
+                                        match_type.find("part of") != std::string::npos);
+
+            for (const auto& src : edge.sources) {
+                for (const auto& tgt : edge.targets) {
+                    if (sources_are_children) {
+                        hierarchical_rels.push_back({src, tgt, match_type, edge.id}); // src is child, tgt is parent
+                    } else {
+                        hierarchical_rels.push_back({tgt, src, match_type, edge.id}); // tgt is child, src is parent
+                    }
+                }
+            }
+        }
+    }
+
+    report_progress("Finding taxonomy relationships", 50, 100);
+
+    // Sort by relation type (prefer "is a" over "part of")
+    std::sort(hierarchical_rels.begin(), hierarchical_rels.end(),
+        [](const auto& a, const auto& b) {
+            bool a_is_a = (std::get<2>(a).find("is a") != std::string::npos);
+            bool b_is_a = (std::get<2>(b).find("is a") != std::string::npos);
+            return a_is_a > b_is_a; // Prefer "is a" relationships
+        });
+
+    // Create insights
+    size_t max_taxonomy = std::min(hierarchical_rels.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_taxonomy; ++i) {
+        const auto& [child, parent, rel_type, edge_id] = hierarchical_rels[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::TAXONOMY);
+        ins.set_type(InsightType::TAXONOMY);
+        ins.seed_nodes = {child, parent};
+        ins.seed_labels = {get_node_label(child), get_node_label(parent)};
+        ins.witness_nodes = {child, parent};
+        ins.witness_edges = {edge_id};
+
+        ins.description = "Taxonomy: '" + get_node_label(child) + "' " +
+                         rel_type + " '" + get_node_label(parent) + "'";
+
+        // Score based on relation type clarity
+        double score = (rel_type.find("is a") != std::string::npos) ? 1.0 : 0.7;
+        ins.score = score;
+        ins.score_breakdown["relation_type"] = score;
+        ins.score_breakdown["confidence"] = score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding taxonomy relationships", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// DOMAIN_BRIDGE: Cross-Domain Connector Detection
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_domain_bridges() {
+    std::vector<Insight> results;
+    report_progress("Finding domain bridges", 0, 100);
+
+    // Use relation diversity as proxy for domain bridging
+    // Nodes that connect different relation types are likely bridging domains
+    std::map<std::string, std::set<std::string>> node_relation_types;
+    std::map<std::string, std::set<std::string>> node_neighbors;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                node_relation_types[src].insert(edge.relation);
+                node_relation_types[tgt].insert(edge.relation);
+                node_neighbors[src].insert(tgt);
+                node_neighbors[tgt].insert(src);
+            }
+        }
+    }
+
+    report_progress("Finding domain bridges", 30, 100);
+
+    // Calculate bridging score based on:
+    // 1. Number of different relation types (domain diversity)
+    // 2. Number of s-connected components the node participates in
+    // 3. Degree centrality
+
+    struct BridgeCandidate {
+        std::string node;
+        int relation_diversity;
+        int degree;
+        double bridge_score;
+    };
+
+    std::vector<BridgeCandidate> candidates;
+
+    for (const auto& [node, rel_types] : node_relation_types) {
+        if (rel_types.size() >= 2) { // Must connect at least 2 relation types
+            BridgeCandidate cand;
+            cand.node = node;
+            cand.relation_diversity = rel_types.size();
+            cand.degree = node_neighbors[node].size();
+
+            // Bridge score: weighted combination of diversity and connectivity
+            cand.bridge_score = (cand.relation_diversity * 0.7) + (std::min(cand.degree, 20) * 0.3);
+
+            candidates.push_back(cand);
+        }
+    }
+
+    report_progress("Finding domain bridges", 60, 100);
+
+    // Sort by bridge score
+    std::sort(candidates.begin(), candidates.end(), [](const BridgeCandidate& a, const BridgeCandidate& b) {
+        return a.bridge_score > b.bridge_score;
+    });
+
+    // Create ranked list for insights
+    std::vector<std::pair<std::string, int>> ranked;
+    for (const auto& cand : candidates) {
+        ranked.push_back({cand.node, cand.relation_diversity});
+    }
+
+    std::sort(ranked.begin(), ranked.end(), [](const auto& a, const auto& b) {
+        return a.second > b.second;
+    });
+
+    // Create insights
+    size_t max_bridges = std::min(ranked.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_bridges; ++i) {
+        const auto& [node, domain_count] = ranked[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::DOMAIN_BRIDGE);
+        ins.set_type(InsightType::DOMAIN_BRIDGE);
+        ins.seed_nodes = {node};
+        ins.seed_labels = {get_node_label(node)};
+        ins.witness_nodes = {node};
+
+        ins.description = "Domain bridge: '" + get_node_label(node) +
+                         "' connects " + std::to_string(domain_count) + " different domains";
+
+        double score = std::min(static_cast<double>(domain_count) / 5.0, 1.0);
+        ins.score = score;
+        ins.score_breakdown["domain_diversity"] = domain_count;
+        ins.score_breakdown["bridge_strength"] = score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding domain bridges", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// LOGICAL_ENTAILMENT: IF-THEN Rule Induction
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_logical_entailments() {
+    std::vector<Insight> results;
+    report_progress("Finding logical entailments", 0, 100);
+
+    // Find nodes with multiple incoming edges (potential premises)
+    std::map<std::string, std::vector<std::pair<std::string, std::string>>> incoming_edges; // target -> [(source, edge_id)]
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                incoming_edges[tgt].push_back({src, edge.id});
+            }
+        }
+    }
+
+    report_progress("Finding logical entailments", 40, 100);
+
+    // Find nodes with 2+ incoming edges (IF X AND Y THEN Z pattern)
+    std::vector<std::tuple<std::vector<std::string>, std::string, std::vector<std::string>>> entailments; // (premises, conclusion, edge_ids)
+
+    for (const auto& [conclusion, premises_data] : incoming_edges) {
+        if (premises_data.size() >= 2 && premises_data.size() <= 5) {
+            std::vector<std::string> premises;
+            std::vector<std::string> edge_ids;
+
+            for (const auto& [premise, edge_id] : premises_data) {
+                premises.push_back(premise);
+                edge_ids.push_back(edge_id);
+            }
+
+            entailments.push_back({premises, conclusion, edge_ids});
+        }
+    }
+
+    report_progress("Finding logical entailments", 70, 100);
+
+    // Sort by number of premises (more premises = more complex rule)
+    std::sort(entailments.begin(), entailments.end(),
+        [](const auto& a, const auto& b) {
+            return std::get<0>(a).size() > std::get<0>(b).size();
+        });
+
+    // Create insights
+    size_t max_entailments = std::min(entailments.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_entailments; ++i) {
+        const auto& [premises, conclusion, edge_ids] = entailments[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::LOGICAL_ENTAILMENT);
+        ins.set_type(InsightType::LOGICAL_ENTAILMENT);
+
+        ins.seed_nodes = premises;
+        ins.seed_nodes.push_back(conclusion);
+
+        for (const auto& p : premises) {
+            ins.seed_labels.push_back(get_node_label(p));
+        }
+        ins.seed_labels.push_back(get_node_label(conclusion));
+
+        ins.witness_nodes = ins.seed_nodes;
+        ins.witness_edges = edge_ids;
+
+        // Build description
+        std::string premise_str = "IF ";
+        for (size_t j = 0; j < premises.size(); ++j) {
+            premise_str += "'" + get_node_label(premises[j]) + "'";
+            if (j < premises.size() - 1) premise_str += " AND ";
+        }
+
+        ins.description = premise_str + " THEN '" + get_node_label(conclusion) + "'";
+
+        ins.score = std::min(static_cast<double>(premises.size()) / 3.0, 1.0);
+        ins.score_breakdown["premise_count"] = premises.size();
+        ins.score_breakdown["rule_complexity"] = ins.score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding logical entailments", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// COMPOSITIONAL_REASONING: Relation Algebra (R1 ∘ R2 = R3)
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_compositional_reasoning() {
+    std::vector<Insight> results;
+    report_progress("Finding compositional patterns", 0, 100);
+
+    // Find 2-hop paths where A→B→C and also A→C directly
+    std::map<std::string, std::vector<std::pair<std::string, std::string>>> outgoing; // node -> [(target, relation)]
+    std::map<std::pair<std::string, std::string>, std::string> direct_relations; // (src, tgt) -> relation
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (!edge.sources.empty() && !edge.targets.empty()) {
+            std::string src = edge.sources[0];
+            std::string tgt = edge.targets[0];
+            outgoing[src].push_back({tgt, edge.relation});
+            direct_relations[{src, tgt}] = edge.relation;
+        }
+    }
+
+    report_progress("Finding compositional patterns", 30, 100);
+
+    // Find A→B→C patterns where A→C also exists
+    struct CompositionPattern {
+        std::string node_a;
+        std::string node_b;
+        std::string node_c;
+        std::string rel_ab;
+        std::string rel_bc;
+        std::string rel_ac;
+    };
+
+    std::vector<CompositionPattern> patterns;
+
+    for (const auto& [node_a, targets_from_a] : outgoing) {
+        for (const auto& [node_b, rel_ab] : targets_from_a) {
+            if (!outgoing.count(node_b)) continue;
+
+            for (const auto& [node_c, rel_bc] : outgoing[node_b]) {
+                if (node_c == node_a) continue; // Skip cycles
+
+                // Check if A→C exists directly
+                auto it = direct_relations.find({node_a, node_c});
+                if (it != direct_relations.end()) {
+                    CompositionPattern pattern;
+                    pattern.node_a = node_a;
+                    pattern.node_b = node_b;
+                    pattern.node_c = node_c;
+                    pattern.rel_ab = rel_ab;
+                    pattern.rel_bc = rel_bc;
+                    pattern.rel_ac = it->second;
+                    patterns.push_back(pattern);
+
+                    if (patterns.size() > 100) break;
+                }
+            }
+            if (patterns.size() > 100) break;
+        }
+        if (patterns.size() > 100) break;
+    }
+
+    report_progress("Finding compositional patterns", 70, 100);
+
+    // Create insights
+    size_t max_patterns = std::min(patterns.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_patterns; ++i) {
+        const auto& pattern = patterns[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::COMPOSITIONAL_REASONING);
+        ins.set_type(InsightType::COMPOSITIONAL_REASONING);
+        ins.seed_nodes = {pattern.node_a, pattern.node_b, pattern.node_c};
+        ins.seed_labels = {
+            get_node_label(pattern.node_a),
+            get_node_label(pattern.node_b),
+            get_node_label(pattern.node_c)
+        };
+        ins.witness_nodes = ins.seed_nodes;
+
+        ins.description = "Composition: '" + pattern.rel_ab + "' ∘ '" + pattern.rel_bc +
+                         "' = '" + pattern.rel_ac + "' (" +
+                         get_node_label(pattern.node_a) + "→" +
+                         get_node_label(pattern.node_b) + "→" +
+                         get_node_label(pattern.node_c) + ")";
+
+        ins.score = 0.8; // Fixed score for compositional patterns
+        ins.score_breakdown["path_length"] = 2;
+        ins.score_breakdown["composition_valid"] = 1.0;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding compositional patterns", 100, 100);
+    return results;
+}
+// =============================================================================
+// EXPLANATORY_CHAIN: Multi-Hop Explanation Path Discovery
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_explanatory_chains() {
+    std::vector<Insight> results;
+    report_progress("Finding explanatory chains", 0, 100);
+
+    // Explanatory relation keywords (relations that explain "why" or "how")
+    std::set<std::string> explanatory_keywords = {
+        "causes", "enables", "requires", "produces", "leads to", "results in",
+        "improves", "addresses", "solves", "supports", "facilitates",
+        "depends on", "is used by", "applied to", "implements",
+        "contributes to", "influences", "affects", "determines"
+    };
+
+    auto is_explanatory = [&](const std::string& relation) {
+        std::string rel_lower = relation;
+        std::transform(rel_lower.begin(), rel_lower.end(), rel_lower.begin(), ::tolower);
+        for (const auto& keyword : explanatory_keywords) {
+            if (rel_lower.find(keyword) != std::string::npos) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    // Build directed explanatory graph
+    std::map<std::string, std::vector<std::pair<std::string, std::string>>> explan_edges; // node -> [(next_node, edge_id)]
+    std::map<std::pair<std::string, std::string>, std::string> edge_relations;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (!is_explanatory(edge.relation)) continue;
+        if (edge.sources.empty() || edge.targets.empty()) continue;
+
+        std::string src = edge.sources[0];
+        std::string tgt = edge.targets[0];
+        explan_edges[src].push_back({tgt, edge.id});
+        edge_relations[{src, tgt}] = edge.relation;
+    }
+
+    if (explan_edges.empty()) {
+        report_progress("Finding explanatory chains", 100, 100);
+        return results;
+    }
+
+    report_progress("Finding explanatory chains", 20, 100);
+
+    // Identify high-value entity pairs to explain
+    // Strategy: Find pairs with high betweenness but no direct connection
+    std::vector<std::pair<std::string, std::string>> entity_pairs;
+    
+    // Get high-degree nodes (likely important concepts)
+    std::vector<std::pair<std::string, int>> node_degrees;
+    for (const auto& [node, neighbors] : explan_edges) {
+        int total_degree = neighbors.size();
+        node_degrees.push_back({node, total_degree});
+    }
+
+    std::sort(node_degrees.begin(), node_degrees.end(), 
+              [](const auto& a, const auto& b) { return a.second > b.second; });
+
+    // Select top nodes as candidates
+    size_t num_candidates = std::min(static_cast<size_t>(50), node_degrees.size());
+    std::set<std::string> candidate_nodes;
+    for (size_t i = 0; i < num_candidates; ++i) {
+        candidate_nodes.insert(node_degrees[i].first);
+    }
+
+    // Generate pairs of candidates without direct connections
+    for (const auto& node_a : candidate_nodes) {
+        for (const auto& node_b : candidate_nodes) {
+            if (node_a >= node_b) continue;
+            
+            // Check if there's a direct connection
+            bool direct_connection = false;
+            for (const auto& [neighbor, _] : explan_edges[node_a]) {
+                if (neighbor == node_b) {
+                    direct_connection = true;
+                    break;
+                }
+            }
+            
+            if (!direct_connection) {
+                entity_pairs.push_back({node_a, node_b});
+            }
+        }
+    }
+
+    report_progress("Finding explanatory chains", 40, 100);
+
+    // Find k-shortest paths for each entity pair
+    struct ExplanPath {
+        std::vector<std::string> nodes;
+        std::vector<std::string> edge_ids;
+        std::vector<std::string> relations;
+        double coherence_score;
+        double novelty_score;
+        double simplicity_score;
+        double final_score;
+    };
+
+    std::vector<ExplanPath> all_paths;
+    const size_t max_path_length = 6;
+    const size_t max_paths_per_pair = 3;
+
+    // BFS-based k-shortest path finding
+    for (const auto& [source, target] : entity_pairs) {
+        if (all_paths.size() >= 200) break; // Limit total paths to evaluate
+
+        // BFS to find paths
+        std::vector<ExplanPath> paths_for_pair;
+        
+        struct PathState {
+            std::vector<std::string> nodes;
+            std::vector<std::string> edge_ids;
+            std::set<std::string> visited;
+        };
+
+        std::queue<PathState> queue;
+        PathState initial;
+        initial.nodes = {source};
+        initial.visited = {source};
+        queue.push(initial);
+
+        while (!queue.empty() && paths_for_pair.size() < max_paths_per_pair) {
+            PathState current = queue.front();
+            queue.pop();
+
+            std::string last_node = current.nodes.back();
+            
+            if (last_node == target && current.nodes.size() >= 3) {
+                // Found a valid path
+                ExplanPath path;
+                path.nodes = current.nodes;
+                path.edge_ids = current.edge_ids;
+                
+                // Extract relations
+                for (size_t i = 0; i < current.nodes.size() - 1; ++i) {
+                    path.relations.push_back(edge_relations[{current.nodes[i], current.nodes[i+1]}]);
+                }
+                
+                paths_for_pair.push_back(path);
+                continue;
+            }
+
+            if (current.nodes.size() >= max_path_length) continue;
+
+            // Expand to neighbors
+            for (const auto& [next_node, edge_id] : explan_edges[last_node]) {
+                if (current.visited.count(next_node)) continue;
+
+                PathState new_state;
+                new_state.nodes = current.nodes;
+                new_state.nodes.push_back(next_node);
+                new_state.edge_ids = current.edge_ids;
+                new_state.edge_ids.push_back(edge_id);
+                new_state.visited = current.visited;
+                new_state.visited.insert(next_node);
+
+                queue.push(new_state);
+            }
+        }
+
+        all_paths.insert(all_paths.end(), paths_for_pair.begin(), paths_for_pair.end());
+    }
+
+    report_progress("Finding explanatory chains", 70, 100);
+
+    // Score paths
+    for (auto& path : all_paths) {
+        // Coherence: prefer paths with semantically related relations
+        path.coherence_score = 0.7; // Baseline (would use LLM for better scoring)
+
+        // Novelty: prefer paths with diverse intermediate nodes
+        std::set<std::string> unique_intermediates(path.nodes.begin() + 1, path.nodes.end() - 1);
+        path.novelty_score = std::min(static_cast<double>(unique_intermediates.size()) / 3.0, 1.0);
+
+        // Simplicity: prefer shorter paths
+        path.simplicity_score = 1.0 / static_cast<double>(path.nodes.size());
+
+        // Final weighted score
+        path.final_score = 0.4 * path.coherence_score +
+                          0.3 * path.novelty_score +
+                          0.3 * path.simplicity_score;
+    }
+
+    // Sort by final score
+    std::sort(all_paths.begin(), all_paths.end(),
+              [](const ExplanPath& a, const ExplanPath& b) {
+                  return a.final_score > b.final_score;
+              });
+
+    // Create insights for top paths
+    size_t max_insights = std::min(all_paths.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_insights; ++i) {
+        const auto& path = all_paths[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::EXPLANATORY_CHAIN);
+        ins.set_type(InsightType::EXPLANATORY_CHAIN);
+
+        ins.seed_nodes = path.nodes;
+        ins.seed_labels.clear();
+        for (const auto& node : path.nodes) {
+            ins.seed_labels.push_back(get_node_label(node));
+        }
+
+        ins.witness_nodes = path.nodes;
+        ins.witness_edges = path.edge_ids;
+
+        // Build description
+        std::stringstream desc;
+        desc << "Explanatory path: " << get_node_label(path.nodes[0]);
+        for (size_t j = 1; j < path.nodes.size(); ++j) {
+            desc << " → [" << path.relations[j-1] << "] → " << get_node_label(path.nodes[j]);
+        }
+
+        ins.description = desc.str();
+
+        ins.score = path.final_score;
+        ins.score_breakdown["coherence"] = path.coherence_score;
+        ins.score_breakdown["novelty"] = path.novelty_score;
+        ins.score_breakdown["simplicity"] = path.simplicity_score;
+        ins.score_breakdown["path_length"] = path.nodes.size();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding explanatory chains", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// SCHEMA_VIOLATION: Detect entities/relations violating expected patterns
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_schema_violations() {
+    std::vector<Insight> results;
+    report_progress("Finding schema violations", 0, 100);
+
+    // Step 1: Learn implicit schema patterns from the graph
+    // Track: (entity_type, relation) -> count
+    std::map<std::pair<std::string, std::string>, int> type_relation_counts;
+    std::map<std::string, int> type_counts;
+    std::map<std::string, std::set<std::string>> entity_relations; // entity -> set of relations
+    std::map<std::string, std::string> entity_types; // entity -> type (if available)
+
+    // Extract entity types from labels (e.g., "Person: John" -> type="Person")
+    auto all_nodes = graph_.get_all_nodes();
+    for (const auto& node : all_nodes) {
+        std::string label = node.label;
+        size_t colon = label.find(':');
+        if (colon != std::string::npos && colon > 0) {
+            std::string type = label.substr(0, colon);
+            // Trim whitespace
+            while (!type.empty() && std::isspace(type.back())) type.pop_back();
+            while (!type.empty() && std::isspace(type.front())) type.erase(0, 1);
+            if (!type.empty()) {
+                entity_types[node.id] = type;
+                type_counts[type]++;
+            }
+        }
+    }
+
+    report_progress("Finding schema violations", 20, 100);
+
+    // Build schema: what relations do entities of each type typically have?
+    // Track unique entities that have each (type, relation) pair
+    std::map<std::pair<std::string, std::string>, std::set<std::string>> type_relation_entities;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string relation = edge.relation;
+        if (relation.empty()) relation = "RELATED_TO";
+
+        // Track all participants (sources + targets)
+        std::set<std::string> participants;
+        for (const auto& src : edge.sources) participants.insert(src);
+        for (const auto& tgt : edge.targets) participants.insert(tgt);
+
+        for (const auto& node_id : participants) {
+            entity_relations[node_id].insert(relation);
+
+            // Track which entities of each type have this relation
+            if (entity_types.count(node_id)) {
+                std::string type = entity_types[node_id];
+                type_relation_entities[{type, relation}].insert(node_id);
+            }
+        }
+    }
+
+    // Convert entity sets to counts
+    for (const auto& [key, entities] : type_relation_entities) {
+        type_relation_counts[key] = entities.size();
+    }
+
+    report_progress("Finding schema violations", 40, 100);
+
+    // Step 2: Compute expected relations for each type (threshold: 30% of entities have it)
+    std::map<std::string, std::set<std::string>> expected_relations; // type -> set of expected relations
+    for (const auto& [type, count] : type_counts) {
+        if (count < 3) continue; // Need at least 3 entities of a type to establish pattern
+
+        for (const auto& [key, rel_count] : type_relation_counts) {
+            if (key.first == type) {
+                double coverage = (double)rel_count / count;
+                if (coverage >= 0.30) { // 30% threshold
+                    expected_relations[type].insert(key.second);
+                }
+            }
+        }
+    }
+
+    report_progress("Finding schema violations", 60, 100);
+
+    // Step 3: Find violations - entities missing expected relations
+    struct Violation {
+        std::string entity;
+        std::string entity_label;
+        std::string entity_type;
+        std::string missing_relation;
+        double severity; // How common is this relation for this type?
+        int type_size;   // How many entities of this type?
+    };
+
+    std::vector<Violation> violations;
+
+    for (const auto& [node_id, type] : entity_types) {
+        if (!expected_relations.count(type)) continue;
+
+        const auto& expected = expected_relations[type];
+        const auto& actual = entity_relations.count(node_id) ? entity_relations[node_id] : std::set<std::string>();
+
+        // Find missing relations
+        for (const auto& expected_rel : expected) {
+            if (actual.find(expected_rel) == actual.end()) {
+                // This entity is missing an expected relation
+                double coverage = (double)type_relation_counts[{type, expected_rel}] / type_counts[type];
+
+                Violation v;
+                v.entity = node_id;
+                v.entity_label = get_node_label(node_id);
+                v.entity_type = type;
+                v.missing_relation = expected_rel;
+                v.severity = coverage; // Higher coverage = more severe violation
+                v.type_size = type_counts[type];
+
+                violations.push_back(v);
+            }
+        }
+    }
+
+    report_progress("Finding schema violations", 80, 100);
+
+    // Step 4: Rank violations by severity and convert to insights
+    std::sort(violations.begin(), violations.end(), [](const Violation& a, const Violation& b) {
+        if (std::abs(a.severity - b.severity) > 0.01) return a.severity > b.severity;
+        return a.type_size > b.type_size; // Prefer violations in larger type groups
+    });
+
+    // Take top violations (limit to 50)
+    size_t max_violations = std::min<size_t>(50, violations.size());
+    for (size_t i = 0; i < max_violations; ++i) {
+        const auto& v = violations[i];
+
+        Insight ins;
+        ins.set_type(InsightType::SCHEMA_VIOLATION);
+        ins.seed_nodes = {v.entity};
+        ins.seed_labels = {v.entity_label};
+        ins.score = v.severity;
+
+        ins.score_breakdown["severity"] = v.severity;
+        ins.score_breakdown["type_size"] = v.type_size;
+        ins.score_breakdown["coverage"] = v.severity * 100.0; // as percentage
+
+        // Find example entities of same type that DO have this relation (for suggestions)
+        std::vector<std::string> examples;
+        for (const auto& [other_id, other_type] : entity_types) {
+            if (other_type == v.entity_type &&
+                entity_relations.count(other_id) &&
+                entity_relations[other_id].count(v.missing_relation) &&
+                examples.size() < 3) {
+                examples.push_back(get_node_label(other_id));
+            }
+        }
+
+        // Build structured description with embedded metadata
+        std::stringstream desc;
+        desc << "SCHEMA_VIOLATION|entity_type:" << v.entity_type
+             << "|missing_relation:" << v.missing_relation
+             << "|expected_coverage:" << std::to_string((int)(v.severity * 100)) << "%";
+        if (!examples.empty()) {
+            desc << "|examples:" << examples[0];
+            if (examples.size() > 1) desc << ", " << examples[1];
+            if (examples.size() > 2) desc << ", " << examples[2];
+        }
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding schema violations", 100, 100);
+    return results;
+}
+
+
+// =============================================================================
+// TRANSITIVE_CLOSURE: Find missing links implied by transitive relations
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_transitive_closure_gaps() {
+    std::vector<Insight> results;
+    report_progress("Finding transitive closure gaps", 0, 100);
+
+    // Step 1: Identify transitive relation types
+    // Relations that should satisfy: if A→B and B→C, then A→C
+    std::set<std::string> transitive_relations;
+
+    // Common transitive patterns
+    std::vector<std::string> transitive_keywords = {
+        "is-a", "isa", "subclass", "subtype", "inherits", "extends",
+        "part-of", "partof", "contains", "includes",
+        "causes", "leads-to", "produces", "results-in",
+        "precedes", "before", "after", "follows",
+        "implies", "entails", "requires"
+    };
+
+    // Scan all edges to find which relations appear transitive
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string rel = edge.relation;
+        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+        // Check if relation name suggests transitivity
+        for (const auto& keyword : transitive_keywords) {
+            if (rel.find(keyword) != std::string::npos) {
+                transitive_relations.insert(edge.relation); // Keep original case
+                break;
+            }
+        }
+    }
+
+    report_progress("Finding transitive closure gaps", 20, 100);
+
+    // Step 2: Build directed graphs for each transitive relation type
+    std::map<std::string, std::map<std::string, std::set<std::string>>> relation_graphs;
+    // relation -> (source -> set of targets)
+
+    std::map<std::string, std::set<std::pair<std::string, std::string>>> existing_links;
+    // relation -> set of (source, target) pairs that exist
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (transitive_relations.count(edge.relation) == 0) continue;
+
+        if (edge.sources.empty() || edge.targets.empty()) continue;
+
+        // For hyperedges, create all source->target combinations
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                relation_graphs[edge.relation][src].insert(tgt);
+                existing_links[edge.relation].insert({src, tgt});
+            }
+        }
+    }
+
+    report_progress("Finding transitive closure gaps", 40, 100);
+
+    // Step 3: Find transitive closure gaps
+    // For each relation, find chains A→B→C where A→C is missing
+    struct Gap {
+        std::string relation;
+        std::string source;
+        std::string intermediate;
+        std::string target;
+        int chain_count;    // How many paths support this gap
+        double confidence;  // Confidence in the inference
+    };
+
+    std::vector<Gap> gaps;
+
+    for (const auto& [relation, graph] : relation_graphs) {
+        // Track potential gaps: (source, target) -> count of supporting chains
+        std::map<std::pair<std::string, std::string>, int> gap_support;
+        std::map<std::pair<std::string, std::string>, std::set<std::string>> gap_intermediates;
+
+        // Find chains of length 2: A→B→C
+        for (const auto& [node_a, targets_of_a] : graph) {
+            for (const auto& node_b : targets_of_a) {
+                // Found A→B, now look for B→C
+                if (graph.count(node_b)) {
+                    for (const auto& node_c : graph.at(node_b)) {
+                        // Found A→B→C chain
+                        // Check if A→C exists
+                        if (existing_links[relation].count({node_a, node_c}) == 0) {
+                            // Gap found!
+                            gap_support[{node_a, node_c}]++;
+                            gap_intermediates[{node_a, node_c}].insert(node_b);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Convert gaps to Gap structures
+        for (const auto& [pair, count] : gap_support) {
+            Gap g;
+            g.relation = relation;
+            g.source = pair.first;
+            g.target = pair.second;
+            g.chain_count = count;
+
+            // Pick most representative intermediate
+            if (!gap_intermediates[pair].empty()) {
+                g.intermediate = *gap_intermediates[pair].begin();
+            }
+
+            // Compute confidence: more supporting chains = higher confidence
+            // Also consider the overall connectivity of the relation graph
+            g.confidence = std::min(1.0, 0.5 + 0.1 * count); // Base 0.5, +0.1 per chain, cap at 1.0
+
+            gaps.push_back(g);
+        }
+    }
+
+    report_progress("Finding transitive closure gaps", 70, 100);
+
+    // Step 4: Rank gaps by confidence and chain count
+    std::sort(gaps.begin(), gaps.end(), [](const Gap& a, const Gap& b) {
+        if (std::abs(a.confidence - b.confidence) > 0.01) return a.confidence > b.confidence;
+        return a.chain_count > b.chain_count;
+    });
+
+    // Step 5: Convert top gaps to insights (limit to 50)
+    size_t max_gaps = std::min<size_t>(50, gaps.size());
+    for (size_t i = 0; i < max_gaps; ++i) {
+        const auto& g = gaps[i];
+
+        Insight ins;
+        ins.set_type(InsightType::TRANSITIVE_CLOSURE);
+        ins.seed_nodes = {g.source, g.target};
+        ins.seed_labels = {get_node_label(g.source), get_node_label(g.target)};
+        ins.score = g.confidence;
+
+        ins.score_breakdown["confidence"] = g.confidence;
+        ins.score_breakdown["chain_count"] = g.chain_count;
+
+        // Build description
+        std::stringstream desc;
+        desc << "TRANSITIVE_GAP|relation:" << g.relation
+             << "|intermediate:" << get_node_label(g.intermediate)
+             << "|chains:" << g.chain_count;
+        ins.description = desc.str();
+
+        ins.novelty_tags.push_back("transitive_closure");
+        ins.novelty_tags.push_back("inferred_" + g.relation);
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding transitive closure gaps", 100, 100);
+    return results;
+}
+
+
+// =============================================================================
+// META_PATH: Meta-Path Based Link Prediction
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_meta_path_links() {
+    std::vector<Insight> results;
+    report_progress("Finding meta-path predictions", 0, 100);
+
+    // Meta-paths are sequences of relation types
+    // For example: Author→Paper→Venue or Author→Paper→Author (collaboration)
+
+    // Build relation-typed graph
+    struct TypedEdge {
+        std::string src;
+        std::string tgt;
+        std::string rel_type;
+    };
+
+    std::vector<TypedEdge> typed_edges;
+    std::map<std::string, std::set<std::string>> neighbors;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (!edge.sources.empty() && !edge.targets.empty()) {
+            for (const auto& src : edge.sources) {
+                for (const auto& tgt : edge.targets) {
+                    typed_edges.push_back({src, tgt, edge.relation});
+                    neighbors[src].insert(tgt);
+                    neighbors[tgt].insert(src);
+                }
+            }
+        }
+    }
+
+    report_progress("Finding meta-path predictions", 30, 100);
+
+    // Find common meta-paths (2-hop with same relation types)
+    std::map<std::string, int> meta_path_frequency; // relation1→relation2 -> count
+    std::map<std::string, std::vector<std::tuple<std::string, std::string, std::string>>> meta_path_instances; // meta_path -> [(a, b, c)]
+
+    for (const auto& edge1 : typed_edges) {
+        for (const auto& edge2 : typed_edges) {
+            if (edge1.tgt == edge2.src && edge1.src != edge2.tgt) {
+                std::string meta_path = edge1.rel_type + "→" + edge2.rel_type;
+                meta_path_frequency[meta_path]++;
+                meta_path_instances[meta_path].push_back({edge1.src, edge1.tgt, edge2.tgt});
+
+                if (meta_path_instances[meta_path].size() > 20) break;
+            }
+        }
+    }
+
+    report_progress("Finding meta-path predictions", 60, 100);
+
+    // Use frequent meta-paths to predict missing links
+    struct MetaPathPrediction {
+        std::string node_a;
+        std::string node_c;
+        std::string meta_path;
+        int support_count;
+    };
+
+    std::vector<MetaPathPrediction> predictions;
+
+    for (const auto& [meta_path, instances] : meta_path_instances) {
+        if (meta_path_frequency[meta_path] < 3) continue; // Require at least 3 instances
+
+        for (const auto& [a, b, c] : instances) {
+            // Predict link from a to c if it doesn't exist
+            if (!neighbors[a].count(c)) {
+                MetaPathPrediction pred;
+                pred.node_a = a;
+                pred.node_c = c;
+                pred.meta_path = meta_path;
+                pred.support_count = meta_path_frequency[meta_path];
+                predictions.push_back(pred);
+
+                if (predictions.size() > 50) break;
+            }
+        }
+        if (predictions.size() > 50) break;
+    }
+
+    report_progress("Finding meta-path predictions", 80, 100);
+
+    // Sort by support count
+    std::sort(predictions.begin(), predictions.end(),
+        [](const MetaPathPrediction& a, const MetaPathPrediction& b) {
+            return a.support_count > b.support_count;
+        });
+
+    // Create insights
+    size_t max_predictions = std::min(predictions.size(), static_cast<size_t>(20));
+    for (size_t i = 0; i < max_predictions; ++i) {
+        const auto& pred = predictions[i];
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::META_PATH);
+        ins.set_type(InsightType::META_PATH);
+        ins.seed_nodes = {pred.node_a, pred.node_c};
+        ins.seed_labels = {get_node_label(pred.node_a), get_node_label(pred.node_c)};
+        ins.witness_nodes = ins.seed_nodes;
+
+        ins.description = "Meta-path prediction: '" + get_node_label(pred.node_a) +
+                         "' → '" + get_node_label(pred.node_c) + "' via path " + pred.meta_path +
+                         " (support: " + std::to_string(pred.support_count) + ")";
+
+        ins.score = std::min(static_cast<double>(pred.support_count) / 10.0, 1.0);
+        ins.score_breakdown["support_count"] = pred.support_count;
+        ins.score_breakdown["meta_path_strength"] = ins.score;
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding meta-path predictions", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// META_PATH_PATTERN: Global Meta-Path Pattern Mining
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_meta_path_patterns() {
+    std::vector<Insight> results;
+    report_progress("Mining meta-path patterns", 0, 100);
+
+    struct EdgeInfo {
+        std::string tgt;
+        std::string relation;
+        std::string edge_id;
+        double confidence;
+    };
+
+    std::unordered_map<std::string, std::vector<EdgeInfo>> adjacency;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (edge.sources.empty() || edge.targets.empty()) continue;
+        std::string rel = edge.relation.empty() ? "related_to" : edge.relation;
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                adjacency[src].push_back({tgt, rel, edge.id, edge.confidence});
+            }
+        }
+    }
+
+    if (adjacency.empty()) {
+        report_progress("Mining meta-path patterns", 100, 100);
+        return results;
+    }
+
+    std::vector<std::string> seeds;
+    if (config_.meta_path_pattern_max_seed_nodes > 0) {
+        auto hubs = graph_.get_top_hubs(static_cast<int>(config_.meta_path_pattern_max_seed_nodes));
+        for (const auto& [node_id, _] : hubs) {
+            seeds.push_back(node_id);
+        }
+    } else {
+        auto nodes = graph_.get_all_nodes();
+        for (const auto& node : nodes) seeds.push_back(node.id);
+    }
+
+    int min_len = std::max(1, config_.meta_path_pattern_min_len);
+    int max_len = std::max(min_len, config_.meta_path_pattern_max_len);
+
+    struct Instance {
+        std::vector<std::string> nodes;
+        std::vector<std::string> edge_ids;
+        double avg_confidence = 0.0;
+    };
+
+    struct PatternInfo {
+        std::unordered_set<std::string> pairs;
+        std::vector<Instance> instances;
+        double conf_sum = 0.0;
+        size_t count = 0;
+        int length = 0;
+    };
+
+    std::unordered_map<std::string, PatternInfo> patterns;
+
+    auto join_pattern = [](const std::vector<std::string>& parts) {
+        std::ostringstream ss;
+        for (size_t i = 0; i < parts.size(); ++i) {
+            if (i > 0) ss << "→";
+            ss << parts[i];
+        }
+        return ss.str();
+    };
+
+    bool stop = false;
+    for (const auto& seed : seeds) {
+        if (stop) break;
+        std::vector<std::string> path_nodes = {seed};
+        std::vector<std::string> path_edges;
+        std::vector<std::string> path_rels;
+        std::unordered_set<std::string> visited = {seed};
+        double conf_sum = 0.0;
+
+        std::function<void(const std::string&, int)> dfs = [&](const std::string& node, int depth) {
+            if (depth >= max_len || stop) return;
+            auto it = adjacency.find(node);
+            if (it == adjacency.end()) return;
+
+            size_t expanded = 0;
+            for (const auto& edge : it->second) {
+                if (config_.meta_path_pattern_degree_cap > 0 &&
+                    expanded++ >= config_.meta_path_pattern_degree_cap) {
+                    break;
+                }
+                if (visited.count(edge.tgt)) continue;
+
+                visited.insert(edge.tgt);
+                path_nodes.push_back(edge.tgt);
+                path_edges.push_back(edge.edge_id);
+                path_rels.push_back(edge.relation);
+                conf_sum += edge.confidence;
+
+                int cur_len = static_cast<int>(path_rels.size());
+                if (cur_len >= min_len) {
+                    std::string pattern = join_pattern(path_rels);
+                    auto& info = patterns[pattern];
+                    if (info.length == 0) info.length = cur_len;
+
+                    std::string pair_key = path_nodes.front() + "||" + path_nodes.back();
+                    info.pairs.insert(pair_key);
+
+                    double avg_conf = path_edges.empty() ? 0.0 : (conf_sum / path_edges.size());
+                    info.conf_sum += avg_conf;
+                    info.count++;
+
+                    if (info.instances.size() < config_.meta_path_pattern_max_instances) {
+                        Instance inst;
+                        inst.nodes = path_nodes;
+                        inst.edge_ids = path_edges;
+                        inst.avg_confidence = avg_conf;
+                        info.instances.push_back(std::move(inst));
+                    }
+                }
+
+                if (cur_len < max_len) {
+                    dfs(edge.tgt, cur_len);
+                }
+
+                conf_sum -= edge.confidence;
+                path_rels.pop_back();
+                path_edges.pop_back();
+                path_nodes.pop_back();
+                visited.erase(edge.tgt);
+
+                if (patterns.size() > config_.meta_path_pattern_max_patterns * 5) {
+                    stop = true;
+                    break;
+                }
+            }
+        };
+
+        dfs(seed, 0);
+    }
+
+    if (patterns.empty()) {
+        report_progress("Mining meta-path patterns", 100, 100);
+        return results;
+    }
+
+    size_t max_support = 0;
+    for (const auto& [pattern, info] : patterns) {
+        if (info.pairs.size() > max_support) max_support = info.pairs.size();
+    }
+
+    struct PatternCandidate {
+        std::string pattern;
+        size_t support = 0;
+        double avg_confidence = 0.0;
+        double score = 0.0;
+        int length = 0;
+        Instance example;
+    };
+
+    std::vector<PatternCandidate> candidates;
+
+    for (const auto& [pattern, info] : patterns) {
+        size_t support = info.pairs.size();
+        if (support < static_cast<size_t>(std::max(1, config_.meta_path_pattern_min_support))) continue;
+
+        double avg_conf = info.count > 0 ? (info.conf_sum / info.count) : 0.0;
+        if (avg_conf < config_.meta_path_pattern_min_avg_confidence) continue;
+
+        double support_score = max_support > 0 ? static_cast<double>(support) / max_support : 0.0;
+        double length_score = (max_len > min_len)
+            ? static_cast<double>(info.length - min_len + 1) / static_cast<double>(max_len - min_len + 1)
+            : 1.0;
+
+        double score =
+            config_.meta_path_pattern_weight_support * support_score +
+            config_.meta_path_pattern_weight_confidence * avg_conf +
+            config_.meta_path_pattern_weight_length * length_score;
+
+        PatternCandidate cand;
+        cand.pattern = pattern;
+        cand.support = support;
+        cand.avg_confidence = avg_conf;
+        cand.score = score;
+        cand.length = info.length;
+        if (!info.instances.empty()) cand.example = info.instances.front();
+        candidates.push_back(std::move(cand));
+    }
+
+    if (candidates.empty()) {
+        report_progress("Mining meta-path patterns", 100, 100);
+        return results;
+    }
+
+    std::sort(candidates.begin(), candidates.end(), [](const PatternCandidate& a, const PatternCandidate& b) {
+        return a.score > b.score;
+    });
+
+    if (candidates.size() > config_.meta_path_pattern_max_patterns) {
+        candidates.resize(config_.meta_path_pattern_max_patterns);
+    }
+
+    for (const auto& cand : candidates) {
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::META_PATH_PATTERN);
+        ins.set_type(InsightType::META_PATH_PATTERN);
+
+        if (!cand.example.nodes.empty()) {
+            ins.seed_nodes = {cand.example.nodes.front(), cand.example.nodes.back()};
+            ins.seed_labels = {get_node_label(cand.example.nodes.front()), get_node_label(cand.example.nodes.back())};
+            ins.witness_nodes = cand.example.nodes;
+            ins.witness_edges = cand.example.edge_ids;
+            ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        }
+
+        std::ostringstream desc;
+        desc << "Meta-path pattern: " << cand.pattern
+             << " (support: " << cand.support
+             << ", avg_conf: " << std::fixed << std::setprecision(2) << cand.avg_confidence << ")";
+        if (cand.example.nodes.size() >= 2) {
+            desc << ". Example: ";
+            for (size_t i = 0; i < cand.example.nodes.size(); ++i) {
+                if (i > 0) desc << " -> ";
+                desc << "'" << get_node_label(cand.example.nodes[i]) << "'";
+            }
+        }
+        ins.description = desc.str();
+
+        ins.score_breakdown["support_count"] = static_cast<double>(cand.support);
+        ins.score_breakdown["avg_confidence"] = cand.avg_confidence;
+        ins.score_breakdown["length"] = static_cast<double>(cand.length);
+        ins.score_breakdown["pattern_score"] = cand.score;
+        ins.score = cand.score;
+        ins.novelty_tags = {"meta_path_pattern", "pattern=" + cand.pattern};
+
+        results.push_back(std::move(ins));
+    }
+
+    report_progress("Mining meta-path patterns", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// EVIDENCE_FUSION_LINK: Multi-operator consensus link discovery
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_evidence_fusion_links(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Evidence fusion links", 0, 100);
+
+    const std::set<InsightType> source_types = {
+        InsightType::PATH_RANK,
+        InsightType::EMBEDDING_LINK,
+        InsightType::RULE,
+        InsightType::ARGUMENT_SUPPORT,
+        InsightType::COMMUNITY_LINK,
+        InsightType::LONG_CHAIN,
+        InsightType::META_PATH,
+        InsightType::META_PATH_PATTERN,
+        InsightType::HYPOTHESES_1,
+        InsightType::HYPOTHESES_2,
+        InsightType::HYPOTHESES_3,
+        InsightType::EXPLANATORY_CHAIN,
+        InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE
+    };
+
+    struct FusionAggregate {
+        std::set<InsightType> operators;
+        std::unordered_set<std::string> witness_edges;
+        std::unordered_set<std::string> witness_nodes;
+        std::unordered_set<std::string> chunk_ids;
+        double score_sum = 0.0;
+        size_t score_count = 0;
+    };
+
+    std::set<InsightType> available_operator_types;
+    std::map<std::pair<std::string, std::string>, FusionAggregate> aggregates;
+
+    for (const auto& insight : collection.insights) {
+        if (source_types.find(insight.type) == source_types.end()) continue;
+        if (insight.seed_nodes.size() < 2) continue;
+
+        std::string a = insight.seed_nodes[0];
+        std::string b = insight.seed_nodes[1];
+        if (a.empty() || b.empty() || a == b) continue;
+
+        // Evidence fusion is for proposing new links.
+        if (nodes_share_edge(graph_, a, b)) continue;
+
+        if (a > b) std::swap(a, b);
+        auto key = std::make_pair(a, b);
+        auto& agg = aggregates[key];
+
+        agg.operators.insert(insight.type);
+        available_operator_types.insert(insight.type);
+        agg.score_sum += insight.score;
+        agg.score_count++;
+
+        for (const auto& e : insight.witness_edges) agg.witness_edges.insert(e);
+        for (const auto& n : insight.witness_nodes) agg.witness_nodes.insert(n);
+        for (const auto& c : insight.evidence_chunk_ids) agg.chunk_ids.insert(c);
+    }
+
+    if (aggregates.empty()) {
+        report_progress("Evidence fusion links", 100, 100);
+        return results;
+    }
+
+    auto stats = graph_.compute_statistics();
+
+    size_t dynamic_min_sources = std::max<size_t>(2, config_.evidence_fusion_min_sources);
+    if (available_operator_types.size() >= 6) dynamic_min_sources++;
+    if (stats.num_edges > 2500) dynamic_min_sources++;
+    dynamic_min_sources = std::min<size_t>(4, dynamic_min_sources);
+
+    double dynamic_min_score = config_.evidence_fusion_min_score;
+    if (stats.avg_node_degree > 8.0) dynamic_min_score += 0.05;
+    if (stats.num_edges < 500) dynamic_min_score -= 0.05;
+    dynamic_min_score = std::clamp(dynamic_min_score, 0.20, 0.95);
+
+    double max_possible_sources = static_cast<double>(
+        std::max<size_t>(dynamic_min_sources, available_operator_types.size()));
+
+    for (const auto& [pair_key, agg] : aggregates) {
+        if (agg.operators.size() < dynamic_min_sources || agg.score_count == 0) continue;
+
+        double avg_strength = agg.score_sum / static_cast<double>(agg.score_count);
+        double consensus = static_cast<double>(agg.operators.size()) /
+                           std::max(1.0, max_possible_sources);
+        double diversity = std::min(1.0, static_cast<double>(agg.chunk_ids.size()) / 6.0);
+
+        double final_score =
+            config_.evidence_fusion_weight_consensus * consensus +
+            config_.evidence_fusion_weight_strength * avg_strength +
+            config_.evidence_fusion_weight_diversity * diversity;
+
+        if (final_score < dynamic_min_score) continue;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::EVIDENCE_FUSION_LINK);
+        ins.set_type(InsightType::EVIDENCE_FUSION_LINK);
+        ins.seed_nodes = {pair_key.first, pair_key.second};
+        ins.seed_labels = {get_node_label(pair_key.first), get_node_label(pair_key.second)};
+
+        for (const auto& edge_id : agg.witness_edges) {
+            ins.witness_edges.push_back(edge_id);
+            if (ins.witness_edges.size() >= config_.evidence_fusion_max_witness_edges) break;
+        }
+
+        ins.witness_nodes.push_back(pair_key.first);
+        ins.witness_nodes.push_back(pair_key.second);
+        for (const auto& node_id : agg.witness_nodes) {
+            if (node_id == pair_key.first || node_id == pair_key.second) continue;
+            ins.witness_nodes.push_back(node_id);
+            if (ins.witness_nodes.size() >= 20) break;
+        }
+
+        for (const auto& chunk_id : agg.chunk_ids) {
+            ins.evidence_chunk_ids.push_back(chunk_id);
+            if (ins.evidence_chunk_ids.size() >= 10) break;
+        }
+
+        std::vector<std::string> op_names;
+        for (auto type : agg.operators) {
+            op_names.push_back(insight_type_to_string(type));
+            ins.novelty_tags.push_back("source=" + insight_type_to_string(type));
+        }
+        std::sort(op_names.begin(), op_names.end());
+
+        std::ostringstream desc;
+        desc << "Evidence fusion link: '" << get_node_label(pair_key.first)
+             << "' <-> '" << get_node_label(pair_key.second)
+             << "' supported by " << agg.operators.size() << " operators (";
+        for (size_t i = 0; i < std::min<size_t>(op_names.size(), 4); ++i) {
+            if (i > 0) desc << ", ";
+            desc << op_names[i];
+        }
+        if (op_names.size() > 4) desc << ", ...";
+        desc << ").";
+        ins.description = desc.str();
+
+        ins.score_breakdown["consensus"] = consensus;
+        ins.score_breakdown["strength"] = avg_strength;
+        ins.score_breakdown["diversity"] = diversity;
+        ins.score_breakdown["source_count"] = static_cast<double>(agg.operators.size());
+        ins.score_breakdown["dynamic_min_sources"] = static_cast<double>(dynamic_min_sources);
+        ins.score_breakdown["dynamic_min_score"] = dynamic_min_score;
+        ins.score = final_score;
+        ins.novelty_tags.push_back("evidence_fusion");
+
+        results.push_back(std::move(ins));
+    }
+
+    std::sort(results.begin(), results.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+    if (results.size() > config_.evidence_fusion_max_candidates) {
+        results.resize(config_.evidence_fusion_max_candidates);
+    }
+
+    report_progress("Evidence fusion links", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// META_PATH_ANOMALY: Rare but plausible relation-sequence anomalies
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_meta_path_anomalies(const InsightCollection& collection) {
+    (void)collection;
+    std::vector<Insight> results;
+    report_progress("Meta-path anomaly", 0, 100);
+
+    struct EdgeInfo {
+        std::string tgt;
+        std::string relation;
+        std::string edge_id;
+        double confidence;
+    };
+
+    std::unordered_map<std::string, std::vector<EdgeInfo>> adjacency;
+    double global_conf_sum = 0.0;
+    size_t global_conf_count = 0;
+
+    for (const auto& edge : graph_.get_all_edges()) {
+        if (edge.sources.empty() || edge.targets.empty()) continue;
+        std::string rel = edge.relation.empty() ? "related_to" : to_lower_copy(edge.relation);
+        for (const auto& src : edge.sources) {
+            for (const auto& tgt : edge.targets) {
+                adjacency[src].push_back({tgt, rel, edge.id, edge.confidence});
+                global_conf_sum += edge.confidence;
+                global_conf_count++;
+            }
+        }
+    }
+
+    if (adjacency.empty()) {
+        report_progress("Meta-path anomaly", 100, 100);
+        return results;
+    }
+
+    double global_avg_conf = global_conf_count > 0
+        ? (global_conf_sum / static_cast<double>(global_conf_count))
+        : 0.0;
+
+    std::vector<std::string> seeds;
+    if (config_.meta_path_anomaly_max_seed_nodes > 0) {
+        auto hubs = graph_.get_top_hubs(static_cast<int>(config_.meta_path_anomaly_max_seed_nodes));
+        for (const auto& [node_id, _] : hubs) {
+            seeds.push_back(node_id);
+        }
+    } else {
+        auto nodes = graph_.get_all_nodes();
+        for (const auto& node : nodes) seeds.push_back(node.id);
+    }
+
+    int min_len = std::max(1, config_.meta_path_anomaly_min_len);
+    int max_len = std::max(min_len, config_.meta_path_anomaly_max_len);
+
+    struct PatternStats {
+        double conf_sum = 0.0;
+        size_t conf_count = 0;
+        int length = 0;
+        std::vector<std::string> example_nodes;
+        std::vector<std::string> example_edges;
+    };
+
+    std::unordered_map<std::string, PatternStats> stats_by_pattern;
+    std::unordered_map<std::string, std::unordered_set<std::string>> support_pairs;
+
+    auto join_pattern = [](const std::vector<std::string>& rels) {
+        std::ostringstream oss;
+        for (size_t i = 0; i < rels.size(); ++i) {
+            if (i > 0) oss << "->";
+            oss << rels[i];
+        }
+        return oss.str();
+    };
+
+    bool stop = false;
+    for (const auto& seed : seeds) {
+        if (stop) break;
+
+        std::vector<std::string> path_nodes = {seed};
+        std::vector<std::string> path_edges;
+        std::vector<std::string> path_rels;
+        std::unordered_set<std::string> visited = {seed};
+        double path_conf_sum = 0.0;
+
+        std::function<void(const std::string&)> dfs = [&](const std::string& node) {
+            if (stop) return;
+            if (static_cast<int>(path_rels.size()) >= max_len) return;
+
+            auto it = adjacency.find(node);
+            if (it == adjacency.end()) return;
+
+            size_t expanded = 0;
+            for (const auto& edge : it->second) {
+                if (config_.meta_path_anomaly_degree_cap > 0 &&
+                    expanded++ >= config_.meta_path_anomaly_degree_cap) {
+                    break;
+                }
+                if (visited.count(edge.tgt)) continue;
+
+                visited.insert(edge.tgt);
+                path_nodes.push_back(edge.tgt);
+                path_edges.push_back(edge.edge_id);
+                path_rels.push_back(edge.relation);
+                path_conf_sum += edge.confidence;
+
+                int depth = static_cast<int>(path_rels.size());
+                if (depth >= min_len) {
+                    std::string pattern = join_pattern(path_rels);
+                    std::string pair_key = path_nodes.front() + "||" + path_nodes.back();
+
+                    auto& stats = stats_by_pattern[pattern];
+                    if (stats.length == 0) stats.length = depth;
+                    stats.conf_count++;
+                    stats.conf_sum += (path_edges.empty() ? 0.0 : path_conf_sum / path_edges.size());
+                    support_pairs[pattern].insert(pair_key);
+
+                    if (stats.example_nodes.empty()) {
+                        stats.example_nodes = path_nodes;
+                        stats.example_edges = path_edges;
+                    }
+                }
+
+                if (depth < max_len) {
+                    dfs(edge.tgt);
+                }
+
+                path_conf_sum -= edge.confidence;
+                path_rels.pop_back();
+                path_edges.pop_back();
+                path_nodes.pop_back();
+                visited.erase(edge.tgt);
+
+                if (stats_by_pattern.size() > config_.meta_path_anomaly_max_candidates * 12) {
+                    stop = true;
+                    break;
+                }
+            }
+        };
+
+        dfs(seed);
+    }
+
+    if (stats_by_pattern.empty()) {
+        report_progress("Meta-path anomaly", 100, 100);
+        return results;
+    }
+
+    size_t max_support = 0;
+    for (const auto& [pattern, pairs] : support_pairs) {
+        max_support = std::max(max_support, pairs.size());
+    }
+    if (max_support == 0) {
+        report_progress("Meta-path anomaly", 100, 100);
+        return results;
+    }
+
+    auto graph_stats = graph_.compute_statistics();
+    int dynamic_min_support = config_.meta_path_anomaly_min_support;
+    if (graph_stats.num_edges > 3000) dynamic_min_support += 1;
+    dynamic_min_support = std::max(1, dynamic_min_support);
+
+    double dynamic_max_support_ratio = config_.meta_path_anomaly_max_support_ratio;
+    if (graph_stats.num_edges < 600) {
+        dynamic_max_support_ratio = std::min(0.45, dynamic_max_support_ratio + 0.10);
+    }
+
+    double dynamic_min_plausibility = config_.meta_path_anomaly_min_plausibility;
+    if (global_avg_conf < 0.45) dynamic_min_plausibility = std::max(0.10, dynamic_min_plausibility - 0.05);
+    if (global_avg_conf > 0.75) dynamic_min_plausibility = std::min(0.90, dynamic_min_plausibility + 0.05);
+
+    double dynamic_min_anomaly = config_.meta_path_anomaly_min_anomaly;
+    if (max_support > 200) dynamic_min_anomaly = std::min(0.90, dynamic_min_anomaly + 0.05);
+
+    for (const auto& [pattern, stats] : stats_by_pattern) {
+        size_t support = support_pairs[pattern].size();
+        if (support < static_cast<size_t>(dynamic_min_support)) continue;
+
+        double support_ratio = static_cast<double>(support) / static_cast<double>(max_support);
+        if (support_ratio > dynamic_max_support_ratio) continue;
+
+        double anomaly = 1.0 - support_ratio;
+        double plausibility = stats.conf_count > 0 ? (stats.conf_sum / static_cast<double>(stats.conf_count)) : 0.0;
+        if (anomaly < dynamic_min_anomaly || plausibility < dynamic_min_plausibility) continue;
+
+        double length_score = (max_len > min_len)
+            ? static_cast<double>(stats.length - min_len + 1) / static_cast<double>(max_len - min_len + 1)
+            : 1.0;
+
+        double final_score =
+            config_.meta_path_anomaly_weight_anomaly * anomaly +
+            config_.meta_path_anomaly_weight_plausibility * plausibility +
+            config_.meta_path_anomaly_weight_length * length_score;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::META_PATH_ANOMALY);
+        ins.set_type(InsightType::META_PATH_ANOMALY);
+
+        if (!stats.example_nodes.empty()) {
+            ins.seed_nodes = {stats.example_nodes.front(), stats.example_nodes.back()};
+            ins.seed_labels = {
+                get_node_label(stats.example_nodes.front()),
+                get_node_label(stats.example_nodes.back())
+            };
+            ins.witness_nodes = stats.example_nodes;
+            ins.witness_edges = stats.example_edges;
+            ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        }
+
+        std::ostringstream desc;
+        desc << "Meta-path anomaly: " << pattern
+             << " (support_ratio=" << std::fixed << std::setprecision(2) << support_ratio
+             << ", anomaly=" << std::setprecision(2) << anomaly
+             << ", plausibility=" << std::setprecision(2) << plausibility << ")";
+        ins.description = desc.str();
+
+        ins.score_breakdown["support_count"] = static_cast<double>(support);
+        ins.score_breakdown["support_ratio"] = support_ratio;
+        ins.score_breakdown["anomaly"] = anomaly;
+        ins.score_breakdown["plausibility"] = plausibility;
+        ins.score_breakdown["length"] = static_cast<double>(stats.length);
+        ins.score_breakdown["dynamic_min_anomaly"] = dynamic_min_anomaly;
+        ins.score = final_score;
+        ins.novelty_tags = {"meta_path_anomaly", "pattern=" + pattern};
+
+        results.push_back(std::move(ins));
+    }
+
+    std::sort(results.begin(), results.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+    if (results.size() > config_.meta_path_anomaly_max_candidates) {
+        results.resize(config_.meta_path_anomaly_max_candidates);
+    }
+
+    report_progress("Meta-path anomaly", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// INTERVENTION_BOTTLENECK: Critical bottleneck nodes in causal chains
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_intervention_bottlenecks(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Intervention bottlenecks", 0, 100);
+
+    struct ChainView {
+        std::vector<std::string> nodes;
+        std::vector<std::string> edges;
+        double score = 0.0;
+    };
+
+    std::vector<ChainView> chains;
+    chains.reserve(collection.insights.size());
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::CAUSAL_CHAIN &&
+            insight.type != InsightType::HYPOTHESES_3) {
+            continue;
+        }
+
+        std::vector<std::string> nodes = insight.witness_nodes;
+        if (nodes.size() < 3) nodes = insight.seed_nodes;
+        if (nodes.size() < 3) continue;
+
+        chains.push_back({nodes, insight.witness_edges, insight.score});
+    }
+
+    if (chains.empty()) {
+        auto generated = find_causal_chains();
+        for (const auto& insight : generated) {
+            std::vector<std::string> nodes = insight.witness_nodes;
+            if (nodes.size() < 3) nodes = insight.seed_nodes;
+            if (nodes.size() < 3) continue;
+            chains.push_back({nodes, insight.witness_edges, insight.score});
+        }
+    }
+
+    if (chains.empty()) {
+        report_progress("Intervention bottlenecks", 100, 100);
+        return results;
+    }
+
+    struct NodeAgg {
+        int chain_count = 0;
+        double score_sum = 0.0;
+        std::unordered_set<std::string> endpoint_pairs;
+        std::unordered_set<std::string> witness_edges;
+        std::unordered_set<std::string> witness_nodes;
+    };
+
+    std::unordered_map<std::string, NodeAgg> node_stats;
+    int total_chains = 0;
+
+    for (const auto& chain : chains) {
+        if (chain.nodes.size() < 3) continue;
+        total_chains++;
+
+        std::string endpoint_key = chain.nodes.front() + "||" + chain.nodes.back();
+        for (size_t i = 1; i + 1 < chain.nodes.size(); ++i) {
+            const std::string& node_id = chain.nodes[i];
+            auto& agg = node_stats[node_id];
+            agg.chain_count++;
+            agg.score_sum += chain.score;
+            agg.endpoint_pairs.insert(endpoint_key);
+            agg.witness_nodes.insert(chain.nodes.front());
+            agg.witness_nodes.insert(chain.nodes.back());
+
+            for (const auto& eid : chain.edges) {
+                agg.witness_edges.insert(eid);
+                if (agg.witness_edges.size() >
+                    config_.intervention_bottleneck_max_evidence_edges * 4) {
+                    break;
+                }
+            }
+        }
+    }
+
+    if (total_chains == 0 || node_stats.empty()) {
+        report_progress("Intervention bottlenecks", 100, 100);
+        return results;
+    }
+
+    size_t max_span = 1;
+    for (const auto& [_, agg] : node_stats) {
+        max_span = std::max(max_span, agg.endpoint_pairs.size());
+    }
+
+    double dynamic_min_coverage = config_.intervention_bottleneck_min_coverage;
+    if (total_chains < 25) dynamic_min_coverage = std::max(0.03, dynamic_min_coverage - 0.03);
+    if (total_chains > 200) dynamic_min_coverage = std::min(0.25, dynamic_min_coverage + 0.05);
+
+    for (const auto& [node_id, agg] : node_stats) {
+        double coverage = static_cast<double>(agg.chain_count) / static_cast<double>(total_chains);
+        if (coverage < dynamic_min_coverage) continue;
+
+        double chain_strength = agg.chain_count > 0
+            ? (agg.score_sum / static_cast<double>(agg.chain_count))
+            : 0.0;
+        double span = static_cast<double>(agg.endpoint_pairs.size()) / static_cast<double>(max_span);
+
+        double final_score =
+            config_.intervention_bottleneck_weight_coverage * coverage +
+            config_.intervention_bottleneck_weight_chain_strength * chain_strength +
+            config_.intervention_bottleneck_weight_span * span;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::INTERVENTION_BOTTLENECK);
+        ins.set_type(InsightType::INTERVENTION_BOTTLENECK);
+        ins.seed_nodes = {node_id};
+        ins.seed_labels = {get_node_label(node_id)};
+
+        ins.witness_nodes.push_back(node_id);
+        for (const auto& wn : agg.witness_nodes) {
+            if (wn == node_id) continue;
+            ins.witness_nodes.push_back(wn);
+            if (ins.witness_nodes.size() >= 10) break;
+        }
+
+        for (const auto& eid : agg.witness_edges) {
+            ins.witness_edges.push_back(eid);
+            if (ins.witness_edges.size() >= config_.intervention_bottleneck_max_evidence_edges) break;
+        }
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+
+        std::ostringstream desc;
+        desc << "Intervention bottleneck: '" << get_node_label(node_id)
+             << "' appears in " << agg.chain_count << "/" << total_chains
+             << " causal chains and connects " << agg.endpoint_pairs.size()
+             << " endpoint pairs.";
+        ins.description = desc.str();
+
+        ins.score_breakdown["coverage"] = coverage;
+        ins.score_breakdown["chain_strength"] = chain_strength;
+        ins.score_breakdown["span"] = span;
+        ins.score_breakdown["affected_chains"] = static_cast<double>(agg.chain_count);
+        ins.score_breakdown["dynamic_min_coverage"] = dynamic_min_coverage;
+        ins.score = final_score;
+        ins.novelty_tags = {"intervention_bottleneck"};
+
+        results.push_back(std::move(ins));
+    }
+
+    std::sort(results.begin(), results.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+    if (results.size() > config_.intervention_bottleneck_max_candidates) {
+        results.resize(config_.intervention_bottleneck_max_candidates);
+    }
+
+    report_progress("Intervention bottlenecks", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// COMPETING_MECHANISM: Alternative mechanism sets for same outcome
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_competing_mechanisms(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Competing mechanisms", 0, 100);
+
+    struct Mechanism {
+        std::string source;
+        std::string outcome;
+        std::unordered_set<std::string> nodes;
+        std::unordered_set<std::string> edges;
+        double score = 0.0;
+    };
+
+    std::vector<Mechanism> mechanisms;
+    mechanisms.reserve(collection.insights.size());
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::HYPOTHESES_2 &&
+            insight.type != InsightType::HYPOTHESES_3 &&
+            insight.type != InsightType::LONG_CHAIN &&
+            insight.type != InsightType::EXPLANATORY_CHAIN &&
+            insight.type != InsightType::MECHANISM_CONSOLIDATION) {
+            continue;
+        }
+        if (insight.seed_nodes.size() < 2) continue;
+
+        Mechanism m;
+        m.source = insight.seed_nodes.front();
+        m.outcome = insight.seed_nodes.back();
+        m.score = insight.score;
+
+        for (const auto& n : insight.seed_nodes) m.nodes.insert(n);
+        for (const auto& n : insight.witness_nodes) m.nodes.insert(n);
+        if (m.nodes.size() < 2) continue;
+
+        for (const auto& e : insight.witness_edges) m.edges.insert(e);
+        mechanisms.push_back(std::move(m));
+    }
+
+    if (mechanisms.empty()) {
+        report_progress("Competing mechanisms", 100, 100);
+        return results;
+    }
+
+    std::unordered_map<std::string, int> contradiction_hits;
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::CONTRADICTION) continue;
+        for (const auto& node_id : insight.seed_nodes) contradiction_hits[node_id]++;
+    }
+
+    std::unordered_map<std::string, std::vector<Mechanism>> by_outcome;
+    for (const auto& m : mechanisms) {
+        by_outcome[m.outcome].push_back(m);
+    }
+
+    size_t dynamic_min_alts = config_.competing_mechanism_min_alternatives;
+    if (mechanisms.size() > 150) dynamic_min_alts += 1;
+
+    double dynamic_min_divergence = config_.competing_mechanism_min_divergence;
+    if (mechanisms.size() < 40) dynamic_min_divergence = std::max(0.25, dynamic_min_divergence - 0.05);
+
+    for (const auto& [outcome, group] : by_outcome) {
+        if (group.size() < dynamic_min_alts) continue;
+
+        int best_i = -1;
+        int best_j = -1;
+        double best_divergence = 0.0;
+        double best_support = 0.0;
+        double best_pair_score = -1.0;
+
+        for (size_t i = 0; i < group.size(); ++i) {
+            for (size_t j = i + 1; j < group.size(); ++j) {
+                double overlap = jaccard_overlap(group[i].nodes, group[j].nodes);
+                if (overlap > config_.competing_mechanism_max_overlap) continue;
+
+                double divergence = 1.0 - overlap;
+                if (divergence < dynamic_min_divergence) continue;
+
+                double support = (group[i].score + group[j].score) / 2.0;
+                double pair_score = 0.6 * divergence + 0.4 * support;
+                if (pair_score > best_pair_score) {
+                    best_pair_score = pair_score;
+                    best_i = static_cast<int>(i);
+                    best_j = static_cast<int>(j);
+                    best_divergence = divergence;
+                    best_support = support;
+                }
+            }
+        }
+
+        if (best_i < 0 || best_j < 0) continue;
+
+        int contradiction_count = contradiction_hits[outcome];
+        contradiction_count += contradiction_hits[group[best_i].source];
+        contradiction_count += contradiction_hits[group[best_j].source];
+        double contradiction_penalty = std::min(1.0, static_cast<double>(contradiction_count) / 3.0);
+
+        double final_score =
+            config_.competing_mechanism_weight_divergence * best_divergence +
+            config_.competing_mechanism_weight_support * best_support -
+            config_.competing_mechanism_weight_contradiction_penalty * contradiction_penalty;
+        final_score = std::max(0.0, final_score);
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::COMPETING_MECHANISM);
+        ins.set_type(InsightType::COMPETING_MECHANISM);
+        ins.seed_nodes = {group[best_i].source, group[best_j].source, outcome};
+        ins.seed_labels = {
+            get_node_label(group[best_i].source),
+            get_node_label(group[best_j].source),
+            get_node_label(outcome)
+        };
+
+        std::unordered_set<std::string> witness_nodes = group[best_i].nodes;
+        witness_nodes.insert(group[best_j].nodes.begin(), group[best_j].nodes.end());
+        for (const auto& n : witness_nodes) {
+            ins.witness_nodes.push_back(n);
+            if (ins.witness_nodes.size() >= 20) break;
+        }
+
+        std::unordered_set<std::string> witness_edges = group[best_i].edges;
+        witness_edges.insert(group[best_j].edges.begin(), group[best_j].edges.end());
+        for (const auto& e : witness_edges) {
+            ins.witness_edges.push_back(e);
+            if (ins.witness_edges.size() >= 30) break;
+        }
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+
+        std::ostringstream desc;
+        desc << "Competing mechanisms for outcome '" << get_node_label(outcome) << "': '"
+             << get_node_label(group[best_i].source) << "' versus '"
+             << get_node_label(group[best_j].source)
+             << "' (divergence=" << std::fixed << std::setprecision(2) << best_divergence << ").";
+        ins.description = desc.str();
+
+        ins.score_breakdown["alternatives"] = static_cast<double>(group.size());
+        ins.score_breakdown["divergence"] = best_divergence;
+        ins.score_breakdown["support"] = best_support;
+        ins.score_breakdown["contradiction_penalty"] = contradiction_penalty;
+        ins.score_breakdown["dynamic_min_divergence"] = dynamic_min_divergence;
+        ins.score = final_score;
+        ins.novelty_tags = {"competing_mechanism"};
+
+        results.push_back(std::move(ins));
+    }
+
+    std::sort(results.begin(), results.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+    if (results.size() > config_.competing_mechanism_max_candidates) {
+        results.resize(config_.competing_mechanism_max_candidates);
+    }
+
+    report_progress("Competing mechanisms", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// SCHEMA_REPAIR: Actionable repair suggestions from violations and closure gaps
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_schema_repairs(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Schema repair", 0, 100);
+
+    auto parse_kv = [](const std::string& text) {
+        std::map<std::string, std::string> kv;
+        std::stringstream ss(text);
+        std::string token;
+        while (std::getline(ss, token, '|')) {
+            auto pos = token.find(':');
+            if (pos == std::string::npos) continue;
+            kv[token.substr(0, pos)] = token.substr(pos + 1);
+        }
+        return kv;
+    };
+
+    std::unordered_map<std::string, std::unordered_map<std::string, int>> relation_targets;
+    for (const auto& edge : graph_.get_all_edges()) {
+        std::string rel = edge.relation.empty() ? "related_to" : edge.relation;
+        for (const auto& tgt : edge.targets) {
+            relation_targets[rel][tgt]++;
+        }
+    }
+
+    auto hubs = graph_.get_top_hubs(50);
+    auto choose_target = [&](const std::string& relation, const std::string& source) -> std::string {
+        auto it = relation_targets.find(relation);
+        if (it != relation_targets.end()) {
+            std::string best;
+            int best_count = -1;
+            for (const auto& [node_id, count] : it->second) {
+                if (node_id == source) continue;
+                if (count > best_count) {
+                    best_count = count;
+                    best = node_id;
+                }
+            }
+            if (!best.empty()) return best;
+        }
+        for (const auto& [node_id, _] : hubs) {
+            if (node_id != source) return node_id;
+        }
+        return "";
+    };
+
+    struct RepairAgg {
+        double gain_sum = 0.0;
+        double support_sum = 0.0;
+        double consistency_sum = 0.0;
+        size_t count = 0;
+        std::unordered_set<std::string> witness_edges;
+        std::unordered_set<std::string> witness_nodes;
+        std::unordered_set<std::string> chunk_ids;
+        std::string reason;
+    };
+
+    std::map<std::tuple<std::string, std::string, std::string>, RepairAgg> repairs;
+
+    auto add_repair = [&](const std::string& src,
+                          const std::string& rel,
+                          const std::string& tgt,
+                          double gain,
+                          double support,
+                          double consistency,
+                          const Insight& source,
+                          const std::string& reason) {
+        if (src.empty() || rel.empty() || tgt.empty() || src == tgt) return;
+        auto key = std::make_tuple(src, rel, tgt);
+        auto& agg = repairs[key];
+        agg.gain_sum += gain;
+        agg.support_sum += support;
+        agg.consistency_sum += consistency;
+        agg.count++;
+        agg.reason = reason;
+        for (const auto& e : source.witness_edges) agg.witness_edges.insert(e);
+        for (const auto& n : source.witness_nodes) agg.witness_nodes.insert(n);
+        for (const auto& c : source.evidence_chunk_ids) agg.chunk_ids.insert(c);
+    };
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type == InsightType::TRANSITIVE_CLOSURE) {
+            if (insight.seed_nodes.size() < 2) continue;
+            auto meta = parse_kv(insight.description);
+            std::string relation = meta.count("relation") ? meta["relation"] : "related_to";
+            double chain_support = 0.5;
+            auto it = insight.score_breakdown.find("chain_count");
+            if (it != insight.score_breakdown.end()) {
+                chain_support = std::min(1.0, it->second / 5.0);
+            }
+            add_repair(insight.seed_nodes[0], relation, insight.seed_nodes[1],
+                       insight.score, chain_support, 0.90, insight, "transitive_closure");
+        } else if (insight.type == InsightType::COMPLETION) {
+            if (insight.seed_nodes.size() < 2) continue;
+            std::string relation = "related_to";
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag.rfind("relation=", 0) == 0) {
+                    relation = tag.substr(9);
+                    break;
+                }
+            }
+            double support = std::min(1.0, static_cast<double>(insight.witness_edges.size()) / 6.0);
+            add_repair(insight.seed_nodes[0], relation, insight.seed_nodes[1],
+                       std::min(1.0, insight.score * 0.85 + 0.10), support, 0.70, insight, "completion");
+        } else if (insight.type == InsightType::SCHEMA_VIOLATION) {
+            if (insight.seed_nodes.empty()) continue;
+            auto meta = parse_kv(insight.description);
+            std::string relation = meta.count("missing_relation") ? meta["missing_relation"] : "";
+            if (relation.empty()) continue;
+            std::string src = insight.seed_nodes[0];
+            std::string tgt = choose_target(relation, src);
+            if (tgt.empty()) continue;
+
+            double support = 0.5;
+            auto it = insight.score_breakdown.find("severity");
+            if (it != insight.score_breakdown.end()) support = std::clamp(it->second, 0.0, 1.0);
+            add_repair(src, relation, tgt, insight.score, support, 0.80, insight, "schema_violation");
+        }
+    }
+
+    if (repairs.empty()) {
+        report_progress("Schema repair", 100, 100);
+        return results;
+    }
+
+    auto stats = graph_.compute_statistics();
+    double dynamic_min_gain = config_.schema_repair_min_gain;
+    if (stats.num_edges > 5000) dynamic_min_gain += 0.05;
+    if (stats.num_edges < 500) dynamic_min_gain -= 0.05;
+    dynamic_min_gain = std::clamp(dynamic_min_gain, 0.15, 0.90);
+
+    for (const auto& [key, agg] : repairs) {
+        const auto& src = std::get<0>(key);
+        const auto& rel = std::get<1>(key);
+        const auto& tgt = std::get<2>(key);
+        if (agg.count == 0) continue;
+
+        double gain = agg.gain_sum / static_cast<double>(agg.count);
+        double support = agg.support_sum / static_cast<double>(agg.count);
+        double consistency = agg.consistency_sum / static_cast<double>(agg.count);
+
+        double final_score =
+            config_.schema_repair_weight_gain * gain +
+            config_.schema_repair_weight_support * support +
+            config_.schema_repair_weight_consistency * consistency;
+        if (final_score < dynamic_min_gain) continue;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::SCHEMA_REPAIR);
+        ins.set_type(InsightType::SCHEMA_REPAIR);
+        ins.seed_nodes = {src, tgt};
+        ins.seed_labels = {get_node_label(src), get_node_label(tgt)};
+
+        ins.witness_nodes = {src, tgt};
+        for (const auto& n : agg.witness_nodes) {
+            if (n == src || n == tgt) continue;
+            ins.witness_nodes.push_back(n);
+            if (ins.witness_nodes.size() >= 14) break;
+        }
+
+        for (const auto& e : agg.witness_edges) {
+            ins.witness_edges.push_back(e);
+            if (ins.witness_edges.size() >= config_.schema_repair_max_witness_edges) break;
+        }
+        for (const auto& c : agg.chunk_ids) {
+            ins.evidence_chunk_ids.push_back(c);
+            if (ins.evidence_chunk_ids.size() >= 10) break;
+        }
+
+        std::ostringstream desc;
+        desc << "Schema repair suggestion: add relation '" << rel << "' between '"
+             << get_node_label(src) << "' and '" << get_node_label(tgt)
+             << "' (derived from " << agg.reason << ").";
+        ins.description = desc.str();
+
+        ins.score_breakdown["gain"] = gain;
+        ins.score_breakdown["support"] = support;
+        ins.score_breakdown["consistency"] = consistency;
+        ins.score_breakdown["dynamic_min_gain"] = dynamic_min_gain;
+        ins.score = final_score;
+        ins.novelty_tags = {"schema_repair", "relation=" + rel, "reason=" + agg.reason};
+
+        results.push_back(std::move(ins));
+    }
+
+    std::sort(results.begin(), results.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+    if (results.size() > config_.schema_repair_max_candidates) {
+        results.resize(config_.schema_repair_max_candidates);
+    }
+
+    report_progress("Schema repair", 100, 100);
+    return results;
+}
+
+// =============================================================================
+// CROSS_COMMUNITY_MECHANISM_BRIDGE: Bridges mechanisms across communities/domains
+// =============================================================================
+
+std::vector<Insight> DiscoveryEngine::find_cross_community_mechanism_bridges(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Cross-community mechanism bridges", 0, 100);
+
+    std::unordered_set<std::string> bridge_nodes;
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::DOMAIN_BRIDGE) continue;
+        for (const auto& n : insight.seed_nodes) bridge_nodes.insert(n);
+        for (const auto& n : insight.witness_nodes) bridge_nodes.insert(n);
+    }
+
+    std::map<std::pair<std::string, std::string>, double> community_pair_scores;
+    std::unordered_set<std::string> community_nodes;
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::COMMUNITY_LINK || insight.seed_nodes.size() < 2) continue;
+        std::string a = insight.seed_nodes[0];
+        std::string b = insight.seed_nodes[1];
+        if (a > b) std::swap(a, b);
+        community_pair_scores[{a, b}] = std::max(community_pair_scores[{a, b}], insight.score);
+        community_nodes.insert(a);
+        community_nodes.insert(b);
+    }
+
+    struct Candidate {
+        std::string start;
+        std::string end;
+        std::vector<std::string> witness_nodes;
+        std::vector<std::string> witness_edges;
+        std::vector<std::string> bridge_hits;
+        double support = 0.0;
+        double novelty = 0.0;
+        double coherence = 0.0;
+        double score = 0.0;
+    };
+
+    std::vector<Candidate> candidates;
+
+    auto avg_edge_confidence = [&](const std::vector<std::string>& edge_ids) {
+        if (edge_ids.empty()) return 0.0;
+        double sum = 0.0;
+        size_t count = 0;
+        for (const auto& eid : edge_ids) {
+            const auto* e = graph_.get_hyperedge(eid);
+            if (!e) continue;
+            sum += e->confidence;
+            count++;
+        }
+        return count > 0 ? (sum / static_cast<double>(count)) : 0.0;
+    };
+
+    for (const auto& insight : collection.insights) {
+        if (insight.type != InsightType::LONG_CHAIN &&
+            insight.type != InsightType::EXPLANATORY_CHAIN &&
+            insight.type != InsightType::HYPOTHESES_2 &&
+            insight.type != InsightType::MECHANISM_CONSOLIDATION) {
+            continue;
+        }
+        if (insight.seed_nodes.size() < 2) continue;
+
+        std::string start = insight.seed_nodes.front();
+        std::string end = insight.seed_nodes.back();
+        if (start.empty() || end.empty() || start == end) continue;
+
+        std::vector<std::string> bridge_hits;
+        for (const auto& n : insight.witness_nodes) {
+            if (bridge_nodes.find(n) != bridge_nodes.end()) bridge_hits.push_back(n);
+        }
+        for (const auto& n : insight.seed_nodes) {
+            if (bridge_nodes.find(n) != bridge_nodes.end()) bridge_hits.push_back(n);
+        }
+        std::sort(bridge_hits.begin(), bridge_hits.end());
+        bridge_hits.erase(std::unique(bridge_hits.begin(), bridge_hits.end()), bridge_hits.end());
+        if (bridge_hits.empty()) continue;
+
+        std::string a = start;
+        std::string b = end;
+        if (a > b) std::swap(a, b);
+
+        double novelty = 0.0;
+        auto it = community_pair_scores.find({a, b});
+        if (it != community_pair_scores.end()) {
+            novelty = std::min(1.0, 0.5 + it->second * 0.5);
+        } else {
+            bool touches_community = community_nodes.count(a) || community_nodes.count(b);
+            novelty = touches_community ? 0.30 : 0.15;
+        }
+
+        double support = std::clamp(insight.score, 0.0, 1.0);
+        double coherence = avg_edge_confidence(insight.witness_edges);
+        if (coherence <= 0.0) {
+            coherence = std::min(1.0, static_cast<double>(insight.witness_nodes.size()) / 10.0);
+        }
+
+        Candidate cand;
+        cand.start = start;
+        cand.end = end;
+        cand.witness_nodes = insight.witness_nodes;
+        cand.witness_edges = insight.witness_edges;
+        cand.bridge_hits = std::move(bridge_hits);
+        cand.support = support;
+        cand.novelty = novelty;
+        cand.coherence = coherence;
+        candidates.push_back(std::move(cand));
+    }
+
+    if (candidates.empty()) {
+        report_progress("Cross-community mechanism bridges", 100, 100);
+        return results;
+    }
+
+    double dynamic_min_novelty = config_.cross_community_bridge_min_novelty;
+    if (community_pair_scores.size() > 50) dynamic_min_novelty += 0.05;
+    dynamic_min_novelty = std::clamp(dynamic_min_novelty, 0.15, 0.90);
+
+    double dynamic_min_support = config_.cross_community_bridge_min_support;
+    if (candidates.size() < 20) dynamic_min_support = std::max(0.10, dynamic_min_support - 0.05);
+
+    std::unordered_set<std::string> seen;
+    for (auto& cand : candidates) {
+        if (cand.novelty < dynamic_min_novelty || cand.support < dynamic_min_support) continue;
+
+        cand.score =
+            config_.cross_community_bridge_weight_novelty * cand.novelty +
+            config_.cross_community_bridge_weight_support * cand.support +
+            config_.cross_community_bridge_weight_coherence * cand.coherence;
+
+        std::string k1 = cand.start;
+        std::string k2 = cand.end;
+        if (k1 > k2) std::swap(k1, k2);
+        std::string dedup_key = k1 + "||" + k2;
+        if (!seen.insert(dedup_key).second) continue;
+
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE);
+        ins.set_type(InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE);
+        ins.seed_nodes = {cand.start, cand.end};
+        ins.seed_labels = {get_node_label(cand.start), get_node_label(cand.end)};
+
+        ins.witness_nodes = {cand.start};
+        for (const auto& bnode : cand.bridge_hits) {
+            if (bnode != cand.start && bnode != cand.end) {
+                ins.witness_nodes.push_back(bnode);
+                if (ins.witness_nodes.size() >= 8) break;
+            }
+        }
+        ins.witness_nodes.push_back(cand.end);
+
+        for (const auto& e : cand.witness_edges) {
+            ins.witness_edges.push_back(e);
+            if (ins.witness_edges.size() >= config_.cross_community_bridge_max_witness_edges) break;
+        }
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+
+        std::ostringstream desc;
+        desc << "Cross-community mechanism bridge: '" << get_node_label(cand.start)
+             << "' ↔ '" << get_node_label(cand.end) << "' via bridge node(s) ";
+        for (size_t i = 0; i < std::min<size_t>(cand.bridge_hits.size(), 2); ++i) {
+            if (i > 0) desc << ", ";
+            desc << "'" << get_node_label(cand.bridge_hits[i]) << "'";
+        }
+        if (cand.bridge_hits.size() > 2) desc << ", ...";
+        desc << ".";
+        ins.description = desc.str();
+
+        ins.score_breakdown["novelty"] = cand.novelty;
+        ins.score_breakdown["support"] = cand.support;
+        ins.score_breakdown["coherence"] = cand.coherence;
+        ins.score_breakdown["bridge_nodes"] = static_cast<double>(cand.bridge_hits.size());
+        ins.score = cand.score;
+        ins.novelty_tags = {"cross_community_mechanism_bridge"};
+
+        results.push_back(std::move(ins));
+    }
+
+    std::sort(results.begin(), results.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+    if (results.size() > config_.cross_community_bridge_max_candidates) {
+        results.resize(config_.cross_community_bridge_max_candidates);
+    }
+
+    report_progress("Cross-community mechanism bridges", 100, 100);
+    return results;
 }
 
 } // namespace kg

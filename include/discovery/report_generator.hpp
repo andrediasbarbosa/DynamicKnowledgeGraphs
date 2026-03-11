@@ -72,6 +72,9 @@ public:
     void save_to_file(const std::string& path, const std::string& content);
     void set_llm_provider(const std::shared_ptr<LLMProvider>& provider);
 
+    // Export pattern library to JSON
+    void export_pattern_library(const InsightCollection& insights, const std::string& output_path);
+
 private:
     const Hypergraph& graph_;
     std::shared_ptr<LLMProvider> llm_provider_;
@@ -81,6 +84,7 @@ private:
     std::string generate_header(const InsightCollection& insights, const ReportConfig& config);
     std::string generate_executive_summary(const InsightCollection& insights, const ReportConfig& config);
     std::string generate_statistics_section(const InsightCollection& insights, const ReportConfig& config);
+    std::string generate_category_overview(const InsightCollection& insights, const ReportConfig& config);
     std::string generate_augmentation_overview(const ReportConfig& config);
     std::string generate_llm_examples_section(
         const std::map<InsightType, std::vector<Insight>>& by_type,
@@ -115,11 +119,34 @@ private:
     std::string generate_surprise_section(const std::vector<Insight>& surprises, const ReportConfig& config);
     std::string generate_diffusion_section(const std::vector<Insight>& diffusions, const ReportConfig& config);
     std::string generate_path_rank_section(const std::vector<Insight>& paths, const ReportConfig& config);
+    std::string generate_long_chain_section(const std::vector<Insight>& chains, const ReportConfig& config);
+    std::string generate_meta_path_patterns_section(const std::vector<Insight>& patterns, const ReportConfig& config);
     std::string generate_community_links_section(const std::vector<Insight>& links, const ReportConfig& config);
-    std::string generate_hypotheses_section(const std::vector<Insight>& hypotheses, const ReportConfig& config);
+    std::string generate_hypotheses_section(const std::vector<Insight>& hypotheses, const ReportConfig& config,
+                                             const std::string& title = "Testable Hypotheses",
+                                             const std::string& description = "These hypotheses synthesize findings across discovery methods into testable claims.");
+    std::string generate_mechanism_consolidation_section(const std::vector<Insight>& mechanisms, const ReportConfig& config);
+    std::string generate_evidence_fusion_section(const std::vector<Insight>& links, const ReportConfig& config);
+    std::string generate_meta_path_anomaly_section(const std::vector<Insight>& anomalies, const ReportConfig& config);
+    std::string generate_intervention_bottleneck_section(const std::vector<Insight>& bottlenecks, const ReportConfig& config);
+    std::string generate_competing_mechanism_section(const std::vector<Insight>& alternatives, const ReportConfig& config);
+    std::string generate_schema_repair_section(const std::vector<Insight>& repairs, const ReportConfig& config);
+    std::string generate_cross_community_bridge_section(const std::vector<Insight>& bridges, const ReportConfig& config);
     std::string generate_rules_section(const std::vector<Insight>& rules, const ReportConfig& config);
     std::string generate_embedding_links_section(const std::vector<Insight>& links, const ReportConfig& config);
     std::string generate_author_chains_section(const std::vector<Insight>& chains, const ReportConfig& config);
+    std::string generate_meta_path_section(const std::vector<Insight>& paths, const ReportConfig& config);
+    std::string generate_causal_chains_section(const std::vector<Insight>& chains, const ReportConfig& config);
+    std::string generate_intervention_points_section(const std::vector<Insight>& points, const ReportConfig& config);
+    std::string generate_feedback_loops_section(const std::vector<Insight>& loops, const ReportConfig& config);
+    std::string generate_confounders_section(const std::vector<Insight>& confounders, const ReportConfig& config);
+    std::string generate_taxonomy_section(const std::vector<Insight>& taxonomies, const ReportConfig& config);
+    std::string generate_domain_bridges_section(const std::vector<Insight>& bridges, const ReportConfig& config);
+    std::string generate_logical_entailments_section(const std::vector<Insight>& entailments, const ReportConfig& config);
+    std::string generate_compositional_reasoning_section(const std::vector<Insight>& compositions, const ReportConfig& config);
+    std::string generate_explanatory_chains_section(const std::vector<Insight>& chains, const ReportConfig& config);
+    std::string generate_schema_violations_section(const std::vector<Insight>& violations, const ReportConfig& config);
+    std::string generate_transitive_closure_section(const std::vector<Insight>& gaps, const ReportConfig& config);
     std::string generate_conclusions(const InsightCollection& insights, const ReportConfig& config);
 
     // Helpers
@@ -171,11 +198,36 @@ private:
     std::string describe_surprise(const Insight& insight) const;
     std::string describe_diffusion(const Insight& insight) const;
     std::string describe_path_rank(const Insight& insight) const;
+    std::string describe_long_chain(const Insight& insight) const;
+    std::string describe_meta_path_pattern(const Insight& insight) const;
     std::string describe_community_link(const Insight& insight) const;
     std::string describe_hypothesis(const Insight& insight) const;
+    std::string describe_mechanism_consolidation(const Insight& insight) const;
+    std::string describe_evidence_fusion(const Insight& insight) const;
+    std::string describe_meta_path_anomaly(const Insight& insight) const;
+    std::string describe_intervention_bottleneck(const Insight& insight) const;
+    std::string describe_competing_mechanism(const Insight& insight) const;
+    std::string describe_schema_repair(const Insight& insight) const;
+    std::string describe_cross_community_bridge(const Insight& insight) const;
     std::string describe_rule(const Insight& insight) const;
     std::string describe_embedding_link(const Insight& insight) const;
     std::string describe_author_chain(const Insight& insight) const;
+    std::string describe_causal_chain(const Insight& insight) const;
+    std::string describe_intervention_point(const Insight& insight) const;
+    std::string describe_feedback_loop(const Insight& insight) const;
+    std::string describe_confounder(const Insight& insight) const;
+    std::string describe_taxonomy(const Insight& insight) const;
+    std::string describe_domain_bridge(const Insight& insight) const;
+    std::string describe_logical_entailment(const Insight& insight) const;
+    std::string describe_compositional_reasoning(const Insight& insight) const;
+    std::string describe_explanatory_chain(const Insight& insight) const;
+    std::string describe_schema_violation(const Insight& insight) const;
+    std::string describe_transitive_closure(const Insight& insight) const;
+    std::string describe_meta_path(const Insight& insight) const;
+
+    // Provenance helpers
+    std::string format_source_documents_html(const Insight& insight) const;
+    std::string format_source_documents_markdown(const Insight& insight) const;
 
     // Clustering helpers for HTML coalescing
     /**

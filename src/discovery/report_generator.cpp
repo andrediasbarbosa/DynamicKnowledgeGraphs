@@ -12,6 +12,12 @@ namespace kg {
 ReportGenerator::ReportGenerator(const Hypergraph& graph)
     : graph_(graph) {}
 
+namespace {
+int capped_max_examples(const ReportConfig& config) {
+    return std::max(1, std::min(10, config.max_examples_per_type));
+}
+}  // namespace
+
 std::string ReportGenerator::get_node_label(const std::string& node_id) const {
     const auto* node = graph_.get_node(node_id);
     return node ? node->label : node_id;
@@ -71,15 +77,44 @@ std::string ReportGenerator::get_insight_type_name(InsightType type) const {
         case InsightType::UNCERTAINTY_SAMPLING: return "Uncertainty Sampling";
         case InsightType::COUNTERFACTUAL: return "Counterfactual";
         case InsightType::HYPEREDGE_PREDICTION: return "Hyperedge Prediction";
-        case InsightType::CONSTRAINED_RULE: return "Constrained Rule";
         case InsightType::DIFFUSION: return "Diffusion";
         case InsightType::SURPRISE: return "Surprise";
         case InsightType::COMMUNITY_LINK: return "Community Link";
         case InsightType::PATH_RANK: return "Path Rank";
-        case InsightType::HYPOTHESIS: return "Hypothesis";
+        case InsightType::LONG_CHAIN: return "Long Chain";
+        case InsightType::META_PATH_PATTERN: return "Meta-Path Pattern";
+        case InsightType::HYPOTHESES_1: return "Hypothesis (H1)";
+        case InsightType::HYPOTHESES_2: return "Mechanistic Chain (H2)";
+        case InsightType::HYPOTHESES_3: return "Causal Hypothesis (H3)";
+        case InsightType::MECHANISM_CONSOLIDATION: return "Mechanism Consolidation";
+        case InsightType::EVIDENCE_FUSION_LINK: return "Evidence Fusion Link";
+        case InsightType::META_PATH_ANOMALY: return "Meta-Path Anomaly";
+        case InsightType::INTERVENTION_BOTTLENECK: return "Intervention Bottleneck";
+        case InsightType::COMPETING_MECHANISM: return "Competing Mechanism";
+        case InsightType::SCHEMA_REPAIR: return "Schema Repair";
+        case InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE: return "Cross-Community Mechanism Bridge";
         case InsightType::RULE: return "Rule";
         case InsightType::EMBEDDING_LINK: return "Embedding Link";
         case InsightType::AUTHOR_CHAIN: return "Author Chain";
+        case InsightType::CO_AUTHORSHIP: return "Co-Authorship";
+        case InsightType::CITATION_IMPACT: return "Citation Impact";
+        case InsightType::MULTI_RESOLUTION_COMMUNITY: return "Multi-Resolution Community";
+        case InsightType::CROSS_COMMUNITY_BRIDGE_MAP: return "Cross-Community Bridge Map";
+        case InsightType::META_PATTERN: return "Meta-Pattern";
+        case InsightType::META_PATH: return "Meta-Path Link";
+        case InsightType::CAUSAL_CHAIN: return "Causal Chain";
+        case InsightType::INTERVENTION_POINT: return "Intervention Point";
+        case InsightType::FEEDBACK_LOOP: return "Feedback Loop";
+        case InsightType::CONFOUNDER: return "Confounder";
+        case InsightType::TAXONOMY: return "Taxonomy";
+        case InsightType::DOMAIN_BRIDGE: return "Domain Bridge";
+        case InsightType::LOGICAL_ENTAILMENT: return "Logical Entailment";
+        case InsightType::COMPOSITIONAL_REASONING: return "Compositional Reasoning";
+        case InsightType::EXPLANATORY_CHAIN: return "Explanatory Chain";
+        case InsightType::SCHEMA_VIOLATION: return "Schema Violation";
+        case InsightType::TRANSITIVE_CLOSURE: return "Transitive Closure";
+        case InsightType::BIAS_AUDIT: return "Bias Audit";
+        case InsightType::COMMUNITY_RECOMMENDATION: return "Community Recommendation";
         default: return "Unknown";
     }
 }
@@ -249,6 +284,34 @@ std::string ReportGenerator::generate_llm_narrative(const Insight& insight, cons
             prompt << "Path-ranked links are entity pairs connected by multiple short paths in the graph, "
                    << "suggesting a relationship supported by structure but not directly observed.\n\n";
             break;
+        case InsightType::LONG_CHAIN:
+            prompt << "Long-chain reasoning links trace multi-hop pathways that connect distant entities. "
+                   << "They highlight extended mechanisms or thematic connections supported by sequences of relations.\n\n";
+            break;
+        case InsightType::EVIDENCE_FUSION_LINK:
+            prompt << "An evidence fusion link combines independent signals from multiple discovery operators "
+                   << "to propose a high-confidence relationship with explicit provenance.\n\n";
+            break;
+        case InsightType::META_PATH_ANOMALY:
+            prompt << "A meta-path anomaly is a rare but plausible relation-sequence pattern. "
+                   << "It highlights structurally unusual pathways that still have strong local support.\n\n";
+            break;
+        case InsightType::INTERVENTION_BOTTLENECK:
+            prompt << "An intervention bottleneck identifies nodes that appear in many causal pathways, "
+                   << "making them strategic leverage points for changing downstream outcomes.\n\n";
+            break;
+        case InsightType::COMPETING_MECHANISM:
+            prompt << "A competing mechanism finding surfaces alternative explanatory pathways for the same outcome, "
+                   << "helping distinguish rival hypotheses that need targeted tests.\n\n";
+            break;
+        case InsightType::SCHEMA_REPAIR:
+            prompt << "A schema repair is an actionable graph edit proposal derived from closure gaps, "
+                   << "schema violations, or completion evidence to improve consistency.\n\n";
+            break;
+        case InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE:
+            prompt << "A cross-community mechanism bridge links distant communities/domains via mechanistic paths, "
+                   << "revealing interdisciplinary pathways in the graph.\n\n";
+            break;
         case InsightType::RULE:
             prompt << "An association rule reveals predictable patterns between relation types that can be "
                    << "used for knowledge inference or validation.\n\n";
@@ -261,6 +324,50 @@ std::string ReportGenerator::generate_llm_narrative(const Insight& insight, cons
         case InsightType::AUTHOR_CHAIN:
             prompt << "An author reference chain traces a sequence of citations between authors, highlighting "
                    << "how scholarly influence or references propagate through the literature.\n\n";
+            break;
+        case InsightType::CAUSAL_CHAIN:
+            prompt << "A causal chain represents a directed sequence of cause-effect relationships, "
+                   << "showing how influence propagates through the knowledge graph.\n\n";
+            break;
+        case InsightType::INTERVENTION_POINT:
+            prompt << "An intervention point is a critical node whose removal would break causal pathways, "
+                   << "making it a strategic point for influencing outcomes.\n\n";
+            break;
+        case InsightType::FEEDBACK_LOOP:
+            prompt << "A feedback loop represents a cycle in causal relationships, creating self-reinforcing "
+                   << "or self-regulating dynamics in the system.\n\n";
+            break;
+        case InsightType::CONFOUNDER:
+            prompt << "A confounder is a node connected to both ends of a suspected causal relationship, "
+                   << "suggesting it may be a common cause that needs to be controlled for.\n\n";
+            break;
+        case InsightType::TAXONOMY:
+            prompt << "A taxonomy insight reveals hierarchical relationships through is-a or part-of relations, "
+                   << "organizing concepts into a structured classification.\n\n";
+            break;
+        case InsightType::DOMAIN_BRIDGE:
+            prompt << "A domain bridge is a node that connects multiple separate domains or disciplines, "
+                   << "enabling cross-domain knowledge transfer and interdisciplinary insights.\n\n";
+            break;
+        case InsightType::LOGICAL_ENTAILMENT:
+            prompt << "A logical entailment represents an inferred implication (if X and Y, then Z), "
+                   << "derived from logical reasoning over the knowledge graph.\n\n";
+            break;
+        case InsightType::COMPOSITIONAL_REASONING:
+            prompt << "Compositional reasoning combines multiple relations through relation algebra, "
+                   << "discovering new relationships by composing existing ones.\n\n";
+            break;
+        case InsightType::EXPLANATORY_CHAIN:
+            prompt << "An explanatory chain provides a multi-hop path connecting distant concepts, "
+                   << "offering an explanation for how seemingly unrelated ideas are connected.\n\n";
+            break;
+        case InsightType::SCHEMA_VIOLATION:
+            prompt << "A schema violation occurs when entities of a particular type are missing expected relations "
+                   << "that other entities of the same type typically have, suggesting incomplete knowledge.\n\n";
+            break;
+        case InsightType::TRANSITIVE_CLOSURE:
+            prompt << "A transitive closure gap identifies a missing link implied by transitivity: "
+                   << "if A relates to B and B relates to C, then A should relate to C.\n\n";
             break;
         default:
             break;
@@ -762,6 +869,134 @@ std::string ReportGenerator::describe_path_rank(const Insight& insight) const {
     return ss.str();
 }
 
+std::string ReportGenerator::describe_long_chain(const Insight& insight) const {
+    std::stringstream ss;
+
+    if (insight.seed_labels.size() < 2) return "";
+
+    int hops = 0;
+    auto hop_it = insight.score_breakdown.find("hops");
+    if (hop_it != insight.score_breakdown.end()) {
+        hops = static_cast<int>(std::round(hop_it->second));
+    }
+    if (hops <= 0) {
+        for (const auto& tag : insight.novelty_tags) {
+            if (tag.rfind("hops=", 0) == 0) {
+                try {
+                    hops = std::stoi(tag.substr(5));
+                } catch (...) {
+                    hops = 0;
+                }
+                break;
+            }
+        }
+    }
+
+    ss << "A long-chain reasoning path links **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1] << "**";
+    if (hops > 0) {
+        ss << " across " << hops << " hops";
+    }
+    ss << ", revealing a distant but structurally coherent connection. ";
+
+    if (!insight.description.empty()) {
+        ss << insight.description << ". ";
+    }
+
+    if (!insight.witness_edges.empty()) {
+        ss << "This chain is supported by " << insight.witness_edges.size()
+           << " evidence edges ";
+    }
+
+    ss << "(confidence: " << format_confidence(insight.score) << ").";
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_meta_path(const Insight& insight) const {
+    std::stringstream ss;
+
+    if (insight.seed_labels.size() < 2) return "";
+
+    std::string pattern;
+    std::string path_count;
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag.find("pattern=") == 0) {
+            pattern = tag.substr(std::string("pattern=").size());
+        } else if (tag.find("paths=") == 0) {
+            path_count = tag.substr(std::string("paths=").size());
+        }
+    }
+
+    ss << "Meta-path reasoning links **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1] << "**";
+    if (!pattern.empty()) {
+        ss << " via the relation pattern **" << pattern << "**";
+    }
+    ss << ". ";
+
+    if (!path_count.empty()) {
+        ss << "This pattern is supported by " << path_count << " path instances. ";
+    }
+
+    if (!insight.description.empty()) {
+        ss << insight.description << ". ";
+    }
+
+    if (!insight.witness_edges.empty()) {
+        ss << "Supporting evidence from " << insight.witness_edges.size() << " graph edges";
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_meta_path_pattern(const Insight& insight) const {
+    std::stringstream ss;
+
+    std::string pattern;
+    for (const auto& tag : insight.novelty_tags) {
+        if (tag.rfind("pattern=", 0) == 0) {
+            pattern = tag.substr(std::string("pattern=").size());
+            break;
+        }
+    }
+
+    double support = 0.0;
+    auto sup_it = insight.score_breakdown.find("support_count");
+    if (sup_it != insight.score_breakdown.end()) support = sup_it->second;
+
+    double avg_conf = 0.0;
+    auto conf_it = insight.score_breakdown.find("avg_confidence");
+    if (conf_it != insight.score_breakdown.end()) avg_conf = conf_it->second;
+
+    if (!insight.description.empty()) {
+        ss << insight.description << " ";
+    } else {
+        ss << "A frequent meta-path pattern";
+        if (!pattern.empty()) {
+            ss << " **" << pattern << "**";
+        }
+        if (support > 0) {
+            ss << " appears across " << static_cast<int>(support) << " distinct entity pairs";
+        }
+        ss << ". ";
+        if (avg_conf > 0.0) {
+            ss << "Average path confidence is " << std::fixed << std::setprecision(2) << avg_conf << ". ";
+        }
+    }
+
+    if (!insight.witness_nodes.empty()) {
+        ss << "Example chain: ";
+        for (size_t i = 0; i < std::min<size_t>(insight.witness_nodes.size(), 4); ++i) {
+            if (i > 0) ss << " → ";
+            ss << get_node_label(insight.witness_nodes[i]);
+        }
+        ss << ".";
+    }
+
+    return ss.str();
+}
+
 std::string ReportGenerator::describe_embedding_link(const Insight& insight) const {
     std::stringstream ss;
 
@@ -852,6 +1087,152 @@ std::string ReportGenerator::describe_hypothesis(const Insight& insight) const {
     return ss.str();
 }
 
+std::string ReportGenerator::describe_mechanism_consolidation(const Insight& insight) const {
+    std::stringstream ss;
+
+    ss << "Mechanism consolidation groups related mechanistic findings into a shared explanation cluster. ";
+    if (!insight.description.empty()) {
+        ss << insight.description << " ";
+    }
+
+    auto size_it = insight.score_breakdown.find("cluster_size");
+    if (size_it != insight.score_breakdown.end()) {
+        ss << "Cluster size: " << static_cast<int>(size_it->second) << " insights. ";
+    }
+
+    auto cohesion_it = insight.score_breakdown.find("cohesion");
+    if (cohesion_it != insight.score_breakdown.end()) {
+        ss << "Cohesion score: " << std::fixed << std::setprecision(2) << cohesion_it->second << ". ";
+    }
+
+    if (!insight.witness_nodes.empty()) {
+        ss << "Core nodes include ";
+        for (size_t i = 0; i < std::min<size_t>(insight.witness_nodes.size(), 4); ++i) {
+            if (i > 0) ss << ", ";
+            ss << get_node_label(insight.witness_nodes[i]);
+        }
+        ss << ".";
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_evidence_fusion(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+
+    ss << "Evidence fusion proposes a link between **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1]
+       << "** by combining multiple independent operators. ";
+
+    auto src_it = insight.score_breakdown.find("source_count");
+    if (src_it != insight.score_breakdown.end()) {
+        ss << "It is supported by " << static_cast<int>(std::round(src_it->second))
+           << " operator signals. ";
+    }
+
+    auto cons_it = insight.score_breakdown.find("consensus");
+    if (cons_it != insight.score_breakdown.end()) {
+        ss << "Consensus strength is " << std::fixed << std::setprecision(2)
+           << cons_it->second << ". ";
+    }
+
+    ss << "This is a high-priority candidate for validation due to convergent evidence.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_meta_path_anomaly(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+
+    ss << "A rare relation-sequence pattern links **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1] << "**. ";
+
+    auto an_it = insight.score_breakdown.find("anomaly");
+    auto pl_it = insight.score_breakdown.find("plausibility");
+    if (an_it != insight.score_breakdown.end()) {
+        ss << "Anomaly score: " << std::fixed << std::setprecision(2) << an_it->second << ". ";
+    }
+    if (pl_it != insight.score_breakdown.end()) {
+        ss << "Plausibility: " << std::fixed << std::setprecision(2) << pl_it->second << ". ";
+    }
+    ss << "These anomalies are useful for novel but interpretable discovery.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_intervention_bottleneck(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+
+    ss << "**" << insight.seed_labels[0] << "** is identified as an intervention bottleneck ";
+    auto cov_it = insight.score_breakdown.find("coverage");
+    auto ch_it = insight.score_breakdown.find("affected_chains");
+    if (ch_it != insight.score_breakdown.end()) {
+        ss << "appearing in " << static_cast<int>(std::round(ch_it->second)) << " causal chains";
+    } else {
+        ss << "across causal pathways";
+    }
+    if (cov_it != insight.score_breakdown.end()) {
+        ss << " (coverage " << std::fixed << std::setprecision(2) << cov_it->second << ")";
+    }
+    ss << ". Targeting this node can affect multiple downstream trajectories.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_competing_mechanism(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 3) return "";
+
+    ss << "Competing mechanisms suggest **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1]
+       << "** as alternative explanations for outcome **" << insight.seed_labels[2] << "**. ";
+
+    auto div_it = insight.score_breakdown.find("divergence");
+    auto sup_it = insight.score_breakdown.find("support");
+    if (div_it != insight.score_breakdown.end()) {
+        ss << "Mechanism divergence is " << std::fixed << std::setprecision(2)
+           << div_it->second << ". ";
+    }
+    if (sup_it != insight.score_breakdown.end()) {
+        ss << "Average support is " << std::fixed << std::setprecision(2)
+           << sup_it->second << ". ";
+    }
+    ss << "Use this to prioritize discriminative tests.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_schema_repair(const Insight& insight) const {
+    std::stringstream ss;
+    if (!insight.description.empty()) {
+        ss << insight.description;
+        return ss.str();
+    }
+    if (insight.seed_labels.size() >= 2) {
+        ss << "Schema repair suggests adding or validating a relation between **"
+           << insight.seed_labels[0] << "** and **" << insight.seed_labels[1] << "**.";
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_cross_community_bridge(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+
+    ss << "A cross-community mechanism bridge connects **" << insight.seed_labels[0]
+       << "** and **" << insight.seed_labels[1]
+       << "** through intermediate bridge nodes, linking distant graph communities. ";
+
+    auto nov_it = insight.score_breakdown.find("novelty");
+    auto coh_it = insight.score_breakdown.find("coherence");
+    if (nov_it != insight.score_breakdown.end()) {
+        ss << "Novelty: " << std::fixed << std::setprecision(2) << nov_it->second << ". ";
+    }
+    if (coh_it != insight.score_breakdown.end()) {
+        ss << "Coherence: " << std::fixed << std::setprecision(2) << coh_it->second << ". ";
+    }
+    return ss.str();
+}
+
 std::string ReportGenerator::describe_author_chain(const Insight& insight) const {
     std::stringstream ss;
     if (insight.seed_labels.size() < 3) return "";
@@ -866,6 +1247,148 @@ std::string ReportGenerator::describe_author_chain(const Insight& insight) const
     }
 
     ss << "(confidence: " << format_confidence(insight.score) << ").";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_causal_chain(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "A causal chain involving **" << insight.seed_labels[0] << "**";
+    if (insight.seed_labels.size() > 1) ss << " and **" << insight.seed_labels[1] << "**";
+    ss << " suggests a directional flow of influence through the graph.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_intervention_point(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "Node **" << insight.seed_labels[0] << "** acts as a critical intervention point, ";
+    ss << "whose removal would disconnect causal pathways.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_feedback_loop(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "A feedback loop involving **" << insight.seed_labels[0] << "** ";
+    ss << "creates a self-reinforcing cycle in the causal structure.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_confounder(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "Node **" << insight.seed_labels[0] << "** may confound the relationship between nodes, ";
+    ss << "acting as a common cause that influences multiple outcomes.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_taxonomy(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "A hierarchical relationship connects **" << insight.seed_labels[0] << "** ";
+    ss << "and **" << insight.seed_labels[1] << "** through is-a or part-of relations.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_domain_bridge(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.empty()) return "";
+    ss << "Node **" << insight.seed_labels[0] << "** bridges multiple domains or disciplines, ";
+    ss << "connecting otherwise separate areas of knowledge.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_logical_entailment(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "Logical relationships suggest that **" << insight.seed_labels[0] << "** ";
+    ss << "may entail or imply **" << insight.seed_labels[1] << "**.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_compositional_reasoning(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "Composed relations connect **" << insight.seed_labels[0] << "** ";
+    ss << "and **" << insight.seed_labels[1] << "** through relation algebra.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_explanatory_chain(const Insight& insight) const {
+    std::stringstream ss;
+    if (insight.seed_labels.size() < 2) return "";
+    ss << "An explanatory path connects **" << insight.seed_labels[0] << "** to **";
+    ss << insight.seed_labels[1] << "**, providing a multi-hop explanation across distant concepts.";
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_schema_violation(const Insight& insight) const {
+    std::stringstream ss;
+
+    // Parse structured description: SCHEMA_VIOLATION|entity_type:X|missing_relation:Y|expected_coverage:Z%|affected:N
+    std::map<std::string, std::string> metadata;
+    std::istringstream desc_stream(insight.description);
+    std::string token;
+
+    while (std::getline(desc_stream, token, '|')) {
+        size_t colon_pos = token.find(':');
+        if (colon_pos != std::string::npos) {
+            std::string key = token.substr(0, colon_pos);
+            std::string value = token.substr(colon_pos + 1);
+            metadata[key] = value;
+        }
+    }
+
+    if (metadata.count("entity_type") && metadata.count("missing_relation")) {
+        ss << "Entities of type **" << metadata["entity_type"] << "** ";
+        ss << "are missing expected **" << metadata["missing_relation"] << "** relations. ";
+
+        if (metadata.count("expected_coverage")) {
+            ss << "Expected coverage: " << metadata["expected_coverage"] << "%. ";
+        }
+
+        if (metadata.count("affected")) {
+            ss << "Affected entities: " << metadata["affected"] << ".";
+        }
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::describe_transitive_closure(const Insight& insight) const {
+    std::stringstream ss;
+
+    // Parse structured description: TRANSITIVE_GAP|relation:X|intermediate:Y|chains:N
+    std::map<std::string, std::string> metadata;
+    std::istringstream desc_stream(insight.description);
+    std::string token;
+
+    while (std::getline(desc_stream, token, '|')) {
+        size_t colon_pos = token.find(':');
+        if (colon_pos != std::string::npos) {
+            std::string key = token.substr(0, colon_pos);
+            std::string value = token.substr(colon_pos + 1);
+            metadata[key] = value;
+        }
+    }
+
+    if (insight.seed_labels.size() >= 2 && metadata.count("relation")) {
+        ss << "Missing **" << metadata["relation"] << "** link between **";
+        ss << insight.seed_labels[0] << "** and **" << insight.seed_labels[1] << "**";
+
+        if (metadata.count("intermediate")) {
+            ss << " (via **" << metadata["intermediate"] << "**)";
+        }
+
+        if (metadata.count("chains")) {
+            ss << " — supported by " << metadata["chains"] << " transitive chain";
+            if (metadata["chains"] != "1") ss << "s";
+        }
+
+        ss << ".";
+    }
+
     return ss.str();
 }
 
@@ -1014,9 +1537,38 @@ std::string ReportGenerator::generate_executive_summary(const InsightCollection&
            << "with similar relation signatures.\n";
     }
 
-    if (counts[InsightType::HYPOTHESIS] > 0) {
-        ss << "- **" << counts[InsightType::HYPOTHESIS] << " hypotheses** synthesize testable claims from the "
+    if (counts[InsightType::HYPOTHESES_1] > 0) {
+        ss << "- **" << counts[InsightType::HYPOTHESES_1] << " hypotheses** synthesize testable claims from the "
            << "combined discovery findings.\n";
+    }
+    if (counts[InsightType::HYPOTHESES_2] > 0) {
+        ss << "- **" << counts[InsightType::HYPOTHESES_2] << " mechanistic hypotheses (H2)** generate graph-native "
+           << "mechanistic chains with structured test plans.\n";
+    }
+    if (counts[InsightType::HYPOTHESES_3] > 0) {
+        ss << "- **" << counts[InsightType::HYPOTHESES_3] << " counterfactual causal hypotheses (H3)** propose "
+           << "causal interventions of the form 'If X then Y because Z'.\n";
+    }
+    if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0) {
+        ss << "- **" << counts[InsightType::MECHANISM_CONSOLIDATION] << " mechanism consolidations** cluster related hypotheses into shared explanatory themes.\n";
+    }
+    if (counts[InsightType::EVIDENCE_FUSION_LINK] > 0) {
+        ss << "- **" << counts[InsightType::EVIDENCE_FUSION_LINK] << " evidence-fusion links** combine multiple operator signals into high-confidence candidates.\n";
+    }
+    if (counts[InsightType::META_PATH_ANOMALY] > 0) {
+        ss << "- **" << counts[InsightType::META_PATH_ANOMALY] << " meta-path anomalies** capture rare but plausible relation-sequence templates.\n";
+    }
+    if (counts[InsightType::INTERVENTION_BOTTLENECK] > 0) {
+        ss << "- **" << counts[InsightType::INTERVENTION_BOTTLENECK] << " intervention bottlenecks** identify high-leverage nodes across causal pathways.\n";
+    }
+    if (counts[InsightType::COMPETING_MECHANISM] > 0) {
+        ss << "- **" << counts[InsightType::COMPETING_MECHANISM] << " competing-mechanism findings** expose alternative explanations for shared outcomes.\n";
+    }
+    if (counts[InsightType::SCHEMA_REPAIR] > 0) {
+        ss << "- **" << counts[InsightType::SCHEMA_REPAIR] << " schema repairs** provide executable graph consistency improvements.\n";
+    }
+    if (counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] > 0) {
+        ss << "- **" << counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] << " cross-community mechanism bridges** connect distant domains through interpretable pathways.\n";
     }
 
     if (counts[InsightType::DIFFUSION] > 0) {
@@ -1027,9 +1579,38 @@ std::string ReportGenerator::generate_executive_summary(const InsightCollection&
     if (counts[InsightType::PATH_RANK] > 0) {
         ss << "- **" << counts[InsightType::PATH_RANK] << " path-ranked links** highlight pairs connected by multiple short paths.\n";
     }
+    if (counts[InsightType::LONG_CHAIN] > 0) {
+        ss << "- **" << counts[InsightType::LONG_CHAIN] << " long-chain links** surface distant multi-hop reasoning paths.\n";
+    }
+    if (counts[InsightType::META_PATH] > 0) {
+        ss << "- **" << counts[InsightType::META_PATH] << " meta-path links** connect entities through typed relation sequences.\n";
+    }
+    if (counts[InsightType::META_PATH_PATTERN] > 0) {
+        ss << "- **" << counts[InsightType::META_PATH_PATTERN] << " meta-path patterns** capture frequent relation templates across the graph.\n";
+    }
 
     if (counts[InsightType::AUTHOR_CHAIN] > 0) {
         ss << "- **" << counts[InsightType::AUTHOR_CHAIN] << " author reference chains** trace citation pathways across authors.\n";
+    }
+
+    if (counts[InsightType::CO_AUTHORSHIP] > 0) {
+        ss << "- **" << counts[InsightType::CO_AUTHORSHIP] << " co-authorship networks** identify frequent collaborators and research clusters.\n";
+    }
+
+    if (counts[InsightType::CITATION_IMPACT] > 0) {
+        ss << "- **" << counts[InsightType::CITATION_IMPACT] << " citation impact** rankings reveal influential authors and seminal works.\n";
+    }
+
+    if (counts[InsightType::MULTI_RESOLUTION_COMMUNITY] > 0) {
+        ss << "- **" << counts[InsightType::MULTI_RESOLUTION_COMMUNITY] << " multi-resolution communities** reveal hierarchical clustering at multiple scales.\n";
+    }
+
+    if (counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] > 0) {
+        ss << "- **" << counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] << " cross-community bridge maps** link bridge entities to the communities they connect.\n";
+    }
+
+    if (counts[InsightType::META_PATTERN] > 0) {
+        ss << "- **" << counts[InsightType::META_PATTERN] << " meta-patterns** identify recurring structural templates across pattern insights.\n";
     }
 
     if (counts[InsightType::RULE] > 0) {
@@ -1040,6 +1621,43 @@ std::string ReportGenerator::generate_executive_summary(const InsightCollection&
     if (counts[InsightType::EMBEDDING_LINK] > 0) {
         ss << "- **" << counts[InsightType::EMBEDDING_LINK] << " embedding-based predictions** were generated using TransE "
            << "link prediction, suggesting plausible missing relationships.\n";
+    }
+
+    // Causal & Mechanistic Discovery
+    if (counts[InsightType::CAUSAL_CHAIN] > 0) {
+        ss << "- **" << counts[InsightType::CAUSAL_CHAIN] << " causal chains** trace directed paths along causal relation types.\n";
+    }
+    if (counts[InsightType::INTERVENTION_POINT] > 0) {
+        ss << "- **" << counts[InsightType::INTERVENTION_POINT] << " intervention points** identify nodes whose removal disconnects causal chains.\n";
+    }
+    if (counts[InsightType::FEEDBACK_LOOP] > 0) {
+        ss << "- **" << counts[InsightType::FEEDBACK_LOOP] << " feedback loops** expose cycles in causal or directional relations.\n";
+    }
+    if (counts[InsightType::CONFOUNDER] > 0) {
+        ss << "- **" << counts[InsightType::CONFOUNDER] << " confounders** flag nodes connected to both ends of suspected causal relations.\n";
+    }
+
+    // Structural & Logical Reasoning
+    if (counts[InsightType::TAXONOMY] > 0) {
+        ss << "- **" << counts[InsightType::TAXONOMY] << " taxonomic relations** surface hierarchical is-a and part-of structures.\n";
+    }
+    if (counts[InsightType::DOMAIN_BRIDGE] > 0) {
+        ss << "- **" << counts[InsightType::DOMAIN_BRIDGE] << " domain bridges** identify cross-domain or interdisciplinary connector nodes.\n";
+    }
+    if (counts[InsightType::LOGICAL_ENTAILMENT] > 0) {
+        ss << "- **" << counts[InsightType::LOGICAL_ENTAILMENT] << " logical entailments** derive implicit implications from existing relations.\n";
+    }
+    if (counts[InsightType::COMPOSITIONAL_REASONING] > 0) {
+        ss << "- **" << counts[InsightType::COMPOSITIONAL_REASONING] << " compositional relations** compose relation algebra to infer new links.\n";
+    }
+    if (counts[InsightType::EXPLANATORY_CHAIN] > 0) {
+        ss << "- **" << counts[InsightType::EXPLANATORY_CHAIN] << " explanatory chains** connect distant concepts through multi-hop explanation paths.\n";
+    }
+    if (counts[InsightType::SCHEMA_VIOLATION] > 0) {
+        ss << "- **" << counts[InsightType::SCHEMA_VIOLATION] << " schema violations** highlight entities or relations that break expected graph patterns.\n";
+    }
+    if (counts[InsightType::TRANSITIVE_CLOSURE] > 0) {
+        ss << "- **" << counts[InsightType::TRANSITIVE_CLOSURE] << " transitive closure gaps** surface missing links implied by transitive relations.\n";
     }
 
     ss << "\n";
@@ -1075,12 +1693,79 @@ std::string ReportGenerator::generate_statistics_section(const InsightCollection
     return ss.str();
 }
 
+std::string ReportGenerator::generate_category_overview(const InsightCollection& insights, const ReportConfig& config) {
+    std::stringstream ss;
+
+    // Count insights by category
+    std::map<InsightCategory, int> category_counts;
+    std::map<InsightCategory, double> category_avg_scores;
+
+    for (const auto& insight : insights.insights) {
+        category_counts[insight.category]++;
+        category_avg_scores[insight.category] += insight.score;
+    }
+
+    // Calculate averages
+    for (auto& [cat, total_score] : category_avg_scores) {
+        if (category_counts[cat] > 0) {
+            total_score /= category_counts[cat];
+        }
+    }
+
+    if (config.markdown_format) {
+        ss << "## Knowledge Discovery Categories\n\n";
+        ss << "Insights are classified into three categories based on how they generate new knowledge:\n\n";
+
+        // Combinatorial
+        ss << "### 🧩 Combinatorial Insights (" << category_counts[InsightCategory::COMBINATORIAL] << ")\n";
+        ss << "**Pattern Detection & Structural Combinations**\n\n";
+        ss << "These insights emerge from combining existing knowledge in new ways, identifying patterns, ";
+        ss << "structures, and motifs that reveal the underlying organization of the knowledge graph.\n";
+        if (category_counts[InsightCategory::COMBINATORIAL] > 0) {
+            ss << "- Average Score: " << std::fixed << std::setprecision(3)
+               << category_avg_scores[InsightCategory::COMBINATORIAL] << "\n";
+        }
+        ss << "\n";
+
+        // Exploratory
+        ss << "### 🔍 Exploratory Insights (" << category_counts[InsightCategory::EXPLORATORY] << ")\n";
+        ss << "**Path Finding & Connection Discovery**\n\n";
+        ss << "These insights discover new connections, paths, and bridges between concepts, ";
+        ss << "exploring previously unexplored areas of the knowledge space.\n";
+        if (category_counts[InsightCategory::EXPLORATORY] > 0) {
+            ss << "- Average Score: " << std::fixed << std::setprecision(3)
+               << category_avg_scores[InsightCategory::EXPLORATORY] << "\n";
+        }
+        ss << "\n";
+
+        // Transformational
+        ss << "### 🔄 Transformational Insights (" << category_counts[InsightCategory::TRANSFORMATIONAL] << ")\n";
+        ss << "**Reframing & Perspective Shifts**\n\n";
+        ss << "These insights transform understanding by reframing concepts, generating hypotheses, ";
+        ss << "identifying contradictions, and suggesting alternative causal mechanisms.\n";
+        if (category_counts[InsightCategory::TRANSFORMATIONAL] > 0) {
+            ss << "- Average Score: " << std::fixed << std::setprecision(3)
+               << category_avg_scores[InsightCategory::TRANSFORMATIONAL] << "\n";
+        }
+        ss << "\n";
+
+    } else {
+        ss << "KNOWLEDGE DISCOVERY CATEGORIES\n";
+        ss << "------------------------------\n\n";
+        ss << "Combinatorial (Pattern Detection): " << category_counts[InsightCategory::COMBINATORIAL] << "\n";
+        ss << "Exploratory (Connection Discovery): " << category_counts[InsightCategory::EXPLORATORY] << "\n";
+        ss << "Transformational (Reframing): " << category_counts[InsightCategory::TRANSFORMATIONAL] << "\n\n";
+    }
+
+    return ss.str();
+}
+
 std::string ReportGenerator::generate_augmentation_overview(const ReportConfig& config) {
     std::stringstream ss;
 
     if (config.markdown_format) {
         ss << "## Augmentation Methods\n\n";
-        ss << "This report uses twenty-nine augmentation signals derived from the graph structure and local patterns:\n";
+        ss << "This report uses a broad set of augmentation signals derived from the graph structure and local patterns:\n";
         ss << "- **Bridge**: identifies entities that connect otherwise separate regions of the graph.\n";
         ss << "- **Completion**: suggests missing relations based on similar neighborhood patterns.\n";
         ss << "- **Motif**: highlights recurring subgraph structures that indicate repeated concepts.\n";
@@ -1108,7 +1793,19 @@ std::string ReportGenerator::generate_augmentation_overview(const ReportConfig& 
         ss << "- **Community Link**: proposes cross-cluster links with similar relation signatures.\n";
         ss << "- **Path Rank**: proposes links supported by multiple short graph paths.\n";
         ss << "- **Author Chain**: traces citation chains across authors.\n";
+        ss << "- **Co-Authorship**: identifies frequent collaborators and research clusters.\n";
+        ss << "- **Citation Impact**: ranks influential authors and works by citations/authorships.\n";
+        ss << "- **Multi-Resolution Community**: reveals hierarchical community structure at multiple scales.\n";
+        ss << "- **Cross-Community Bridge Map**: maps bridges to the communities they connect.\n";
+        ss << "- **Meta-Pattern**: identifies recurring structural templates across pattern insights.\n";
         ss << "- **Hypothesis**: synthesizes testable claims from combined discovery findings.\n";
+        ss << "- **Mechanism Consolidation**: clusters overlapping hypotheses into shared mechanisms.\n";
+        ss << "- **Evidence Fusion Link**: combines multiple operator signals into consensus links.\n";
+        ss << "- **Meta-Path Anomaly**: captures rare but plausible relation-sequence templates.\n";
+        ss << "- **Intervention Bottleneck**: identifies high-leverage nodes across causal paths.\n";
+        ss << "- **Competing Mechanism**: surfaces alternative explanations for the same outcome.\n";
+        ss << "- **Schema Repair**: proposes executable graph consistency fixes.\n";
+        ss << "- **Cross-Community Mechanism Bridge**: connects distant communities via mechanism paths.\n";
         ss << "- **Rule**: mines association rules between relation types (e.g., if R1(X,Y) then R2(X,Z)).\n";
         ss << "- **Embedding Link**: predicts missing relations using TransE embeddings.\n\n";
         ss << "Alternatives to consider:\n";
@@ -1119,7 +1816,7 @@ std::string ReportGenerator::generate_augmentation_overview(const ReportConfig& 
     } else {
         ss << "AUGMENTATION METHODS\n";
         ss << "--------------------\n";
-        ss << "This report uses thirty augmentation signals derived from the graph structure and local patterns:\n";
+        ss << "This report uses a broad set of augmentation signals derived from the graph structure and local patterns:\n";
         ss << "1) Bridge: identifies entities that connect otherwise separate regions of the graph.\n";
         ss << "2) Completion: suggests missing relations based on similar neighborhood patterns.\n";
         ss << "3) Motif: highlights recurring subgraph structures that indicate repeated concepts.\n";
@@ -1146,9 +1843,19 @@ std::string ReportGenerator::generate_augmentation_overview(const ReportConfig& 
         ss << "24) Community Link: proposes cross-cluster links with similar relation signatures.\n";
         ss << "25) Path Rank: proposes links supported by multiple short graph paths.\n";
         ss << "26) Author Chain: traces citation chains across authors.\n";
-        ss << "27) Hypothesis: synthesizes testable claims from combined findings.\n";
-        ss << "28) Rule: mines association rules between relation types.\n";
-        ss << "29) Embedding Link: predicts missing relations using TransE embeddings.\n\n";
+        ss << "27) Co-Authorship: identifies frequent collaborators and research clusters.\n";
+        ss << "28) Citation Impact: ranks influential authors and works by citations/authorships.\n";
+        ss << "29) Multi-Resolution Community: reveals hierarchical community structure at multiple scales.\n";
+        ss << "30) Cross-Community Bridge Map: maps bridges to the communities they connect.\n";
+        ss << "31) Meta-Pattern: identifies recurring structural templates across pattern insights.\n";
+        ss << "32) Hypothesis: synthesizes testable claims from combined findings.\n";
+        ss << "33) Mechanism Consolidation: clusters overlapping hypotheses into shared mechanisms.\n";
+        ss << "34) Evidence Fusion Link: combines multiple operator signals into consensus links.\n";
+        ss << "35) Competing Mechanism: surfaces alternative explanations for shared outcomes.\n";
+        ss << "36) Schema Repair: proposes executable graph consistency fixes.\n";
+        ss << "37) Cross-Community Mechanism Bridge: links distant communities via mechanism paths.\n";
+        ss << "38) Rule: mines association rules between relation types.\n";
+        ss << "39) Embedding Link: predicts missing relations using TransE embeddings.\n\n";
         ss << "Alternatives to consider:\n";
         ss << "- Embedding-based link prediction (TransE, RotatE, ComplEx).\n";
         ss << "- GNN-based link prediction (GraphSAGE, GAT, RGCN).\n";
@@ -1196,6 +1903,51 @@ std::string escape_html(const std::string& s) {
     return out;
 }
 } // namespace
+
+std::string ReportGenerator::format_source_documents_html(const Insight& insight) const {
+    if (insight.source_documents.empty()) {
+        return "";
+    }
+
+    std::stringstream ss;
+    ss << R"HTML(<div class="provenance" style="margin-top: 10px; padding: 8px; background: rgba(100,100,100,0.1); border-left: 3px solid #4fc3f7; border-radius: 4px;">
+        <span style="font-weight: 600; color: #4fc3f7;">📄 Sources:</span> )HTML";
+
+    for (size_t i = 0; i < insight.source_documents.size(); ++i) {
+        const auto& doc = insight.source_documents[i];
+        // Extract filename from path
+        size_t last_slash = doc.find_last_of("/\\");
+        std::string filename = (last_slash != std::string::npos) ? doc.substr(last_slash + 1) : doc;
+
+        if (i > 0) ss << ", ";
+        ss << R"HTML(<a href=")HTML" << escape_html(doc) << R"HTML(" style="color: #4fc3f7; text-decoration: none;">)HTML"
+           << escape_html(filename) << "</a>";
+    }
+
+    ss << R"HTML(</div>)HTML";
+    return ss.str();
+}
+
+std::string ReportGenerator::format_source_documents_markdown(const Insight& insight) const {
+    if (insight.source_documents.empty()) {
+        return "";
+    }
+
+    std::stringstream ss;
+    ss << "\n\n**Sources:** ";
+
+    for (size_t i = 0; i < insight.source_documents.size(); ++i) {
+        const auto& doc = insight.source_documents[i];
+        // Extract filename from path
+        size_t last_slash = doc.find_last_of("/\\");
+        std::string filename = (last_slash != std::string::npos) ? doc.substr(last_slash + 1) : doc;
+
+        if (i > 0) ss << ", ";
+        ss << "`" << filename << "`";
+    }
+
+    return ss.str();
+}
 
 std::string ReportGenerator::get_graph_context_summary(const Insight& insight, bool markdown) const {
     std::string summary;
@@ -1263,9 +2015,6 @@ std::string ReportGenerator::get_graph_context_summary(const Insight& insight, b
         case InsightType::HYPEREDGE_PREDICTION:
             summary = describe_hyperedge_prediction(insight);
             break;
-        case InsightType::CONSTRAINED_RULE:
-            summary = describe_constrained_rule(insight);
-            break;
         case InsightType::DIFFUSION:
             summary = describe_diffusion(insight);
             break;
@@ -1278,8 +2027,40 @@ std::string ReportGenerator::get_graph_context_summary(const Insight& insight, b
         case InsightType::PATH_RANK:
             summary = describe_path_rank(insight);
             break;
-        case InsightType::HYPOTHESIS:
+        case InsightType::LONG_CHAIN:
+            summary = describe_long_chain(insight);
+            break;
+        case InsightType::META_PATH_PATTERN:
+            summary = describe_meta_path_pattern(insight);
+            break;
+        case InsightType::META_PATH:
+            summary = describe_meta_path(insight);
+            break;
+        case InsightType::HYPOTHESES_1:
+        case InsightType::HYPOTHESES_2:
+        case InsightType::HYPOTHESES_3:
             summary = describe_hypothesis(insight);
+            break;
+        case InsightType::MECHANISM_CONSOLIDATION:
+            summary = describe_mechanism_consolidation(insight);
+            break;
+        case InsightType::EVIDENCE_FUSION_LINK:
+            summary = describe_evidence_fusion(insight);
+            break;
+        case InsightType::META_PATH_ANOMALY:
+            summary = describe_meta_path_anomaly(insight);
+            break;
+        case InsightType::INTERVENTION_BOTTLENECK:
+            summary = describe_intervention_bottleneck(insight);
+            break;
+        case InsightType::COMPETING_MECHANISM:
+            summary = describe_competing_mechanism(insight);
+            break;
+        case InsightType::SCHEMA_REPAIR:
+            summary = describe_schema_repair(insight);
+            break;
+        case InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE:
+            summary = describe_cross_community_bridge(insight);
             break;
         case InsightType::RULE:
             summary = describe_rule(insight);
@@ -1289,6 +2070,39 @@ std::string ReportGenerator::get_graph_context_summary(const Insight& insight, b
             break;
         case InsightType::AUTHOR_CHAIN:
             summary = describe_author_chain(insight);
+            break;
+        case InsightType::CAUSAL_CHAIN:
+            summary = describe_causal_chain(insight);
+            break;
+        case InsightType::INTERVENTION_POINT:
+            summary = describe_intervention_point(insight);
+            break;
+        case InsightType::FEEDBACK_LOOP:
+            summary = describe_feedback_loop(insight);
+            break;
+        case InsightType::CONFOUNDER:
+            summary = describe_confounder(insight);
+            break;
+        case InsightType::TAXONOMY:
+            summary = describe_taxonomy(insight);
+            break;
+        case InsightType::DOMAIN_BRIDGE:
+            summary = describe_domain_bridge(insight);
+            break;
+        case InsightType::LOGICAL_ENTAILMENT:
+            summary = describe_logical_entailment(insight);
+            break;
+        case InsightType::COMPOSITIONAL_REASONING:
+            summary = describe_compositional_reasoning(insight);
+            break;
+        case InsightType::EXPLANATORY_CHAIN:
+            summary = describe_explanatory_chain(insight);
+            break;
+        case InsightType::SCHEMA_VIOLATION:
+            summary = describe_schema_violation(insight);
+            break;
+        case InsightType::TRANSITIVE_CLOSURE:
+            summary = describe_transitive_closure(insight);
             break;
         default:
             break;
@@ -1341,8 +2155,17 @@ std::string ReportGenerator::generate_llm_examples_section(
         InsightType::SURPRISE,
         InsightType::COMMUNITY_LINK,
         InsightType::PATH_RANK,
+        InsightType::LONG_CHAIN,
+        InsightType::META_PATH_PATTERN,
         InsightType::AUTHOR_CHAIN,
-        InsightType::HYPOTHESIS,
+        InsightType::HYPOTHESES_1,
+        InsightType::MECHANISM_CONSOLIDATION,
+        InsightType::EVIDENCE_FUSION_LINK,
+        InsightType::META_PATH_ANOMALY,
+        InsightType::INTERVENTION_BOTTLENECK,
+        InsightType::COMPETING_MECHANISM,
+        InsightType::SCHEMA_REPAIR,
+        InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE,
         InsightType::RULE,
         InsightType::EMBEDDING_LINK
     };
@@ -1428,8 +2251,17 @@ std::string ReportGenerator::generate_llm_examples_section_html(
         InsightType::SURPRISE,
         InsightType::COMMUNITY_LINK,
         InsightType::PATH_RANK,
+        InsightType::LONG_CHAIN,
+        InsightType::META_PATH_PATTERN,
         InsightType::AUTHOR_CHAIN,
-        InsightType::HYPOTHESIS,
+        InsightType::HYPOTHESES_1,
+        InsightType::MECHANISM_CONSOLIDATION,
+        InsightType::EVIDENCE_FUSION_LINK,
+        InsightType::META_PATH_ANOMALY,
+        InsightType::INTERVENTION_BOTTLENECK,
+        InsightType::COMPETING_MECHANISM,
+        InsightType::SCHEMA_REPAIR,
+        InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE,
         InsightType::RULE,
         InsightType::EMBEDDING_LINK
     };
@@ -1496,7 +2328,7 @@ std::string ReportGenerator::generate_bridges_section(const std::vector<Insight>
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". " << (insight.seed_labels.empty() ? "Unknown" : insight.seed_labels[0]) << "\n\n";
@@ -1511,6 +2343,7 @@ std::string ReportGenerator::generate_bridges_section(const std::vector<Insight>
             narrative = describe_bridge(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
 
         if (config.include_evidence && !insight.evidence_chunk_ids.empty()) {
             ss << "*Evidence from: " << insight.evidence_chunk_ids[0];
@@ -1544,7 +2377,7 @@ std::string ReportGenerator::generate_completions_section(const std::vector<Insi
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". ";
@@ -1561,6 +2394,7 @@ std::string ReportGenerator::generate_completions_section(const std::vector<Insi
             narrative = describe_completion(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1585,7 +2419,7 @@ std::string ReportGenerator::generate_motifs_section(const std::vector<Insight>&
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Pattern Cluster\n\n";
@@ -1598,6 +2432,7 @@ std::string ReportGenerator::generate_motifs_section(const std::vector<Insight>&
             narrative = describe_motif(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1622,7 +2457,7 @@ std::string ReportGenerator::generate_substitutions_section(const std::vector<In
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ↔ " << insight.seed_labels[1] << "\n\n";
@@ -1635,6 +2470,7 @@ std::string ReportGenerator::generate_substitutions_section(const std::vector<In
             narrative = describe_substitution(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1659,7 +2495,7 @@ std::string ReportGenerator::generate_contradictions_section(const std::vector<I
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Conflict\n\n";
@@ -1672,6 +2508,7 @@ std::string ReportGenerator::generate_contradictions_section(const std::vector<I
             narrative = describe_contradiction(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1696,7 +2533,7 @@ std::string ReportGenerator::generate_entity_resolutions_section(const std::vect
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
@@ -1710,6 +2547,7 @@ std::string ReportGenerator::generate_entity_resolutions_section(const std::vect
             narrative = describe_entity_resolution(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1735,7 +2573,7 @@ std::string ReportGenerator::generate_core_periphery_section(const std::vector<I
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && !insight.seed_labels.empty()) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
@@ -1748,6 +2586,7 @@ std::string ReportGenerator::generate_core_periphery_section(const std::vector<I
             narrative = describe_core_periphery(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1772,7 +2611,7 @@ std::string ReportGenerator::generate_text_similarity_section(const std::vector<
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
@@ -1786,6 +2625,7 @@ std::string ReportGenerator::generate_text_similarity_section(const std::vector<
             narrative = describe_text_similarity(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1808,7 +2648,7 @@ std::string ReportGenerator::generate_argument_support_section(const std::vector
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
                << " ↔ " << insight.seed_labels[1] << "\n\n";
@@ -1817,6 +2657,7 @@ std::string ReportGenerator::generate_argument_support_section(const std::vector
             ? generate_llm_narrative(insight, config)
             : describe_argument_support(insight);
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -1834,7 +2675,7 @@ std::string ReportGenerator::generate_active_learning_section(const std::vector<
 
     int count = 0;
     for (const auto& insight : queries) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Verification Question\n\n";
         }
@@ -1861,7 +2702,7 @@ std::string ReportGenerator::generate_method_outcome_section(const std::vector<I
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && !insight.seed_labels.empty()) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
         }
@@ -1888,7 +2729,7 @@ std::string ReportGenerator::generate_centrality_section(const std::vector<Insig
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && !insight.seed_labels.empty()) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
         }
@@ -1915,7 +2756,7 @@ std::string ReportGenerator::generate_community_detection_section(const std::vec
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Community Cluster\n\n";
         }
@@ -1942,7 +2783,7 @@ std::string ReportGenerator::generate_k_core_section(const std::vector<Insight>&
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && !insight.seed_labels.empty()) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
         }
@@ -1969,7 +2810,7 @@ std::string ReportGenerator::generate_k_truss_section(const std::vector<Insight>
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
                << " — " << insight.seed_labels[1] << "\n\n";
@@ -1992,7 +2833,7 @@ std::string ReportGenerator::generate_claim_stance_section(const std::vector<Ins
 
     int count = 0;
     for (const auto& insight : claims) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → "
                << insight.seed_labels[1] << "\n\n";
@@ -2015,7 +2856,7 @@ std::string ReportGenerator::generate_relation_induction_section(const std::vect
 
     int count = 0;
     for (const auto& insight : relations) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Suggested Type\n\n";
         }
@@ -2037,7 +2878,7 @@ std::string ReportGenerator::generate_analogical_transfer_section(const std::vec
 
     int count = 0;
     for (const auto& insight : links) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
                << " → " << insight.seed_labels[1] << "\n\n";
@@ -2058,7 +2899,7 @@ std::string ReportGenerator::generate_uncertainty_sampling_section(const std::ve
     }
     int count = 0;
     for (const auto& insight : samples) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → "
                << insight.seed_labels[1] << "\n\n";
@@ -2078,7 +2919,7 @@ std::string ReportGenerator::generate_counterfactual_section(const std::vector<I
     }
     int count = 0;
     for (const auto& insight : probes) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Counterfactual Question\n\n";
         }
@@ -2097,7 +2938,7 @@ std::string ReportGenerator::generate_hyperedge_prediction_section(const std::ve
     }
     int count = 0;
     for (const auto& insight : links) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → "
                << insight.seed_labels[1] << "\n\n";
@@ -2117,7 +2958,7 @@ std::string ReportGenerator::generate_constrained_rule_section(const std::vector
     }
     int count = 0;
     for (const auto& insight : rules) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Rule\n\n";
         }
@@ -2145,7 +2986,7 @@ std::string ReportGenerator::generate_surprise_section(const std::vector<Insight
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Unexpected Connection\n\n";
@@ -2158,6 +2999,7 @@ std::string ReportGenerator::generate_surprise_section(const std::vector<Insight
             narrative = describe_surprise(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
 
         if (config.include_evidence && !insight.evidence_chunk_ids.empty()) {
             ss << "*Found in: " << insight.evidence_chunk_ids[0] << "*\n\n";
@@ -2186,7 +3028,7 @@ std::string ReportGenerator::generate_diffusion_section(const std::vector<Insigh
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         std::string narrative;
         if (config.use_llm_narratives && llm_provider_) {
@@ -2195,6 +3037,7 @@ std::string ReportGenerator::generate_diffusion_section(const std::vector<Insigh
             narrative = describe_diffusion(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -2222,7 +3065,7 @@ std::string ReportGenerator::generate_path_rank_section(const std::vector<Insigh
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
@@ -2239,6 +3082,159 @@ std::string ReportGenerator::generate_path_rank_section(const std::vector<Insigh
             narrative = describe_path_rank(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_long_chain_section(const std::vector<Insight>& chains, const ReportConfig& config) {
+    if (chains.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Long-Chain Reasoning Links\n\n";
+        ss << "These findings highlight distant, multi-hop pathways that connect entities across the graph. "
+           << "They surface interpretive chains that span multiple relations rather than direct links.\n\n";
+    } else {
+        ss << "LONG-CHAIN REASONING LINKS\n";
+        ss << "---------------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = chains;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " ↔ " << insight.seed_labels[1] << "\n\n";
+        } else if (!config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << (count + 1) << ". " << insight.seed_labels[0]
+               << " <-> " << insight.seed_labels[1] << "\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_long_chain(insight);
+        }
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_meta_path_patterns_section(const std::vector<Insight>& patterns, const ReportConfig& config) {
+    if (patterns.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Meta-Path Patterns\n\n";
+        ss << "These patterns capture frequently occurring relation sequences across the graph, "
+           << "revealing reusable structural templates for reasoning or link prediction.\n\n";
+    } else {
+        ss << "META-PATH PATTERNS\n";
+        ss << "------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = patterns;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+
+        std::string pattern;
+        for (const auto& tag : insight.novelty_tags) {
+            if (tag.rfind("pattern=", 0) == 0) {
+                pattern = tag.substr(std::string("pattern=").size());
+                break;
+            }
+        }
+
+        if (config.markdown_format) {
+            if (!pattern.empty()) {
+                ss << "### " << (count + 1) << ". " << pattern << "\n\n";
+            } else if (insight.seed_labels.size() >= 2) {
+                ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+                   << " ↔ " << insight.seed_labels[1] << "\n\n";
+            } else {
+                ss << "### " << (count + 1) << ". Pattern\n\n";
+            }
+        } else {
+            if (!pattern.empty()) {
+                ss << (count + 1) << ". " << pattern << "\n";
+            } else {
+                ss << (count + 1) << ". Pattern\n";
+            }
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_meta_path_pattern(insight);
+        }
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_meta_path_section(const std::vector<Insight>& paths, const ReportConfig& config) {
+    if (paths.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Meta-Path Links\n\n";
+        ss << "These candidates are inferred from typed relation sequences (meta-paths) that repeatedly connect pairs of entities. "
+           << "They provide interpretable, schema-aware evidence for missing links.\n\n";
+    } else {
+        ss << "META-PATH LINKS\n";
+        ss << "--------------\n\n";
+    }
+
+    std::vector<Insight> sorted = paths;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " ↔ " << insight.seed_labels[1] << "\n\n";
+        } else if (!config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << (count + 1) << ". " << insight.seed_labels[0]
+               << " <-> " << insight.seed_labels[1] << "\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_meta_path(insight);
+        }
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -2265,7 +3261,7 @@ std::string ReportGenerator::generate_author_chains_section(const std::vector<In
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (insight.seed_labels.size() >= 3) {
             if (config.markdown_format) {
@@ -2284,6 +3280,7 @@ std::string ReportGenerator::generate_author_chains_section(const std::vector<In
             narrative = describe_author_chain(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -2310,7 +3307,7 @@ std::string ReportGenerator::generate_community_links_section(const std::vector<
 
     int count = 0;
     for (const auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
@@ -2325,23 +3322,28 @@ std::string ReportGenerator::generate_community_links_section(const std::vector<
             narrative = describe_community_link(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
     return ss.str();
 }
 
-std::string ReportGenerator::generate_hypotheses_section(const std::vector<Insight>& hypotheses, const ReportConfig& config) {
+std::string ReportGenerator::generate_hypotheses_section(const std::vector<Insight>& hypotheses, const ReportConfig& config,
+                                                          const std::string& title,
+                                                          const std::string& description) {
     if (hypotheses.empty()) return "";
 
     std::stringstream ss;
 
     if (config.markdown_format) {
-        ss << "## Testable Hypotheses\n\n";
-        ss << "These hypotheses synthesize findings across discovery methods into testable claims.\n\n";
+        ss << "## " << title << "\n\n";
+        ss << description << "\n\n";
     } else {
-        ss << "TESTABLE HYPOTHESES\n";
-        ss << "-------------------\n\n";
+        ss << title << "\n";
+        for (size_t i = 0; i < title.length(); ++i) ss << "-";
+        ss << "\n\n";
+        ss << description << "\n\n";
     }
 
     std::vector<Insight> sorted = hypotheses;
@@ -2351,7 +3353,7 @@ std::string ReportGenerator::generate_hypotheses_section(const std::vector<Insig
 
     int count = 0;
     for (const auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". Hypothesis\n\n";
@@ -2364,9 +3366,233 @@ std::string ReportGenerator::generate_hypotheses_section(const std::vector<Insig
             narrative = describe_hypothesis(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_mechanism_consolidation_section(const std::vector<Insight>& mechanisms, const ReportConfig& config) {
+    if (mechanisms.empty()) return "";
+
+    std::stringstream ss;
+
+    if (config.markdown_format) {
+        ss << "## Mechanism Consolidation\n\n";
+        ss << "These clusters consolidate overlapping hypotheses and chains into higher-level mechanisms.\n\n";
+    } else {
+        ss << "MECHANISM CONSOLIDATION\n";
+        ss << "-----------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = mechanisms;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+        return a.score > b.score;
+    });
+
+    int count = 0;
+    for (const auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+
+        if (config.markdown_format) {
+            ss << "### " << (count + 1) << ". Mechanism Cluster\n\n";
+        } else {
+            ss << (count + 1) << ". Mechanism Cluster\n";
+        }
+
+        std::string narrative;
+        if (config.use_llm_narratives && llm_provider_) {
+            narrative = generate_llm_narrative(insight, config);
+        } else {
+            narrative = describe_mechanism_consolidation(insight);
+        }
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_evidence_fusion_section(const std::vector<Insight>& links, const ReportConfig& config) {
+    if (links.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Evidence Fusion Links\n\n";
+        ss << "These links are supported by multiple independent operators, increasing confidence through convergent evidence.\n\n";
+    } else {
+        ss << "EVIDENCE FUSION LINKS\n";
+        ss << "---------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = links;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ↔ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_evidence_fusion(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_meta_path_anomaly_section(const std::vector<Insight>& anomalies, const ReportConfig& config) {
+    if (anomalies.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Meta-Path Anomalies\n\n";
+        ss << "Rare but plausible relation-sequence templates that may indicate novel mechanisms or underexplored structures.\n\n";
+    } else {
+        ss << "META-PATH ANOMALIES\n";
+        ss << "-------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = anomalies;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ↔ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_meta_path_anomaly(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_intervention_bottleneck_section(const std::vector<Insight>& bottlenecks, const ReportConfig& config) {
+    if (bottlenecks.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Intervention Bottlenecks\n\n";
+        ss << "Nodes that sit on many causal pathways and therefore offer high leverage for intervention.\n\n";
+    } else {
+        ss << "INTERVENTION BOTTLENECKS\n";
+        ss << "------------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = bottlenecks;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_intervention_bottleneck(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_competing_mechanism_section(const std::vector<Insight>& alternatives, const ReportConfig& config) {
+    if (alternatives.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Competing Mechanisms\n\n";
+        ss << "Alternative mechanism sets for the same outcome, useful for discriminative testing and falsification.\n\n";
+    } else {
+        ss << "COMPETING MECHANISMS\n";
+        ss << "--------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = alternatives;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 3) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0]
+               << " vs " << insight.seed_labels[1] << " ⇒ " << insight.seed_labels[2] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_competing_mechanism(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_schema_repair_section(const std::vector<Insight>& repairs, const ReportConfig& config) {
+    if (repairs.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Schema Repair Suggestions\n\n";
+        ss << "Executable repair actions derived from schema violations, transitive closure gaps, and completion evidence.\n\n";
+    } else {
+        ss << "SCHEMA REPAIR SUGGESTIONS\n";
+        ss << "-------------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = repairs;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " → " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_schema_repair(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_cross_community_bridge_section(const std::vector<Insight>& bridges, const ReportConfig& config) {
+    if (bridges.empty()) return "";
+
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Cross-Community Mechanism Bridges\n\n";
+        ss << "Mechanistic links that connect distant communities or domains through bridge nodes.\n\n";
+    } else {
+        ss << "CROSS-COMMUNITY MECHANISM BRIDGES\n";
+        ss << "---------------------------------\n\n";
+    }
+
+    std::vector<Insight> sorted = bridges;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ↔ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_cross_community_bridge(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
     return ss.str();
 }
 
@@ -2391,7 +3617,7 @@ std::string ReportGenerator::generate_rules_section(const std::vector<Insight>& 
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format) {
             ss << "### " << (count + 1) << ". " << insight.description << "\n\n";
@@ -2406,6 +3632,7 @@ std::string ReportGenerator::generate_rules_section(const std::vector<Insight>& 
             narrative = describe_rule(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
@@ -2434,7 +3661,7 @@ std::string ReportGenerator::generate_embedding_links_section(const std::vector<
 
     int count = 0;
     for (auto& insight : sorted) {
-        if (count >= config.max_examples_per_type) break;
+        if (count >= capped_max_examples(config)) break;
 
         if (config.markdown_format && insight.seed_labels.size() >= 2) {
             // Extract relation type
@@ -2459,9 +3686,294 @@ std::string ReportGenerator::generate_embedding_links_section(const std::vector<
             narrative = describe_embedding_link(insight);
         }
         ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
         count++;
     }
 
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_causal_chains_section(const std::vector<Insight>& chains, const ReportConfig& config) {
+    if (chains.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Causal Chains\n\n";
+        ss << "These chains represent directed sequences of cause-effect relationships.\n\n";
+    } else {
+        ss << "CAUSAL CHAINS\n--------------\n\n";
+    }
+    std::vector<Insight> sorted = chains;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0];
+            if (insight.seed_labels.size() > 1) ss << " → " << insight.seed_labels[1];
+            ss << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_causal_chain(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_intervention_points_section(const std::vector<Insight>& points, const ReportConfig& config) {
+    if (points.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Intervention Points\n\n";
+        ss << "Critical nodes whose removal would disconnect causal pathways.\n\n";
+    } else {
+        ss << "INTERVENTION POINTS\n-------------------\n\n";
+    }
+    std::vector<Insight> sorted = points;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_intervention_point(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_feedback_loops_section(const std::vector<Insight>& loops, const ReportConfig& config) {
+    if (loops.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Feedback Loops\n\n";
+        ss << "Cycles in causal relationships creating self-reinforcing dynamics.\n\n";
+    } else {
+        ss << "FEEDBACK LOOPS\n--------------\n\n";
+    }
+    std::vector<Insight> sorted = loops;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_feedback_loop(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_confounders_section(const std::vector<Insight>& confounders, const ReportConfig& config) {
+    if (confounders.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Confounders\n\n";
+        ss << "Nodes that may confound causal relationships as common causes.\n\n";
+    } else {
+        ss << "CONFOUNDERS\n-----------\n\n";
+    }
+    std::vector<Insight> sorted = confounders;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_confounder(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_taxonomy_section(const std::vector<Insight>& taxonomies, const ReportConfig& config) {
+    if (taxonomies.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Taxonomy Relationships\n\n";
+        ss << "Hierarchical is-a and part-of relationships organizing concepts.\n\n";
+    } else {
+        ss << "TAXONOMY RELATIONSHIPS\n----------------------\n\n";
+    }
+    std::vector<Insight> sorted = taxonomies;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ↔ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_taxonomy(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_domain_bridges_section(const std::vector<Insight>& bridges, const ReportConfig& config) {
+    if (bridges.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Domain Bridges\n\n";
+        ss << "Cross-domain connectors enabling interdisciplinary knowledge transfer.\n\n";
+    } else {
+        ss << "DOMAIN BRIDGES\n--------------\n\n";
+    }
+    std::vector<Insight> sorted = bridges;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_domain_bridge(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_logical_entailments_section(const std::vector<Insight>& entailments, const ReportConfig& config) {
+    if (entailments.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Logical Entailments\n\n";
+        ss << "Inferred implications derived from logical reasoning.\n\n";
+    } else {
+        ss << "LOGICAL ENTAILMENTS\n-------------------\n\n";
+    }
+    std::vector<Insight> sorted = entailments;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ⇒ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_logical_entailment(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_compositional_reasoning_section(const std::vector<Insight>& compositions, const ReportConfig& config) {
+    if (compositions.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Compositional Reasoning\n\n";
+        ss << "Composed relations discovered through relation algebra.\n\n";
+    } else {
+        ss << "COMPOSITIONAL REASONING\n-----------------------\n\n";
+    }
+    std::vector<Insight> sorted = compositions;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ◦ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_compositional_reasoning(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_explanatory_chains_section(const std::vector<Insight>& chains, const ReportConfig& config) {
+    if (chains.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Explanatory Chains\n\n";
+        ss << "Multi-hop paths explaining connections between distant concepts.\n\n";
+    } else {
+        ss << "EXPLANATORY CHAINS\n------------------\n\n";
+    }
+    std::vector<Insight> sorted = chains;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ⟿ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_explanatory_chain(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_schema_violations_section(const std::vector<Insight>& violations, const ReportConfig& config) {
+    if (violations.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Schema Violations\n\n";
+        ss << "Entities missing expected relations based on learned schema patterns.\n\n";
+    } else {
+        ss << "SCHEMA VIOLATIONS\n-----------------\n\n";
+    }
+    std::vector<Insight> sorted = violations;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_schema_violation(insight);
+        ss << "**" << (count + 1) << ".** " << narrative << "\n\n";
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_transitive_closure_section(const std::vector<Insight>& gaps, const ReportConfig& config) {
+    if (gaps.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Transitive Closure Gaps\n\n";
+        ss << "Missing links implied by transitive relations (if A→B and B→C, expect A→C).\n\n";
+    } else {
+        ss << "TRANSITIVE CLOSURE GAPS\n-----------------------\n\n";
+    }
+    std::vector<Insight> sorted = gaps;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && insight.seed_labels.size() >= 2) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << " ⇝ " << insight.seed_labels[1] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_transitive_closure(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
     return ss.str();
 }
 
@@ -2586,34 +4098,208 @@ std::string ReportGenerator::generate_conclusions(const InsightCollection& insig
            << "Prioritize high-confidence candidates for validation or targeted data collection.\n\n";
     }
 
+    if (counts[InsightType::LONG_CHAIN] > 0) {
+        ss << "20. **Review Long-Chain Links**: The " << counts[InsightType::LONG_CHAIN]
+           << " long-chain reasoning paths highlight distant connections across multiple hops. "
+           << "Use them to trace extended mechanisms or thematic linkages.\n\n";
+    }
+
+    if (counts[InsightType::META_PATH_PATTERN] > 0) {
+        ss << "21. **Interpret Meta-Path Patterns**: The " << counts[InsightType::META_PATH_PATTERN]
+           << " frequent relation templates summarize recurring multi-hop structures. "
+           << "Use them to guide querying and validation strategies.\n\n";
+    }
+
     if (counts[InsightType::AUTHOR_CHAIN] > 0) {
-        ss << "20. **Track Citation Trails**: The " << counts[InsightType::AUTHOR_CHAIN]
+        ss << "22. **Track Citation Trails**: The " << counts[InsightType::AUTHOR_CHAIN]
            << " author reference chains reveal how scholarship propagates through citations. "
            << "Use these chains to map influence or identify key scholarly bridges.\n\n";
     }
 
     if (counts[InsightType::COMMUNITY_LINK] > 0) {
-        ss << "21. **Review Community Links**: The " << counts[InsightType::COMMUNITY_LINK]
+        ss << "23. **Review Community Links**: The " << counts[InsightType::COMMUNITY_LINK]
            << " cross-cluster links highlight structurally similar entities across communities. "
            << "Validate candidates that bridge distinct topic areas.\n\n";
     }
 
-    if (counts[InsightType::HYPOTHESIS] > 0) {
-        ss << "22. **Test Hypotheses**: The " << counts[InsightType::HYPOTHESIS]
+    if (counts[InsightType::HYPOTHESES_1] > 0) {
+        ss << "24. **Test Hypotheses**: The " << counts[InsightType::HYPOTHESES_1]
            << " synthesized hypotheses translate graph discoveries into testable claims. "
            << "Prioritize those with strong supporting evidence.\n\n";
     }
 
+    if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0) {
+        ss << "25. **Review Consolidated Mechanisms**: The " << counts[InsightType::MECHANISM_CONSOLIDATION]
+           << " mechanism clusters unify overlapping hypotheses and chains. "
+           << "Use them to focus validation on the strongest shared explanations.\n\n";
+    }
+
+    if (counts[InsightType::EVIDENCE_FUSION_LINK] > 0) {
+        ss << "26. **Prioritize Evidence-Fusion Links**: The " << counts[InsightType::EVIDENCE_FUSION_LINK]
+           << " fused candidates are supported by multiple independent operators. "
+           << "Use them as top-tier targets for validation and curation.\n\n";
+    }
+
+    if (counts[InsightType::META_PATH_ANOMALY] > 0) {
+        ss << "27. **Investigate Meta-Path Anomalies**: The " << counts[InsightType::META_PATH_ANOMALY]
+           << " rare relation templates may indicate novel mechanisms or underexplored structures.\n\n";
+    }
+
+    if (counts[InsightType::INTERVENTION_BOTTLENECK] > 0) {
+        ss << "28. **Stress-Test Bottleneck Nodes**: The " << counts[InsightType::INTERVENTION_BOTTLENECK]
+           << " intervention bottlenecks offer high leverage over downstream causal pathways.\n\n";
+    }
+
+    if (counts[InsightType::COMPETING_MECHANISM] > 0) {
+        ss << "29. **Design Discriminative Tests**: The " << counts[InsightType::COMPETING_MECHANISM]
+           << " competing-mechanism findings provide alternative explanations for shared outcomes.\n\n";
+    }
+
+    if (counts[InsightType::SCHEMA_REPAIR] > 0) {
+        ss << "30. **Apply Schema Repairs Carefully**: The " << counts[InsightType::SCHEMA_REPAIR]
+           << " repair suggestions provide executable consistency improvements. "
+           << "Validate high-scoring actions before insertion.\n\n";
+    }
+
+    if (counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] > 0) {
+        ss << "31. **Explore Cross-Community Bridges**: The " << counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE]
+           << " bridge mechanisms connect distant communities and may support interdisciplinary hypotheses.\n\n";
+    }
+
     if (counts[InsightType::RULE] > 0) {
-        ss << "23. **Leverage Association Rules**: The " << counts[InsightType::RULE]
+        ss << "32. **Leverage Association Rules**: The " << counts[InsightType::RULE]
            << " discovered rules can be used for automated knowledge inference, "
            << "consistency checking, or to guide further data collection.\n\n";
     }
 
     if (counts[InsightType::EMBEDDING_LINK] > 0) {
-        ss << "24. **Review Embedding Predictions**: The " << counts[InsightType::EMBEDDING_LINK]
+        ss << "33. **Review Embedding Predictions**: The " << counts[InsightType::EMBEDDING_LINK]
            << " TransE-based link predictions suggest plausible missing relationships. "
            << "Higher plausibility scores indicate stronger evidence for the predicted link.\n\n";
+    }
+    if (counts[InsightType::MOTIF] > 0) {
+        ss << "34. **Investigate Recurring Motifs**: The " << counts[InsightType::MOTIF]
+           << " detected motifs represent frequently co-occurring concept clusters. "
+           << "Use them to identify recurring structural patterns worth further study.\n\n";
+    }
+    if (counts[InsightType::DIFFUSION] > 0) {
+        ss << "35. **Follow Influence Pathways**: The " << counts[InsightType::DIFFUSION]
+           << " diffusion pathways map how concepts propagate through the graph. "
+           << "Use them to trace knowledge transmission routes and influence dynamics.\n\n";
+    }
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0) {
+        ss << "36. **Verify Uncertain Relations**: The " << counts[InsightType::UNCERTAINTY_SAMPLING]
+           << " low-confidence relations are prime candidates for targeted validation or expert review.\n\n";
+    }
+    if (counts[InsightType::COUNTERFACTUAL] > 0) {
+        ss << "37. **Answer Counterfactual Probes**: The " << counts[InsightType::COUNTERFACTUAL]
+           << " falsification questions test the robustness of key claims. "
+           << "Prioritize probes that target high-confidence findings.\n\n";
+    }
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0) {
+        ss << "38. **Review Hyperedge Predictions**: The " << counts[InsightType::HYPEREDGE_PREDICTION]
+           << " predicted relations are derived from entity overlap patterns. "
+           << "Validate before insertion into the knowledge graph.\n\n";
+    }
+    if (counts[InsightType::HYPOTHESES_2] > 0) {
+        ss << "39. **Evaluate Mechanistic Chains (H2)**: The " << counts[InsightType::HYPOTHESES_2]
+           << " typed mechanistic hypotheses provide role-labeled causal pathways with structured test plans. "
+           << "Use them to prioritize interpretable mechanisms for experimental follow-up.\n\n";
+    }
+    if (counts[InsightType::HYPOTHESES_3] > 0) {
+        ss << "40. **Test Counterfactual Hypotheses (H3)**: The " << counts[InsightType::HYPOTHESES_3]
+           << " counterfactual causal hypotheses propose specific interventions with predicted outcomes. "
+           << "Design experiments to validate or falsify the proposed causal claims.\n\n";
+    }
+    if (counts[InsightType::META_PATH] > 0) {
+        ss << "41. **Validate Meta-Path Links**: The " << counts[InsightType::META_PATH]
+           << " meta-path links connect entities through typed relation sequences. "
+           << "Validate higher-confidence candidates for knowledge graph augmentation.\n\n";
+    }
+    if (counts[InsightType::CAUSAL_CHAIN] > 0) {
+        ss << "42. **Verify Causal Chains**: The " << counts[InsightType::CAUSAL_CHAIN]
+           << " causal chains trace directed paths via causal relation types. "
+           << "Prioritize chains with strong supporting evidence for mechanistic validation.\n\n";
+    }
+    if (counts[InsightType::INTERVENTION_POINT] > 0) {
+        ss << "43. **Target Intervention Points**: The " << counts[InsightType::INTERVENTION_POINT]
+           << " intervention points are nodes whose removal disconnects causal chains. "
+           << "These are high-value targets for experimental design.\n\n";
+    }
+    if (counts[InsightType::FEEDBACK_LOOP] > 0) {
+        ss << "44. **Examine Feedback Loops**: The " << counts[InsightType::FEEDBACK_LOOP]
+           << " feedback loops expose cycles in causal or directional relations. "
+           << "These may indicate self-reinforcing mechanisms worth modelling explicitly.\n\n";
+    }
+    if (counts[InsightType::CONFOUNDER] > 0) {
+        ss << "45. **Control for Confounders**: The " << counts[InsightType::CONFOUNDER]
+           << " identified confounders connect to both ends of suspected causal relations. "
+           << "Account for these in experimental or statistical analyses.\n\n";
+    }
+    if (counts[InsightType::TAXONOMY] > 0) {
+        ss << "46. **Refine Taxonomic Structure**: The " << counts[InsightType::TAXONOMY]
+           << " taxonomic relations surface is-a and part-of hierarchies. "
+           << "Use them to improve ontological consistency and support classification tasks.\n\n";
+    }
+    if (counts[InsightType::DOMAIN_BRIDGE] > 0) {
+        ss << "47. **Leverage Domain Bridges**: The " << counts[InsightType::DOMAIN_BRIDGE]
+           << " domain bridge nodes connect distinct disciplines. "
+           << "These are prime candidates for interdisciplinary hypotheses.\n\n";
+    }
+    if (counts[InsightType::LOGICAL_ENTAILMENT] > 0) {
+        ss << "48. **Expand via Logical Entailments**: The " << counts[InsightType::LOGICAL_ENTAILMENT]
+           << " entailments derive implicit implications from existing relations. "
+           << "Validate and add confirmed entailments to enrich the knowledge graph.\n\n";
+    }
+    if (counts[InsightType::COMPOSITIONAL_REASONING] > 0) {
+        ss << "49. **Test Compositional Relations**: The " << counts[InsightType::COMPOSITIONAL_REASONING]
+           << " compositional inferences combine relation algebra to propose new links. "
+           << "Verify whether composed paths reflect genuine domain knowledge.\n\n";
+    }
+    if (counts[InsightType::EXPLANATORY_CHAIN] > 0) {
+        ss << "50. **Trace Explanatory Chains**: The " << counts[InsightType::EXPLANATORY_CHAIN]
+           << " explanatory chains connect distant concepts through multi-hop paths. "
+           << "Use them to build narrative explanations linking remote but related findings.\n\n";
+    }
+    if (counts[InsightType::SCHEMA_VIOLATION] > 0) {
+        ss << "51. **Address Schema Violations**: The " << counts[InsightType::SCHEMA_VIOLATION]
+           << " violations highlight entities or relations that break expected graph patterns. "
+           << "Resolve these to improve data quality and consistency.\n\n";
+    }
+    if (counts[InsightType::TRANSITIVE_CLOSURE] > 0) {
+        ss << "52. **Close Transitive Gaps**: The " << counts[InsightType::TRANSITIVE_CLOSURE]
+           << " transitive closure gaps reveal links implied by transitivity but not yet recorded. "
+           << "Validate and add confirmed closures to increase graph completeness.\n\n";
+    }
+
+    if (counts[InsightType::CO_AUTHORSHIP] > 0) {
+        ss << "53. **Map Collaboration Networks**: The " << counts[InsightType::CO_AUTHORSHIP]
+           << " co-authorship networks identify frequent collaborators and research clusters. "
+           << "Use them to understand research team dynamics and identify collaboration opportunities.\n\n";
+    }
+
+    if (counts[InsightType::CITATION_IMPACT] > 0) {
+        ss << "54. **Identify Influential Works**: The " << counts[InsightType::CITATION_IMPACT]
+           << " citation impact rankings reveal influential authors and seminal works. "
+           << "Prioritize these for deeper analysis or as entry points for domain exploration.\n\n";
+    }
+
+    if (counts[InsightType::MULTI_RESOLUTION_COMMUNITY] > 0) {
+        ss << "55. **Explore Hierarchical Structure**: The " << counts[InsightType::MULTI_RESOLUTION_COMMUNITY]
+           << " multi-resolution communities reveal organization at different granularities. "
+           << "Use fine-grained scales for detailed analysis and coarse scales for high-level overview.\n\n";
+    }
+
+    if (counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] > 0) {
+        ss << "56. **Leverage Inter-Community Bridges**: The " << counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP]
+           << " bridge mappings identify entities that connect distinct communities. "
+           << "Focus on high-scoring bridges to understand cross-domain knowledge transfer.\n\n";
+    }
+
+    if (counts[InsightType::META_PATTERN] > 0) {
+        ss << "57. **Recognize Structural Templates**: The " << counts[InsightType::META_PATTERN]
+           << " meta-patterns identify frequently recurring structural configurations. "
+           << "Use them to guide targeted searches for similar patterns elsewhere in the graph.\n\n";
     }
 
     ss << "---\n\n";
@@ -2636,6 +4322,7 @@ std::string ReportGenerator::generate(const InsightCollection& insights, const R
     report << generate_header(insights, config);
     report << generate_executive_summary(insights, config);
     report << generate_statistics_section(insights, config);
+    report << generate_category_overview(insights, config);
     report << generate_augmentation_overview(config);
     report << generate_llm_examples_section(by_type, config);
 
@@ -2666,10 +4353,57 @@ std::string ReportGenerator::generate(const InsightCollection& insights, const R
     report << generate_diffusion_section(by_type[InsightType::DIFFUSION], config);
     report << generate_community_links_section(by_type[InsightType::COMMUNITY_LINK], config);
     report << generate_path_rank_section(by_type[InsightType::PATH_RANK], config);
+    report << generate_long_chain_section(by_type[InsightType::LONG_CHAIN], config);
+    report << generate_meta_path_patterns_section(by_type[InsightType::META_PATH_PATTERN], config);
+    report << generate_meta_path_section(by_type[InsightType::META_PATH], config);
     report << generate_author_chains_section(by_type[InsightType::AUTHOR_CHAIN], config);
-    report << generate_hypotheses_section(by_type[InsightType::HYPOTHESIS], config);
+
+    // Hypothesis Generation (3 types)
+    report << generate_hypotheses_section(
+        by_type[InsightType::HYPOTHESES_1],
+        config,
+        "Bayesian Hypothesis Network (Hypotheses_1)",
+        "Hypotheses_1 uses probabilistic belief propagation to infer likely missing relationships. "
+        "It constructs a Bayesian network from insights, estimates conditional probabilities, propagates beliefs iteratively, "
+        "and identifies high-posterior relationships with quantified uncertainty and confidence intervals.");
+    report << generate_hypotheses_section(
+        by_type[InsightType::HYPOTHESES_2],
+        config,
+        "Typed Mechanistic Chains (Hypotheses_2)",
+        "Hypotheses_2 discovers typed mechanistic chains that match domain templates (e.g., Driver→Hazard→Impact) "
+        "and augments them with compact explanation subgraphs. It emphasizes role-labeled pathways and evidence-aligned "
+        "supporting structure rather than timestamp ordering.");
+    report << generate_hypotheses_section(
+        by_type[InsightType::HYPOTHESES_3],
+        config,
+        "Counterfactual Causal Hypotheses (Hypotheses_3)",
+        "Hypotheses_3 generates testable counterfactual hypotheses using causal infrastructure. "
+        "Each hypothesis proposes an intervention, predicts downstream effects, explains the mechanism, and suggests test plans.");
+
+    report << generate_mechanism_consolidation_section(by_type[InsightType::MECHANISM_CONSOLIDATION], config);
+    report << generate_evidence_fusion_section(by_type[InsightType::EVIDENCE_FUSION_LINK], config);
+    report << generate_meta_path_anomaly_section(by_type[InsightType::META_PATH_ANOMALY], config);
+    report << generate_intervention_bottleneck_section(by_type[InsightType::INTERVENTION_BOTTLENECK], config);
+    report << generate_competing_mechanism_section(by_type[InsightType::COMPETING_MECHANISM], config);
+    report << generate_schema_repair_section(by_type[InsightType::SCHEMA_REPAIR], config);
+    report << generate_cross_community_bridge_section(by_type[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE], config);
     report << generate_rules_section(by_type[InsightType::RULE], config);
     report << generate_embedding_links_section(by_type[InsightType::EMBEDDING_LINK], config);
+
+    // Causal & Mechanistic Discovery
+    report << generate_causal_chains_section(by_type[InsightType::CAUSAL_CHAIN], config);
+    report << generate_intervention_points_section(by_type[InsightType::INTERVENTION_POINT], config);
+    report << generate_feedback_loops_section(by_type[InsightType::FEEDBACK_LOOP], config);
+    report << generate_confounders_section(by_type[InsightType::CONFOUNDER], config);
+
+    // Advanced Reasoning & Structural Discovery
+    report << generate_taxonomy_section(by_type[InsightType::TAXONOMY], config);
+    report << generate_domain_bridges_section(by_type[InsightType::DOMAIN_BRIDGE], config);
+    report << generate_logical_entailments_section(by_type[InsightType::LOGICAL_ENTAILMENT], config);
+    report << generate_compositional_reasoning_section(by_type[InsightType::COMPOSITIONAL_REASONING], config);
+    report << generate_explanatory_chains_section(by_type[InsightType::EXPLANATORY_CHAIN], config);
+    report << generate_schema_violations_section(by_type[InsightType::SCHEMA_VIOLATION], config);
+    report << generate_transitive_closure_section(by_type[InsightType::TRANSITIVE_CLOSURE], config);
 
     // Conclusions
     report << generate_conclusions(insights, config);
@@ -2686,8 +4420,58 @@ void ReportGenerator::save_to_file(const std::string& path, const std::string& c
     file.close();
 }
 
+// ============================================================================
+// Dynamic Threshold Helper for HTML Report Generation
+// ============================================================================
+
+// Helper to calculate dynamic limits based on actual data
+struct DynamicLimits {
+    int max_clusters_to_show;
+    int max_items_per_cluster;
+    bool should_cluster;
+    double similarity_threshold;
+};
+
+static DynamicLimits calculate_dynamic_limits(size_t insight_count, const ReportConfig& config) {
+    DynamicLimits limits;
+    const int max_examples = capped_max_examples(config);
+
+    // Respect per-operator display cap (hard-capped at 10 in capped_max_examples).
+    limits.max_clusters_to_show = std::min(max_examples, static_cast<int>(insight_count));
+    limits.max_items_per_cluster = std::min(config.max_items_per_cluster, max_examples);
+
+    // Only enable clustering if:
+    // 1. User hasn't disabled it
+    // 2. There are enough insights to benefit from clustering (> 15)
+    // 3. Not too many (< 200, where we want to see everything)
+    limits.should_cluster = config.coalesce_similar_findings
+                          && insight_count > 15
+                          && insight_count < 200;
+
+    // Dynamic similarity threshold: more aggressive only with many insights
+    if (insight_count < 20) {
+        limits.similarity_threshold = 0.95;  // Very strict - almost no clustering
+    } else if (insight_count < 50) {
+        limits.similarity_threshold = 0.85;  // Moderate
+    } else {
+        limits.similarity_threshold = config.similarity_threshold;  // Use configured (0.7)
+    }
+
+    // If clustering is disabled, show all insights individually
+    if (!limits.should_cluster) {
+        limits.max_clusters_to_show = std::min(max_examples, static_cast<int>(insight_count));
+        limits.max_items_per_cluster = 1;  // Each insight gets its own display
+    }
+
+    return limits;
+}
+
 std::string ReportGenerator::generate_html(const InsightCollection& insights, const ReportConfig& config) {
     std::stringstream html;
+
+    auto has_novelty_tag = [](const Insight& insight, const std::string& tag) {
+        return std::find(insight.novelty_tags.begin(), insight.novelty_tags.end(), tag) != insight.novelty_tags.end();
+    };
 
     // Group insights by type
     std::map<InsightType, std::vector<Insight>> by_type;
@@ -2700,6 +4484,19 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
     for (const auto& insight : insights.insights) {
         counts[insight.type]++;
     }
+
+    // Split out intersection-constrained hypotheses from generic H2 chains.
+    std::vector<Insight> intersection_bridge_hypotheses;
+    std::vector<Insight> regular_h2_hypotheses;
+    for (const auto& insight : by_type[InsightType::HYPOTHESES_2]) {
+        if (has_novelty_tag(insight, "intersection_bridge")) {
+            intersection_bridge_hypotheses.push_back(insight);
+        } else {
+            regular_h2_hypotheses.push_back(insight);
+        }
+    }
+    const int intersection_bridge_count = static_cast<int>(intersection_bridge_hypotheses.size());
+    const int regular_h2_count = static_cast<int>(regular_h2_hypotheses.size());
 
     auto stats = graph_.compute_statistics();
 
@@ -2726,8 +4523,18 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             --theme-rule: #818cf8;
             --theme-motif: #4ade80;
             --theme-path: #38bdf8;
+            --theme-longchain: #a3e635;
+            --theme-metapath: #38bdf8;
             --theme-community: #f97316;
             --theme-hypothesis: #22d3ee;
+            --theme-mechanism: #22d3ee;
+            --theme-intersection-bridge: #06b6d4;
+            --theme-fusion: #06b6d4;
+            --theme-anomaly: #fb7185;
+            --theme-bottleneck: #f97316;
+            --theme-competing: #8b5cf6;
+            --theme-repair: #10b981;
+            --theme-crosscommunity: #0ea5e9;
             --theme-author: #facc15;
             --theme-contradiction: #f87171;
             --theme-resolution: #34d399;
@@ -2816,10 +4623,22 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         .card.motifs .value { color: var(--theme-motif); }
         .card.community .value { color: var(--theme-community); }
         .card.pathrank .value { color: var(--theme-path); }
+        .card.longchain .value { color: var(--theme-longchain); }
+        .card.metapathpattern .value { color: var(--theme-metapath); }
         .card.rules .value { color: var(--theme-rule); }
         .card.embedding .value { color: var(--secondary); }
         .card.hypothesis .value { color: var(--theme-hypothesis); }
+        .card.mechanism .value { color: var(--theme-mechanism); }
+        .card.intersectionbridge .value { color: var(--theme-intersection-bridge); }
+        .card.fusion .value { color: var(--theme-fusion); }
+        .card.anomaly .value { color: var(--theme-anomaly); }
+        .card.bottleneck .value { color: var(--theme-bottleneck); }
+        .card.competing .value { color: var(--theme-competing); }
+        .card.repair .value { color: var(--theme-repair); }
+        .card.crosscommunity .value { color: var(--theme-crosscommunity); }
         .card.authorchain .value { color: var(--theme-author); }
+        .card.coauthorship .value { color: var(--theme-author); }
+        .card.citations .value { color: var(--theme-author); }
         .card.contradiction .value { color: var(--theme-contradiction); }
         .card.resolution .value { color: var(--theme-resolution); }
         .card.coreperiphery .value { color: var(--theme-core); }
@@ -2838,6 +4657,82 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         .card.counterfactual .value { color: var(--theme-counterfactual); }
         .card.hyperedge .value { color: var(--theme-hyperedge); }
         .card.constrainedrule .value { color: var(--theme-constrained); }
+
+        /* Category overview styles */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+        .category-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            border-color: rgba(79, 195, 247, 0.4);
+            transform: translateY(-4px);
+        }
+        .category-card.combinatorial {
+            border-left: 4px solid #4ade80;
+        }
+        .category-card.exploratory {
+            border-left: 4px solid #4fc3f7;
+        }
+        .category-card.transformational {
+            border-left: 4px solid #e879f9;
+        }
+        .category-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+        .category-card h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+        .category-card.combinatorial h3 { color: #4ade80; }
+        .category-card.exploratory h3 { color: #4fc3f7; }
+        .category-card.transformational h3 { color: #e879f9; }
+        .category-card .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .category-card .description {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .category-card .stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .category-card .stat-item {
+            text-align: center;
+        }
+        .category-card .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .category-card.combinatorial .stat-value { color: #4ade80; }
+        .category-card.exploratory .stat-value { color: #4fc3f7; }
+        .category-card.transformational .stat-value { color: #e879f9; }
+        .category-card .stat-label {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         section {
             margin: 40px 0;
         }
@@ -3033,6 +4928,172 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             color: var(--text-muted);
             font-size: 0.9em;
         }
+        .toc .category-toc > a {
+            font-weight: 600;
+            font-size: 1.05em;
+            display: block;
+            margin: 12px 0 8px 0;
+            color: var(--primary);
+        }
+        .toc .sub-toc {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        .toc .sub-toc li {
+            margin: 6px 0;
+        }
+
+        /* Category section headers */
+        .category-section-header {
+            margin: 50px 0 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            border-radius: 16px;
+            border-left: 5px solid var(--primary);
+        }
+        .category-section-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+            color: var(--primary);
+        }
+        .category-section-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1.1em;
+        }
+
+        /* Interactive features CSS */
+        .search-controls {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .search-controls input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .search-controls input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .filter-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-group label {
+            cursor: pointer;
+            padding: 6px 12px;
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .filter-group label:hover {
+            background: rgba(79, 195, 247, 0.2);
+        }
+        .filter-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+        .highlighted {
+            background: rgba(251, 191, 36, 0.3) !important;
+            box-shadow: 0 0 0 2px var(--theme-gap);
+            animation: pulse 0.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .entity, .data-table td:first-child {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .entity:hover, .data-table td:first-child:hover {
+            background: rgba(79, 195, 247, 0.15);
+        }
+        section h2 {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding-left: 30px;
+        }
+        section h2::before {
+            content: '▼';
+            position: absolute;
+            left: 0;
+            transition: transform 0.2s;
+        }
+        section.collapsed h2::before {
+            transform: rotate(-90deg);
+        }
+        .export-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        .load-more-btn {
+            margin: 15px auto;
+            display: block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .load-more-btn:hover {
+            background: rgba(79, 195, 247, 0.8);
+        }
+        .chart-container {
+            max-width: 700px;
+            min-height: 250px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        @media print {
+            .search-controls, .export-btn, .load-more-btn, .chart-container {
+                display: none !important;
+            }
+            section.collapsed > *:not(h2) {
+                display: block !important;
+            }
+            section h2::before {
+                content: '' !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3064,6 +5125,111 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             <div class="stat">
                 <div class="label">Insights Discovered</div>
                 <div class="value">)" << insights.insights.size() << R"(</div>
+            </div>
+        </section>
+
+        <section id="categories">
+            <h2>Knowledge Discovery Categories</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">
+                Insights are classified into three categories based on how they generate new knowledge from the graph structure.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95em;">
+                <strong>Average Score</strong> indicates the mean confidence/quality score across all insights in each category,
+                ranging from 0.0 (low confidence) to 1.0 (high confidence). Higher scores suggest more reliable or significant discoveries.
+            </p>
+
+            <div class="categories-grid">
+)";
+
+    // Count by category
+    std::map<InsightCategory, int> category_counts;
+    std::map<InsightCategory, double> category_avg_scores;
+
+    for (const auto& insight : insights.insights) {
+        category_counts[insight.category]++;
+        category_avg_scores[insight.category] += insight.score;
+    }
+
+    // Calculate averages
+    for (auto& [cat, total_score] : category_avg_scores) {
+        if (category_counts[cat] > 0) {
+            total_score /= category_counts[cat];
+        }
+    }
+
+    // Combinatorial card
+    html << R"(
+                <div class="category-card combinatorial">
+                    <div class="icon">🧩</div>
+                    <h3>Combinatorial</h3>
+                    <div class="subtitle">Pattern Detection & Structural Combinations</div>
+                    <div class="description">
+                        These insights emerge from combining existing knowledge in new ways,
+                        identifying patterns, structures, and motifs that reveal the underlying
+                        organization of the knowledge graph.
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">)" << category_counts[InsightCategory::COMBINATORIAL] << R"(</div>
+                            <div class="stat-label">Insights</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">)" << std::fixed << std::setprecision(2) << category_avg_scores[InsightCategory::COMBINATORIAL] << R"(</div>
+                            <div class="stat-label">Avg Score</div>
+                        </div>
+                    </div>
+                </div>
+)";
+
+    // Exploratory card
+    html << R"(
+                <div class="category-card exploratory">
+                    <div class="icon">🔍</div>
+                    <h3>Exploratory</h3>
+                    <div class="subtitle">Path Finding & Connection Discovery</div>
+                    <div class="description">
+                        These insights discover new connections, paths, and bridges between concepts,
+                        exploring previously unexplored areas of the knowledge space and revealing
+                        hidden relationships.
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">)" << category_counts[InsightCategory::EXPLORATORY] << R"(</div>
+                            <div class="stat-label">Insights</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">)" << std::fixed << std::setprecision(2) << category_avg_scores[InsightCategory::EXPLORATORY] << R"(</div>
+                            <div class="stat-label">Avg Score</div>
+                        </div>
+                    </div>
+                </div>
+)";
+
+    // Transformational card
+    html << R"(
+                <div class="category-card transformational">
+                    <div class="icon">🔄</div>
+                    <h3>Transformational</h3>
+                    <div class="subtitle">Reframing & Perspective Shifts</div>
+                    <div class="description">
+                        These insights transform understanding by reframing concepts, generating
+                        hypotheses, identifying contradictions, and suggesting alternative causal
+                        mechanisms or paradigms.
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">)" << category_counts[InsightCategory::TRANSFORMATIONAL] << R"(</div>
+                            <div class="stat-label">Insights</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">)" << std::fixed << std::setprecision(2) << category_avg_scores[InsightCategory::TRANSFORMATIONAL] << R"(</div>
+                            <div class="stat-label">Avg Score</div>
+                        </div>
+                    </div>
+                </div>
+)";
+
+    html << R"(
             </div>
         </section>
 
@@ -3298,11 +5464,111 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     }
 
-    if (counts[InsightType::HYPOTHESIS] > 0) {
+    if (counts[InsightType::HYPOTHESES_1] > 0) {
         html << R"(                <a class="card-link" href="#module-hypotheses">
                     <div class="card hypothesis">
-                        <h3>Hypotheses</h3>
-                        <div class="value">)" << counts[InsightType::HYPOTHESIS] << R"(</div>
+                        <h3>Hypotheses (H1)</h3>
+                        <div class="value">)" << counts[InsightType::HYPOTHESES_1] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (intersection_bridge_count > 0) {
+        html << R"(                <a class="card-link" href="#module-intersection-bridge">
+                    <div class="card intersectionbridge">
+                        <h3>Intersection Bridges</h3>
+                        <div class="value">)" << intersection_bridge_count << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (regular_h2_count > 0) {
+        html << R"(                <a class="card-link" href="#module-hypotheses-2">
+                    <div class="card mechanism">
+                        <h3>Mechanistic (H2)</h3>
+                        <div class="value">)" << regular_h2_count << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::HYPOTHESES_3] > 0) {
+        html << R"(                <a class="card-link" href="#module-hypotheses-3">
+                    <div class="card counterfactual">
+                        <h3>Causal (H3)</h3>
+                        <div class="value">)" << counts[InsightType::HYPOTHESES_3] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0) {
+        html << R"(                <a class="card-link" href="#module-mechanism-consolidation">
+                    <div class="card mechanism">
+                        <h3>Mechanism Consolidation</h3>
+                        <div class="value">)" << counts[InsightType::MECHANISM_CONSOLIDATION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::EVIDENCE_FUSION_LINK] > 0) {
+        html << R"(                <a class="card-link" href="#module-evidence-fusion">
+                    <div class="card fusion">
+                        <h3>Evidence Fusion</h3>
+                        <div class="value">)" << counts[InsightType::EVIDENCE_FUSION_LINK] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::META_PATH_ANOMALY] > 0) {
+        html << R"(                <a class="card-link" href="#module-meta-path-anomaly">
+                    <div class="card anomaly">
+                        <h3>Meta-Path Anomaly</h3>
+                        <div class="value">)" << counts[InsightType::META_PATH_ANOMALY] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::INTERVENTION_BOTTLENECK] > 0) {
+        html << R"(                <a class="card-link" href="#module-intervention-bottleneck">
+                    <div class="card bottleneck">
+                        <h3>Bottlenecks</h3>
+                        <div class="value">)" << counts[InsightType::INTERVENTION_BOTTLENECK] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::COMPETING_MECHANISM] > 0) {
+        html << R"(                <a class="card-link" href="#module-competing-mechanism">
+                    <div class="card competing">
+                        <h3>Competing Mechanisms</h3>
+                        <div class="value">)" << counts[InsightType::COMPETING_MECHANISM] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::SCHEMA_REPAIR] > 0) {
+        html << R"(                <a class="card-link" href="#module-schema-repair">
+                    <div class="card repair">
+                        <h3>Schema Repairs</h3>
+                        <div class="value">)" << counts[InsightType::SCHEMA_REPAIR] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] > 0) {
+        html << R"(                <a class="card-link" href="#module-cross-community-bridge">
+                    <div class="card crosscommunity">
+                        <h3>Cross-Community Bridges</h3>
+                        <div class="value">)" << counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] << R"(</div>
                     </div>
                 </a>
 )";
@@ -3318,11 +5584,81 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     }
 
+    if (counts[InsightType::LONG_CHAIN] > 0) {
+        html << R"(                <a class="card-link" href="#long-chain">
+                    <div class="card longchain">
+                        <h3>Long-Chain Links</h3>
+                        <div class="value">)" << counts[InsightType::LONG_CHAIN] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::META_PATH_PATTERN] > 0) {
+        html << R"(                <a class="card-link" href="#meta-path-patterns">
+                    <div class="card metapathpattern">
+                        <h3>Meta-Path Patterns</h3>
+                        <div class="value">)" << counts[InsightType::META_PATH_PATTERN] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
     if (counts[InsightType::AUTHOR_CHAIN] > 0) {
         html << R"(                <a class="card-link" href="#module-author-chains">
                     <div class="card authorchain">
                         <h3>Author Chains</h3>
                         <div class="value">)" << counts[InsightType::AUTHOR_CHAIN] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CO_AUTHORSHIP] > 0) {
+        html << R"(                <a class="card-link" href="#module-co-authorship">
+                    <div class="card coauthorship">
+                        <h3>Co-Authorships</h3>
+                        <div class="value">)" << counts[InsightType::CO_AUTHORSHIP] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CITATION_IMPACT] > 0) {
+        html << R"(                <a class="card-link" href="#module-citation-impact">
+                    <div class="card citations">
+                        <h3>Citation Impact</h3>
+                        <div class="value">)" << counts[InsightType::CITATION_IMPACT] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::MULTI_RESOLUTION_COMMUNITY] > 0) {
+        html << R"(                <a class="card-link" href="#module-multi-resolution-community">
+                    <div class="card communitydetect">
+                        <h3>Multi-Res Communities</h3>
+                        <div class="value">)" << counts[InsightType::MULTI_RESOLUTION_COMMUNITY] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] > 0) {
+        html << R"(                <a class="card-link" href="#module-cross-community-bridge-map">
+                    <div class="card crosscommunity">
+                        <h3>Community Bridge Maps</h3>
+                        <div class="value">)" << counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
+    if (counts[InsightType::META_PATTERN] > 0) {
+        html << R"(                <a class="card-link" href="#module-meta-pattern">
+                    <div class="card metapathpattern">
+                        <h3>Meta-Patterns</h3>
+                        <div class="value">)" << counts[InsightType::META_PATTERN] << R"(</div>
                     </div>
                 </a>
 )";
@@ -3348,106 +5684,330 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     }
 
+    if (counts[InsightType::META_PATH] > 0) {
+        html << R"(                <a class="card-link" href="#module-meta-path">
+                    <div class="card meta-path">
+                        <h3>Meta-Path Links</h3>
+                        <div class="value">)" << counts[InsightType::META_PATH] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::CAUSAL_CHAIN] > 0) {
+        html << R"(                <a class="card-link" href="#module-causal-chain">
+                    <div class="card causal-chain">
+                        <h3>Causal Chains</h3>
+                        <div class="value">)" << counts[InsightType::CAUSAL_CHAIN] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::INTERVENTION_POINT] > 0) {
+        html << R"(                <a class="card-link" href="#module-intervention-point">
+                    <div class="card intervention-point">
+                        <h3>Intervention Points</h3>
+                        <div class="value">)" << counts[InsightType::INTERVENTION_POINT] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::FEEDBACK_LOOP] > 0) {
+        html << R"(                <a class="card-link" href="#module-feedback-loop">
+                    <div class="card feedback-loop">
+                        <h3>Feedback Loops</h3>
+                        <div class="value">)" << counts[InsightType::FEEDBACK_LOOP] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::CONFOUNDER] > 0) {
+        html << R"(                <a class="card-link" href="#module-confounder">
+                    <div class="card confounder">
+                        <h3>Confounders</h3>
+                        <div class="value">)" << counts[InsightType::CONFOUNDER] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::TAXONOMY] > 0) {
+        html << R"(                <a class="card-link" href="#module-taxonomy">
+                    <div class="card taxonomy">
+                        <h3>Taxonomic Relations</h3>
+                        <div class="value">)" << counts[InsightType::TAXONOMY] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::DOMAIN_BRIDGE] > 0) {
+        html << R"(                <a class="card-link" href="#module-domain-bridge">
+                    <div class="card domain-bridge">
+                        <h3>Domain Bridges</h3>
+                        <div class="value">)" << counts[InsightType::DOMAIN_BRIDGE] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::LOGICAL_ENTAILMENT] > 0) {
+        html << R"(                <a class="card-link" href="#module-logical-entailment">
+                    <div class="card logical-entailment">
+                        <h3>Logical Entailments</h3>
+                        <div class="value">)" << counts[InsightType::LOGICAL_ENTAILMENT] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::COMPOSITIONAL_REASONING] > 0) {
+        html << R"(                <a class="card-link" href="#module-compositional">
+                    <div class="card compositional">
+                        <h3>Compositional Reasoning</h3>
+                        <div class="value">)" << counts[InsightType::COMPOSITIONAL_REASONING] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::EXPLANATORY_CHAIN] > 0) {
+        html << R"(                <a class="card-link" href="#module-explanatory-chain">
+                    <div class="card explanatory-chain">
+                        <h3>Explanatory Chains</h3>
+                        <div class="value">)" << counts[InsightType::EXPLANATORY_CHAIN] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::SCHEMA_VIOLATION] > 0) {
+        html << R"(                <a class="card-link" href="#module-schema-violation">
+                    <div class="card schema-violation">
+                        <h3>Schema Violations</h3>
+                        <div class="value">)" << counts[InsightType::SCHEMA_VIOLATION] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+    if (counts[InsightType::TRANSITIVE_CLOSURE] > 0) {
+        html << R"(                <a class="card-link" href="#module-transitive-closure">
+                    <div class="card transitive-closure">
+                        <h3>Transitive Closure Gaps</h3>
+                        <div class="value">)" << counts[InsightType::TRANSITIVE_CLOSURE] << R"(</div>
+                    </div>
+                </a>
+)";
+    }
+
     html << R"(            </div>
+
+            <!-- Interactive Chart -->
+            <div class="chart-container">
+                <canvas id="insightChart"></canvas>
+            </div>
         </section>
 )";
 
-    // Table of Contents
+    // Table of Contents - Organized by Category
     html << R"(
         <nav class="toc">
             <h3>Contents</h3>
             <ul>
                 <li><a href="#statistics">Knowledge Graph Statistics</a></li>
+                <li><a href="#categories">Knowledge Discovery Categories</a></li>
+                <li class="category-toc"><a href="#combinatorial-section">🧩 Combinatorial Insights</a>
+                    <ul class="sub-toc">
+)";
+
+    if (counts[InsightType::MOTIF] > 0)
+        html << R"(                        <li><a href="#module-motifs">Recurring Patterns</a> <span class="count">()" << counts[InsightType::MOTIF] << R"()</span></li>
+)";
+    if (counts[InsightType::K_CORE] > 0)
+        html << R"(                        <li><a href="#module-k-core">K-Core Subgraphs</a> <span class="count">()" << counts[InsightType::K_CORE] << R"()</span></li>
+)";
+    if (counts[InsightType::K_TRUSS] > 0)
+        html << R"(                        <li><a href="#module-k-truss">K-Truss Subgraphs</a> <span class="count">()" << counts[InsightType::K_TRUSS] << R"()</span></li>
+)";
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0)
+        html << R"(                        <li><a href="#module-community-detection">Community Detection</a> <span class="count">()" << counts[InsightType::COMMUNITY_DETECTION] << R"()</span></li>
+)";
+    if (counts[InsightType::CORE_PERIPHERY] > 0)
+        html << R"(                        <li><a href="#module-core-periphery">Core–Periphery</a> <span class="count">()" << counts[InsightType::CORE_PERIPHERY] << R"()</span></li>
+)";
+    if (counts[InsightType::META_PATH_PATTERN] > 0)
+        html << R"(                        <li><a href="#meta-path-patterns">Meta-Path Patterns</a> <span class="count">()" << counts[InsightType::META_PATH_PATTERN] << R"()</span></li>
+)";
+    if (counts[InsightType::RULE] > 0)
+        html << R"(                        <li><a href="#module-rules">Association Rules</a> <span class="count">()" << counts[InsightType::RULE] << R"()</span></li>
+)";
+    if (counts[InsightType::TAXONOMY] > 0)
+        html << R"(                        <li><a href="#module-taxonomy">Taxonomic Relations</a> <span class="count">()" << counts[InsightType::TAXONOMY] << R"()</span></li>
+)";
+    if (counts[InsightType::COMPOSITIONAL_REASONING] > 0)
+        html << R"(                        <li><a href="#module-compositional">Compositional Reasoning</a> <span class="count">()" << counts[InsightType::COMPOSITIONAL_REASONING] << R"()</span></li>
+)";
+    if (counts[InsightType::TRANSITIVE_CLOSURE] > 0)
+        html << R"(                        <li><a href="#module-transitive-closure">Transitive Closure Gaps</a> <span class="count">()" << counts[InsightType::TRANSITIVE_CLOSURE] << R"()</span></li>
+)";
+    if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0)
+        html << R"(                        <li><a href="#module-mechanism-consolidation">Mechanism Consolidation</a> <span class="count">()" << counts[InsightType::MECHANISM_CONSOLIDATION] << R"()</span></li>
+)";
+    if (counts[InsightType::META_PATH] > 0)
+        html << R"(                        <li><a href="#module-meta-path">Meta-Path Links</a> <span class="count">()" << counts[InsightType::META_PATH] << R"()</span></li>
+)";
+    if (counts[InsightType::CENTRALITY] > 0)
+        html << R"(                        <li><a href="#module-centrality">Centrality Analysis</a> <span class="count">()" << counts[InsightType::CENTRALITY] << R"()</span></li>
+)";
+
+    html << R"(                    </ul>
+                </li>
+                <li class="category-toc"><a href="#exploratory-section">🔍 Exploratory Insights</a>
+                    <ul class="sub-toc">
 )";
 
     if (counts[InsightType::BRIDGE] > 0)
-        html << R"(                <li><a href="#bridges">Bridge Entities</a> <span class="count">()" << counts[InsightType::BRIDGE] << R"()</span></li>
-)";
-    if (counts[InsightType::SURPRISE] > 0)
-        html << R"(                <li><a href="#module-surprises">Surprising Discoveries</a> <span class="count">()" << counts[InsightType::SURPRISE] << R"()</span></li>
+        html << R"(                        <li><a href="#bridges">Bridge Entities</a> <span class="count">()" << counts[InsightType::BRIDGE] << R"()</span></li>
 )";
     if (counts[InsightType::COMPLETION] > 0)
-        html << R"(                <li><a href="#module-completions">Knowledge Gaps</a> <span class="count">()" << counts[InsightType::COMPLETION] << R"()</span></li>
+        html << R"(                        <li><a href="#module-completions">Knowledge Gaps</a> <span class="count">()" << counts[InsightType::COMPLETION] << R"()</span></li>
 )";
-    if (counts[InsightType::MOTIF] > 0)
-        html << R"(                <li><a href="#module-motifs">Recurring Patterns</a> <span class="count">()" << counts[InsightType::MOTIF] << R"()</span></li>
-)";
-    if (counts[InsightType::CONTRADICTION] > 0)
-        html << R"(                <li><a href="#module-contradictions">Contradictions</a> <span class="count">()" << counts[InsightType::CONTRADICTION] << R"()</span></li>
-)";
-    if (counts[InsightType::ENTITY_RESOLUTION] > 0)
-        html << R"(                <li><a href="#module-entity-resolution">Entity Resolution</a> <span class="count">()" << counts[InsightType::ENTITY_RESOLUTION] << R"()</span></li>
-)";
-    if (counts[InsightType::CORE_PERIPHERY] > 0)
-        html << R"(                <li><a href="#module-core-periphery">Core–Periphery</a> <span class="count">()" << counts[InsightType::CORE_PERIPHERY] << R"()</span></li>
-)";
-    if (counts[InsightType::TEXT_SIMILARITY] > 0)
-        html << R"(                <li><a href="#module-text-similarity">Text Similarity</a> <span class="count">()" << counts[InsightType::TEXT_SIMILARITY] << R"()</span></li>
-)";
-    if (counts[InsightType::ARGUMENT_SUPPORT] > 0)
-        html << R"(                <li><a href="#module-argument-support">Argument Support</a> <span class="count">()" << counts[InsightType::ARGUMENT_SUPPORT] << R"()</span></li>
-)";
-    if (counts[InsightType::ACTIVE_LEARNING] > 0)
-        html << R"(                <li><a href="#module-active-learning">Active Learning</a> <span class="count">()" << counts[InsightType::ACTIVE_LEARNING] << R"()</span></li>
-)";
-    if (counts[InsightType::METHOD_OUTCOME] > 0)
-        html << R"(                <li><a href="#module-method-outcome">Method/Outcome</a> <span class="count">()" << counts[InsightType::METHOD_OUTCOME] << R"()</span></li>
-)";
-    if (counts[InsightType::CENTRALITY] > 0)
-        html << R"(                <li><a href="#module-centrality">Centrality</a> <span class="count">()" << counts[InsightType::CENTRALITY] << R"()</span></li>
-)";
-    if (counts[InsightType::COMMUNITY_DETECTION] > 0)
-        html << R"(                <li><a href="#module-community-detection">Community Detection</a> <span class="count">()" << counts[InsightType::COMMUNITY_DETECTION] << R"()</span></li>
-)";
-    if (counts[InsightType::K_CORE] > 0)
-        html << R"(                <li><a href="#module-k-core">k-Core</a> <span class="count">()" << counts[InsightType::K_CORE] << R"()</span></li>
-)";
-    if (counts[InsightType::K_TRUSS] > 0)
-        html << R"(                <li><a href="#module-k-truss">k-Truss</a> <span class="count">()" << counts[InsightType::K_TRUSS] << R"()</span></li>
-)";
-    if (counts[InsightType::CLAIM_STANCE] > 0)
-        html << R"(                <li><a href="#module-claim-stance">Claim Stance</a> <span class="count">()" << counts[InsightType::CLAIM_STANCE] << R"()</span></li>
-)";
-    if (counts[InsightType::RELATION_INDUCTION] > 0)
-        html << R"(                <li><a href="#module-relation-induction">Relation Induction</a> <span class="count">()" << counts[InsightType::RELATION_INDUCTION] << R"()</span></li>
-)";
-    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0)
-        html << R"(                <li><a href="#module-analogical-transfer">Analogical Transfer</a> <span class="count">()" << counts[InsightType::ANALOGICAL_TRANSFER] << R"()</span></li>
-)";
-    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0)
-        html << R"(                <li><a href="#module-uncertainty-sampling">Uncertainty Sampling</a> <span class="count">()" << counts[InsightType::UNCERTAINTY_SAMPLING] << R"()</span></li>
-)";
-    if (counts[InsightType::COUNTERFACTUAL] > 0)
-        html << R"(                <li><a href="#module-counterfactual">Counterfactual</a> <span class="count">()" << counts[InsightType::COUNTERFACTUAL] << R"()</span></li>
-)";
-    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0)
-        html << R"(                <li><a href="#module-hyperedge-prediction">Hyperedge Prediction</a> <span class="count">()" << counts[InsightType::HYPEREDGE_PREDICTION] << R"()</span></li>
-)";
-    // Constrained rules removed from pipeline
     if (counts[InsightType::COMMUNITY_LINK] > 0)
-        html << R"(                <li><a href="#module-community">Community Links</a> <span class="count">()" << counts[InsightType::COMMUNITY_LINK] << R"()</span></li>
-)";
-    if (counts[InsightType::HYPOTHESIS] > 0)
-        html << R"(                <li><a href="#module-hypotheses">Hypotheses</a> <span class="count">()" << counts[InsightType::HYPOTHESIS] << R"()</span></li>
-)";
-    if (counts[InsightType::RULE] > 0)
-        html << R"(                <li><a href="#module-rules">Association Rules</a> <span class="count">()" << counts[InsightType::RULE] << R"()</span></li>
-)";
-    if (counts[InsightType::PATH_RANK] > 0)
-        html << R"(                <li><a href="#path-rank">Path-Ranked Links</a> <span class="count">()" << counts[InsightType::PATH_RANK] << R"()</span></li>
-)";
-    if (counts[InsightType::AUTHOR_CHAIN] > 0)
-        html << R"(                <li><a href="#module-author-chains">Author Reference Chains</a> <span class="count">()" << counts[InsightType::AUTHOR_CHAIN] << R"()</span></li>
+        html << R"(                        <li><a href="#module-community">Cross-Community Links</a> <span class="count">()" << counts[InsightType::COMMUNITY_LINK] << R"()</span></li>
 )";
     if (counts[InsightType::EMBEDDING_LINK] > 0)
-        html << R"(                <li><a href="#module-embedding">Embedding Predictions</a> <span class="count">()" << counts[InsightType::EMBEDDING_LINK] << R"()</span></li>
+        html << R"(                        <li><a href="#module-embedding">Embedding Predictions</a> <span class="count">()" << counts[InsightType::EMBEDDING_LINK] << R"()</span></li>
+)";
+    if (counts[InsightType::HYPEREDGE_PREDICTION] > 0)
+        html << R"(                        <li><a href="#module-hyperedge-prediction">Hyperedge Predictions</a> <span class="count">()" << counts[InsightType::HYPEREDGE_PREDICTION] << R"()</span></li>
+)";
+    if (counts[InsightType::DOMAIN_BRIDGE] > 0)
+        html << R"(                        <li><a href="#module-domain-bridge">Domain Bridges</a> <span class="count">()" << counts[InsightType::DOMAIN_BRIDGE] << R"()</span></li>
+)";
+    if (counts[InsightType::EXPLANATORY_CHAIN] > 0)
+        html << R"(                        <li><a href="#module-explanatory-chain">Explanatory Chains</a> <span class="count">()" << counts[InsightType::EXPLANATORY_CHAIN] << R"()</span></li>
+)";
+    if (counts[InsightType::AUTHOR_CHAIN] > 0)
+        html << R"(                        <li><a href="#module-author-chains">Author Chains</a> <span class="count">()" << counts[InsightType::AUTHOR_CHAIN] << R"()</span></li>
+)";
+    if (counts[InsightType::CO_AUTHORSHIP] > 0)
+        html << R"(                        <li><a href="#module-co-authorship">Co-Authorship Networks</a> <span class="count">()" << counts[InsightType::CO_AUTHORSHIP] << R"()</span></li>
+)";
+    if (counts[InsightType::CITATION_IMPACT] > 0)
+        html << R"(                        <li><a href="#module-citation-impact">Citation Impact</a> <span class="count">()" << counts[InsightType::CITATION_IMPACT] << R"()</span></li>
+)";
+    if (counts[InsightType::MULTI_RESOLUTION_COMMUNITY] > 0)
+        html << R"(                        <li><a href="#module-multi-resolution-community">Multi-Resolution Communities</a> <span class="count">()" << counts[InsightType::MULTI_RESOLUTION_COMMUNITY] << R"()</span></li>
+)";
+    if (counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] > 0)
+        html << R"(                        <li><a href="#module-cross-community-bridge-map">Cross-Community Bridge Maps</a> <span class="count">()" << counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] << R"()</span></li>
+)";
+    if (counts[InsightType::META_PATTERN] > 0)
+        html << R"(                        <li><a href="#module-meta-pattern">Meta-Patterns</a> <span class="count">()" << counts[InsightType::META_PATTERN] << R"()</span></li>
+)";
+    if (counts[InsightType::CAUSAL_CHAIN] > 0)
+        html << R"(                        <li><a href="#module-causal-chain">Causal Chains</a> <span class="count">()" << counts[InsightType::CAUSAL_CHAIN] << R"()</span></li>
+)";
+    if (counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] > 0)
+        html << R"(                        <li><a href="#module-cross-community-bridge">Cross-Community Bridges</a> <span class="count">()" << counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] << R"()</span></li>
+)";
+    if (counts[InsightType::DIFFUSION] > 0)
+        html << R"(                        <li><a href="#module-diffusion">Diffusion Predictions</a> <span class="count">()" << counts[InsightType::DIFFUSION] << R"()</span></li>
+)";
+    if (counts[InsightType::RELATION_INDUCTION] > 0)
+        html << R"(                        <li><a href="#module-relation-induction">Relation Induction</a> <span class="count">()" << counts[InsightType::RELATION_INDUCTION] << R"()</span></li>
+)";
+    if (counts[InsightType::EVIDENCE_FUSION_LINK] > 0)
+        html << R"(                        <li><a href="#module-evidence-fusion">Evidence Fusion Links</a> <span class="count">()" << counts[InsightType::EVIDENCE_FUSION_LINK] << R"()</span></li>
+)";
+    if (counts[InsightType::TEXT_SIMILARITY] > 0)
+        html << R"(                        <li><a href="#module-text-similarity">Text Similarity</a> <span class="count">()" << counts[InsightType::TEXT_SIMILARITY] << R"()</span></li>
+)";
+    if (counts[InsightType::ARGUMENT_SUPPORT] > 0)
+        html << R"(                        <li><a href="#module-argument-support">Argument Support</a> <span class="count">()" << counts[InsightType::ARGUMENT_SUPPORT] << R"()</span></li>
+)";
+    if (counts[InsightType::METHOD_OUTCOME] > 0)
+        html << R"(                        <li><a href="#module-method-outcome">Method/Outcome</a> <span class="count">()" << counts[InsightType::METHOD_OUTCOME] << R"()</span></li>
+)";
+    if (counts[InsightType::LONG_CHAIN] > 0)
+        html << R"(                        <li><a href="#long-chain">Long-Chain Links</a> <span class="count">()" << counts[InsightType::LONG_CHAIN] << R"()</span></li>
+)";
+    if (counts[InsightType::PATH_RANK] > 0)
+        html << R"(                        <li><a href="#path-rank">Path-Ranked Links</a> <span class="count">()" << counts[InsightType::PATH_RANK] << R"()</span></li>
 )";
 
-    html << R"(                <li><a href="#recommendations">Conclusions &amp; Recommendations</a></li>
+    html << R"(                    </ul>
+                </li>
+                <li class="category-toc"><a href="#transformational-section">🔄 Transformational Insights</a>
+                    <ul class="sub-toc">
+)";
+
+    if (counts[InsightType::SUBSTITUTION] > 0)
+        html << R"(                        <li><a href="#module-substitution">Substitutions</a> <span class="count">()" << counts[InsightType::SUBSTITUTION] << R"()</span></li>
+)";
+    if (counts[InsightType::CONTRADICTION] > 0)
+        html << R"(                        <li><a href="#module-contradictions">Contradictions</a> <span class="count">()" << counts[InsightType::CONTRADICTION] << R"()</span></li>
+)";
+    if (counts[InsightType::ENTITY_RESOLUTION] > 0)
+        html << R"(                        <li><a href="#module-entity-resolution">Entity Resolution</a> <span class="count">()" << counts[InsightType::ENTITY_RESOLUTION] << R"()</span></li>
+)";
+    if (counts[InsightType::ANALOGICAL_TRANSFER] > 0)
+        html << R"(                        <li><a href="#module-analogical-transfer">Analogical Transfer</a> <span class="count">()" << counts[InsightType::ANALOGICAL_TRANSFER] << R"()</span></li>
+)";
+    if (counts[InsightType::COUNTERFACTUAL] > 0)
+        html << R"(                        <li><a href="#module-counterfactual">Counterfactual Queries</a> <span class="count">()" << counts[InsightType::COUNTERFACTUAL] << R"()</span></li>
+)";
+    if (counts[InsightType::SURPRISE] > 0)
+        html << R"(                        <li><a href="#module-surprises">Surprising Discoveries</a> <span class="count">()" << counts[InsightType::SURPRISE] << R"()</span></li>
+)";
+    if (counts[InsightType::HYPOTHESES_1] > 0)
+        html << R"(                        <li><a href="#module-hypotheses">Testable Hypotheses</a> <span class="count">()" << counts[InsightType::HYPOTHESES_1] << R"()</span></li>
+)";
+    if (counts[InsightType::HYPOTHESES_3] > 0)
+        html << R"(                        <li><a href="#module-hypotheses-3">Counterfactual Hypotheses</a> <span class="count">()" << counts[InsightType::HYPOTHESES_3] << R"()</span></li>
+)";
+    if (counts[InsightType::META_PATH_ANOMALY] > 0)
+        html << R"(                        <li><a href="#module-meta-path-anomaly">Meta-Path Anomalies</a> <span class="count">()" << counts[InsightType::META_PATH_ANOMALY] << R"()</span></li>
+)";
+    if (counts[InsightType::INTERVENTION_BOTTLENECK] > 0)
+        html << R"(                        <li><a href="#module-intervention-bottleneck">Intervention Bottlenecks</a> <span class="count">()" << counts[InsightType::INTERVENTION_BOTTLENECK] << R"()</span></li>
+)";
+    if (counts[InsightType::COMPETING_MECHANISM] > 0)
+        html << R"(                        <li><a href="#module-competing-mechanism">Competing Mechanisms</a> <span class="count">()" << counts[InsightType::COMPETING_MECHANISM] << R"()</span></li>
+)";
+    if (counts[InsightType::SCHEMA_REPAIR] > 0)
+        html << R"(                        <li><a href="#module-schema-repair">Schema Repairs</a> <span class="count">()" << counts[InsightType::SCHEMA_REPAIR] << R"()</span></li>
+)";
+    if (counts[InsightType::INTERVENTION_POINT] > 0)
+        html << R"(                        <li><a href="#module-intervention-point">Intervention Points</a> <span class="count">()" << counts[InsightType::INTERVENTION_POINT] << R"()</span></li>
+)";
+    if (counts[InsightType::FEEDBACK_LOOP] > 0)
+        html << R"(                        <li><a href="#module-feedback-loop">Feedback Loops</a> <span class="count">()" << counts[InsightType::FEEDBACK_LOOP] << R"()</span></li>
+)";
+    if (counts[InsightType::CONFOUNDER] > 0)
+        html << R"(                        <li><a href="#module-confounder">Confounders</a> <span class="count">()" << counts[InsightType::CONFOUNDER] << R"()</span></li>
+)";
+    if (counts[InsightType::LOGICAL_ENTAILMENT] > 0)
+        html << R"(                        <li><a href="#module-logical-entailment">Logical Entailments</a> <span class="count">()" << counts[InsightType::LOGICAL_ENTAILMENT] << R"()</span></li>
+)";
+    if (counts[InsightType::SCHEMA_VIOLATION] > 0)
+        html << R"(                        <li><a href="#module-schema-violation">Schema Violations</a> <span class="count">()" << counts[InsightType::SCHEMA_VIOLATION] << R"()</span></li>
+)";
+    if (counts[InsightType::CLAIM_STANCE] > 0)
+        html << R"(                        <li><a href="#module-claim-stance">Claim Stance Analysis</a> <span class="count">()" << counts[InsightType::CLAIM_STANCE] << R"()</span></li>
+)";
+    if (counts[InsightType::UNCERTAINTY_SAMPLING] > 0)
+        html << R"(                        <li><a href="#module-uncertainty-sampling">Uncertainty Sampling</a> <span class="count">()" << counts[InsightType::UNCERTAINTY_SAMPLING] << R"()</span></li>
+)";
+    if (counts[InsightType::ACTIVE_LEARNING] > 0)
+        html << R"(                        <li><a href="#module-active-learning">Active Learning</a> <span class="count">()" << counts[InsightType::ACTIVE_LEARNING] << R"()</span></li>
+)";
+    if (regular_h2_count > 0)
+        html << R"(                        <li><a href="#module-hypotheses-2">Mechanistic Hypotheses</a> <span class="count">()" << regular_h2_count << R"()</span></li>
+)";
+    if (intersection_bridge_count > 0)
+        html << R"(                        <li><a href="#module-intersection-bridge">Intersection Bridges</a> <span class="count">()" << intersection_bridge_count << R"()</span></li>
+)";
+
+    html << R"(                    </ul>
+                </li>
+                <li><a href="#recommendations">Conclusions &amp; Recommendations</a></li>
             </ul>
         </nav>
 )";
-
     // No standalone statistics/augmentation sections in modular layout.
 
     [[maybe_unused]] auto spotlight_text = [&](std::vector<Insight>& list) -> std::string {
@@ -3515,260 +6075,15 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         return std::make_tuple(antecedent, consequent, metrics);
     };
 
-    // Discovery modules
-    auto& surprises = by_type[InsightType::SURPRISE];
-    if (!surprises.empty()) {
-        std::vector<Insight> sorted = surprises;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
+    // Discovery modules - organized by category
 
-        html << R"HTML(
-        <section id="module-surprises" class="module" style="border-left-color: var(--theme-surprise)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-surprise)">Surprising Discoveries</h2>
-                <p class="definition">Flags statistically unusual or novel connections in the graph.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-surprise);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Surprise Detection</strong> algorithm identifies entity pairs that co-occur in the knowledge graph more frequently than would be expected by chance. It computes an expected co-occurrence rate based on each entity's individual frequency, then flags pairs where actual co-occurrence significantly exceeds this expectation.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> These unexpected connections often reveal hidden relationships, novel insights, or potential data quality issues that merit human review. A high surprise score indicates the relationship is statistically anomalous given the overall graph structure.</p>
-            </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-)HTML";
-
-        // Use clustering to coalesce similar findings
-        if (config.coalesce_similar_findings && sorted.size() > 3) {
-            auto clusters = cluster_insights(sorted, config);
-            int cluster_num = 0;
-            int total_shown = 0;
-
-            for (auto& cluster : clusters) {
-                if (total_shown >= config.max_examples_per_type) break;
-
-                std::string summary = generate_cluster_summary(cluster, config);
-                cluster_num++;
-
-                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                <h4 style="color: var(--theme-surprise); margin-bottom: 10px;">)HTML";
-
-                if (cluster.insights.size() > 1) {
-                    html << "Discovery Group " << cluster_num << " (" << cluster.insights.size() << " similar findings)";
-                } else {
-                    html << "Discovery: " << escape_html(cluster.common_theme);
-                }
-                html << R"HTML(</h4>
-                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
-                <table class="data-table" style="font-size: 0.9em;">
-                    <thead>
-                        <tr><th>Entities</th><th>Score</th><th>Source</th></tr>
-                    </thead>
-                    <tbody>
-)HTML";
-
-                int items_in_cluster = 0;
-                for (const auto& insight : cluster.insights) {
-                    if (items_in_cluster >= config.max_items_per_cluster) {
-                        html << R"(                        <tr><td colspan="3" style="text-align: center; font-style: italic;">... and )"
-                             << (cluster.insights.size() - items_in_cluster) << R"( more similar items</td></tr>
+    // COMBINATORIAL INSIGHTS SECTION
+    html << R"(
+        <div class="category-section-header" id="combinatorial-section">
+            <h2>🧩 Combinatorial Insights</h2>
+            <p>Pattern Detection & Structural Combinations - insights that emerge from combining existing knowledge in new ways and identifying patterns</p>
+        </div>
 )";
-                        break;
-                    }
-                    std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
-
-                    html << R"(                        <tr>
-                            <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
-                            <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
-                            <td>)" << escape_html(source) << R"(</td>
-                        </tr>
-)";
-                    items_in_cluster++;
-                    total_shown++;
-                }
-
-                html << R"HTML(                    </tbody>
-                </table>
-            </div>
-)HTML";
-            }
-        } else {
-            // Non-clustered view (original behavior)
-            bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
-            html << R"HTML(            <table class="data-table">
-                <thead>
-                    <tr><th>Entities</th><th>Score</th><th>Source</th>)HTML";
-            if (include_explanation) {
-                html << R"HTML(<th>Explanation</th>)HTML";
-            }
-            html << R"HTML(</tr>
-                </thead>
-                <tbody>
-)HTML";
-            int count = 0;
-            for (auto& insight : sorted) {
-                if (count >= config.max_examples_per_type) break;
-                std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
-                std::string explanation;
-                if (include_explanation) {
-                    if (config.use_llm_narratives) {
-                        explanation = generate_llm_narrative(insight, config);
-                    } else {
-                        explanation = get_llm_example(insight, config);
-                        if (explanation.empty()) {
-                            explanation = get_graph_context_summary(insight, false);
-                        }
-                    }
-                }
-                html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
-                        <td>)" << escape_html(source) << R"(</td>)";
-                if (include_explanation) {
-                    html << R"(
-                        <td>)" << escape_html(explanation) << R"(</td>)";
-                }
-                html << R"(
-                    </tr>
-)";
-                count++;
-            }
-            html << R"HTML(                </tbody>
-            </table>
-)HTML";
-        }
-        html << R"HTML(        </section>
-)HTML";
-    }
-
-    auto& completions = by_type[InsightType::COMPLETION];
-    if (!completions.empty()) {
-        std::vector<Insight> sorted = completions;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-completions" class="module" style="border-left-color: var(--theme-gap)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-gap)">Knowledge Gaps (Completions)</h2>
-                <p class="definition">Suggests missing relations based on similar neighborhood patterns.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-gap);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Completion Detection</strong> algorithm identifies potential missing relationships by analyzing neighborhood patterns. When two entities share multiple common neighbors or appear in similar hyperedge contexts but lack a direct connection, the algorithm suggests they may be related. This is based on the principle that entities with similar structural positions in a knowledge graph often share semantic relationships.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> These suggestions highlight gaps where relationships likely exist but were not explicitly captured during extraction. Reviewing completions can improve knowledge graph coverage and reveal implicit connections in the source documents.</p>
-            </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-)HTML";
-
-        // Use clustering to coalesce similar findings
-        if (config.coalesce_similar_findings && sorted.size() > 3) {
-            auto clusters = cluster_insights(sorted, config);
-            int cluster_num = 0;
-            int total_shown = 0;
-
-            for (auto& cluster : clusters) {
-                if (total_shown >= config.max_examples_per_type) break;
-
-                std::string summary = generate_cluster_summary(cluster, config);
-                cluster_num++;
-
-                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                <h4 style="color: var(--theme-gap); margin-bottom: 10px;">)HTML";
-
-                if (cluster.insights.size() > 1) {
-                    html << "Gap Group " << cluster_num << " (" << cluster.insights.size() << " similar findings)";
-                } else {
-                    html << "Gap: " << escape_html(cluster.common_theme);
-                }
-                html << R"HTML(</h4>
-                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
-                <table class="data-table" style="font-size: 0.9em;">
-                    <thead>
-                        <tr><th>Gap (X + Y)</th><th>Confidence</th></tr>
-                    </thead>
-                    <tbody>
-)HTML";
-
-                int items_in_cluster = 0;
-                for (const auto& insight : cluster.insights) {
-                    if (items_in_cluster >= config.max_items_per_cluster) {
-                        html << R"(                        <tr><td colspan="2" style="text-align: center; font-style: italic;">... and )"
-                             << (cluster.insights.size() - items_in_cluster) << R"( more similar items</td></tr>
-)";
-                        break;
-                    }
-                    if (insight.seed_labels.size() < 2) continue;
-
-                    html << R"(                        <tr>
-                            <td>)" << format_entities({insight.seed_labels[0], insight.seed_labels[1]}, 2) << R"(</td>
-                            <td>)" << escape_html(format_confidence(insight.score)) << R"(</td>
-                        </tr>
-)";
-                    items_in_cluster++;
-                    total_shown++;
-                }
-
-                html << R"HTML(                    </tbody>
-                </table>
-            </div>
-)HTML";
-            }
-        } else {
-            // Non-clustered view (original behavior)
-            bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
-            html << R"HTML(            <table class="data-table">
-                <thead>
-                    <tr><th>Gap (X + Y)</th><th>Confidence</th>)HTML";
-            if (include_explanation) {
-                html << R"HTML(<th>Explanation</th>)HTML";
-            }
-            html << R"HTML(</tr>
-                </thead>
-                <tbody>
-)HTML";
-            int count = 0;
-            for (auto& insight : sorted) {
-                if (count >= config.max_examples_per_type) break;
-                if (insight.seed_labels.size() < 2) continue;
-                std::string explanation;
-                if (include_explanation) {
-                    if (config.use_llm_narratives) {
-                        explanation = generate_llm_narrative(insight, config);
-                    } else {
-                        explanation = get_llm_example(insight, config);
-                        if (explanation.empty()) {
-                            explanation = get_graph_context_summary(insight, false);
-                        }
-                    }
-                }
-                html << R"(                    <tr>
-                        <td>)" << format_entities({insight.seed_labels[0], insight.seed_labels[1]}, 2) << R"(</td>
-                        <td>)" << escape_html(format_confidence(insight.score)) << R"(</td>)";
-                if (include_explanation) {
-                    html << R"(
-                        <td>)" << escape_html(explanation) << R"(</td>)";
-                }
-                html << R"(
-                    </tr>
-)";
-                count++;
-            }
-            html << R"HTML(                </tbody>
-            </table>
-)HTML";
-        }
-        html << R"HTML(        </section>
-)HTML";
-    }
 
     auto& motifs = by_type[InsightType::MOTIF];
     if (!motifs.empty()) {
@@ -3792,20 +6107,28 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             <div class="spotlight">
                 <h3>Top Insight Analysis</h3>
                 <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+                )HTML" << (!sorted.empty() ? format_source_documents_html(sorted[0]) : "") << R"HTML(
             </div>
 )HTML";
 
+        // Use dynamic limits based on data size
+        auto limits = calculate_dynamic_limits(sorted.size(), config);
+
+        // Adjust config for clustering with dynamic threshold
+        ReportConfig dynamic_config = config;
+        dynamic_config.similarity_threshold = limits.similarity_threshold;
+
         // Use clustering to coalesce similar findings
-        if (config.coalesce_similar_findings && sorted.size() > 3) {
-            auto clusters = cluster_insights(sorted, config);
+        if (limits.should_cluster) {
+            auto clusters = cluster_insights(sorted, dynamic_config);
             int cluster_num = 0;
             int total_shown = 0;
 
             for (auto& cluster : clusters) {
-                if (total_shown >= config.max_examples_per_type) break;
+                if (total_shown >= limits.max_clusters_to_show) break;
 
                 // Generate cluster summary
-                std::string summary = generate_cluster_summary(cluster, config);
+                std::string summary = generate_cluster_summary(cluster, dynamic_config);
                 cluster_num++;
 
                 html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
@@ -3827,7 +6150,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 
                 int items_in_cluster = 0;
                 for (const auto& insight : cluster.insights) {
-                    if (items_in_cluster >= config.max_items_per_cluster) {
+                    if (items_in_cluster >= limits.max_items_per_cluster) {
                         html << R"(                        <tr><td colspan="3" style="text-align: center; font-style: italic;">... and )"
                              << (cluster.insights.size() - items_in_cluster) << R"( more similar items</td></tr>
 )";
@@ -3870,7 +6193,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
             int count = 0;
             for (auto& insight : sorted) {
-                if (count >= config.max_examples_per_type) break;
+                if (count >= limits.max_clusters_to_show) break;
                 double support = 0.0;
                 double lift = 0.0;
                 auto sit = insight.score_breakdown.find("support");
@@ -3892,6 +6215,2270 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                         <td>)" << format_entities(insight.seed_labels, 4) << R"(</td>
                         <td>)" << std::fixed << std::setprecision(0) << support << R"(</td>
                         <td>)" << std::fixed << std::setprecision(2) << lift << R"(</td>)";
+                if (include_explanation) {
+                    html << R"(
+                        <td>)" << escape_html(explanation) << R"(</td>)";
+                }
+                html << R"(
+                    </tr>
+)";
+                count++;
+            }
+            html << R"HTML(                </tbody>
+            </table>
+)HTML";
+        }
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    auto& core_periphery = by_type[InsightType::CORE_PERIPHERY];
+    if (!core_periphery.empty()) {
+        std::vector<Insight> sorted = core_periphery;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-core-periphery" class="module" style="border-left-color: var(--theme-core)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-core)">Core–Periphery / Hub–Authority</h2>
+                <p class="definition">Maps central hubs versus peripheral entities using degree, hub/authority, and integration signals.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-core);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Core–Periphery</strong> operator combines degree centrality, hub/authority balance (source vs. target roles), and hub integration scores to identify structurally central entities. Low-scoring nodes are treated as peripheral.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Core nodes anchor the graph’s structure, while peripheral nodes may represent niche concepts or sparse evidence. Understanding both helps prioritize validation and curation.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <!-- Core Nodes -->
+            <h4 style="color: var(--theme-core); margin-top: 20px; margin-bottom: 10px;">🔵 Core Nodes (Highly Connected Hubs)</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Degree</th><th>Hub</th><th>Authority</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            bool is_core = true;
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag == "periphery") {
+                    is_core = false;
+                    break;
+                }
+            }
+            if (!is_core) continue; // Skip periphery for now
+
+            double degree = 0.0;
+            double hub = 0.0;
+            double auth = 0.0;
+            auto dit = insight.score_breakdown.find("degree_norm");
+            if (dit != insight.score_breakdown.end()) degree = dit->second;
+            auto hit = insight.score_breakdown.find("hub_score");
+            if (hit != insight.score_breakdown.end()) hub = hit->second;
+            auto ait = insight.score_breakdown.find("authority_score");
+            if (ait != insight.score_breakdown.end()) auth = ait->second;
+
+            html << R"(                    <tr style="background: rgba(74, 222, 128, 0.05);">
+                        <td><strong>)" << format_entities(insight.seed_labels, 1) << R"(</strong></td>
+                        <td>)" << std::fixed << std::setprecision(2) << degree << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << hub << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << auth << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+
+            <!-- Periphery Nodes -->
+            <h4 style="color: var(--text-muted); margin-top: 30px; margin-bottom: 10px;">⚪ Periphery Nodes (Low Connectivity)</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Degree</th><th>Hub</th><th>Authority</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            bool is_periphery = false;
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag == "periphery") {
+                    is_periphery = true;
+                    break;
+                }
+            }
+            if (!is_periphery) continue; // Skip core for this table
+
+            double degree = 0.0;
+            double hub = 0.0;
+            double auth = 0.0;
+            auto dit = insight.score_breakdown.find("degree_norm");
+            if (dit != insight.score_breakdown.end()) degree = dit->second;
+            auto hit = insight.score_breakdown.find("hub_score");
+            if (hit != insight.score_breakdown.end()) hub = hit->second;
+            auto ait = insight.score_breakdown.find("authority_score");
+            if (ait != insight.score_breakdown.end()) auth = ait->second;
+
+            html << R"(                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << degree << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << hub << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << auth << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& centrality_nodes = by_type[InsightType::CENTRALITY];
+    if (!centrality_nodes.empty()) {
+        std::vector<Insight> sorted = centrality_nodes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-centrality" class="module" style="border-left-color: var(--theme-centrality)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-centrality)">Centrality</h2>
+                <p class="definition">Ranks entities by structural importance in the bipartite projection.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-centrality);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Centrality</strong> operator runs PageRank on the bipartite graph formed by entities and hyperedges, highlighting structurally influential nodes.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Central entities are often critical for connecting multiple relationship contexts.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Centrality</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double score = insight.score;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& communities = by_type[InsightType::COMMUNITY_DETECTION];
+    if (!communities.empty()) {
+        std::vector<Insight> sorted = communities;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-community-detection" class="module" style="border-left-color: var(--theme-community-detect)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-community-detect)">Community Detection</h2>
+                <p class="definition">Finds dense clusters via Louvain on the projected graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-community-detect);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Community Detection</strong> operator clusters entities using a Louvain-style modularity optimization on the projected graph.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Communities represent topic or subdomain structure in the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Representative Entities</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& k_core_nodes = by_type[InsightType::K_CORE];
+    if (!k_core_nodes.empty()) {
+        std::vector<Insight> sorted = k_core_nodes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-k-core" class="module" style="border-left-color: var(--theme-k-core)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-k-core)">k-Core Nodes</h2>
+                <p class="definition">Highlights entities in tightly connected cores.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-k-core);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>k-Core</strong> operator computes the core number of each node on the projected graph, identifying the largest k for which the node remains connected to at least k neighbors. Higher core numbers indicate denser local connectivity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> k-cores reveal robust, tightly knit regions that often represent stable conceptual hubs or well-supported areas of the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Core Number</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double core = 0.0;
+            auto it = insight.score_breakdown.find("core");
+            if (it != insight.score_breakdown.end()) core = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(0) << core << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& k_truss_links = by_type[InsightType::K_TRUSS];
+    if (!k_truss_links.empty()) {
+        std::vector<Insight> sorted = k_truss_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-k-truss" class="module" style="border-left-color: var(--theme-k-truss)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-k-truss)">k-Truss Edges</h2>
+                <p class="definition">Finds triangle-reinforced edges in the projected graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-k-truss);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>k-Truss</strong> operator scores edges by the number of shared neighbors (triangles) in the projected graph. Edges supported by many triangles are retained in higher-order trusses.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Triangle-reinforced edges often indicate cohesive substructures and more reliable associations.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Triangle Support</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double support_val = 0.0;
+            auto it = insight.score_breakdown.find("support");
+            if (it != insight.score_breakdown.end()) support_val = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(0) << support_val << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& mechanisms = by_type[InsightType::MECHANISM_CONSOLIDATION];
+    if (!mechanisms.empty()) {
+        std::vector<Insight> sorted = mechanisms;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-mechanism-consolidation" class="module" style="border-left-color: var(--theme-mechanism)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-mechanism)">Mechanism Consolidation</h2>
+                <p class="definition">Clusters overlapping hypotheses and chains into higher-level mechanisms.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-mechanism);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Mechanism Consolidation</strong> operator clusters mechanistic hypotheses, long-chain links, and explanatory chains based on overlapping node sets. Each cluster highlights a shared explanatory theme supported by multiple independent signals.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Consolidated mechanisms reduce redundancy and emphasize the most persistent explanatory structures in the graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Cluster Summary</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_mechanism_consolidation(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& rules = by_type[InsightType::RULE];
+    if (!rules.empty()) {
+        std::vector<Insight> sorted = rules;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-rules" class="module" style="border-left-color: var(--theme-rule)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-rule)">Association Rules</h2>
+                <p class="definition">Mines association rules between relation types.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-rule);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Association Rule Mining</strong> algorithm discovers "if-then" patterns in the knowledge graph. It identifies cases where the presence of certain relation types (the antecedent) reliably predicts other relation types (the consequent). Rules are scored by <em>support</em> (how often the pattern occurs), <em>confidence</em> (P(consequent|antecedent)), and <em>lift</em> (how much better than random chance).</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> These rules encode predictable patterns that can be used for automated inference, data validation, or identifying incomplete records. High-lift rules reveal genuine domain regularities rather than coincidental correlations.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+                )HTML" << (!sorted.empty() ? format_source_documents_html(sorted[0]) : "") << R"HTML(
+            </div>
+)HTML";
+
+        // Use dynamic limits based on data size
+        auto limits = calculate_dynamic_limits(sorted.size(), config);
+
+        // Adjust config for clustering with dynamic threshold
+        ReportConfig dynamic_config = config;
+        dynamic_config.similarity_threshold = limits.similarity_threshold;
+
+        // Use clustering to coalesce similar findings
+        if (limits.should_cluster) {
+            auto clusters = cluster_insights(sorted, dynamic_config);
+            int cluster_num = 0;
+            int total_shown = 0;
+
+            for (auto& cluster : clusters) {
+                if (total_shown >= limits.max_clusters_to_show) break;
+
+                std::string summary = generate_cluster_summary(cluster, dynamic_config);
+                cluster_num++;
+
+                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <h4 style="color: var(--theme-rule); margin-bottom: 10px;">)HTML";
+
+                if (cluster.insights.size() > 1) {
+                    html << "Rule Group " << cluster_num << " (" << cluster.insights.size() << " similar rules)";
+                } else {
+                    html << "Rule: " << escape_html(cluster.common_theme);
+                }
+                html << R"HTML(</h4>
+                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
+                <table class="data-table" style="font-size: 0.9em;">
+                    <thead>
+                        <tr><th>Antecedent</th><th>Consequent</th><th>Lift / Confidence</th><th>Examples</th></tr>
+                    </thead>
+                    <tbody>
+)HTML";
+
+                int items_in_cluster = 0;
+                for (const auto& insight : cluster.insights) {
+                    if (items_in_cluster >= limits.max_items_per_cluster) {
+                        html << R"(                        <tr><td colspan="4" style="text-align: center; font-style: italic;">... and )"
+                             << (cluster.insights.size() - items_in_cluster) << R"( more similar rules</td></tr>
+)";
+                        break;
+                    }
+                    auto [antecedent, consequent, metrics] = parse_rule(insight.description);
+                    double confidence = 0.0;
+                    double lift = 0.0;
+                    auto cit = insight.score_breakdown.find("specificity");
+                    if (cit != insight.score_breakdown.end()) confidence = cit->second;
+                    auto lit = insight.score_breakdown.find("novelty");
+                    if (lit != insight.score_breakdown.end()) lift = lit->second;
+                    std::stringstream metric_ss;
+                    if (confidence > 0.0 || lift > 0.0) {
+                        metric_ss << "lift " << std::fixed << std::setprecision(2) << lift
+                                  << ", conf " << std::fixed << std::setprecision(2) << confidence;
+                    } else if (!metrics.empty()) {
+                        metric_ss << metrics;
+                    } else {
+                        metric_ss << "-";
+                    }
+
+                    html << R"(                        <tr>
+                            <td>)" << escape_html(antecedent) << R"(</td>
+                            <td>)" << escape_html(consequent) << R"(</td>
+                            <td>)" << escape_html(metric_ss.str()) << R"(</td>
+                            <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                        </tr>
+)";
+                    items_in_cluster++;
+                    total_shown++;
+                }
+
+                html << R"HTML(                    </tbody>
+                </table>
+            </div>
+)HTML";
+            }
+        } else {
+            // Non-clustered view (original behavior)
+            bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
+            html << R"HTML(            <table class="data-table">
+                <thead>
+                    <tr><th>Antecedent</th><th>Consequent</th><th>Lift / Confidence</th><th>Examples</th>)HTML";
+            if (include_explanation) {
+                html << R"HTML(<th>Explanation</th>)HTML";
+            }
+            html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+            int count = 0;
+            for (auto& insight : sorted) {
+                if (count >= limits.max_clusters_to_show) break;
+                auto [antecedent, consequent, metrics] = parse_rule(insight.description);
+                double confidence = 0.0;
+                double lift = 0.0;
+                auto cit = insight.score_breakdown.find("specificity");
+                if (cit != insight.score_breakdown.end()) confidence = cit->second;
+                auto lit = insight.score_breakdown.find("novelty");
+                if (lit != insight.score_breakdown.end()) lift = lit->second;
+                std::string explanation;
+                if (include_explanation) {
+                    if (config.use_llm_narratives) {
+                        explanation = generate_llm_narrative(insight, config);
+                    } else {
+                        explanation = get_llm_example(insight, config);
+                        if (explanation.empty()) {
+                            explanation = get_graph_context_summary(insight, false);
+                        }
+                    }
+                }
+                std::stringstream metric_ss;
+                if (confidence > 0.0 || lift > 0.0) {
+                    metric_ss << "lift " << std::fixed << std::setprecision(2) << lift
+                              << ", conf " << std::fixed << std::setprecision(2) << confidence;
+                } else if (!metrics.empty()) {
+                    metric_ss << metrics;
+                } else {
+                    metric_ss << "-";
+                }
+
+                html << R"(                    <tr>
+                        <td>)" << escape_html(antecedent) << R"(</td>
+                        <td>)" << escape_html(consequent) << R"(</td>
+                        <td>)" << escape_html(metric_ss.str()) << R"(</td>
+                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>)";
+                if (include_explanation) {
+                    html << R"(
+                        <td>)" << escape_html(explanation) << R"(</td>)";
+                }
+                html << R"(
+                    </tr>
+)";
+                count++;
+            }
+            html << R"HTML(                </tbody>
+            </table>
+)HTML";
+        }
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    auto& meta_patterns = by_type[InsightType::META_PATH_PATTERN];
+    if (!meta_patterns.empty()) {
+        std::vector<Insight> sorted = meta_patterns;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"(
+        <section id="meta-path-patterns">
+            <h2>Meta-Path Patterns</h2>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-metapath);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Meta-Path Pattern</strong> operator mines frequently occurring relation sequences across the graph. Patterns are scored by distinct (start, end) support, average confidence, and path length.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> These templates reveal reusable structural motifs that can guide validation, querying, and hypothesis generation.</p>
+            </div>
+)";
+
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+
+            std::string narrative;
+            if (config.use_llm_narratives && llm_provider_) {
+                narrative = generate_llm_narrative(insight, config);
+            } else {
+                narrative = describe_meta_path_pattern(insight);
+            }
+            html << R"HTML(
+            <div class="insight metapathpattern">
+                <h4>)HTML" << (count + 1) << R"HTML(. Pattern</h4>
+                <p>)HTML" << escape_html(strip_markdown_bold(narrative)) << R"HTML(</p>
+            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"(        </section>
+)";
+    }
+
+    auto& meta_path_links = by_type[InsightType::META_PATH];
+    if (!meta_path_links.empty()) {
+        std::vector<Insight> sorted = meta_path_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-meta-path" class="module" style="border-left-color: var(--theme-metapath)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-metapath)">Meta-Path Links</h2>
+                <p class="definition">Inferred from typed relation sequences that repeatedly connect entity pairs.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-metapath);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Meta-Path Link</strong> detector searches for entity pairs connected by recurring typed relation sequences (e.g., A &rarr;causes&rarr; B &rarr;regulates&rarr; C). It scores pairs by template frequency and entity-type alignment, surfacing connections that are non-obvious from direct or single-hop links alone.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Meta-path links capture structural relationships that only emerge when considering the full typed context of a multi-hop path. They enable predictions that span knowledge boundaries, revealing how entities are related through shared relational patterns even when no direct connection exists.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity Pair</th><th>Pattern</th><th>Score</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.size() < 2) continue;
+
+            std::string pattern = "";
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag.find("pattern=") == 0) {
+                    pattern = tag.substr(8);
+                    break;
+                }
+            }
+
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_meta_path(insight);
+            }
+
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(insight.seed_labels[0]) << " ↔ " << escape_html(insight.seed_labels[1]) << R"HTML(</td>
+                        <td>)HTML" << escape_html(pattern) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& taxonomies = by_type[InsightType::TAXONOMY];
+    if (!taxonomies.empty()) {
+        std::vector<Insight> sorted = taxonomies;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-taxonomy" class="module" style="border-left-color: var(--theme-motif)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-motif)">Taxonomy</h2>
+                <p class="definition">Hierarchical is-a and part-of relationships.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-motif);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Taxonomy</strong> detector identifies hierarchical edges (is-a, instance-of, type-of, part-of, subclass-of) in the graph and assembles them into consistent hierarchical trees. It resolves cross-edges, detects inconsistencies (e.g., circular inheritance), and scores relations by consistency and evidence support.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explicit taxonomic structure enables class-level inference, improves ontological consistency, and supports classification algorithms that exploit the hierarchy. It is foundational for knowledge graph reasoning: an entity that is-a X inherits all properties of X without requiring them to be explicitly stated for each instance.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Hierarchy</th><th>Confidence</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_taxonomy(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 3) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& compositional = by_type[InsightType::COMPOSITIONAL_REASONING];
+    if (!compositional.empty()) {
+        std::vector<Insight> sorted = compositional;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-compositional" class="module" style="border-left-color: var(--theme-analogy)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-analogy)">Compositional Reasoning</h2>
+                <p class="definition">Composed relations via relation algebra.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-analogy);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Compositional Reasoning</strong> operator applies relation algebra to compose pairs of existing edges. Given edges A &rarr;<em>r1</em>&rarr; B and B &rarr;<em>r2</em>&rarr; C, it infers A &rarr;compose(<em>r1</em>,<em>r2</em>)&rarr; C using a learned or rule-based composition table, then scores the inferred link by the confidence of both component edges and the specificity of the composed relation.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Compositional reasoning enables multi-hop inference without requiring an explicit path to already exist in the graph. It extends knowledge coverage through principled link prediction grounded in known relation semantics, and can surface implied connections that are definitionally entailed but not yet recorded.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Composition</th><th>Confidence</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Derivation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_compositional_reasoning(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 3) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& transitive_closures = by_type[InsightType::TRANSITIVE_CLOSURE];
+    if (!transitive_closures.empty()) {
+        std::vector<Insight> sorted = transitive_closures;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-transitive-closure" class="module" style="border-left-color: var(--theme-completion)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-completion)">Transitive Closure Gaps</h2>
+                <p class="definition">Missing links implied by transitive relations (if A&rarr;B and B&rarr;C, expect A&rarr;C).</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-completion);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Transitive Closure</strong> detector applies transitivity rules to specific relation types known to be transitive (is-a, part-of, implies, precedes, etc.). For each transitive chain A &rarr; B &rarr; C, it checks whether the implied direct link A &rarr; C exists. Missing links are scored by the strength of the transitive chain that implies them.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Transitive closure gaps represent definitively missing knowledge — links that are logically implied but not yet recorded. Adding confirmed closures directly increases graph completeness and reduces the need to traverse multi-hop paths during inference. High-confidence gaps are among the safest additions to a knowledge graph since they are deductively entailed by existing data.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Source</th><th>Target</th><th>Confidence</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Reasoning</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string source = insight.seed_labels.size() > 0 ? insight.seed_labels[0] : "-";
+            std::string target = insight.seed_labels.size() > 1 ? insight.seed_labels[1] : "-";
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_transitive_closure(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(source) << R"HTML(</td>
+                        <td>)HTML" << escape_html(target) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    // EXPLORATORY INSIGHTS SECTION
+    html << R"(
+        <div class="category-section-header" id="exploratory-section">
+            <h2>🔍 Exploratory Insights</h2>
+            <p>Path Finding & Connection Discovery - insights that discover new connections, paths, and bridges between concepts</p>
+        </div>
+)";
+
+    auto& completions = by_type[InsightType::COMPLETION];
+    if (!completions.empty()) {
+        std::vector<Insight> sorted = completions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-completions" class="module" style="border-left-color: var(--theme-gap)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-gap)">Knowledge Gaps (Completions)</h2>
+                <p class="definition">Suggests missing relations based on similar neighborhood patterns.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-gap);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Completion Detection</strong> algorithm identifies potential missing relationships by analyzing neighborhood patterns. When two entities share multiple common neighbors or appear in similar hyperedge contexts but lack a direct connection, the algorithm suggests they may be related. This is based on the principle that entities with similar structural positions in a knowledge graph often share semantic relationships.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> These suggestions highlight gaps where relationships likely exist but were not explicitly captured during extraction. Reviewing completions can improve knowledge graph coverage and reveal implicit connections in the source documents.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+                )HTML" << (!sorted.empty() ? format_source_documents_html(sorted[0]) : "") << R"HTML(
+            </div>
+)HTML";
+
+        // Use dynamic limits based on data size
+        auto limits = calculate_dynamic_limits(sorted.size(), config);
+
+        // Adjust config for clustering with dynamic threshold
+        ReportConfig dynamic_config = config;
+        dynamic_config.similarity_threshold = limits.similarity_threshold;
+
+        // Use clustering to coalesce similar findings
+        if (limits.should_cluster) {
+            auto clusters = cluster_insights(sorted, dynamic_config);
+            int cluster_num = 0;
+            int total_shown = 0;
+
+            for (auto& cluster : clusters) {
+                if (total_shown >= limits.max_clusters_to_show) break;
+
+                std::string summary = generate_cluster_summary(cluster, dynamic_config);
+                cluster_num++;
+
+                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <h4 style="color: var(--theme-gap); margin-bottom: 10px;">)HTML";
+
+                if (cluster.insights.size() > 1) {
+                    html << "Gap Group " << cluster_num << " (" << cluster.insights.size() << " similar findings)";
+                } else {
+                    html << "Gap: " << escape_html(cluster.common_theme);
+                }
+                html << R"HTML(</h4>
+                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
+                <table class="data-table" style="font-size: 0.9em;">
+                    <thead>
+                        <tr><th>Gap (X + Y)</th><th>Confidence</th></tr>
+                    </thead>
+                    <tbody>
+)HTML";
+
+                int items_in_cluster = 0;
+                for (const auto& insight : cluster.insights) {
+                    if (items_in_cluster >= limits.max_items_per_cluster) {
+                        html << R"(                        <tr><td colspan="2" style="text-align: center; font-style: italic;">... and )"
+                             << (cluster.insights.size() - items_in_cluster) << R"( more similar items</td></tr>
+)";
+                        break;
+                    }
+                    if (insight.seed_labels.size() < 2) continue;
+
+                    html << R"(                        <tr>
+                            <td>)" << format_entities({insight.seed_labels[0], insight.seed_labels[1]}, 2) << R"(</td>
+                            <td>)" << escape_html(format_confidence(insight.score)) << R"(</td>
+                        </tr>
+)";
+                    items_in_cluster++;
+                    total_shown++;
+                }
+
+                html << R"HTML(                    </tbody>
+                </table>
+            </div>
+)HTML";
+            }
+        } else {
+            // Non-clustered view (original behavior)
+            bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
+            html << R"HTML(            <table class="data-table">
+                <thead>
+                    <tr><th>Gap (X + Y)</th><th>Confidence</th>)HTML";
+            if (include_explanation) {
+                html << R"HTML(<th>Explanation</th>)HTML";
+            }
+            html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+            int count = 0;
+            for (auto& insight : sorted) {
+                if (count >= limits.max_clusters_to_show) break;
+                if (insight.seed_labels.size() < 2) continue;
+                std::string explanation;
+                if (include_explanation) {
+                    if (config.use_llm_narratives) {
+                        explanation = generate_llm_narrative(insight, config);
+                    } else {
+                        explanation = get_llm_example(insight, config);
+                        if (explanation.empty()) {
+                            explanation = get_graph_context_summary(insight, false);
+                        }
+                    }
+                }
+                html << R"(                    <tr>
+                        <td>)" << format_entities({insight.seed_labels[0], insight.seed_labels[1]}, 2) << R"(</td>
+                        <td>)" << escape_html(format_confidence(insight.score)) << R"(</td>)";
+                if (include_explanation) {
+                    html << R"(
+                        <td>)" << escape_html(explanation) << R"(</td>)";
+                }
+                html << R"(
+                    </tr>
+)";
+                count++;
+            }
+            html << R"HTML(                </tbody>
+            </table>
+)HTML";
+        }
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    auto& text_links = by_type[InsightType::TEXT_SIMILARITY];
+    if (!text_links.empty()) {
+        std::vector<Insight> sorted = text_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-text-similarity" class="module" style="border-left-color: var(--theme-text)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-text)">Text-Semantic Similarity Links</h2>
+                <p class="definition">Links entities with highly similar labels based on TF-IDF cosine similarity.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-text);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Text Similarity</strong> operator tokenizes entity labels, builds TF-IDF vectors, and computes cosine similarity. Pairs above a threshold are suggested as semantically related.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Similar labels often indicate related concepts, synonyms, or naming variants that can inform curation.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Similarity</th><th>Source</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+            double sim = 0.0;
+            auto it = insight.score_breakdown.find("text_similarity");
+            if (it != insight.score_breakdown.end()) sim = it->second;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << sim << R"(</td>
+                        <td>)" << escape_html(source) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& argument_links = by_type[InsightType::ARGUMENT_SUPPORT];
+    if (!argument_links.empty()) {
+        std::vector<Insight> sorted = argument_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-argument-support" class="module" style="border-left-color: var(--theme-argument)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-argument)">Argument-Supported Relations</h2>
+                <p class="definition">Proposes links grounded in evidence paths through the graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-argument);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Argument Support</strong> operator finds short evidence paths between entity pairs and uses them to justify a plausible relation. Longer or weaker paths reduce confidence.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Path-grounded suggestions provide interpretable support for candidate edges.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Support</th><th>Source</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                        <td>)" << escape_html(source) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& method_nodes = by_type[InsightType::METHOD_OUTCOME];
+    if (!method_nodes.empty()) {
+        std::vector<Insight> sorted = method_nodes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-method-outcome" class="module" style="border-left-color: var(--theme-method)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-method)">Method/Outcome Entities</h2>
+                <p class="definition">Identifies entities likely representing methods or outcomes.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-method);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Method/Outcome</strong> operator classifies nodes using label cues and local relation context. LLM assistance refines ambiguous cases.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explicit method/outcome roles support clearer reasoning and downstream analysis.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Role</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string role = "method";
+            for (const auto& tag : insight.novelty_tags) {
+                if (tag == "outcome") role = "outcome";
+            }
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
+                        <td>)" << escape_html(role) << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& relation_inductions = by_type[InsightType::RELATION_INDUCTION];
+    if (!relation_inductions.empty()) {
+        std::vector<Insight> sorted = relation_inductions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-relation-induction" class="module" style="border-left-color: var(--theme-relation)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-relation)">Relation Induction</h2>
+                <p class="definition">Suggests canonical relation type names and descriptions.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-relation);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Relation Induction</strong> operator clusters examples of a relation label and uses an LLM to propose a canonical type name plus a short description.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Normalized relation types improve consistency and enable cleaner downstream analytics.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Suggestion</th><th>Confidence</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double conf = 0.0;
+            auto it = insight.score_breakdown.find("confidence");
+            if (it != insight.score_breakdown.end()) conf = it->second;
+            html << R"(                    <tr>
+                        <td>)" << escape_html(insight.description) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& hyperedge_links = by_type[InsightType::HYPEREDGE_PREDICTION];
+    if (!hyperedge_links.empty()) {
+        std::vector<Insight> sorted = hyperedge_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-hyperedge-prediction" class="module" style="border-left-color: var(--theme-hyperedge)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-hyperedge)">Hyperedge Prediction</h2>
+                <p class="definition">Predicts relations using overlap patterns under the same relation type.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-hyperedge);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Hyperedge Prediction</strong> operator compares source entities that share similar target sets under the same relation and proposes missing links based on overlap.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Overlap-based predictions capture consistent relational patterns that often indicate missing knowledge.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Proposed Link</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                    </tr>
+)";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& community_links = by_type[InsightType::COMMUNITY_LINK];
+    if (!community_links.empty()) {
+        std::vector<Insight> sorted = community_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-community" class="module" style="border-left-color: var(--theme-community)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-community)">Community Links</h2>
+                <p class="definition">Proposes cross-cluster links based on shared relation signatures.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-community);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Community Link Detection</strong> algorithm first identifies densely connected communities (clusters) in the hypergraph using s-connectivity analysis. It then finds candidate pairs of entities from <em>different</em> communities that share similar "relation signatures" - meaning they participate in similar types of relationships. The Jaccard overlap of their relation types determines similarity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> These cross-cluster candidates suggest potential bridges between distinct topic areas or knowledge domains. They often represent interdisciplinary connections, analogies across fields, or integration points that could unify separate parts of the knowledge graph.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Overlap</th><th>Evidence</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double overlap = 0.0;
+            auto oit = insight.score_breakdown.find("novelty");
+            if (oit != insight.score_breakdown.end()) overlap = oit->second;
+            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+            std::string explanation;
+            if (include_llm) {
+                explanation = get_llm_example(insight, config);
+                if (explanation.empty()) {
+                    explanation = get_graph_context_summary(insight, false);
+                }
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 2) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << overlap << R"HTML(</td>
+                        <td>)HTML" << escape_html(source) << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(explanation) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& evidence_fusion = by_type[InsightType::EVIDENCE_FUSION_LINK];
+    if (!evidence_fusion.empty()) {
+        std::vector<Insight> sorted = evidence_fusion;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-evidence-fusion" class="module" style="border-left-color: var(--theme-fusion)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-fusion)">Evidence Fusion Links</h2>
+                <p class="definition">Combines multiple operator signals into consensus link candidates.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-fusion);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Evidence Fusion</strong> operator aggregates confidence scores from multiple independent discovery operators (completions, analogies, path ranks, embedding links, etc.) using a weighted consensus model. Candidate links that appear in several independent pipelines receive a multiplicative score boost, making them high-priority discoveries.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Multi-operator agreement is a strong signal of genuine knowledge. Fused links are substantially more reliable than single-method findings — independent lines of evidence converging on the same candidate link provide the strongest grounds for knowledge graph augmentation.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Candidate Link</th><th>Sources</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double source_count = 0.0;
+            auto it = insight.score_breakdown.find("source_count");
+            if (it != insight.score_breakdown.end()) source_count = it->second;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_evidence_fusion(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(0) << source_count << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& cross_bridges = by_type[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE];
+    if (!cross_bridges.empty()) {
+        std::vector<Insight> sorted = cross_bridges;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-cross-community-bridge" class="module" style="border-left-color: var(--theme-crosscommunity)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-crosscommunity)">Cross-Community Mechanism Bridges</h2>
+                <p class="definition">Mechanistic paths that connect distant communities/domains.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-crosscommunity);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Cross-Community Mechanism Bridge</strong> detector extracts the shortest mechanistic path between every pair of detected graph communities, scores bridges by path strength, entity-type diversity, and cross-domain explanatory power. It selects bridges where the connecting path uses causal or mechanistic relations, not just structural proximity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Cross-community bridges represent the most intellectually fertile discovery zone — they connect knowledge communities through interpretable causal pathways, seeding interdisciplinary hypotheses. These findings are prime candidates for research that cuts across disciplinary boundaries.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Bridge</th><th>Novelty</th><th>Support</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double novelty = 0.0;
+            double support = 0.0;
+            auto n_it = insight.score_breakdown.find("novelty");
+            if (n_it != insight.score_breakdown.end()) novelty = n_it->second;
+            auto s_it = insight.score_breakdown.find("support");
+            if (s_it != insight.score_breakdown.end()) support = s_it->second;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_cross_community_bridge(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << novelty << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << support << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& bridges = by_type[InsightType::BRIDGE];
+    if (!bridges.empty()) {
+        std::sort(bridges.begin(), bridges.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        // Calculate dynamic limits based on data size
+        auto bridge_limits = calculate_dynamic_limits(bridges.size(), config);
+
+        html << R"HTML(
+        <section id="bridges" class="module" style="border-left-color: var(--theme-bridge)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-bridge)">Bridge Entities</h2>
+                <p class="definition">Identifies critical entities that connect otherwise separate parts of the graph.</p>
+                <div class="count">Total: )HTML" << bridges.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-bridge);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Bridge Detection</strong> algorithm identifies entities whose removal would disconnect or significantly fragment the knowledge graph. Using s-connectivity analysis on the hypergraph structure, it finds nodes that serve as critical links between otherwise separate clusters or communities. The bridge score reflects how essential the entity is for maintaining graph connectivity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Bridge entities are often key concepts, pivotal figures, or central ideas that tie together different areas of knowledge. They represent critical junctions for information flow and should be documented thoroughly. Losing or misrepresenting a bridge entity could fragment understanding of the domain.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : bridges) {
+            if (count >= bridge_limits.max_clusters_to_show) break;
+
+            std::string entity = insight.seed_labels.empty() ? "Unknown" : insight.seed_labels[0];
+
+            std::string narrative;
+            if (config.use_llm_narratives && llm_provider_) {
+                narrative = generate_llm_narrative(insight, config);
+            } else {
+                narrative = describe_bridge(insight);
+            }
+            html << R"(
+            <div class="insight">
+                <h4>)" << (count + 1) << ". " << entity << R"(</h4>
+                <p>)" << escape_html(strip_markdown_bold(narrative)) << R"(</p>
+)";
+
+            if (config.include_evidence && !insight.evidence_chunk_ids.empty()) {
+                html << R"(                <p class="evidence">Evidence from: )" << insight.evidence_chunk_ids[0];
+                if (insight.evidence_chunk_ids.size() > 1) {
+                    html << " and " << (insight.evidence_chunk_ids.size() - 1) << " other sources";
+                }
+                html << R"(</p>
+)";
+            }
+
+            html << R"(            </div>
+)";
+            count++;
+        }
+
+        html << R"(        </section>
+)";
+    }
+
+    auto& path_ranks = by_type[InsightType::PATH_RANK];
+    if (!path_ranks.empty()) {
+        std::sort(path_ranks.begin(), path_ranks.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"(
+        <section id="path-rank">
+            <h2>Path-Ranked Links</h2>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-pathrank);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Path Ranking</strong> algorithm identifies entity pairs that are connected by multiple short paths through the graph but lack a direct relationship. It computes path scores based on the number and length of connecting paths, with shorter and more numerous paths indicating stronger potential relationships. The algorithm uses k-shortest-path search with configurable maximum hop distance.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Path-ranked links represent relationships strongly implied by the graph structure. When two entities share many neighbors or are consistently a few hops apart, they likely have a meaningful connection that wasn't explicitly captured. These are high-confidence candidates for knowledge graph completion.</p>
+            </div>
+)";
+
+        int count = 0;
+        for (auto& insight : path_ranks) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.size() < 2) continue;
+
+            std::string narrative;
+            if (config.use_llm_narratives && llm_provider_) {
+                narrative = generate_llm_narrative(insight, config);
+            } else {
+                narrative = describe_path_rank(insight);
+            }
+            html << R"(
+            <div class="insight pathrank">
+                <h4>)" << (count + 1) << ". " << insight.seed_labels[0] << " <-> " << insight.seed_labels[1] << R"(</h4>
+                <p>)" << escape_html(strip_markdown_bold(narrative)) << R"(</p>
+            </div>
+)";
+            count++;
+        }
+
+        html << R"(        </section>
+)";
+    }
+
+    auto& long_chains = by_type[InsightType::LONG_CHAIN];
+    if (!long_chains.empty()) {
+        std::sort(long_chains.begin(), long_chains.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"(
+        <section id="long-chain">
+            <h2>Long-Chain Reasoning Links</h2>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-longchain);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Long-Chain Reasoning</strong> algorithm searches for multi-hop paths (4–7 edges by default) that connect distant entities. It favors chains with strong average edge confidence, coherent relation patterns, and novel path signatures. These chains are not direct links, but they can reveal extended mechanisms or thematic connections across the graph.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Long chains can surface deeper explanatory pathways that short-hop methods miss, helping researchers trace multi-step dependencies or causal narratives.</p>
+            </div>
+)";
+
+        int count = 0;
+        for (auto& insight : long_chains) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.size() < 2) continue;
+
+            std::string narrative;
+            if (config.use_llm_narratives && llm_provider_) {
+                narrative = generate_llm_narrative(insight, config);
+            } else {
+                narrative = describe_long_chain(insight);
+            }
+            html << R"(
+            <div class="insight longchain">
+                <h4>)" << (count + 1) << ". " << insight.seed_labels[0] << " <-> " << insight.seed_labels[1] << R"(</h4>
+                <p>)" << escape_html(strip_markdown_bold(narrative)) << R"(</p>
+            </div>
+)";
+            count++;
+        }
+
+        html << R"(        </section>
+)";
+    }
+
+    auto& author_chains = by_type[InsightType::AUTHOR_CHAIN];
+    if (!author_chains.empty()) {
+        std::sort(author_chains.begin(), author_chains.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-author-chains" class="module" style="border-left-color: var(--theme-author)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-author)">Author Reference Chains</h2>
+                <p class="definition">Tracks citation chains across authors using reference relations in the graph.</p>
+                <div class="count">Total: )HTML" << author_chains.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-author);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Author Chain</strong> operator scans citation-like relations (e.g., cites, references) and builds directed chains that link authors through references. Chains of length two (A -> B -> C) indicate a sequence where one author cites another who cites a third.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> These chains reveal how influence and scholarship propagate across authors, highlighting citation paths that may indicate schools of thought or intellectual lineage.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : author_chains) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.size() < 3) continue;
+
+            std::string narrative;
+            if (config.use_llm_narratives && llm_provider_) {
+                narrative = generate_llm_narrative(insight, config);
+            } else {
+                narrative = describe_author_chain(insight);
+            }
+            html << R"HTML(
+            <div class="insight authorchain">
+                <h4>)HTML" << (count + 1) << ". " << insight.seed_labels[0] << " -> " << insight.seed_labels[1]
+                 << " -> " << insight.seed_labels[2] << R"HTML(</h4>
+                <p>)HTML" << escape_html(strip_markdown_bold(narrative)) << R"HTML(</p>
+            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    // ========== CO-AUTHORSHIP NETWORKS ==========
+    auto& co_authorships = by_type[InsightType::CO_AUTHORSHIP];
+    if (!co_authorships.empty()) {
+        std::sort(co_authorships.begin(), co_authorships.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-co-authorship" class="module" style="border-left-color: var(--theme-author)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-author)">Co-Authorship Networks</h2>
+                <p class="definition">Identifies frequent collaborators and co-authorship patterns based on joint document appearances.</p>
+                <div class="count">Total: )HTML" << co_authorships.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-author);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Co-Authorship</strong> operator detects authors who frequently appear together in the same documents. It builds a collaboration network by identifying person entities that co-occur across multiple texts, indicating joint authorship or collaboration.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Co-authorship networks reveal research clusters, institutional collaborations, and intellectual communities. High collaboration counts suggest strong working relationships or shared research agendas.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : co_authorships) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.size() < 2) continue;
+
+            int collab_count = static_cast<int>(insight.score_breakdown["collaborations"]);
+
+            html << R"HTML(
+            <div class="insight co-authorship">
+                <h4>)HTML" << (count + 1) << ". " << escape_html(insight.seed_labels[0]) << " & "
+                 << escape_html(insight.seed_labels[1]) << R"HTML(</h4>
+                <p><strong>Collaborations:</strong> )HTML" << collab_count << R"HTML( joint works</p>
+                <p>)HTML" << escape_html(strip_markdown_bold(insight.description)) << R"HTML(</p>
+            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    // ========== CITATION IMPACT ANALYSIS ==========
+    auto& citation_impacts = by_type[InsightType::CITATION_IMPACT];
+    if (!citation_impacts.empty()) {
+        std::sort(citation_impacts.begin(), citation_impacts.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-citation-impact" class="module" style="border-left-color: var(--theme-author)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-author)">Citation & Authorship Impact Analysis</h2>
+                <p class="definition">Ranks authors and works by incoming citations or authorship counts to identify influential scholars and seminal works.</p>
+                <div class="count">Total: )HTML" << citation_impacts.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-author);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Citation Impact</strong> operator counts incoming citations for each author or work in the graph using reference relations (cites, cited by, references). When citation data is unavailable, it counts authorship relations (authored, co-authored) to identify frequently authored works.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Citation/authorship counts are proxies for scholarly influence and impact. Highly cited authors and frequently authored works often represent foundational contributions, seminal papers, or influential thought leaders in their domains.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : citation_impacts) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.empty()) continue;
+
+            // Determine metric type (citations or authorships)
+            int impact_count = 0;
+            std::string metric_type = "Citations";
+            std::string contributor_label = "Cited by";
+
+            if (insight.score_breakdown.find("citations") != insight.score_breakdown.end()) {
+                impact_count = static_cast<int>(insight.score_breakdown["citations"]);
+                metric_type = "Citations";
+                contributor_label = "Cited by";
+            } else if (insight.score_breakdown.find("authorships") != insight.score_breakdown.end()) {
+                impact_count = static_cast<int>(insight.score_breakdown["authorships"]);
+                metric_type = "Authorships";
+                contributor_label = "Authored by";
+            } else if (insight.score_breakdown.find("citation_count") != insight.score_breakdown.end()) {
+                // Legacy support
+                impact_count = static_cast<int>(insight.score_breakdown["citation_count"]);
+                metric_type = "Citations";
+                contributor_label = "Cited by";
+            }
+
+            std::string entity_name = insight.seed_labels[0];
+
+            html << R"HTML(
+            <div class="insight citation-impact">
+                <h4>)HTML" << (count + 1) << ". " << escape_html(entity_name) << R"HTML(</h4>
+                <p><strong>)HTML" << metric_type << R"HTML(:</strong> )HTML" << impact_count << R"HTML(</p>
+)HTML";
+
+            // Show top contributors if available
+            if (insight.seed_labels.size() > 1) {
+                html << R"HTML(                <p><strong>)HTML" << contributor_label << R"HTML(:</strong> )HTML";
+                for (size_t i = 1; i < std::min(insight.seed_labels.size(), size_t(6)); ++i) {
+                    if (i > 1) html << ", ";
+                    html << escape_html(insight.seed_labels[i]);
+                }
+                if (insight.seed_labels.size() > 6) {
+                    html << ", and " << (insight.seed_labels.size() - 6) << " others";
+                }
+                html << R"HTML(</p>
+)HTML";
+            }
+
+            html << R"HTML(            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    // ========== MULTI-RESOLUTION COMMUNITY DETECTION ==========
+    auto& multi_res_communities = by_type[InsightType::MULTI_RESOLUTION_COMMUNITY];
+    if (!multi_res_communities.empty()) {
+        std::sort(multi_res_communities.begin(), multi_res_communities.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-multi-resolution-community" class="module" style="border-left-color: var(--theme-community)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-community)">Multi-Resolution Community Detection</h2>
+                <p class="definition">Reveals hierarchical community structure by running detection at multiple resolution scales.</p>
+                <div class="count">Total: )HTML" << multi_res_communities.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-community);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Multi-Resolution Community</strong> operator runs Louvain community detection at multiple resolution parameters (0.5, 1.0, 2.0, 4.0). This reveals hierarchical organization—communities merge and split across scales, showing both fine-grained clusters and broader groupings.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Different resolution scales reveal different organizational levels. Low resolution shows major divisions; high resolution reveals sub-communities. This hierarchical view helps understand nested knowledge structures.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : multi_res_communities) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.empty()) continue;
+
+            double resolution = insight.score_breakdown["resolution"];
+            int size = static_cast<int>(insight.score_breakdown["size"]);
+
+            html << R"HTML(
+            <div class="insight multi-resolution">
+                <h4>)HTML" << (count + 1) << ". Resolution " << std::fixed << std::setprecision(1) << resolution
+                 << " - " << size << " members" << R"HTML(</h4>
+                <p><strong>Members (sample):</strong> )HTML";
+
+            for (size_t i = 0; i < std::min(insight.seed_labels.size(), size_t(10)); ++i) {
+                if (i > 0) html << ", ";
+                html << escape_html(insight.seed_labels[i]);
+            }
+            if (insight.seed_labels.size() > 10) {
+                html << ", and " << (size - 10) << " more";
+            }
+
+            html << R"HTML(</p>
+            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    // ========== CROSS-COMMUNITY BRIDGE MAPPING ==========
+    auto& bridge_maps = by_type[InsightType::CROSS_COMMUNITY_BRIDGE_MAP];
+    if (!bridge_maps.empty()) {
+        std::sort(bridge_maps.begin(), bridge_maps.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-cross-community-bridge-map" class="module" style="border-left-color: var(--theme-bridge)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-bridge)">Cross-Community Bridge Mapping</h2>
+                <p class="definition">Maps bridge entities to the communities they connect, revealing inter-cluster knowledge flow.</p>
+                <div class="count">Total: )HTML" << bridge_maps.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-bridge);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Bridge Mapping</strong> operator takes previously identified bridges and determines which communities each bridge connects. It scores bridges by the number of distinct communities they link.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Bridges that connect many communities are critical for cross-domain knowledge transfer. High-connectivity bridges enable interdisciplinary synthesis and represent boundary-spanning concepts.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : bridge_maps) {
+            if (count >= capped_max_examples(config)) break;
+            if (insight.seed_labels.empty()) continue;
+
+            int communities_connected = static_cast<int>(insight.score_breakdown["communities_connected"]);
+            std::string bridge_name = insight.seed_labels[0];
+
+            html << R"HTML(
+            <div class="insight bridge-map">
+                <h4>)HTML" << (count + 1) << ". " << escape_html(bridge_name) << R"HTML(</h4>
+                <p><strong>Communities Connected:</strong> )HTML" << communities_connected << R"HTML(</p>
+                <p>)HTML" << escape_html(insight.description) << R"HTML(</p>
+            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    // ========== META-PATTERN DISCOVERY ==========
+    auto& meta_pattern_insights = by_type[InsightType::META_PATTERN];
+    if (!meta_pattern_insights.empty()) {
+        std::sort(meta_pattern_insights.begin(), meta_pattern_insights.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-meta-pattern" class="module" style="border-left-color: var(--theme-motif)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-motif)">Meta-Pattern Discovery</h2>
+                <p class="definition">Identifies patterns across patterns—recurring structural templates that appear multiple times.</p>
+                <div class="count">Total: )HTML" << meta_pattern_insights.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-motif);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Meta-Pattern</strong> operator analyzes existing patterns (motifs, k-trusses) to find structural similarities. It groups patterns by size and identifies frequently recurring configurations.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Meta-patterns reveal the "grammar" of the knowledge graph—fundamental structural building blocks that recur across domains. They enable pattern-based querying and structural abstraction.</p>
+            </div>
+)HTML";
+
+        int count = 0;
+        for (auto& insight : meta_pattern_insights) {
+            if (count >= capped_max_examples(config)) break;
+
+            int occurrences = static_cast<int>(insight.score_breakdown["occurrences"]);
+            int pattern_size = static_cast<int>(insight.score_breakdown["pattern_size"]);
+
+            html << R"HTML(
+            <div class="insight meta-pattern">
+                <h4>)HTML" << (count + 1) << ". " << pattern_size << "-node pattern (" << occurrences << " occurrences)" << R"HTML(</h4>
+                <p><strong>Sample instances:</strong> )HTML";
+
+            size_t max_show = std::min(insight.seed_labels.size(), size_t(15));
+            for (size_t i = 0; i < max_show; ++i) {
+                if (i > 0 && i % pattern_size == 0) html << " | ";
+                else if (i > 0) html << ", ";
+                html << escape_html(insight.seed_labels[i]);
+            }
+            if (insight.seed_labels.size() > max_show) {
+                html << " ...";
+            }
+
+            html << R"HTML(</p>
+            </div>
+)HTML";
+            count++;
+        }
+
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    auto& embedding_links = by_type[InsightType::EMBEDDING_LINK];
+    if (!embedding_links.empty()) {
+        std::vector<Insight> sorted = embedding_links;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-embedding" class="module" style="border-left-color: var(--theme-pathrank)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-pathrank)">Embedding-Based Link Predictions</h2>
+                <p class="definition">Uses TransE neural embeddings to predict plausible missing relationships based on learned vector representations.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-pathrank);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>TransE Embedding</strong> algorithm learns dense vector representations (embeddings) for all entities and relations in the knowledge graph. The model is trained on the principle that <code>head + relation ≈ tail</code> for valid triples. After training, the algorithm scores candidate triples by measuring how well they satisfy this translation property - lower distance means higher plausibility.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Embedding-based predictions leverage the entire graph structure to identify plausible missing links. Unlike path-based methods, embeddings can capture latent semantic patterns and long-range dependencies. High plausibility scores indicate relationships that fit naturally with learned patterns in the knowledge graph.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Prediction Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+)HTML";
+
+        // Use dynamic limits based on data size
+        auto limits = calculate_dynamic_limits(sorted.size(), config);
+
+        // Adjust config for clustering with dynamic threshold
+        ReportConfig dynamic_config = config;
+        dynamic_config.similarity_threshold = limits.similarity_threshold;
+
+        // Use clustering to coalesce similar findings
+        if (limits.should_cluster) {
+            auto clusters = cluster_insights(sorted, dynamic_config);
+            int cluster_num = 0;
+            int total_shown = 0;
+
+            for (auto& cluster : clusters) {
+                if (total_shown >= limits.max_clusters_to_show) break;
+
+                std::string summary = generate_cluster_summary(cluster, dynamic_config);
+                cluster_num++;
+
+                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <h4 style="color: var(--theme-pathrank); margin-bottom: 10px;">)HTML";
+
+                if (cluster.insights.size() > 1) {
+                    html << "Prediction Group " << cluster_num << " (" << cluster.insights.size() << " similar predictions)";
+                } else {
+                    html << "Prediction: " << escape_html(cluster.common_theme);
+                }
+                html << R"HTML(</h4>
+                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
+                <table class="data-table" style="font-size: 0.9em;">
+                    <thead>
+                        <tr><th>Head Entity</th><th>Relation</th><th>Tail Entity</th><th>Plausibility</th></tr>
+                    </thead>
+                    <tbody>
+)HTML";
+
+                int items_in_cluster = 0;
+                for (const auto& insight : cluster.insights) {
+                    if (items_in_cluster >= limits.max_items_per_cluster) {
+                        html << R"(                        <tr><td colspan="4" style="text-align: center; font-style: italic;">... and )"
+                             << (cluster.insights.size() - items_in_cluster) << R"( more similar predictions</td></tr>
+)";
+                        break;
+                    }
+                    if (insight.seed_labels.size() < 2) continue;
+
+                    // Extract relation type
+                    std::string relation = "related_to";
+                    for (const auto& tag : insight.novelty_tags) {
+                        if (tag.find("relation=") == 0) {
+                            relation = tag.substr(9);
+                            break;
+                        }
+                    }
+
+                    double plausibility = 0.0;
+                    auto it = insight.score_breakdown.find("novelty");
+                    if (it != insight.score_breakdown.end()) plausibility = it->second;
+
+                    html << R"(                        <tr>
+                            <td>)" << escape_html(insight.seed_labels[0]) << R"(</td>
+                            <td>)" << escape_html(relation) << R"(</td>
+                            <td>)" << escape_html(insight.seed_labels[1]) << R"(</td>
+                            <td>)" << std::fixed << std::setprecision(3) << plausibility << R"(</td>
+                        </tr>
+)";
+                    items_in_cluster++;
+                    total_shown++;
+                }
+
+                html << R"HTML(                    </tbody>
+                </table>
+            </div>
+)HTML";
+            }
+        } else {
+            // Non-clustered view
+            html << R"HTML(            <table class="data-table">
+                <thead>
+                    <tr><th>Head Entity</th><th>Relation</th><th>Tail Entity</th><th>Plausibility</th><th>Explanation</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+            int count = 0;
+            for (auto& insight : sorted) {
+                if (count >= limits.max_clusters_to_show) break;
+                if (insight.seed_labels.size() < 2) continue;
+
+                std::string relation = "related_to";
+                for (const auto& tag : insight.novelty_tags) {
+                    if (tag.find("relation=") == 0) {
+                        relation = tag.substr(9);
+                        break;
+                    }
+                }
+
+                double plausibility = 0.0;
+                auto it = insight.score_breakdown.find("novelty");
+                if (it != insight.score_breakdown.end()) plausibility = it->second;
+
+                std::string explanation;
+                if (config.use_llm_narratives && llm_provider_) {
+                    explanation = generate_llm_narrative(insight, config);
+                } else {
+                    explanation = describe_embedding_link(insight);
+                }
+
+                html << R"(                    <tr>
+                        <td>)" << escape_html(insight.seed_labels[0]) << R"(</td>
+                        <td>)" << escape_html(relation) << R"(</td>
+                        <td>)" << escape_html(insight.seed_labels[1]) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(3) << plausibility << R"(</td>
+                        <td>)" << escape_html(strip_markdown_bold(explanation)) << R"(</td>
+                    </tr>
+)";
+                count++;
+            }
+            html << R"HTML(                </tbody>
+            </table>
+)HTML";
+        }
+        html << R"HTML(        </section>
+)HTML";
+    }
+
+    auto& diffusions = by_type[InsightType::DIFFUSION];
+    if (!diffusions.empty()) {
+        std::vector<Insight> sorted = diffusions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-diffusion" class="module" style="border-left-color: var(--theme-path)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-path)">Diffusion Patterns</h2>
+                <p class="definition">Information or influence spread patterns through the graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-path);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Diffusion</strong> operator simulates random-walk or label-propagation over graph edges to estimate how influence, information, or contagion would spread from a seed node. The spread score reflects how broadly and rapidly the seed's influence would reach other nodes given the graph's edge structure.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Diffusion patterns reveal knowledge transmission routes — which concepts would most rapidly propagate an idea through the domain. High spread-score entities are influential information hubs whose connections should be validated and maintained, as errors there would propagate widely.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Source</th><th>Spread Score</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_diffusion(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 2) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& causal_chains = by_type[InsightType::CAUSAL_CHAIN];
+    if (!causal_chains.empty()) {
+        std::vector<Insight> sorted = causal_chains;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-causal-chain" class="module" style="border-left-color: var(--theme-longchain)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-longchain)">Causal Chains</h2>
+                <p class="definition">Directed causal pathways through the knowledge graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-longchain);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Causal Chain</strong> detector traverses the graph searching for directed paths that use only relation types labeled as causal (causes, leads-to, results-in, triggers, inhibits, etc.). Chains are scored by the specificity of their causal relation types, the length of the chain, and the confidence of individual edges.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explicit causal chains provide mechanistic explanations for why two concepts are related, moving beyond correlation to directed dependency. They are essential for building causal models of the domain and identifying intervention points.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Chain</th><th>Confidence</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Mechanism</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_causal_chain(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 4) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& domain_bridges = by_type[InsightType::DOMAIN_BRIDGE];
+    if (!domain_bridges.empty()) {
+        std::vector<Insight> sorted = domain_bridges;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-domain-bridge" class="module" style="border-left-color: var(--theme-crosscommunity)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-crosscommunity)">Domain Bridges</h2>
+                <p class="definition">Cross-domain or interdisciplinary connector nodes.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-crosscommunity);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Domain Bridge</strong> detector computes cross-community edge ratios for each node. Nodes with a high proportion of edges crossing community boundaries — connecting to entities in multiple distinct clusters with diverse relation types — are flagged as domain bridges. The score reflects both the number of domains bridged and the semantic diversity of relations.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Domain bridges sit at the intellectual intersection of multiple fields. They often represent the most productive areas for interdisciplinary research, as they connect concepts that are independently studied but rarely linked. These nodes are prime starting points for cross-domain hypothesis generation.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Bridge</th><th>Domains</th><th>Strength</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Significance</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string domains = insight.seed_labels.size() > 1 ? (insight.seed_labels.size() > 2 ? std::to_string(insight.seed_labels.size()) + " domains" : "2 domains") : "-";
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_domain_bridge(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << (insight.seed_labels.empty() ? "-" : escape_html(insight.seed_labels[0])) << R"HTML(</td>
+                        <td>)HTML" << escape_html(domains) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& explanatory_chains = by_type[InsightType::EXPLANATORY_CHAIN];
+    if (!explanatory_chains.empty()) {
+        std::vector<Insight> sorted = explanatory_chains;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-explanatory-chain" class="module" style="border-left-color: var(--theme-longchain)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-longchain)">Explanatory Chains</h2>
+                <p class="definition">Multi-hop explanation paths connecting distant concepts.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-longchain);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Explanatory Chain</strong> detector searches for multi-hop paths between distantly related entities that maximise a combination of path coherence (consistent relation type sequences), entity relevance, and narrative interpretability. Chains are scored by path quality — how clearly the sequence of relations forms a logical explanation.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explanatory chains provide narrative connections between remote concepts, helping researchers understand <em>why</em> distant entities are related and how knowledge flows between them. They are essential for building explanatory narratives from graph data — transforming structured links into human-readable reasoning chains.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Chain</th><th>Quality</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_explanatory_chain(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 4) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    // TRANSFORMATIONAL INSIGHTS SECTION
+    html << R"(
+        <div class="category-section-header" id="transformational-section">
+            <h2>🔄 Transformational Insights</h2>
+            <p>Reframing & Perspective Shifts - insights that transform understanding by reframing concepts, generating hypotheses, and suggesting alternative explanations</p>
+        </div>
+)";
+
+    auto& surprises = by_type[InsightType::SURPRISE];
+    if (!surprises.empty()) {
+        std::vector<Insight> sorted = surprises;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-surprises" class="module" style="border-left-color: var(--theme-surprise)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-surprise)">Surprising Discoveries</h2>
+                <p class="definition">Flags statistically unusual or novel connections in the graph.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-surprise);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Surprise Detection</strong> algorithm identifies entity pairs that co-occur in the knowledge graph more frequently than would be expected by chance. It computes an expected co-occurrence rate based on each entity's individual frequency, then flags pairs where actual co-occurrence significantly exceeds this expectation.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> These unexpected connections often reveal hidden relationships, novel insights, or potential data quality issues that merit human review. A high surprise score indicates the relationship is statistically anomalous given the overall graph structure.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+                )HTML" << (!sorted.empty() ? format_source_documents_html(sorted[0]) : "") << R"HTML(
+            </div>
+)HTML";
+
+        // Use dynamic limits based on data size
+        auto limits = calculate_dynamic_limits(sorted.size(), config);
+
+        // Adjust config for clustering with dynamic threshold
+        ReportConfig dynamic_config = config;
+        dynamic_config.similarity_threshold = limits.similarity_threshold;
+
+        // Use clustering to coalesce similar findings
+        if (limits.should_cluster) {
+            auto clusters = cluster_insights(sorted, dynamic_config);
+            int cluster_num = 0;
+            int total_shown = 0;
+
+            for (auto& cluster : clusters) {
+                if (total_shown >= limits.max_clusters_to_show) break;
+
+                std::string summary = generate_cluster_summary(cluster, dynamic_config);
+                cluster_num++;
+
+                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <h4 style="color: var(--theme-surprise); margin-bottom: 10px;">)HTML";
+
+                if (cluster.insights.size() > 1) {
+                    html << "Discovery Group " << cluster_num << " (" << cluster.insights.size() << " similar findings)";
+                } else {
+                    html << "Discovery: " << escape_html(cluster.common_theme);
+                }
+                html << R"HTML(</h4>
+                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
+                <table class="data-table" style="font-size: 0.9em;">
+                    <thead>
+                        <tr><th>Entities</th><th>Score</th><th>Source</th></tr>
+                    </thead>
+                    <tbody>
+)HTML";
+
+                int items_in_cluster = 0;
+                for (const auto& insight : cluster.insights) {
+                    if (items_in_cluster >= limits.max_items_per_cluster) {
+                        html << R"(                        <tr><td colspan="3" style="text-align: center; font-style: italic;">... and )"
+                             << (cluster.insights.size() - items_in_cluster) << R"( more similar items</td></tr>
+)";
+                        break;
+                    }
+                    std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+
+                    html << R"(                        <tr>
+                            <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                            <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                            <td>)" << escape_html(source) << R"(</td>
+                        </tr>
+)";
+                    items_in_cluster++;
+                    total_shown++;
+                }
+
+                html << R"HTML(                    </tbody>
+                </table>
+            </div>
+)HTML";
+            }
+        } else {
+            // Non-clustered view (original behavior)
+            bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
+            html << R"HTML(            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Score</th><th>Source</th>)HTML";
+            if (include_explanation) {
+                html << R"HTML(<th>Explanation</th>)HTML";
+            }
+            html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+            int count = 0;
+            for (auto& insight : sorted) {
+                if (count >= limits.max_clusters_to_show) break;
+                std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
+                std::string explanation;
+                if (include_explanation) {
+                    if (config.use_llm_narratives) {
+                        explanation = generate_llm_narrative(insight, config);
+                    } else {
+                        explanation = get_llm_example(insight, config);
+                        if (explanation.empty()) {
+                            explanation = get_graph_context_summary(insight, false);
+                        }
+                    }
+                }
+                html << R"(                    <tr>
+                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
+                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
+                        <td>)" << escape_html(source) << R"(</td>)";
                 if (include_explanation) {
                     html << R"(
                         <td>)" << escape_html(explanation) << R"(</td>)";
@@ -3945,7 +8532,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
             std::string explanation;
             if (include_explanation) {
@@ -4005,7 +8592,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             double label_sim = 0.0;
             double neighbor_overlap = 0.0;
             auto lit = insight.score_breakdown.find("label_similarity");
@@ -4016,168 +8603,6 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                         <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
                         <td>)" << std::fixed << std::setprecision(2) << label_sim << R"(</td>
                         <td>)" << std::fixed << std::setprecision(2) << neighbor_overlap << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& core_periphery = by_type[InsightType::CORE_PERIPHERY];
-    if (!core_periphery.empty()) {
-        std::vector<Insight> sorted = core_periphery;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-core-periphery" class="module" style="border-left-color: var(--theme-core)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-core)">Core–Periphery / Hub–Authority</h2>
-                <p class="definition">Maps central hubs versus peripheral entities using degree, hub/authority, and integration signals.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-core);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Core–Periphery</strong> operator combines degree centrality, hub/authority balance (source vs. target roles), and hub integration scores to identify structurally central entities. Low-scoring nodes are treated as peripheral.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Core nodes anchor the graph’s structure, while peripheral nodes may represent niche concepts or sparse evidence. Understanding both helps prioritize validation and curation.</p>
-            </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entity</th><th>Role</th><th>Degree</th><th>Hub</th><th>Authority</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            std::string role = "core";
-            for (const auto& tag : insight.novelty_tags) {
-                if (tag == "periphery") {
-                    role = "periphery";
-                    break;
-                }
-            }
-            double degree = 0.0;
-            double hub = 0.0;
-            double auth = 0.0;
-            auto dit = insight.score_breakdown.find("degree_norm");
-            if (dit != insight.score_breakdown.end()) degree = dit->second;
-            auto hit = insight.score_breakdown.find("hub_score");
-            if (hit != insight.score_breakdown.end()) hub = hit->second;
-            auto ait = insight.score_breakdown.find("authority_score");
-            if (ait != insight.score_breakdown.end()) auth = ait->second;
-
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
-                        <td>)" << escape_html(role) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << degree << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << hub << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << auth << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& text_links = by_type[InsightType::TEXT_SIMILARITY];
-    if (!text_links.empty()) {
-        std::vector<Insight> sorted = text_links;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-text-similarity" class="module" style="border-left-color: var(--theme-text)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-text)">Text-Semantic Similarity Links</h2>
-                <p class="definition">Links entities with highly similar labels based on TF-IDF cosine similarity.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-text);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Text Similarity</strong> operator tokenizes entity labels, builds TF-IDF vectors, and computes cosine similarity. Pairs above a threshold are suggested as semantically related.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Similar labels often indicate related concepts, synonyms, or naming variants that can inform curation.</p>
-            </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entities</th><th>Similarity</th><th>Source</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
-            double sim = 0.0;
-            auto it = insight.score_breakdown.find("text_similarity");
-            if (it != insight.score_breakdown.end()) sim = it->second;
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << sim << R"(</td>
-                        <td>)" << escape_html(source) << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& argument_links = by_type[InsightType::ARGUMENT_SUPPORT];
-    if (!argument_links.empty()) {
-        std::vector<Insight> sorted = argument_links;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-argument-support" class="module" style="border-left-color: var(--theme-argument)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-argument)">Argument-Supported Relations</h2>
-                <p class="definition">Proposes links grounded in evidence paths through the graph.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-argument);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Argument Support</strong> operator finds short evidence paths between entity pairs and uses them to justify a plausible relation. Longer or weaker paths reduce confidence.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Path-grounded suggestions provide interpretable support for candidate edges.</p>
-            </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entities</th><th>Support</th><th>Source</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
-                        <td>)" << escape_html(source) << R"(</td>
                     </tr>
 )";
             count++;
@@ -4215,7 +8640,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             double conf = 0.0;
             auto it = insight.score_breakdown.find("confidence");
             if (it != insight.score_breakdown.end()) conf = it->second;
@@ -4223,222 +8648,6 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                         <td>)" << escape_html(insight.description) << R"(</td>
                         <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
                         <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& method_nodes = by_type[InsightType::METHOD_OUTCOME];
-    if (!method_nodes.empty()) {
-        std::vector<Insight> sorted = method_nodes;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-method-outcome" class="module" style="border-left-color: var(--theme-method)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-method)">Method/Outcome Entities</h2>
-                <p class="definition">Identifies entities likely representing methods or outcomes.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-method);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Method/Outcome</strong> operator classifies nodes using label cues and local relation context. LLM assistance refines ambiguous cases.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explicit method/outcome roles support clearer reasoning and downstream analysis.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entity</th><th>Role</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            std::string role = "method";
-            for (const auto& tag : insight.novelty_tags) {
-                if (tag == "outcome") role = "outcome";
-            }
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
-                        <td>)" << escape_html(role) << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& centrality_nodes = by_type[InsightType::CENTRALITY];
-    if (!centrality_nodes.empty()) {
-        std::vector<Insight> sorted = centrality_nodes;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-centrality" class="module" style="border-left-color: var(--theme-centrality)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-centrality)">Centrality</h2>
-                <p class="definition">Ranks entities by structural importance in the bipartite projection.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-centrality);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Centrality</strong> operator runs PageRank on the bipartite graph formed by entities and hyperedges, highlighting structurally influential nodes.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Central entities are often critical for connecting multiple relationship contexts.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entity</th><th>Centrality</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            double score = insight.score;
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << score << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& communities = by_type[InsightType::COMMUNITY_DETECTION];
-    if (!communities.empty()) {
-        std::vector<Insight> sorted = communities;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-community-detection" class="module" style="border-left-color: var(--theme-community-detect)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-community-detect)">Community Detection</h2>
-                <p class="definition">Finds dense clusters via Louvain on the projected graph.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-community-detect);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Community Detection</strong> operator clusters entities using a Louvain-style modularity optimization on the projected graph.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Communities represent topic or subdomain structure in the knowledge graph.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Representative Entities</th><th>Score</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& k_core_nodes = by_type[InsightType::K_CORE];
-    if (!k_core_nodes.empty()) {
-        std::vector<Insight> sorted = k_core_nodes;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-k-core" class="module" style="border-left-color: var(--theme-k-core)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-k-core)">k-Core Nodes</h2>
-                <p class="definition">Highlights entities in tightly connected cores.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-k-core);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>k-Core</strong> operator computes the core number of each node on the projected graph, identifying the largest k for which the node remains connected to at least k neighbors. Higher core numbers indicate denser local connectivity.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> k-cores reveal robust, tightly knit regions that often represent stable conceptual hubs or well-supported areas of the knowledge graph.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entity</th><th>Core Number</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            double core = 0.0;
-            auto it = insight.score_breakdown.find("core");
-            if (it != insight.score_breakdown.end()) core = it->second;
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 1) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(0) << core << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& k_truss_links = by_type[InsightType::K_TRUSS];
-    if (!k_truss_links.empty()) {
-        std::vector<Insight> sorted = k_truss_links;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-k-truss" class="module" style="border-left-color: var(--theme-k-truss)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-k-truss)">k-Truss Edges</h2>
-                <p class="definition">Finds triangle-reinforced edges in the projected graph.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-k-truss);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>k-Truss</strong> operator scores edges by the number of shared neighbors (triangles) in the projected graph. Edges supported by many triangles are retained in higher-order trusses.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Triangle-reinforced edges often indicate cohesive substructures and more reliable associations.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entities</th><th>Triangle Support</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            double support_val = 0.0;
-            auto it = insight.score_breakdown.find("support");
-            if (it != insight.score_breakdown.end()) support_val = it->second;
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(0) << support_val << R"(</td>
                     </tr>
 )";
             count++;
@@ -4476,7 +8685,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             std::string stance = "neutral";
             for (const auto& tag : insight.novelty_tags) {
                 if (tag == "supports" || tag == "opposes" || tag == "neutral") stance = tag;
@@ -4488,50 +8697,6 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             html << R"(                    <tr>
                         <td>)" << escape_html(claim) << R"(</td>
                         <td>)" << escape_html(stance) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& relation_inductions = by_type[InsightType::RELATION_INDUCTION];
-    if (!relation_inductions.empty()) {
-        std::vector<Insight> sorted = relation_inductions;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-relation-induction" class="module" style="border-left-color: var(--theme-relation)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-relation)">Relation Induction</h2>
-                <p class="definition">Suggests canonical relation type names and descriptions.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-relation);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Relation Induction</strong> operator clusters examples of a relation label and uses an LLM to propose a canonical type name plus a short description.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Normalized relation types improve consistency and enable cleaner downstream analytics.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Suggestion</th><th>Confidence</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            double conf = 0.0;
-            auto it = insight.score_breakdown.find("confidence");
-            if (it != insight.score_breakdown.end()) conf = it->second;
-            html << R"(                    <tr>
-                        <td>)" << escape_html(insight.description) << R"(</td>
                         <td>)" << std::fixed << std::setprecision(2) << conf << R"(</td>
                     </tr>
 )";
@@ -4570,7 +8735,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             html << R"(                    <tr>
                         <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
                         <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
@@ -4611,7 +8776,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             double uncertainty = 0.0;
             auto it = insight.score_breakdown.find("uncertainty");
             if (it != insight.score_breakdown.end()) uncertainty = it->second;
@@ -4655,7 +8820,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             html << R"(                    <tr>
                         <td>)" << escape_html(describe_counterfactual(insight)) << R"(</td>
                     </tr>
@@ -4668,117 +8833,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
     }
 
-    auto& hyperedge_links = by_type[InsightType::HYPEREDGE_PREDICTION];
-    if (!hyperedge_links.empty()) {
-        std::vector<Insight> sorted = hyperedge_links;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-hyperedge-prediction" class="module" style="border-left-color: var(--theme-hyperedge)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-hyperedge)">Hyperedge Prediction</h2>
-                <p class="definition">Predicts relations using overlap patterns under the same relation type.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-hyperedge);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Hyperedge Prediction</strong> operator compares source entities that share similar target sets under the same relation and proposes missing links based on overlap.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Overlap-based predictions capture consistent relational patterns that often indicate missing knowledge.</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Proposed Link</th><th>Score</th></tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            html << R"(                    <tr>
-                        <td>)" << format_entities(insight.seed_labels, 2) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(2) << insight.score << R"(</td>
-                    </tr>
-)";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    // Constrained rules removed from pipeline
-
-    auto& community_links = by_type[InsightType::COMMUNITY_LINK];
-    if (!community_links.empty()) {
-        std::vector<Insight> sorted = community_links;
-        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        bool include_llm = config.include_llm_examples && llm_provider_;
-        html << R"HTML(
-        <section id="module-community" class="module" style="border-left-color: var(--theme-community)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-community)">Community Links</h2>
-                <p class="definition">Proposes cross-cluster links based on shared relation signatures.</p>
-                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-community);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Community Link Detection</strong> algorithm first identifies densely connected communities (clusters) in the hypergraph using s-connectivity analysis. It then finds candidate pairs of entities from <em>different</em> communities that share similar "relation signatures" - meaning they participate in similar types of relationships. The Jaccard overlap of their relation types determines similarity.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> These cross-cluster candidates suggest potential bridges between distinct topic areas or knowledge domains. They often represent interdisciplinary connections, analogies across fields, or integration points that could unify separate parts of the knowledge graph.</p>
-            </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr><th>Entities</th><th>Overlap</th><th>Evidence</th>)HTML";
-        if (include_llm) {
-            html << R"HTML(<th>Explanation</th>)HTML";
-        }
-        html << R"HTML(</tr>
-                </thead>
-                <tbody>
-)HTML";
-        int count = 0;
-        for (const auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
-            double overlap = 0.0;
-            auto oit = insight.score_breakdown.find("novelty");
-            if (oit != insight.score_breakdown.end()) overlap = oit->second;
-            std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
-            std::string explanation;
-            if (include_llm) {
-                explanation = get_llm_example(insight, config);
-                if (explanation.empty()) {
-                    explanation = get_graph_context_summary(insight, false);
-                }
-            }
-            html << R"HTML(                    <tr>
-                        <td>)HTML" << format_entities(insight.seed_labels, 2) << R"HTML(</td>
-                        <td>)HTML" << std::fixed << std::setprecision(2) << overlap << R"HTML(</td>
-                        <td>)HTML" << escape_html(source) << R"HTML(</td>)HTML";
-            if (include_llm) {
-                html << R"HTML(
-                        <td>)HTML" << escape_html(explanation) << R"HTML(</td>)HTML";
-            }
-            html << R"HTML(
-                    </tr>
-)HTML";
-            count++;
-        }
-        html << R"HTML(                </tbody>
-            </table>
-        </section>
-)HTML";
-    }
-
-    auto& hypotheses = by_type[InsightType::HYPOTHESIS];
+    auto& hypotheses = by_type[InsightType::HYPOTHESES_1];
     if (!hypotheses.empty()) {
         std::vector<Insight> sorted = hypotheses;
         std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
@@ -4792,6 +8847,11 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                 <h2 style="color: var(--theme-hypothesis)">Testable Hypotheses</h2>
                 <p class="definition">Synthesizes findings into testable claims grounded in the augmented graph.</p>
                 <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-hypothesis);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Bayesian Hypothesis Generator (H1)</strong> combines signals from bridge detection, completion, contradiction, community, and structural scoring into posterior probability estimates for candidate relational hypotheses. Each hypothesis is ranked by posterior probability, prior surprise, and evidence breadth.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Bayesian hypotheses quantify uncertainty explicitly, surfacing high-impact uncertain relations as the best targets for empirical validation. They provide a probabilistic ranking rather than a binary pass/fail, enabling prioritization under limited experimental budget.</p>
             </div>
             <div class="spotlight">
                 <h3>Top Hypothesis</h3>
@@ -4809,7 +8869,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
         int count = 0;
         for (const auto& insight : sorted) {
-            if (count >= config.max_examples_per_type) break;
+            if (count >= capped_max_examples(config)) break;
             std::string source = insight.evidence_chunk_ids.empty() ? "-" : insight.evidence_chunk_ids[0];
             std::string explanation;
             if (include_llm) {
@@ -4836,448 +8896,581 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )HTML";
     }
 
-    auto& rules = by_type[InsightType::RULE];
-    if (!rules.empty()) {
-        std::vector<Insight> sorted = rules;
+    auto& hypotheses3 = by_type[InsightType::HYPOTHESES_3];
+    if (!hypotheses3.empty()) {
+        std::vector<Insight> sorted = hypotheses3;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-hypotheses-3" class="module" style="border-left-color: var(--theme-counterfactual)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-counterfactual)">Counterfactual Causal Hypotheses (Hypotheses_3)</h2>
+                <p class="definition">Generates testable counterfactual hypotheses with predicted interventions and mechanisms.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-counterfactual);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Counterfactual Causal Hypothesis Generator (H3)</strong> applies graph-based counterfactual reasoning to identify causal interventions. It estimates effect size from local structural changes (node/edge removal) and proposes 'If X then Y because Z' hypotheses with quantified predicted outcomes and underlying graph-derived mechanisms.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Counterfactual hypotheses directly support experimental design by specifying the exact intervention, the expected outcome, and the mechanistic chain that would be disrupted. High effect-size hypotheses with clear mechanisms are the highest-priority candidates for empirical testing.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Causal Hypothesis</h3>
+                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Hypothesis</th><th>Effect Size</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Mechanism</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            auto eit = insight.score_breakdown.find("effect_size");
+            double effect_size = (eit != insight.score_breakdown.end()) ? eit->second : insight.score;
+            std::string explanation;
+            if (include_llm) {
+                explanation = get_llm_example(insight, config);
+                if (explanation.empty()) {
+                    explanation = get_graph_context_summary(insight, false);
+                }
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_hypothesis(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << effect_size << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(explanation) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& meta_path_anomalies = by_type[InsightType::META_PATH_ANOMALY];
+    if (!meta_path_anomalies.empty()) {
+        std::vector<Insight> sorted = meta_path_anomalies;
         std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
             return a.score > b.score;
         });
 
         html << R"HTML(
-        <section id="module-rules" class="module" style="border-left-color: var(--theme-rule)">
+        <section id="module-meta-path-anomaly" class="module" style="border-left-color: var(--theme-anomaly)">
             <div class="module-header">
-                <h2 style="color: var(--theme-rule)">Association Rules</h2>
-                <p class="definition">Mines association rules between relation types.</p>
+                <h2 style="color: var(--theme-anomaly)">Meta-Path Anomalies</h2>
+                <p class="definition">Rare but plausible relation-sequence templates.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-anomaly);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Meta-Path Anomaly Detector</strong> mines all observed relation-sequence templates (meta-paths) in the graph and computes their frequency. Templates that occur rarely but still satisfy entity-type compatibility and plausibility constraints are flagged as anomalies. The anomaly score measures statistical rarity; the plausibility score measures structural compatibility.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Rare relation templates that remain plausible may expose novel mechanisms that frequency-based mining systematically misses. These anomalies are high-value discovery candidates — they represent unique structural patterns that could reflect genuine but underrepresented domain knowledge.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Anomaly</th><th>Anomaly Score</th><th>Plausibility</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double anomaly = 0.0;
+            double plausibility = 0.0;
+            auto a_it = insight.score_breakdown.find("anomaly");
+            if (a_it != insight.score_breakdown.end()) anomaly = a_it->second;
+            auto p_it = insight.score_breakdown.find("plausibility");
+            if (p_it != insight.score_breakdown.end()) plausibility = p_it->second;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_meta_path_anomaly(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << anomaly << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << plausibility << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& intervention_bottlenecks = by_type[InsightType::INTERVENTION_BOTTLENECK];
+    if (!intervention_bottlenecks.empty()) {
+        std::vector<Insight> sorted = intervention_bottlenecks;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-intervention-bottleneck" class="module" style="border-left-color: var(--theme-bottleneck)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-bottleneck)">Intervention Bottlenecks</h2>
+                <p class="definition">High-leverage nodes that appear across many causal pathways.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-bottleneck);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Intervention Bottleneck</strong> detector computes causal path centrality — it counts how many distinct causal chains pass through each node and scores nodes by their coverage (fraction of all chains) and the raw number of affected chains. Nodes are ranked from most to least pivotal.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Bottleneck nodes are the highest-leverage intervention points in a causal network. Modifying, blocking, or amplifying a bottleneck node affects the maximum number of downstream causal effects simultaneously, making them the most strategically valuable targets for experimental or therapeutic intervention.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Node</th><th>Coverage</th><th>Affected Chains</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double coverage = 0.0;
+            double chains = 0.0;
+            auto c_it = insight.score_breakdown.find("coverage");
+            if (c_it != insight.score_breakdown.end()) coverage = c_it->second;
+            auto a_it = insight.score_breakdown.find("affected_chains");
+            if (a_it != insight.score_breakdown.end()) chains = a_it->second;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 1) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << coverage << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(0) << chains << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& competing_mechanisms = by_type[InsightType::COMPETING_MECHANISM];
+    if (!competing_mechanisms.empty()) {
+        std::vector<Insight> sorted = competing_mechanisms;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-competing-mechanism" class="module" style="border-left-color: var(--theme-competing)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-competing)">Competing Mechanisms</h2>
+                <p class="definition">Alternative mechanism sets for the same outcome.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-competing);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Competing Mechanism</strong> detector finds all minimal causal chains that converge on the same outcome node, then clusters chains by structural divergence — measuring how different their intermediate entities and relation types are. High-divergence clusters identify genuinely competing explanatory routes to the same effect.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Competing mechanisms are essential for scientific rigor: they prevent over-commitment to a single explanation. Identifying alternative pathways to the same outcome enables researchers to design discriminative experiments that pit the hypotheses against each other, ultimately converging on the most accurate causal model.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Alternative Mechanisms</th><th>Divergence</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            double divergence = 0.0;
+            auto d_it = insight.score_breakdown.find("divergence");
+            if (d_it != insight.score_breakdown.end()) divergence = d_it->second;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_competing_mechanism(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << divergence << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& schema_repairs = by_type[InsightType::SCHEMA_REPAIR];
+    if (!schema_repairs.empty()) {
+        std::vector<Insight> sorted = schema_repairs;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        html << R"HTML(
+        <section id="module-schema-repair" class="module" style="border-left-color: var(--theme-repair)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-repair)">Schema Repair Suggestions</h2>
+                <p class="definition">Actionable graph repair proposals inferred from structural gaps.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-repair);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Schema Repair</strong> detector identifies constraint violations — missing type annotations, broken is-a hierarchies, isolated nodes, domain/range mismatches — and generates concrete, executable repair operations. Each repair is scored by impact (how many downstream inferences it restores) and confidence (how certain the repair is correct).</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Schema violations silently corrupt downstream reasoning. Repair suggestions are executable actions that improve graph consistency and integrity without requiring manual inspection of every entity. Applying high-scoring repairs directly improves the reliability of all other discovery results.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Repair Action</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(strip_markdown_bold(describe_schema_repair(insight))) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& substitutions = by_type[InsightType::SUBSTITUTION];
+    if (!substitutions.empty()) {
+        std::vector<Insight> sorted = substitutions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-substitution" class="module" style="border-left-color: var(--theme-resolution)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-resolution)">Substitutions</h2>
+                <p class="definition">Interchangeable entities that may be synonyms or closely related concepts.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-resolution);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Substitution Detector</strong> compares entity neighborhoods using Jaccard similarity over shared hyperedges. Two entities that appear in highly overlapping relation contexts — connected to the same set of other entities through the same types of relations — are flagged as contextually interchangeable substitution candidates.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Substitution reveals synonym entities or context-interchangeable concepts that may represent the same real-world object expressed with different terminology. Identifying these candidates helps consolidate redundant nodes, reduce vocabulary inconsistencies, and improve retrieval and reasoning quality.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Similarity</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Explanation</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_substitution(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 3) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& intervention_pts = by_type[InsightType::INTERVENTION_POINT];
+    if (!intervention_pts.empty()) {
+        std::vector<Insight> sorted = intervention_pts;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-intervention-point" class="module" style="border-left-color: var(--theme-bottleneck)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-bottleneck)">Intervention Points</h2>
+                <p class="definition">Critical nodes whose removal would disconnect causal pathways.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-bottleneck);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Intervention Point</strong> detector applies a directed variant of betweenness centrality restricted to causal edges. It identifies nodes that, if removed, would disconnect the maximum number of causal pathways. Criticality scores reflect the fraction of all causal chains disrupted by removing that node.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Intervention points are the most strategically valuable nodes in a causal network — modifying, blocking, or amplifying them has the maximum downstream effect. These nodes are prime candidates for experimental manipulation, therapeutic targeting, or policy intervention.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Node</th><th>Criticality</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Impact</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_intervention_point(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 1) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& feedback_loops = by_type[InsightType::FEEDBACK_LOOP];
+    if (!feedback_loops.empty()) {
+        std::vector<Insight> sorted = feedback_loops;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-feedback-loop" class="module" style="border-left-color: var(--theme-surprise)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-surprise)">Feedback Loops</h2>
+                <p class="definition">Cycles in causal or directional relationships.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-surprise);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Feedback Loop</strong> detector finds strongly connected components (SCCs) in the directed subgraph of causal and directional relations. Cycles within SCCs are enumerated, and each loop is scored by the minimum edge strength in the cycle — a loop is only as strong as its weakest causal link.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Feedback loops indicate self-reinforcing or self-regulating dynamics in the domain — amplification cycles or homeostatic control mechanisms. They are critical for system dynamics modelling, as positive feedback loops lead to exponential growth and negative loops to equilibrium. Identifying them early prevents incorrect linear modelling of inherently cyclic phenomena.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Loop</th><th>Strength</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Dynamics</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_feedback_loop(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 3) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& confounders = by_type[InsightType::CONFOUNDER];
+    if (!confounders.empty()) {
+        std::vector<Insight> sorted = confounders;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-confounder" class="module" style="border-left-color: var(--theme-anomaly)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-anomaly)">Confounders</h2>
+                <p class="definition">Potential confounding variables in causal relationships.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-anomaly);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Confounder Detector</strong> searches for third variables connected to both ends of a suspected causal relation. For each candidate causal pair A &rarr; C, it identifies entities B that share edges with both A and C, scoring B by how strongly it is associated with each endpoint and how likely it is to be a genuine shared cause rather than a coincidental neighbor.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Confounders can make spurious correlations appear causal. Identifying them early guides researchers to control for these variables in statistical or experimental analyses, preventing false causal conclusions and improving the credibility of derived hypotheses.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Confounder</th><th>Relation</th><th>Association</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Impact</th>)HTML";
+        }
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string relation = insight.seed_labels.size() >= 3 ? (insight.seed_labels[0] + " → " + insight.seed_labels[2]) : "-";
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_confounder(insight);
+            }
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << (insight.seed_labels.size() > 1 ? escape_html(insight.seed_labels[1]) : "-") << R"HTML(</td>
+                        <td>)HTML" << escape_html(relation) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& logical_entailments = by_type[InsightType::LOGICAL_ENTAILMENT];
+    if (!logical_entailments.empty()) {
+        std::vector<Insight> sorted = logical_entailments;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-logical-entailment" class="module" style="border-left-color: var(--theme-rule)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-rule)">Logical Entailments</h2>
+                <p class="definition">Inferred implications (if X and Y, then Z).</p>
                 <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
             </div>
             <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                 <h4 style="margin-top: 0; color: var(--theme-rule);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Association Rule Mining</strong> algorithm discovers "if-then" patterns in the knowledge graph. It identifies cases where the presence of certain relation types (the antecedent) reliably predicts other relation types (the consequent). Rules are scored by <em>support</em> (how often the pattern occurs), <em>confidence</em> (P(consequent|antecedent)), and <em>lift</em> (how much better than random chance).</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> These rules encode predictable patterns that can be used for automated inference, data validation, or identifying incomplete records. High-lift rules reveal genuine domain regularities rather than coincidental correlations.</p>
+                <p style="margin-bottom: 10px;">The <strong>Logical Entailment</strong> detector applies a set of first-order inference rules to derive implicit facts from the graph. For example: if A is-a B and B has-property P, then A has-property P. Rules are applied iteratively until a fixed point, and each derived fact is scored by the confidence of the rule chain that produced it.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Logical entailments can significantly densify the knowledge graph with reliable implicit knowledge — facts that are not explicitly stated but necessarily follow from what is. They reduce redundant explicit assertions needed and reveal implied relations that improve downstream reasoning quality without requiring additional data collection.</p>
             </div>
-            <div class="spotlight">
-                <h3>Top Insight Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-)HTML";
-
-        // Use clustering to coalesce similar findings
-        if (config.coalesce_similar_findings && sorted.size() > 3) {
-            auto clusters = cluster_insights(sorted, config);
-            int cluster_num = 0;
-            int total_shown = 0;
-
-            for (auto& cluster : clusters) {
-                if (total_shown >= config.max_examples_per_type) break;
-
-                std::string summary = generate_cluster_summary(cluster, config);
-                cluster_num++;
-
-                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                <h4 style="color: var(--theme-rule); margin-bottom: 10px;">)HTML";
-
-                if (cluster.insights.size() > 1) {
-                    html << "Rule Group " << cluster_num << " (" << cluster.insights.size() << " similar rules)";
-                } else {
-                    html << "Rule: " << escape_html(cluster.common_theme);
-                }
-                html << R"HTML(</h4>
-                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
-                <table class="data-table" style="font-size: 0.9em;">
-                    <thead>
-                        <tr><th>Antecedent</th><th>Consequent</th><th>Lift / Confidence</th><th>Examples</th></tr>
-                    </thead>
-                    <tbody>
-)HTML";
-
-                int items_in_cluster = 0;
-                for (const auto& insight : cluster.insights) {
-                    if (items_in_cluster >= config.max_items_per_cluster) {
-                        html << R"(                        <tr><td colspan="4" style="text-align: center; font-style: italic;">... and )"
-                             << (cluster.insights.size() - items_in_cluster) << R"( more similar rules</td></tr>
-)";
-                        break;
-                    }
-                    auto [antecedent, consequent, metrics] = parse_rule(insight.description);
-                    double confidence = 0.0;
-                    double lift = 0.0;
-                    auto cit = insight.score_breakdown.find("specificity");
-                    if (cit != insight.score_breakdown.end()) confidence = cit->second;
-                    auto lit = insight.score_breakdown.find("novelty");
-                    if (lit != insight.score_breakdown.end()) lift = lit->second;
-                    std::stringstream metric_ss;
-                    if (confidence > 0.0 || lift > 0.0) {
-                        metric_ss << "lift " << std::fixed << std::setprecision(2) << lift
-                                  << ", conf " << std::fixed << std::setprecision(2) << confidence;
-                    } else if (!metrics.empty()) {
-                        metric_ss << metrics;
-                    } else {
-                        metric_ss << "-";
-                    }
-
-                    html << R"(                        <tr>
-                            <td>)" << escape_html(antecedent) << R"(</td>
-                            <td>)" << escape_html(consequent) << R"(</td>
-                            <td>)" << escape_html(metric_ss.str()) << R"(</td>
-                            <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>
-                        </tr>
-)";
-                    items_in_cluster++;
-                    total_shown++;
-                }
-
-                html << R"HTML(                    </tbody>
-                </table>
-            </div>
-)HTML";
-            }
-        } else {
-            // Non-clustered view (original behavior)
-            bool include_explanation = (config.use_llm_narratives || config.include_llm_examples) && llm_provider_;
-            html << R"HTML(            <table class="data-table">
+            <table class="data-table">
                 <thead>
-                    <tr><th>Antecedent</th><th>Consequent</th><th>Lift / Confidence</th><th>Examples</th>)HTML";
-            if (include_explanation) {
-                html << R"HTML(<th>Explanation</th>)HTML";
-            }
-            html << R"HTML(</tr>
+                    <tr><th>Entailment</th><th>Confidence</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Reasoning</th>)HTML";
+        }
+        html << R"HTML(</tr>
                 </thead>
                 <tbody>
 )HTML";
-            int count = 0;
-            for (auto& insight : sorted) {
-                if (count >= config.max_examples_per_type) break;
-                auto [antecedent, consequent, metrics] = parse_rule(insight.description);
-                double confidence = 0.0;
-                double lift = 0.0;
-                auto cit = insight.score_breakdown.find("specificity");
-                if (cit != insight.score_breakdown.end()) confidence = cit->second;
-                auto lit = insight.score_breakdown.find("novelty");
-                if (lit != insight.score_breakdown.end()) lift = lit->second;
-                std::string explanation;
-                if (include_explanation) {
-                    if (config.use_llm_narratives) {
-                        explanation = generate_llm_narrative(insight, config);
-                    } else {
-                        explanation = get_llm_example(insight, config);
-                        if (explanation.empty()) {
-                            explanation = get_graph_context_summary(insight, false);
-                        }
-                    }
-                }
-                std::stringstream metric_ss;
-                if (confidence > 0.0 || lift > 0.0) {
-                    metric_ss << "lift " << std::fixed << std::setprecision(2) << lift
-                              << ", conf " << std::fixed << std::setprecision(2) << confidence;
-                } else if (!metrics.empty()) {
-                    metric_ss << metrics;
-                } else {
-                    metric_ss << "-";
-                }
-
-                html << R"(                    <tr>
-                        <td>)" << escape_html(antecedent) << R"(</td>
-                        <td>)" << escape_html(consequent) << R"(</td>
-                        <td>)" << escape_html(metric_ss.str()) << R"(</td>
-                        <td>)" << format_entities(insight.seed_labels, 3) << R"(</td>)";
-                if (include_explanation) {
-                    html << R"(
-                        <td>)" << escape_html(explanation) << R"(</td>)";
-                }
-                html << R"(
-                    </tr>
-)";
-                count++;
-            }
-            html << R"HTML(                </tbody>
-            </table>
-)HTML";
-        }
-        html << R"HTML(        </section>
-)HTML";
-    }
-
-    // Bridge entities section
-    auto& bridges = by_type[InsightType::BRIDGE];
-    if (!bridges.empty()) {
-        std::sort(bridges.begin(), bridges.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"(
-        <section id="bridges">
-            <h2>Bridge Entities</h2>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-bridge);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Bridge Detection</strong> algorithm identifies entities whose removal would disconnect or significantly fragment the knowledge graph. Using s-connectivity analysis on the hypergraph structure, it finds nodes that serve as critical links between otherwise separate clusters or communities. The bridge score reflects how essential the entity is for maintaining graph connectivity.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Bridge entities are often key concepts, pivotal figures, or central ideas that tie together different areas of knowledge. They represent critical junctions for information flow and should be documented thoroughly. Losing or misrepresenting a bridge entity could fragment understanding of the domain.</p>
-            </div>
-)";
-
         int count = 0;
-        for (auto& insight : bridges) {
-            if (count >= config.max_examples_per_type) break;
-
-            std::string entity = insight.seed_labels.empty() ? "Unknown" : insight.seed_labels[0];
-
-            std::string narrative;
-            if (config.use_llm_narratives && llm_provider_) {
-                narrative = generate_llm_narrative(insight, config);
-            } else {
-                narrative = describe_bridge(insight);
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_logical_entailment(insight);
             }
-            html << R"(
-            <div class="insight">
-                <h4>)" << (count + 1) << ". " << entity << R"(</h4>
-                <p>)" << escape_html(strip_markdown_bold(narrative)) << R"(</p>
-)";
-
-            if (config.include_evidence && !insight.evidence_chunk_ids.empty()) {
-                html << R"(                <p class="evidence">Evidence from: )" << insight.evidence_chunk_ids[0];
-                if (insight.evidence_chunk_ids.size() > 1) {
-                    html << " and " << (insight.evidence_chunk_ids.size() - 1) << " other sources";
-                }
-                html << R"(</p>
-)";
-            }
-
-            html << R"(            </div>
-)";
-            count++;
-        }
-
-        html << R"(        </section>
-)";
-    }
-
-    // Path rank section
-    auto& path_ranks = by_type[InsightType::PATH_RANK];
-    if (!path_ranks.empty()) {
-        std::sort(path_ranks.begin(), path_ranks.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"(
-        <section id="path-rank">
-            <h2>Path-Ranked Links</h2>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-pathrank);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Path Ranking</strong> algorithm identifies entity pairs that are connected by multiple short paths through the graph but lack a direct relationship. It computes path scores based on the number and length of connecting paths, with shorter and more numerous paths indicating stronger potential relationships. The algorithm uses k-shortest-path search with configurable maximum hop distance.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Path-ranked links represent relationships strongly implied by the graph structure. When two entities share many neighbors or are consistently a few hops apart, they likely have a meaningful connection that wasn't explicitly captured. These are high-confidence candidates for knowledge graph completion.</p>
-            </div>
-)";
-
-        int count = 0;
-        for (auto& insight : path_ranks) {
-            if (count >= config.max_examples_per_type) break;
-            if (insight.seed_labels.size() < 2) continue;
-
-            std::string narrative;
-            if (config.use_llm_narratives && llm_provider_) {
-                narrative = generate_llm_narrative(insight, config);
-            } else {
-                narrative = describe_path_rank(insight);
-            }
-            html << R"(
-            <div class="insight pathrank">
-                <h4>)" << (count + 1) << ". " << insight.seed_labels[0] << " <-> " << insight.seed_labels[1] << R"(</h4>
-                <p>)" << escape_html(strip_markdown_bold(narrative)) << R"(</p>
-            </div>
-)";
-            count++;
-        }
-
-        html << R"(        </section>
-)";
-    }
-
-    // Author reference chains section
-    auto& author_chains = by_type[InsightType::AUTHOR_CHAIN];
-    if (!author_chains.empty()) {
-        std::sort(author_chains.begin(), author_chains.end(), [](const Insight& a, const Insight& b) {
-            return a.score > b.score;
-        });
-
-        html << R"HTML(
-        <section id="module-author-chains" class="module" style="border-left-color: var(--theme-author)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-author)">Author Reference Chains</h2>
-                <p class="definition">Tracks citation chains across authors using reference relations in the graph.</p>
-                <div class="count">Total: )HTML" << author_chains.size() << R"HTML(</div>
-            </div>
-            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-author);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>Author Chain</strong> operator scans citation-like relations (e.g., cites, references) and builds directed chains that link authors through references. Chains of length two (A -> B -> C) indicate a sequence where one author cites another who cites a third.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> These chains reveal how influence and scholarship propagate across authors, highlighting citation paths that may indicate schools of thought or intellectual lineage.</p>
-            </div>
-)HTML";
-
-        int count = 0;
-        for (auto& insight : author_chains) {
-            if (count >= config.max_examples_per_type) break;
-            if (insight.seed_labels.size() < 3) continue;
-
-            std::string narrative;
-            if (config.use_llm_narratives && llm_provider_) {
-                narrative = generate_llm_narrative(insight, config);
-            } else {
-                narrative = describe_author_chain(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 3) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
             }
             html << R"HTML(
-            <div class="insight authorchain">
-                <h4>)HTML" << (count + 1) << ". " << insight.seed_labels[0] << " -> " << insight.seed_labels[1]
-                 << " -> " << insight.seed_labels[2] << R"HTML(</h4>
-                <p>)HTML" << escape_html(strip_markdown_bold(narrative)) << R"HTML(</p>
-            </div>
+                    </tr>
 )HTML";
             count++;
         }
-
-        html << R"HTML(        </section>
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
 )HTML";
     }
 
-    // Embedding link predictions section
-    auto& embedding_links = by_type[InsightType::EMBEDDING_LINK];
-    if (!embedding_links.empty()) {
-        std::vector<Insight> sorted = embedding_links;
+    auto& schema_violations = by_type[InsightType::SCHEMA_VIOLATION];
+    if (!schema_violations.empty()) {
+        std::vector<Insight> sorted = schema_violations;
         std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
             return a.score > b.score;
         });
 
+        bool include_llm = config.include_llm_examples && llm_provider_;
         html << R"HTML(
-        <section id="module-embedding" class="module" style="border-left-color: var(--theme-pathrank)">
+        <section id="module-schema-violation" class="module" style="border-left-color: var(--theme-contradiction)">
             <div class="module-header">
-                <h2 style="color: var(--theme-pathrank)">Embedding-Based Link Predictions</h2>
-                <p class="definition">Uses TransE neural embeddings to predict plausible missing relationships based on learned vector representations.</p>
+                <h2 style="color: var(--theme-contradiction)">Schema Violations</h2>
+                <p class="definition">Entities or relations that violate expected patterns.</p>
                 <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
             </div>
             <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top: 0; color: var(--theme-pathrank);">How This Method Works</h4>
-                <p style="margin-bottom: 10px;">The <strong>TransE Embedding</strong> algorithm learns dense vector representations (embeddings) for all entities and relations in the knowledge graph. The model is trained on the principle that <code>head + relation ≈ tail</code> for valid triples. After training, the algorithm scores candidate triples by measuring how well they satisfy this translation property - lower distance means higher plausibility.</p>
-                <p style="margin-bottom: 0;"><em>Why it matters:</em> Embedding-based predictions leverage the entire graph structure to identify plausible missing links. Unlike path-based methods, embeddings can capture latent semantic patterns and long-range dependencies. High plausibility scores indicate relationships that fit naturally with learned patterns in the knowledge graph.</p>
+                <h4 style="margin-top: 0; color: var(--theme-contradiction);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Schema Violation</strong> detector checks each entity and relation against expected schema constraints: type compatibility, arity requirements, domain and range restrictions, mandatory property rules, and structural invariants. Each violation is scored by severity — how many downstream inferences are invalidated by it.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Schema violations silently corrupt downstream reasoning and can propagate errors across the graph. High-severity violations indicate data quality issues, ingestion errors, or genuinely novel findings that break assumed patterns — all of which deserve immediate attention before the graph is used for inference or augmentation.</p>
             </div>
-            <div class="spotlight">
-                <h3>Top Prediction Analysis</h3>
-                <p class="narrative">)HTML" << spotlight_text(sorted) << R"HTML(</p>
-            </div>
-)HTML";
-
-        // Use clustering to coalesce similar findings
-        if (config.coalesce_similar_findings && sorted.size() > 3) {
-            auto clusters = cluster_insights(sorted, config);
-            int cluster_num = 0;
-            int total_shown = 0;
-
-            for (auto& cluster : clusters) {
-                if (total_shown >= config.max_examples_per_type) break;
-
-                std::string summary = generate_cluster_summary(cluster, config);
-                cluster_num++;
-
-                html << R"HTML(            <div class="cluster" style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                <h4 style="color: var(--theme-pathrank); margin-bottom: 10px;">)HTML";
-
-                if (cluster.insights.size() > 1) {
-                    html << "Prediction Group " << cluster_num << " (" << cluster.insights.size() << " similar predictions)";
-                } else {
-                    html << "Prediction: " << escape_html(cluster.common_theme);
-                }
-                html << R"HTML(</h4>
-                <p style="margin-bottom: 15px; color: var(--text-muted);">)HTML" << escape_html(summary) << R"HTML(</p>
-                <table class="data-table" style="font-size: 0.9em;">
-                    <thead>
-                        <tr><th>Head Entity</th><th>Relation</th><th>Tail Entity</th><th>Plausibility</th></tr>
-                    </thead>
-                    <tbody>
-)HTML";
-
-                int items_in_cluster = 0;
-                for (const auto& insight : cluster.insights) {
-                    if (items_in_cluster >= config.max_items_per_cluster) {
-                        html << R"(                        <tr><td colspan="4" style="text-align: center; font-style: italic;">... and )"
-                             << (cluster.insights.size() - items_in_cluster) << R"( more similar predictions</td></tr>
-)";
-                        break;
-                    }
-                    if (insight.seed_labels.size() < 2) continue;
-
-                    // Extract relation type
-                    std::string relation = "related_to";
-                    for (const auto& tag : insight.novelty_tags) {
-                        if (tag.find("relation=") == 0) {
-                            relation = tag.substr(9);
-                            break;
-                        }
-                    }
-
-                    double plausibility = 0.0;
-                    auto it = insight.score_breakdown.find("novelty");
-                    if (it != insight.score_breakdown.end()) plausibility = it->second;
-
-                    html << R"(                        <tr>
-                            <td>)" << escape_html(insight.seed_labels[0]) << R"(</td>
-                            <td>)" << escape_html(relation) << R"(</td>
-                            <td>)" << escape_html(insight.seed_labels[1]) << R"(</td>
-                            <td>)" << std::fixed << std::setprecision(3) << plausibility << R"(</td>
-                        </tr>
-)";
-                    items_in_cluster++;
-                    total_shown++;
-                }
-
-                html << R"HTML(                    </tbody>
-                </table>
-            </div>
-)HTML";
-            }
-        } else {
-            // Non-clustered view
-            html << R"HTML(            <table class="data-table">
+            <table class="data-table">
                 <thead>
-                    <tr><th>Head Entity</th><th>Relation</th><th>Tail Entity</th><th>Plausibility</th><th>Explanation</th></tr>
+                    <tr><th>Violation</th><th>Severity</th>)HTML";
+        if (include_llm) {
+            html << R"HTML(<th>Details</th>)HTML";
+        }
+        html << R"HTML(</tr>
                 </thead>
                 <tbody>
 )HTML";
-            int count = 0;
-            for (auto& insight : sorted) {
-                if (count >= config.max_examples_per_type) break;
-                if (insight.seed_labels.size() < 2) continue;
-
-                std::string relation = "related_to";
-                for (const auto& tag : insight.novelty_tags) {
-                    if (tag.find("relation=") == 0) {
-                        relation = tag.substr(9);
-                        break;
-                    }
-                }
-
-                double plausibility = 0.0;
-                auto it = insight.score_breakdown.find("novelty");
-                if (it != insight.score_breakdown.end()) plausibility = it->second;
-
-                std::string explanation;
-                if (config.use_llm_narratives && llm_provider_) {
-                    explanation = generate_llm_narrative(insight, config);
-                } else {
-                    explanation = describe_embedding_link(insight);
-                }
-
-                html << R"(                    <tr>
-                        <td>)" << escape_html(insight.seed_labels[0]) << R"(</td>
-                        <td>)" << escape_html(relation) << R"(</td>
-                        <td>)" << escape_html(insight.seed_labels[1]) << R"(</td>
-                        <td>)" << std::fixed << std::setprecision(3) << plausibility << R"(</td>
-                        <td>)" << escape_html(strip_markdown_bold(explanation)) << R"(</td>
-                    </tr>
-)";
-                count++;
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string explanation;
+            if (include_llm) {
+                explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_schema_violation(insight);
             }
-            html << R"HTML(                </tbody>
-            </table>
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << format_entities(insight.seed_labels, 2) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) {
+                html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            }
+            html << R"HTML(
+                    </tr>
 )HTML";
+            count++;
         }
-        html << R"HTML(        </section>
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
 )HTML";
     }
 
@@ -5391,8 +9584,58 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     }
 
-    if (counts[InsightType::HYPOTHESIS] > 0) {
-        html << R"(                    <li><strong>Test Hypotheses:</strong> The )" << counts[InsightType::HYPOTHESIS] << R"( synthesized hypotheses translate graph discoveries into testable claims. Prioritize those with strong supporting evidence.</li>
+    if (counts[InsightType::HYPOTHESES_1] > 0) {
+        html << R"(                    <li><strong>Test Bayesian Hypotheses (H1):</strong> The )" << counts[InsightType::HYPOTHESES_1] << R"( probabilistic hypotheses quantify relationship likelihood with posterior probabilities and uncertainty metrics. Prioritize high-posterior, high-surprise candidates.</li>
+)";
+    }
+
+    if (intersection_bridge_count > 0) {
+        html << R"(                    <li><strong>Prioritize Intersection-Constrained Bridges:</strong> The )" << intersection_bridge_count << R"( intersection-based mechanistic bridge hypotheses connect semantically distant concepts through higher-order pathways. Validate top bridge nodes and pathway evidence first.</li>
+)";
+    }
+
+    if (regular_h2_count > 0) {
+        html << R"(                    <li><strong>Evaluate Typed Mechanistic Chains (H2):</strong> The )" << regular_h2_count << R"( typed mechanistic chains highlight role-labeled pathways and compact explanation subgraphs. Use them to prioritize interpretable causal pathways and supporting evidence.</li>
+)";
+    }
+
+    if (counts[InsightType::HYPOTHESES_3] > 0) {
+        html << R"(                    <li><strong>Test Counterfactual Hypotheses (H3):</strong> The )" << counts[InsightType::HYPOTHESES_3] << R"( counterfactual causal hypotheses propose specific interventions with predicted outcomes. Use the mechanistic explanations and test plans to design empirical validations.</li>
+)";
+    }
+
+    if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0) {
+        html << R"(                    <li><strong>Review Consolidated Mechanisms:</strong> The )" << counts[InsightType::MECHANISM_CONSOLIDATION] << R"( mechanism clusters unify overlapping hypotheses and chains. Focus validation on the strongest shared explanations.</li>
+)";
+    }
+
+    if (counts[InsightType::EVIDENCE_FUSION_LINK] > 0) {
+        html << R"(                    <li><strong>Prioritize Evidence-Fusion Links:</strong> The )" << counts[InsightType::EVIDENCE_FUSION_LINK] << R"( fused candidates aggregate multiple independent operator signals. Validate these first for high-yield KG expansion.</li>
+)";
+    }
+
+    if (counts[InsightType::META_PATH_ANOMALY] > 0) {
+        html << R"(                    <li><strong>Inspect Meta-Path Anomalies:</strong> The )" << counts[InsightType::META_PATH_ANOMALY] << R"( rare templates may expose novel mechanisms that standard pattern mining misses.</li>
+)";
+    }
+
+    if (counts[InsightType::INTERVENTION_BOTTLENECK] > 0) {
+        html << R"(                    <li><strong>Stress-Test Bottleneck Nodes:</strong> The )" << counts[InsightType::INTERVENTION_BOTTLENECK] << R"( bottlenecks sit on many causal pathways and are high-leverage intervention points.</li>
+)";
+    }
+
+    if (counts[InsightType::COMPETING_MECHANISM] > 0) {
+        html << R"(                    <li><strong>Design Discriminative Experiments:</strong> The )" << counts[InsightType::COMPETING_MECHANISM] << R"( competing mechanisms represent alternative explanations for shared outcomes.</li>
+)";
+    }
+
+    if (counts[InsightType::SCHEMA_REPAIR] > 0) {
+        html << R"(                    <li><strong>Apply Schema Repairs Carefully:</strong> The )" << counts[InsightType::SCHEMA_REPAIR] << R"( repair suggestions provide executable consistency improvements. Validate top actions before insertion.</li>
+)";
+    }
+
+    if (counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] > 0) {
+        html << R"(                    <li><strong>Explore Cross-Community Bridges:</strong> The )" << counts[InsightType::CROSS_COMMUNITY_MECHANISM_BRIDGE] << R"( bridge mechanisms connect distant domains and can seed interdisciplinary hypotheses.</li>
 )";
     }
 
@@ -5401,8 +9644,28 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     }
 
+    if (counts[InsightType::LONG_CHAIN] > 0) {
+        html << R"(                    <li><strong>Review Long-Chain Links:</strong> The )" << counts[InsightType::LONG_CHAIN] << R"( long-chain reasoning paths highlight distant multi-hop connections. Use them to trace extended mechanisms or thematic linkages.</li>
+)";
+    }
+
+    if (counts[InsightType::META_PATH_PATTERN] > 0) {
+        html << R"(                    <li><strong>Interpret Meta-Path Patterns:</strong> The )" << counts[InsightType::META_PATH_PATTERN] << R"( frequent relation templates summarize recurring multi-hop structures. Use them to guide querying and validation strategies.</li>
+)";
+    }
+
     if (counts[InsightType::AUTHOR_CHAIN] > 0) {
         html << R"(                    <li><strong>Track Citation Trails:</strong> The )" << counts[InsightType::AUTHOR_CHAIN] << R"( author reference chains reveal citation pathways across authors. Use them to map scholarly influence or identify key bridges.</li>
+)";
+    }
+
+    if (counts[InsightType::CO_AUTHORSHIP] > 0) {
+        html << R"(                    <li><strong>Explore Collaboration Networks:</strong> The )" << counts[InsightType::CO_AUTHORSHIP] << R"( co-authorship patterns reveal research clusters and institutional partnerships. Use them to identify active collaborators and potential interdisciplinary teams.</li>
+)";
+    }
+
+    if (counts[InsightType::CITATION_IMPACT] > 0) {
+        html << R"(                    <li><strong>Identify Influential Works:</strong> The )" << counts[InsightType::CITATION_IMPACT] << R"( highly cited/authored entities represent seminal contributions. Prioritize these for literature review and theoretical grounding.</li>
 )";
     }
 
@@ -5415,8 +9678,320 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         html << R"(                    <li><strong>Review Embedding Predictions:</strong> The )" << counts[InsightType::EMBEDDING_LINK] << R"( TransE-based link predictions suggest plausible missing relationships. Higher plausibility scores indicate stronger evidence for the predicted link.</li>
 )";
     }
+    if (counts[InsightType::MOTIF] > 0) {
+        html << R"(                    <li><strong>Investigate Recurring Motifs:</strong> The )" << counts[InsightType::MOTIF] << R"( detected motifs represent frequently co-occurring concept clusters. Use them to identify recurring structural patterns worth documenting.</li>
+)";
+    }
+    if (counts[InsightType::DIFFUSION] > 0) {
+        html << R"(                    <li><strong>Follow Influence Pathways:</strong> The )" << counts[InsightType::DIFFUSION] << R"( diffusion pathways reveal how concepts propagate through the graph. Use them to map likely transmission routes for knowledge or influence.</li>
+)";
+    }
+    if (counts[InsightType::META_PATH] > 0) {
+        html << R"(                    <li><strong>Validate Meta-Path Links:</strong> The )" << counts[InsightType::META_PATH] << R"( meta-path links connect entities through typed relation sequences. Validate higher-confidence candidates for knowledge graph augmentation.</li>
+)";
+    }
+    if (counts[InsightType::CAUSAL_CHAIN] > 0) {
+        html << R"(                    <li><strong>Verify Causal Chains:</strong> The )" << counts[InsightType::CAUSAL_CHAIN] << R"( causal chains trace directed paths via causal relation types. Prioritize chains with strong supporting evidence for mechanistic validation.</li>
+)";
+    }
+    if (counts[InsightType::INTERVENTION_POINT] > 0) {
+        html << R"(                    <li><strong>Target Intervention Points:</strong> The )" << counts[InsightType::INTERVENTION_POINT] << R"( intervention points are nodes whose removal would disconnect causal chains. These are high-value targets for experimental design.</li>
+)";
+    }
+    if (counts[InsightType::FEEDBACK_LOOP] > 0) {
+        html << R"(                    <li><strong>Examine Feedback Loops:</strong> The )" << counts[InsightType::FEEDBACK_LOOP] << R"( feedback loops expose cycles in causal or directional relations. These may indicate self-reinforcing mechanisms or oscillatory dynamics.</li>
+)";
+    }
+    if (counts[InsightType::CONFOUNDER] > 0) {
+        html << R"(                    <li><strong>Control for Confounders:</strong> The )" << counts[InsightType::CONFOUNDER] << R"( identified confounders connect to both ends of suspected causal relations. Account for these in experimental or statistical analyses.</li>
+)";
+    }
+    if (counts[InsightType::TAXONOMY] > 0) {
+        html << R"(                    <li><strong>Refine Taxonomic Structure:</strong> The )" << counts[InsightType::TAXONOMY] << R"( taxonomic relations surface is-a and part-of hierarchies. Use them to improve ontological consistency and support classification tasks.</li>
+)";
+    }
+    if (counts[InsightType::DOMAIN_BRIDGE] > 0) {
+        html << R"(                    <li><strong>Leverage Domain Bridges:</strong> The )" << counts[InsightType::DOMAIN_BRIDGE] << R"( domain bridge nodes connect distinct disciplines. These are prime candidates for interdisciplinary hypotheses and cross-domain knowledge transfer.</li>
+)";
+    }
+    if (counts[InsightType::LOGICAL_ENTAILMENT] > 0) {
+        html << R"(                    <li><strong>Expand via Logical Entailments:</strong> The )" << counts[InsightType::LOGICAL_ENTAILMENT] << R"( entailments derive implicit implications from existing relations. Validate and add confirmed entailments to enrich the knowledge graph.</li>
+)";
+    }
+    if (counts[InsightType::COMPOSITIONAL_REASONING] > 0) {
+        html << R"(                    <li><strong>Test Compositional Relations:</strong> The )" << counts[InsightType::COMPOSITIONAL_REASONING] << R"( compositional inferences combine relation algebra to propose new links. Verify whether composed paths reflect genuine domain knowledge.</li>
+)";
+    }
+    if (counts[InsightType::EXPLANATORY_CHAIN] > 0) {
+        html << R"(                    <li><strong>Trace Explanatory Chains:</strong> The )" << counts[InsightType::EXPLANATORY_CHAIN] << R"( explanatory chains connect distant concepts through multi-hop paths. Use them to build narrative explanations linking remote but related findings.</li>
+)";
+    }
+    if (counts[InsightType::SCHEMA_VIOLATION] > 0) {
+        html << R"(                    <li><strong>Address Schema Violations:</strong> The )" << counts[InsightType::SCHEMA_VIOLATION] << R"( violations highlight entities or relations that break expected graph patterns. Resolve these to improve data quality and consistency.</li>
+)";
+    }
+    if (counts[InsightType::TRANSITIVE_CLOSURE] > 0) {
+        html << R"(                    <li><strong>Close Transitive Gaps:</strong> The )" << counts[InsightType::TRANSITIVE_CLOSURE] << R"( transitive closure gaps reveal links implied by transitivity but not yet recorded. Validate and add confirmed closures to increase graph completeness.</li>
+)";
+    }
 
-    html << R"(                </ol>
+    html << R"HTML(                </ol>
+            </div>
+        </section>
+)HTML";
+
+    // ========================================================================
+    // SUGGESTED FUTURE WORK - Dynamic based on actual findings
+    // ========================================================================
+
+    html << R"HTML(
+        <!-- Suggested Future Work Section -->
+        <section id="future-work" class="module" style="border-left-color: var(--theme-misc)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-misc)">Suggested Future Work</h2>
+                <p class="definition">Tailored research directions based on the epistemological distribution and gaps in this analysis</p>
+            </div>
+            <div class="module-content">
+)HTML";
+
+    // Calculate total insights and percentages
+    int total_insights = static_cast<int>(insights.insights.size());
+    int comb_count = category_counts[InsightCategory::COMBINATORIAL];
+    int expl_count = category_counts[InsightCategory::EXPLORATORY];
+    int trans_count = category_counts[InsightCategory::TRANSFORMATIONAL];
+
+    double comb_pct = (total_insights > 0) ? (100.0 * comb_count / total_insights) : 0.0;
+    double expl_pct = (total_insights > 0) ? (100.0 * expl_count / total_insights) : 0.0;
+    double trans_pct = (total_insights > 0) ? (100.0 * trans_count / total_insights) : 0.0;
+
+    // Introduction based on category distribution
+    html << R"HTML(                <h3>Epistemological Analysis of This Report</h3>
+                <p>This analysis generated <strong>)HTML" << total_insights << R"HTML( insights</strong> distributed across Margaret Boden's creativity framework as follows:</p>
+                <ul>
+                    <li>🧩 <strong>Combinatorial</strong> (Pattern Detection): )HTML" << comb_count << " (" << std::fixed << std::setprecision(1) << comb_pct << R"HTML(%)</li>
+                    <li>🔍 <strong>Exploratory</strong> (Connection Discovery): )HTML" << expl_count << " (" << expl_pct << R"HTML(%)</li>
+                    <li>🔄 <strong>Transformational</strong> (Conceptual Reframing): )HTML" << trans_count << " (" << trans_pct << R"HTML(%)</li>
+                </ul>
+)HTML";
+
+    // Category-based analysis and recommendations
+    html << R"HTML(
+                <h3>1. Category Distribution Insights</h3>
+)HTML";
+
+    // Determine dominant category
+    if (comb_count > expl_count && comb_count > trans_count) {
+        html << R"HTML(                <p><strong>Dominant Mode: Combinatorial (Pattern-Based)</strong></p>
+                <p>This report is <em>pattern-heavy</em>, with )HTML" << comb_pct << R"HTML(% of insights emerging from structural combinations and motif detection. This suggests:</p>
+                <ul>
+                    <li><strong>Strength:</strong> The knowledge graph contains rich, detectable structural patterns suitable for automated discovery.</li>
+                    <li><strong>Opportunity:</strong> To advance toward exploratory and transformational modes, implement deeper path-traversal operators and hypothesis generation mechanisms.</li>
+                    <li><strong>Next Steps:</strong> Develop meta-pattern operators that identify patterns <em>across patterns</em>, enabling cross-domain structural mappings.</li>
+                </ul>
+)HTML";
+    } else if (expl_count > comb_count && expl_count > trans_count) {
+        html << R"HTML(                <p><strong>Dominant Mode: Exploratory (Connection-Based)</strong></p>
+                <p>This report is <em>connection-heavy</em>, with )HTML" << expl_pct << R"HTML(% of insights arising from path traversal and link prediction. This suggests:</p>
+                <ul>
+                    <li><strong>Strength:</strong> The system effectively navigates the graph to discover non-obvious relationships and multi-hop reasoning chains.</li>
+                    <li><strong>Opportunity:</strong> To advance toward transformational creativity, add operators that propose ontology revisions or challenge existing categorizations.</li>
+                    <li><strong>Next Steps:</strong> Implement causal inference mechanisms that distinguish correlation from causation in discovered paths.</li>
+                </ul>
+)HTML";
+    } else if (trans_count > 0 && trans_count >= comb_count && trans_count >= expl_count) {
+        html << R"HTML(                <p><strong>Dominant Mode: Transformational (Reframing)</strong></p>
+                <p>This report demonstrates significant <em>transformational capacity</em>, with )HTML" << trans_pct << R"HTML(% of insights challenging existing structures. This suggests:</p>
+                <ul>
+                    <li><strong>Strength:</strong> The system is successfully identifying schema violations, confounders, and structural anomalies that warrant conceptual revision.</li>
+                    <li><strong>Opportunity:</strong> Leverage these findings to implement semi-automated ontology refinement workflows.</li>
+                    <li><strong>Next Steps:</strong> Develop interactive tools allowing domain experts to approve, reject, or modify proposed schema changes.</li>
+                </ul>
+)HTML";
+    } else {
+        html << R"HTML(                <p><strong>Balanced Distribution</strong></p>
+                <p>This report shows relatively balanced distribution across all three modes, suggesting a mature analytical capability. Continue expanding all operator types while focusing on:</p>
+                <ul>
+                    <li>Deepening transformational mechanisms for ontology revision</li>
+                    <li>Enhancing causal reasoning beyond pattern detection</li>
+                    <li>Implementing cross-corpus comparative analysis</li>
+                </ul>
+)HTML";
+    }
+
+    // Transformational gap analysis
+    if (trans_pct < 15.0) {
+        html << R"HTML(
+                <h3>2. Transformational Creativity Gap</h3>
+                <p><strong>⚠️ Low Transformational Output:</strong> Only )HTML" << trans_count << R"HTML( transformational insights ()HTML" << trans_pct << R"HTML(%) were generated. To advance toward transformational creativity:</p>
+                <ul>
+                    <li><strong>Implement Ontology Revision Operators:</strong> Develop algorithms that propose schema modifications when recurring anomalies suggest structural inadequacies.</li>
+)HTML";
+        if (counts[InsightType::SCHEMA_VIOLATION] > 0) {
+            html << R"HTML(                    <li><strong>Leverage Schema Violations:</strong> The )HTML" << counts[InsightType::SCHEMA_VIOLATION] << R"HTML( schema violations identified are prime candidates for ontology refinement—investigate whether these represent data errors or genuine conceptual mismatches.</li>
+)HTML";
+        }
+        if (counts[InsightType::CONFOUNDER] > 0) {
+            html << R"HTML(                    <li><strong>Investigate Confounders:</strong> The )HTML" << counts[InsightType::CONFOUNDER] << R"HTML( confounders reveal hidden variables affecting apparent relationships—use these to refine causal models.</li>
+)HTML";
+        }
+        if (counts[InsightType::HYPOTHESES_1] == 0 && counts[InsightType::HYPOTHESES_2] == 0 && counts[InsightType::HYPOTHESES_3] == 0) {
+            html << R"HTML(                    <li><strong>Hypothesis Generation Available:</strong> Run <code>hypotheses_1</code> (Bayesian), <code>hypotheses_2</code> (mechanistic), or <code>hypotheses_3</code> (counterfactual) operators to generate testable hypotheses about missing relationships and alternative classification schemes.</li>
+)HTML";
+        }
+        html << R"HTML(                </ul>
+)HTML";
+    }
+
+    // Missing insight type analysis
+    html << R"HTML(
+                <h3>3. Operator Coverage Analysis</h3>
+                <p>The following capabilities were not observed in this analysis:</p>
+                <ul>
+)HTML";
+
+    // Check for missing causal insights
+    if (counts[InsightType::CAUSAL_CHAIN] == 0 && counts[InsightType::INTERVENTION_POINT] == 0 &&
+        counts[InsightType::FEEDBACK_LOOP] == 0 && counts[InsightType::CONFOUNDER] == 0) {
+        html << R"HTML(                    <li><strong>Causal Reasoning (✓ Implemented, Not Run):</strong> Operators for causal chains, intervention points, feedback loops, and confounders are available but were not activated in this run.
+                        <ul>
+                            <li><strong>System Status:</strong> <code>causal_chains</code>, <code>intervention_points</code>, <code>feedback_loops</code>, <code>confounders</code> are fully implemented</li>
+                            <li><strong>Why Not Observed:</strong> Either these operators were not included in the run parameters, or the graph lacks causal relation types (e.g., "causes", "leads to", "results in")</li>
+                            <li><em>Action:</em> Run with <code>-p "causal_chains,intervention_points,feedback_loops,confounders"</code> or ensure extraction captures causal language</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    // Check for missing taxonomic insights
+    if (counts[InsightType::TAXONOMY] == 0) {
+        html << R"HTML(                    <li><strong>Taxonomic Structure (✓ Implemented, Not Run):</strong> Taxonomy operator is available but was not activated or found no hierarchical relations.
+                        <ul>
+                            <li><strong>System Status:</strong> <code>taxonomy</code> operator is fully implemented</li>
+                            <li><strong>Why Not Observed:</strong> Either the operator was not run, or the graph lacks hierarchical relation types (e.g., "is-a", "part-of", "subclass-of")</li>
+                            <li><em>Action:</em> Run with <code>-p taxonomy</code> and ensure extraction captures hierarchical relations for ontological organization</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    // Check for missing logical entailments
+    if (counts[InsightType::LOGICAL_ENTAILMENT] == 0 && counts[InsightType::COMPOSITIONAL_REASONING] == 0) {
+        html << R"HTML(                    <li><strong>Logical Inference (✓ Implemented, Not Run):</strong> Operators for logical entailment and compositional reasoning are available but were not activated.
+                        <ul>
+                            <li><strong>System Status:</strong> <code>logical_entailment</code>, <code>compositional_reasoning</code>, <code>transitive_closure</code> are fully implemented</li>
+                            <li><strong>Why Not Observed:</strong> These operators were not included in the run parameters</li>
+                            <li><em>Action:</em> Run with <code>-p "logical_entailment,compositional_reasoning,transitive_closure"</code> to derive implicit facts from explicit relations and dramatically increase knowledge graph completeness</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    // Check for missing diffusion/author chains
+    if (counts[InsightType::DIFFUSION] == 0 && counts[InsightType::AUTHOR_CHAIN] == 0 &&
+        counts[InsightType::CO_AUTHORSHIP] == 0 && counts[InsightType::CITATION_IMPACT] == 0) {
+        html << R"HTML(                    <li><strong>Citation/Influence Networks (✓ Implemented, Not Run):</strong> Bibliometric operators are available but were not activated or found no citation data.
+                        <ul>
+                            <li><strong>System Status:</strong> <code>author_chain</code>, <code>co_authorship</code>, <code>citation_impact</code>, <code>diffusion</code> are fully implemented</li>
+                            <li><strong>Why Not Observed:</strong> Either these operators were not run, or the graph lacks author/citation metadata (e.g., "cites", "authored-by", "co-authored" relations)</li>
+                            <li><em>Action:</em> Run with <code>-p "author_chain,co_authorship,citation_impact,diffusion"</code> and ensure extraction captures bibliometric data to reveal knowledge transmission pathways</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    html << R"HTML(                </ul>
+
+                <h3>4. Leveraging Strong Discovery Areas</h3>
+                <p>Based on the insight types that <em>were</em> successfully generated, prioritize the following extensions:</p>
+                <ul>
+)HTML";
+
+    // Highlight successful areas and suggest extensions
+    if (counts[InsightType::COMMUNITY_DETECTION] > 0 || counts[InsightType::COMMUNITY_LINK] > 0 ||
+        counts[InsightType::MULTI_RESOLUTION_COMMUNITY] > 0 || counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] > 0) {
+        html << R"HTML(                    <li><strong>Community Structure (✓ Active):</strong> With )HTML" << (counts[InsightType::COMMUNITY_DETECTION] + counts[InsightType::COMMUNITY_LINK] + counts[InsightType::MULTI_RESOLUTION_COMMUNITY] + counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP]) << R"HTML( community-related insights:
+                        <ul>
+)HTML";
+        if (counts[InsightType::MULTI_RESOLUTION_COMMUNITY] == 0) {
+            html << R"HTML(                            <li><strong>Available:</strong> Run <code>multi_resolution_community</code> operator to reveal hierarchical structure at multiple scales</li>
+)HTML";
+        }
+        if (counts[InsightType::CROSS_COMMUNITY_BRIDGE_MAP] == 0) {
+            html << R"HTML(                            <li><strong>Available:</strong> Run <code>cross_community_bridge_map</code> operator to identify interdisciplinary synthesis opportunities</li>
+)HTML";
+        }
+        html << R"HTML(                            <li>Use community labels as features for supervised learning tasks (e.g., entity classification)</li>
+                            <li>Develop community-aware recommendation systems</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    if (counts[InsightType::BRIDGE] > 0 || counts[InsightType::DOMAIN_BRIDGE] > 0) {
+        html << R"HTML(                    <li><strong>Bridge Entities (✓ Active):</strong> The )HTML" << (counts[InsightType::BRIDGE] + counts[InsightType::DOMAIN_BRIDGE]) << R"HTML( bridge nodes identified are prime candidates for:
+                        <ul>
+                            <li>Cross-domain knowledge transfer and analogy generation</li>
+                            <li>Interdisciplinary hypothesis formulation</li>
+                            <li>Targeted expert interviews (bridges often represent boundary-spanning concepts)</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    if (counts[InsightType::MOTIF] > 0 || counts[InsightType::META_PATTERN] > 0) {
+        html << R"HTML(                    <li><strong>Recurring Motifs (✓ Active):</strong> The )HTML" << (counts[InsightType::MOTIF] + counts[InsightType::META_PATTERN]) << R"HTML( detected patterns suggest:
+                        <ul>
+)HTML";
+        if (counts[InsightType::META_PATTERN] == 0 && counts[InsightType::MOTIF] > 0) {
+            html << R"HTML(                            <li><strong>Available:</strong> Run <code>meta_pattern</code> operator to identify patterns-of-patterns (structural templates across motifs)</li>
+)HTML";
+        }
+        html << R"HTML(                            <li>Develop a motif/pattern library as reusable knowledge templates</li>
+                            <li>Implement pattern-based querying (find similar structural patterns elsewhere)</li>
+                            <li>Use pattern frequency as a measure of conceptual importance or centrality</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    if (counts[InsightType::HYPOTHESES_1] > 0 || counts[InsightType::HYPOTHESES_2] > 0) {
+        html << R"HTML(                    <li><strong>Link Prediction (✓ Active):</strong> With )HTML" << (counts[InsightType::HYPOTHESES_1] + counts[InsightType::HYPOTHESES_2]) << R"HTML( predicted links:
+                        <ul>
+                            <li>Validate high-confidence predictions through expert review or literature search</li>
+                            <li>Add confirmed predictions back to the graph to increase density and enable deeper multi-hop reasoning</li>
+                            <li>Use prediction confidence scores as uncertainty estimates for downstream tasks</li>
+                        </ul>
+                    </li>
+)HTML";
+    }
+
+    html << R"HTML(                </ul>
+
+                <h3>5. Advancing Toward Epistemic Reliability</h3>
+                <p>From an epistemological perspective (justification, grounding, calibration), the system includes:</p>
+                <ul>
+                    <li><strong>Provenance Tracking (✓ Implemented):</strong> Each insight now includes source document links in its JSON output, enabling one-click verification. Spotlight sections in HTML reports display these with the 📄 Sources indicator.</li>
+                    <li><strong>Confidence Calibration (Recommendation):</strong> Current scores reflect heuristic-based confidence; implement Bayesian or statistical methods for well-calibrated uncertainty estimates.</li>
+                    <li><strong>External Validation:</strong> Link discovered entities to authoritative knowledge bases (Wikidata, domain ontologies) to validate extraction accuracy.</li>
+                    <li><strong>Human-in-the-Loop Workflows:</strong> Design interfaces for domain experts to approve/reject/refine insights, creating feedback loops for continuous improvement.</li>
+                    <li><strong>Bias Audits:</strong> Analyze whether discovered patterns systematically privilege certain perspectives or domains—implement fairness metrics for knowledge representation.</li>
+                </ul>
+
+                <h3>6. Long-Term Research Directions</h3>
+                <p>To truly achieve transformational machine creativity—the ability to restructure conceptual spaces rather than merely navigate them—this project should pursue:</p>
+                <ul>
+                    <li><strong>Autonomous Ontology Evolution:</strong> Systems that propose, test, and adopt schema revisions based on recurring anomalies or improved explanatory power.</li>
+                    <li><strong>Causal World Models:</strong> Move beyond correlation to build structural causal models enabling counterfactual reasoning ("what would happen if...?").</li>
+                    <li><strong>Meta-Learning Over Operators:</strong> Analyze which discovery operators produce the most valuable insights for specific domains, then adaptively prioritize them.</li>
+                    <li><strong>Collaborative Human-AI Knowledge Construction:</strong> Interactive systems where experts and AI co-construct knowledge through dialogue, challenging each other's assumptions.</li>
+                    <li><strong>Multimodal Integration:</strong> Extend beyond text to incorporate visual, spatial, and temporal data, grounding abstract concepts in perceptual evidence.</li>
+                </ul>
+
+                <div style="margin-top: 30px; padding: 20px; background: rgba(79, 195, 247, 0.1); border-left: 4px solid var(--theme-misc); border-radius: 8px;">
+                    <p style="margin: 0; font-style: italic;">
+                        <strong>Philosophical Positioning:</strong> This project deliberately occupies a middle ground between neural generation (fluent but opaque) and symbolic reasoning (transparent but brittle). The )HTML" << comb_pct << R"HTML(% combinatorial, )HTML" << expl_pct << R"HTML(% exploratory, and )HTML" << trans_pct << R"HTML(% transformational distribution reveals the current epistemological profile. The path forward lies in deepening hybrid neuro-symbolic integration—leveraging neural pattern recognition to generate candidate structures, and symbolic reasoning to validate, explain, and refine them. The ultimate goal is <strong>epistemic reliability over fluent generation</strong>: systems that produce not just plausible claims, but <em>justified, traceable, and contestable</em> knowledge.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -5425,9 +10000,419 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             All insights should be validated by domain experts before taking action.</p>
         </footer>
     </div>
+
+    <!-- Export Button -->
+    <button class="export-btn" id="exportBtn">Export PDF</button>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Interactive Features JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ====================================================================
+        // 0. BUTTON EVENT LISTENERS
+        // ====================================================================
+        const expandAllBtn = document.getElementById('expandAllBtn');
+        const collapseAllBtn = document.getElementById('collapseAllBtn');
+        const exportBtn = document.getElementById('exportBtn');
+
+        if (expandAllBtn) {
+            expandAllBtn.addEventListener('click', function() {
+                document.querySelectorAll('section:not(#statistics)').forEach(s => {
+                    s.classList.remove('collapsed');
+                    Array.from(s.children).forEach((child, idx) => {
+                        if (idx > 0) child.style.display = '';
+                    });
+                });
+            });
+        }
+
+        if (collapseAllBtn) {
+            collapseAllBtn.addEventListener('click', function() {
+                document.querySelectorAll('section:not(#statistics)').forEach(s => {
+                    s.classList.add('collapsed');
+                    Array.from(s.children).forEach((child, idx) => {
+                        if (idx > 0) child.style.display = 'none';
+                    });
+                });
+            });
+        }
+
+        if (exportBtn) {
+            exportBtn.addEventListener('click', function() {
+                window.print();
+            });
+        }
+
+        // ====================================================================
+        // 1. COLLAPSIBLE SECTIONS
+        // ====================================================================
+        const allSections = Array.from(document.querySelectorAll('section:not(#statistics)'));
+        allSections.forEach((section, index) => {
+            const header = section.querySelector('h2');
+            if (!header) return;
+
+            // Start all sections collapsed
+            section.classList.add('collapsed');
+            const children = Array.from(section.children);
+            children.forEach((child, idx) => {
+                if (idx > 0) { // Skip the h2
+                    child.style.display = 'none';
+                }
+            });
+
+            // Expand the first two sections (categories overview and executive summary)
+            if (index < 2) {
+                section.classList.remove('collapsed');
+                children.forEach((child, idx) => {
+                    if (idx > 0) {
+                        child.style.display = '';
+                    }
+                });
+            }
+
+            header.addEventListener('click', function() {
+                section.classList.toggle('collapsed');
+                const children = Array.from(section.children);
+                children.forEach((child, idx) => {
+                    if (idx > 0) { // Skip the h2
+                        child.style.display = section.classList.contains('collapsed') ? 'none' : '';
+                    }
+                });
+            });
+        });
+
+        // ====================================================================
+        // 2. SEARCH FUNCTIONALITY
+        // ====================================================================
+        const searchBox = document.getElementById('searchBox');
+        if (searchBox) {
+            searchBox.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                let visibleCount = 0;
+
+                // Search through table rows
+                document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    const matches = text.includes(query);
+                    row.style.display = matches ? '' : 'none';
+                    if (matches) visibleCount++;
+                });
+
+                // Search through clusters
+                document.querySelectorAll('.cluster').forEach(cluster => {
+                    const text = cluster.textContent.toLowerCase();
+                    cluster.style.display = text.includes(query) ? '' : 'none';
+                });
+
+                // Search through module sections - show/hide entire sections
+                document.querySelectorAll('section[id^="module-"]').forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    if (query === '') {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = text.includes(query) ? '' : 'none';
+                    }
+                });
+
+                updateVisibleCounts();
+            });
+        }
+
+        // ====================================================================
+        // 3. CONFIDENCE FILTERING
+        // ====================================================================
+        document.querySelectorAll('.filter-score').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const activeFilters = Array.from(document.querySelectorAll('.filter-score:checked'))
+                    .map(cb => cb.value);
+
+                document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                    const scoreCell = row.querySelector('td:nth-child(2)');
+                    if (!scoreCell) return;
+
+                    const scoreText = scoreCell.textContent.trim();
+                    const score = parseFloat(scoreText);
+
+                    if (isNaN(score)) {
+                        row.style.display = '';
+                        return;
+                    }
+
+                    let show = false;
+                    if (activeFilters.includes('high') && score >= 0.7) show = true;
+                    if (activeFilters.includes('med') && score >= 0.4 && score < 0.7) show = true;
+                    if (activeFilters.includes('low') && score < 0.4) show = true;
+
+                    row.style.display = show ? '' : 'none';
+                });
+
+                updateVisibleCounts();
+            });
+        });
+
+        function updateVisibleCounts() {
+            document.querySelectorAll('section[id^="module-"]').forEach(section => {
+                const table = section.querySelector('.data-table tbody');
+                if (!table) return;
+
+                const total = table.querySelectorAll('tr').length;
+                const visible = table.querySelectorAll('tr:not([style*="display: none"])').length;
+
+                const countEl = section.querySelector('.module-header .count');
+                if (countEl && total > 0) {
+                    const originalText = countEl.textContent;
+                    if (visible < total) {
+                        countEl.textContent = originalText.replace(/Total: \d+/, `Showing: ${visible} / ${total}`);
+                    } else {
+                        countEl.textContent = originalText.replace(/Showing: \d+ \/ /, 'Total: ');
+                    }
+                }
+            });
+        }
+
+        // ====================================================================
+        // 4. ENTITY HIGHLIGHTING (Cross-Reference)
+        // ====================================================================
+        function highlightEntity(entityName) {
+            // Clear previous highlights
+            document.querySelectorAll('.highlighted').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+
+            if (!entityName) return;
+
+            const normalizedSearch = entityName.toLowerCase().trim();
+            let firstMatch = null;
+
+            // Highlight in tables
+            document.querySelectorAll('.data-table td').forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(normalizedSearch)) {
+                    cell.classList.add('highlighted');
+                    if (!firstMatch) firstMatch = cell;
+                }
+            });
+
+            // Highlight entity badges
+            document.querySelectorAll('.entity').forEach(badge => {
+                if (badge.textContent.toLowerCase().includes(normalizedSearch)) {
+                    badge.classList.add('highlighted');
+                    if (!firstMatch) firstMatch = badge;
+                }
+            });
+
+            // Scroll to first match
+            if (firstMatch) {
+                firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Add click handlers to entities
+        document.querySelectorAll('.entity, .data-table td:first-child').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const entityName = this.textContent.trim();
+                highlightEntity(entityName);
+            });
+        });
+
+        // ====================================================================
+        // 5. LAZY LOADING FOR LARGE TABLES
+        // ====================================================================
+        document.querySelectorAll('.data-table tbody').forEach(tbody => {
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const INITIAL_ROWS = 20;
+
+            if (rows.length <= INITIAL_ROWS) return; // Skip small sections
+
+            // Hide rows after INITIAL_ROWS
+            rows.slice(INITIAL_ROWS).forEach(row => {
+                row.style.display = 'none';
+                row.dataset.lazyHidden = 'true';
+            });
+
+            // Create "Load More" button
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.className = 'load-more-btn';
+            loadMoreBtn.textContent = `Load ${rows.length - INITIAL_ROWS} more...`;
+
+            loadMoreBtn.addEventListener('click', function() {
+                rows.forEach(row => {
+                    if (row.dataset.lazyHidden === 'true') {
+                        row.style.display = '';
+                        delete row.dataset.lazyHidden;
+                    }
+                });
+                this.remove();
+            });
+
+            tbody.parentElement.insertAdjacentElement('afterend', loadMoreBtn);
+        });
+
+        // ====================================================================
+        // 6. INTERACTIVE CHART
+        // ====================================================================
+        const chartCanvas = document.getElementById('insightChart');
+        if (chartCanvas && typeof Chart !== 'undefined') {
+            // Collect category counts from category cards
+            const categoryData = {
+                'Combinatorial': 0,
+                'Exploratory': 0,
+                'Transformational': 0
+            };
+
+            // Get data from the category overview cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                const title = card.querySelector('h3');
+                const statItems = card.querySelectorAll('.stat-item');
+                if (title && statItems.length > 0) {
+                    const categoryName = title.textContent.trim();
+                    // First stat-item contains the count
+                    const countValue = statItems[0].querySelector('.stat-value');
+                    const count = countValue ? parseInt(countValue.textContent.trim()) || 0 : 0;
+                    if (categoryData.hasOwnProperty(categoryName)) {
+                        categoryData[categoryName] = count;
+                    }
+                }
+            });
+
+            const totalInsights = Object.values(categoryData).reduce((a, b) => a + b, 0);
+
+            if (totalInsights > 0) {
+                new Chart(chartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['🧩 Combinatorial', '🔍 Exploratory', '🔄 Transformational'],
+                        datasets: [{
+                            label: 'Number of Insights',
+                            data: [
+                                categoryData['Combinatorial'],
+                                categoryData['Exploratory'],
+                                categoryData['Transformational']
+                            ],
+                            backgroundColor: [
+                                'rgba(74, 222, 128, 0.7)',   // Green for Combinatorial
+                                'rgba(79, 195, 247, 0.7)',   // Blue for Exploratory
+                                'rgba(232, 121, 249, 0.7)'   // Purple for Transformational
+                            ],
+                            borderColor: [
+                                'rgba(74, 222, 128, 1)',
+                                'rgba(79, 195, 247, 1)',
+                                'rgba(232, 121, 249, 1)'
+                            ],
+                            borderWidth: 2,
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Insight Distribution by Category',
+                                color: '#f8fafc',
+                                font: { size: 16, weight: 'bold' },
+                                padding: { bottom: 20 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                padding: 12,
+                                titleColor: '#f8fafc',
+                                bodyColor: '#f8fafc',
+                                borderColor: 'rgba(148, 163, 184, 0.3)',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        const value = context.parsed.x || 0;
+                                        const percentage = ((value / totalInsights) * 100).toFixed(1);
+                                        return `${value} insights (${percentage}%)`;
+                                    },
+                                    afterLabel: function(context) {
+                                        const descriptions = [
+                                            'Pattern Detection & Structural Combinations',
+                                            'Path Finding & Connection Discovery',
+                                            'Reframing & Perspective Shifts'
+                                        ];
+                                        return descriptions[context.dataIndex];
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 11 }
+                                },
+                                grid: {
+                                    color: 'rgba(148, 163, 184, 0.1)'
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#f8fafc',
+                                    font: { size: 13, weight: '600' },
+                                    padding: 10
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        onClick: (event, activeElements) => {
+                            if (activeElements.length > 0) {
+                                const index = activeElements[0].index;
+                                const sectionIds = [
+                                    '#combinatorial-section',
+                                    '#exploratory-section',
+                                    '#transformational-section'
+                                ];
+                                const section = document.querySelector(sectionIds[index]);
+                                if (section) {
+                                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // ====================================================================
+        // 7. KEYBOARD SHORTCUTS
+        // ====================================================================
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K: Focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                if (searchBox) searchBox.focus();
+            }
+
+            // Escape: Clear search and highlights
+            if (e.key === 'Escape') {
+                if (searchBox) {
+                    searchBox.value = '';
+                    searchBox.dispatchEvent(new Event('input'));
+                }
+                highlightEntity(null);
+            }
+        });
+
+        console.log('Interactive report features loaded successfully');
+    })();
+    </script>
 </body>
 </html>
-)";
+)HTML";
 
     return html.str();
 }
@@ -5705,6 +10690,150 @@ std::string ReportGenerator::generate_cluster_summary(InsightCluster& cluster, c
     }
 
     return summary.str();
+}
+
+// ============== PATTERN LIBRARY EXPORT ==============
+void ReportGenerator::export_pattern_library(const InsightCollection& insights, const std::string& output_path) {
+    std::ofstream out(output_path);
+    if (!out.is_open()) {
+        throw std::runtime_error("Failed to open pattern library file: " + output_path);
+    }
+
+    out << "{\n";
+    out << "  \"meta\": {\n";
+    out << "    \"generated_at\": \"" << get_current_timestamp() << "\",\n";
+    out << "    \"run_id\": \"" << insights.run_id << "\",\n";
+    out << "    \"total_patterns\": " << 0 << "\n";  // Will update below
+    out << "  },\n";
+    out << "  \"patterns\": [\n";
+
+    int pattern_count = 0;
+    bool first_pattern = true;
+
+    // Extract patterns from motifs, k-truss, and meta-patterns
+    for (const auto& insight : insights.insights) {
+        if (insight.type != InsightType::MOTIF &&
+            insight.type != InsightType::K_TRUSS &&
+            insight.type != InsightType::META_PATTERN) {
+            continue;
+        }
+
+        if (!first_pattern) {
+            out << ",\n";
+        }
+        first_pattern = false;
+        pattern_count++;
+
+        out << "    {\n";
+        out << "      \"id\": \"" << insight.insight_id << "\",\n";
+        out << "      \"type\": \"" << get_insight_type_name(insight.type) << "\",\n";
+        out << "      \"size\": " << insight.seed_nodes.size() << ",\n";
+        out << "      \"confidence\": " << std::fixed << std::setprecision(3) << insight.score << ",\n";
+
+        // Pattern structure (nodes)
+        out << "      \"nodes\": [";
+        for (size_t i = 0; i < insight.seed_labels.size(); ++i) {
+            if (i > 0) out << ", ";
+            out << "\"" << insight.seed_labels[i] << "\"";
+        }
+        out << "],\n";
+
+        // Node IDs (for graph queries)
+        out << "      \"node_ids\": [";
+        for (size_t i = 0; i < insight.seed_nodes.size(); ++i) {
+            if (i > 0) out << ", ";
+            out << "\"" << insight.seed_nodes[i] << "\"";
+        }
+        out << "],\n";
+
+        // Metadata from score_breakdown
+        out << "      \"metadata\": {\n";
+        bool first_meta = true;
+        for (const auto& [key, value] : insight.score_breakdown) {
+            if (!first_meta) out << ",\n";
+            first_meta = false;
+            out << "        \"" << key << "\": " << std::fixed << std::setprecision(3) << value;
+        }
+        out << "\n      },\n";
+
+        // Description
+        out << "      \"description\": \"";
+        // Escape quotes in description
+        std::string desc = insight.description;
+        for (size_t i = 0; i < desc.size(); ++i) {
+            if (desc[i] == '"') out << "\\\"";
+            else if (desc[i] == '\\') out << "\\\\";
+            else if (desc[i] == '\n') out << "\\n";
+            else if (desc[i] == '\r') {} // Skip
+            else out << desc[i];
+        }
+        out << "\",\n";
+
+        // Source documents
+        out << "      \"sources\": [";
+        for (size_t i = 0; i < insight.source_documents.size() && i < 10; ++i) {
+            if (i > 0) out << ", ";
+            out << "\"" << insight.source_documents[i] << "\"";
+        }
+        out << "]\n";
+
+        out << "    }";
+    }
+
+    out << "\n  ],\n";
+
+    // Statistics by pattern type
+    std::map<std::string, int> type_counts;
+    std::map<std::string, int> size_distribution;
+
+    for (const auto& insight : insights.insights) {
+        if (insight.type == InsightType::MOTIF ||
+            insight.type == InsightType::K_TRUSS ||
+            insight.type == InsightType::META_PATTERN) {
+
+            std::string type_name = get_insight_type_name(insight.type);
+            type_counts[type_name]++;
+
+            int size = static_cast<int>(insight.seed_nodes.size());
+            std::string size_key = std::to_string(size) + "-node";
+            size_distribution[size_key]++;
+        }
+    }
+
+    out << "  \"statistics\": {\n";
+    out << "    \"total_patterns\": " << pattern_count << ",\n";
+
+    out << "    \"by_type\": {\n";
+    bool first_type = true;
+    for (const auto& [type, count] : type_counts) {
+        if (!first_type) out << ",\n";
+        first_type = false;
+        out << "      \"" << type << "\": " << count;
+    }
+    out << "\n    },\n";
+
+    out << "    \"by_size\": {\n";
+    bool first_size = true;
+    for (const auto& [size, count] : size_distribution) {
+        if (!first_size) out << ",\n";
+        first_size = false;
+        out << "      \"" << size << "\": " << count;
+    }
+    out << "\n    }\n";
+
+    out << "  },\n";
+
+    // Usage guide
+    out << "  \"usage\": {\n";
+    out << "    \"description\": \"Pattern library for reuse and querying\",\n";
+    out << "    \"query_by_id\": \"Use 'id' field to retrieve specific patterns\",\n";
+    out << "    \"query_by_size\": \"Use 'size' field to find patterns of specific dimensions\",\n";
+    out << "    \"query_by_nodes\": \"Use 'node_ids' to find patterns containing specific entities\",\n";
+    out << "    \"similarity_search\": \"Compare 'nodes' arrays to find structurally similar patterns\"\n";
+    out << "  }\n";
+
+    out << "}\n";
+    out.close();
 }
 
 } // namespace kg

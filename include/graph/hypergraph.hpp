@@ -446,6 +446,37 @@ public:
                         const std::string& title = "Hypergraph Visualization") const;
 
     /**
+     * @brief Export to a self-contained Graph-RAG HTML viewer
+     *
+     * Generates a single-file interactive 3D viewer with an embedded LLM chat
+     * window.  The user can ask natural-language questions; the page builds a
+     * local subgraph context, calls the configured LLM provider, and highlights
+     * the answer paths directly on the 3D force-graph.
+     *
+     * All clustering algorithms (Louvain + DBSCAN) and the standard graph
+     * controls are preserved.
+     *
+     * @param filename           Output HTML file path
+     * @param title              Page/graph title
+     * @param llm_provider       "openai" | "gemini" | "openai-compatible"
+     * @param llm_api_key        API key embedded into the page (editable at runtime)
+     * @param llm_model          Default model name
+     * @param llm_base_url       Custom base URL for openai-compatible endpoints
+     * @param augmentation_json  Optional pre-serialised AugmentationData JSON
+     *                           (call augmentation.to_json() at the call-site).
+     *                           When non-empty its nodes/links are merged into
+     *                           the embedded graph so the RAG chat can reason
+     *                           over insight-operator results as well.
+     */
+    void export_to_html_rag(const std::string& filename,
+                            const std::string& title              = "Knowledge Graph — Graph-RAG",
+                            const std::string& llm_provider       = "openai",
+                            const std::string& llm_api_key        = "",
+                            const std::string& llm_model          = "gpt-4o-mini",
+                            const std::string& llm_base_url       = "",
+                            const nlohmann::json& augmentation_json = nlohmann::json{}) const;
+
+    /**
      * @brief Load hypergraph from JSON
      */
     static Hypergraph from_json(const nlohmann::json& j);
