@@ -1909,6 +1909,29 @@ std::string ReportGenerator::generate_statistics_section(const InsightCollection
         ss << "| Max Degree | " << stats.max_node_degree << " |\n";
         ss << "| Insights Discovered | " << insights.insights.size() << " |\n";
         ss << "\n";
+
+        // Add QC stats if available
+        if (config.pipeline_stats.contains("quality_control")) {
+            auto qc = config.pipeline_stats["quality_control"];
+            ss << "### Quality Control Statistics\n\n";
+            ss << "| Metric | Value |\n";
+            ss << "|--------|-------|\n";
+            ss << "| Initial Entities | " << qc.value("initial_nodes", 0) << " |\n";
+            ss << "| Entities Removed | " << qc.value("total_removed", 0) << " |\n";
+            ss << "| Removal Rate | " << std::fixed << std::setprecision(1)
+               << (qc.value("initial_nodes", 0) > 0 ? 100.0 * qc.value("total_removed", 0) / qc.value("initial_nodes", 1) : 0.0) << "% |\n";
+
+            if (qc.contains("connectivity")) {
+                auto conn = qc["connectivity"];
+                ss << "| Connected Components | " << conn.value("num_connected_components", 0) << " |\n";
+                ss << "| Largest Component | " << conn.value("largest_component_size", 0)
+                   << " (" << std::fixed << std::setprecision(1)
+                   << (qc.value("final_nodes", 0) > 0 ? 100.0 * conn.value("largest_component_size", 0) / qc.value("final_nodes", 1) : 0.0) << "%) |\n";
+                ss << "| Graph Density | " << std::fixed << std::setprecision(4) << conn.value("graph_density", 0.0) << " |\n";
+                ss << "| Clustering Coefficient | " << std::fixed << std::setprecision(3) << conn.value("clustering_coefficient", 0.0) << " |\n";
+            }
+            ss << "\n";
+        }
     } else {
         ss << "KNOWLEDGE GRAPH STATISTICS\n";
         ss << "--------------------------\n";
@@ -5535,6 +5558,68 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                     <div class="value">)" << std::fixed << std::setprecision(3) << config.pipeline_stats.value("avg_confidence_boost", 0.0) << R"(</div>
                 </div>
             </div>
+        </section>
+)";
+    }
+
+    // Add QC stats if available
+    if (!config.pipeline_stats.empty() && config.pipeline_stats.contains("quality_control")) {
+        auto qc = config.pipeline_stats["quality_control"];
+        html << R"(
+        <section id="qc-stats" style="margin-top: 30px;">
+            <h2 style="margin-bottom: 15px;">Quality Control Statistics</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95em;">
+                3-level validation system removes noise, artifacts, and invalid entities to improve graph quality.
+            </p>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="label">Initial Entities</div>
+                    <div class="value">)" << qc.value("initial_nodes", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Final Entities</div>
+                    <div class="value">)" << qc.value("final_nodes", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Removed</div>
+                    <div class="value">)" << qc.value("total_removed", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Removal Rate</div>
+                    <div class="value">)" << std::fixed << std::setprecision(1)
+            << (qc.value("initial_nodes", 0) > 0 ? 100.0 * qc.value("total_removed", 0) / qc.value("initial_nodes", 1) : 0.0) << R"(%</div>
+                </div>
+            </div>
+)";
+
+        if (qc.contains("connectivity")) {
+            auto conn = qc["connectivity"];
+            html << R"(
+            <h3 style="margin-top: 25px; margin-bottom: 15px;">Graph Connectivity</h3>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="label">Connected Components</div>
+                    <div class="value">)" << conn.value("num_connected_components", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Largest Component</div>
+                    <div class="value">)" << conn.value("largest_component_size", 0)
+                << " (" << std::fixed << std::setprecision(1)
+                << (qc.value("final_nodes", 0) > 0 ? 100.0 * conn.value("largest_component_size", 0) / qc.value("final_nodes", 1) : 0.0) << R"(%)</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Graph Density</div>
+                    <div class="value">)" << std::fixed << std::setprecision(4) << conn.value("graph_density", 0.0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Clustering Coeff</div>
+                    <div class="value">)" << std::fixed << std::setprecision(3) << conn.value("clustering_coefficient", 0.0) << R"(</div>
+                </div>
+            </div>
+)";
+        }
+
+        html << R"(
         </section>
 )";
     }

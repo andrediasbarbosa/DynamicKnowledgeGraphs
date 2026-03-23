@@ -1454,6 +1454,19 @@ int cmd_run(const Args& args) {
         report_config.include_statistics = true;
         report_config.llm_examples_per_type = 1;
 
+        // Load QC stats if available
+        std::string qc_stats_path = run_dir + "/Step_3_QualityControl/cleaning_report.json";
+        if (fs::exists(qc_stats_path)) {
+            try {
+                std::ifstream qc_file(qc_stats_path);
+                nlohmann::json qc_json;
+                qc_file >> qc_json;
+                report_config.pipeline_stats["quality_control"] = qc_json;
+            } catch (const std::exception& e) {
+                std::cerr << "Warning: Could not load QC statistics: " << e.what() << "\n";
+            }
+        }
+
         ReportGenerator report_gen(graph);
         auto report_llm = LLMProviderFactory::create_from_config_file();
         if (report_llm) {
