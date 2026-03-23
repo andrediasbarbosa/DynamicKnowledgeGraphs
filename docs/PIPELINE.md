@@ -22,8 +22,16 @@ Command:
          v
 +-------------------------------------------+
 | Stage 1: Extract                          |
-| outputs: graph.json OR graph_raw.json,    |
-|          extraction_stats.json             |
+| outputs: graph_raw.json,                  |
+|          extraction_stats.json            |
++-------------------------------------------+
+         |
+         v
++-------------------------------------------+
+| Stage 1.75: Quality Control               |
+| outputs: graph.json (cleaned),            |
+|          cleaning_report.json,            |
+|          quality_control_report.html      |
 +-------------------------------------------+
          |
          v
@@ -68,8 +76,9 @@ Command:
 
 | Stage | Name | Main Input | Main Output |
 |---|---|---|---|
-| 1 | Knowledge Extraction | PDF file(s) + LLM config | `graph.json` (or `graph_raw.json` if preprocess enabled), `extraction_stats.json` |
-| 1.5 (optional) | Preprocess Graph | In-memory graph from Stage 1 | Updated `graph.json`, optional `graph_raw.json` |
+| 1 | Knowledge Extraction | PDF file(s) + LLM config | `graph_raw.json`, `extraction_stats.json` |
+| 1.75 | Quality Control | `graph_raw.json` + QC config | `graph.json` (cleaned), `cleaning_report.json`, `quality_control_report.html` |
+| 1.5 (optional) | Preprocess Graph | In-memory graph from Stage 1.75 | Updated `graph.json`, optional `graph_raw.json` |
 | 2 | Build Index | `graph.json` | `index.json` |
 | 3 | Knowledge Discovery | `graph.json` + `index.json` + operator list | `insights.json` |
 | 4 | Generate Visualizations | `graph.json` + `insights.json` | `graph.html`, `graph_augmented.html`, `graph_rag.html`, `augmentation.json`, `graph.dot` |
@@ -111,6 +120,58 @@ Implemented by `ExtractionPipeline::process_pdfs()` and friends.
   - `graph.json`
 - If `--preprocess` **is** used:
   - `graph_raw.json` (raw extracted graph before preprocessing)
+
+## Stage 1.75: Quality Control
+
+Runs by default after extraction (can be disabled with `--no-qc`).
+
+### Expected inputs
+- `graph_raw.json` (or in-memory graph from Stage 1)
+- Quality control configuration from CLI flags:
+  - `--min-node-length` (default: 2)
+  - `--min-degree` (default: 1)
+  - `--llm-validate` (default: false)
+  - `--validation-mode` (default: "suspicious")
+  - `--semantic-dedup` (default: false)
+  - `--semantic-threshold` (default: 0.85)
+
+### Processing steps
+1. **Level 1: Rule-based filtering**
+   - Remove entities based on length constraints
+   - Filter stopwords ("the", "a", "fig", etc.)
+   - Remove pure numbers and pure punctuation
+   - Detect extraction artifacts ("figure", "section", etc.)
+   - Trim whitespace from all entity labels
+
+2. **Level 1.5: Semantic deduplication** (optional, requires LLM)
+   - Group entities in batches
+   - Use LLM to identify semantic duplicates
+   - Merge similar entities (e.g., "ML" → "machine learning")
+   - Update relations to canonical entities
+
+3. **Level 2: Statistical filtering**
+   - Compute node degrees and importance scores
+   - Remove isolated nodes (degree < threshold)
+   - Flag statistical outliers
+
+4. **Level 3: LLM validation** (optional)
+   - Batch validate suspicious or all entities
+   - Ask LLM to classify as VALID/INVALID
+   - Remove entities rejected by LLM
+
+5. **Graph connectivity analysis**
+   - Find connected components using DFS
+   - Calculate graph density, clustering coefficient
+   - Count isolated nodes
+   - Identify largest component
+
+### Expected outputs
+- `graph.json` (cleaned graph)
+- `cleaning_report.json` (JSON statistics)
+- `quality_control_report.html` (visual report with charts)
+
+### Output folder
+- `Step_3_QualityControl/`
 
 ## Stage 1.5 (optional): Preprocess Graph
 

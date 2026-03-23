@@ -143,6 +143,8 @@ kg run --input paper.pdf --output runs/ \
 | `--min-degree` | int | 1 | Minimum node degree (connectivity) |
 | `--llm-validate` | bool | false | Enable Level 3 LLM validation |
 | `--validation-mode` | string | "suspicious" | LLM validation mode (all/suspicious/none) |
+| `--semantic-dedup` | bool | false | Enable semantic deduplication (requires LLM) |
+| `--semantic-threshold` | double | 0.85 | Similarity threshold for semantic deduplication |
 
 ---
 
@@ -160,6 +162,10 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
   "removed_by_numbers": 3,
   "removed_by_artifacts": 2,
   "level1_removed": 18,
+  "level1_5": {
+    "semantic_duplicates_found": 5,
+    "semantic_duplicates_merged": 5
+  },
   "removed_by_degree": 10,
   "removed_by_importance": 5,
   "removed_by_outliers": 2,
@@ -169,7 +175,15 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
   "level3_removed": 3,
   "final_nodes": 112,
   "final_edges": 185,
-  "cleaning_time_ms": 234.5
+  "cleaning_time_ms": 234.5,
+  "connectivity": {
+    "num_connected_components": 3,
+    "largest_component_size": 95,
+    "num_isolated_nodes": 8,
+    "graph_density": 0.0234,
+    "average_degree": 3.28,
+    "clustering_coefficient": 0.156
+  }
 }
 ```
 
@@ -182,11 +196,86 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
   Initial: 150 entities, 200 relations
   Cleaned: 112 entities (38 removed), 185 relations (15 removed)
   Level 1 (rules):   removed 18 entities
+  Level 1.5 (semantic): merged 5 semantic duplicates (5 groups)
   Level 2 (stats):   removed 17 entities
   Level 3 (LLM):     removed 3 entities
+
+  Graph Connectivity:
+    Connected components:  3
+    Largest component:     95 nodes (84.8%)
+    Isolated nodes:        8
+    Graph density:         0.0234
+    Average degree:        3.28
+    Clustering coeff:      0.1560
+
   Saved: Step_3_QualityControl/cleaning_report.json
+  Saved: Step_3_QualityControl/quality_control_report.html
   QC time: 234ms
 ```
+
+---
+
+## Graph Connectivity Analysis
+
+After cleaning, the system analyzes the graph structure to provide insights into connectivity patterns:
+
+### **Metrics Computed**
+
+1. **Connected Components**
+   - Number of separate subgraphs
+   - Identifies graph fragmentation
+   - Ideal: 1 component (fully connected)
+
+2. **Largest Component Size**
+   - Number of nodes in the biggest connected subgraph
+   - Percentage of total nodes
+   - Indicates main knowledge cluster
+
+3. **Isolated Nodes**
+   - Nodes with degree = 0 (no connections)
+   - May indicate extraction artifacts or orphaned concepts
+   - Candidates for removal in stricter filtering
+
+4. **Graph Density**
+   - Range: 0.0 to 1.0
+   - Formula: 2×E / (V×(V-1))
+   - Higher density = more interconnected knowledge
+
+5. **Average Degree**
+   - Mean number of connections per node
+   - Indicates overall connectivity level
+   - Higher values suggest richer relationships
+
+6. **Clustering Coefficient**
+   - Range: 0.0 to 1.0
+   - Measures local clustering (triangles in graph)
+   - Higher values indicate tightly-knit knowledge communities
+   - Uses local clustering averaged across all nodes
+
+### **Interpretation**
+
+**Healthy Graph Indicators:**
+- 1-3 connected components (low fragmentation)
+- Largest component contains >80% of nodes
+- Few isolated nodes (<5% of total)
+- Moderate density (0.01-0.1 for large graphs)
+- Average degree >2 (nodes have multiple connections)
+- Clustering coefficient >0.1 (knowledge clustering present)
+
+**Problem Indicators:**
+- Many components (>5) → fragmented knowledge
+- Many isolated nodes (>10%) → poor extraction or over-cleaning
+- Very low density (<0.001) → sparse, disconnected graph
+- Average degree <1 → most nodes have few connections
+- Clustering coefficient ~0 → no knowledge clustering
+
+### **HTML Report Visualization**
+
+The `quality_control_report.html` includes:
+- Visual cards showing connectivity metrics
+- Comparison table with descriptions
+- Color-coded indicators (green = good, yellow = warning, red = issue)
+- Graph cohesion assessment
 
 ---
 
@@ -216,26 +305,40 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
 
 4. Level 1: Rule-based filtering
    - Check length, stopwords, numbers, artifacts
+   - Trim whitespace from all labels
    - Mark invalid entities with removal_reason
 
-5. Level 2: Statistical filtering
+5. Level 1.5: Semantic deduplication (optional, requires LLM)
+   - Batch entities by similarity
+   - Ask LLM to identify semantic duplicates
+   - Merge entities (e.g., "ML" → "machine learning")
+   - Update relations to point to canonical entities
+
+6. Level 2: Statistical filtering
    - Compute degrees and importance scores
    - Flag suspicious entities (degree < threshold)
    - Mark invalid entities
 
-6. Level 3: LLM validation (optional)
+7. Level 3: LLM validation (optional)
    - Batch validate suspicious/all entities
    - Call LLM with validation prompt
    - Parse JSON response (VALID/INVALID)
 
-7. Apply results:
+8. Apply results:
    - Remove invalid entities from graph
    - Remove relations with invalid entities
    - Remove explicitly invalid relations
 
-8. Save:
-   - Cleaned graph → Step_4_GraphBuilding/graph.json
-   - Cleaning report → Step_3_QualityControl/cleaning_report.json
+9. Analyze graph connectivity:
+   - Build adjacency list from valid entities/relations
+   - Run DFS to find connected components
+   - Calculate density, clustering coefficient, average degree
+   - Count isolated nodes
+
+10. Save:
+    - Cleaned graph → Step_4_GraphBuilding/graph.json
+    - Cleaning report → Step_3_QualityControl/cleaning_report.json
+    - HTML report → Step_3_QualityControl/quality_control_report.html
 ```
 
 ### **LLM Validation Prompt**
