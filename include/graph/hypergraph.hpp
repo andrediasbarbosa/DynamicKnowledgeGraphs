@@ -9,6 +9,7 @@
 #include <optional>
 #include <functional>
 #include <nlohmann/json.hpp>
+#include "llm/causal_metadata.hpp"  // Phase 2: Causal metadata
 
 namespace kg {
 
@@ -59,6 +60,37 @@ struct HyperEdge {
     int source_page = -1;                              // Page number (if applicable)
 
     double confidence = 1.0;                           // Confidence score [0, 1]
+
+    // Phase 2: Causal metadata (optional)
+    std::optional<CausalMetadata> causal_metadata;     // Rich causal information (if causal)
+
+    /**
+     * @brief Check if this is a causal edge
+     */
+    bool is_causal() const {
+        return causal_metadata.has_value();
+    }
+
+    /**
+     * @brief Get causal type (if causal)
+     */
+    CausalRelationType get_causal_type() const {
+        return causal_metadata ? causal_metadata->type : CausalRelationType::DIRECT_CAUSE;
+    }
+
+    /**
+     * @brief Get causal strength score (0-1)
+     */
+    double get_causal_strength_score() const {
+        return causal_metadata ? causal_metadata->get_strength_score() : 0.0;
+    }
+
+    /**
+     * @brief Check if this is a strong causal relationship
+     */
+    bool is_strong_causal() const {
+        return causal_metadata && causal_metadata->is_strong();
+    }
 
     /**
      * @brief Get all nodes involved in this hyperedge (sources + targets)

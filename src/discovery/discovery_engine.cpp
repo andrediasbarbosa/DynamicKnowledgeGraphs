@@ -6921,16 +6921,26 @@ std::vector<Insight> DiscoveryEngine::find_causal_chains() {
     // Build directed causal graph
     std::map<std::string, std::vector<std::string>> causal_edges;
     std::map<std::pair<std::string, std::string>, std::string> edge_relation;
+    std::map<std::string, double> edge_strength;  // Phase 2: Store causal strength
 
     for (const auto& edge : graph_.get_all_edges()) {
-        std::string rel = edge.relation;
-        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
-
         bool is_causal = false;
-        for (const auto& keyword : causal_keywords) {
-            if (rel.find(keyword) != std::string::npos) {
-                is_causal = true;
-                break;
+        double strength = 0.5;  // Default strength
+
+        // Phase 2: Check for causal metadata first
+        if (edge.is_causal()) {
+            is_causal = true;
+            strength = edge.causal_metadata->get_strength_score();
+        } else {
+            // Fallback: Check for causal keywords in relation
+            std::string rel = edge.relation;
+            std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+            for (const auto& keyword : causal_keywords) {
+                if (rel.find(keyword) != std::string::npos) {
+                    is_causal = true;
+                    break;
+                }
             }
         }
 
@@ -6939,6 +6949,7 @@ std::vector<Insight> DiscoveryEngine::find_causal_chains() {
             std::string tgt = edge.targets[0];
             causal_edges[src].push_back(tgt);
             edge_relation[{src, tgt}] = edge.id;
+            edge_strength[edge.id] = strength;  // Phase 2: Store strength
         }
     }
 
@@ -6976,7 +6987,22 @@ std::vector<Insight> DiscoveryEngine::find_causal_chains() {
                     CausalChain chain;
                     chain.path = new_path;
                     chain.edge_ids = new_edges;
-                    chain.chain_strength = 1.0 / new_path.size(); // Longer chains = weaker
+
+                    // Phase 2: Calculate chain strength from edge strengths
+                    double total_strength = 0.0;
+                    int edge_count = 0;
+                    for (const auto& eid : new_edges) {
+                        auto it = edge_strength.find(eid);
+                        if (it != edge_strength.end()) {
+                            total_strength += it->second;
+                            edge_count++;
+                        }
+                    }
+                    // Average strength, penalized by chain length
+                    chain.chain_strength = edge_count > 0 ?
+                        (total_strength / edge_count) * (1.0 / std::sqrt(new_path.size())) :
+                        1.0 / new_path.size();
+
                     chains.push_back(chain);
                 }
 
@@ -6995,9 +7021,14 @@ std::vector<Insight> DiscoveryEngine::find_causal_chains() {
 
     report_progress("Finding causal chains", 70, 100);
 
-    // Sort by chain strength and length
+    // Phase 2: Sort by chain strength first, then length
     std::sort(chains.begin(), chains.end(), [](const CausalChain& a, const CausalChain& b) {
-        return a.path.size() > b.path.size(); // Prefer longer chains
+        // Primary: Sort by strength (higher is better)
+        if (std::abs(a.chain_strength - b.chain_strength) > 0.01) {
+            return a.chain_strength > b.chain_strength;
+        }
+        // Secondary: Sort by path length (longer is more informative)
+        return a.path.size() > b.path.size();
     });
 
     // Create insights
@@ -7045,16 +7076,38 @@ std::vector<Insight> DiscoveryEngine::find_intervention_points() {
 
     std::map<std::string, std::vector<std::string>> causal_edges;
     std::set<std::string> causal_nodes;
+    std::map<std::pair<std::string, std::string>, double> edge_importance;  // Phase 2: Track link importance
 
     for (const auto& edge : graph_.get_all_edges()) {
-        std::string rel = edge.relation;
-        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
-
         bool is_causal = false;
-        for (const auto& keyword : causal_keywords) {
-            if (rel.find(keyword) != std::string::npos) {
-                is_causal = true;
-                break;
+        double importance = 1.0;  // Default importance
+
+        // Phase 2: Check for causal metadata first
+        if (edge.is_causal()) {
+            is_causal = true;
+            const auto& causal = *edge.causal_metadata;
+
+            // Calculate importance based on type and strength
+            double type_weight = 1.0;
+            if (causal.type == CausalRelationType::NECESSARY) {
+                type_weight = 2.0;  // NECESSARY links are high-priority interventions
+            } else if (causal.type == CausalRelationType::SUFFICIENT) {
+                type_weight = 1.5;  // SUFFICIENT links are also important
+            } else if (causal.type == CausalRelationType::DIRECT_CAUSE) {
+                type_weight = 1.3;
+            }
+
+            importance = causal.get_strength_score() * type_weight;
+        } else {
+            // Fallback: Check for causal keywords in relation
+            std::string rel = edge.relation;
+            std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+            for (const auto& keyword : causal_keywords) {
+                if (rel.find(keyword) != std::string::npos) {
+                    is_causal = true;
+                    break;
+                }
             }
         }
 
@@ -7064,19 +7117,22 @@ std::vector<Insight> DiscoveryEngine::find_intervention_points() {
             causal_edges[src].push_back(tgt);
             causal_nodes.insert(src);
             causal_nodes.insert(tgt);
+            edge_importance[{src, tgt}] = importance;  // Phase 2: Store importance
         }
     }
 
     report_progress("Finding intervention points", 30, 100);
 
-    // Calculate betweenness centrality in causal graph
+    // Phase 2: Calculate importance-weighted betweenness centrality
     std::map<std::string, double> betweenness;
+    std::map<std::string, double> weighted_importance;  // Sum of importance through node
 
     for (const auto& node : causal_nodes) {
         betweenness[node] = 0.0;
+        weighted_importance[node] = 0.0;
     }
 
-    // Simple betweenness: count paths that go through each node
+    // Betweenness: count paths that go through each node
     for (const auto& start : causal_nodes) {
         std::map<std::string, int> path_count;
 
@@ -7095,6 +7151,12 @@ std::vector<Insight> DiscoveryEngine::find_intervention_points() {
                     visited.insert(next);
                     q.push(next);
                     path_count[next]++;
+
+                    // Phase 2: Accumulate importance through this path
+                    auto imp_it = edge_importance.find({current, next});
+                    if (imp_it != edge_importance.end()) {
+                        weighted_importance[next] += imp_it->second;
+                    }
                 }
             }
         }
@@ -7115,11 +7177,15 @@ std::vector<Insight> DiscoveryEngine::find_intervention_points() {
         out_degree[src] = targets.size();
     }
 
-    // Create insights for high-betweenness nodes
+    // Phase 2: Create insights with importance-weighted scoring
     std::vector<std::pair<std::string, double>> ranked;
     for (const auto& [node, score] : betweenness) {
         if (score > 0) {
-            double combined = score * 0.7 + out_degree[node] * 0.3;
+            // Phase 2: Combine betweenness, out-degree, and weighted importance
+            double normalized_importance = weighted_importance[node] / std::max(1.0, score);
+            double combined = score * 0.5 +                           // Path centrality
+                            out_degree[node] * 0.2 +                  // Downstream effects
+                            normalized_importance * 0.3;              // Causal importance
             ranked.push_back({node, combined});
         }
     }
@@ -7172,16 +7238,30 @@ std::vector<Insight> DiscoveryEngine::find_feedback_loops() {
 
     std::map<std::string, std::vector<std::string>> directed_edges;
     std::map<std::pair<std::string, std::string>, std::string> edge_ids;
+    std::map<std::string, double> edge_strengths;         // Phase 2: Store edge strengths
+    std::map<std::string, bool> edge_immediate;          // Phase 2: Track immediate feedback
 
     for (const auto& edge : graph_.get_all_edges()) {
-        std::string rel = edge.relation;
-        std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
-
         bool is_directional = false;
-        for (const auto& keyword : directional_keywords) {
-            if (rel.find(keyword) != std::string::npos) {
-                is_directional = true;
-                break;
+        double strength = 0.5;  // Default
+        bool immediate = false;
+
+        // Phase 2: Check for causal metadata first
+        if (edge.is_causal()) {
+            is_directional = true;
+            const auto& causal = *edge.causal_metadata;
+            strength = causal.get_strength_score();
+            immediate = (causal.temporality == Temporality::IMMEDIATE);
+        } else {
+            // Fallback: Check for directional keywords
+            std::string rel = edge.relation;
+            std::transform(rel.begin(), rel.end(), rel.begin(), ::tolower);
+
+            for (const auto& keyword : directional_keywords) {
+                if (rel.find(keyword) != std::string::npos) {
+                    is_directional = true;
+                    break;
+                }
             }
         }
 
@@ -7190,16 +7270,21 @@ std::vector<Insight> DiscoveryEngine::find_feedback_loops() {
             std::string tgt = edge.targets[0];
             directed_edges[src].push_back(tgt);
             edge_ids[{src, tgt}] = edge.id;
+            edge_strengths[edge.id] = strength;      // Phase 2: Store
+            edge_immediate[edge.id] = immediate;     // Phase 2: Store
         }
     }
 
     report_progress("Finding feedback loops", 30, 100);
 
-    // Find cycles using DFS
+    // Phase 2: Enhanced feedback loop structure
     struct FeedbackLoop {
         std::vector<std::string> cycle;
         std::vector<std::string> edges;
-        bool is_positive; // reinforcing vs balancing
+        bool is_positive;            // reinforcing vs balancing
+        double avg_strength = 0.5;   // Phase 2: Average causal strength
+        bool has_immediate = false;  // Phase 2: Has immediate feedback
+        bool has_delayed = false;    // Phase 2: Has delayed feedback
     };
 
     std::vector<FeedbackLoop> loops;
@@ -7222,8 +7307,33 @@ std::vector<Insight> DiscoveryEngine::find_feedback_loops() {
                     loop.edges.push_back(it->second);
                 }
 
-                // Check if reinforcing (all positive) or balancing
-                loop.is_positive = true; // Simplified
+                // Phase 2: Calculate loop properties from edge metadata
+                double total_strength = 0.0;
+                int edge_count = 0;
+                int immediate_count = 0;
+                int delayed_count = 0;
+
+                for (const auto& eid : loop.edges) {
+                    auto str_it = edge_strengths.find(eid);
+                    if (str_it != edge_strengths.end()) {
+                        total_strength += str_it->second;
+                        edge_count++;
+                    }
+
+                    auto imm_it = edge_immediate.find(eid);
+                    if (imm_it != edge_immediate.end()) {
+                        if (imm_it->second) {
+                            immediate_count++;
+                        } else {
+                            delayed_count++;
+                        }
+                    }
+                }
+
+                loop.avg_strength = edge_count > 0 ? total_strength / edge_count : 0.5;
+                loop.has_immediate = (immediate_count > 0);
+                loop.has_delayed = (delayed_count > 0);
+                loop.is_positive = (loop.avg_strength > 0.5); // Strong = reinforcing
 
                 // Create a canonical representation to avoid duplicates
                 std::vector<std::string> sorted_cycle = path;
@@ -7265,8 +7375,13 @@ std::vector<Insight> DiscoveryEngine::find_feedback_loops() {
 
     report_progress("Finding feedback loops", 70, 100);
 
-    // Sort by cycle length (prefer shorter, more direct cycles)
+    // Phase 2: Sort by strength first, then cycle length
     std::sort(loops.begin(), loops.end(), [](const FeedbackLoop& a, const FeedbackLoop& b) {
+        // Primary: Sort by strength (higher = more important)
+        if (std::abs(a.avg_strength - b.avg_strength) > 0.1) {
+            return a.avg_strength > b.avg_strength;
+        }
+        // Secondary: Prefer shorter, more direct cycles
         return a.cycle.size() < b.cycle.size();
     });
 
@@ -9802,6 +9917,105 @@ std::vector<Insight> DiscoveryEngine::find_cross_community_mechanism_bridges(con
 
     report_progress("Cross-community mechanism bridges", 100, 100);
     return results;
+}
+
+// Phase 2: Apply causal filtering to insights
+std::vector<Insight> DiscoveryEngine::apply_causal_filter(const std::vector<Insight>& insights) const {
+    // If no filters are active, return all insights
+    if (!causal_filter_.has_filters()) {
+        return insights;
+    }
+
+    std::vector<Insight> filtered;
+
+    for (const auto& insight : insights) {
+        // Only filter causal insight types
+        if (insight.type != InsightType::CAUSAL_CHAIN &&
+            insight.type != InsightType::INTERVENTION_POINT &&
+            insight.type != InsightType::FEEDBACK_LOOP &&
+            insight.type != InsightType::CONFOUNDER) {
+            // Non-causal insights pass through unchanged
+            filtered.push_back(insight);
+            continue;
+        }
+
+        // Check if insight has causal metadata
+        bool has_causal_metadata = false;
+        bool passes_filter = false;
+
+        // Check all witness edges for causal metadata
+        for (const auto& edge_id : insight.witness_edges) {
+            const auto* edge = graph_.get_hyperedge(edge_id);
+            if (!edge || !edge->is_causal()) {
+                continue;
+            }
+
+            has_causal_metadata = true;
+            const auto& causal = *edge->causal_metadata;
+
+            // Check strength filter
+            bool strength_match = causal_filter_.strengths.empty();
+            if (!strength_match) {
+                std::string strength_str = causal.get_strength_string();
+                for (const auto& filter_strength : causal_filter_.strengths) {
+                    if (strength_str == filter_strength) {
+                        strength_match = true;
+                        break;
+                    }
+                }
+            }
+
+            // Check type filter
+            bool type_match = causal_filter_.types.empty();
+            if (!type_match) {
+                std::string type_str = causal.get_type_string();
+                for (const auto& filter_type : causal_filter_.types) {
+                    if (type_str == filter_type) {
+                        type_match = true;
+                        break;
+                    }
+                }
+            }
+
+            // Check mechanism type filter
+            bool mechanism_match = causal_filter_.mechanism_types.empty();
+            if (!mechanism_match && !causal.mechanism_type.empty()) {
+                for (const auto& filter_mech : causal_filter_.mechanism_types) {
+                    if (causal.mechanism_type == filter_mech) {
+                        mechanism_match = true;
+                        break;
+                    }
+                }
+            }
+
+            // Check temporality filter
+            bool temporality_match = causal_filter_.temporalities.empty();
+            if (!temporality_match) {
+                std::string temp_str = causal.get_temporality_string();
+                for (const auto& filter_temp : causal_filter_.temporalities) {
+                    if (temp_str == filter_temp) {
+                        temporality_match = true;
+                        break;
+                    }
+                }
+            }
+
+            // If all active filters match, this edge passes
+            if (strength_match && type_match && mechanism_match && temporality_match) {
+                passes_filter = true;
+                break;  // Found at least one edge that matches all filters
+            }
+        }
+
+        // Include insight if:
+        // 1. It has no causal metadata (fallback to keyword detection), OR
+        // 2. It has causal metadata that passes all filters
+        if (!has_causal_metadata || passes_filter) {
+            filtered.push_back(insight);
+        }
+    }
+
+    return filtered;
 }
 
 } // namespace kg

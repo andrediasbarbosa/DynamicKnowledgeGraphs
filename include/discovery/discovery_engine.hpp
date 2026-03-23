@@ -437,6 +437,27 @@ struct DiscoveryConfig {
     bool adaptive_thresholds = true;          // Enable adaptive pruning
 };
 
+// Phase 2: Causal filtering configuration
+struct CausalFilterConfig {
+    // Strength filters (empty = no filter)
+    std::vector<std::string> strengths;  // "weak", "moderate", "strong", "deterministic"
+
+    // Type filters (empty = no filter)
+    std::vector<std::string> types;  // "necessary", "sufficient", "direct_cause", "contributing", "preventing", "enabling", "mechanism"
+
+    // Mechanism type filters (empty = no filter)
+    std::vector<std::string> mechanism_types;  // "physical", "chemical", "biological", "social", "economic", "computational"
+
+    // Temporality filters (empty = no filter)
+    std::vector<std::string> temporalities;  // "immediate", "short_term", "long_term", "delayed"
+
+    // Check if any filters are active
+    bool has_filters() const {
+        return !strengths.empty() || !types.empty() ||
+               !mechanism_types.empty() || !temporalities.empty();
+    }
+};
+
 // Progress callback
 using DiscoveryProgressCallback = std::function<void(const std::string& stage, int current, int total)>;
 
@@ -449,6 +470,10 @@ public:
     void set_run_id(const std::string& run_id) { run_id_ = run_id; }
     void set_progress_callback(DiscoveryProgressCallback cb) { progress_cb_ = std::move(cb); }
     void set_llm_provider(const std::shared_ptr<LLMProvider>& provider) { llm_provider_ = provider; }
+
+    // Phase 2: Causal filtering
+    void set_causal_filter(const CausalFilterConfig& filter) { causal_filter_ = filter; }
+    std::vector<Insight> apply_causal_filter(const std::vector<Insight>& insights) const;
 
     // Individual operators
     std::vector<Insight> find_bridges();
@@ -531,6 +556,7 @@ private:
     std::string run_id_;
     DiscoveryProgressCallback progress_cb_;
     std::shared_ptr<LLMProvider> llm_provider_;
+    CausalFilterConfig causal_filter_;  // Phase 2: Causal filtering
     int insight_counter_ = 0;
 
     // Helper: generate insight ID

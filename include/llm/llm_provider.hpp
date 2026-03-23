@@ -6,6 +6,9 @@
 #include <memory>
 #include <optional>
 #include <functional>
+#include <algorithm>
+#include <nlohmann/json.hpp>
+#include "llm/causal_metadata.hpp"  // Phase 2: Causal metadata
 
 namespace kg {
 
@@ -73,6 +76,40 @@ struct LLMResponse {
 };
 
 /**
+ * @brief Provenance information for an extraction (V2)
+ *
+ * Tracks where a relation was extracted from, enabling deduplication
+ * of overlapping extractions and confidence boosting.
+ */
+struct ExtractionProvenance {
+    std::string chunk_id;           ///< Source chunk identifier
+    size_t start_char = 0;          ///< Start position in document
+    size_t end_char = 0;            ///< End position in document
+    double confidence = 1.0;        ///< Extraction confidence for this occurrence
+    std::string source_text;        ///< Exact text span
+
+    /**
+     * @brief Check if this provenance overlaps with another
+     */
+    bool overlaps_with(const ExtractionProvenance& other) const {
+        if (chunk_id == other.chunk_id) return false;  // Same chunk, not overlap
+        size_t overlap_start = std::max(start_char, other.start_char);
+        size_t overlap_end = std::min(end_char, other.end_char);
+        return overlap_start < overlap_end;
+    }
+
+    /**
+     * @brief Convert to JSON
+     */
+    nlohmann::json to_json() const;
+
+    /**
+     * @brief Create from JSON
+     */
+    static ExtractionProvenance from_json(const nlohmann::json& j);
+};
+
+/**
  * @brief Extracted relation from text
  */
 struct ExtractedRelation {
@@ -82,6 +119,86 @@ struct ExtractedRelation {
     double confidence = 1.0;                ///< Confidence score (0.0-1.0)
     std::string source_text;                ///< Original text snippet
     std::map<std::string, std::string> properties;  ///< Additional properties
+
+    // V2: Provenance tracking for overlap deduplication
+    std::vector<ExtractionProvenance> provenances;  ///< All chunks where this was extracted
+
+    // Phase 2: Causal metadata (optional)
+    std::optional<CausalMetadata> causal_metadata;  ///< Rich causal information (if causal)
+
+    /**
+     * @brief Check if this is a causal relation
+     */
+    bool is_causal() const {
+        return causal_metadata.has_value();
+    }
+
+    /**
+     * @brief Get causal type (if causal)
+     */
+    CausalRelationType get_causal_type() const {
+        return causal_metadata ? causal_metadata->type : CausalRelationType::DIRECT_CAUSE;
+    }
+
+    /**
+     * @brief Get causal strength score (0-1)
+     */
+    double get_causal_strength_score() const {
+        return causal_metadata ? causal_metadata->get_strength_score() : 0.0;
+    }
+
+    /**
+     * @brief Add provenance for this extraction
+     */
+    void add_provenance(const ExtractionProvenance& prov) {
+        provenances.push_back(prov);
+    }
+
+    /**
+     * @brief Check if has overlapping provenance with another relation
+     */
+    bool has_overlapping_provenance(const ExtractedRelation& other) const {
+        for (const auto& p1 : provenances) {
+            for (const auto& p2 : other.provenances) {
+                if (p1.overlaps_with(p2)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @brief Merge another relation into this one (for deduplication)
+     *
+     * @param other The relation to merge
+     * @param confidence_boost Boost to apply for overlapping extractions (e.g., 0.1 = 10%)
+     */
+    void merge_with(const ExtractedRelation& other, double confidence_boost = 0.1) {
+        // Merge provenances
+        provenances.insert(provenances.end(), other.provenances.begin(), other.provenances.end());
+
+        // Update confidence (max + boost, capped at 1.0)
+        double max_conf = std::max(confidence, other.confidence);
+        confidence = std::min(1.0, max_conf + confidence_boost * (1.0 - max_conf));
+
+        // Prefer longer source text
+        if (other.source_text.length() > source_text.length()) {
+            source_text = other.source_text;
+        }
+
+        // Merge properties (keep existing, add new)
+        for (const auto& [key, value] : other.properties) {
+            if (properties.find(key) == properties.end()) {
+                properties[key] = value;
+            }
+        }
+    }
+
+    /**
+     * @brief Generate normalized key for deduplication
+     */
+    std::string get_normalized_key() const;
 };
 
 /**
@@ -416,6 +533,25 @@ public:
      * @brief Format instructions for JSON output
      */
     static std::string json_format_instructions();
+
+    // ========================================================================
+    // Phase 2: Causal Extraction Prompts
+    // ========================================================================
+
+    /**
+     * @brief System prompt for causal relation extraction
+     */
+    static std::string causal_extraction_system_prompt();
+
+    /**
+     * @brief User prompt for causal relation extraction
+     */
+    static std::string causal_extraction_user_prompt(const std::string& text);
+
+    /**
+     * @brief Causal JSON format instructions
+     */
+    static std::string causal_json_format_instructions();
 };
 
 // ============================================================================

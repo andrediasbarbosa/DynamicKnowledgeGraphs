@@ -1,5 +1,6 @@
 #include "discovery/report_generator.hpp"
 #include "llm/llm_provider.hpp"
+#include "llm/causal_metadata.hpp"  // Phase 2: Causal metadata support
 #include <fstream>
 #include <cmath>
 #include <algorithm>
@@ -1253,6 +1254,93 @@ std::string ReportGenerator::describe_author_chain(const Insight& insight) const
 std::string ReportGenerator::describe_causal_chain(const Insight& insight) const {
     std::stringstream ss;
     if (insight.seed_labels.empty()) return "";
+
+    // Phase 2: Check if witness edges have causal metadata
+    bool has_causal_metadata = false;
+    const HyperEdge* causal_edge = nullptr;
+
+    if (!insight.witness_edges.empty()) {
+        // Try to find an edge with causal metadata
+        for (const auto& edge_id : insight.witness_edges) {
+            const auto* edge = graph_.get_hyperedge(edge_id);
+            if (edge && edge->is_causal()) {
+                causal_edge = edge;
+                has_causal_metadata = true;
+                break;
+            }
+        }
+    }
+
+    if (has_causal_metadata && causal_edge) {
+        const auto& causal = *causal_edge->causal_metadata;
+
+        // Build enhanced description with causal metadata
+        ss << "A **" << causal.get_strength_string() << "** causal chain: ";
+        ss << "**" << insight.seed_labels[0] << "**";
+
+        // Show causal type
+        std::string type_str = causal.get_type_string();
+        if (type_str == "direct_cause") {
+            ss << " directly causes";
+        } else if (type_str == "necessary") {
+            ss << " is necessary for";
+        } else if (type_str == "sufficient") {
+            ss << " is sufficient for";
+        } else if (type_str == "contributing") {
+            ss << " contributes to";
+        } else if (type_str == "preventing") {
+            ss << " prevents";
+        } else if (type_str == "enabling") {
+            ss << " enables";
+        } else {
+            ss << " causes";
+        }
+
+        if (insight.seed_labels.size() > 1) {
+            ss << " **" << insight.seed_labels[1] << "**";
+        }
+
+        // Show mechanism if available
+        if (!causal.mechanism_description.empty()) {
+            ss << " through " << causal.mechanism_description;
+            if (!causal.mechanism_type.empty()) {
+                ss << " (" << causal.mechanism_type << " mechanism)";
+            }
+        }
+
+        // Show temporality
+        ss << ". This operates over the **" << causal.get_temporality_string() << "**";
+
+        // Show temporal context if available
+        if (!causal.temporal_context.empty()) {
+            ss << " (" << causal.temporal_context << ")";
+        }
+
+        // Show evidence sources if available
+        if (!causal.evidence_sources.empty()) {
+            ss << ", with evidence from " << causal.evidence_sources[0];
+            if (causal.evidence_sources.size() > 1) {
+                ss << " and " << (causal.evidence_sources.size() - 1) << " other source(s)";
+            }
+        }
+
+        // Show confidence
+        ss << " (confidence: " << std::fixed << std::setprecision(2) << causal.confidence << ").";
+
+        // Show mechanism chain if available
+        if (!causal.mechanism_chain.empty() && causal.mechanism_chain.size() > 1) {
+            ss << " Mechanism chain: ";
+            for (size_t i = 0; i < causal.mechanism_chain.size(); ++i) {
+                if (i > 0) ss << " → ";
+                ss << causal.mechanism_chain[i];
+            }
+            ss << ".";
+        }
+
+        return ss.str();
+    }
+
+    // Fallback to generic description if no causal metadata
     ss << "A causal chain involving **" << insight.seed_labels[0] << "**";
     if (insight.seed_labels.size() > 1) ss << " and **" << insight.seed_labels[1] << "**";
     ss << " suggests a directional flow of influence through the graph.";
@@ -1262,24 +1350,164 @@ std::string ReportGenerator::describe_causal_chain(const Insight& insight) const
 std::string ReportGenerator::describe_intervention_point(const Insight& insight) const {
     std::stringstream ss;
     if (insight.seed_labels.empty()) return "";
-    ss << "Node **" << insight.seed_labels[0] << "** acts as a critical intervention point, ";
-    ss << "whose removal would disconnect causal pathways.";
+
+    // Phase 2: Check for causal metadata in witness edges
+    int strong_links = 0;
+    int necessary_links = 0;
+    bool has_mechanism = false;
+
+    for (const auto& edge_id : insight.witness_edges) {
+        const auto* edge = graph_.get_hyperedge(edge_id);
+        if (edge && edge->is_causal()) {
+            const auto& causal = *edge->causal_metadata;
+            if (causal.strength >= CausalStrength::STRONG) {
+                strong_links++;
+            }
+            if (causal.type == CausalRelationType::NECESSARY) {
+                necessary_links++;
+            }
+            if (!causal.mechanism_description.empty()) {
+                has_mechanism = true;
+            }
+        }
+    }
+
+    ss << "Node **" << insight.seed_labels[0] << "** acts as a critical intervention point";
+
+    // Phase 2: Add detail about causal links if available
+    if (necessary_links > 0) {
+        ss << " with **" << necessary_links << " necessary causal link(s)**";
+    }
+    if (strong_links > 0) {
+        ss << " (" << strong_links << " strong/deterministic link" << (strong_links > 1 ? "s" : "") << ")";
+    }
+
+    ss << ", whose removal would disconnect causal pathways";
+
+    if (has_mechanism) {
+        ss << " and disrupt mechanistic processes";
+    }
+
+    ss << ".";
+
     return ss.str();
 }
 
 std::string ReportGenerator::describe_feedback_loop(const Insight& insight) const {
     std::stringstream ss;
     if (insight.seed_labels.empty()) return "";
-    ss << "A feedback loop involving **" << insight.seed_labels[0] << "** ";
-    ss << "creates a self-reinforcing cycle in the causal structure.";
+
+    // Phase 2: Analyze causal metadata in the loop
+    double avg_strength = 0.0;
+    int edge_count = 0;
+    bool has_immediate = false;
+    bool has_delayed = false;
+    std::string dominant_mechanism_type;
+
+    std::map<std::string, int> mechanism_types;
+    for (const auto& edge_id : insight.witness_edges) {
+        const auto* edge = graph_.get_hyperedge(edge_id);
+        if (edge && edge->is_causal()) {
+            const auto& causal = *edge->causal_metadata;
+            avg_strength += causal.get_strength_score();
+            edge_count++;
+
+            if (causal.temporality == Temporality::IMMEDIATE) has_immediate = true;
+            if (causal.temporality == Temporality::DELAYED || causal.temporality == Temporality::LONG_TERM) has_delayed = true;
+
+            if (!causal.mechanism_type.empty()) {
+                mechanism_types[causal.mechanism_type]++;
+            }
+        }
+    }
+
+    if (edge_count > 0) {
+        avg_strength /= edge_count;
+    }
+
+    // Find dominant mechanism type
+    int max_count = 0;
+    for (const auto& [type, count] : mechanism_types) {
+        if (count > max_count) {
+            max_count = count;
+            dominant_mechanism_type = type;
+        }
+    }
+
+    ss << "A ";
+
+    // Phase 2: Classify by strength
+    if (avg_strength >= 0.75) {
+        ss << "**strong** ";
+    } else if (avg_strength >= 0.5) {
+        ss << "**moderate** ";
+    } else if (avg_strength > 0) {
+        ss << "**weak** ";
+    }
+
+    ss << "feedback loop involving **" << insight.seed_labels[0] << "** ";
+
+    // Show temporality characteristics
+    if (has_immediate && has_delayed) {
+        ss << "with both immediate and delayed feedback ";
+    } else if (has_immediate) {
+        ss << "with immediate feedback ";
+    } else if (has_delayed) {
+        ss << "with delayed feedback ";
+    }
+
+    ss << "creates a self-reinforcing cycle";
+
+    // Show mechanism type if available
+    if (!dominant_mechanism_type.empty()) {
+        ss << " through " << dominant_mechanism_type << " mechanisms";
+    }
+
+    ss << " in the causal structure.";
+
     return ss.str();
 }
 
 std::string ReportGenerator::describe_confounder(const Insight& insight) const {
     std::stringstream ss;
     if (insight.seed_labels.size() < 2) return "";
-    ss << "Node **" << insight.seed_labels[0] << "** may confound the relationship between nodes, ";
-    ss << "acting as a common cause that influences multiple outcomes.";
+
+    // Phase 2: Check if the confounding links have causal metadata
+    int causal_links = 0;
+    int strong_links = 0;
+    std::vector<std::string> affected_outcomes;
+
+    for (const auto& edge_id : insight.witness_edges) {
+        const auto* edge = graph_.get_hyperedge(edge_id);
+        if (edge && edge->is_causal()) {
+            causal_links++;
+            if (edge->causal_metadata->strength >= CausalStrength::STRONG) {
+                strong_links++;
+            }
+            // Collect targets as affected outcomes
+            for (const auto& target : edge->targets) {
+                if (std::find(affected_outcomes.begin(), affected_outcomes.end(), target) == affected_outcomes.end()) {
+                    affected_outcomes.push_back(target);
+                }
+            }
+        }
+    }
+
+    ss << "Node **" << insight.seed_labels[0] << "** may confound the relationship";
+
+    if (affected_outcomes.size() > 1) {
+        ss << " affecting **" << affected_outcomes.size() << " outcome(s)**";
+    }
+
+    // Phase 2: Add strength information
+    if (strong_links > 0) {
+        ss << " through **" << strong_links << " strong causal link(s)**";
+    } else if (causal_links > 0) {
+        ss << " through **" << causal_links << " causal link(s)**";
+    }
+
+    ss << ", acting as a common cause that influences multiple outcomes.";
+
     return ss.str();
 }
 
@@ -1947,6 +2175,76 @@ std::string ReportGenerator::format_source_documents_markdown(const Insight& ins
     }
 
     return ss.str();
+}
+
+// Phase 2: Generate HTML badges for causal metadata
+std::string ReportGenerator::generate_causal_badges_html(const Insight& insight) const {
+    std::stringstream badges;
+
+    // Only generate badges for causal insight types
+    if (insight.type != InsightType::CAUSAL_CHAIN &&
+        insight.type != InsightType::INTERVENTION_POINT &&
+        insight.type != InsightType::FEEDBACK_LOOP &&
+        insight.type != InsightType::CONFOUNDER) {
+        return "";
+    }
+
+    // Check if any witness edges have causal metadata
+    bool has_causal_metadata = false;
+    const HyperEdge* causal_edge = nullptr;
+
+    for (const auto& edge_id : insight.witness_edges) {
+        const auto* edge = graph_.get_hyperedge(edge_id);
+        if (edge && edge->is_causal()) {
+            has_causal_metadata = true;
+            causal_edge = edge;
+            break;  // Use first causal edge for badge generation
+        }
+    }
+
+    if (!has_causal_metadata || !causal_edge) {
+        return "";
+    }
+
+    const auto& causal = *causal_edge->causal_metadata;
+    badges << R"HTML(<div class="causal-badges">)HTML";
+
+    // Strength badge
+    std::string strength_str = causal.get_strength_string();
+    std::string strength_class = "badge badge-strength-" + strength_str;
+    badges << R"HTML(<span class=")HTML" << strength_class << R"HTML(">)HTML"
+           << strength_str << R"HTML(</span>)HTML";
+
+    // Type badge (highlight NECESSARY and SUFFICIENT)
+    std::string type_str = causal.get_type_string();
+    std::string type_class = "badge badge-type";
+    if (causal.type == CausalRelationType::NECESSARY) {
+        type_class = "badge badge-type-necessary";
+    } else if (causal.type == CausalRelationType::SUFFICIENT) {
+        type_class = "badge badge-type-sufficient";
+    }
+    badges << R"HTML(<span class=")HTML" << type_class << R"HTML(">)HTML"
+           << type_str << R"HTML(</span>)HTML";
+
+    // Temporality badge
+    std::string temp_str = causal.get_temporality_string();
+    std::string temp_class = "badge badge-temporality";
+    if (causal.temporality == Temporality::IMMEDIATE) {
+        temp_class = "badge badge-immediate";
+    } else if (causal.temporality == Temporality::DELAYED) {
+        temp_class = "badge badge-delayed";
+    }
+    badges << R"HTML(<span class=")HTML" << temp_class << R"HTML(">)HTML"
+           << temp_str << R"HTML(</span>)HTML";
+
+    // Mechanism badge (if available)
+    if (!causal.mechanism_type.empty()) {
+        badges << R"HTML(<span class="badge badge-mechanism">)HTML"
+               << escape_html(causal.mechanism_type) << R"HTML(</span>)HTML";
+    }
+
+    badges << R"HTML(</div>)HTML";
+    return badges.str();
 }
 
 std::string ReportGenerator::get_graph_context_summary(const Insight& insight, bool markdown) const {
@@ -5094,6 +5392,84 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                 content: '' !important;
             }
         }
+
+        /* Phase 2: Causal Metadata Badges */
+        .causal-badges {
+            display: inline-flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-left: 8px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        /* Strength badges */
+        .badge-strength-deterministic {
+            background: rgba(34, 197, 94, 0.25);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+        .badge-strength-strong {
+            background: rgba(132, 204, 22, 0.25);
+            color: #84cc16;
+            border: 1px solid rgba(132, 204, 22, 0.4);
+        }
+        .badge-strength-moderate {
+            background: rgba(251, 191, 36, 0.25);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+        .badge-strength-weak {
+            background: rgba(248, 113, 113, 0.25);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.4);
+        }
+        /* Type badges */
+        .badge-type {
+            background: rgba(79, 195, 247, 0.25);
+            color: #4fc3f7;
+            border: 1px solid rgba(79, 195, 247, 0.4);
+        }
+        .badge-type-necessary {
+            background: rgba(220, 38, 38, 0.25);
+            color: #ff6b6b;
+            border: 1px solid rgba(220, 38, 38, 0.4);
+        }
+        .badge-type-sufficient {
+            background: rgba(168, 85, 247, 0.25);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+        }
+        /* Temporality badges */
+        .badge-temporality {
+            background: rgba(148, 163, 184, 0.25);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+        .badge-immediate {
+            background: rgba(34, 211, 238, 0.25);
+            color: #22d3ee;
+            border: 1px solid rgba(34, 211, 238, 0.4);
+        }
+        .badge-delayed {
+            background: rgba(251, 146, 60, 0.25);
+            color: #fb923c;
+            border: 1px solid rgba(251, 146, 60, 0.4);
+        }
+        /* Mechanism badge */
+        .badge-mechanism {
+            background: rgba(139, 92, 246, 0.25);
+            color: #8b5cf6;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -5127,7 +5503,43 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                 <div class="value">)" << insights.insights.size() << R"(</div>
             </div>
         </section>
+)";
 
+    // V2: Add deduplication statistics if available
+    if (!config.pipeline_stats.empty() && config.pipeline_stats.contains("relations_before_dedup")) {
+        html << R"(
+        <section id="v2-dedup-stats" style="margin-top: 30px;">
+            <h2 style="margin-bottom: 15px;">V2 Extraction Statistics</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95em;">
+                This pipeline uses overlapping chunk extraction with automatic deduplication to improve boundary recall.
+            </p>
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="label">Relations Before Dedup</div>
+                    <div class="value">)" << config.pipeline_stats.value("relations_before_dedup", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Relations After Dedup</div>
+                    <div class="value">)" << config.pipeline_stats.value("relations_after_dedup", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Duplicates Merged</div>
+                    <div class="value">)" << config.pipeline_stats.value("duplicate_relations_merged", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Multi-Provenance</div>
+                    <div class="value">)" << config.pipeline_stats.value("multi_provenance_relations", 0) << R"(</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Avg Confidence Boost</div>
+                    <div class="value">)" << std::fixed << std::setprecision(3) << config.pipeline_stats.value("avg_confidence_boost", 0.0) << R"(</div>
+                </div>
+            </div>
+        </section>
+)";
+    }
+
+    html << R"(
         <section id="categories">
             <h2>Knowledge Discovery Categories</h2>
             <p style="color: var(--text-muted); margin-bottom: 15px;">
@@ -5794,6 +6206,47 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
     }
 
     html << R"(            </div>
+
+            <!-- Featured Insights with Subgraph Visualizations -->
+            <div style="margin: 40px 0;">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Featured High-Impact Insights</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+)";
+
+    // Get top 3 insights by score across all types
+    std::vector<Insight> top_insights;
+    for (const auto& insight : insights.insights) {
+        top_insights.push_back(insight);
+    }
+    std::sort(top_insights.begin(), top_insights.end(),
+              [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+    int featured_count = 0;
+    for (const auto& insight : top_insights) {
+        if (featured_count >= 3) break;
+        if (insight.witness_edges.empty()) continue;  // Skip insights without witness edges
+
+        std::string svg = generate_mini_subgraph_svg(insight, 8);
+        if (svg.empty()) continue;
+
+        std::string type_name = get_insight_type_name(insight.type);
+        std::string entity_label = insight.seed_labels.empty() ? "N/A" : insight.seed_labels[0];
+
+        html << R"(                    <div class="card" style="padding: 15px;">
+                        <div style="font-size: 0.85em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">)"
+             << type_name << R"(</div>
+                        <div style="font-weight: 600; margin-bottom: 10px; color: var(--text);">)"
+             << escape_html(entity_label) << R"(</div>
+                        <div style="margin: 10px 0;">)" << svg << R"(</div>
+                        <div style="font-size: 0.9em; color: var(--text-muted);">Score: )"
+             << std::fixed << std::setprecision(2) << insight.score << R"(</div>
+                    </div>
+)";
+        featured_count++;
+    }
+
+    html << R"(                </div>
+            </div>
 
             <!-- Interactive Chart -->
             <div class="chart-container">
@@ -8222,8 +8675,10 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             if (include_llm) {
                 explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_causal_chain(insight);
             }
+            // Phase 2: Generate causal metadata badges
+            std::string badges = generate_causal_badges_html(insight);
             html << R"HTML(                    <tr>
-                        <td>)HTML" << format_entities(insight.seed_labels, 4) << R"HTML(</td>
+                        <td>)HTML" << format_entities(insight.seed_labels, 4) << badges << R"HTML(</td>
                         <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
             if (include_llm) {
                 html << R"HTML(
@@ -9234,8 +9689,10 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             if (include_llm) {
                 explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_intervention_point(insight);
             }
+            // Phase 2: Generate causal metadata badges
+            std::string badges = generate_causal_badges_html(insight);
             html << R"HTML(                    <tr>
-                        <td>)HTML" << format_entities(insight.seed_labels, 1) << R"HTML(</td>
+                        <td>)HTML" << format_entities(insight.seed_labels, 1) << badges << R"HTML(</td>
                         <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
             if (include_llm) {
                 html << R"HTML(
@@ -9289,8 +9746,10 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             if (include_llm) {
                 explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_feedback_loop(insight);
             }
+            // Phase 2: Generate causal metadata badges
+            std::string badges = generate_causal_badges_html(insight);
             html << R"HTML(                    <tr>
-                        <td>)HTML" << format_entities(insight.seed_labels, 3) << R"HTML(</td>
+                        <td>)HTML" << format_entities(insight.seed_labels, 3) << badges << R"HTML(</td>
                         <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
             if (include_llm) {
                 html << R"HTML(
@@ -9345,8 +9804,10 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
             if (include_llm) {
                 explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_confounder(insight);
             }
+            // Phase 2: Generate causal metadata badges
+            std::string badges = generate_causal_badges_html(insight);
             html << R"HTML(                    <tr>
-                        <td>)HTML" << (insight.seed_labels.size() > 1 ? escape_html(insight.seed_labels[1]) : "-") << R"HTML(</td>
+                        <td>)HTML" << (insight.seed_labels.size() > 1 ? escape_html(insight.seed_labels[1]) : "-") << badges << R"HTML(</td>
                         <td>)HTML" << escape_html(relation) << R"HTML(</td>
                         <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
             if (include_llm) {
@@ -10410,6 +10871,12 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         console.log('Interactive report features loaded successfully');
     })();
     </script>
+)";
+
+    // Add Chart.js visualization
+    html << generate_chart_js_data(counts, insights);
+
+    html << R"(
 </body>
 </html>
 )HTML";
@@ -10834,6 +11301,182 @@ void ReportGenerator::export_pattern_library(const InsightCollection& insights, 
 
     out << "}\n";
     out.close();
+}
+
+// ============================================================================
+// Visualization Helpers (Executive Summary Enhancements)
+// ============================================================================
+
+std::string ReportGenerator::generate_mini_subgraph_svg(const Insight& insight, int max_nodes) const {
+    std::stringstream svg;
+
+    // Extract unique nodes from witness edges
+    std::set<std::string> node_set;
+    std::vector<std::pair<std::string, std::string>> edge_list;
+
+    for (const auto& edge_id : insight.witness_edges) {
+        const auto* edge = graph_.get_hyperedge(edge_id);
+        if (!edge) continue;
+
+        // Add sources and targets
+        for (const auto& src : edge->sources) {
+            node_set.insert(src);
+        }
+        for (const auto& tgt : edge->targets) {
+            node_set.insert(tgt);
+        }
+
+        // Create edge pairs (source -> target)
+        if (!edge->sources.empty() && !edge->targets.empty()) {
+            edge_list.push_back(std::make_pair(edge->sources[0], edge->targets[0]));
+        }
+
+        if (node_set.size() >= static_cast<size_t>(max_nodes)) break;
+    }
+
+    // Convert to vector for indexing
+    std::vector<std::string> nodes(node_set.begin(), node_set.end());
+    if (nodes.size() > static_cast<size_t>(max_nodes)) {
+        nodes.resize(max_nodes);
+    }
+
+    if (nodes.empty()) return "";
+
+    // SVG dimensions
+    const int width = 200;
+    const int height = 150;
+    const int padding = 20;
+    const int node_radius = 6;
+
+    svg << R"(<svg width=")" << width << R"(" height=")" << height << R"(" viewBox="0 0 )" << width << " " << height << R"(" xmlns="http://www.w3.org/2000/svg">)";
+    svg << R"(<rect width=")" << width << R"(" height=")" << height << R"(" fill="#1e293b" rx="8"/>)";
+
+    // Layout nodes in a circle
+    std::map<std::string, std::pair<double, double>> positions;
+    double center_x = width / 2.0;
+    double center_y = height / 2.0;
+    double radius = std::min(width, height) / 2.0 - padding;
+
+    for (size_t i = 0; i < nodes.size(); i++) {
+        double angle = 2.0 * M_PI * i / nodes.size() - M_PI / 2.0;
+        double x = center_x + radius * std::cos(angle);
+        double y = center_y + radius * std::sin(angle);
+        positions[nodes[i]] = {x, y};
+    }
+
+    // Draw edges
+    svg << R"(<g opacity="0.6">)";
+    for (const auto& [from, to] : edge_list) {
+        if (positions.count(from) && positions.count(to)) {
+            auto [x1, y1] = positions[from];
+            auto [x2, y2] = positions[to];
+            svg << R"(<line x1=")" << x1 << R"(" y1=")" << y1
+                << R"(" x2=")" << x2 << R"(" y2=")" << y2
+                << R"(" stroke="#4fc3f7" stroke-width="1.5"/>)";
+        }
+    }
+    svg << R"(</g>)";
+
+    // Draw nodes
+    for (const auto& [node_id, pos] : positions) {
+        auto [x, y] = pos;
+        svg << R"(<circle cx=")" << x << R"(" cy=")" << y << R"(" r=")" << node_radius
+            << R"(" fill="#fbbf24" stroke="#0f172a" stroke-width="2"/>)";
+    }
+
+    svg << R"(</svg>)";
+    return svg.str();
+}
+
+std::string ReportGenerator::generate_chart_js_data(const std::map<InsightType, int>& counts, const InsightCollection& insights) const {
+    std::stringstream js;
+
+    // Collect top 10 insight types by count
+    std::vector<std::pair<std::string, int>> top_types;
+    for (const auto& [type, count] : counts) {
+        if (count > 0) {
+            top_types.push_back({get_insight_type_name(type), count});
+        }
+    }
+    std::sort(top_types.begin(), top_types.end(),
+              [](const auto& a, const auto& b) { return a.second > b.second; });
+    if (top_types.size() > 10) {
+        top_types.resize(10);
+    }
+
+    // Count by category
+    std::map<std::string, int> category_counts;
+    for (const auto& insight : insights.insights) {
+        category_counts[category_to_string(insight.category)]++;
+    }
+
+    js << R"(
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script>
+    (function() {
+        const ctx = document.getElementById('insightChart');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [)";
+
+    // Add labels
+    for (size_t i = 0; i < top_types.size(); i++) {
+        js << "'" << top_types[i].first << "'";
+        if (i < top_types.size() - 1) js << ", ";
+    }
+
+    js << R"(],
+                datasets: [{
+                    label: 'Number of Insights',
+                    data: [)";
+
+    // Add data
+    for (size_t i = 0; i < top_types.size(); i++) {
+        js << top_types[i].second;
+        if (i < top_types.size() - 1) js << ", ";
+    }
+
+    js << R"(],
+                    backgroundColor: 'rgba(79, 195, 247, 0.6)',
+                    borderColor: 'rgba(79, 195, 247, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top 10 Insight Types',
+                        color: '#f8fafc',
+                        font: { size: 16, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#94a3b8' },
+                        grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                    },
+                    y: {
+                        ticks: { color: '#94a3b8' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    })();
+    </script>
+    )";
+
+    return js.str();
 }
 
 } // namespace kg

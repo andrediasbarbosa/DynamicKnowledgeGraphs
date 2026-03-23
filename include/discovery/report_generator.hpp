@@ -2,6 +2,7 @@
 
 #include "discovery/insight.hpp"
 #include "graph/hypergraph.hpp"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <sstream>
 #include <map>
@@ -44,6 +45,9 @@ struct ReportConfig {
     bool coalesce_similar_findings = true;  ///< Group similar findings together in HTML to reduce repetition
     double similarity_threshold = 0.7;       ///< Threshold for considering findings similar (0-1)
     int max_items_per_cluster = 10;          ///< Maximum items to show per cluster before summarizing
+
+    // V2: Optional pipeline statistics (for V2 deduplication stats)
+    nlohmann::json pipeline_stats;           ///< Optional extraction pipeline statistics
 };
 
 /**
@@ -228,6 +232,26 @@ private:
     // Provenance helpers
     std::string format_source_documents_html(const Insight& insight) const;
     std::string format_source_documents_markdown(const Insight& insight) const;
+
+    // Phase 2: Causal metadata badge helpers
+    std::string generate_causal_badges_html(const Insight& insight) const;
+
+    // Visualization helpers (executive summary enhancements)
+    /**
+     * @brief Generate SVG visualization of a subgraph for an insight
+     * @param insight The insight to visualize
+     * @param max_nodes Maximum nodes to include in visualization
+     * @return SVG string showing mini subgraph
+     */
+    std::string generate_mini_subgraph_svg(const Insight& insight, int max_nodes = 6) const;
+
+    /**
+     * @brief Generate Chart.js data and initialization script
+     * @param counts Map of insight types to counts
+     * @param insights Full insight collection
+     * @return JavaScript code to initialize charts
+     */
+    std::string generate_chart_js_data(const std::map<InsightType, int>& counts, const InsightCollection& insights) const;
 
     // Clustering helpers for HTML coalescing
     /**

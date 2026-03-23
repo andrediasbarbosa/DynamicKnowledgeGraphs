@@ -328,6 +328,21 @@ int cmd_discover(const Args& args) {
     auto operators = expand_operators(args.get("operators", "bridges,completions,motifs").as_list());
     std::string run_id = args.get("run-id", "").value;
 
+    // Phase 2: Parse causal filtering options
+    CausalFilterConfig causal_filter;
+    if (args.has("causal-strength")) {
+        causal_filter.strengths = args.get("causal-strength", "").as_list();
+    }
+    if (args.has("causal-type")) {
+        causal_filter.types = args.get("causal-type", "").as_list();
+    }
+    if (args.has("mechanism-type")) {
+        causal_filter.mechanism_types = args.get("mechanism-type", "").as_list();
+    }
+    if (args.has("temporality")) {
+        causal_filter.temporalities = args.get("temporality", "").as_list();
+    }
+
     std::cout << "Loading hypergraph from: " << input_path << "\n";
     Hypergraph graph = Hypergraph::load_from_json(input_path);
 
@@ -355,6 +370,43 @@ int cmd_discover(const Args& args) {
     }
     std::cout << "\n";
 
+    // Phase 2: Display active causal filters
+    if (causal_filter.has_filters()) {
+        std::cout << "Causal filters active:\n";
+        if (!causal_filter.strengths.empty()) {
+            std::cout << "  Strength: ";
+            for (size_t i = 0; i < causal_filter.strengths.size(); ++i) {
+                if (i > 0) std::cout << ", ";
+                std::cout << causal_filter.strengths[i];
+            }
+            std::cout << "\n";
+        }
+        if (!causal_filter.types.empty()) {
+            std::cout << "  Type: ";
+            for (size_t i = 0; i < causal_filter.types.size(); ++i) {
+                if (i > 0) std::cout << ", ";
+                std::cout << causal_filter.types[i];
+            }
+            std::cout << "\n";
+        }
+        if (!causal_filter.mechanism_types.empty()) {
+            std::cout << "  Mechanism: ";
+            for (size_t i = 0; i < causal_filter.mechanism_types.size(); ++i) {
+                if (i > 0) std::cout << ", ";
+                std::cout << causal_filter.mechanism_types[i];
+            }
+            std::cout << "\n";
+        }
+        if (!causal_filter.temporalities.empty()) {
+            std::cout << "  Temporality: ";
+            for (size_t i = 0; i < causal_filter.temporalities.size(); ++i) {
+                if (i > 0) std::cout << ", ";
+                std::cout << causal_filter.temporalities[i];
+            }
+            std::cout << "\n";
+        }
+    }
+
     DiscoveryEngine engine(graph, index);
     if (!run_id.empty()) {
         engine.set_run_id(run_id);
@@ -364,11 +416,25 @@ int cmd_discover(const Args& args) {
         engine.set_llm_provider(std::shared_ptr<LLMProvider>(std::move(discovery_llm)));
     }
 
+    // Phase 2: Set causal filter
+    engine.set_causal_filter(causal_filter);
+
     engine.set_progress_callback([](const std::string& stage, int current, int total) {
         std::cout << "  [" << stage << "] " << current << "/" << total << "\r" << std::flush;
     });
 
     InsightCollection insights = engine.run_operators(operators);
+
+    // Phase 2: Apply causal filtering
+    int original_count = insights.insights.size();
+    insights.insights = engine.apply_causal_filter(insights.insights);
+    int filtered_count = insights.insights.size();
+
+    if (causal_filter.has_filters() && original_count != filtered_count) {
+        std::cout << "\nFiltered: " << original_count << " → " << filtered_count
+                  << " insights (" << (original_count - filtered_count) << " removed)\n";
+    }
+
     insights.source_graph = input_path;
 
     // Ensure output directory exists
@@ -519,6 +585,24 @@ int cmd_report(const Args& args) {
 
     // Configure report
     ReportConfig config;
+
+    // V2: Load pipeline statistics if available (from Step_2_Extraction/)
+    fs::path insights_file(insights_path);
+    fs::path run_dir = insights_file.parent_path().parent_path();  // Go up from Step_5_Discovery to run dir
+    fs::path stats_file_path = run_dir / "Step_2_Extraction" / "extraction_stats.json";
+    std::cout << "[DEBUG] Looking for stats at: " << stats_file_path << "\n";
+    if (fs::exists(stats_file_path)) {
+        try {
+            std::ifstream stats_file(stats_file_path);
+            stats_file >> config.pipeline_stats;
+            std::cout << "✓ Loaded pipeline statistics from Step_2_Extraction/\n";
+            std::cout << "  Relations before dedup: " << config.pipeline_stats.value("relations_before_dedup", 0) << "\n";
+        } catch (const std::exception& e) {
+            std::cerr << "Warning: Could not load pipeline statistics: " << e.what() << "\n";
+        }
+    } else {
+        std::cout << "[DEBUG] Stats file does not exist at expected path\n";
+    }
     config.title = title;
     config.source_document = source.empty() ? input_path : source;
     config.max_examples_per_type = max_examples;
@@ -690,6 +774,7 @@ int cmd_run(const Args& args) {
     int from_stage = args.get("from-stage", "1").as_int();
     std::string existing_run_dir = args.get("run-dir", "").value;
     bool preprocess = args.has("preprocess");
+    bool use_causal = args.has("causal");  // Phase 2: Causal extraction mode
 
     // Validate stage range
     if (from_stage < 1 || from_stage > 5) {
@@ -797,6 +882,19 @@ int cmd_run(const Args& args) {
         std::cout << "\nOutput: " << run_dir << "/\n";
     }
 
+    // V2: Create step-based output folders for organized artifacts
+    std::string step1_dir = run_dir + "/Step_1_Loading";
+    std::string step2_dir = run_dir + "/Step_2_Extraction";
+    std::string step3_dir = run_dir + "/Step_3_Deduplication";
+    std::string step4_dir = run_dir + "/Step_4_GraphBuilding";
+    std::string step5_dir = run_dir + "/Step_5_Discovery";
+
+    fs::create_directories(step1_dir);
+    fs::create_directories(step2_dir);
+    fs::create_directories(step3_dir);
+    fs::create_directories(step4_dir);
+    fs::create_directories(step5_dir);
+
     // Derive title from first PDF if not specified
     if (title.empty() && !pdf_paths.empty()) {
         title = get_basename(pdf_paths[0]) + " Knowledge Discovery";
@@ -804,11 +902,11 @@ int cmd_run(const Args& args) {
         title = "Knowledge Discovery";
     }
 
-    // Define paths for all artifacts
-    std::string graph_path = run_dir + "/graph.json";
-    std::string graph_raw_path = run_dir + "/graph_raw.json";
-    std::string index_path = run_dir + "/index.json";
-    std::string insights_path = run_dir + "/insights.json";
+    // V2: Define paths for all artifacts in step-based folders
+    std::string graph_path = step4_dir + "/graph.json";
+    std::string graph_raw_path = step4_dir + "/graph_raw.json";
+    std::string index_path = step5_dir + "/index.json";
+    std::string insights_path = step5_dir + "/insights.json";
 
     // Declare variables used across stages
     Hypergraph graph;
@@ -841,10 +939,16 @@ int cmd_run(const Args& args) {
             pipeline_config = load_config_with_fallback("");
         }
 
-        // Override output directory to our run folder
-        pipeline_config.output_directory = run_dir;
+        // V2: Override output directory to Step_2_Extraction folder
+        pipeline_config.output_directory = step2_dir;
         pipeline_config.save_intermediate = true;
         pipeline_config.save_extractions = true;
+
+        // Phase 2: Use causal extraction prompts if --causal flag is set
+        if (use_causal) {
+            pipeline_config.custom_system_prompt = PromptTemplates::causal_extraction_system_prompt();
+            std::cout << "  Causal extraction mode: ENABLED\n";
+        }
 
         // Validate config
         std::string config_error;
@@ -876,22 +980,22 @@ int cmd_run(const Args& args) {
         std::cout << "\n  Extracted: " << graph_stats.num_nodes << " entities, "
                   << graph_stats.num_edges << " relationships\n";
 
-        // Save graph (raw if preprocessing enabled)
+        // V2: Save graph to Step_4_GraphBuilding folder (raw if preprocessing enabled)
         if (preprocess) {
             graph.export_to_json(graph_raw_path, true);
-            std::cout << "  Saved: graph_raw.json\n";
+            std::cout << "  Saved: Step_4_GraphBuilding/graph_raw.json\n";
         } else {
             graph.export_to_json(graph_path, true);
-            std::cout << "  Saved: graph.json\n";
+            std::cout << "  Saved: Step_4_GraphBuilding/graph.json\n";
         }
 
-        // Save pipeline stats
+        // V2: Save pipeline stats to Step_2_Extraction folder
         auto pipeline_stats = pipeline.get_statistics();
-        std::string stats_path = run_dir + "/extraction_stats.json";
+        std::string stats_path = step2_dir + "/extraction_stats.json";
         std::ofstream stats_file(stats_path);
         stats_file << pipeline_stats.to_json().dump(2);
         stats_file.close();
-        std::cout << "  Saved: extraction_stats.json\n";
+        std::cout << "  Saved: Step_2_Extraction/extraction_stats.json\n";
     } else {
         // Load existing graph
         std::cout << "\n";
@@ -923,9 +1027,9 @@ int cmd_run(const Args& args) {
 
         if (!fs::exists(graph_raw_path)) {
             graph.export_to_json(graph_raw_path, true);
-            std::cout << "  Saved: graph_raw.json\n";
+            std::cout << "  Saved: Step_4_GraphBuilding/graph_raw.json\n";
         } else {
-            std::cout << "  Found existing: graph_raw.json\n";
+            std::cout << "  Found existing: Step_4_GraphBuilding/graph_raw.json\n";
         }
 
         normalize_relations(graph, preprocess_stats);
@@ -939,7 +1043,7 @@ int cmd_run(const Args& args) {
         std::cout << "  Merged nodes:         " << preprocess_stats.nodes_merged << "\n";
         std::cout << "  Preprocessed graph:   " << graph_stats.num_nodes << " entities, "
                   << graph_stats.num_edges << " relationships\n";
-        std::cout << "  Saved: graph.json\n";
+        std::cout << "  Saved: Step_4_GraphBuilding/graph.json\n";
     }
 
     // =========================================================================
@@ -957,7 +1061,7 @@ int cmd_run(const Args& args) {
 
         index.save_to_json(index_path);
         std::cout << "  S-components computed for s = 2, 3, 4\n";
-        std::cout << "  Saved: index.json\n";
+        std::cout << "  Saved: Step_5_Discovery/index.json\n";
     } else {
         // Load existing index
         std::cout << "\n";
@@ -1019,7 +1123,7 @@ int cmd_run(const Args& args) {
         for (const auto& [type, count] : insight_counts) {
             std::cout << "    - " << insight_type_to_string(type) << ": " << count << "\n";
         }
-        std::cout << "  Saved: insights.json\n";
+        std::cout << "  Saved: Step_5_Discovery/insights.json\n";
     } else {
         // Load existing insights
         std::cout << "\n";
@@ -1056,20 +1160,20 @@ int cmd_run(const Args& args) {
         std::cout << "  Stage 4: Generating Visualizations\n";
         std::cout << "----------------------------------------------------------------------\n";
 
-        // Baseline HTML
-        std::string baseline_html = run_dir + "/graph.html";
+        // V2: Baseline HTML in Step_5_Discovery
+        std::string baseline_html = step5_dir + "/graph.html";
         graph.export_to_html(baseline_html, title);
-        std::cout << "  Saved: graph.html (baseline viewer)\n";
+        std::cout << "  Saved: Step_5_Discovery/graph.html (baseline viewer)\n";
 
         // Augmented HTML with insights (must come before Graph-RAG so we can pass augmentation)
         AugmentationRenderer renderer(graph);
         augmentation = renderer.convert(insights);
 
-        std::string aug_json = run_dir + "/augmentation.json";
+        std::string aug_json = step5_dir + "/augmentation.json";
         augmentation.save_to_json(aug_json);
-        std::cout << "  Saved: augmentation.json\n";
+        std::cout << "  Saved: Step_5_Discovery/augmentation.json\n";
 
-        std::string aug_html = run_dir + "/graph_augmented.html";
+        std::string aug_html = step5_dir + "/graph_augmented.html";
         renderer.export_augmented_html(aug_html, title, augmentation);
         std::cout << "  Saved: graph_augmented.html (with " << augmentation.nodes.size()
                   << " augmented nodes)\n";
@@ -1090,18 +1194,18 @@ int cmd_run(const Args& args) {
                 } catch (...) {}
             }
         }
-        std::string rag_html = run_dir + "/graph_rag.html";
+        std::string rag_html = step5_dir + "/graph_rag.html";
         graph.export_to_html_rag(rag_html, title,
             rag_provider, rag_key, rag_model,
             /*base_url=*/"",
             augmentation.to_json());
-        std::cout << "  Saved: graph_rag.html (Graph-RAG chat viewer, "
+        std::cout << "  Saved: Step_5_Discovery/graph_rag.html (Graph-RAG chat viewer, "
                   << augmentation.nodes.size() << " insight nodes included)\n";
 
         // DOT visualization
-        std::string dot_path = run_dir + "/graph.dot";
+        std::string dot_path = step5_dir + "/graph.dot";
         graph.export_to_dot(dot_path);
-        std::cout << "  Saved: graph.dot\n";
+        std::cout << "  Saved: Step_5_Discovery/graph.dot\n";
     } else {
         std::cout << "\n";
         std::cout << "----------------------------------------------------------------------\n";
@@ -1147,21 +1251,21 @@ int cmd_run(const Args& args) {
         // Markdown report
         report_config.format = ReportFormat::MARKDOWN;
         std::string md_report = report_gen.generate(insights, report_config);
-        std::string md_path = run_dir + "/report.md";
+        std::string md_path = step5_dir + "/report.md";
         report_gen.save_to_file(md_path, md_report);
-        std::cout << "  Saved: report.md\n";
+        std::cout << "  Saved: Step_5_Discovery/report.md\n";
 
-        // HTML report
+        // V2: HTML report in Step_5_Discovery
         report_config.format = ReportFormat::HTML;
         std::string html_report = report_gen.generate_html(insights, report_config);
-        std::string html_path = run_dir + "/report.html";
+        std::string html_path = step5_dir + "/report.html";
         report_gen.save_to_file(html_path, html_report);
-        std::cout << "  Saved: report.html\n";
+        std::cout << "  Saved: Step_5_Discovery/report.html\n";
 
-        // Pattern library export
-        std::string pattern_lib_path = run_dir + "/pattern_library.json";
+        // V2: Pattern library export in Step_5_Discovery
+        std::string pattern_lib_path = step5_dir + "/pattern_library.json";
         report_gen.export_pattern_library(insights, pattern_lib_path);
-        std::cout << "  Saved: pattern_library.json\n";
+        std::cout << "  Saved: Step_5_Discovery/pattern_library.json\n";
     } else {
         std::cout << "\n";
         std::cout << "----------------------------------------------------------------------\n";
@@ -1232,15 +1336,16 @@ int cmd_run(const Args& args) {
         manifest["preprocess"]["relations_normalized"] = preprocess_stats.relations_normalized;
         manifest["preprocess"]["nodes_merged"] = preprocess_stats.nodes_merged;
     }
-    manifest["artifacts"]["index"] = "index.json";
-    manifest["artifacts"]["insights"] = "insights.json";
-    manifest["artifacts"]["augmentation"] = "augmentation.json";
-    manifest["artifacts"]["visualizations"]["baseline"] = "graph.html";
-    manifest["artifacts"]["visualizations"]["augmented"] = "graph_augmented.html";
-    manifest["artifacts"]["visualizations"]["dot"] = "graph.dot";
-    manifest["artifacts"]["reports"]["markdown"] = "report.md";
-    manifest["artifacts"]["reports"]["html"] = "report.html";
-    manifest["artifacts"]["extraction_stats"] = "extraction_stats.json";
+    manifest["artifacts"]["index"] = "Step_5_Discovery/index.json";
+    manifest["artifacts"]["insights"] = "Step_5_Discovery/insights.json";
+    manifest["artifacts"]["augmentation"] = "Step_5_Discovery/augmentation.json";
+    manifest["artifacts"]["visualizations"]["baseline"] = "Step_5_Discovery/graph.html";
+    manifest["artifacts"]["visualizations"]["augmented"] = "Step_5_Discovery/graph_augmented.html";
+    manifest["artifacts"]["visualizations"]["rag"] = "Step_5_Discovery/graph_rag.html";
+    manifest["artifacts"]["visualizations"]["dot"] = "Step_5_Discovery/graph.dot";
+    manifest["artifacts"]["reports"]["markdown"] = "Step_5_Discovery/report.md";
+    manifest["artifacts"]["reports"]["html"] = "Step_5_Discovery/report.html";
+    manifest["artifacts"]["extraction_stats"] = "Step_2_Extraction/extraction_stats.json";
 
     std::ofstream manifest_file(manifest_path);
     manifest_file << manifest.dump(2);
@@ -1255,27 +1360,28 @@ int cmd_run(const Args& args) {
     readme << "Sources: " << source_name << "\n\n";
     readme << "Artifacts:\n";
     readme << "  Data:\n";
-    readme << "    graph.json           - Extracted knowledge graph\n";
+    readme << "    Step_4_GraphBuilding/graph.json        - Extracted knowledge graph\n";
     if (preprocess) {
-        readme << "    graph_raw.json       - Raw graph prior to preprocessing\n";
+        readme << "    Step_4_GraphBuilding/graph_raw.json    - Raw graph prior to preprocessing\n";
     }
-    readme << "    index.json           - S-component index\n";
-    readme << "    insights.json        - Discovered insights\n";
-    readme << "    augmentation.json    - Augmentation overlay data\n";
-    readme << "    extraction_stats.json - Pipeline statistics\n";
-    readme << "    manifest.json        - Run metadata\n";
+    readme << "    Step_5_Discovery/index.json            - S-component index\n";
+    readme << "    Step_5_Discovery/insights.json         - Discovered insights\n";
+    readme << "    Step_5_Discovery/augmentation.json     - Augmentation overlay data\n";
+    readme << "    Step_2_Extraction/extraction_stats.json - Pipeline statistics\n";
+    readme << "    manifest.json                          - Run metadata\n";
     readme << "\n";
     readme << "  Visualizations:\n";
-    readme << "    graph.html           - Interactive 3D graph viewer\n";
-    readme << "    graph_augmented.html - Augmented view with insights\n";
-    readme << "    graph.dot            - GraphViz DOT format\n";
+    readme << "    Step_5_Discovery/graph.html            - Interactive 3D graph viewer\n";
+    readme << "    Step_5_Discovery/graph_augmented.html  - Augmented view with insights\n";
+    readme << "    Step_5_Discovery/graph_rag.html        - Graph-RAG chat viewer\n";
+    readme << "    Step_5_Discovery/graph.dot             - GraphViz DOT format\n";
     readme << "\n";
     readme << "  Reports:\n";
-    readme << "    report.md            - Markdown report\n";
-    readme << "    report.html          - Styled HTML report\n";
+    readme << "    Step_5_Discovery/report.md             - Markdown report\n";
+    readme << "    Step_5_Discovery/report.html           - Styled HTML report (with Phase 2 causal badges)\n";
     readme << "\n";
     readme << "To view:\n";
-    readme << "  cd " << run_dir << "\n";
+    readme << "  cd " << run_dir << "/Step_5_Discovery\n";
     readme << "  python3 -m http.server 8080\n";
     readme << "  # Open http://localhost:8080/graph_augmented.html\n";
     readme << "  # Or open http://localhost:8080/report.html\n";
@@ -1338,7 +1444,12 @@ int main(int argc, char** argv) {
             {"index", "x", "Index directory (optional, will build if not provided)", "", false, false},
             {"output", "o", "Output path for insights JSON", "", true, false},
             {"operators", "p", build_operator_help("Operators: "), "bridges,completions,motifs", false, false},
-            {"run-id", "r", "Run ID for tracking", "", false, false}
+            {"run-id", "r", "Run ID for tracking", "", false, false},
+            // Phase 2: Causal filtering options
+            {"causal-strength", "", "Filter by causal strength (weak,moderate,strong,deterministic)", "", false, false},
+            {"causal-type", "", "Filter by causal type (necessary,sufficient,direct_cause,contributing,preventing,enabling,mechanism)", "", false, false},
+            {"mechanism-type", "", "Filter by mechanism type (physical,chemical,biological,social,economic,computational)", "", false, false},
+            {"temporality", "", "Filter by temporal characteristics (immediate,short_term,long_term,delayed)", "", false, false}
         },
         cmd_discover
     });
@@ -1403,7 +1514,8 @@ int main(int argc, char** argv) {
             {"max-examples", "m", "Max examples per insight type in reports", "10", false, false},
             {"from-stage", "f", "Start from stage (1=extract, 2=index, 3=discover, 4=render, 5=report)", "1", false, false},
             {"run-dir", "d", "Existing run directory to resume (required if from-stage > 1)", "", false, false},
-            {"preprocess", "P", "Normalize relations and merge aliases before indexing", "", false, true}
+            {"preprocess", "P", "Normalize relations and merge aliases before indexing", "", false, true},
+            {"causal", "C", "Use causal extraction prompts (Phase 2 feature)", "", false, true}
         },
         cmd_run
     });
