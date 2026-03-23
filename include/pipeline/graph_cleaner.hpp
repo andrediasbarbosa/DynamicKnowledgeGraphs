@@ -81,6 +81,14 @@ struct CleaningReport {
 
     double cleaning_time_ms = 0.0;
 
+    // Graph connectivity analysis
+    int num_connected_components = 0;
+    int largest_component_size = 0;
+    int num_isolated_nodes = 0;
+    double graph_density = 0.0;
+    double average_degree = 0.0;
+    double clustering_coefficient = 0.0;
+
     void print_summary() const;
     nlohmann::json to_json() const;
     std::string generate_html_report() const;
@@ -219,6 +227,13 @@ private:
 
     std::string build_relation_validation_prompt(
         const std::vector<std::tuple<std::string, std::string, std::string>>& triples
+    ) const;
+
+    // Graph connectivity analysis
+    void analyze_connectivity(
+        const std::vector<CleanableEntity>& entities,
+        const std::vector<CleanableRelation>& relations,
+        CleaningReport& report
     ) const;
 
     // Utility

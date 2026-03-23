@@ -60,6 +60,17 @@ void CleaningReport::print_summary() const {
               << (100.0 * total_removed / initial_nodes) << "%)\n";
     std::cout << "Time:      " << cleaning_time_ms << " ms\n";
     std::cout << "\n";
+
+    // Graph connectivity analysis
+    std::cout << "Graph Connectivity:\n";
+    std::cout << "  Connected components:  " << num_connected_components << "\n";
+    std::cout << "  Largest component:     " << largest_component_size << " nodes ("
+              << (final_nodes > 0 ? 100.0 * largest_component_size / final_nodes : 0.0) << "%)\n";
+    std::cout << "  Isolated nodes:        " << num_isolated_nodes << "\n";
+    std::cout << "  Graph density:         " << std::fixed << std::setprecision(4) << graph_density << "\n";
+    std::cout << "  Average degree:        " << std::fixed << std::setprecision(2) << average_degree << "\n";
+    std::cout << "  Clustering coeff:      " << std::fixed << std::setprecision(4) << clustering_coefficient << "\n";
+    std::cout << "\n";
     std::cout << "======================================================================\n";
 }
 
@@ -98,6 +109,16 @@ nlohmann::json CleaningReport::to_json() const {
 
     j["total_removed"] = level1_removed + level2_removed + level3_removed;
     j["cleaning_time_ms"] = cleaning_time_ms;
+
+    // Graph connectivity analysis
+    j["connectivity"] = {
+        {"num_connected_components", num_connected_components},
+        {"largest_component_size", largest_component_size},
+        {"num_isolated_nodes", num_isolated_nodes},
+        {"graph_density", graph_density},
+        {"average_degree", average_degree},
+        {"clustering_coefficient", clustering_coefficient}
+    };
 
     return j;
 }
@@ -493,6 +514,63 @@ std::string CleaningReport::generate_html_report() const {
                     </tbody>
                 </table>
             </div>
+
+            <!-- Graph Connectivity Analysis -->
+            <div class="section">
+                <h2>Graph Connectivity Analysis</h2>
+                <div class="summary-cards">
+                    <div class="card info">
+                        <h3>Connected Components</h3>
+                        <div class="value">)" << num_connected_components << R"(</div>
+                        <div class="label">separate subgraphs</div>
+                    </div>
+                    <div class="card success">
+                        <h3>Largest Component</h3>
+                        <div class="value">)" << largest_component_size << R"(</div>
+                        <div class="label">nodes ()" << std::fixed << std::setprecision(1)
+             << (final_nodes > 0 ? 100.0 * largest_component_size / final_nodes : 0.0) << R"(%)</div>
+                    </div>
+                    <div class="card warning">
+                        <h3>Isolated Nodes</h3>
+                        <div class="value">)" << num_isolated_nodes << R"(</div>
+                        <div class="label">degree = 0</div>
+                    </div>
+                    <div class="card info">
+                        <h3>Graph Density</h3>
+                        <div class="value">)" << std::fixed << std::setprecision(3) << graph_density << R"(</div>
+                        <div class="label">edge completeness</div>
+                    </div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Average Degree</strong></td>
+                            <td>)" << std::fixed << std::setprecision(2) << average_degree << R"(</td>
+                            <td>Avg. connections per node</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clustering Coefficient</strong></td>
+                            <td>)" << std::fixed << std::setprecision(3) << clustering_coefficient << R"(</td>
+                            <td>How clustered the graph is (0-1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Graph Cohesion</strong></td>
+                            <td>)" << (num_connected_components == 1 ? "High" : "Low") << R"(</td>
+                            <td>)" << (num_connected_components == 1
+                                       ? "Single connected graph"
+                                       : std::to_string(num_connected_components) + " disconnected components") << R"(</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="footer">
@@ -571,6 +649,9 @@ CleaningReport GraphCleaner::clean(
                                        [](const auto& e) { return e.is_valid; });
     report.final_edges = std::count_if(relations.begin(), relations.end(),
                                        [](const auto& r) { return r.is_valid; });
+
+    // Analyze graph connectivity
+    analyze_connectivity(entities, relations, report);
 
     auto end_time = std::chrono::steady_clock::now();
     report.cleaning_time_ms = std::chrono::duration<double, std::milli>(end_time - start_time).count();
@@ -1166,6 +1247,139 @@ std::string GraphCleaner::build_relation_validation_prompt(
     ss << "Response:";
 
     return ss.str();
+}
+
+// ============================================================================
+// Graph Connectivity Analysis
+// ============================================================================
+
+void GraphCleaner::analyze_connectivity(
+    const std::vector<CleanableEntity>& entities,
+    const std::vector<CleanableRelation>& relations,
+    CleaningReport& report
+) const {
+    // Only analyze valid entities and relations
+    std::vector<std::string> valid_entity_ids;
+    std::map<std::string, int> entity_index;
+
+    for (const auto& e : entities) {
+        if (e.is_valid) {
+            entity_index[e.id] = valid_entity_ids.size();
+            valid_entity_ids.push_back(e.id);
+        }
+    }
+
+    int num_nodes = valid_entity_ids.size();
+    if (num_nodes == 0) {
+        report.num_connected_components = 0;
+        report.largest_component_size = 0;
+        report.num_isolated_nodes = 0;
+        report.graph_density = 0.0;
+        report.average_degree = 0.0;
+        report.clustering_coefficient = 0.0;
+        return;
+    }
+
+    // Build adjacency list
+    std::vector<std::set<int>> adj(num_nodes);
+    int num_edges = 0;
+
+    for (const auto& r : relations) {
+        if (r.is_valid && entity_index.count(r.source) && entity_index.count(r.target)) {
+            int src_idx = entity_index[r.source];
+            int tgt_idx = entity_index[r.target];
+            adj[src_idx].insert(tgt_idx);
+            adj[tgt_idx].insert(src_idx);  // Treat as undirected for connectivity
+            num_edges++;
+        }
+    }
+
+    // 1. Find connected components using DFS
+    std::vector<bool> visited(num_nodes, false);
+    std::vector<int> component_sizes;
+
+    for (int i = 0; i < num_nodes; i++) {
+        if (!visited[i]) {
+            int component_size = 0;
+            std::vector<int> stack = {i};
+
+            while (!stack.empty()) {
+                int node = stack.back();
+                stack.pop_back();
+
+                if (visited[node]) continue;
+                visited[node] = true;
+                component_size++;
+
+                for (int neighbor : adj[node]) {
+                    if (!visited[neighbor]) {
+                        stack.push_back(neighbor);
+                    }
+                }
+            }
+
+            component_sizes.push_back(component_size);
+        }
+    }
+
+    report.num_connected_components = component_sizes.size();
+
+    // 2. Largest component size
+    report.largest_component_size = 0;
+    for (int size : component_sizes) {
+        if (size > report.largest_component_size) {
+            report.largest_component_size = size;
+        }
+    }
+
+    // 3. Count isolated nodes (degree = 0)
+    report.num_isolated_nodes = 0;
+    for (const auto& neighbors : adj) {
+        if (neighbors.empty()) {
+            report.num_isolated_nodes++;
+        }
+    }
+
+    // 4. Graph density = 2*E / (V*(V-1))
+    if (num_nodes > 1) {
+        report.graph_density = (2.0 * num_edges) / (num_nodes * (num_nodes - 1.0));
+    } else {
+        report.graph_density = 0.0;
+    }
+
+    // 5. Average degree
+    int total_degree = 0;
+    for (const auto& neighbors : adj) {
+        total_degree += neighbors.size();
+    }
+    report.average_degree = num_nodes > 0 ? (double)total_degree / num_nodes : 0.0;
+
+    // 6. Clustering coefficient (average local clustering)
+    double total_clustering = 0.0;
+    int nodes_with_edges = 0;
+
+    for (int i = 0; i < num_nodes; i++) {
+        int degree = adj[i].size();
+        if (degree < 2) continue;  // Need at least 2 neighbors
+
+        nodes_with_edges++;
+
+        // Count triangles: edges between neighbors
+        int triangles = 0;
+        for (int neighbor1 : adj[i]) {
+            for (int neighbor2 : adj[i]) {
+                if (neighbor1 < neighbor2 && adj[neighbor1].count(neighbor2)) {
+                    triangles++;
+                }
+            }
+        }
+
+        // Local clustering = 2*triangles / (degree * (degree-1))
+        double local_clustering = (2.0 * triangles) / (degree * (degree - 1.0));
+        total_clustering += local_clustering;
+    }
+
+    report.clustering_coefficient = nodes_with_edges > 0 ? total_clustering / nodes_with_edges : 0.0;
 }
 
 // ============================================================================
