@@ -6209,40 +6209,256 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 
             <!-- Featured Insights with Subgraph Visualizations -->
             <div style="margin: 40px 0;">
-                <h3 style="color: var(--primary); margin-bottom: 20px;">Featured High-Impact Insights</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">Featured High-Impact Insights</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 0.95em;">
+                    Diverse examples showcasing different types of discoveries with their underlying graph structures.
+                    Arrows indicate directionality of relationships.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;">
 )";
 
-    // Get top 3 insights by score across all types
-    std::vector<Insight> top_insights;
+    // Select diverse insights from different categories
+    std::map<InsightCategory, std::vector<Insight>> by_category;
     for (const auto& insight : insights.insights) {
-        top_insights.push_back(insight);
+        if (!insight.witness_edges.empty()) {
+            by_category[insight.category].push_back(insight);
+        }
     }
-    std::sort(top_insights.begin(), top_insights.end(),
-              [](const Insight& a, const Insight& b) { return a.score > b.score; });
 
-    int featured_count = 0;
-    for (const auto& insight : top_insights) {
-        if (featured_count >= 3) break;
-        if (insight.witness_edges.empty()) continue;  // Skip insights without witness edges
+    // Sort within each category by score
+    for (auto& [cat, insights_vec] : by_category) {
+        std::sort(insights_vec.begin(), insights_vec.end(),
+                  [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    }
 
-        std::string svg = generate_mini_subgraph_svg(insight, 8);
+    // Select top insight from each category (max 4 - ensure diversity)
+    std::vector<std::pair<InsightCategory, Insight>> featured_insights;
+    for (const auto& cat : {InsightCategory::EXPLORATORY, InsightCategory::TRANSFORMATIONAL, InsightCategory::COMBINATORIAL}) {
+        if (by_category.count(cat) && !by_category[cat].empty()) {
+            featured_insights.push_back({cat, by_category[cat][0]});
+        }
+    }
+
+    // If we have less than 4, add more from different types within categories
+    if (featured_insights.size() < 4) {
+        std::vector<Insight> remaining;
+        for (const auto& insight : insights.insights) {
+            if (insight.witness_edges.empty()) continue;
+            bool already_featured = false;
+            for (const auto& [cat, fi] : featured_insights) {
+                if (fi.seed_labels == insight.seed_labels && fi.type == insight.type) {
+                    already_featured = true;
+                    break;
+                }
+            }
+            if (!already_featured) {
+                remaining.push_back(insight);
+            }
+        }
+        std::sort(remaining.begin(), remaining.end(),
+                  [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+        for (const auto& insight : remaining) {
+            if (featured_insights.size() >= 4) break;
+            featured_insights.push_back({insight.category, insight});
+        }
+    }
+
+    // Render featured insights
+    for (const auto& [category, insight] : featured_insights) {
+        std::string svg = generate_mini_subgraph_svg(insight, 6);
         if (svg.empty()) continue;
 
         std::string type_name = get_insight_type_name(insight.type);
+        std::string category_name = category_to_string(category);
         std::string entity_label = insight.seed_labels.empty() ? "N/A" : insight.seed_labels[0];
 
-        html << R"(                    <div class="card" style="padding: 15px;">
-                        <div style="font-size: 0.85em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">)"
+        // Get brief description
+        std::string description;
+        if (insight.type == InsightType::CAUSAL_CHAIN) {
+            description = "Directed causal pathway showing cause-effect relationships";
+        } else if (insight.type == InsightType::BRIDGE) {
+            description = "Connects separate knowledge clusters, enabling information flow";
+        } else if (insight.type == InsightType::INTERVENTION_POINT) {
+            description = "Critical node whose removal would disconnect causal pathways";
+        } else if (insight.type == InsightType::MOTIF) {
+            description = "Recurring structural pattern across the knowledge graph";
+        } else if (insight.type == InsightType::FEEDBACK_LOOP) {
+            description = "Cyclic structure indicating self-reinforcing dynamics";
+        } else if (insight.type == InsightType::DOMAIN_BRIDGE) {
+            description = "Cross-domain connector linking distinct research areas";
+        } else if (insight.type == InsightType::COMMUNITY_DETECTION) {
+            description = "Dense cluster of related concepts forming a community";
+        } else {
+            description = "High-impact discovery revealing hidden structure";
+        }
+
+        // Generate contextual "Why High-Impact" explanation
+        std::stringstream why_impact;
+        why_impact << "<strong>Reveals:</strong> ";
+
+        // Extract context from insight
+        std::vector<std::string> entities;
+        for (size_t i = 0; i < std::min(insight.seed_labels.size(), size_t(3)); i++) {
+            entities.push_back(insight.seed_labels[i]);
+        }
+
+        // Get relationships from witness edges
+        std::vector<std::string> relations;
+        for (size_t i = 0; i < std::min(insight.witness_edges.size(), size_t(2)); i++) {
+            const auto* edge = graph_.get_hyperedge(insight.witness_edges[i]);
+            if (edge && !edge->relation.empty()) {
+                relations.push_back(edge->relation);
+            }
+        }
+
+        // Build contextual explanation based on type
+        if (insight.type == InsightType::CAUSAL_CHAIN) {
+            if (entities.size() >= 2) {
+                why_impact << "How <em>" << escape_html(entities[0]) << "</em>";
+                if (entities.size() >= 3) {
+                    why_impact << " causally influences <em>" << escape_html(entities[1])
+                              << "</em> leading to <em>" << escape_html(entities[2]) << "</em>";
+                } else {
+                    why_impact << " directly causes <em>" << escape_html(entities[1]) << "</em>";
+                }
+                why_impact << ", with " << insight.witness_edges.size()
+                          << " evidence paths showing " << std::fixed << std::setprecision(0)
+                          << (insight.score * 100) << "% confidence in this causal mechanism";
+            } else {
+                why_impact << "A causal pathway with " << insight.witness_edges.size()
+                          << " supporting evidence links demonstrating " << std::fixed << std::setprecision(0)
+                          << (insight.score * 100) << "% confidence in the cause-effect relationship";
+            }
+
+        } else if (insight.type == InsightType::BRIDGE) {
+            if (!entities.empty()) {
+                why_impact << "That <em>" << escape_html(entities[0])
+                          << "</em> connects otherwise disconnected knowledge domains";
+                if (insight.witness_edges.size() >= 5) {
+                    why_impact << ", serving as a critical junction in "
+                              << insight.witness_edges.size() << " cross-cluster pathways";
+                } else {
+                    why_impact << " across " << insight.witness_edges.size() << " boundary-spanning relationships";
+                }
+                why_impact << " (" << std::fixed << std::setprecision(0)
+                          << (insight.score * 100) << "% structural importance)";
+            } else {
+                why_impact << "A critical bridge connecting " << insight.witness_edges.size()
+                          << " cross-cluster relationships with " << std::fixed << std::setprecision(0)
+                          << (insight.score * 100) << "% centrality score";
+            }
+
+        } else if (insight.type == InsightType::INTERVENTION_POINT) {
+            if (!entities.empty()) {
+                why_impact << "That removing or modifying <em>" << escape_html(entities[0])
+                          << "</em> would disrupt " << insight.witness_edges.size()
+                          << " causal pathways, making it a leverage point for intervention";
+                why_impact << " (criticality: " << std::fixed << std::setprecision(0)
+                          << (insight.score * 100) << "%)";
+            } else {
+                why_impact << "A critical control point affecting " << insight.witness_edges.size()
+                          << " downstream pathways (" << std::fixed << std::setprecision(0)
+                          << (insight.score * 100) << "% bottleneck score)";
+            }
+
+        } else if (insight.type == InsightType::MOTIF) {
+            if (entities.size() >= 2) {
+                why_impact << "A recurring pattern involving <em>" << escape_html(entities[0])
+                          << "</em>, <em>" << escape_html(entities[1]) << "</em>";
+                if (entities.size() >= 3) {
+                    why_impact << ", and <em>" << escape_html(entities[2]) << "</em>";
+                }
+                why_impact << " appearing " << insight.witness_edges.size()
+                          << " times across the graph";
+            } else {
+                why_impact << "A structural pattern recurring " << insight.witness_edges.size()
+                          << " times, suggesting systematic organization";
+            }
+            why_impact << " (" << std::fixed << std::setprecision(0)
+                      << (insight.score * 100) << "% pattern consistency)";
+
+        } else if (insight.type == InsightType::FEEDBACK_LOOP) {
+            if (entities.size() >= 2) {
+                why_impact << "A self-reinforcing cycle where <em>" << escape_html(entities[0])
+                          << "</em> influences <em>" << escape_html(entities[1]) << "</em>";
+                if (entities.size() >= 3) {
+                    why_impact << " which affects <em>" << escape_html(entities[2]) << "</em>";
+                }
+                why_impact << " and loops back, creating amplifying dynamics";
+            } else {
+                why_impact << "A cyclic structure with " << insight.witness_edges.size()
+                          << " feedback connections creating self-reinforcing behavior";
+            }
+            why_impact << " (" << std::fixed << std::setprecision(0)
+                      << (insight.score * 100) << "% loop strength)";
+
+        } else if (insight.type == InsightType::DOMAIN_BRIDGE) {
+            if (!entities.empty()) {
+                why_impact << "That <em>" << escape_html(entities[0])
+                          << "</em> spans multiple research domains, connecting "
+                          << insight.witness_edges.size()
+                          << " cross-disciplinary relationships and enabling knowledge transfer";
+            } else {
+                why_impact << "A cross-domain connector linking " << insight.witness_edges.size()
+                          << " relationships across distinct research fields";
+            }
+            why_impact << " (" << std::fixed << std::setprecision(0)
+                      << (insight.score * 100) << "% interdisciplinary score)";
+
+        } else if (insight.type == InsightType::COMMUNITY_DETECTION) {
+            if (entities.size() >= 2) {
+                why_impact << "A cohesive cluster containing <em>" << escape_html(entities[0])
+                          << "</em>, <em>" << escape_html(entities[1]) << "</em>";
+                if (entities.size() >= 3) {
+                    why_impact << ", <em>" << escape_html(entities[2]) << "</em>";
+                }
+                why_impact << " and " << (insight.witness_edges.size() - std::min(size_t(3), entities.size()))
+                          << " other densely connected concepts";
+            } else {
+                why_impact << "A dense community of " << insight.witness_edges.size()
+                          << " tightly interconnected concepts forming a distinct knowledge cluster";
+            }
+            why_impact << " (" << std::fixed << std::setprecision(0)
+                      << (insight.score * 100) << "% clustering coefficient)";
+
+        } else {
+            // Generic fallback with context
+            if (!entities.empty()) {
+                why_impact << "Important structural role of <em>" << escape_html(entities[0])
+                          << "</em> with " << insight.witness_edges.size()
+                          << " supporting relationships";
+            } else {
+                why_impact << "Significant graph structure with " << insight.witness_edges.size()
+                          << " supporting evidence links";
+            }
+            why_impact << " (" << std::fixed << std::setprecision(0)
+                      << (insight.score * 100) << "% confidence)";
+        }
+
+        html << R"(                    <div class="card" style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="font-size: 0.8em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">)"
              << type_name << R"(</div>
-                        <div style="font-weight: 600; margin-bottom: 10px; color: var(--text);">)"
+                            <div style="font-size: 0.75em; color: var(--primary); background: rgba(79, 195, 247, 0.15); padding: 3px 8px; border-radius: 4px;">)"
+             << category_name << R"(</div>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 8px; color: var(--text); font-size: 1.05em;">)"
              << escape_html(entity_label) << R"(</div>
-                        <div style="margin: 10px 0;">)" << svg << R"(</div>
-                        <div style="font-size: 0.9em; color: var(--text-muted);">Score: )"
-             << std::fixed << std::setprecision(2) << insight.score << R"(</div>
+                        <div style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">)"
+             << description << R"(</div>
+                        <div style="margin: 15px 0;">)" << svg << R"(</div>
+                        <div style="background: rgba(79, 195, 247, 0.08); padding: 12px; border-radius: 6px; margin: 12px 0; border-left: 3px solid var(--primary);">
+                            <div style="font-size: 0.75em; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Why High-Impact</div>
+                            <div style="font-size: 0.85em; color: var(--text); line-height: 1.5;">)"
+             << why_impact.str() << R"(</div>
+                        </div>
+                        <div style="font-size: 0.9em; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid rgba(148, 163, 184, 0.2);">
+                            <span>Confidence: )" << std::fixed << std::setprecision(2) << insight.score << R"(</span>
+                            <span style="font-size: 0.8em;">)" << insight.witness_edges.size() << R"( witness edges</span>
+                        </div>
                     </div>
 )";
-        featured_count++;
     }
 
     html << R"(                </div>
@@ -11310,9 +11526,10 @@ void ReportGenerator::export_pattern_library(const InsightCollection& insights, 
 std::string ReportGenerator::generate_mini_subgraph_svg(const Insight& insight, int max_nodes) const {
     std::stringstream svg;
 
-    // Extract unique nodes from witness edges
+    // Extract unique nodes from witness edges with their labels
     std::set<std::string> node_set;
     std::vector<std::pair<std::string, std::string>> edge_list;
+    std::map<std::string, std::string> node_labels;
 
     for (const auto& edge_id : insight.witness_edges) {
         const auto* edge = graph_.get_hyperedge(edge_id);
@@ -11321,9 +11538,15 @@ std::string ReportGenerator::generate_mini_subgraph_svg(const Insight& insight, 
         // Add sources and targets
         for (const auto& src : edge->sources) {
             node_set.insert(src);
+            if (node_labels.count(src) == 0) {
+                node_labels[src] = get_node_label(src);
+            }
         }
         for (const auto& tgt : edge->targets) {
             node_set.insert(tgt);
+            if (node_labels.count(tgt) == 0) {
+                node_labels[tgt] = get_node_label(tgt);
+            }
         }
 
         // Create edge pairs (source -> target)
@@ -11342,11 +11565,12 @@ std::string ReportGenerator::generate_mini_subgraph_svg(const Insight& insight, 
 
     if (nodes.empty()) return "";
 
-    // SVG dimensions
-    const int width = 200;
-    const int height = 150;
-    const int padding = 20;
-    const int node_radius = 6;
+    // SVG dimensions - larger to accommodate labels
+    const int width = 300;
+    const int height = 280;
+    const int padding = 40;
+    const int node_radius = 8;
+    const int legend_height = 60;
 
     svg << R"(<svg width=")" << width << R"(" height=")" << height << R"(" viewBox="0 0 )" << width << " " << height << R"(" xmlns="http://www.w3.org/2000/svg">)";
     svg << R"(<rect width=")" << width << R"(" height=")" << height << R"(" fill="#1e293b" rx="8"/>)";
@@ -11354,8 +11578,8 @@ std::string ReportGenerator::generate_mini_subgraph_svg(const Insight& insight, 
     // Layout nodes in a circle
     std::map<std::string, std::pair<double, double>> positions;
     double center_x = width / 2.0;
-    double center_y = height / 2.0;
-    double radius = std::min(width, height) / 2.0 - padding;
+    double center_y = (height - legend_height) / 2.0;
+    double radius = std::min(width, height - legend_height) / 2.0 - padding;
 
     for (size_t i = 0; i < nodes.size(); i++) {
         double angle = 2.0 * M_PI * i / nodes.size() - M_PI / 2.0;
@@ -11364,25 +11588,67 @@ std::string ReportGenerator::generate_mini_subgraph_svg(const Insight& insight, 
         positions[nodes[i]] = {x, y};
     }
 
-    // Draw edges
-    svg << R"(<g opacity="0.6">)";
+    // Draw edges with arrows
+    svg << "<defs><marker id=\"arrowhead\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\">"
+        << "<polygon points=\"0 0, 6 3, 0 6\" fill=\"#4fc3f7\"/></marker></defs>";
+    svg << "<g opacity=\"0.7\">";
     for (const auto& [from, to] : edge_list) {
         if (positions.count(from) && positions.count(to)) {
             auto [x1, y1] = positions[from];
             auto [x2, y2] = positions[to];
-            svg << R"(<line x1=")" << x1 << R"(" y1=")" << y1
-                << R"(" x2=")" << x2 << R"(" y2=")" << y2
-                << R"(" stroke="#4fc3f7" stroke-width="1.5"/>)";
+
+            // Calculate shortened line to stop at node edge
+            double dx = x2 - x1;
+            double dy = y2 - y1;
+            double len = std::sqrt(dx*dx + dy*dy);
+            double ratio = (len - node_radius - 2) / len;
+            double new_x2 = x1 + dx * ratio;
+            double new_y2 = y1 + dy * ratio;
+
+            svg << "<line x1=\"" << x1 << "\" y1=\"" << y1
+                << "\" x2=\"" << new_x2 << "\" y2=\"" << new_y2
+                << "\" stroke=\"#4fc3f7\" stroke-width=\"2\" marker-end=\"url(#arrowhead)\"/>";
         }
     }
-    svg << R"(</g>)";
+    svg << "</g>";
 
-    // Draw nodes
+    // Draw nodes with labels
     for (const auto& [node_id, pos] : positions) {
         auto [x, y] = pos;
+
+        // Node circle
         svg << R"(<circle cx=")" << x << R"(" cy=")" << y << R"(" r=")" << node_radius
             << R"(" fill="#fbbf24" stroke="#0f172a" stroke-width="2"/>)";
+
+        // Node label - truncate if too long
+        std::string label = node_labels[node_id];
+        if (label.length() > 15) {
+            label = label.substr(0, 12) + "...";
+        }
+
+        // Position label below node
+        svg << R"(<text x=")" << x << R"(" y=")" << (y + node_radius + 12)
+            << R"(" font-size="10" fill="#94a3b8" text-anchor="middle" font-family="Inter, sans-serif">)"
+            << label << R"(</text>)";
     }
+
+    // Add legend at bottom
+    int legend_y = height - legend_height + 10;
+    svg << R"(<text x=")" << (width / 2) << R"(" y=")" << legend_y
+        << R"(" font-size="11" font-weight="600" fill="#f8fafc" text-anchor="middle">Subgraph Structure</text>)";
+
+    // Legend items
+    int item_y = legend_y + 18;
+    svg << R"(<circle cx="20" cy=")" << item_y << R"(" r="5" fill="#fbbf24"/>)";
+    svg << R"(<text x="30" y=")" << (item_y + 4) << R"(" font-size="9" fill="#94a3b8">Entity</text>)";
+
+    svg << "<line x1=\"100\" y1=\"" << item_y << "\" x2=\"130\" y2=\"" << item_y
+        << "\" stroke=\"#4fc3f7\" stroke-width=\"2\" marker-end=\"url(#arrowhead)\"/>";
+    svg << R"(<text x="135" y=")" << (item_y + 4) << R"(" font-size="9" fill="#94a3b8">Relation</text>)";
+
+    svg << R"(<text x=")" << (width / 2) << R"(" y=")" << (item_y + 20)
+        << R"(" font-size="8" fill="#64748b" text-anchor="middle">)"
+        << nodes.size() << " nodes, " << edge_list.size() << " edges</text>)";
 
     svg << R"(</svg>)";
     return svg.str();
