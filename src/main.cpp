@@ -1188,6 +1188,32 @@ int cmd_run(const Args& args) {
             }
         }
 
+        // Update graph node labels to trimmed versions and deduplicate
+        // Build map: trimmed_label -> list of node_ids with that label
+        std::map<std::string, std::vector<std::string>> label_to_ids;
+        for (const auto& ce : cleanable_entities) {
+            if (ce.is_valid) {
+                label_to_ids[ce.label].push_back(ce.id);
+            }
+        }
+
+        // Merge duplicate nodes (nodes with identical trimmed labels)
+        int duplicates_merged = 0;
+        for (const auto& [label, ids] : label_to_ids) {
+            if (ids.size() > 1) {
+                // Keep first node, merge others into it
+                std::string keep_id = ids[0];
+                for (size_t i = 1; i < ids.size(); i++) {
+                    graph.merge_nodes(keep_id, ids[i]);
+                    duplicates_merged++;
+                }
+            }
+        }
+
+        if (duplicates_merged > 0) {
+            std::cout << "  Merged " << duplicates_merged << " duplicate nodes after trimming\n";
+        }
+
         // Update graph statistics
         graph_stats = graph.compute_statistics();
 
