@@ -1729,7 +1729,15 @@ int main(int argc, char** argv) {
             {"from-stage", "f", "Start from stage (1=extract, 2=index, 3=discover, 4=render, 5=report)", "1", false, false},
             {"run-dir", "d", "Existing run directory to resume (required if from-stage > 1)", "", false, false},
             {"preprocess", "P", "Normalize relations and merge aliases before indexing", "", false, true},
-            {"causal", "C", "Use causal extraction prompts (Phase 2 feature)", "", false, true}
+            {"causal", "C", "Use causal extraction prompts (Phase 2 feature)", "", false, true},
+            // Quality Control flags
+            {"no-qc", "", "Disable quality control entirely", "", false, true},
+            {"min-node-length", "", "Minimum character length for entity labels", "2", false, false},
+            {"min-degree", "", "Minimum node degree (connectivity)", "1", false, false},
+            {"llm-validate", "", "Enable Level 3 LLM validation for quality control", "", false, true},
+            {"validation-mode", "", "LLM validation mode: all, suspicious, none", "suspicious", false, false},
+            {"semantic-dedup", "", "Enable semantic deduplication (requires LLM)", "", false, true},
+            {"semantic-threshold", "", "Similarity threshold for semantic deduplication", "0.85", false, false}
         },
         cmd_run
     });
