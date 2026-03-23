@@ -1066,13 +1066,27 @@ int cmd_run(const Args& args) {
 
         auto qc_start = std::chrono::steady_clock::now();
 
+        // Helper lambda to trim whitespace
+        auto trim = [](const std::string& s) {
+            if (s.empty()) return s;
+            size_t start = 0;
+            while (start < s.length() && std::isspace(static_cast<unsigned char>(s[start]))) {
+                start++;
+            }
+            size_t end = s.length();
+            while (end > start && std::isspace(static_cast<unsigned char>(s[end - 1]))) {
+                end--;
+            }
+            return s.substr(start, end - start);
+        };
+
         // Convert graph entities to CleanableEntity format
         std::vector<CleanableEntity> cleanable_entities;
         auto all_nodes = graph.get_all_nodes();
         for (const auto& node : all_nodes) {
             CleanableEntity ce;
             ce.id = node.id;
-            ce.label = node.label;
+            ce.label = trim(node.label);  // Trim whitespace for accurate validation
             // Try to get type from properties
             auto type_it = node.properties.find("type");
             if (type_it != node.properties.end()) {

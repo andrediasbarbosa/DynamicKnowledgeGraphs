@@ -195,6 +195,7 @@ private:
 
     // Utility
     std::string to_lowercase(const std::string& s) const;
+    std::string trim(const std::string& s) const;
     void remove_invalid_entities(std::vector<CleanableEntity>& entities);
     void remove_invalid_relations(
         std::vector<CleanableRelation>& relations,

@@ -586,7 +586,8 @@ void GraphCleaner::level1_rule_based_filtering(
     for (auto& entity : entities) {
         if (!entity.is_valid) continue;
 
-        std::string label = entity.label;
+        // Trim whitespace from label for accurate checking
+        std::string label = trim(entity.label);
         std::string label_lower = to_lowercase(label);
 
         // Check length
@@ -998,6 +999,24 @@ std::string GraphCleaner::to_lowercase(const std::string& s) const {
     std::transform(result.begin(), result.end(), result.begin(),
                    [](unsigned char c) { return std::tolower(c); });
     return result;
+}
+
+std::string GraphCleaner::trim(const std::string& s) const {
+    if (s.empty()) return s;
+
+    // Find first non-whitespace
+    size_t start = 0;
+    while (start < s.length() && std::isspace(static_cast<unsigned char>(s[start]))) {
+        start++;
+    }
+
+    // Find last non-whitespace
+    size_t end = s.length();
+    while (end > start && std::isspace(static_cast<unsigned char>(s[end - 1]))) {
+        end--;
+    }
+
+    return s.substr(start, end - start);
 }
 
 void GraphCleaner::remove_invalid_entities(std::vector<CleanableEntity>& entities) {
