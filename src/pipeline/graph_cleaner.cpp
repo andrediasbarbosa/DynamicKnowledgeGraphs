@@ -78,6 +78,11 @@ nlohmann::json CleaningReport::to_json() const {
         {"total_removed", level1_removed}
     };
 
+    j["level1_5"] = {
+        {"semantic_duplicates_found", semantic_duplicates_found},
+        {"semantic_duplicates_merged", semantic_duplicates_merged}
+    };
+
     j["level2"] = {
         {"removed_by_degree", removed_by_degree},
         {"removed_by_importance", removed_by_importance},
@@ -547,6 +552,11 @@ CleaningReport GraphCleaner::clean(
         level1_rule_based_filtering(entities, relations, config, report);
     }
 
+    // Level 1.5: Semantic deduplication (merges semantically similar entities)
+    if (config.enable_semantic_dedup && llm) {
+        level15_semantic_deduplication(entities, relations, config, llm, report);
+    }
+
     // Level 2: Statistical filtering (medium speed, removes outliers)
     if (config.enable_statistical) {
         level2_statistical_filtering(entities, relations, config, report);
@@ -659,6 +669,174 @@ void GraphCleaner::level1_rule_based_filtering(
         valid_ids.insert(e.id);
     }
     remove_invalid_relations(relations, valid_ids);
+}
+
+// ============================================================================
+// Level 1.5: Semantic Deduplication
+// ============================================================================
+
+void GraphCleaner::level15_semantic_deduplication(
+    std::vector<CleanableEntity>& entities,
+    std::vector<CleanableRelation>& relations,
+    const CleaningConfig& config,
+    std::shared_ptr<LLMProvider> llm,
+    CleaningReport& report
+) {
+    if (!llm) return;
+
+    if (config.progress_callback) {
+        config.progress_callback("Level 1.5: Semantic Dedup", 0, entities.size());
+    }
+
+    // Collect valid entities for semantic comparison
+    std::vector<CleanableEntity*> valid_entities;
+    for (auto& entity : entities) {
+        if (entity.is_valid) {
+            valid_entities.push_back(&entity);
+        }
+    }
+
+    if (valid_entities.size() < 2) return;  // Need at least 2 entities to deduplicate
+
+    // Build map: canonical label -> list of entity pointers
+    std::map<std::string, std::vector<CleanableEntity*>> duplicate_groups;
+
+    // Process entities in batches for semantic comparison
+    for (size_t i = 0; i < valid_entities.size(); i += config.semantic_batch_size) {
+        size_t batch_end = std::min(i + config.semantic_batch_size, valid_entities.size());
+        std::vector<std::string> batch_labels;
+
+        for (size_t j = i; j < batch_end; j++) {
+            batch_labels.push_back(valid_entities[j]->label);
+        }
+
+        // Ask LLM to identify semantic duplicates in this batch
+        auto duplicates = identify_semantic_duplicates(batch_labels, llm);
+
+        // Group entities by their canonical form
+        for (const auto& dup_group : duplicates) {
+            for (const auto& label : dup_group.variants) {
+                // Find the entity with this label
+                for (size_t j = i; j < batch_end; j++) {
+                    if (valid_entities[j]->label == label) {
+                        duplicate_groups[dup_group.canonical].push_back(valid_entities[j]);
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (config.progress_callback) {
+            config.progress_callback("Level 1.5: Semantic Dedup", batch_end, valid_entities.size());
+        }
+    }
+
+    // Merge duplicate entities
+    for (const auto& [canonical, group] : duplicate_groups) {
+        if (group.size() > 1) {
+            report.semantic_duplicates_found++;
+
+            // Keep entity with highest confidence/degree, mark others as invalid
+            CleanableEntity* keep = group[0];
+            for (size_t i = 1; i < group.size(); i++) {
+                if (group[i]->confidence > keep->confidence ||
+                    (group[i]->confidence == keep->confidence && group[i]->degree > keep->degree)) {
+                    keep = group[i];
+                }
+            }
+
+            // Update the kept entity to use canonical label
+            keep->label = canonical;
+
+            // Mark other variants as invalid (will be merged later)
+            for (auto* entity : group) {
+                if (entity != keep) {
+                    entity->is_valid = false;
+                    entity->removal_reason = "semantic_duplicate_of_" + keep->label;
+                    report.semantic_duplicates_merged++;
+                }
+            }
+        }
+    }
+
+    // Remove invalid entities
+    remove_invalid_entities(entities);
+
+    // Remove relations with invalid entities
+    std::set<std::string> valid_ids;
+    for (const auto& e : entities) {
+        if (e.is_valid) {
+            valid_ids.insert(e.id);
+        }
+    }
+    remove_invalid_relations(relations, valid_ids);
+}
+
+std::vector<GraphCleaner::SemanticDuplicateGroup> GraphCleaner::identify_semantic_duplicates(
+    const std::vector<std::string>& labels,
+    std::shared_ptr<LLMProvider> llm
+) const {
+    std::vector<SemanticDuplicateGroup> result;
+
+    if (labels.size() < 2) return result;
+
+    // Build prompt for LLM to identify semantic duplicates
+    std::stringstream prompt;
+    prompt << "You are identifying semantic duplicates in entity labels extracted from scientific documents.\n";
+    prompt << "Semantic duplicates are entities that refer to the same concept but have different labels.\n\n";
+    prompt << "Examples:\n";
+    prompt << "- 'ML' and 'machine learning' are semantic duplicates\n";
+    prompt << "- 'AI' and 'artificial intelligence' are semantic duplicates\n";
+    prompt << "- 'neural network' and 'neural networks' are semantic duplicates (singular/plural)\n";
+    prompt << "- 'CO2' and 'carbon dioxide' are semantic duplicates\n\n";
+    prompt << "Entity labels:\n";
+    for (size_t i = 0; i < labels.size(); i++) {
+        prompt << (i + 1) << ". \"" << labels[i] << "\"\n";
+    }
+    prompt << "\nIdentify groups of semantic duplicates. For each group, specify the canonical form (preferred label).\n";
+    prompt << "Respond in JSON format:\n";
+    prompt << "{\n";
+    prompt << "  \"duplicates\": [\n";
+    prompt << "    {\"canonical\": \"machine learning\", \"variants\": [\"ML\", \"machine learning\"]},\n";
+    prompt << "    {\"canonical\": \"artificial intelligence\", \"variants\": [\"AI\", \"artificial intelligence\"]}\n";
+    prompt << "  ]\n";
+    prompt << "}\n";
+    prompt << "\nIf no semantic duplicates are found, return: {\"duplicates\": []}\n";
+
+    try {
+        LLMResponse response = llm->complete(prompt.str());
+        if (!response.success) {
+            return result;  // Empty result on failure
+        }
+
+        // Parse JSON response
+        auto json = nlohmann::json::parse(response.content);
+        if (json.contains("duplicates") && json["duplicates"].is_array()) {
+            for (const auto& dup : json["duplicates"]) {
+                if (dup.contains("canonical") && dup.contains("variants")) {
+                    SemanticDuplicateGroup group;
+                    group.canonical = dup["canonical"].get<std::string>();
+
+                    if (dup["variants"].is_array()) {
+                        for (const auto& variant : dup["variants"]) {
+                            if (variant.is_string()) {
+                                group.variants.push_back(variant.get<std::string>());
+                            }
+                        }
+                    }
+
+                    if (group.variants.size() > 1) {
+                        result.push_back(group);
+                    }
+                }
+            }
+        }
+    } catch (const std::exception& e) {
+        // Parsing failed, return empty result
+        std::cerr << "Semantic dedup parsing error: " << e.what() << std::endl;
+    }
+
+    return result;
 }
 
 // ============================================================================

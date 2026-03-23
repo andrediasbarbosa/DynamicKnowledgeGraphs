@@ -783,6 +783,8 @@ int cmd_run(const Args& args) {
     int min_degree = args.get("min-degree", "1").as_int();
     bool llm_validate = args.has("llm-validate");
     std::string validation_mode = args.get("validation-mode", "suspicious").value;
+    bool semantic_dedup = args.has("semantic-dedup");
+    double semantic_threshold = args.get("semantic-threshold", "0.85").as_double();
 
     // Validate stage range
     if (from_stage < 1 || from_stage > 5) {
@@ -1126,6 +1128,8 @@ int cmd_run(const Args& args) {
         CleaningConfig qc_config;
         qc_config.min_node_length = min_node_length;
         qc_config.min_degree = min_degree;
+        qc_config.enable_semantic_dedup = semantic_dedup;
+        qc_config.semantic_threshold = semantic_threshold;
         qc_config.enable_llm_validation = llm_validate;
         qc_config.validation_mode = validation_mode;
         qc_config.progress_callback = [](const std::string& msg, int current, int total) {
@@ -1135,7 +1139,7 @@ int cmd_run(const Args& args) {
         // Run cleaning
         GraphCleaner cleaner;
         std::shared_ptr<LLMProvider> qc_llm = nullptr;
-        if (llm_validate) {
+        if (llm_validate || semantic_dedup) {
             qc_llm = std::shared_ptr<LLMProvider>(
                 LLMProviderFactory::create_from_config_file(config_path)
             );
@@ -1238,6 +1242,10 @@ int cmd_run(const Args& args) {
                   << qc_report.final_edges << " relations ("
                   << (qc_report.initial_edges - qc_report.final_edges) << " removed)\n";
         std::cout << "  Level 1 (rules):   removed " << qc_report.level1_removed << " entities\n";
+        if (semantic_dedup && qc_report.semantic_duplicates_merged > 0) {
+            std::cout << "  Level 1.5 (semantic): merged " << qc_report.semantic_duplicates_merged
+                      << " semantic duplicates (" << qc_report.semantic_duplicates_found << " groups)\n";
+        }
         std::cout << "  Level 2 (stats):   removed " << qc_report.level2_removed << " entities\n";
         if (llm_validate) {
             std::cout << "  Level 3 (LLM):     removed " << qc_report.level3_removed << " entities\n";

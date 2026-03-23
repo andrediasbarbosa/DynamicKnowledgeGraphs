@@ -26,6 +26,11 @@ struct CleaningConfig {
     bool remove_single_chars = true;
     bool remove_artifacts = true;
 
+    // Level 1.5: Semantic deduplication
+    bool enable_semantic_dedup = false;
+    int semantic_batch_size = 20;       // Batch size for semantic comparison
+    double semantic_threshold = 0.85;    // Similarity threshold for merging
+
     // Level 2: Statistical filtering
     bool enable_statistical = true;
     int min_degree = 1;           // Remove nodes with degree < this (after graph built)
@@ -55,6 +60,10 @@ struct CleaningReport {
     int removed_by_numbers = 0;
     int removed_by_artifacts = 0;
     int level1_removed = 0;
+
+    // Level 1.5 results (semantic dedup)
+    int semantic_duplicates_found = 0;
+    int semantic_duplicates_merged = 0;
 
     // Level 2 results
     int removed_by_degree = 0;
@@ -136,6 +145,14 @@ public:
         CleaningReport& report
     );
 
+    void level15_semantic_deduplication(
+        std::vector<CleanableEntity>& entities,
+        std::vector<CleanableRelation>& relations,
+        const CleaningConfig& config,
+        std::shared_ptr<LLMProvider> llm,
+        CleaningReport& report
+    );
+
     void level2_statistical_filtering(
         std::vector<CleanableEntity>& entities,
         std::vector<CleanableRelation>& relations,
@@ -173,6 +190,17 @@ private:
     ) const;
 
     bool is_statistical_outlier(const CleanableEntity& entity, double threshold) const;
+
+    // Level 1.5: Semantic deduplication helpers
+    struct SemanticDuplicateGroup {
+        std::string canonical;
+        std::vector<std::string> variants;
+    };
+
+    std::vector<SemanticDuplicateGroup> identify_semantic_duplicates(
+        const std::vector<std::string>& labels,
+        std::shared_ptr<LLMProvider> llm
+    ) const;
 
     // Level 3: LLM validation helpers
     std::vector<bool> batch_validate_entities(
