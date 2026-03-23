@@ -7,6 +7,7 @@
 #include <chrono>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 
 namespace kg {
 
@@ -94,6 +95,411 @@ nlohmann::json CleaningReport::to_json() const {
     j["cleaning_time_ms"] = cleaning_time_ms;
 
     return j;
+}
+
+std::string CleaningReport::generate_html_report() const {
+    std::stringstream html;
+
+    int total_removed = level1_removed + level2_removed + level3_removed;
+    double removal_rate = initial_nodes > 0 ? (100.0 * total_removed / initial_nodes) : 0.0;
+
+    html << R"(<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Control Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            border-left: 4px solid #667eea;
+        }
+        .card h3 {
+            color: #495057;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .card .value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+        .card .label {
+            color: #6c757d;
+            font-size: 0.95em;
+        }
+        .card.success { border-left-color: #28a745; }
+        .card.warning { border-left-color: #ffc107; }
+        .card.danger { border-left-color: #dc3545; }
+        .card.info { border-left-color: #17a2b8; }
+
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #212529;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .level-box {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .level-box h3 {
+            color: #495057;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .level-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f5;
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .stat-value {
+            color: #212529;
+            font-weight: 600;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .comparison-table th {
+            background: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .metric-change {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .metric-change.positive {
+            background: #d4edda;
+            color: #155724;
+        }
+        .metric-change.negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧹 Quality Control Report</h1>
+            <p>3-Level Graph Cleaning Analysis</p>
+        </div>
+
+        <div class="content">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card info">
+                    <h3>Initial Graph</h3>
+                    <div class="value">)" << initial_nodes << R"(</div>
+                    <div class="label">entities, )" << initial_edges << R"( relations</div>
+                </div>
+                <div class="card success">
+                    <h3>Final Graph</h3>
+                    <div class="value">)" << final_nodes << R"(</div>
+                    <div class="label">entities, )" << final_edges << R"( relations</div>
+                </div>
+                <div class="card warning">
+                    <h3>Entities Removed</h3>
+                    <div class="value">)" << total_removed << R"(</div>
+                    <div class="label">)" << std::fixed << std::setprecision(1) << removal_rate << R"(% of total</div>
+                </div>
+                <div class="card danger">
+                    <h3>Processing Time</h3>
+                    <div class="value">)" << std::fixed << std::setprecision(0) << cleaning_time_ms << R"(</div>
+                    <div class="label">milliseconds</div>
+                </div>
+            </div>
+
+            <!-- Retention Rate -->
+            <div class="section">
+                <h2>Retention Rate</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: )"
+         << std::fixed << std::setprecision(1) << (100.0 - removal_rate) << R"(%">
+                        )" << final_nodes << " / " << initial_nodes << " entities retained ("
+         << std::fixed << std::setprecision(1) << (100.0 - removal_rate) << R"(%)</div>
+                </div>
+            </div>
+
+            <!-- Level-by-Level Breakdown -->
+            <div class="section">
+                <h2>Cleaning Breakdown</h2>
+)";
+
+    // Level 1
+    if (level1_removed > 0) {
+        html << R"(
+                <div class="level-box">
+                    <h3>Level 1: Rule-Based Filtering <span class="level-badge">FAST</span></h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed by length constraints</span>
+                        <span class="stat-value">)" << removed_by_length << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed stopwords</span>
+                        <span class="stat-value">)" << removed_by_stopwords << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed pure numbers</span>
+                        <span class="stat-value">)" << removed_by_numbers << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed artifacts (fig, table, etc.)</span>
+                        <span class="stat-value">)" << removed_by_artifacts << R"(</span>
+                    </div>
+                    <div class="stat-row" style="border-top: 2px solid #667eea; margin-top: 10px; padding-top: 15px;">
+                        <span class="stat-label" style="color: #667eea; font-weight: 600;">Level 1 Total</span>
+                        <span class="stat-value" style="color: #667eea; font-size: 1.2em;">)" << level1_removed
+             << " (" << std::fixed << std::setprecision(1)
+             << (initial_nodes > 0 ? 100.0 * level1_removed / initial_nodes : 0.0) << R"(%)</span>
+                    </div>
+                </div>
+)";
+    }
+
+    // Level 2
+    if (level2_removed > 0) {
+        html << R"(
+                <div class="level-box">
+                    <h3>Level 2: Statistical Filtering <span class="level-badge">MEDIUM</span></h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed by low degree (connectivity)</span>
+                        <span class="stat-value">)" << removed_by_degree << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed by low importance</span>
+                        <span class="stat-value">)" << removed_by_importance << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed as statistical outliers</span>
+                        <span class="stat-value">)" << removed_by_outliers << R"(</span>
+                    </div>
+                    <div class="stat-row" style="border-top: 2px solid #667eea; margin-top: 10px; padding-top: 15px;">
+                        <span class="stat-label" style="color: #667eea; font-weight: 600;">Level 2 Total</span>
+                        <span class="stat-value" style="color: #667eea; font-size: 1.2em;">)" << level2_removed
+             << " (" << std::fixed << std::setprecision(1)
+             << (initial_nodes > 0 ? 100.0 * level2_removed / initial_nodes : 0.0) << R"(%)</span>
+                    </div>
+                </div>
+)";
+    }
+
+    // Level 3
+    if (validated_by_llm > 0) {
+        html << R"(
+                <div class="level-box">
+                    <h3>Level 3: LLM Validation <span class="level-badge">ACCURATE</span></h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Entities validated by LLM</span>
+                        <span class="stat-value">)" << validated_by_llm << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Removed by LLM</span>
+                        <span class="stat-value">)" << removed_by_llm << R"(</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">LLM rejection rate</span>
+                        <span class="stat-value">)" << std::fixed << std::setprecision(1)
+             << (validated_by_llm > 0 ? 100.0 * removed_by_llm / validated_by_llm : 0.0) << R"(%</span>
+                    </div>
+                    <div class="stat-row" style="border-top: 2px solid #667eea; margin-top: 10px; padding-top: 15px;">
+                        <span class="stat-label" style="color: #667eea; font-weight: 600;">Level 3 Total</span>
+                        <span class="stat-value" style="color: #667eea; font-size: 1.2em;">)" << level3_removed
+             << " (" << std::fixed << std::setprecision(1)
+             << (initial_nodes > 0 ? 100.0 * level3_removed / initial_nodes : 0.0) << R"(%)</span>
+                    </div>
+                </div>
+)";
+    }
+
+    // Comparison Table
+    html << R"(
+            </div>
+
+            <!-- Before/After Comparison -->
+            <div class="section">
+                <h2>Before/After Comparison</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Before Cleaning</th>
+                            <th>After Cleaning</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Entities</strong></td>
+                            <td>)" << initial_nodes << R"(</td>
+                            <td>)" << final_nodes << R"(</td>
+                            <td><span class="metric-change )"
+         << (total_removed > 0 ? "negative" : "positive") << R"(">
+                                -)" << total_removed << " ("
+         << std::fixed << std::setprecision(1) << removal_rate << R"(%)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Relations</strong></td>
+                            <td>)" << initial_edges << R"(</td>
+                            <td>)" << final_edges << R"(</td>
+                            <td><span class="metric-change )"
+         << ((initial_edges - final_edges) > 0 ? "negative" : "positive") << R"(">
+                                -)" << (initial_edges - final_edges) << " ("
+         << std::fixed << std::setprecision(1)
+         << (initial_edges > 0 ? 100.0 * (initial_edges - final_edges) / initial_edges : 0.0) << R"(%)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Avg. Relations per Entity</strong></td>
+                            <td>)" << std::fixed << std::setprecision(2)
+         << (initial_nodes > 0 ? (double)initial_edges / initial_nodes : 0.0) << R"(</td>
+                            <td>)" << std::fixed << std::setprecision(2)
+         << (final_nodes > 0 ? (double)final_edges / final_nodes : 0.0) << R"(</td>
+                            <td><span class="metric-change )"
+         << ((final_nodes > 0 && initial_nodes > 0 &&
+              ((double)final_edges / final_nodes) > ((double)initial_edges / initial_nodes))
+             ? "positive" : "negative") << R"(">
+                                )" << (final_nodes > 0 && initial_nodes > 0
+                                      ? (((double)final_edges / final_nodes) - ((double)initial_edges / initial_nodes) >= 0 ? "+" : "")
+                                      : "")
+         << std::fixed << std::setprecision(2)
+         << (final_nodes > 0 && initial_nodes > 0
+             ? ((double)final_edges / final_nodes) - ((double)initial_edges / initial_nodes)
+             : 0.0) << R"(</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Generated by Knowledge Graph Quality Control System v1.0</p>
+            <p>Processing completed in )" << std::fixed << std::setprecision(0) << cleaning_time_ms << R"( ms</p>
+        </div>
+    </div>
+</body>
+</html>
+)";
+
+    return html.str();
 }
 
 // ============================================================================

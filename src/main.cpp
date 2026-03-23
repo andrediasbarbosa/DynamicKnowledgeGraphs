@@ -1180,11 +1180,17 @@ int cmd_run(const Args& args) {
         // Save cleaned graph
         graph.export_to_json(graph_path, true);
 
-        // Save cleaning report
+        // Save cleaning report (JSON)
         std::string qc_report_path = step3_dir + "/cleaning_report.json";
         std::ofstream qc_file(qc_report_path);
         qc_file << qc_report.to_json().dump(2);
         qc_file.close();
+
+        // Save cleaning report (HTML)
+        std::string qc_html_path = step3_dir + "/quality_control_report.html";
+        std::ofstream qc_html_file(qc_html_path);
+        qc_html_file << qc_report.generate_html_report();
+        qc_html_file.close();
 
         auto qc_duration = std::chrono::steady_clock::now() - qc_start;
         std::cout << "\n  Cleaned: " << qc_report.final_nodes << " entities ("
@@ -1197,6 +1203,7 @@ int cmd_run(const Args& args) {
             std::cout << "  Level 3 (LLM):     removed " << qc_report.level3_removed << " entities\n";
         }
         std::cout << "  Saved: Step_3_QualityControl/cleaning_report.json\n";
+        std::cout << "  Saved: Step_3_QualityControl/quality_control_report.html\n";
         std::cout << "  QC time: " << format_duration(qc_duration) << "\n";
     } else if (!enable_qc) {
         std::cout << "\n";

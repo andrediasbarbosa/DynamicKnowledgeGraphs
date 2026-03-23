@@ -74,6 +74,7 @@ struct CleaningReport {
 
     void print_summary() const;
     nlohmann::json to_json() const;
+    std::string generate_html_report() const;
 };
 
 /**
