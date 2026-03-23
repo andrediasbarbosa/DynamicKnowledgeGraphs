@@ -736,6 +736,117 @@ std::string PromptTemplates::json_format_instructions() {
 }
 
 // ============================================================================
+// Phase 2: Causal Extraction Prompts
+// ============================================================================
+
+std::string PromptTemplates::causal_extraction_system_prompt() {
+    return R"(You are an expert at extracting causal relationships from scientific and technical text.
+
+Your task is to identify causal relationships and enrich them with detailed metadata including:
+1. Causal type (direct, necessary, sufficient, contributing, preventing, enabling, mechanism)
+2. Causal strength (weak, moderate, strong, deterministic)
+3. Mechanism description (HOW A causes B)
+4. Temporal aspects (immediate, short-term, long-term, delayed)
+5. Necessary and sufficient conditions
+6. Contributing factors and inhibitors
+7. Evidence and confidence
+
+Output JSON format:
+{
+  "relations": [
+    {
+      "sources": ["entity1"],
+      "relation": "causes",
+      "targets": ["entity2"],
+      "confidence": 0.9,
+      "causal": {
+        "type": "direct_cause|necessary|sufficient|contributing|preventing|enabling|mechanism",
+        "strength": "weak|moderate|strong|deterministic",
+        "temporality": "immediate|short_term|long_term|delayed",
+        "mechanism_description": "detailed explanation of HOW A causes B",
+        "mechanism_type": "physical|chemical|biological|social|economic|computational|other",
+        "mechanism_chain": ["intermediate_step1", "intermediate_step2"],
+        "necessary_conditions": ["condition required for causation"],
+        "sufficient_conditions": ["condition that guarantees causation"],
+        "contributing_factors": ["other factors that contribute"],
+        "inhibitors": ["factors that prevent or weaken causation"],
+        "confidence": 0.85,
+        "evidence_sources": ["supporting text snippet"],
+        "temporal_context": "within hours|over decades|etc",
+        "bidirectional": false,
+        "context": "conditions under which causation holds",
+        "scope_limitations": ["boundary condition"]
+      }
+    }
+  ]
+}
+
+Guidelines for Causal Extraction:
+
+1. CAUSAL TYPES:
+   - direct_cause: A directly causes B (most common)
+   - necessary: A is necessary for B (B cannot happen without A)
+   - sufficient: A is sufficient for B (A guarantees B will happen)
+   - contributing: A contributes to B (among other factors)
+   - preventing: A prevents/inhibits B
+   - enabling: A enables B (makes B possible but doesn't cause it)
+   - mechanism: A causes B via specific mechanism M
+
+2. CAUSAL STRENGTH:
+   - weak: Weak causal link, easily broken
+   - moderate: Moderate causal link (default if unclear)
+   - strong: Strong, reliable causal link
+   - deterministic: Invariant, deterministic causation
+
+3. MECHANISM:
+   - Always extract mechanism_description when present
+   - Describe HOW A causes B, not just that it does
+   - Break complex mechanisms into mechanism_chain steps
+   - Classify mechanism_type (physical, chemical, biological, etc.)
+
+4. CONDITIONS:
+   - necessary_conditions: What must be present for causation?
+   - sufficient_conditions: What alone guarantees the effect?
+   - contributing_factors: What else contributes?
+   - inhibitors: What prevents or weakens the causal link?
+
+5. TEMPORAL ASPECTS:
+   - immediate: Effect occurs immediately
+   - short_term: Within hours/days
+   - long_term: Over months/years
+   - delayed: Significantly delayed effect
+
+6. CONFIDENCE & EVIDENCE:
+   - Set confidence based on evidence strength (0.0-1.0)
+   - Extract supporting text snippets as evidence_sources
+   - Consider context and scope_limitations
+
+7. ONLY extract causal relations:
+   - Skip non-causal relations (correlations, associations, etc.)
+   - Focus on relationships that express causation
+   - Look for causal verbs: causes, leads to, results in, produces, triggers, induces, etc.
+
+IMPORTANT: Extract only genuine causal relationships. If a relationship is correlational or associative but not clearly causal, do NOT extract it.)";
+}
+
+std::string PromptTemplates::causal_extraction_user_prompt(const std::string& text) {
+    return "Extract all causal relationships with rich metadata from the following text:\n\n" +
+           text + "\n\n" + causal_json_format_instructions();
+}
+
+std::string PromptTemplates::causal_json_format_instructions() {
+    return R"(IMPORTANT:
+- Respond ONLY with valid JSON (no markdown, no explanation)
+- Extract ONLY causal relations (skip correlations, associations, etc.)
+- Keep entity names SHORT (1-4 words max)
+- Fill in ALL causal metadata fields when information is available
+- Set confidence based on evidence strength in text
+- Include mechanism_description whenever causation mechanism is mentioned
+- Limit to 5-10 most important CAUSAL relations
+- Ensure JSON is complete and properly closed with all brackets)";
+}
+
+// ============================================================================
 // Utility Functions
 // ============================================================================
 
@@ -883,6 +994,16 @@ std::vector<ExtractedRelation> parse_relations_json(const std::string& json_str)
                 }
             }
 
+            // Phase 2: Parse causal metadata if present
+            if (rel_json.contains("causal")) {
+                try {
+                    rel.causal_metadata = CausalMetadata::from_json(rel_json["causal"]);
+                } catch (const std::exception& e) {
+                    // If causal parsing fails, continue without causal metadata
+                    // (silently ignore parsing errors to maintain backward compatibility)
+                }
+            }
+
             relations.push_back(rel);
         }
 
@@ -910,6 +1031,11 @@ std::string relations_to_json(const std::vector<ExtractedRelation>& relations) {
             rel_json["properties"] = rel.properties;
         }
 
+        // Phase 2: Serialize causal metadata if present
+        if (rel.causal_metadata.has_value()) {
+            rel_json["causal"] = rel.causal_metadata->to_json();
+        }
+
         relations_array.push_back(rel_json);
     }
 
@@ -920,6 +1046,75 @@ std::string relations_to_json(const std::vector<ExtractedRelation>& relations) {
 std::string get_api_key_from_env(const std::string& env_var_name) {
     const char* value = std::getenv(env_var_name.c_str());
     return value ? std::string(value) : std::string();
+}
+
+// ============================================================================
+// V2: Provenance Tracking Methods
+// ============================================================================
+
+nlohmann::json ExtractionProvenance::to_json() const {
+    nlohmann::json j;
+    j["chunk_id"] = chunk_id;
+    j["start_char"] = start_char;
+    j["end_char"] = end_char;
+    j["confidence"] = confidence;
+    if (!source_text.empty()) {
+        j["source_text"] = source_text;
+    }
+    return j;
+}
+
+ExtractionProvenance ExtractionProvenance::from_json(const nlohmann::json& j) {
+    ExtractionProvenance prov;
+    if (j.contains("chunk_id")) prov.chunk_id = j["chunk_id"];
+    if (j.contains("start_char")) prov.start_char = j["start_char"];
+    if (j.contains("end_char")) prov.end_char = j["end_char"];
+    if (j.contains("confidence")) prov.confidence = j["confidence"];
+    if (j.contains("source_text")) prov.source_text = j["source_text"];
+    return prov;
+}
+
+std::string ExtractedRelation::get_normalized_key() const {
+    // Normalize: lowercase, trim, sort sources/targets
+    auto normalize_str = [](std::string s) {
+        // Convert to lowercase
+        std::transform(s.begin(), s.end(), s.begin(), ::tolower);
+        // Remove leading/trailing whitespace
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+            return !std::isspace(ch);
+        }));
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
+            return !std::isspace(ch);
+        }).base(), s.end());
+        return s;
+    };
+
+    // Sort and join sources
+    std::vector<std::string> norm_sources = sources;
+    for (auto& s : norm_sources) s = normalize_str(s);
+    std::sort(norm_sources.begin(), norm_sources.end());
+
+    // Sort and join targets
+    std::vector<std::string> norm_targets = targets;
+    for (auto& t : norm_targets) t = normalize_str(t);
+    std::sort(norm_targets.begin(), norm_targets.end());
+
+    // Normalize relation
+    std::string norm_relation = normalize_str(relation);
+
+    // Build key: sources|relation|targets
+    std::string key;
+    for (const auto& s : norm_sources) {
+        if (!key.empty()) key += ",";
+        key += s;
+    }
+    key += "|" + norm_relation + "|";
+    for (const auto& t : norm_targets) {
+        if (key.back() != '|') key += ",";
+        key += t;
+    }
+
+    return key;
 }
 
 } // namespace kg

@@ -31,7 +31,9 @@ struct PipelineConfig {
     // Chunking Configuration
     std::string chunking_strategy = "page";  ///< "fixed", "page", "paragraph", "sentence"
     int chunk_size = 500;                   ///< For fixed-size chunking
-    int chunk_overlap = 100;                ///< For fixed-size chunking
+    int chunk_overlap = 100;                ///< For fixed-size chunking (V1 - character count)
+    double chunk_overlap_percentage = 0.15; ///< For fixed-size chunking (V2 - percentage, e.g., 0.15 = 15%)
+    bool use_percentage_overlap = true;     ///< Use percentage-based overlap (V2) vs character count (V1)
     int max_paragraphs = 3;                 ///< For paragraph chunking
     int max_sentences = 5;                  ///< For sentence chunking
     int max_chars_per_chunk = 800;          ///< Max chars for semantic chunking
@@ -44,6 +46,11 @@ struct PipelineConfig {
     // Deduplication Configuration
     bool enable_deduplication = true;       ///< Enable node deduplication
     double similarity_threshold = 0.85;     ///< Similarity threshold for merging
+
+    // V2: Overlap Deduplication Configuration
+    bool enable_overlap_deduplication = true;  ///< Enable overlap-based relation deduplication
+    double overlap_confidence_boost = 0.1;     ///< Confidence boost for overlapping extractions (0.1 = 10%)
+    std::string overlap_merge_strategy = "max"; ///< "max" | "avg" | "boost"
 
     // Output Configuration
     std::string output_directory = "output_json";  ///< Output directory
@@ -111,6 +118,13 @@ struct PipelineStatistics {
     int final_edges = 0;
     int nodes_before_dedup = 0;
     int nodes_merged = 0;
+
+    // V2: Overlap deduplication statistics
+    int relations_before_dedup = 0;        ///< Total relations before overlap deduplication
+    int relations_after_dedup = 0;         ///< Total relations after overlap deduplication
+    int duplicate_relations_merged = 0;    ///< Number of duplicate relations merged
+    double avg_confidence_boost = 0.0;     ///< Average confidence boost from overlaps
+    int multi_provenance_relations = 0;    ///< Relations found in multiple chunks
 
     /**
      * @brief Print summary to stdout
@@ -260,6 +274,14 @@ private:
     );
 
     /**
+     * @brief Build hypergraph from flat list of relations (V2, post-deduplication)
+     */
+    Hypergraph build_graph_from_relations(
+        const std::vector<ExtractedRelation>& relations,
+        const std::string& document_id
+    );
+
+    /**
      * @brief Merge multiple hypergraphs
      */
     Hypergraph merge_graphs(const std::vector<Hypergraph>& graphs);
@@ -294,6 +316,16 @@ private:
      * @brief Apply rate limiting
      */
     void apply_rate_limit();
+
+    /**
+     * @brief Deduplicate relations from overlapping chunks (V2)
+     *
+     * @param all_relations All extracted relations (may contain duplicates)
+     * @return Deduplicated relations with merged provenances
+     */
+    std::vector<ExtractedRelation> deduplicate_relations(
+        const std::vector<ExtractedRelation>& all_relations
+    );
 };
 
 // ============================================================================

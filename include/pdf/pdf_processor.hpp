@@ -122,19 +122,46 @@ public:
 class FixedSizeChunking : public ChunkingStrategy {
 public:
     /**
-     * @brief Constructor
+     * @brief Constructor with character-based overlap (V1 compatibility)
      *
      * @param chunk_size Number of characters per chunk
      * @param overlap Number of overlapping characters between chunks
      */
     FixedSizeChunking(size_t chunk_size = 1000, size_t overlap = 200);
 
+    /**
+     * @brief Constructor with percentage-based overlap (V2)
+     *
+     * @param chunk_size Number of characters per chunk
+     * @param overlap_percentage Overlap as fraction of chunk_size (0.0 to 1.0)
+     *                          e.g., 0.15 = 15% overlap
+     * @param use_percentage Marker parameter to select this constructor
+     */
+    FixedSizeChunking(size_t chunk_size, double overlap_percentage, bool use_percentage);
+
     std::vector<TextChunk> chunk(const PDFDocument& document) override;
     std::string get_name() const override { return "FixedSize"; }
+
+    /**
+     * @brief Get effective overlap in characters
+     */
+    size_t get_overlap() const { return overlap_; }
+
+    /**
+     * @brief Get overlap percentage (if using percentage mode)
+     */
+    double get_overlap_percentage() const { return overlap_percentage_; }
+
+    /**
+     * @brief Check if using percentage-based overlap
+     */
+    bool is_using_percentage() const { return use_percentage_; }
 
 private:
     size_t chunk_size_;
     size_t overlap_;
+    double overlap_percentage_ = 0.0;
+    bool use_percentage_ = false;
 };
 
 /**

@@ -119,6 +119,8 @@ PipelineConfig PipelineConfig::from_json_file(const std::string& path) {
     if (j.contains("chunking_strategy")) config.chunking_strategy = j["chunking_strategy"];
     if (j.contains("chunk_size")) config.chunk_size = j["chunk_size"];
     if (j.contains("chunk_overlap")) config.chunk_overlap = j["chunk_overlap"];
+    if (j.contains("chunk_overlap_percentage")) config.chunk_overlap_percentage = j["chunk_overlap_percentage"];
+    if (j.contains("use_percentage_overlap")) config.use_percentage_overlap = j["use_percentage_overlap"];
     if (j.contains("max_paragraphs")) config.max_paragraphs = j["max_paragraphs"];
     if (j.contains("max_sentences")) config.max_sentences = j["max_sentences"];
     if (j.contains("max_chars_per_chunk")) config.max_chars_per_chunk = j["max_chars_per_chunk"];
@@ -131,6 +133,11 @@ PipelineConfig PipelineConfig::from_json_file(const std::string& path) {
     // Deduplication config
     if (j.contains("enable_deduplication")) config.enable_deduplication = j["enable_deduplication"];
     if (j.contains("similarity_threshold")) config.similarity_threshold = j["similarity_threshold"];
+
+    // V2: Overlap deduplication config
+    if (j.contains("enable_overlap_deduplication")) config.enable_overlap_deduplication = j["enable_overlap_deduplication"];
+    if (j.contains("overlap_confidence_boost")) config.overlap_confidence_boost = j["overlap_confidence_boost"];
+    if (j.contains("overlap_merge_strategy")) config.overlap_merge_strategy = j["overlap_merge_strategy"];
 
     // Output config
     if (j.contains("output_directory")) config.output_directory = j["output_directory"];
@@ -160,6 +167,8 @@ void PipelineConfig::to_json_file(const std::string& path) const {
     j["chunking_strategy"] = chunking_strategy;
     j["chunk_size"] = chunk_size;
     j["chunk_overlap"] = chunk_overlap;
+    j["chunk_overlap_percentage"] = chunk_overlap_percentage;
+    j["use_percentage_overlap"] = use_percentage_overlap;
     j["max_paragraphs"] = max_paragraphs;
     j["max_sentences"] = max_sentences;
     j["max_chars_per_chunk"] = max_chars_per_chunk;
@@ -172,6 +181,11 @@ void PipelineConfig::to_json_file(const std::string& path) const {
     // Deduplication config
     j["enable_deduplication"] = enable_deduplication;
     j["similarity_threshold"] = similarity_threshold;
+
+    // V2: Overlap deduplication config
+    j["enable_overlap_deduplication"] = enable_overlap_deduplication;
+    j["overlap_confidence_boost"] = overlap_confidence_boost;
+    j["overlap_merge_strategy"] = overlap_merge_strategy;
 
     // Output config
     j["output_directory"] = output_directory;
@@ -317,6 +331,13 @@ json PipelineStatistics::to_json() const {
     j["nodes_before_dedup"] = nodes_before_dedup;
     j["nodes_merged"] = nodes_merged;
 
+    // V2: Overlap deduplication statistics
+    j["relations_before_dedup"] = relations_before_dedup;
+    j["relations_after_dedup"] = relations_after_dedup;
+    j["duplicate_relations_merged"] = duplicate_relations_merged;
+    j["avg_confidence_boost"] = avg_confidence_boost;
+    j["multi_provenance_relations"] = multi_provenance_relations;
+
     return j;
 }
 
@@ -364,10 +385,20 @@ void ExtractionPipeline::initialize_components() {
 
 std::unique_ptr<ChunkingStrategy> ExtractionPipeline::create_chunking_strategy() {
     if (config_.chunking_strategy == "fixed") {
-        return std::make_unique<FixedSizeChunking>(
-            config_.chunk_size,
-            config_.chunk_overlap
-        );
+        if (config_.use_percentage_overlap) {
+            // V2: Percentage-based overlap
+            return std::make_unique<FixedSizeChunking>(
+                config_.chunk_size,
+                config_.chunk_overlap_percentage,
+                true  // use_percentage marker
+            );
+        } else {
+            // V1: Character-based overlap (backward compatibility)
+            return std::make_unique<FixedSizeChunking>(
+                config_.chunk_size,
+                config_.chunk_overlap
+            );
+        }
     } else if (config_.chunking_strategy == "page") {
         return std::make_unique<PageBasedChunking>();
     } else if (config_.chunking_strategy == "paragraph") {
@@ -428,9 +459,24 @@ Hypergraph ExtractionPipeline::process_document(const PDFDocument& doc) {
     // Extract relations from chunks
     auto extraction_results = extract_from_chunks(chunks, doc.document_id);
 
+    // V2: Collect all relations into flat vector for deduplication
+    std::vector<ExtractedRelation> all_relations;
+    for (const auto& result : extraction_results) {
+        if (result.success) {
+            all_relations.insert(all_relations.end(),
+                                result.relations.begin(),
+                                result.relations.end());
+        }
+    }
+
+    // V2: Deduplicate overlapping extractions
+    if (config_.use_percentage_overlap && config_.enable_overlap_deduplication) {
+        all_relations = deduplicate_relations(all_relations);
+    }
+
     // Build graph
     auto graph_start = std::chrono::high_resolution_clock::now();
-    Hypergraph graph = build_graph_from_results(extraction_results, doc.document_id);
+    Hypergraph graph = build_graph_from_relations(all_relations, doc.document_id);
     auto graph_end = std::chrono::high_resolution_clock::now();
 
     stats_.graph_building_time_seconds += std::chrono::duration<double>(
@@ -467,6 +513,19 @@ std::vector<ExtractionResult> ExtractionPipeline::extract_from_chunks(
         stats_.llm_time_seconds += std::chrono::duration<double>(
             llm_end - llm_start
         ).count();
+
+        // V2: Attach provenance to each relation
+        if (result.success) {
+            for (auto& rel : result.relations) {
+                ExtractionProvenance prov;
+                prov.chunk_id = chunks[i].chunk_id;
+                prov.start_char = chunks[i].start_position;
+                prov.end_char = chunks[i].end_position;
+                prov.confidence = rel.confidence;
+                prov.source_text = chunks[i].text.substr(0, 200);  // Store snippet
+                rel.add_provenance(prov);
+            }
+        }
 
         // Update statistics
         stats_.extraction_calls++;
@@ -532,6 +591,43 @@ Hypergraph ExtractionPipeline::build_graph_from_results(
 
             graph.add_hyperedge(edge);
         }
+    }
+
+    return graph;
+}
+
+// V2: Build graph from flat list of relations (post-deduplication)
+Hypergraph ExtractionPipeline::build_graph_from_relations(
+    const std::vector<ExtractedRelation>& relations,
+    const std::string& document_id
+) {
+    Hypergraph graph;
+
+    for (const auto& rel : relations) {
+        if (rel.sources.empty() || rel.targets.empty()) continue;
+
+        HyperEdge edge;
+        edge.sources.reserve(rel.sources.size());
+        for (const auto& src : rel.sources) {
+            edge.sources.push_back(normalize_entity_label(src));
+        }
+        edge.relation = rel.relation;
+        edge.targets.reserve(rel.targets.size());
+        for (const auto& tgt : rel.targets) {
+            edge.targets.push_back(normalize_entity_label(tgt));
+        }
+        edge.confidence = rel.confidence;
+        edge.source_document = document_id;
+
+        // Use first provenance for chunk ID (relations may have multiple)
+        if (!rel.provenances.empty()) {
+            edge.source_chunk_id = rel.provenances[0].chunk_id;
+        }
+
+        // Copy properties
+        edge.properties = rel.properties;
+
+        graph.add_hyperedge(edge);
     }
 
     return graph;
@@ -790,6 +886,76 @@ PipelineConfig load_config_with_fallback(const std::string& config_path) {
 
     // Fallback to environment
     return PipelineConfig::from_environment();
+}
+
+// ============================================================================
+// V2: Overlap Deduplication
+// ============================================================================
+
+std::vector<ExtractedRelation> ExtractionPipeline::deduplicate_relations(
+    const std::vector<ExtractedRelation>& all_relations
+) {
+    if (!config_.enable_overlap_deduplication) {
+        return all_relations;  // Return as-is if deduplication disabled
+    }
+
+    // V2: Track statistics
+    stats_.relations_before_dedup = all_relations.size();
+
+    // Map: normalized_key -> merged_relation
+    std::map<std::string, ExtractedRelation> relation_map;
+    double total_confidence_boost = 0.0;
+    int num_merges = 0;
+
+    for (const auto& rel : all_relations) {
+        std::string key = rel.get_normalized_key();
+
+        if (relation_map.count(key)) {
+            // Duplicate found -> merge
+            double old_confidence = relation_map[key].confidence;
+            relation_map[key].merge_with(rel, config_.overlap_confidence_boost);
+            double new_confidence = relation_map[key].confidence;
+
+            // Track confidence boost
+            total_confidence_boost += (new_confidence - old_confidence);
+            num_merges++;
+
+            if (config_.verbose) {
+                std::cout << "  [Dedup] Merged duplicate: " << key << std::endl;
+            }
+        } else {
+            // New relation
+            relation_map[key] = rel;
+        }
+    }
+
+    // Convert map back to vector
+    std::vector<ExtractedRelation> deduplicated;
+    deduplicated.reserve(relation_map.size());
+
+    int multi_prov_count = 0;
+    for (const auto& [key, rel] : relation_map) {
+        if (rel.provenances.size() > 1) {
+            multi_prov_count++;
+        }
+        deduplicated.push_back(rel);
+    }
+
+    // V2: Update statistics
+    stats_.relations_after_dedup = deduplicated.size();
+    stats_.duplicate_relations_merged = all_relations.size() - deduplicated.size();
+    stats_.avg_confidence_boost = num_merges > 0 ? total_confidence_boost / num_merges : 0.0;
+    stats_.multi_provenance_relations = multi_prov_count;
+
+    // Log statistics
+    if (config_.verbose && deduplicated.size() < all_relations.size()) {
+        std::cout << "  [Dedup] Merged " << stats_.duplicate_relations_merged << " duplicate relations ("
+                  << all_relations.size() << " -> " << deduplicated.size() << ")" << std::endl;
+        std::cout << "  [Dedup] Avg confidence boost: " << stats_.avg_confidence_boost << std::endl;
+        std::cout << "  [Dedup] Multi-provenance relations: " << multi_prov_count << std::endl;
+    }
+
+    return deduplicated;
 }
 
 } // namespace kg

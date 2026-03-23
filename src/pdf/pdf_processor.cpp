@@ -80,9 +80,21 @@ size_t PDFDocument::get_total_words() const {
 // ============================================================================
 
 FixedSizeChunking::FixedSizeChunking(size_t chunk_size, size_t overlap)
-    : chunk_size_(chunk_size), overlap_(overlap) {
+    : chunk_size_(chunk_size), overlap_(overlap), use_percentage_(false) {
     if (overlap >= chunk_size) {
         throw std::invalid_argument("Overlap must be less than chunk size");
+    }
+}
+
+FixedSizeChunking::FixedSizeChunking(size_t chunk_size, double overlap_percentage, bool use_percentage)
+    : chunk_size_(chunk_size), overlap_percentage_(overlap_percentage), use_percentage_(use_percentage) {
+    if (overlap_percentage < 0.0 || overlap_percentage >= 1.0) {
+        throw std::invalid_argument("Overlap percentage must be in range [0.0, 1.0)");
+    }
+    // Calculate overlap in characters from percentage
+    overlap_ = static_cast<size_t>(chunk_size * overlap_percentage);
+    if (overlap_ >= chunk_size) {
+        throw std::invalid_argument("Calculated overlap must be less than chunk size");
     }
 }
 

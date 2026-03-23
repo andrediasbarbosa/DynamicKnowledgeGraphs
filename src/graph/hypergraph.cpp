@@ -102,6 +102,11 @@ nlohmann::json HyperEdge::to_json() const {
         j["source_page"] = source_page;
     }
 
+    // Phase 2: Serialize causal metadata if present
+    if (causal_metadata.has_value()) {
+        j["causal_metadata"] = causal_metadata->to_json();
+    }
+
     return j;
 }
 
@@ -124,6 +129,11 @@ HyperEdge HyperEdge::from_json(const nlohmann::json& j) {
     }
     if (j.contains("source_page")) {
         edge.source_page = j["source_page"].get<int>();
+    }
+
+    // Phase 2: Deserialize causal metadata if present
+    if (j.contains("causal_metadata")) {
+        edge.causal_metadata = CausalMetadata::from_json(j["causal_metadata"]);
     }
 
     return edge;

@@ -113,6 +113,7 @@ endif()
 
 add_library(llm_provider
     src/llm/llm_provider.cpp
+    src/llm/causal_metadata.cpp  # Phase 2: Causal metadata
 )
 
 target_include_directories(llm_provider PUBLIC
@@ -235,6 +236,15 @@ if(HAVE_POPPLER)
     )
 endif()
 
+# Phase 2: Causal extraction demo
+add_executable(causal_extraction_demo
+    examples/causal_extraction_demo.cpp
+)
+
+target_link_libraries(causal_extraction_demo PRIVATE
+    llm_provider
+)
+
 # End-to-end pipeline example
 add_executable(pipeline_example
     examples/pipeline_example.cpp
@@ -303,6 +313,28 @@ if(BUILD_TESTS)
         )
 
         add_test(NAME HypergraphTests COMMAND test_hypergraph)
+
+        # V2: Deduplication tests
+        add_executable(test_deduplication
+            tests/test_deduplication.cpp
+        )
+
+        target_link_libraries(test_deduplication PRIVATE
+            llm_provider
+            GTest::gtest
+            GTest::gtest_main
+        )
+
+        add_test(NAME DeduplicationTests COMMAND test_deduplication)
+
+        # Phase 2: Causal extraction test (non-GTest demo)
+        add_executable(test_causal_extraction
+            tests/test_causal_extraction.cpp
+        )
+
+        target_link_libraries(test_causal_extraction PRIVATE
+            llm_provider
+        )
 
     else()
         message(STATUS "Google Test not found, tests will not be built")
