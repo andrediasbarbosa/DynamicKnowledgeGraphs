@@ -6273,7 +6273,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         std::string category_name = category_to_string(category);
         std::string entity_label = insight.seed_labels.empty() ? "N/A" : insight.seed_labels[0];
 
-        // Get brief description
+        // Get brief description - contextual, not generic
         std::string description;
         if (insight.type == InsightType::CAUSAL_CHAIN) {
             description = "Directed causal pathway showing cause-effect relationships";
@@ -6290,7 +6290,14 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
         } else if (insight.type == InsightType::COMMUNITY_DETECTION) {
             description = "Dense cluster of related concepts forming a community";
         } else {
-            description = "High-impact discovery revealing hidden structure";
+            // Build contextual description from entities
+            if (insight.seed_labels.size() >= 2) {
+                description = "Relationship between " + insight.seed_labels[0] + " and " + insight.seed_labels[1];
+            } else if (!insight.seed_labels.empty()) {
+                description = "Network structure centered on " + insight.seed_labels[0];
+            } else {
+                description = "Graph pattern with " + std::to_string(insight.witness_edges.size()) + " supporting edges";
+            }
         }
 
         // Generate contextual "Why High-Impact" explanation
@@ -6423,17 +6430,66 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                       << (insight.score * 100) << "% clustering coefficient)";
 
         } else {
-            // Generic fallback with context
-            if (!entities.empty()) {
-                why_impact << "Important structural role of <em>" << escape_html(entities[0])
-                          << "</em> with " << insight.witness_edges.size()
-                          << " supporting relationships";
+            // Build truly contextual explanation from available data
+            if (entities.size() >= 2) {
+                // Multiple entities - describe their relationship
+                why_impact << "A network connection linking <em>" << escape_html(entities[0])
+                          << "</em> with <em>" << escape_html(entities[1]) << "</em>";
+                if (entities.size() >= 3) {
+                    why_impact << " and <em>" << escape_html(entities[2]) << "</em>";
+                }
+
+                // Add relation context if available
+                if (!relations.empty()) {
+                    why_impact << " through <em>" << escape_html(relations[0]) << "</em> relationships";
+                }
+
+                why_impact << ", supported by " << insight.witness_edges.size() << " evidence paths";
+
+                // Determine significance from score
+                if (insight.score >= 0.8) {
+                    why_impact << ". This high-confidence pattern (" << std::fixed << std::setprecision(0)
+                              << (insight.score * 100) << "%) suggests a fundamental structural connection";
+                } else {
+                    why_impact << " with " << std::fixed << std::setprecision(0)
+                              << (insight.score * 100) << "% confidence in the association";
+                }
+
+            } else if (!entities.empty()) {
+                // Single entity - describe its role
+                why_impact << "The central role of <em>" << escape_html(entities[0])
+                          << "</em> in connecting " << insight.witness_edges.size()
+                          << " related concepts";
+
+                if (!relations.empty()) {
+                    why_impact << " via <em>" << escape_html(relations[0]) << "</em> relationships";
+                }
+
+                if (insight.score >= 0.8) {
+                    why_impact << ". High structural importance (" << std::fixed << std::setprecision(0)
+                              << (insight.score * 100) << "%) indicates this is a key organizational node";
+                } else {
+                    why_impact << " (" << std::fixed << std::setprecision(0)
+                              << (insight.score * 100) << "% centrality score)";
+                }
+
             } else {
-                why_impact << "Significant graph structure with " << insight.witness_edges.size()
-                          << " supporting evidence links";
+                // No entities - describe structure
+                why_impact << "A structural pattern involving " << insight.witness_edges.size()
+                          << " interconnected relationships";
+
+                if (!relations.empty()) {
+                    why_impact << " of type <em>" << escape_html(relations[0]) << "</em>";
+                }
+
+                if (insight.score >= 0.8) {
+                    why_impact << ", with exceptional pattern strength (" << std::fixed << std::setprecision(0)
+                              << (insight.score * 100) << "%) indicating systematic organization";
+                } else {
+                    why_impact << " showing " << std::fixed << std::setprecision(0)
+                              << (insight.score * 100) << "% pattern consistency";
+                }
             }
-            why_impact << " (" << std::fixed << std::setprecision(0)
-                      << (insight.score * 100) << "% confidence)";
         }
 
         html << R"(                    <div class="card" style="padding: 20px;">
