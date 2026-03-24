@@ -1124,6 +1124,12 @@ int cmd_run(const Args& args) {
         std::cout << "  Initial: " << cleanable_entities.size() << " entities, "
                   << cleanable_relations.size() << " relations\n";
 
+        // Track original node IDs before cleaning
+        std::set<std::string> original_node_ids;
+        for (const auto& ce : cleanable_entities) {
+            original_node_ids.insert(ce.id);
+        }
+
         // Configure cleaning
         CleaningConfig qc_config;
         qc_config.min_node_length = min_node_length;
@@ -1152,53 +1158,60 @@ int cmd_run(const Args& args) {
         qc_report = cleaner.clean(cleanable_entities, cleanable_relations, qc_config, qc_llm);
 
         // Apply cleaning results to graph - remove invalid entities
-        std::set<std::string> valid_entity_ids;
+        // After cleaning, cleanable_entities only contains valid entities (invalid ones were removed from the list)
+        // So we need to find which nodes to remove by comparing original IDs vs remaining IDs
+        std::set<std::string> remaining_node_ids;
         for (const auto& ce : cleanable_entities) {
-            if (ce.is_valid) {
-                valid_entity_ids.insert(ce.id);
-            } else {
-                graph.remove_node(ce.id);
-            }
+            remaining_node_ids.insert(ce.id);
         }
 
-        // Build map of invalid relation ids
-        std::set<std::string> invalid_relation_ids;
-        for (const auto& cr : cleanable_relations) {
-            if (!cr.is_valid) {
-                invalid_relation_ids.insert(cr.id);
+        // Remove nodes that were in the original but not in the remaining list
+        int nodes_removed = 0;
+        for (const auto& node_id : original_node_ids) {
+            if (remaining_node_ids.find(node_id) == remaining_node_ids.end()) {
+                graph.remove_node(node_id);
+                nodes_removed++;
             }
         }
+        std::cout << "  [DEBUG] Removed " << nodes_removed << " nodes from graph\n";
 
         // Remove invalid relations and relations referencing removed nodes
+        // cleanable_relations now only contains valid relations
+        std::set<std::string> remaining_relation_ids;
+        for (const auto& cr : cleanable_relations) {
+            remaining_relation_ids.insert(cr.id);
+        }
+
+        // Remove relations that are no longer in the cleaned list OR reference removed nodes
         auto edges_after_cleaning = graph.get_all_edges();
         for (const auto& edge : edges_after_cleaning) {
-            // Check if this relation was marked invalid
-            if (invalid_relation_ids.count(edge.id) > 0) {
-                graph.remove_hyperedge(edge.id);
-                continue;
-            }
+            bool should_remove = false;
 
-            // Check if any node in this edge was removed
-            auto edge_nodes = edge.get_all_nodes();
-            bool has_invalid_node = false;
-            for (const auto& node_id : edge_nodes) {
-                if (valid_entity_ids.find(node_id) == valid_entity_ids.end()) {
-                    has_invalid_node = true;
-                    break;
+            // Check if this relation was removed by the cleaner
+            if (remaining_relation_ids.find(edge.id) == remaining_relation_ids.end()) {
+                should_remove = true;
+            } else {
+                // Check if any node in this edge was removed
+                auto edge_nodes = edge.get_all_nodes();
+                for (const auto& node_id : edge_nodes) {
+                    if (remaining_node_ids.find(node_id) == remaining_node_ids.end()) {
+                        should_remove = true;
+                        break;
+                    }
                 }
             }
-            if (has_invalid_node) {
+
+            if (should_remove) {
                 graph.remove_hyperedge(edge.id);
             }
         }
 
         // Update graph node labels to trimmed versions and deduplicate
         // Build map: trimmed_label -> list of node_ids with that label
+        // (cleanable_entities now only contains valid entities after cleaning)
         std::map<std::string, std::vector<std::string>> label_to_ids;
         for (const auto& ce : cleanable_entities) {
-            if (ce.is_valid) {
-                label_to_ids[ce.label].push_back(ce.id);
-            }
+            label_to_ids[ce.label].push_back(ce.id);
         }
 
         // Merge duplicate nodes (nodes with identical trimmed labels)
@@ -1220,6 +1233,10 @@ int cmd_run(const Args& args) {
 
         // Update graph statistics
         graph_stats = graph.compute_statistics();
+
+        // Debug: Verify node count before save
+        auto current_nodes = graph.get_all_nodes();
+        std::cout << "  [DEBUG] Graph has " << current_nodes.size() << " nodes before save\n";
 
         // Save cleaned graph
         graph.export_to_json(graph_path, true);
