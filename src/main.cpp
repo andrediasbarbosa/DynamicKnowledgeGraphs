@@ -1252,6 +1252,12 @@ int cmd_run(const Args& args) {
         }
         std::cout << "  Saved: Step_3_QualityControl/cleaning_report.json\n";
         std::cout << "  Saved: Step_3_QualityControl/quality_control_report.html\n";
+
+        // Save the cleaned graph to disk
+        std::string cleaned_graph_path = step4_dir + "/graph.json";
+        graph.export_to_json(cleaned_graph_path, true);
+        std::cout << "  Saved: Step_4_GraphBuilding/graph.json (cleaned)\n";
+
         std::cout << "  QC time: " << format_duration(qc_duration) << "\n";
     } else if (!enable_qc) {
         std::cout << "\n";
