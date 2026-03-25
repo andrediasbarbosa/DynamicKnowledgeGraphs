@@ -548,7 +548,7 @@ std::unique_ptr<LLMProvider> LLMProviderFactory::create_from_env() {
         }
         config.model = get_api_key_from_env("KG_LLM_MODEL");
         if (config.model.empty()) {
-            config.model = "gemini-1.5-flash";
+            config.model = "gemini-2.5-flash";
         }
     }
 
@@ -618,7 +618,7 @@ std::unique_ptr<LLMProvider> LLMProviderFactory::create_from_config_file(
             if (provider == "openai") {
                 config.model = "gpt-4";
             } else if (provider == "gemini") {
-                config.model = "gemini-1.5-flash";
+                config.model = "gemini-2.5-flash";
             }
         }
 

@@ -1,0 +1,57 @@
+Graph-RAG Kuzu Explorer
+Version: 1.0.0
+Release Date: February 20, 2026
+Build: Deployment Bundle
+
+Components:
+- Frontend: template.html (v1.0)
+- Backend: graph_rag_server.py (v1.0)
+- Database: Kuzu embedded graph database
+
+Features:
+- 3D Force-Directed Graph Visualization
+- Kuzu Database Explorer (5 tabs)
+- Cypher Query Execution
+- Entity Search and Navigation
+- Shortest Path Finding
+- Graph-RAG AI Chat
+- JSON/CSV Export
+- Keyboard Shortcuts
+
+Dependencies:
+- Python 3.8+
+- FastAPI 0.100+
+- Uvicorn 0.20+
+- Kuzu 0.1.0+
+- python-multipart 0.0.6+
+
+System Requirements:
+- OS: Linux, macOS, Windows, WSL
+- RAM: 2GB minimum, 4GB recommended
+- Browser: Chrome 90+, Firefox 88+, Edge 90+, Safari 14+
+- WebGL: Required for 3D visualization
+
+Changes from Original:
+- Database auto-cleanup on page load
+- Kuzu Explorer auto-reset on graph load
+- All documentation included
+- Standalone deployment ready
+
+Build Notes:
+- All external dependencies loaded via CDN
+- No build process required
+- Pure Python + HTML/CSS/JS
+- No compilation needed
+
+Deployment:
+- Extract zip file
+- Run: pip install -r requirements.txt
+- Run: ./start.sh (or start.bat)
+- Open: http://localhost:8000
+
+Support:
+- See README.md for full documentation
+- See docs/ folder for detailed guides
+- See examples/ folder for sample data
+
+License: MIT (see LICENSE.txt)

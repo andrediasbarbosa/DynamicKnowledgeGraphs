@@ -65,6 +65,9 @@ struct CleaningReport {
     int semantic_duplicates_found = 0;
     int semantic_duplicates_merged = 0;
 
+    // Level 1.2: Label simplification
+    int labels_simplified = 0;
+
     // Level 2 results
     int removed_by_degree = 0;
     int removed_by_importance = 0;
@@ -88,6 +91,8 @@ struct CleaningReport {
     double graph_density = 0.0;
     double average_degree = 0.0;
     double clustering_coefficient = 0.0;
+    std::string hub_node_label = "";  // Highest degree node in largest component
+    int hub_node_degree = 0;
 
     void print_summary() const;
     nlohmann::json to_json() const;
@@ -149,6 +154,12 @@ public:
     void level1_rule_based_filtering(
         std::vector<CleanableEntity>& entities,
         std::vector<CleanableRelation>& relations,
+        const CleaningConfig& config,
+        CleaningReport& report
+    );
+
+    void level12_simplify_labels(
+        std::vector<CleanableEntity>& entities,
         const CleaningConfig& config,
         CleaningReport& report
     );

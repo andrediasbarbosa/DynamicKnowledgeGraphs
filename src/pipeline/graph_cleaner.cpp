@@ -24,12 +24,15 @@ void CleaningReport::print_summary() const {
     std::cout << "Initial:   " << initial_nodes << " nodes, " << initial_edges << " edges\n";
     std::cout << "\n";
 
-    if (level1_removed > 0) {
+    if (level1_removed > 0 || labels_simplified > 0) {
         std::cout << "Level 1: Rule-Based Filtering\n";
         std::cout << "  Removed by length:     " << removed_by_length << "\n";
         std::cout << "  Removed by stopwords:  " << removed_by_stopwords << "\n";
         std::cout << "  Removed by numbers:    " << removed_by_numbers << "\n";
         std::cout << "  Removed by artifacts:  " << removed_by_artifacts << "\n";
+        if (labels_simplified > 0) {
+            std::cout << "  Labels simplified:     " << labels_simplified << "\n";
+        }
         std::cout << "  Level 1 total:         " << level1_removed << " ("
                   << (100.0 * level1_removed / initial_nodes) << "%)\n";
         std::cout << "\n";
@@ -86,6 +89,7 @@ nlohmann::json CleaningReport::to_json() const {
         {"removed_by_stopwords", removed_by_stopwords},
         {"removed_by_numbers", removed_by_numbers},
         {"removed_by_artifacts", removed_by_artifacts},
+        {"labels_simplified", labels_simplified},
         {"total_removed", level1_removed}
     };
 
@@ -117,7 +121,9 @@ nlohmann::json CleaningReport::to_json() const {
         {"num_isolated_nodes", num_isolated_nodes},
         {"graph_density", graph_density},
         {"average_degree", average_degree},
-        {"clustering_coefficient", clustering_coefficient}
+        {"clustering_coefficient", clustering_coefficient},
+        {"hub_node_label", hub_node_label},
+        {"hub_node_degree", hub_node_degree}
     };
 
     return j;
@@ -388,7 +394,12 @@ std::string CleaningReport::generate_html_report() const {
                     <div class="stat-row">
                         <span class="stat-label">Removed artifacts (fig, table, etc.)</span>
                         <span class="stat-value">)" << removed_by_artifacts << R"(</span>
-                    </div>
+                    </div>)"
+             << (labels_simplified > 0 ?
+                R"(<div class="stat-row" style="background: #f0fdf4;">
+                        <span class="stat-label" style="color: #059669;">✓ Labels simplified</span>
+                        <span class="stat-value" style="color: #059669;">)" + std::to_string(labels_simplified) + R"(</span>
+                    </div>)" : "") << R"(
                     <div class="stat-row" style="border-top: 2px solid #667eea; margin-top: 10px; padding-top: 15px;">
                         <span class="stat-label" style="color: #667eea; font-weight: 600;">Level 1 Total</span>
                         <span class="stat-value" style="color: #667eea; font-size: 1.2em;">)" << level1_removed
@@ -528,7 +539,10 @@ std::string CleaningReport::generate_html_report() const {
                         <h3>Largest Component</h3>
                         <div class="value">)" << largest_component_size << R"(</div>
                         <div class="label">nodes ()" << std::fixed << std::setprecision(1)
-             << (final_nodes > 0 ? 100.0 * largest_component_size / final_nodes : 0.0) << R"(%)</div>
+             << (final_nodes > 0 ? 100.0 * largest_component_size / final_nodes : 0.0) << R"(%)</div>)"
+             << (!hub_node_label.empty() ?
+                R"(<div class="label" style="margin-top: 8px; color: #059669; font-weight: 600;">
+                    Hub: ")" + hub_node_label + R"(" (degree: )" + std::to_string(hub_node_degree) + R"()</div>)" : "") << R"(
                     </div>
                     <div class="card warning">
                         <h3>Isolated Nodes</h3>
@@ -628,6 +642,11 @@ CleaningReport GraphCleaner::clean(
     // Level 1: Rule-based filtering (fast, removes obvious noise)
     if (config.enable_rule_based) {
         level1_rule_based_filtering(entities, relations, config, report);
+    }
+
+    // Level 1.2: Simplify verbose labels (reduces noise from overly descriptive names)
+    if (config.enable_rule_based) {  // Runs with rule-based filtering
+        level12_simplify_labels(entities, config, report);
     }
 
     // Level 1.5: Semantic deduplication (merges semantically similar entities)
@@ -750,6 +769,90 @@ void GraphCleaner::level1_rule_based_filtering(
         valid_ids.insert(e.id);
     }
     remove_invalid_relations(relations, valid_ids);
+}
+
+// ============================================================================
+// Level 1.2: Label Simplification
+// ============================================================================
+
+void GraphCleaner::level12_simplify_labels(
+    std::vector<CleanableEntity>& entities,
+    const CleaningConfig& config,
+    CleaningReport& report
+) {
+    // Simplify overly verbose entity labels by removing filler phrases
+    // and trimming to core noun phrases
+
+    const std::vector<std::string> filler_prefixes = {
+        "the process of ",
+        "the concept of ",
+        "the idea of ",
+        "the notion of ",
+        "the method of ",
+        "the technique of ",
+        "the approach of ",
+        "a process of ",
+        "a concept of ",
+        "a method of ",
+        "a technique of ",
+        "an approach of ",
+        "the use of ",
+        "the application of ",
+        "the implementation of "
+    };
+
+    const std::vector<std::string> filler_suffixes = {
+        " process",
+        " concept",
+        " technique",
+        " approach",
+        " method"
+    };
+
+    for (auto& entity : entities) {
+        if (!entity.is_valid) continue;
+
+        std::string original = entity.label;
+        std::string simplified = original;
+
+        // Convert to lowercase for matching
+        std::string lower_label = simplified;
+        std::transform(lower_label.begin(), lower_label.end(), lower_label.begin(), ::tolower);
+
+        // Remove filler prefixes
+        for (const auto& prefix : filler_prefixes) {
+            if (lower_label.find(prefix) == 0) {
+                simplified = simplified.substr(prefix.length());
+                lower_label = lower_label.substr(prefix.length());
+                break;
+            }
+        }
+
+        // Remove redundant suffixes (but only if label is long enough)
+        if (simplified.length() > 20) {
+            for (const auto& suffix : filler_suffixes) {
+                size_t pos = lower_label.rfind(suffix);
+                if (pos != std::string::npos && pos + suffix.length() == lower_label.length()) {
+                    // Check if removing suffix leaves a meaningful term
+                    std::string without_suffix = simplified.substr(0, pos);
+                    if (without_suffix.length() >= 3) {
+                        simplified = without_suffix;
+                        lower_label = lower_label.substr(0, pos);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Trim whitespace
+        simplified = trim(simplified);
+
+        // Only apply if it actually simplified the label
+        if (simplified != original && simplified.length() >= config.min_node_length) {
+            entity.label = simplified;
+            report.labels_simplified++;
+        }
+    }
 }
 
 // ============================================================================
@@ -1297,10 +1400,12 @@ void GraphCleaner::analyze_connectivity(
     // 1. Find connected components using DFS
     std::vector<bool> visited(num_nodes, false);
     std::vector<int> component_sizes;
+    std::vector<std::vector<int>> components;  // Track nodes in each component
 
     for (int i = 0; i < num_nodes; i++) {
         if (!visited[i]) {
             int component_size = 0;
+            std::vector<int> component_nodes;
             std::vector<int> stack = {i};
 
             while (!stack.empty()) {
@@ -1310,6 +1415,7 @@ void GraphCleaner::analyze_connectivity(
                 if (visited[node]) continue;
                 visited[node] = true;
                 component_size++;
+                component_nodes.push_back(node);
 
                 for (int neighbor : adj[node]) {
                     if (!visited[neighbor]) {
@@ -1319,16 +1425,36 @@ void GraphCleaner::analyze_connectivity(
             }
 
             component_sizes.push_back(component_size);
+            components.push_back(component_nodes);
         }
     }
 
     report.num_connected_components = component_sizes.size();
 
-    // 2. Largest component size
+    // 2. Largest component size and find hub node
     report.largest_component_size = 0;
-    for (int size : component_sizes) {
-        if (size > report.largest_component_size) {
-            report.largest_component_size = size;
+    int largest_component_idx = -1;
+    for (size_t i = 0; i < component_sizes.size(); i++) {
+        if (component_sizes[i] > report.largest_component_size) {
+            report.largest_component_size = component_sizes[i];
+            largest_component_idx = i;
+        }
+    }
+
+    // Find highest degree node in largest component
+    if (largest_component_idx >= 0) {
+        int max_degree = 0;
+        int hub_node_idx = -1;
+        for (int node_idx : components[largest_component_idx]) {
+            int degree = adj[node_idx].size();
+            if (degree > max_degree) {
+                max_degree = degree;
+                hub_node_idx = node_idx;
+            }
+        }
+        if (hub_node_idx >= 0) {
+            report.hub_node_label = valid_entity_ids[hub_node_idx];
+            report.hub_node_degree = max_degree;
         }
     }
 

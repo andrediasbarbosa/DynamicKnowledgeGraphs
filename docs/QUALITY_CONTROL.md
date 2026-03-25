@@ -1,16 +1,16 @@
 # Graph Quality Control System
 
-**Date:** 2026-03-23
-**Status:** ✅ COMPLETE
+**Date:** 2026-03-25
+**Status:** ✅ COMPLETE + Enhanced
 **Build:** ✅ All tests passing
 
 ---
 
 ## Overview
 
-The Quality Control system provides 3-level validation of extracted knowledge graphs to remove noise, artifacts, and invalid entities/relations before indexing and discovery.
+The Quality Control system provides 5-level validation of extracted knowledge graphs to remove noise, simplify verbose labels, merge semantic duplicates, and provide comprehensive connectivity analysis.
 
-## 3-Level Architecture
+## 5-Level Architecture
 
 ### **Level 1: Rule-Based Filtering** (Fast)
 - Removes single characters and very short labels
@@ -18,6 +18,21 @@ The Quality Control system provides 3-level validation of extracted knowledge gr
 - Removes pure numbers and pure punctuation
 - Detects extraction artifacts ("figure", "section", "ref", etc.)
 - Validates label length (configurable min/max)
+- Trims whitespace from all labels
+
+### **Level 1.2: Label Simplification** (Fast) 🆕
+- Simplifies overly verbose entity names
+- Removes filler phrases: "the process of", "the concept of", "a method for"
+- Trims redundant suffixes: " process", " technique", " method"
+- Example: "the process of machine learning algorithms" → "machine learning algorithms"
+- Preserves meaningful content while reducing noise
+
+### **Level 1.5: Semantic Deduplication** (Requires LLM)
+- Identifies semantically equivalent entities with different labels
+- Examples: "ML" ↔ "machine learning", "AI" ↔ "artificial intelligence"
+- Uses LLM to suggest canonical forms
+- Merges duplicate entities and updates all relations
+- Batch processing for efficiency (20 entities per call)
 
 ### **Level 2: Statistical Filtering** (Medium)
 - Computes node degrees (connectivity)
@@ -157,28 +172,38 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
 {
   "initial_nodes": 150,
   "initial_edges": 200,
-  "removed_by_length": 5,
-  "removed_by_stopwords": 8,
-  "removed_by_numbers": 3,
-  "removed_by_artifacts": 2,
-  "level1_removed": 18,
+  "level1": {
+    "removed_by_length": 5,
+    "removed_by_stopwords": 8,
+    "removed_by_numbers": 3,
+    "removed_by_artifacts": 2,
+    "labels_simplified": 12,
+    "total_removed": 18
+  },
   "level1_5": {
     "semantic_duplicates_found": 5,
     "semantic_duplicates_merged": 5
   },
-  "removed_by_degree": 10,
-  "removed_by_importance": 5,
-  "removed_by_outliers": 2,
-  "level2_removed": 17,
-  "validated_by_llm": 15,
-  "removed_by_llm": 3,
-  "level3_removed": 3,
+  "level2": {
+    "removed_by_degree": 10,
+    "removed_by_importance": 5,
+    "removed_by_outliers": 2,
+    "total_removed": 17
+  },
+  "level3": {
+    "validated_by_llm": 15,
+    "removed_by_llm": 3,
+    "total_removed": 3
+  },
+  "total_removed": 38,
   "final_nodes": 112,
   "final_edges": 185,
   "cleaning_time_ms": 234.5,
   "connectivity": {
     "num_connected_components": 3,
     "largest_component_size": 95,
+    "hub_node_label": "machine learning",
+    "hub_node_degree": 45,
     "num_isolated_nodes": 8,
     "graph_density": 0.0234,
     "average_degree": 3.28,
@@ -195,7 +220,7 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
 ----------------------------------------------------------------------
   Initial: 150 entities, 200 relations
   Cleaned: 112 entities (38 removed), 185 relations (15 removed)
-  Level 1 (rules):   removed 18 entities
+  Level 1 (rules):   removed 18 entities, simplified 12 labels
   Level 1.5 (semantic): merged 5 semantic duplicates (5 groups)
   Level 2 (stats):   removed 17 entities
   Level 3 (LLM):     removed 3 entities
@@ -203,6 +228,7 @@ Saved to: `Step_3_QualityControl/cleaning_report.json`
   Graph Connectivity:
     Connected components:  3
     Largest component:     95 nodes (84.8%)
+    Hub node:             "machine learning" (degree: 45)
     Isolated nodes:        8
     Graph density:         0.0234
     Average degree:        3.28
@@ -231,22 +257,28 @@ After cleaning, the system analyzes the graph structure to provide insights into
    - Percentage of total nodes
    - Indicates main knowledge cluster
 
-3. **Isolated Nodes**
+3. **Hub Node** 🆕
+   - Identifies the node with highest degree in the largest component
+   - Shows the label and degree of the most connected entity
+   - Represents the central concept in the knowledge graph
+   - Example: Hub: "machine learning" (degree: 45)
+
+4. **Isolated Nodes**
    - Nodes with degree = 0 (no connections)
    - May indicate extraction artifacts or orphaned concepts
    - Candidates for removal in stricter filtering
 
-4. **Graph Density**
+5. **Graph Density**
    - Range: 0.0 to 1.0
    - Formula: 2×E / (V×(V-1))
    - Higher density = more interconnected knowledge
 
-5. **Average Degree**
+6. **Average Degree**
    - Mean number of connections per node
    - Indicates overall connectivity level
    - Higher values suggest richer relationships
 
-6. **Clustering Coefficient**
+7. **Clustering Coefficient**
    - Range: 0.0 to 1.0
    - Measures local clustering (triangles in graph)
    - Higher values indicate tightly-knit knowledge communities
@@ -308,34 +340,40 @@ The `quality_control_report.html` includes:
    - Trim whitespace from all labels
    - Mark invalid entities with removal_reason
 
-5. Level 1.5: Semantic deduplication (optional, requires LLM)
+5. Level 1.2: Label simplification
+   - Remove filler phrases from verbose labels
+   - Trim redundant suffixes
+   - Track simplified label count
+
+6. Level 1.5: Semantic deduplication (optional, requires LLM)
    - Batch entities by similarity
    - Ask LLM to identify semantic duplicates
    - Merge entities (e.g., "ML" → "machine learning")
    - Update relations to point to canonical entities
 
-6. Level 2: Statistical filtering
+7. Level 2: Statistical filtering
    - Compute degrees and importance scores
    - Flag suspicious entities (degree < threshold)
    - Mark invalid entities
 
-7. Level 3: LLM validation (optional)
+8. Level 3: LLM validation (optional)
    - Batch validate suspicious/all entities
    - Call LLM with validation prompt
    - Parse JSON response (VALID/INVALID)
 
-8. Apply results:
+9. Apply results:
    - Remove invalid entities from graph
    - Remove relations with invalid entities
    - Remove explicitly invalid relations
 
-9. Analyze graph connectivity:
-   - Build adjacency list from valid entities/relations
-   - Run DFS to find connected components
-   - Calculate density, clustering coefficient, average degree
-   - Count isolated nodes
+10. Analyze graph connectivity:
+    - Build adjacency list from valid entities/relations
+    - Run DFS to find connected components
+    - Identify hub node (highest degree in largest component)
+    - Calculate density, clustering coefficient, average degree
+    - Count isolated nodes
 
-10. Save:
+11. Save:
     - Cleaned graph → Step_4_GraphBuilding/graph.json
     - Cleaning report → Step_3_QualityControl/cleaning_report.json
     - HTML report → Step_3_QualityControl/quality_control_report.html
@@ -438,14 +476,21 @@ cat test_runs/run_*/Step_3_QualityControl/cleaning_report.json
 
 ---
 
-**Status:** ✅ Implemented and tested
+**Status:** ✅ Implemented, tested, and enhanced
 **Integration:** ✅ Stage 1.75 in pipeline
-**Documentation:** ✅ Complete
-**CLI Flags:** ✅ Added
+**Documentation:** ✅ Complete and up-to-date
+**CLI Flags:** ✅ All flags registered
+
+**Recent Enhancements (2026-03-25):**
+- ✅ Level 1.2: Label Simplification
+- ✅ Hub Node Identification in Connectivity Analysis
+- ✅ Enhanced HTML reports with hub node display
+- ✅ Improved JSON output structure
 
 ---
 
 *Completed: 2026-03-23*
-*Feature: 3-Level Graph Quality Control*
-*Lines Added: ~1,150*
-*Impact: High - significantly improves graph quality*
+*Enhanced: 2026-03-25*
+*Feature: 5-Level Graph Quality Control + Connectivity Analysis*
+*Lines Added: ~1,400*
+*Impact: High - significantly improves graph quality and provides structural insights*
