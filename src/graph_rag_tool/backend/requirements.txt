@@ -1,0 +1,25 @@
+# Graph-RAG Tool - Standard Deployment
+# Full dependencies including local embeddings (sentence-transformers)
+# Use this for academic/research environments with internet access
+
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+
+# Graph Database
+kuzu==0.7.1
+
+# LLM API
+openai==1.54.0
+
+# Data Validation
+pydantic==2.9.0
+
+# Vector Embeddings (Local)
+sentence-transformers==3.3.1
+numpy==1.24.3  # Pre-built wheels available for Windows
+
+# Note: First run downloads ~90MB embedding model from HuggingFace
+# Model: all-MiniLM-L6-v2 (384 dimensions)
+# Cached in: ~/.cache/torch/sentence_transformers/

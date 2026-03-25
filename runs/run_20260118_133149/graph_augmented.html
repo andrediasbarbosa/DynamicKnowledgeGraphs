@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>three_essays_cs_music_history Knowledge Discovery (Augmented)</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.75.0/dist/3d-force-graph.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            overflow: hidden;
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #header h1 { font-size: 1.5em; font-weight: 500; }
+        #stats { font-size: 0.9em; opacity: 0.8; }
+        #graph { width: 100vw; height: 100vh; }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        #controls label { display: block; margin-bottom: 8px; font-size: 0.85em; }
+        #controls input[type="range"] { width: 150px; }
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 16px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            font-size: 0.9em;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #tooltip h3 { margin-bottom: 6px; color: #4fc3f7; }
+        #tooltip .detail { color: #aaa; margin: 3px 0; }
+        #legend {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.85em;
+        }
+        #legend h3 { margin-bottom: 10px; font-size: 1em; }
+        .legend-item { display: flex; align-items: center; margin: 6px 0; }
+        .legend-color { width: 16px; height: 16px; border-radius: 3px; margin-right: 10px; }
+        .kg-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+        .kg-input {
+            width: 220px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #eee;
+            outline: none;
+        }
+        .kg-input::placeholder { color: rgba(255,255,255,0.55); }
+        .kg-btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #eee;
+            cursor: pointer;
+            user-select: none;
+        }
+        .kg-btn:hover { background: rgba(255,255,255,0.12); }
+        .kg-btn:active { transform: translateY(1px); }
+        #kgHud {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            z-index: 120;
+            pointer-events: none;
+        }
+        #kgOverlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        #kgOverlay.show { opacity: 1; pointer-events: all; }
+        #kgOverlay .panel {
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 18px;
+            width: min(520px, 92vw);
+            color: #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        #kgOverlay .title { font-size: 14px; color: #4fc3f7; margin-bottom: 8px; }
+        #kgOverlay .sub { font-size: 12px; color: rgba(255,255,255,0.75); }
+        .aug-section {
+            border-top: 1px solid #e040fb;
+            margin-top: 12px;
+            padding-top: 10px;
+        }
+        .aug-section > label:first-child { color: #e040fb; font-weight: 600; }
+        #augDetails {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(224, 64, 251, 0.1);
+            border-radius: 8px;
+            font-size: 0.8em;
+            display: none;
+        }
+        #augDetails.show { display: block; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>three_essays_cs_music_history Knowledge Discovery (Augmented)</h1>
+        <div id="stats">
+            Entities: 220 |
+            Relations: 109 |
+            Augmentations: 77
+        </div>
+    </div>
+
+    <div id="graph"></div>
+
+    <div id="controls">
+        <label>
+            Min Entity Degree: <span id="degreeValue">1</span>
+            <input type="range" id="minDegree" min="1" max="20" step="1" value="1">
+        </label>
+        <label>
+            Link Strength:
+            <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="0.5">
+        </label>
+        <label>
+            Node Repulsion:
+            <input type="range" id="repulsion" min="100" max="1000" step="50" value="400">
+        </label>
+        <label>
+            <input type="checkbox" id="showLabels" checked> Show Labels
+        </label>
+        <div id="filterStats" style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            Showing: <span id="visibleNodes">0</span> nodes, <span id="visibleLinks">0</span> links
+        </div>
+    </div>
+
+    <div id="legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7;"></div>
+            <span>Entity Node</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800;"></div>
+            <span>Relation (Hyperedge)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb;"></div>
+            <span>Augmentation (Insight)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7; width: 30px; height: 3px;"></div>
+            <span>Source Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800; width: 30px; height: 3px;"></div>
+            <span>Target Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb; width: 30px; height: 3px; border-style: dashed;"></div>
+            <span>Augmentation Link</span>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script>
+        const data = {
+            nodes: [{"degree":1,"id":"Academies","label":"Academies","type":"entity"},{"degree":1,"id":"Catalogs","label":"Catalogs","type":"entity"},{"degree":2,"id":"Counterpoint","label":"Counterpoint","type":"entity"},{"degree":1,"id":"Errata sheets","label":"Errata sheets","type":"entity"},{"degree":1,"id":"Institutions","label":"Institutions","type":"entity"},{"degree":1,"id":"Instruction selection","label":"Instruction selection","type":"entity"},{"degree":1,"id":"Knowledge","label":"Knowledge","type":"entity"},{"degree":1,"id":"Networks","label":"Networks","type":"entity"},{"degree":2,"id":"Printed books","label":"Printed books","type":"entity"},{"degree":1,"id":"Printing","label":"Printing","type":"entity"},{"degree":1,"id":"Register allocation","label":"Register allocation","type":"entity"},{"degree":4,"id":"Republic of Letters","label":"Republic of Letters","type":"entity"},{"degree":1,"id":"Scheduling","label":"Scheduling","type":"entity"},{"degree":1,"id":"Scholars","label":"Scholars","type":"entity"},{"degree":1,"id":"abstraction","label":"abstraction","type":"entity"},{"degree":1,"id":"acknowledgments","label":"acknowledgments","type":"entity"},{"degree":1,"id":"agreement","label":"agreement","type":"entity"},{"degree":1,"id":"analysis","label":"analysis","type":"entity"},{"degree":1,"id":"another voice","label":"another voice","type":"entity"},{"degree":1,"id":"apparatus of correction","label":"apparatus of correction","type":"entity"},{"degree":1,"id":"argumentative","label":"argumentative","type":"entity"},{"degree":1,"id":"arguments","label":"arguments","type":"entity"},{"degree":1,"id":"arrangements","label":"arrangements","type":"entity"},{"degree":1,"id":"art of combining","label":"art of combining","type":"entity"},{"degree":1,"id":"benign","label":"benign","type":"entity"},{"degree":1,"id":"biting","label":"biting","type":"entity"},{"degree":1,"id":"bloodstream","label":"bloodstream","type":"entity"},{"degree":1,"id":"boundaries","label":"boundaries","type":"entity"},{"degree":1,"id":"cache misses","label":"cache misses","type":"entity"},{"degree":1,"id":"ceremonial","label":"ceremonial","type":"entity"},{"degree":1,"id":"change","label":"change","type":"entity"},{"degree":1,"id":"character","label":"character","type":"entity"},{"degree":1,"id":"choral writing","label":"choral writing","type":"entity"},{"degree":1,"id":"churches","label":"churches","type":"entity"},{"degree":1,"id":"citation","label":"citation","type":"entity"},{"degree":1,"id":"citing sources","label":"citing sources","type":"entity"},{"degree":1,"id":"citizens","label":"citizens","type":"entity"},{"degree":1,"id":"claim","label":"claim","type":"entity"},{"degree":1,"id":"claims","label":"claims","type":"entity"},{"degree":1,"id":"clash","label":"clash","type":"entity"},{"degree":1,"id":"clerical work","label":"clerical work","type":"entity"},{"degree":1,"id":"clumsy","label":"clumsy","type":"entity"},{"degree":1,"id":"code","label":"code","type":"entity"},{"degree":1,"id":"coherence","label":"coherence","type":"entity"},{"degree":12,"id":"compiler","label":"compiler","type":"entity"},{"degree":3,"id":"compilers","label":"compilers","type":"entity"},{"degree":1,"id":"composer","label":"composer","type":"entity"},{"degree":1,"id":"consonance","label":"consonance","type":"entity"},{"degree":1,"id":"continuously","label":"continuously","type":"entity"},{"degree":1,"id":"contradictory","label":"contradictory","type":"entity"},{"degree":1,"id":"contrary motion","label":"contrary motion","type":"entity"},{"degree":1,"id":"conversation","label":"conversation","type":"entity"},{"degree":1,"id":"correction","label":"correction","type":"entity"},{"degree":1,"id":"correspondence","label":"correspondence","type":"entity"},{"degree":1,"id":"countermelody","label":"countermelody","type":"entity"},{"degree":4,"id":"counterpoint","label":"counterpoint","type":"entity"},{"degree":1,"id":"courts","label":"courts","type":"entity"},{"degree":2,"id":"critique","label":"critique","type":"entity"},{"degree":1,"id":"debate from rupture","label":"debate from rupture","type":"entity"},{"degree":1,"id":"decisions","label":"decisions","type":"entity"},{"degree":1,"id":"dedications","label":"dedications","type":"entity"},{"degree":1,"id":"destination","label":"destination","type":"entity"},{"degree":1,"id":"dignity","label":"dignity","type":"entity"},{"degree":1,"id":"disagreement","label":"disagreement","type":"entity"},{"degree":1,"id":"dissonance","label":"dissonance","type":"entity"},{"degree":1,"id":"dissonances","label":"dissonances","type":"entity"},{"degree":1,"id":"distinct lines","label":"distinct lines","type":"entity"},{"degree":1,"id":"dramatic","label":"dramatic","type":"entity"},{"degree":1,"id":"durable conventions","label":"durable conventions","type":"entity"},{"degree":1,"id":"earlier claim","label":"earlier claim","type":"entity"},{"degree":1,"id":"earned","label":"earned","type":"entity"},{"degree":1,"id":"echo","label":"echo","type":"entity"},{"degree":1,"id":"elegant","label":"elegant","type":"entity"},{"degree":1,"id":"episodes","label":"episodes","type":"entity"},{"degree":1,"id":"equivalent sequences","label":"equivalent sequences","type":"entity"},{"degree":1,"id":"errors","label":"errors","type":"entity"},{"degree":1,"id":"evade","label":"evade","type":"entity"},{"degree":1,"id":"exchange","label":"exchange","type":"entity"},{"degree":1,"id":"experiment","label":"experiment","type":"entity"},{"degree":1,"id":"expressions evaluate to same value","label":"expressions evaluate to same value","type":"entity"},{"degree":1,"id":"fastest storage","label":"fastest storage","type":"entity"},{"degree":1,"id":"film scores","label":"film scores","type":"entity"},{"degree":1,"id":"fugue","label":"fugue","type":"entity"},{"degree":1,"id":"gestures","label":"gestures","type":"entity"},{"degree":1,"id":"grammar","label":"grammar","type":"entity"},{"degree":1,"id":"grit","label":"grit","type":"entity"},{"degree":1,"id":"hardware","label":"hardware","type":"entity"},{"degree":1,"id":"harmony","label":"harmony","type":"entity"},{"degree":1,"id":"history of logistics","label":"history of logistics","type":"entity"},{"degree":1,"id":"honor","label":"honor","type":"entity"},{"degree":1,"id":"ideas","label":"ideas","type":"entity"},{"degree":1,"id":"ideas legible","label":"ideas legible","type":"entity"},{"degree":1,"id":"idioms","label":"idioms","type":"entity"},{"degree":1,"id":"imitation","label":"imitation","type":"entity"},{"degree":1,"id":"imitative writing","label":"imitative writing","type":"entity"},{"degree":1,"id":"improvement","label":"improvement","type":"entity"},{"degree":1,"id":"improvements","label":"improvements","type":"entity"},{"degree":1,"id":"independent melodies","label":"independent melodies","type":"entity"},{"degree":1,"id":"infrastructure","label":"infrastructure","type":"entity"},{"degree":1,"id":"ink","label":"ink","type":"entity"},{"degree":1,"id":"insist","label":"insist","type":"entity"},{"degree":1,"id":"instructions","label":"instructions","type":"entity"},{"degree":1,"id":"intellectual grounding","label":"intellectual grounding","type":"entity"},{"degree":2,"id":"intellectual history","label":"intellectual history","type":"entity"},{"degree":1,"id":"intent","label":"intent","type":"entity"},{"degree":1,"id":"intermediate forms","label":"intermediate forms","type":"entity"},{"degree":2,"id":"intermediate representation","label":"intermediate representation","type":"entity"},{"degree":1,"id":"internal lingua franca","label":"internal lingua franca","type":"entity"},{"degree":1,"id":"intimate","label":"intimate","type":"entity"},{"degree":1,"id":"languages","label":"languages","type":"entity"},{"degree":1,"id":"learned reviews","label":"learned reviews","type":"entity"},{"degree":2,"id":"letter","label":"letter","type":"entity"},{"degree":2,"id":"letters","label":"letters","type":"entity"},{"degree":1,"id":"line","label":"line","type":"entity"},{"degree":3,"id":"lines","label":"lines","type":"entity"},{"degree":2,"id":"listener","label":"listener","type":"entity"},{"degree":1,"id":"lists","label":"lists","type":"entity"},{"degree":1,"id":"loop","label":"loop","type":"entity"},{"degree":1,"id":"machinery of addresses","label":"machinery of addresses","type":"entity"},{"degree":1,"id":"marginal notes","label":"marginal notes","type":"entity"},{"degree":3,"id":"meaning","label":"meaning","type":"entity"},{"degree":1,"id":"melodies","label":"melodies","type":"entity"},{"degree":2,"id":"memory","label":"memory","type":"entity"},{"degree":1,"id":"memory aliasing","label":"memory aliasing","type":"entity"},{"degree":1,"id":"motif","label":"motif","type":"entity"},{"degree":1,"id":"moving line","label":"moving line","type":"entity"},{"degree":1,"id":"music","label":"music","type":"entity"},{"degree":1,"id":"mutually responsible lines","label":"mutually responsible lines","type":"entity"},{"degree":2,"id":"network","label":"network","type":"entity"},{"degree":1,"id":"news","label":"news","type":"entity"},{"degree":1,"id":"observations","label":"observations","type":"entity"},{"degree":1,"id":"one another","label":"one another","type":"entity"},{"degree":1,"id":"one voice","label":"one voice","type":"entity"},{"degree":1,"id":"operations","label":"operations","type":"entity"},{"degree":1,"id":"other moves","label":"other moves","type":"entity"},{"degree":1,"id":"others","label":"others","type":"entity"},{"degree":1,"id":"overloaded operation rules","label":"overloaded operation rules","type":"entity"},{"degree":1,"id":"paper","label":"paper","type":"entity"},{"degree":2,"id":"parse tree","label":"parse tree","type":"entity"},{"degree":1,"id":"parts","label":"parts","type":"entity"},{"degree":1,"id":"passing tone","label":"passing tone","type":"entity"},{"degree":2,"id":"patronage","label":"patronage","type":"entity"},{"degree":1,"id":"peers","label":"peers","type":"entity"},{"degree":1,"id":"performance","label":"performance","type":"entity"},{"degree":1,"id":"physics","label":"physics","type":"entity"},{"degree":3,"id":"piece","label":"piece","type":"entity"},{"degree":1,"id":"pitches","label":"pitches","type":"entity"},{"degree":1,"id":"pleasure","label":"pleasure","type":"entity"},{"degree":1,"id":"politeness formulas","label":"politeness formulas","type":"entity"},{"degree":1,"id":"polity","label":"polity","type":"entity"},{"degree":1,"id":"popular arrangements","label":"popular arrangements","type":"entity"},{"degree":1,"id":"power use","label":"power use","type":"entity"},{"degree":1,"id":"powers","label":"powers","type":"entity"},{"degree":1,"id":"praise","label":"praise","type":"entity"},{"degree":1,"id":"print","label":"print","type":"entity"},{"degree":1,"id":"printed books","label":"printed books","type":"entity"},{"degree":2,"id":"printing","label":"printing","type":"entity"},{"degree":1,"id":"private disputes","label":"private disputes","type":"entity"},{"degree":1,"id":"private letters","label":"private letters","type":"entity"},{"degree":1,"id":"prizes","label":"prizes","type":"entity"},{"degree":1,"id":"problems","label":"problems","type":"entity"},{"degree":3,"id":"program","label":"program","type":"entity"},{"degree":1,"id":"program meaning","label":"program meaning","type":"entity"},{"degree":3,"id":"programmers","label":"programmers","type":"entity"},{"degree":1,"id":"public ones","label":"public ones","type":"entity"},{"degree":1,"id":"pursuit","label":"pursuit","type":"entity"},{"degree":1,"id":"rare text","label":"rare text","type":"entity"},{"degree":1,"id":"reasoning","label":"reasoning","type":"entity"},{"degree":1,"id":"recognizable ways","label":"recognizable ways","type":"entity"},{"degree":1,"id":"reconcile","label":"reconcile","type":"entity"},{"degree":1,"id":"registers","label":"registers","type":"entity"},{"degree":1,"id":"relief","label":"relief","type":"entity"},{"degree":1,"id":"reorientation","label":"reorientation","type":"entity"},{"degree":1,"id":"republic","label":"republic","type":"entity"},{"degree":1,"id":"reputations","label":"reputations","type":"entity"},{"degree":1,"id":"request","label":"request","type":"entity"},{"degree":1,"id":"resolution","label":"resolution","type":"entity"},{"degree":1,"id":"revised editions","label":"revised editions","type":"entity"},{"degree":1,"id":"rhetorical moves","label":"rhetorical moves","type":"entity"},{"degree":1,"id":"rhythm","label":"rhythm","type":"entity"},{"degree":1,"id":"risks of misunderstanding","label":"risks of misunderstanding","type":"entity"},{"degree":1,"id":"routes","label":"routes","type":"entity"},{"degree":1,"id":"rumor","label":"rumor","type":"entity"},{"degree":5,"id":"scholar","label":"scholar","type":"entity"},{"degree":1,"id":"scholars","label":"scholars","type":"entity"},{"degree":1,"id":"scope resolution","label":"scope resolution","type":"entity"},{"degree":2,"id":"semantic pass","label":"semantic pass","type":"entity"},{"degree":1,"id":"shared world","label":"shared world","type":"entity"},{"degree":1,"id":"ships","label":"ships","type":"entity"},{"degree":1,"id":"side effects","label":"side effects","type":"entity"},{"degree":1,"id":"similar motion","label":"similar motion","type":"entity"},{"degree":1,"id":"social etiquette","label":"social etiquette","type":"entity"},{"degree":1,"id":"social life","label":"social life","type":"entity"},{"degree":1,"id":"social positioning","label":"social positioning","type":"entity"},{"degree":1,"id":"social signals","label":"social signals","type":"entity"},{"degree":1,"id":"sound","label":"sound","type":"entity"},{"degree":1,"id":"space","label":"space","type":"entity"},{"degree":1,"id":"stabilizing knowledge","label":"stabilizing knowledge","type":"entity"},{"degree":1,"id":"stillness","label":"stillness","type":"entity"},{"degree":1,"id":"stream of characters","label":"stream of characters","type":"entity"},{"degree":1,"id":"string quartets","label":"string quartets","type":"entity"},{"degree":1,"id":"structure","label":"structure","type":"entity"},{"degree":1,"id":"style","label":"style","type":"entity"},{"degree":1,"id":"subject","label":"subject","type":"entity"},{"degree":1,"id":"suspensions","label":"suspensions","type":"entity"},{"degree":1,"id":"syntax","label":"syntax","type":"entity"},{"degree":1,"id":"tactical","label":"tactical","type":"entity"},{"degree":1,"id":"target machine","label":"target machine","type":"entity"},{"degree":1,"id":"tokens","label":"tokens","type":"entity"},{"degree":1,"id":"trust","label":"trust","type":"entity"},{"degree":2,"id":"two parts","label":"two parts","type":"entity"},{"degree":1,"id":"type checking","label":"type checking","type":"entity"},{"degree":1,"id":"undefined behavior","label":"undefined behavior","type":"entity"},{"degree":1,"id":"universities","label":"universities","type":"entity"},{"degree":1,"id":"variable never changes","label":"variable never changes","type":"entity"},{"degree":3,"id":"voice","label":"voice","type":"entity"},{"degree":1,"id":"voices","label":"voices","type":"entity"},{"degree":1,"id":"way of thinking","label":"way of thinking","type":"entity"},{"degree":2,"id":"work","label":"work","type":"entity"},{"degree":1,"id":"yield","label":"yield","type":"entity"},{"confidence":0.95,"id":"edge_0","label":"translates","sources":["compiler"],"targets":["code"],"type":"relation"},{"confidence":0.9,"id":"edge_1","label":"negotiates","sources":["compiler"],"targets":["languages","hardware","intent"],"type":"relation"},{"confidence":0.9,"id":"edge_2","label":"include","sources":["semantic pass"],"targets":["type checking","scope resolution","overloaded operation rules"],"type":"relation"},{"confidence":0.95,"id":"edge_3","label":"made possible","sources":["Catalogs","registers","lists"],"targets":["exchange"],"type":"relation"},{"confidence":0.9,"id":"edge_4","label":"finds","sources":["letter"],"targets":["destination"],"type":"relation"},{"confidence":0.9,"id":"edge_5","label":"linked to","sources":["claim"],"targets":["earlier claim"],"type":"relation"},{"confidence":0.9,"id":"edge_6","label":"moved through","sources":["Knowledge"],"targets":["machinery of addresses"],"type":"relation"},{"confidence":0.85,"id":"edge_7","label":"reminds us","sources":["Republic of Letters"],"targets":["intellectual history"],"type":"relation"},{"confidence":0.9,"id":"edge_8","label":"is also","sources":["intellectual history"],"targets":["history of logistics"],"type":"relation"},{"confidence":0.95,"id":"edge_9","label":"traveled by","sources":["routes"],"targets":["ideas"],"type":"relation"},{"confidence":0.9,"id":"edge_10","label":"kept","sources":["clerical work"],"targets":["ideas legible"],"type":"relation"},{"confidence":0.85,"id":"edge_11","label":"kept","sources":["social etiquette"],"targets":["debate from rupture"],"type":"relation"},{"confidence":0.85,"id":"edge_12","label":"reshape","sources":["meaning"],"targets":["structure"],"type":"relation"},{"confidence":0.95,"id":"edge_13","label":"convert","sources":["compilers"],"targets":["program","intermediate representation"],"type":"relation"},{"confidence":0.9,"id":"edge_14","label":"is type of","sources":["intermediate representation"],"targets":["internal lingua franca"],"type":"relation"},{"confidence":0.9,"id":"edge_15","label":"make easier","sources":["intermediate forms"],"targets":["analysis","improvement"],"type":"relation"},{"confidence":0.85,"id":"edge_16","label":"simplify","sources":["compiler"],"targets":["loop"],"type":"relation"},{"confidence":0.8,"id":"edge_17","label":"prove","sources":["compiler"],"targets":["variable never changes"],"type":"relation"},{"confidence":0.8,"id":"edge_18","label":"show","sources":["compiler"],"targets":["expressions evaluate to same value"],"type":"relation"},{"confidence":0.85,"id":"edge_19","label":"depend on","sources":["improvements"],"targets":["reasoning","side effects","memory aliasing","boundaries"],"type":"relation"},{"confidence":0.95,"id":"edge_20","label":"learns","sources":["compiler"],"targets":["target machine"],"type":"relation"},{"confidence":0.95,"id":"edge_21","label":"produces","sources":["program"],"targets":["instructions"],"type":"relation"},{"confidence":0.9,"id":"edge_22","label":"decides","sources":["Register allocation"],"targets":["fastest storage","memory"],"type":"relation"},{"confidence":0.95,"id":"edge_23","label":"chooses","sources":["Instruction selection"],"targets":["equivalent sequences"],"type":"relation"},{"confidence":0.9,"id":"edge_24","label":"rearranges","sources":["Scheduling"],"targets":["operations"],"type":"relation"},{"confidence":0.85,"id":"edge_25","label":"accumulate","sources":["decisions"],"targets":["performance","power use","cache misses"],"type":"relation"},{"confidence":0.9,"id":"edge_26","label":"mediate between","sources":["compilers","programmers"],"targets":["abstraction","physics"],"type":"relation"},{"confidence":0.85,"id":"edge_27","label":"provides warnings about","sources":["compiler"],"targets":["undefined behavior"],"type":"relation"},{"confidence":0.8,"id":"edge_28","label":"gives diagnostic traces to","sources":["compiler"],"targets":["programmers"],"type":"relation"},{"confidence":0.75,"id":"edge_29","label":"exposes costs of","sources":["compiler"],"targets":["idioms"],"type":"relation"},{"confidence":0.8,"id":"edge_30","label":"reveals assumptions of","sources":["compiler"],"targets":["programmers"],"type":"relation"},{"confidence":0.9,"id":"edge_31","label":"combines","sources":["Counterpoint","melodies"],"targets":["independent melodies"],"type":"relation"},{"confidence":0.85,"id":"edge_32","label":"reveals","sources":["compiler"],"targets":["program meaning"],"type":"relation"},{"confidence":0.85,"id":"edge_33","label":"describes","sources":["Counterpoint"],"targets":["art of combining"],"type":"relation"},{"confidence":0.8,"id":"edge_34","label":"has","sources":["lines"],"targets":["dignity"],"type":"relation"},{"confidence":0.75,"id":"edge_35","label":"behaves as if it can hear","sources":["lines"],"targets":["others"],"type":"relation"},{"confidence":0.85,"id":"edge_36","label":"involves","sources":["conversation"],"targets":["agreement","disagreement"],"type":"relation"},{"confidence":0.8,"id":"edge_37","label":"follows","sources":["listener"],"targets":["voice","space"],"type":"relation"},{"confidence":0.9,"id":"edge_38","label":"is negotiated","sources":["harmony"],"targets":["continuously"],"type":"relation"},{"confidence":0.9,"id":"edge_39","label":"move relative to","sources":["voices","parts"],"targets":["one another"],"type":"relation"},{"confidence":0.85,"id":"edge_40","label":"travel in","sources":["two parts"],"targets":["similar motion"],"type":"relation"},{"confidence":0.85,"id":"edge_41","label":"move in","sources":["two parts"],"targets":["contrary motion"],"type":"relation"},{"confidence":0.8,"id":"edge_42","label":"holds while","sources":["one voice"],"targets":["other moves"],"type":"relation"},{"confidence":0.8,"id":"edge_43","label":"can be","sources":["program"],"targets":["elegant","clumsy","contradictory"],"type":"relation"},{"confidence":0.9,"id":"edge_44","label":"is framed by","sources":["moving line"],"targets":["stillness"],"type":"relation"},{"confidence":0.9,"id":"edge_45","label":"shape","sources":["gestures"],"targets":["character"],"type":"relation"},{"confidence":0.85,"id":"edge_46","label":"feels","sources":["piece"],"targets":["ceremonial"],"type":"relation"},{"confidence":0.85,"id":"edge_47","label":"feels","sources":["piece"],"targets":["argumentative"],"type":"relation"},{"confidence":0.85,"id":"edge_48","label":"feels","sources":["piece"],"targets":["intimate"],"type":"relation"},{"confidence":0.9,"id":"edge_49","label":"becomes","sources":["dissonance"],"targets":["dramatic"],"type":"relation"},{"confidence":0.8,"id":"edge_50","label":"introduces","sources":["passing tone"],"targets":["grit"],"type":"relation"},{"confidence":0.85,"id":"edge_51","label":"feels","sources":["resolution"],"targets":["earned"],"type":"relation"},{"confidence":0.9,"id":"edge_52","label":"creates","sources":["suspensions"],"targets":["clash"],"type":"relation"},{"confidence":0.85,"id":"edge_53","label":"delays","sources":["voice"],"targets":["change"],"type":"relation"},{"confidence":0.95,"id":"edge_54","label":"read","sources":["compilers"],"targets":["stream of characters"],"type":"relation"},{"confidence":0.9,"id":"edge_55","label":"releases","sources":["voice"],"targets":["consonance"],"type":"relation"},{"confidence":0.9,"id":"edge_56","label":"can be","sources":["pitches"],"targets":["benign","biting"],"type":"relation"},{"confidence":0.95,"id":"edge_57","label":"treats","sources":["counterpoint"],"targets":["rhythm"],"type":"relation"},{"confidence":0.85,"id":"edge_58","label":"are permitted","sources":["dissonances"],"targets":["recognizable ways"],"type":"relation"},{"confidence":0.9,"id":"edge_59","label":"adds","sources":["imitation"],"targets":["meaning"],"type":"relation"},{"confidence":0.95,"id":"edge_60","label":"is answered by","sources":["motif"],"targets":["another voice"],"type":"relation"},{"confidence":0.9,"id":"edge_61","label":"suggests","sources":["music"],"targets":["memory","pursuit","echo"],"type":"relation"},{"confidence":0.9,"id":"edge_62","label":"tests","sources":["fugue","subject"],"targets":["claims"],"type":"relation"},{"confidence":0.85,"id":"edge_63","label":"provide","sources":["episodes"],"targets":["relief","reorientation"],"type":"relation"},{"confidence":0.9,"id":"edge_64","label":"creates","sources":["imitative writing"],"targets":["coherence"],"type":"relation"},{"confidence":0.9,"id":"edge_65","label":"build","sources":["tokens"],"targets":["parse tree"],"type":"relation"},{"confidence":0.8,"id":"edge_66","label":"belong to","sources":["lines"],"targets":["shared world"],"type":"relation"},{"confidence":0.95,"id":"edge_67","label":"remains","sources":["counterpoint"],"targets":["way of thinking"],"type":"relation"},{"confidence":0.85,"id":"edge_68","label":"appears in","sources":["counterpoint"],"targets":["choral writing","string quartets","film scores","popular arrangements"],"type":"relation"},{"confidence":0.8,"id":"edge_69","label":"weave","sources":["arrangements"],"targets":["countermelody"],"type":"relation"},{"confidence":0.9,"id":"edge_70","label":"asks","sources":["composer"],"targets":["distinct lines","mutually responsible lines"],"type":"relation"},{"confidence":0.95,"id":"edge_71","label":"experiences","sources":["listener"],"targets":["pleasure"],"type":"relation"},{"confidence":0.85,"id":"edge_72","label":"chooses","sources":["line"],"targets":["yield","insist","evade","reconcile"],"type":"relation"},{"confidence":0.8,"id":"edge_73","label":"feels","sources":["counterpoint"],"targets":["social life","sound"],"type":"relation"},{"confidence":0.9,"id":"edge_74","label":"formed","sources":["scholars"],"targets":["Republic of Letters"],"type":"relation"},{"confidence":0.85,"id":"edge_75","label":"behaved","sources":["Republic of Letters"],"targets":["polity"],"type":"relation"},{"confidence":0.85,"id":"edge_76","label":"reflect","sources":["parse tree"],"targets":["grammar"],"type":"relation"},{"confidence":0.9,"id":"edge_77","label":"connected by","sources":["citizens"],"targets":["correspondence","patronage","printed books","citation","critique"],"type":"relation"},{"confidence":0.85,"id":"edge_78","label":"depended on","sources":["network"],"targets":["paper","ink","ships","trust"],"type":"relation"},{"confidence":0.8,"id":"edge_79","label":"developed","sources":["network"],"targets":["durable conventions"],"type":"relation"},{"confidence":0.95,"id":"edge_80","label":"were","sources":["letters"],"targets":["bloodstream"],"type":"relation"},{"confidence":0.9,"id":"edge_81","label":"might describe","sources":["scholar"],"targets":["experiment"],"type":"relation"},{"confidence":0.9,"id":"edge_82","label":"might request","sources":["scholar"],"targets":["rare text"],"type":"relation"},{"confidence":0.85,"id":"edge_83","label":"might report","sources":["scholar"],"targets":["rumor"],"type":"relation"},{"confidence":0.9,"id":"edge_84","label":"might ask for","sources":["scholar"],"targets":["correction"],"type":"relation"},{"confidence":0.95,"id":"edge_85","label":"carries","sources":["letter"],"targets":["news","arguments","social signals"],"type":"relation"},{"confidence":0.9,"id":"edge_86","label":"matters for","sources":["style"],"targets":["politeness formulas","dedications","acknowledgments"],"type":"relation"},{"confidence":0.9,"id":"edge_87","label":"settle","sources":["syntax"],"targets":["meaning"],"type":"relation"},{"confidence":0.85,"id":"edge_88","label":"softened by","sources":["critique"],"targets":["praise"],"type":"relation"},{"confidence":0.9,"id":"edge_89","label":"framed as","sources":["request"],"targets":["honor"],"type":"relation"},{"confidence":0.95,"id":"edge_90","label":"help manage","sources":["rhetorical moves"],"targets":["risks of misunderstanding"],"type":"relation"},{"confidence":0.95,"id":"edge_91","label":"amplified","sources":["Printing"],"targets":["letters"],"type":"relation"},{"confidence":0.9,"id":"edge_92","label":"turned","sources":["Printed books"],"targets":["private disputes","public ones"],"type":"relation"},{"confidence":0.9,"id":"edge_93","label":"let travel","sources":["Printed books"],"targets":["reputations"],"type":"relation"},{"confidence":0.95,"id":"edge_94","label":"created","sources":["printing"],"targets":["problems"],"type":"relation"},{"confidence":0.9,"id":"edge_95","label":"multiplied","sources":["errors"],"targets":["printing"],"type":"relation"},{"confidence":0.95,"id":"edge_96","label":"responded by building","sources":["Scholars"],"targets":["apparatus of correction"],"type":"relation"},{"confidence":0.9,"id":"edge_97","label":"became instruments for","sources":["Errata sheets","revised editions","marginal notes","learned reviews"],"targets":["stabilizing knowledge"],"type":"relation"},{"confidence":0.95,"id":"edge_98","label":"perform","sources":["compiler"],"targets":["semantic pass"],"type":"relation"},{"confidence":0.9,"id":"edge_99","label":"provides","sources":["citing sources"],"targets":["intellectual grounding","social positioning"],"type":"relation"},{"confidence":0.85,"id":"edge_100","label":"surrounds","sources":["Institutions"],"targets":["republic"],"type":"relation"},{"confidence":0.9,"id":"edge_101","label":"sponsors","sources":["Academies"],"targets":["observations","prizes"],"type":"relation"},{"confidence":0.95,"id":"edge_102","label":"provides","sources":["churches","courts"],"targets":["patronage"],"type":"relation"},{"confidence":0.9,"id":"edge_103","label":"supplies","sources":["universities"],"targets":["infrastructure"],"type":"relation"},{"confidence":0.85,"id":"edge_104","label":"navigates","sources":["Republic of Letters"],"targets":["powers"],"type":"relation"},{"confidence":0.9,"id":"edge_105","label":"dedicates","sources":["scholar"],"targets":["work"],"type":"relation"},{"confidence":0.8,"id":"edge_106","label":"addresses","sources":["work"],"targets":["peers"],"type":"relation"},{"confidence":0.9,"id":"edge_107","label":"circulated as","sources":["private letters"],"targets":["print"],"type":"relation"},{"confidence":0.85,"id":"edge_108","label":"had dimension","sources":["Networks"],"targets":["tactical"],"type":"relation"}],
+            links: [{"source":44,"target":220,"type":"source"},{"source":220,"target":42,"type":"target"},{"source":44,"target":221,"type":"source"},{"source":221,"target":109,"type":"target"},{"source":221,"target":86,"type":"target"},{"source":221,"target":104,"type":"target"},{"source":186,"target":222,"type":"source"},{"source":222,"target":211,"type":"target"},{"source":222,"target":185,"type":"target"},{"source":222,"target":136,"type":"target"},{"source":1,"target":223,"type":"source"},{"source":170,"target":223,"type":"source"},{"source":116,"target":223,"type":"source"},{"source":223,"target":77,"type":"target"},{"source":111,"target":224,"type":"source"},{"source":224,"target":61,"type":"target"},{"source":37,"target":225,"type":"source"},{"source":225,"target":69,"type":"target"},{"source":6,"target":226,"type":"source"},{"source":226,"target":118,"type":"target"},{"source":11,"target":227,"type":"source"},{"source":227,"target":103,"type":"target"},{"source":103,"target":228,"type":"source"},{"source":228,"target":88,"type":"target"},{"source":181,"target":229,"type":"source"},{"source":229,"target":90,"type":"target"},{"source":40,"target":230,"type":"source"},{"source":230,"target":91,"type":"target"},{"source":191,"target":231,"type":"source"},{"source":231,"target":58,"type":"target"},{"source":120,"target":232,"type":"source"},{"source":232,"target":201,"type":"target"},{"source":45,"target":233,"type":"source"},{"source":233,"target":161,"type":"target"},{"source":233,"target":106,"type":"target"},{"source":106,"target":234,"type":"source"},{"source":234,"target":107,"type":"target"},{"source":105,"target":235,"type":"source"},{"source":235,"target":17,"type":"target"},{"source":235,"target":95,"type":"target"},{"source":44,"target":236,"type":"source"},{"source":236,"target":117,"type":"target"},{"source":44,"target":237,"type":"source"},{"source":237,"target":214,"type":"target"},{"source":44,"target":238,"type":"source"},{"source":238,"target":79,"type":"target"},{"source":96,"target":239,"type":"source"},{"source":239,"target":167,"type":"target"},{"source":239,"target":189,"type":"target"},{"source":239,"target":123,"type":"target"},{"source":239,"target":27,"type":"target"},{"source":44,"target":240,"type":"source"},{"source":240,"target":207,"type":"target"},{"source":161,"target":241,"type":"source"},{"source":241,"target":101,"type":"target"},{"source":10,"target":242,"type":"source"},{"source":242,"target":80,"type":"target"},{"source":242,"target":122,"type":"target"},{"source":5,"target":243,"type":"source"},{"source":243,"target":74,"type":"target"},{"source":12,"target":244,"type":"source"},{"source":244,"target":133,"type":"target"},{"source":59,"target":245,"type":"source"},{"source":245,"target":143,"type":"target"},{"source":245,"target":151,"type":"target"},{"source":245,"target":28,"type":"target"},{"source":45,"target":246,"type":"source"},{"source":163,"target":246,"type":"source"},{"source":246,"target":14,"type":"target"},{"source":246,"target":144,"type":"target"},{"source":44,"target":247,"type":"source"},{"source":247,"target":212,"type":"target"},{"source":44,"target":248,"type":"source"},{"source":248,"target":163,"type":"target"},{"source":44,"target":249,"type":"source"},{"source":249,"target":92,"type":"target"},{"source":44,"target":250,"type":"source"},{"source":250,"target":163,"type":"target"},{"source":2,"target":251,"type":"source"},{"source":121,"target":251,"type":"source"},{"source":251,"target":97,"type":"target"},{"source":44,"target":252,"type":"source"},{"source":252,"target":162,"type":"target"},{"source":2,"target":253,"type":"source"},{"source":253,"target":23,"type":"target"},{"source":114,"target":254,"type":"source"},{"source":254,"target":62,"type":"target"},{"source":114,"target":255,"type":"source"},{"source":255,"target":135,"type":"target"},{"source":51,"target":256,"type":"source"},{"source":256,"target":16,"type":"target"},{"source":256,"target":63,"type":"target"},{"source":115,"target":257,"type":"source"},{"source":257,"target":215,"type":"target"},{"source":257,"target":196,"type":"target"},{"source":87,"target":258,"type":"source"},{"source":258,"target":48,"type":"target"},{"source":216,"target":259,"type":"source"},{"source":139,"target":259,"type":"source"},{"source":259,"target":131,"type":"target"},{"source":210,"target":260,"type":"source"},{"source":260,"target":190,"type":"target"},{"source":210,"target":261,"type":"source"},{"source":261,"target":50,"type":"target"},{"source":132,"target":262,"type":"source"},{"source":262,"target":134,"type":"target"},{"source":161,"target":263,"type":"source"},{"source":263,"target":72,"type":"target"},{"source":263,"target":41,"type":"target"},{"source":263,"target":49,"type":"target"},{"source":125,"target":264,"type":"source"},{"source":264,"target":198,"type":"target"},{"source":83,"target":265,"type":"source"},{"source":265,"target":31,"type":"target"},{"source":145,"target":266,"type":"source"},{"source":266,"target":29,"type":"target"},{"source":145,"target":267,"type":"source"},{"source":267,"target":20,"type":"target"},{"source":145,"target":268,"type":"source"},{"source":268,"target":108,"type":"target"},{"source":64,"target":269,"type":"source"},{"source":269,"target":67,"type":"target"},{"source":140,"target":270,"type":"source"},{"source":270,"target":85,"type":"target"},{"source":176,"target":271,"type":"source"},{"source":271,"target":70,"type":"target"},{"source":204,"target":272,"type":"source"},{"source":272,"target":39,"type":"target"},{"source":215,"target":273,"type":"source"},{"source":273,"target":30,"type":"target"},{"source":45,"target":274,"type":"source"},{"source":274,"target":199,"type":"target"},{"source":215,"target":275,"type":"source"},{"source":275,"target":47,"type":"target"},{"source":146,"target":276,"type":"source"},{"source":276,"target":24,"type":"target"},{"source":276,"target":25,"type":"target"},{"source":55,"target":277,"type":"source"},{"source":277,"target":179,"type":"target"},{"source":65,"target":278,"type":"source"},{"source":278,"target":168,"type":"target"},{"source":93,"target":279,"type":"source"},{"source":279,"target":120,"type":"target"},{"source":124,"target":280,"type":"source"},{"source":280,"target":18,"type":"target"},{"source":126,"target":281,"type":"source"},{"source":281,"target":122,"type":"target"},{"source":281,"target":165,"type":"target"},{"source":281,"target":71,"type":"target"},{"source":82,"target":282,"type":"source"},{"source":203,"target":282,"type":"source"},{"source":282,"target":38,"type":"target"},{"source":73,"target":283,"type":"source"},{"source":283,"target":171,"type":"target"},{"source":283,"target":172,"type":"target"},{"source":94,"target":284,"type":"source"},{"source":284,"target":43,"type":"target"},{"source":208,"target":285,"type":"source"},{"source":285,"target":138,"type":"target"},{"source":114,"target":286,"type":"source"},{"source":286,"target":187,"type":"target"},{"source":55,"target":287,"type":"source"},{"source":287,"target":217,"type":"target"},{"source":55,"target":288,"type":"source"},{"source":288,"target":32,"type":"target"},{"source":288,"target":200,"type":"target"},{"source":288,"target":81,"type":"target"},{"source":288,"target":150,"type":"target"},{"source":22,"target":289,"type":"source"},{"source":289,"target":54,"type":"target"},{"source":46,"target":290,"type":"source"},{"source":290,"target":66,"type":"target"},{"source":290,"target":127,"type":"target"},{"source":115,"target":291,"type":"source"},{"source":291,"target":147,"type":"target"},{"source":113,"target":292,"type":"source"},{"source":292,"target":219,"type":"target"},{"source":292,"target":100,"type":"target"},{"source":292,"target":76,"type":"target"},{"source":292,"target":169,"type":"target"},{"source":55,"target":293,"type":"source"},{"source":293,"target":192,"type":"target"},{"source":293,"target":195,"type":"target"},{"source":184,"target":294,"type":"source"},{"source":294,"target":11,"type":"target"},{"source":11,"target":295,"type":"source"},{"source":295,"target":149,"type":"target"},{"source":138,"target":296,"type":"source"},{"source":296,"target":84,"type":"target"},{"source":36,"target":297,"type":"source"},{"source":297,"target":53,"type":"target"},{"source":297,"target":141,"type":"target"},{"source":297,"target":155,"type":"target"},{"source":297,"target":34,"type":"target"},{"source":297,"target":57,"type":"target"},{"source":128,"target":298,"type":"source"},{"source":298,"target":137,"type":"target"},{"source":298,"target":99,"type":"target"},{"source":298,"target":188,"type":"target"},{"source":298,"target":209,"type":"target"},{"source":128,"target":299,"type":"source"},{"source":299,"target":68,"type":"target"},{"source":112,"target":300,"type":"source"},{"source":300,"target":26,"type":"target"},{"source":183,"target":301,"type":"source"},{"source":301,"target":78,"type":"target"},{"source":183,"target":302,"type":"source"},{"source":302,"target":166,"type":"target"},{"source":183,"target":303,"type":"source"},{"source":303,"target":182,"type":"target"},{"source":183,"target":304,"type":"source"},{"source":304,"target":52,"type":"target"},{"source":111,"target":305,"type":"source"},{"source":305,"target":129,"type":"target"},{"source":305,"target":21,"type":"target"},{"source":305,"target":194,"type":"target"},{"source":202,"target":306,"type":"source"},{"source":306,"target":148,"type":"target"},{"source":306,"target":60,"type":"target"},{"source":306,"target":15,"type":"target"},{"source":205,"target":307,"type":"source"},{"source":307,"target":120,"type":"target"},{"source":57,"target":308,"type":"source"},{"source":308,"target":153,"type":"target"},{"source":175,"target":309,"type":"source"},{"source":309,"target":89,"type":"target"},{"source":178,"target":310,"type":"source"},{"source":310,"target":180,"type":"target"},{"source":9,"target":311,"type":"source"},{"source":311,"target":112,"type":"target"},{"source":8,"target":312,"type":"source"},{"source":312,"target":157,"type":"target"},{"source":312,"target":164,"type":"target"},{"source":8,"target":313,"type":"source"},{"source":313,"target":174,"type":"target"},{"source":156,"target":314,"type":"source"},{"source":314,"target":160,"type":"target"},{"source":75,"target":315,"type":"source"},{"source":315,"target":156,"type":"target"},{"source":13,"target":316,"type":"source"},{"source":316,"target":19,"type":"target"},{"source":3,"target":317,"type":"source"},{"source":177,"target":317,"type":"source"},{"source":119,"target":317,"type":"source"},{"source":110,"target":317,"type":"source"},{"source":317,"target":197,"type":"target"},{"source":44,"target":318,"type":"source"},{"source":318,"target":186,"type":"target"},{"source":35,"target":319,"type":"source"},{"source":319,"target":102,"type":"target"},{"source":319,"target":193,"type":"target"},{"source":4,"target":320,"type":"source"},{"source":320,"target":173,"type":"target"},{"source":0,"target":321,"type":"source"},{"source":321,"target":130,"type":"target"},{"source":321,"target":159,"type":"target"},{"source":33,"target":322,"type":"source"},{"source":56,"target":322,"type":"source"},{"source":322,"target":141,"type":"target"},{"source":213,"target":323,"type":"source"},{"source":323,"target":98,"type":"target"},{"source":11,"target":324,"type":"source"},{"source":324,"target":152,"type":"target"},{"source":183,"target":325,"type":"source"},{"source":325,"target":218,"type":"target"},{"source":218,"target":326,"type":"source"},{"source":326,"target":142,"type":"target"},{"source":158,"target":327,"type":"source"},{"source":327,"target":154,"type":"target"},{"source":7,"target":328,"type":"source"},{"source":328,"target":206,"type":"target"}]
+        };
+
+        const augData = {"links":[{"is_new":true,"source":"compiler","target":"aug:n:000001","type":"source"},{"is_new":true,"source":"aug:n:000001","target":"code","type":"target"},{"is_new":true,"source":"aug:n:000001","target":"expressions evaluate to same value","type":"target"},{"is_new":true,"source":"aug:n:000001","target":"hardware","type":"target"},{"is_new":true,"source":"scholar","target":"aug:n:000002","type":"source"},{"is_new":true,"source":"aug:n:000002","target":"correction","type":"target"},{"is_new":true,"source":"aug:n:000002","target":"experiment","type":"target"},{"is_new":true,"source":"aug:n:000002","target":"rare text","type":"target"},{"is_new":true,"source":"counterpoint","target":"aug:n:000003","type":"source"},{"is_new":true,"source":"aug:n:000003","target":"choral writing","type":"target"},{"is_new":true,"source":"aug:n:000003","target":"film scores","type":"target"},{"is_new":true,"source":"aug:n:000003","target":"popular arrangements","type":"target"},{"is_new":true,"source":"Republic of Letters","target":"aug:n:000004","type":"source"},{"is_new":true,"source":"aug:n:000004","target":"intellectual history","type":"target"},{"is_new":true,"source":"aug:n:000004","target":"polity","type":"target"},{"is_new":true,"source":"aug:n:000004","target":"powers","type":"target"},{"is_new":true,"source":"piece","target":"aug:n:000005","type":"source"},{"is_new":true,"source":"aug:n:000005","target":"argumentative","type":"target"},{"is_new":true,"source":"aug:n:000005","target":"ceremonial","type":"target"},{"is_new":true,"source":"aug:n:000005","target":"intimate","type":"target"},{"is_new":true,"source":"programmers","target":"aug:n:000006","type":"source"},{"is_new":true,"source":"aug:n:000006","target":"abstraction","type":"target"},{"is_new":true,"source":"aug:n:000006","target":"compiler","type":"target"},{"is_new":true,"source":"aug:n:000006","target":"compilers","type":"target"},{"is_new":true,"source":"voice","target":"aug:n:000007","type":"source"},{"is_new":true,"source":"aug:n:000007","target":"change","type":"target"},{"is_new":true,"source":"aug:n:000007","target":"consonance","type":"target"},{"is_new":true,"source":"aug:n:000007","target":"listener","type":"target"},{"is_new":true,"source":"compilers","target":"aug:n:000008","type":"source"},{"is_new":true,"source":"aug:n:000008","target":"abstraction","type":"target"},{"is_new":true,"source":"aug:n:000008","target":"intermediate representation","type":"target"},{"is_new":true,"source":"aug:n:000008","target":"physics","type":"target"},{"is_new":true,"source":"meaning","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"aug:n:000009","target":"imitation","type":"target"},{"is_new":true,"source":"aug:n:000009","target":"structure","type":"target"},{"is_new":true,"source":"aug:n:000009","target":"syntax","type":"target"},{"is_new":true,"source":"program","target":"aug:n:000010","type":"source"},{"is_new":true,"source":"aug:n:000010","target":"clumsy","type":"target"},{"is_new":true,"source":"aug:n:000010","target":"compilers","type":"target"},{"is_new":true,"source":"aug:n:000010","target":"contradictory","type":"target"},{"is_new":true,"source":"lines","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"aug:n:000011","target":"dignity","type":"target"},{"is_new":true,"source":"aug:n:000011","target":"others","type":"target"},{"is_new":true,"source":"aug:n:000011","target":"shared world","type":"target"},{"is_new":true,"source":"network","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"aug:n:000012","target":"durable conventions","type":"target"},{"is_new":true,"source":"aug:n:000012","target":"ink","type":"target"},{"is_new":true,"source":"aug:n:000012","target":"paper","type":"target"},{"is_new":true,"source":"listener","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"aug:n:000013","target":"pleasure","type":"target"},{"is_new":true,"source":"aug:n:000013","target":"space","type":"target"},{"is_new":true,"source":"aug:n:000013","target":"voice","type":"target"},{"is_new":true,"source":"Counterpoint","target":"aug:n:000014","type":"source"},{"is_new":true,"source":"aug:n:000014","target":"art of combining","type":"target"},{"is_new":true,"source":"aug:n:000014","target":"independent melodies","type":"target"},{"is_new":true,"source":"aug:n:000014","target":"melodies","type":"target"},{"is_new":true,"source":"parse tree","target":"aug:n:000015","type":"source"},{"is_new":true,"source":"aug:n:000015","target":"grammar","type":"target"},{"is_new":true,"source":"aug:n:000015","target":"tokens","type":"target"},{"is_new":true,"source":"memory","target":"aug:n:000016","type":"source"},{"is_new":true,"source":"aug:n:000016","target":"Register allocation","type":"target"},{"is_new":true,"source":"aug:n:000016","target":"echo","type":"target"},{"is_new":true,"source":"aug:n:000016","target":"fastest storage","type":"target"},{"is_new":true,"source":"critique","target":"aug:n:000017","type":"source"},{"is_new":true,"source":"aug:n:000017","target":"citation","type":"target"},{"is_new":true,"source":"aug:n:000017","target":"citizens","type":"target"},{"is_new":true,"source":"aug:n:000017","target":"correspondence","type":"target"},{"is_new":true,"source":"semantic pass","target":"aug:n:000018","type":"source"},{"is_new":true,"source":"aug:n:000018","target":"compiler","type":"target"},{"is_new":true,"source":"aug:n:000018","target":"overloaded operation rules","type":"target"},{"is_new":true,"source":"aug:n:000018","target":"scope resolution","type":"target"},{"is_new":true,"source":"two parts","target":"aug:n:000019","type":"source"},{"is_new":true,"source":"aug:n:000019","target":"contrary motion","type":"target"},{"is_new":true,"source":"aug:n:000019","target":"similar motion","type":"target"},{"is_new":true,"source":"intermediate representation","target":"aug:n:000020","type":"source"},{"is_new":true,"source":"aug:n:000020","target":"compilers","type":"target"},{"is_new":true,"source":"aug:n:000020","target":"internal lingua franca","type":"target"},{"is_new":true,"source":"aug:n:000020","target":"program","type":"target"},{"is_new":true,"source":"printing","target":"aug:n:000021","type":"source"},{"is_new":true,"source":"aug:n:000021","target":"errors","type":"target"},{"is_new":true,"source":"aug:n:000021","target":"problems","type":"target"},{"is_new":true,"source":"Printed books","target":"aug:n:000022","type":"source"},{"is_new":true,"source":"aug:n:000022","target":"private disputes","type":"target"},{"is_new":true,"source":"aug:n:000022","target":"public ones","type":"target"},{"is_new":true,"source":"aug:n:000022","target":"reputations","type":"target"},{"is_new":true,"source":"work","target":"aug:n:000023","type":"source"},{"is_new":true,"source":"aug:n:000023","target":"peers","type":"target"},{"is_new":true,"source":"aug:n:000023","target":"scholar","type":"target"},{"is_new":true,"source":"letters","target":"aug:n:000024","type":"source"},{"is_new":true,"source":"aug:n:000024","target":"Printing","type":"target"},{"is_new":true,"source":"aug:n:000024","target":"bloodstream","type":"target"},{"is_new":true,"source":"intellectual history","target":"aug:n:000025","type":"source"},{"is_new":true,"source":"aug:n:000025","target":"Republic of Letters","type":"target"},{"is_new":true,"source":"aug:n:000025","target":"history of logistics","type":"target"},{"is_new":true,"source":"letter","target":"aug:n:000026","type":"source"},{"is_new":true,"source":"aug:n:000026","target":"arguments","type":"target"},{"is_new":true,"source":"aug:n:000026","target":"destination","type":"target"},{"is_new":true,"source":"aug:n:000026","target":"news","type":"target"},{"is_new":true,"source":"patronage","target":"aug:n:000027","type":"source"},{"is_new":true,"source":"aug:n:000027","target":"churches","type":"target"},{"is_new":true,"source":"aug:n:000027","target":"citation","type":"target"},{"is_new":true,"source":"aug:n:000027","target":"citizens","type":"target"},{"is_new":true,"source":"benign","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"biting","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"pitches","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"composer","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"distinct lines","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"mutually responsible lines","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"dissonance","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"dramatic","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"arrangements","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"countermelody","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"grit","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"passing tone","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"print","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"private letters","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"earned","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"resolution","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"clash","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"suspensions","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"infrastructure","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"universities","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"Institutions","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"republic","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"dissonances","target":"aug:n:000038","type":"source"},{"is_new":true,"source":"recognizable ways","target":"aug:n:000038","type":"source"},{"is_new":true,"source":"Scholars","target":"aug:n:000039","type":"source"},{"is_new":true,"source":"apparatus of correction","target":"aug:n:000039","type":"source"},{"is_new":true,"source":"another voice","target":"aug:n:000040","type":"source"},{"is_new":true,"source":"motif","target":"aug:n:000040","type":"source"},{"is_new":true,"source":"rhetorical moves","target":"aug:n:000041","type":"source"},{"is_new":true,"source":"risks of misunderstanding","target":"aug:n:000041","type":"source"},{"is_new":true,"source":"honor","target":"aug:n:000042","type":"source"},{"is_new":true,"source":"request","target":"aug:n:000042","type":"source"},{"is_new":true,"source":"Networks","target":"aug:n:000043","type":"source"},{"is_new":true,"source":"tactical","target":"aug:n:000043","type":"source"},{"is_new":true,"source":"coherence","target":"aug:n:000044","type":"source"},{"is_new":true,"source":"imitative writing","target":"aug:n:000044","type":"source"},{"is_new":true,"source":"character","target":"aug:n:000045","type":"source"},{"is_new":true,"source":"gestures","target":"aug:n:000045","type":"source"},{"is_new":true,"source":"moving line","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"stillness","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"one voice","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"other moves","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"claim","target":"aug:n:000048","type":"source"},{"is_new":true,"source":"earlier claim","target":"aug:n:000048","type":"source"},{"is_new":true,"source":"one another","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"parts","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"voices","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"acknowledgments","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"dedications","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"politeness formulas","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"style","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"analysis","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"improvement","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"intermediate forms","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"episodes","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"relief","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"reorientation","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"claims","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"fugue","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"subject","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"agreement","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"conversation","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"disagreement","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"cache misses","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"decisions","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"power use","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"Catalogs","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"exchange","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"lists","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"registers","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"boundaries","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"improvements","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"memory aliasing","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"reasoning","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"side effects","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"Errata sheets","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"learned reviews","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"marginal notes","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"revised editions","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"stabilizing knowledge","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"evade","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"insist","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"line","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"reconcile","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"yield","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"Academies","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"observations","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"prizes","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"citing sources","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"intellectual grounding","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"social positioning","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"ink","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"network","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"paper","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"ships","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"trust","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"overloaded operation rules","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"scope resolution","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"semantic pass","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"type checking","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"arguments","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"letter","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"news","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"social signals","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"echo","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"memory","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"music","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"pursuit","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"citation","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"citizens","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"correspondence","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"critique","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"patronage","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"printed books","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"churches","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"courts","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"patronage","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"Counterpoint","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"independent melodies","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"melodies","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"Register allocation","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"fastest storage","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"memory","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"Printed books","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"private disputes","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"public ones","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"clumsy","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"contradictory","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"elegant","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"program","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"choral writing","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"counterpoint","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"film scores","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"popular arrangements","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"string quartets","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"abstraction","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"compilers","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"physics","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"programmers","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"listener","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"space","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"voice","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"counterpoint","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"social life","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"sound","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"compilers","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"intermediate representation","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"program","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"compiler","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"hardware","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"intent","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"languages","target":"aug:n:000077","type":"source"}],"meta":{"created_utc":"2026-01-18T13:34:18Z","notes":"Overlay candidates only; not ground truth.","run_id":"run_20260118_133149","source":"kg render"},"nodes":[{"confidence":0.6907045643226248,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_4","three_essays_cs_music_history_chunk_3","three_essays_cs_music_history_chunk_2","three_essays_cs_music_history_chunk_1","three_essays_cs_music_history_chunk_0"],"id":"aug:n:000001","insight_id":"run_20260118_133149:bridge:000001","is_new":true,"label":"Bridge: compiler","type":"relation","witness_edges":["edge_0","edge_1","edge_3","edge_9","edge_15","edge_16","edge_17","edge_19","edge_25","edge_26","edge_27","edge_28"]},{"confidence":0.5758097620994111,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14","three_essays_cs_music_history_chunk_11"],"id":"aug:n:000002","insight_id":"run_20260118_133149:bridge:000002","is_new":true,"label":"Bridge: scholar","type":"relation","witness_edges":["edge_74","edge_75","edge_76","edge_77","edge_96"]},{"confidence":0.5503940750687213,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_10","three_essays_cs_music_history_chunk_9","three_essays_cs_music_history_chunk_8"],"id":"aug:n:000003","insight_id":"run_20260118_133149:bridge:000003","is_new":true,"label":"Bridge: counterpoint","type":"relation","witness_edges":["edge_52","edge_61","edge_62","edge_67"]},{"confidence":0.5503940750687213,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_16","three_essays_cs_music_history_chunk_14","three_essays_cs_music_history_chunk_10"],"id":"aug:n:000004","insight_id":"run_20260118_133149:bridge:000004","is_new":true,"label":"Bridge: Republic of Letters","type":"relation","witness_edges":["edge_68","edge_69","edge_95","edge_104"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7"],"id":"aug:n:000005","insight_id":"run_20260118_133149:bridge:000010","is_new":true,"label":"Bridge: piece","type":"relation","witness_edges":["edge_42","edge_43","edge_44"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_4"],"id":"aug:n:000006","insight_id":"run_20260118_133149:bridge:000024","is_new":true,"label":"Bridge: programmers","type":"relation","witness_edges":["edge_24","edge_26","edge_28"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7","three_essays_cs_music_history_chunk_5"],"id":"aug:n:000007","insight_id":"run_20260118_133149:bridge:000009","is_new":true,"label":"Bridge: voice","type":"relation","witness_edges":["edge_34","edge_49","edge_50"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_4","three_essays_cs_music_history_chunk_2","three_essays_cs_music_history_chunk_1"],"id":"aug:n:000008","insight_id":"run_20260118_133149:bridge:000008","is_new":true,"label":"Bridge: compilers","type":"relation","witness_edges":["edge_5","edge_12","edge_24"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_8","three_essays_cs_music_history_chunk_1"],"id":"aug:n:000009","insight_id":"run_20260118_133149:bridge:000007","is_new":true,"label":"Bridge: meaning","type":"relation","witness_edges":["edge_8","edge_11","edge_54"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_2","three_essays_cs_music_history_chunk_0"],"id":"aug:n:000010","insight_id":"run_20260118_133149:bridge:000006","is_new":true,"label":"Bridge: program","type":"relation","witness_edges":["edge_2","edge_4","edge_12"]},{"confidence":0.5205889425802862,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_9","three_essays_cs_music_history_chunk_5"],"id":"aug:n:000011","insight_id":"run_20260118_133149:bridge:000005","is_new":true,"label":"Bridge: lines","type":"relation","witness_edges":["edge_31","edge_32","edge_60"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_11"],"id":"aug:n:000012","insight_id":"run_20260118_133149:bridge:000025","is_new":true,"label":"Bridge: network","type":"relation","witness_edges":["edge_71","edge_72"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_10","three_essays_cs_music_history_chunk_5"],"id":"aug:n:000013","insight_id":"run_20260118_133149:bridge:000027","is_new":true,"label":"Bridge: listener","type":"relation","witness_edges":["edge_34","edge_65"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_5"],"id":"aug:n:000014","insight_id":"run_20260118_133149:bridge:000026","is_new":true,"label":"Bridge: Counterpoint","type":"relation","witness_edges":["edge_29","edge_30"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_1"],"id":"aug:n:000015","insight_id":"run_20260118_133149:bridge:000023","is_new":true,"label":"Bridge: parse tree","type":"relation","witness_edges":["edge_6","edge_7"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_8","three_essays_cs_music_history_chunk_3"],"id":"aug:n:000016","insight_id":"run_20260118_133149:bridge:000022","is_new":true,"label":"Bridge: memory","type":"relation","witness_edges":["edge_20","edge_56"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_12","three_essays_cs_music_history_chunk_11"],"id":"aug:n:000017","insight_id":"run_20260118_133149:bridge:000021","is_new":true,"label":"Bridge: critique","type":"relation","witness_edges":["edge_70","edge_80"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_1"],"id":"aug:n:000018","insight_id":"run_20260118_133149:bridge:000020","is_new":true,"label":"Bridge: semantic pass","type":"relation","witness_edges":["edge_9","edge_10"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_6"],"id":"aug:n:000019","insight_id":"run_20260118_133149:bridge:000018","is_new":true,"label":"Bridge: two parts","type":"relation","witness_edges":["edge_37","edge_38"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_2"],"id":"aug:n:000020","insight_id":"run_20260118_133149:bridge:000011","is_new":true,"label":"Bridge: intermediate representation","type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_13"],"id":"aug:n:000021","insight_id":"run_20260118_133149:bridge:000012","is_new":true,"label":"Bridge: printing","type":"relation","witness_edges":["edge_86","edge_87"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_13"],"id":"aug:n:000022","insight_id":"run_20260118_133149:bridge:000013","is_new":true,"label":"Bridge: Printed books","type":"relation","witness_edges":["edge_84","edge_85"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14"],"id":"aug:n:000023","insight_id":"run_20260118_133149:bridge:000019","is_new":true,"label":"Bridge: work","type":"relation","witness_edges":["edge_96","edge_97"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_13","three_essays_cs_music_history_chunk_11"],"id":"aug:n:000024","insight_id":"run_20260118_133149:bridge:000014","is_new":true,"label":"Bridge: letters","type":"relation","witness_edges":["edge_73","edge_83"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_16"],"id":"aug:n:000025","insight_id":"run_20260118_133149:bridge:000015","is_new":true,"label":"Bridge: intellectual history","type":"relation","witness_edges":["edge_104","edge_105"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_15","three_essays_cs_music_history_chunk_12"],"id":"aug:n:000026","insight_id":"run_20260118_133149:bridge:000016","is_new":true,"label":"Bridge: letter","type":"relation","witness_edges":["edge_78","edge_101"]},{"confidence":0.4849748413979911,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14","three_essays_cs_music_history_chunk_11"],"id":"aug:n:000027","insight_id":"run_20260118_133149:bridge:000017","is_new":true,"label":"Bridge: patronage","type":"relation","witness_edges":["edge_70","edge_93"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_8"],"id":"aug:n:000028","insight_id":"run_20260118_133149:surprise:000050","is_new":true,"label":"Surprising: {benign, biting, pitches}","type":"relation","witness_edges":["edge_51"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_10"],"id":"aug:n:000029","insight_id":"run_20260118_133149:surprise:000051","is_new":true,"label":"Surprising: {composer, distinct lines, mutually responsible lines}","type":"relation","witness_edges":["edge_64"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7"],"id":"aug:n:000030","insight_id":"run_20260118_133149:surprise:000059","is_new":true,"label":"Surprising: {dissonance, dramatic}","type":"relation","witness_edges":["edge_45"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_9"],"id":"aug:n:000031","insight_id":"run_20260118_133149:surprise:000060","is_new":true,"label":"Surprising: {arrangements, countermelody}","type":"relation","witness_edges":["edge_63"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7"],"id":"aug:n:000032","insight_id":"run_20260118_133149:surprise:000061","is_new":true,"label":"Surprising: {grit, passing tone}","type":"relation","witness_edges":["edge_46"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_15"],"id":"aug:n:000033","insight_id":"run_20260118_133149:surprise:000062","is_new":true,"label":"Surprising: {print, private letters}","type":"relation","witness_edges":["edge_98"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7"],"id":"aug:n:000034","insight_id":"run_20260118_133149:surprise:000063","is_new":true,"label":"Surprising: {earned, resolution}","type":"relation","witness_edges":["edge_47"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7"],"id":"aug:n:000035","insight_id":"run_20260118_133149:surprise:000064","is_new":true,"label":"Surprising: {clash, suspensions}","type":"relation","witness_edges":["edge_48"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14"],"id":"aug:n:000036","insight_id":"run_20260118_133149:surprise:000065","is_new":true,"label":"Surprising: {infrastructure, universities}","type":"relation","witness_edges":["edge_94"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14"],"id":"aug:n:000037","insight_id":"run_20260118_133149:surprise:000066","is_new":true,"label":"Surprising: {Institutions, republic}","type":"relation","witness_edges":["edge_91"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_8"],"id":"aug:n:000038","insight_id":"run_20260118_133149:surprise:000067","is_new":true,"label":"Surprising: {dissonances, recognizable ways}","type":"relation","witness_edges":["edge_53"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_13"],"id":"aug:n:000039","insight_id":"run_20260118_133149:surprise:000068","is_new":true,"label":"Surprising: {Scholars, apparatus of correction}","type":"relation","witness_edges":["edge_88"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_8"],"id":"aug:n:000040","insight_id":"run_20260118_133149:surprise:000069","is_new":true,"label":"Surprising: {another voice, motif}","type":"relation","witness_edges":["edge_55"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_12"],"id":"aug:n:000041","insight_id":"run_20260118_133149:surprise:000070","is_new":true,"label":"Surprising: {rhetorical moves, risks of misunderstanding}","type":"relation","witness_edges":["edge_82"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_12"],"id":"aug:n:000042","insight_id":"run_20260118_133149:surprise:000071","is_new":true,"label":"Surprising: {honor, request}","type":"relation","witness_edges":["edge_81"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_15"],"id":"aug:n:000043","insight_id":"run_20260118_133149:surprise:000072","is_new":true,"label":"Surprising: {Networks, tactical}","type":"relation","witness_edges":["edge_99"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_9"],"id":"aug:n:000044","insight_id":"run_20260118_133149:surprise:000073","is_new":true,"label":"Surprising: {coherence, imitative writing}","type":"relation","witness_edges":["edge_59"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_7"],"id":"aug:n:000045","insight_id":"run_20260118_133149:surprise:000074","is_new":true,"label":"Surprising: {character, gestures}","type":"relation","witness_edges":["edge_41"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_6"],"id":"aug:n:000046","insight_id":"run_20260118_133149:surprise:000075","is_new":true,"label":"Surprising: {moving line, stillness}","type":"relation","witness_edges":["edge_40"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_6"],"id":"aug:n:000047","insight_id":"run_20260118_133149:surprise:000076","is_new":true,"label":"Surprising: {one voice, other moves}","type":"relation","witness_edges":["edge_39"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_15"],"id":"aug:n:000048","insight_id":"run_20260118_133149:surprise:000077","is_new":true,"label":"Surprising: {claim, earlier claim}","type":"relation","witness_edges":["edge_102"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_6"],"id":"aug:n:000049","insight_id":"run_20260118_133149:surprise:000048","is_new":true,"label":"Surprising: {one another, parts, voices}","type":"relation","witness_edges":["edge_36"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_12"],"id":"aug:n:000050","insight_id":"run_20260118_133149:surprise:000036","is_new":true,"label":"Surprising: {acknowledgments, dedications, politeness formulas, ...}","type":"relation","witness_edges":["edge_79"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_2"],"id":"aug:n:000051","insight_id":"run_20260118_133149:surprise:000043","is_new":true,"label":"Surprising: {analysis, improvement, intermediate forms}","type":"relation","witness_edges":["edge_14"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_9"],"id":"aug:n:000052","insight_id":"run_20260118_133149:surprise:000044","is_new":true,"label":"Surprising: {episodes, relief, reorientation}","type":"relation","witness_edges":["edge_58"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_9"],"id":"aug:n:000053","insight_id":"run_20260118_133149:surprise:000045","is_new":true,"label":"Surprising: {claims, fugue, subject}","type":"relation","witness_edges":["edge_57"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_5"],"id":"aug:n:000054","insight_id":"run_20260118_133149:surprise:000046","is_new":true,"label":"Surprising: {agreement, conversation, disagreement}","type":"relation","witness_edges":["edge_33"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_3"],"id":"aug:n:000055","insight_id":"run_20260118_133149:surprise:000035","is_new":true,"label":"Surprising: {cache misses, decisions, performance, ...}","type":"relation","witness_edges":["edge_23"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_15"],"id":"aug:n:000056","insight_id":"run_20260118_133149:surprise:000034","is_new":true,"label":"Surprising: {Catalogs, exchange, lists, ...}","type":"relation","witness_edges":["edge_100"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_2"],"id":"aug:n:000057","insight_id":"run_20260118_133149:surprise:000031","is_new":true,"label":"Surprising: {boundaries, improvements, memory aliasing, ...}","type":"relation","witness_edges":["edge_18"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_13"],"id":"aug:n:000058","insight_id":"run_20260118_133149:surprise:000030","is_new":true,"label":"Surprising: {Errata sheets, learned reviews, marginal notes, ...}","type":"relation","witness_edges":["edge_89"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_10"],"id":"aug:n:000059","insight_id":"run_20260118_133149:surprise:000029","is_new":true,"label":"Surprising: {evade, insist, line, ...}","type":"relation","witness_edges":["edge_66"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14"],"id":"aug:n:000060","insight_id":"run_20260118_133149:surprise:000049","is_new":true,"label":"Surprising: {Academies, observations, prizes}","type":"relation","witness_edges":["edge_92"]},{"confidence":0.4747816637553772,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14"],"id":"aug:n:000061","insight_id":"run_20260118_133149:surprise:000047","is_new":true,"label":"Surprising: {citing sources, intellectual grounding, social positioning}","type":"relation","witness_edges":["edge_90"]},{"confidence":0.46691290926255025,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_11"],"id":"aug:n:000062","insight_id":"run_20260118_133149:surprise:000032","is_new":true,"label":"Surprising: {ink, network, paper, ...}","type":"relation","witness_edges":["edge_71"]},{"confidence":0.46517823486282833,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_1"],"id":"aug:n:000063","insight_id":"run_20260118_133149:surprise:000037","is_new":true,"label":"Surprising: {overloaded operation rules, scope resolution, semantic pass, ...}","type":"relation","witness_edges":["edge_10"]},{"confidence":0.46517823486282833,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_12"],"id":"aug:n:000064","insight_id":"run_20260118_133149:surprise:000038","is_new":true,"label":"Surprising: {arguments, letter, news, ...}","type":"relation","witness_edges":["edge_78"]},{"confidence":0.46517823486282833,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_8"],"id":"aug:n:000065","insight_id":"run_20260118_133149:surprise:000039","is_new":true,"label":"Surprising: {echo, memory, music, ...}","type":"relation","witness_edges":["edge_56"]},{"confidence":0.46246044086346305,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_11"],"id":"aug:n:000066","insight_id":"run_20260118_133149:surprise:000028","is_new":true,"label":"Surprising: {citation, citizens, correspondence, ...}","type":"relation","witness_edges":["edge_70"]},{"confidence":0.46246044086346305,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_14"],"id":"aug:n:000067","insight_id":"run_20260118_133149:surprise:000055","is_new":true,"label":"Surprising: {churches, courts, patronage}","type":"relation","witness_edges":["edge_93"]},{"confidence":0.46246044086346305,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_5"],"id":"aug:n:000068","insight_id":"run_20260118_133149:surprise:000054","is_new":true,"label":"Surprising: {Counterpoint, independent melodies, melodies}","type":"relation","witness_edges":["edge_29"]},{"confidence":0.46246044086346305,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_3"],"id":"aug:n:000069","insight_id":"run_20260118_133149:surprise:000053","is_new":true,"label":"Surprising: {Register allocation, fastest storage, memory}","type":"relation","witness_edges":["edge_20"]},{"confidence":0.46246044086346305,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_13"],"id":"aug:n:000070","insight_id":"run_20260118_133149:surprise:000052","is_new":true,"label":"Surprising: {Printed books, private disputes, public ones}","type":"relation","witness_edges":["edge_84"]},{"confidence":0.4575880075597255,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_0"],"id":"aug:n:000071","insight_id":"run_20260118_133149:surprise:000040","is_new":true,"label":"Surprising: {clumsy, contradictory, elegant, ...}","type":"relation","witness_edges":["edge_4"]},{"confidence":0.454971429269953,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_9"],"id":"aug:n:000072","insight_id":"run_20260118_133149:surprise:000033","is_new":true,"label":"Surprising: {choral writing, counterpoint, film scores, ...}","type":"relation","witness_edges":["edge_62"]},{"confidence":0.44625397597809296,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_4"],"id":"aug:n:000073","insight_id":"run_20260118_133149:surprise:000041","is_new":true,"label":"Surprising: {abstraction, compilers, physics, ...}","type":"relation","witness_edges":["edge_24"]},{"confidence":0.44625397597809296,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_5"],"id":"aug:n:000074","insight_id":"run_20260118_133149:surprise:000057","is_new":true,"label":"Surprising: {listener, space, voice}","type":"relation","witness_edges":["edge_34"]},{"confidence":0.44625397597809296,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_10"],"id":"aug:n:000075","insight_id":"run_20260118_133149:surprise:000056","is_new":true,"label":"Surprising: {counterpoint, social life, sound}","type":"relation","witness_edges":["edge_67"]},{"confidence":0.4358571846469034,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_2"],"id":"aug:n:000076","insight_id":"run_20260118_133149:surprise:000058","is_new":true,"label":"Surprising: {compilers, intermediate representation, program}","type":"relation","witness_edges":["edge_12"]},{"confidence":0.42485471500620253,"evidence_chunk_ids":["three_essays_cs_music_history_chunk_0"],"id":"aug:n:000077","insight_id":"run_20260118_133149:surprise:000042","is_new":true,"label":"Surprising: {compiler, hardware, intent, ...}","type":"relation","witness_edges":["edge_1"]}]};
+
+        (() => {
+            const graphDiv = document.getElementById('graph');
+            const controls = document.getElementById('controls');
+
+            if (typeof ForceGraph3D !== 'function' || typeof THREE === 'undefined') {
+                alert('Missing WebGL libs. Serve via http://localhost.');
+                return;
+            }
+
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const ric = window.requestIdleCallback || ((cb) => setTimeout(() => cb({ timeRemaining: () => 0 }), 16));
+            const rafThrottle = (fn) => {
+                let scheduled = false;
+                return (...args) => {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(() => { scheduled = false; fn(...args); });
+                };
+            };
+
+            // Overlay
+            let overlay = document.getElementById('kgOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'kgOverlay';
+                overlay.innerHTML = '<div class="panel"><div class="title">Working...</div><div class="sub">Building subgraph</div></div>';
+                document.body.appendChild(overlay);
+            }
+            const overlayTitle = overlay.querySelector('.title');
+            const overlaySub = overlay.querySelector('.sub');
+
+            function showOverlay(title, sub) {
+                if (overlayTitle) overlayTitle.textContent = title || 'Working...';
+                if (overlaySub) overlaySub.textContent = sub || '';
+                overlay.classList.add('show');
+            }
+            function hideOverlay() { overlay.classList.remove('show'); }
+
+            let hud = document.getElementById('kgHud');
+            if (!hud) {
+                hud = document.createElement('div');
+                hud.id = 'kgHud';
+                hud.textContent = '3D: initializing...';
+                document.body.appendChild(hud);
+            }
+
+            // Add extra controls
+            controls.insertAdjacentHTML('beforeend', `
+                <div class="kg-row">
+                    <input class="kg-input" id="kgSearch" placeholder="Search node..." />
+                    <button class="kg-btn" id="kgGo">Go</button>
+                </div>
+                <div class="kg-row">
+                    <button class="kg-btn" id="kgExpand1">+ 1 hop</button>
+                    <button class="kg-btn" id="kgExpand2">+ 2 hops</button>
+                    <button class="kg-btn" id="kgReset">Reset</button>
+                    <button class="kg-btn" id="kgCamReset">Reset camera</button>
+                </div>
+                <label style="margin-top:10px;">
+                    <input type="checkbox" id="kgAutoFreeze" checked> Auto-freeze physics
+                </label>
+                <label>
+                    Max nodes: <span id="kgMaxNodesVal">2500</span>
+                    <input type="range" id="kgMaxNodes" min="200" max="8000" step="100" value="2500">
+                </label>
+                <label>
+                    Depth spread: <span id="kgDepthVal">120</span>
+                    <input type="range" id="kgDepth" min="0" max="600" step="10" value="120">
+                </label>
+
+                <div class="aug-section">
+                    <label>Augmentation Layer</label>
+                    <label style="margin-top:8px;">
+                        <input type="checkbox" id="showAug" checked> Show Augmentations
+                    </label>
+                    <label>
+                        Aug Opacity: <span id="augOpacityVal">1.0</span>
+                        <input type="range" id="augOpacity" min="0.1" max="1" step="0.1" value="1.0">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="augOnlyMode"> Augmentation-only mode
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="focusAug">Focus Aug</button>
+                    </div>
+                    <div id="augDetails">
+                        <strong>Insight Details</strong>
+                        <div id="augInfo">Click an augmentation node.</div>
+                    </div>
+                </div>
+
+                <div id="kgDetails" style="margin-top:10px; font-size:0.82em; color:#cfcfcf; line-height:1.35;"></div>
+            `);
+
+            const minDegreeEl = document.getElementById('minDegree');
+            const degreeValueEl = document.getElementById('degreeValue');
+            const linkStrengthEl = document.getElementById('linkStrength');
+            const repulsionEl = document.getElementById('repulsion');
+            const showLabelsEl = document.getElementById('showLabels');
+            const searchEl = document.getElementById('kgSearch');
+            const goBtn = document.getElementById('kgGo');
+            const exp1Btn = document.getElementById('kgExpand1');
+            const exp2Btn = document.getElementById('kgExpand2');
+            const resetBtn = document.getElementById('kgReset');
+            const camResetBtn = document.getElementById('kgCamReset');
+            const autoFreezeEl = document.getElementById('kgAutoFreeze');
+            const maxNodesEl = document.getElementById('kgMaxNodes');
+            const maxNodesValEl = document.getElementById('kgMaxNodesVal');
+            const depthEl = document.getElementById('kgDepth');
+            const depthValEl = document.getElementById('kgDepthVal');
+            const detailsEl = document.getElementById('kgDetails');
+            const showAugEl = document.getElementById('showAug');
+            const augOpacityEl = document.getElementById('augOpacity');
+            const augOpacityValEl = document.getElementById('augOpacityVal');
+            const augOnlyEl = document.getElementById('augOnlyMode');
+            const focusAugBtn = document.getElementById('focusAug');
+            const augDetailsEl = document.getElementById('augDetails');
+            const augInfoEl = document.getElementById('augInfo');
+
+            // Index base nodes/edges
+            showOverlay('Indexing nodes & edges...', 'Preparing 3D graph with augmentation');
+
+            const N = data.nodes.length;
+            for (let i = 0; i < N; i++) {
+                const n = data.nodes[i];
+                n.gid = i;
+                n.isAug = false;
+                if (typeof n.x !== 'number') n.x = (window.innerWidth / 2) + (Math.random() - 0.5) * 40;
+                if (typeof n.y !== 'number') n.y = (window.innerHeight / 2) + (Math.random() - 0.5) * 40;
+            }
+
+            // Build node ID to index map for linking augmentation
+            const nodeIdToIdx = new Map();
+            for (let i = 0; i < N; i++) {
+                nodeIdToIdx.set(data.nodes[i].id, i);
+            }
+
+            // Add augmentation nodes
+            const augNodeIdToIdx = new Map();
+            for (const augNode of augData.nodes) {
+                const newIdx = data.nodes.length;
+                data.nodes.push({
+                    gid: newIdx,
+                    id: augNode.id,
+                    label: augNode.label,
+                    type: 'augmentation',
+                    isAug: true,
+                    insightId: augNode.insight_id,
+                    confidence: augNode.confidence,
+                    evidenceChunks: augNode.evidence_chunk_ids || [],
+                    witnessEdges: augNode.witness_edges || [],
+                    x: (window.innerWidth / 2) + (Math.random() - 0.5) * 60,
+                    y: (window.innerHeight / 2) + (Math.random() - 0.5) * 60
+                });
+                augNodeIdToIdx.set(augNode.id, newIdx);
+            }
+
+            // Add augmentation links
+            for (const augLink of augData.links) {
+                let srcIdx = nodeIdToIdx.get(augLink.source);
+                if (srcIdx === undefined) srcIdx = augNodeIdToIdx.get(augLink.source);
+                let tgtIdx = nodeIdToIdx.get(augLink.target);
+                if (tgtIdx === undefined) tgtIdx = augNodeIdToIdx.get(augLink.target);
+
+                if (srcIdx !== undefined && tgtIdx !== undefined) {
+                    data.links.push({
+                        source: srcIdx,
+                        target: tgtIdx,
+                        type: augLink.type,
+                        isAug: true
+                    });
+                }
+            }
+
+            // Re-index all edges
+            const edges = new Array(data.links.length);
+            const incident = Array.from({ length: data.nodes.length }, () => []);
+            for (let i = 0; i < data.links.length; i++) {
+                const l = data.links[i];
+                const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                const e = { s, t, type: l.type, isAug: !!l.isAug };
+                edges[i] = e;
+                incident[s].push(i);
+                incident[t].push(i);
+            }
+
+            const entityByDegree = [];
+            for (let i = 0; i < data.nodes.length; i++) {
+                if (data.nodes[i].type === 'entity') entityByDegree.push(i);
+            }
+            entityByDegree.sort((a, b) => ((data.nodes[b].degree || 0) - (data.nodes[a].degree || 0)));
+
+            const labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+
+            // State
+            const state = {
+                minDegree: +minDegreeEl.value,
+                linkStrength: +linkStrengthEl.value,
+                repulsion: +repulsionEl.value,
+                showLabels: !!showLabelsEl.checked,
+                autoFreeze: true,
+                maxNodes: +maxNodesEl.value,
+                depthSpread: +depthEl.value,
+                selectedGid: null,
+                visible: new Set(),
+                subNodes: [],
+                subLinks: [],
+                subNodesByGid: new Map(),
+                graph: null,
+                fps: { t0: performance.now(), frames: 0, value: 0 },
+                showAug: true,
+                augOpacity: 1.0,
+                augOnlyMode: false,
+                degreeDebounce: null
+            };
+
+            function applyDepth() {
+                const spread = state.depthSpread;
+                for (let i = 0; i < data.nodes.length; i++) {
+                    const n = data.nodes[i];
+                    const base = n.isAug ? 0.6 : (n.type === 'relation' ? 0.45 : 1.0);
+                    n.z = (Math.random() - 0.5) * spread * base;
+                    if (n.isAug) n.z += spread * 0.3; // Float augmentation slightly above
+                }
+            }
+
+            function seedVisibleByDegree(minDegree, maxNodes) {
+                const vis = new Set();
+
+                // Always include augmentation nodes if enabled
+                if (state.showAug) {
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug) vis.add(i);
+                    }
+                }
+
+                if (state.augOnlyMode) {
+                    // Only show augmentation and connected nodes
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug) {
+                            for (const ei of incident[i]) {
+                                const e = edges[ei];
+                                const other = (e.s === i) ? e.t : e.s;
+                                vis.add(other);
+                            }
+                        }
+                    }
+                    return vis;
+                }
+
+                for (let k = 0; k < entityByDegree.length && vis.size < maxNodes; k++) {
+                    const idx = entityByDegree[k];
+                    const n = data.nodes[idx];
+                    if ((n.degree || 0) >= minDegree) vis.add(idx);
+                    else break;
+                }
+
+                if (vis.size < 50) {
+                    for (let k = 0; k < Math.min(200, entityByDegree.length) && vis.size < Math.min(maxNodes, 200); k++) {
+                        vis.add(entityByDegree[k]);
+                    }
+                }
+
+                const relQueue = [];
+                for (const idx of vis) {
+                    for (const ei of incident[idx]) {
+                        const e = edges[ei];
+                        const other = (e.s === idx) ? e.t : e.s;
+                        if ((data.nodes[other].type === 'relation' || data.nodes[other].isAug) && !vis.has(other)) {
+                            relQueue.push(other);
+                        }
+                    }
+                }
+                for (let i = 0; i < relQueue.length && vis.size < maxNodes; i++) vis.add(relQueue[i]);
+
+                if (state.selectedGid != null) vis.add(state.selectedGid);
+                return vis;
+            }
+
+            function buildSubgraphFromVisible() {
+                const subNodes = [];
+                state.visible.forEach(i => subNodes.push(data.nodes[i]));
+
+                const edgeIds = new Set();
+                for (const i of state.visible) for (const ei of incident[i]) edgeIds.add(ei);
+
+                const subLinks = [];
+                edgeIds.forEach(ei => {
+                    const e = edges[ei];
+                    if (state.visible.has(e.s) && state.visible.has(e.t)) {
+                        // Filter augmentation links if showAug is off
+                        if (e.isAug && !state.showAug) return;
+                        subLinks.push(e);
+                    }
+                });
+
+                state.subNodes = subNodes;
+                state.subLinks = subLinks;
+
+                const vn = document.getElementById('visibleNodes');
+                const vl = document.getElementById('visibleLinks');
+                if (vn) vn.textContent = String(subNodes.length);
+                if (vl) vl.textContent = String(subLinks.length);
+            }
+
+            function rebuildSubgraphIndex() {
+                state.subNodesByGid = new Map();
+                for (const n of state.subNodes) state.subNodesByGid.set(n.gid, n);
+            }
+
+            function updateDetails(node) {
+                if (!detailsEl) return;
+                if (!node) {
+                    detailsEl.innerHTML = '<span style="opacity:0.8;">Click a node to see details.</span>';
+                    augDetailsEl.classList.remove('show');
+                    return;
+                }
+
+                const lines = [];
+                lines.push(`<div><b>${escapeHtml(node.label || node.id || 'Node')}</b></div>`);
+                lines.push(`<div style="opacity:0.85;">type: <code>${escapeHtml(node.type || '')}</code></div>`);
+
+                if (node.isAug) {
+                    augDetailsEl.classList.add('show');
+                    let augHtml = `<strong>${escapeHtml(node.label)}</strong><br>`;
+                    if (node.insightId) augHtml += `Insight: ${escapeHtml(node.insightId)}<br>`;
+                    if (typeof node.confidence === 'number') augHtml += `Confidence: ${node.confidence.toFixed(3)}<br>`;
+                    if (node.evidenceChunks && node.evidenceChunks.length) {
+                        augHtml += `Evidence: ${escapeHtml(node.evidenceChunks.slice(0, 3).join(', '))}`;
+                        if (node.evidenceChunks.length > 3) augHtml += '...';
+                    }
+                    augInfoEl.innerHTML = augHtml;
+                } else {
+                    augDetailsEl.classList.remove('show');
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                        if (typeof node.confidence === 'number') lines.push(`<div style="opacity:0.85;">confidence: <code>${node.confidence}</code></div>`);
+                    }
+                }
+                detailsEl.innerHTML = lines.join('');
+            }
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            }
+
+            function expandSelected(hops) {
+                if (state.selectedGid == null) return;
+
+                const maxNodes = state.maxNodes;
+                const q = [state.selectedGid];
+                const dist = new Map([[state.selectedGid, 0]]);
+
+                while (q.length) {
+                    const u = q.shift();
+                    const d = dist.get(u) || 0;
+                    if (d >= hops) continue;
+
+                    for (const ei of incident[u]) {
+                        const e = edges[ei];
+                        const v = (e.s === u) ? e.t : e.s;
+                        if (!dist.has(v)) {
+                            dist.set(v, d + 1);
+                            q.push(v);
+                        }
+                        if (state.visible.size < maxNodes) state.visible.add(v);
+                    }
+                    if (state.visible.size >= maxNodes) break;
+                }
+
+                rebuildAndRender('Expanding neighborhood...');
+            }
+
+            // Graph init
+            graphDiv.innerHTML = '';
+
+            const Graph = ForceGraph3D()(graphDiv)
+                .nodeId('gid')
+                .nodeLabel(n => (n.label || n.id || ''))
+                .backgroundColor('rgba(0,0,0,0)')
+                .showNavInfo(false)
+                .enableNodeDrag(true)
+                .linkSource('source')
+                .linkTarget('target');
+
+            state.graph = Graph;
+
+            function applyStyles() {
+                const showAug = state.showAug;
+                const opacity = state.augOpacity;
+
+                Graph
+                    .nodeColor(n => {
+                        if (n.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity})` : 'rgba(224, 64, 251, 0.1)';
+                        }
+                        return n.type === 'relation' ? '#ff9800' : '#4fc3f7';
+                    })
+                    .nodeVal(n => {
+                        if (n.isAug) return showAug ? 4 : 1;
+                        return n.type === 'relation' ? 1.5 : Math.max(1.2, 1 + (n.degree || 0) * 0.06);
+                    })
+                    .linkColor(l => {
+                        if (l.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity * 0.7})` : 'rgba(224, 64, 251, 0.05)';
+                        }
+                        return l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)';
+                    })
+                    .linkWidth(l => l.isAug ? 1.5 : 0.6)
+                    .linkLineDash(l => l.isAug ? [2, 2] : null);
+
+                Graph.refresh();
+            }
+
+            function rebuildAndRender(msg) {
+                showOverlay(msg || 'Rebuilding view...', 'Please wait');
+
+                // Single ric() call - no nesting for better performance
+                ric(() => {
+                    state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+                    buildSubgraphFromVisible();
+                    rebuildSubgraphIndex();
+                    applyDepth();
+
+                    const gdata = {
+                        nodes: state.subNodes,
+                        links: state.subLinks.map(e => ({ source: e.s, target: e.t, type: e.type, isAug: e.isAug }))
+                    };
+                    Graph.graphData(gdata);
+
+                    // Apply forces (ForceGraph3D has built-in center force)
+                    if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+                    if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength / 10);
+
+                    // Auto-freeze after layout settles
+                    if (state.autoFreeze) {
+                        Graph.cooldownTime(2000);
+                    } else {
+                        Graph.cooldownTime(Infinity);
+                    }
+
+                    Graph.d3ReheatSimulation();
+                    applyStyles();
+                    hideOverlay();
+                    updateHud();
+                });
+            }
+
+            function updateHud() {
+                const now = performance.now();
+                state.fps.frames++;
+                const dt = now - state.fps.t0;
+                if (dt >= 800) {
+                    state.fps.value = Math.round((state.fps.frames * 1000) / dt);
+                    state.fps.frames = 0;
+                    state.fps.t0 = now;
+                }
+                const augCount = state.subNodes.filter(n => n.isAug).length;
+                hud.textContent = `3D | ${state.subNodes.length} nodes | ${state.subLinks.length} links | ${augCount} aug | ${state.fps.value} fps`;
+            }
+
+            // Camera reset function
+            function resetCamera() {
+                Graph.cameraPosition({ x: 0, y: 0, z: 420 }, { x: 0, y: 0, z: 0 }, 700);
+            }
+
+            // Event handlers
+            Graph.onNodeClick(node => {
+                state.selectedGid = node ? node.gid : null;
+                updateDetails(node);
+            });
+
+            // Debounced degree filter
+            minDegreeEl.addEventListener('input', () => {
+                state.minDegree = +minDegreeEl.value;
+                degreeValueEl.textContent = String(state.minDegree);
+                if (state.degreeDebounce) clearTimeout(state.degreeDebounce);
+                state.degreeDebounce = setTimeout(() => rebuildAndRender('Filtering by degree...'), 150);
+            });
+
+            linkStrengthEl.addEventListener('input', () => {
+                state.linkStrength = +linkStrengthEl.value;
+                Graph.d3Force('link').strength(state.linkStrength / 10);
+                Graph.d3ReheatSimulation();
+            });
+
+            repulsionEl.addEventListener('input', () => {
+                state.repulsion = +repulsionEl.value;
+                Graph.d3Force('charge').strength(-state.repulsion);
+                Graph.d3ReheatSimulation();
+            });
+
+            maxNodesEl.addEventListener('input', () => {
+                state.maxNodes = +maxNodesEl.value;
+                maxNodesValEl.textContent = String(state.maxNodes);
+            });
+            maxNodesEl.addEventListener('change', () => rebuildAndRender('Adjusting max nodes...'));
+
+            depthEl.addEventListener('input', () => {
+                state.depthSpread = +depthEl.value;
+                depthValEl.textContent = String(state.depthSpread);
+                applyDepth();
+                Graph.refresh();
+            });
+
+            goBtn.addEventListener('click', () => {
+                const q = (searchEl.value || '').trim().toLowerCase();
+                if (!q) return;
+                let idx = labelsLower.indexOf(q);
+                if (idx === -1) {
+                    for (let i = 0; i < labelsLower.length; i++) {
+                        if (labelsLower[i].includes(q)) { idx = i; break; }
+                    }
+                }
+                if (idx === -1) {
+                    detailsEl.innerHTML = `<div style="color:#ffb74d;">No match for "${escapeHtml(q)}".</div>`;
+                    return;
+                }
+                state.selectedGid = idx;
+                state.visible.add(idx);
+                rebuildAndRender('Searching...');
+                updateDetails(data.nodes[idx]);
+            });
+
+            searchEl.addEventListener('keydown', e => { if (e.key === 'Enter') goBtn.click(); });
+
+            exp1Btn.addEventListener('click', () => expandSelected(1));
+            exp2Btn.addEventListener('click', () => expandSelected(2));
+            resetBtn.addEventListener('click', () => {
+                state.selectedGid = null;
+                updateDetails(null);
+                rebuildAndRender('Resetting view...');
+            });
+            camResetBtn.addEventListener('click', resetCamera);
+
+            showAugEl.addEventListener('change', () => {
+                state.showAug = showAugEl.checked;
+                rebuildAndRender('Toggling augmentation...');
+            });
+
+            augOpacityEl.addEventListener('input', () => {
+                state.augOpacity = +augOpacityEl.value;
+                augOpacityValEl.textContent = state.augOpacity.toFixed(1);
+                applyStyles();
+            });
+
+            augOnlyEl.addEventListener('change', () => {
+                state.augOnlyMode = augOnlyEl.checked;
+                rebuildAndRender(state.augOnlyMode ? 'Augmentation-only mode...' : 'Full graph mode...');
+            });
+
+            focusAugBtn.addEventListener('click', () => {
+                const augNodes = state.subNodes.filter(n => n.isAug);
+                if (augNodes.length === 0) return;
+
+                let cx = 0, cy = 0, cz = 0;
+                for (const n of augNodes) {
+                    cx += n.x || 0;
+                    cy += n.y || 0;
+                    cz += n.z || 0;
+                }
+                cx /= augNodes.length;
+                cy /= augNodes.length;
+                cz /= augNodes.length;
+
+                Graph.cameraPosition({ x: cx, y: cy, z: cz + 300 }, { x: cx, y: cy, z: cz }, 1000);
+            });
+
+            // Tooltip hover
+            Graph.onNodeHover(rafThrottle((node) => {
+                const tt = document.getElementById('tooltip');
+                if (!tt) return;
+                if (!node) { tt.style.opacity = 0; return; }
+                tt.style.opacity = 1;
+                let info = `<strong>${escapeHtml(node.label || node.id || '')}</strong><br/>`;
+                info += `<span style="opacity:0.85;">${escapeHtml(node.type || '')}`;
+                if (typeof node.degree === 'number') info += ` deg ${node.degree}`;
+                if (node.isAug && typeof node.confidence === 'number') info += ` conf ${node.confidence.toFixed(2)}`;
+                info += '</span>';
+                tt.innerHTML = info;
+            }));
+
+            // Auto-freeze handler
+            autoFreezeEl.addEventListener('change', () => {
+                state.autoFreeze = !!autoFreezeEl.checked;
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+                Graph.d3ReheatSimulation();
+            });
+
+            // FPS counter
+            if (Graph.onRenderFramePost) {
+                Graph.onRenderFramePost(updateHud);
+            } else {
+                setInterval(updateHud, 250);
+            }
+
+            // Window resize
+            window.addEventListener('resize', () => {
+                Graph.width(window.innerWidth);
+                Graph.height(window.innerHeight);
+            });
+
+            // Initial render
+            resetCamera();
+            rebuildAndRender('Building initial view...');
+        })();
+    </script>
+</body>
+</html>

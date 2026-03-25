@@ -2,6 +2,63 @@
 
 ## [Unreleased]
 
+### Added (2026-03-25)
+- **Level 1.2: Label Simplification** in Quality Control
+  - Automatically simplifies verbose entity names
+  - Removes filler phrases: "the process of", "the concept of", "a method for", etc.
+  - Trims redundant suffixes: " process", " technique", " method"
+  - Example: "the process of machine learning algorithms" → "machine learning algorithms"
+  - Tracked in `labels_simplified` metric in cleaning reports
+  - Reduces noise from overly descriptive entity names
+
+- **Hub Node Identification** in Connectivity Analysis
+  - Identifies the highest-degree node in the largest connected component
+  - Represents the central concept in the knowledge graph
+  - Displayed in all reports (HTML/JSON/console)
+  - Format: `Hub: "machine learning" (degree: 45)`
+  - Helps identify the most interconnected entity
+
+- **Enhanced Connectivity Reporting**
+  - Added `hub_node_label` and `hub_node_degree` to JSON reports
+  - Updated HTML quality control report with hub node display
+  - Improved console output with hub node information
+  - Restructured JSON for better organization (nested level1/level2/level3 objects)
+
+### Changed (2026-03-25)
+- **LLM Provider Configuration**
+  - Switched from OpenAI to Google Gemini support
+  - Updated hardcoded model defaults: `gemini-1.5-flash` → `gemini-2.5-flash`
+  - Fixed API compatibility issues with Gemini
+  - Model configuration now supports latest Gemini models
+
+- **Documentation Updates**
+  - Updated `QUALITY_CONTROL.md` with new features (Level 1.2, Hub Node)
+  - Enhanced examples and algorithm flow documentation
+  - Updated metric descriptions and interpretations
+
+### Removed (2026-03-25)
+- **Obsolete Documentation Files** (12 files removed)
+  - All `PHASE1_DAY*.md` daily summary files
+  - All `PHASE2_DAY*.md` daily summary files
+  - `SESSION_SUMMARY_*.md` session logs
+  - `CATEGORY_REORGANIZATION.md` (outdated)
+  - `CLEANUP_AUDIT.md` (outdated)
+  - `DOCUMENTATION_UPDATES.md` (meta-doc no longer needed)
+  - `PHASE1_PROGRESS.md` (progress tracking, obsolete)
+  - `PHASE1_DEDUPLICATION_DESIGN.md` (superseded by QUALITY_CONTROL.md)
+  - `PHASE2_ENHANCEMENT_PLAN.md` and `PHASE2_PLAN.md` (planning docs, obsolete)
+  - `VISUAL_ENHANCEMENTS_*.md` (multiple versions, obsolete)
+  - `REPORT_UI_IMPROVEMENTS.md` (merged into other docs)
+  - `KUZU_UPGRADE_PROPOSAL.md` (proposal, no longer needed)
+  - Streamlined docs/ directory from 42 to 18 files
+
+### Fixed (2026-03-25)
+- **Gemini LLM Integration**
+  - Fixed model name incompatibility (v1beta API requires different model names)
+  - Updated C++ code to use `gemini-2.5-flash` instead of non-existent `gemini-1.5-flash`
+  - Fixed API endpoint format for Gemini generateContent calls
+  - Tested and verified Gemini API connectivity
+
 ### Added (2026-03-06)
 - **Knowledge Discovery Category System**:
   - Introduced 3-category classification for insights: **Combinatorial** (pattern detection), **Exploratory** (path finding), **Transformational** (reframing)
