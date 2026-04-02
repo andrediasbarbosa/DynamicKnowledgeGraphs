@@ -11,6 +11,7 @@ References/
 
 # API keys and sensitive config (keep examples)
 .llm_config.json
+.llm_config.json.*
 !.llm_config*.example
 
 # Compiled objects
