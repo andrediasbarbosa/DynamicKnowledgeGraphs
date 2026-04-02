@@ -12,13 +12,14 @@ namespace kg {
 // Augmentation node (new nodes to add to the graph)
 struct AugmentationNode {
     std::string id;             // "aug:n:000001"
-    std::string label;
+    std::string label;          // Short, simplified label (aligned with original graph)
     std::string type;           // "entity" or "relation"
     bool is_new = true;
     std::string insight_id;
     double confidence = 0.0;
     std::vector<std::string> evidence_chunk_ids;
     std::vector<std::string> witness_edges;  // Changed from uint32_t to string
+    std::map<std::string, std::string> properties;  // Metadata storage (aligned with original graph)
 
     nlohmann::json to_json() const {
         nlohmann::json j;
@@ -30,7 +31,42 @@ struct AugmentationNode {
         j["confidence"] = confidence;
         j["evidence_chunk_ids"] = evidence_chunk_ids;
         j["witness_edges"] = witness_edges;
+
+        // V2: Include properties if not empty
+        if (!properties.empty()) {
+            j["properties"] = properties;
+        }
+
         return j;
+    }
+
+    // Backward compatible from_json
+    static AugmentationNode from_json(const nlohmann::json& j) {
+        AugmentationNode node;
+        node.id = j.value("id", "");
+        node.label = j.value("label", "");
+        node.type = j.value("type", "entity");
+        node.is_new = j.value("is_new", true);
+        node.insight_id = j.value("insight_id", "");
+        node.confidence = j.value("confidence", 0.0);
+
+        if (j.contains("evidence_chunk_ids")) {
+            node.evidence_chunk_ids = j["evidence_chunk_ids"].get<std::vector<std::string>>();
+        }
+        if (j.contains("witness_edges")) {
+            node.witness_edges = j["witness_edges"].get<std::vector<std::string>>();
+        }
+
+        // V2: Load properties if present
+        if (j.contains("properties")) {
+            node.properties = j["properties"].get<std::map<std::string, std::string>>();
+        }
+        // V1 compatibility: Store confidence in properties too
+        else if (node.confidence > 0.0) {
+            node.properties["confidence"] = std::to_string(node.confidence);
+        }
+
+        return node;
     }
 };
 
@@ -63,6 +99,8 @@ struct AugmentationData {
     nlohmann::json to_json() const {
         nlohmann::json j;
         j["meta"] = {
+            {"version", "2.0"},          // V2: Unified schema with properties
+            {"schema", "unified"},
             {"run_id", run_id},
             {"created_utc", created_utc},
             {"source", source},
@@ -158,6 +196,22 @@ private:
     void convert_intervention_point(const Insight& insight, AugmentationData& data);
     void convert_feedback_loop(const Insight& insight, AugmentationData& data);
     void convert_confounder(const Insight& insight, AugmentationData& data);
+    void convert_cross_community_bridge_map(const Insight& insight, AugmentationData& data);
+    void convert_multi_resolution_community(const Insight& insight, AugmentationData& data);
+    void convert_meta_pattern(const Insight& insight, AugmentationData& data);
+
+    // Epistemic Discovery converters
+    void convert_evidence_debt(const Insight& insight, AugmentationData& data);
+    void convert_consensus_frontier(const Insight& insight, AugmentationData& data);
+    void convert_boundary_condition_map(const Insight& insight, AugmentationData& data);
+    void convert_failure_mode_topology(const Insight& insight, AugmentationData& data);
+    void convert_benchmark_dependence(const Insight& insight, AugmentationData& data);
+    void convert_concept_drift(const Insight& insight, AugmentationData& data);
+    void convert_premise_bottleneck(const Insight& insight, AugmentationData& data);
+    void convert_translation_gap(const Insight& insight, AugmentationData& data);
+
+    // V2: Label simplification helper
+    static std::string simplify_label(const std::string& label);
 };
 
 } // namespace kg

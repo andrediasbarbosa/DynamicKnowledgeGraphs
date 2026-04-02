@@ -1,62 +1,57 @@
 # Knowledge Graph Extractor
 
-C++ and Python tooling for extracting hypergraph knowledge graphs from PDF text, running discovery operators, and serving an interactive Graph RAG interface.
+This repository contains three active code paths:
 
-## What Is In This Repo
+- `kg` CLI: the C++ pipeline for PDF extraction, quality control, indexing, discovery, rendering, and reporting
+- `src/graph_rag_tool/`: a FastAPI + Kuzu Graph RAG application for interactive graph exploration
+- `src/python_porting/`: a lightweight Python-only extractor for Azure OpenAI workflows
 
-- `kg` CLI (C++): end-to-end pipeline `extract -> index -> discover -> render -> report`
-- Graph RAG app (`src/graph_rag_tool/`): FastAPI + Kuzu backend with 3D UI, chat, and DB Explorer
-- Python-only extractor (`src/python_porting/`): lightweight Azure OpenAI extraction path
+## Repo Layout
 
-## Documentation
+- `src/main.cpp`: `kg` CLI entrypoint
+- `include/`, `src/`: C++ pipeline, discovery engine, rendering, and LLM integrations
+- `src/graph_rag_tool/backend/`: active Graph RAG backend and frontend template
+- `src/graph_rag_tool/deployment/`: standalone deployment bundle for the Graph RAG app
+- `src/python_porting/`: Python-only extractor
+- `docs/`: maintained code-facing documentation
 
-### Main Guides
+## Quick Start: `kg`
 
-- **[README.md](README.md)** - This file (project overview)
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Installation & deployment instructions (Windows/Linux, Local/Azure)
-- **[FEATURES.md](FEATURES.md)** - Complete feature guide (RAG modes, UI, capabilities)
-- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and recent changes
-- **[PIPELINE.md](PIPELINE.md)** - Technical pipeline details
+### 1. Install dependencies
 
-### Component-Specific
-
-- `src/graph_rag_tool/README.md` - Graph-RAG tool specifics
-- `src/graph_rag_tool/backend/README.md` - Backend API details
-- `src/python_porting/README.md` - Python extractor docs
-
-**Note:** Generated run artifacts (`runs/*/report.md`, `output/report.md`) are runtime outputs, not canonical docs.
-
-## C++ Pipeline (`kg`) Quick Start
-
-### 1. Install dependencies (Ubuntu/WSL)
+Ubuntu/WSL:
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y cmake g++ libcurl4-openssl-dev nlohmann-json3-dev
-# Optional (PDF + tests + visualization)
 sudo apt-get install -y libpoppler-cpp-dev libgtest-dev graphviz
 ```
+
+`libpoppler-cpp-dev` enables PDF extraction. Without it, the project still configures, but PDF processing targets are skipped.
 
 ### 2. Build
 
 ```bash
 ./build.sh build
-# binaries in build/bin/
 ```
 
-### 3. Configure LLM
+Main binary:
 
-Use config file (recommended):
+```bash
+./build/bin/kg
+```
+
+### 3. Configure the LLM
+
+Recommended:
 
 ```bash
 cp .llm_config.json.example .llm_config.json
-# edit provider/api_key/model
 ```
 
-Gemini template: `.llm_config_gemini.json.example`
+Then set `provider`, `api_key`, and `model`.
 
-Environment fallback:
+Environment-variable fallback is also supported:
 
 ```bash
 export OPENAI_API_KEY='...'
@@ -65,129 +60,84 @@ export GEMINI_API_KEY='...'
 export KG_LLM_PROVIDER='gemini'
 ```
 
-### 4. Run pipeline
+### 4. Run the pipeline
 
 ```bash
-./build/bin/kg run -i /path/to/file.pdf -t "My Run"
+./build/bin/kg run -i /path/to/pdfs -t "My Run"
 ```
 
-Useful options:
+Common options:
 
-- `--preprocess` normalize relation labels and merge aliases before indexing
-- `-p all` run all 55 discovery operators
-- `-f <stage> -d <run_dir>` resume existing runs from stage 2-5
+- `-p all` is the default for `kg run`
+- `--preprocess` normalizes relation labels and merges alias-like entities before quality control
+- `--with-ontology` adds class/instance classification
+- `--causal` switches extraction prompts to the causal prompt set
+- `-f <stage> -d <run_dir>` resumes an existing run
 
 Examples:
 
 ```bash
-./build/bin/kg run -i ./pdfs/ -t "Corpus Run" -p all --preprocess
+./build/bin/kg run -i tests/ -p all --preprocess
+./build/bin/kg run -i tests/ --with-ontology --semantic-dedup
 ./build/bin/kg run -f 3 -d runs/run_YYYYMMDD_HHMMSS
 ./build/bin/kg list-operators
 ```
 
-CLI commands:
+Current CLI defaults:
 
-```bash
-./build/bin/kg --help
-```
+- `kg run`: all 62 operators from `all_discovery_operators()`
+- `kg discover`: `bridges,completions,motifs`
 
-Available commands: `run`, `index`, `discover`, `render`, `report`, `stats`, `list-operators`.
+## Quick Start: Graph RAG
 
-Pipeline output per run (`runs/run_YYYYMMDD_HHMMSS/`):
-
-- `graph.json`, `index.json`, `insights.json`, `augmentation.json`
-- `graph.html`, `graph_augmented.html`, `graph.dot`
-- `report.md`, `report.html`, `manifest.json`, `extraction_stats.json`
-
-### HTML Report Features
-
-The `report.html` provides an interactive, category-organized view of discovered insights:
-
-**🎨 Modern Interface:**
-- Dark theme with smooth animations
-- Category-organized layout (Combinatorial, Exploratory, Transformational)
-- Hierarchical table of contents
-- Horizontal bar chart showing insight distribution
-
-**📊 Smart Navigation:**
-- All sections start collapsed (except Categories Overview and Executive Summary)
-- Click section headers to expand/collapse
-- Click chart bars to jump to category sections
-- Clean initial view for better overview
-
-**📖 See:** [REPORT_UI_IMPROVEMENTS.md](REPORT_UI_IMPROVEMENTS.md) | [CATEGORY_REORGANIZATION.md](CATEGORY_REORGANIZATION.md)
-
-## Graph-RAG Tool (Kuzu + FastAPI + 3D UI)
-
-Interactive knowledge graph exploration with natural language queries, 3D visualization, and database explorer.
-
-### Quick Start
-
-**Windows (Anaconda Prompt):**
-```bash
-cd C:\Users\homea\Documents\PhD\DynamicKGs\Batch4\src\graph_rag_tool\backend
-python graph_rag_server.py
-```
-
-**Linux/Mac:**
 ```bash
 cd src/graph_rag_tool/backend
+pip install -r requirements.txt
 python graph_rag_server.py
 ```
 
-**Open Browser:**
-```
-http://localhost:8000
-```
+Open:
 
-⚠️ **Important:** Use `http://localhost:8000` (NOT `file://` protocol)
+- `http://localhost:8000`
+- `http://localhost:8000/docs`
 
-### Features
+The active runtime lives in `src/graph_rag_tool/backend/`. The `deployment/` folder is a separately packaged standalone bundle.
 
-- **3 RAG Modes**: Graph-RAG (Cypher), Document-RAG (vector similarity), Compare both
-- **3D Visualization**: WebGL force-directed graph with clustering
-- **Kuzu Explorer**: Cypher queries, entity search, path finding, quality metrics
-- **Dual Embedding**: Local (sentence-transformers) or Azure OpenAI
-- **Export**: CSV/JSON query results
-
-📖 **Full Documentation:** [DEPLOYMENT.md](DEPLOYMENT.md) | [FEATURES.md](FEATURES.md) | [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-
-### API Endpoints
-
-- App: `http://localhost:8000`
-- API docs: `http://localhost:8000/docs`
-
-**Core APIs:**
-- `GET /api/health` - Server status
-- `GET /api/schema` - Graph schema
-- `POST /api/query` - Natural language query (3 RAG modes)
-- `POST /api/cypher` - Execute Cypher query
-- `GET /api/entities` - Search entities
-- `GET /api/relations` - List relation types
-- `GET /api/relations/{composite_hash}` - Get incoming/outgoing relations for an entity hash
-- `POST /api/path` - Find shortest path
-- `GET /api/quality` - Data quality metrics
-
-## Python-Only Extractor (Optional)
-
-See `src/python_porting/README.md`.
-
-Fast start:
+## Quick Start: Python Port
 
 ```bash
 cd src/python_porting
-conda env create -f environment.yml
-conda activate kg-extractor
-# set Azure credentials in kg_extractor.py
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 python kg_extractor.py /path/to/file.pdf --output ./output --verbose
 ```
 
-## Tests and Data Notes
+This path is intentionally smaller in scope than `kg`: it extracts a graph and generates `graph.json` plus `graph.html`, but it does not run the full discovery/report pipeline.
 
-- Unit tests: `./build.sh test` (requires Google Test)
-- Current `tests/` folder mostly contains ZIP archives. Unzip PDFs before running `kg run -i tests/...`.
+## Documentation
+
+Maintained docs:
+
+- [`docs/QUICK_START.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUICK_START.md)
+- [`docs/CLI_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CLI_REFERENCE.md)
+- [`docs/PIPELINE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PIPELINE.md)
+- [`docs/OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md)
+- [`docs/QUALITY_CONTROL.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUALITY_CONTROL.md)
+- [`docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md)
+- [`docs/DEPLOYMENT.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/DEPLOYMENT.md)
+- [`docs/TROUBLESHOOTING.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/TROUBLESHOOTING.md)
+- [`docs/PROJECT_OVERVIEW.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PROJECT_OVERVIEW.md)
+- [`src/graph_rag_tool/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/README.md)
+- [`src/graph_rag_tool/backend/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/README.md)
+- [`src/graph_rag_tool/backend/docs/API_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/docs/API_REFERENCE.md)
+- [`src/python_porting/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/python_porting/README.md)
+
+Generated artifacts such as `runs/*/Step_5_Discovery/report.md` and `output/report.md` are runtime outputs, not canonical project documentation.
 
 ## Status
 
-- `kg` CLI and discovery pipeline are active and production-usable.
-- Graph RAG backend supports chat query planning plus direct DB Explorer operations.
+- `kg` is the primary maintained pipeline
+- the default operator registry currently exposes 62 operators at runtime
+- `bias_audit` and `community_recommendation` are implemented but not part of the default `all` registry
+- 4 legacy insight types remain in `InsightType` for compatibility but are not executed by the default registry

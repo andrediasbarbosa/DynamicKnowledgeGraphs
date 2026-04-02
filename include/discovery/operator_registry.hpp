@@ -33,25 +33,28 @@ inline const std::vector<std::string>& all_discovery_operators() {
         "taxonomy", "domain_bridge",
         // Causal & Mechanistic Discovery (4) - MUST run before hypotheses_3
         "causal_chains", "intervention_points", "feedback_loops", "confounders",
-        // Semantic/LLM (11)
+        // Semantic/LLM (10) - removed analogical_transfer (deprecated 2026-03-29)
         "contradictions", "entity_resolution", "text_similarity", "argument_support",
-        "method_outcome", "claim_stance", "relation_induction", "analogical_transfer",
+        "method_outcome", "claim_stance", "relation_induction",
         "hypotheses_1", "hypotheses_2", "hypotheses_3",
         // Advanced Reasoning (continued, 5)
         "logical_entailment", "compositional_reasoning", "explanatory_chain",
         "schema_violation", "transitive_closure",
         // Active Learning (4)
         "active_learning", "uncertainty_sampling", "counterfactual", "hyperedge_prediction",
-        // Link Prediction & Path Reasoning (14)
+        // Link Prediction & Path Reasoning (13) - removed co_authorship (deprecated 2026-03-29)
         "rules", "community", "pathrank", "intersection_bridge",
         "long_chain", "meta_path", "meta_path_pattern", "embedding",
-        "author_chain", "co_authorship", "citation_impact",
+        "author_chain", "citation_impact",
         "multi_resolution_community", "cross_community_bridge_map", "meta_pattern",
-        // Synthesis & Consolidation (1)
-        "mechanism_consolidation",
-        // Advanced cross-operator synthesis (6)
-        "intervention_bottleneck", "competing_mechanisms", "schema_repair",
-        "cross_community_mechanism_bridge", "meta_path_anomaly", "evidence_fusion"
+        // Synthesis & Consolidation (0) - removed mechanism_consolidation (deprecated 2026-03-29)
+        // Advanced cross-operator synthesis (5) - removed intervention_bottleneck (deprecated 2026-03-29)
+        "competing_mechanisms", "schema_repair",
+        "cross_community_mechanism_bridge", "meta_path_anomaly", "evidence_fusion",
+        // Epistemic Discovery (8)
+        "evidence_debt", "consensus_frontier", "boundary_condition_map",
+        "failure_mode_topology", "benchmark_dependence", "concept_drift",
+        "premise_bottleneck", "translation_gap"
     };
     return ops;
 }

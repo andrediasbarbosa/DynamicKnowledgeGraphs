@@ -859,6 +859,51 @@ void GraphCleaner::level12_simplify_labels(
 // Level 1.5: Semantic Deduplication
 // ============================================================================
 
+std::string GraphCleaner::normalize_plural(const std::string& label) {
+    if (label.empty()) return label;
+
+    std::string normalized = label;
+    std::string lower = label;
+    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+
+    // Handle common plural patterns
+    // Pattern 1: ends with 'ies' -> replace with 'y' (e.g., "queries" -> "query")
+    if (lower.length() > 3 && lower.substr(lower.length() - 3) == "ies") {
+        normalized = label.substr(0, label.length() - 3) + "y";
+    }
+    // Pattern 2: ends with 'ves' -> replace with 'f' or 'fe' (e.g., "knives" -> "knife")
+    else if (lower.length() > 3 && lower.substr(lower.length() - 3) == "ves") {
+        // Try 'fe' first (more common: knife/knives, life/lives)
+        normalized = label.substr(0, label.length() - 3) + "fe";
+    }
+    // Pattern 3: ends with 'ses' -> remove 's' (e.g., "classes" -> "class", "processes" -> "process")
+    else if (lower.length() > 3 && lower.substr(lower.length() - 3) == "ses") {
+        normalized = label.substr(0, label.length() - 2);
+    }
+    // Pattern 4: ends with 'xes' or 'ches' or 'shes' -> remove 'es' (e.g., "boxes" -> "box", "batches" -> "batch")
+    else if (lower.length() > 3 &&
+             (lower.substr(lower.length() - 3) == "xes" ||
+              lower.substr(lower.length() - 4) == "ches" ||
+              lower.substr(lower.length() - 4) == "shes")) {
+        normalized = label.substr(0, label.length() - 2);
+    }
+    // Pattern 5: ends with 's' but not 'ss' -> remove 's' (e.g., "kgs" -> "kg", "graphs" -> "graph")
+    else if (lower.length() > 1 && lower[lower.length() - 1] == 's' &&
+             lower[lower.length() - 2] != 's') {
+        // But don't remove 's' from common words that end in 's' naturally
+        std::set<std::string> exceptions = {
+            "analysis", "basis", "bias", "class", "gas", "glass", "mass", "pass", "process",
+            "status", "this", "thus", "yes", "plus", "minus", "focus", "genus", "corpus"
+        };
+
+        if (exceptions.find(lower) == exceptions.end()) {
+            normalized = label.substr(0, label.length() - 1);
+        }
+    }
+
+    return normalized;
+}
+
 void GraphCleaner::level15_semantic_deduplication(
     std::vector<CleanableEntity>& entities,
     std::vector<CleanableRelation>& relations,
@@ -882,6 +927,53 @@ void GraphCleaner::level15_semantic_deduplication(
 
     if (valid_entities.size() < 2) return;  // Need at least 2 entities to deduplicate
 
+    // STEP 1: Pre-process with plural normalization
+    // Group entities by normalized (singular) form
+    std::map<std::string, std::vector<CleanableEntity*>> plural_groups;
+    for (auto* entity : valid_entities) {
+        std::string normalized = normalize_plural(entity->label);
+        plural_groups[normalized].push_back(entity);
+    }
+
+    // Merge obvious plural/singular variants
+    for (const auto& [normalized, group] : plural_groups) {
+        if (group.size() > 1) {
+            report.semantic_duplicates_found++;
+
+            // Keep entity with highest confidence/degree
+            CleanableEntity* keep = group[0];
+            for (size_t i = 1; i < group.size(); i++) {
+                if (group[i]->confidence > keep->confidence ||
+                    (group[i]->confidence == keep->confidence && group[i]->degree > keep->degree)) {
+                    keep = group[i];
+                }
+            }
+
+            // Use normalized singular form as canonical
+            keep->label = normalized;
+
+            // Mark other variants as invalid
+            for (auto* entity : group) {
+                if (entity != keep) {
+                    entity->is_valid = false;
+                    entity->removal_reason = "plural_variant_of_" + normalized;
+                    report.semantic_duplicates_merged++;
+                }
+            }
+        }
+    }
+
+    // Update valid_entities list after plural merging
+    valid_entities.clear();
+    for (auto& entity : entities) {
+        if (entity.is_valid) {
+            valid_entities.push_back(&entity);
+        }
+    }
+
+    if (valid_entities.size() < 2) return;  // Early exit if nothing left to deduplicate
+
+    // STEP 2: LLM-based semantic deduplication for remaining entities
     // Build map: canonical label -> list of entity pointers
     std::map<std::string, std::vector<CleanableEntity*>> duplicate_groups;
 
@@ -993,8 +1085,38 @@ std::vector<GraphCleaner::SemanticDuplicateGroup> GraphCleaner::identify_semanti
             return result;  // Empty result on failure
         }
 
+        // Clean response content - remove markdown code blocks if present
+        std::string clean_content = response.content;
+
+        // Remove leading/trailing whitespace
+        size_t start = clean_content.find_first_not_of(" \t\n\r");
+        if (start != std::string::npos) {
+            clean_content = clean_content.substr(start);
+        }
+
+        // Remove markdown code blocks (```json ... ``` or ``` ... ```)
+        if (clean_content.substr(0, 3) == "```") {
+            // Find the first newline after ```
+            size_t first_newline = clean_content.find('\n');
+            if (first_newline != std::string::npos) {
+                clean_content = clean_content.substr(first_newline + 1);
+            }
+            // Remove trailing ```
+            size_t last_backticks = clean_content.rfind("```");
+            if (last_backticks != std::string::npos) {
+                clean_content = clean_content.substr(0, last_backticks);
+            }
+        }
+
+        // Remove any remaining leading/trailing whitespace
+        start = clean_content.find_first_not_of(" \t\n\r");
+        size_t end = clean_content.find_last_not_of(" \t\n\r");
+        if (start != std::string::npos && end != std::string::npos) {
+            clean_content = clean_content.substr(start, end - start + 1);
+        }
+
         // Parse JSON response
-        auto json = nlohmann::json::parse(response.content);
+        auto json = nlohmann::json::parse(clean_content);
         if (json.contains("duplicates") && json["duplicates"].is_array()) {
             for (const auto& dup : json["duplicates"]) {
                 if (dup.contains("canonical") && dup.contains("variants")) {
@@ -1174,8 +1296,17 @@ void GraphCleaner::level3_llm_validation(
 // ============================================================================
 
 bool GraphCleaner::is_valid_length(const std::string& s, int min_len, int max_len) const {
-    int len = s.length();
-    return len >= min_len && len <= max_len;
+    // Count Unicode codepoints, not raw bytes, so multi-byte chars (θ, Ω, etc.) are counted correctly.
+    int codepoints = 0;
+    for (size_t i = 0; i < s.size(); ) {
+        unsigned char c = static_cast<unsigned char>(s[i]);
+        if      (c < 0x80)  { i += 1; }  // 1-byte codepoint
+        else if (c < 0xE0)  { i += 2; }  // 2-byte codepoint
+        else if (c < 0xF0)  { i += 3; }  // 3-byte codepoint
+        else                { i += 4; }  // 4-byte codepoint
+        codepoints++;
+    }
+    return codepoints >= min_len && codepoints <= max_len;
 }
 
 bool GraphCleaner::is_stopword(const std::string& s) const {
@@ -1201,15 +1332,28 @@ bool GraphCleaner::is_extraction_artifact(const std::string& s) const {
 }
 
 bool GraphCleaner::is_single_char(const std::string& s) const {
-    // Check if string has only one alphanumeric character (ignoring whitespace/punctuation)
-    int alpha_count = 0;
-    for (char c : s) {
-        if (std::isalnum(c)) {
-            alpha_count++;
-            if (alpha_count > 1) return false;
+    // Count Unicode codepoints that are not ASCII whitespace or ASCII punctuation.
+    // Non-ASCII bytes (e.g. Greek letters, math symbols) each count as one meaningful character.
+    int meaningful = 0;
+    for (size_t i = 0; i < s.size(); ) {
+        unsigned char c = static_cast<unsigned char>(s[i]);
+        if (c < 0x80) {
+            // ASCII: skip plain whitespace and punctuation-only chars
+            if (!std::isspace(c) && !std::ispunct(c)) {
+                meaningful++;
+                if (meaningful > 1) return false;
+            }
+            i += 1;
+        } else {
+            // Non-ASCII codepoint — always counts as a meaningful character
+            meaningful++;
+            if (meaningful > 1) return false;
+            if      (c < 0xE0) i += 2;
+            else if (c < 0xF0) i += 3;
+            else                i += 4;
         }
     }
-    return alpha_count == 1;
+    return meaningful == 1;
 }
 
 // ============================================================================

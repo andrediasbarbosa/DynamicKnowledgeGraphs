@@ -114,6 +114,14 @@ std::string ReportGenerator::get_insight_type_name(InsightType type) const {
         case InsightType::EXPLANATORY_CHAIN: return "Explanatory Chain";
         case InsightType::SCHEMA_VIOLATION: return "Schema Violation";
         case InsightType::TRANSITIVE_CLOSURE: return "Transitive Closure";
+        case InsightType::EVIDENCE_DEBT: return "Evidence Debt";
+        case InsightType::CONSENSUS_FRONTIER: return "Consensus Frontier";
+        case InsightType::BOUNDARY_CONDITION_MAP: return "Boundary Condition Map";
+        case InsightType::FAILURE_MODE_TOPOLOGY: return "Failure Mode Topology";
+        case InsightType::BENCHMARK_DEPENDENCE: return "Benchmark Dependence";
+        case InsightType::CONCEPT_DRIFT: return "Concept Drift";
+        case InsightType::PREMISE_BOTTLENECK: return "Premise Bottleneck";
+        case InsightType::TRANSLATION_GAP: return "Translation Gap";
         case InsightType::BIAS_AUDIT: return "Bias Audit";
         case InsightType::COMMUNITY_RECOMMENDATION: return "Community Recommendation";
         default: return "Unknown";
@@ -1620,6 +1628,54 @@ std::string ReportGenerator::describe_transitive_closure(const Insight& insight)
     return ss.str();
 }
 
+std::string ReportGenerator::describe_evidence_debt(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "High-impact node with narrow evidence provenance.";
+    return "'" + insight.seed_labels[0] + "' has high structural influence but is supported by limited evidence diversity.";
+}
+
+std::string ReportGenerator::describe_consensus_frontier(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Claim cluster at the frontier of consensus or active disagreement.";
+    return "'" + insight.seed_labels[0] + "' represents a claim cluster where the literature is either converging toward consensus or actively diverging.";
+}
+
+std::string ReportGenerator::describe_boundary_condition_map(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Boundary conditions constrain the applicability of this claim or method.";
+    return "'" + insight.seed_labels[0] + "' holds only under specific boundary conditions that are underspecified in the literature.";
+}
+
+std::string ReportGenerator::describe_failure_mode_topology(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Recurring failure pattern detected across the graph.";
+    return "'" + insight.seed_labels[0] + "' participates in a recurring failure mode topology identified across multiple sources.";
+}
+
+std::string ReportGenerator::describe_benchmark_dependence(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Claims are concentrated on a narrow evaluation regime.";
+    return "'" + insight.seed_labels[0] + "' has claims that are heavily dependent on a narrow set of benchmarks, limiting generalizability.";
+}
+
+std::string ReportGenerator::describe_concept_drift(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Term with divergent meanings across communities.";
+    return "'" + insight.seed_labels[0] + "' exhibits semantic drift — its meaning or usage differs significantly across communities or time periods.";
+}
+
+std::string ReportGenerator::describe_premise_bottleneck(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Hidden premise supporting many downstream claims.";
+    return "'" + insight.seed_labels[0] + "' is a hidden premise that many downstream claims implicitly rely on, creating a bottleneck of epistemic dependency.";
+}
+
+std::string ReportGenerator::describe_translation_gap(const Insight& insight) const {
+    if (!insight.description.empty()) return insight.description;
+    if (insight.seed_labels.empty()) return "Theory-rich but practice-weak concept.";
+    return "'" + insight.seed_labels[0] + "' is extensively theorised but lacks practical implementation or empirical validation in the literature.";
+}
+
 std::string ReportGenerator::generate_header(const InsightCollection& insights, const ReportConfig& config) {
     std::stringstream ss;
 
@@ -2424,6 +2480,30 @@ std::string ReportGenerator::get_graph_context_summary(const Insight& insight, b
             break;
         case InsightType::TRANSITIVE_CLOSURE:
             summary = describe_transitive_closure(insight);
+            break;
+        case InsightType::EVIDENCE_DEBT:
+            summary = describe_evidence_debt(insight);
+            break;
+        case InsightType::CONSENSUS_FRONTIER:
+            summary = describe_consensus_frontier(insight);
+            break;
+        case InsightType::BOUNDARY_CONDITION_MAP:
+            summary = describe_boundary_condition_map(insight);
+            break;
+        case InsightType::FAILURE_MODE_TOPOLOGY:
+            summary = describe_failure_mode_topology(insight);
+            break;
+        case InsightType::BENCHMARK_DEPENDENCE:
+            summary = describe_benchmark_dependence(insight);
+            break;
+        case InsightType::CONCEPT_DRIFT:
+            summary = describe_concept_drift(insight);
+            break;
+        case InsightType::PREMISE_BOTTLENECK:
+            summary = describe_premise_bottleneck(insight);
+            break;
+        case InsightType::TRANSLATION_GAP:
+            summary = describe_translation_gap(insight);
             break;
         default:
             break;
@@ -4298,6 +4378,214 @@ std::string ReportGenerator::generate_transitive_closure_section(const std::vect
     return ss.str();
 }
 
+std::string ReportGenerator::generate_evidence_debt_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Evidence Debt — High-impact nodes with under-validated provenance\n\n";
+        ss << "High-impact nodes whose structural influence is not matched by evidence diversity.\n\n";
+    } else {
+        ss << "EVIDENCE DEBT\n-------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_evidence_debt(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_consensus_frontier_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Consensus Frontier — Claim clusters with convergence or active disagreement\n\n";
+        ss << "Claim clusters where the literature is either converging toward consensus or actively diverging.\n\n";
+    } else {
+        ss << "CONSENSUS FRONTIER\n------------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_consensus_frontier(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_boundary_condition_map_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Boundary Conditions — Conditions under which methods and claims hold\n\n";
+        ss << "Conditions and constraints that limit or define the applicability of methods and claims.\n\n";
+    } else {
+        ss << "BOUNDARY CONDITIONS\n-------------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_boundary_condition_map(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_failure_mode_topology_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Failure Mode Topology — Recurring failure patterns across the literature\n\n";
+        ss << "Recurring failure patterns and anti-patterns identified across the literature.\n\n";
+    } else {
+        ss << "FAILURE MODE TOPOLOGY\n---------------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_failure_mode_topology(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_benchmark_dependence_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Benchmark Dependence — Claims concentrated on narrow evaluation regimes\n\n";
+        ss << "Claims whose validity is heavily tied to specific benchmarks, limiting generalisability.\n\n";
+    } else {
+        ss << "BENCHMARK DEPENDENCE\n--------------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_benchmark_dependence(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_concept_drift_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Concept Drift — Terms with divergent meanings across communities\n\n";
+        ss << "Terms whose meaning or usage diverges significantly across communities or time periods.\n\n";
+    } else {
+        ss << "CONCEPT DRIFT\n-------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_concept_drift(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_premise_bottleneck_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Premise Bottleneck — Hidden premises supporting many downstream claims\n\n";
+        ss << "Hidden premises that many downstream claims implicitly depend on.\n\n";
+    } else {
+        ss << "PREMISE BOTTLENECK\n------------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_premise_bottleneck(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
+std::string ReportGenerator::generate_translation_gap_section(const std::vector<Insight>& insights, const ReportConfig& config) {
+    if (insights.empty()) return "";
+    std::stringstream ss;
+    if (config.markdown_format) {
+        ss << "## Translation Gap — Theory-rich but practice-weak concepts\n\n";
+        ss << "Concepts that are extensively theorised but lack practical implementation or empirical validation.\n\n";
+    } else {
+        ss << "TRANSLATION GAP\n---------------\n\n";
+    }
+    std::vector<Insight> sorted = insights;
+    std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    int count = 0;
+    for (auto& insight : sorted) {
+        if (count >= capped_max_examples(config)) break;
+        if (config.markdown_format && !insight.seed_labels.empty()) {
+            ss << "### " << (count + 1) << ". " << insight.seed_labels[0] << "\n\n";
+        }
+        std::string narrative = (config.use_llm_narratives && llm_provider_)
+            ? generate_llm_narrative(insight, config) : describe_translation_gap(insight);
+        ss << narrative << "\n\n";
+        ss << format_source_documents_markdown(insight);
+        count++;
+    }
+    return ss.str();
+}
+
 std::string ReportGenerator::generate_conclusions(const InsightCollection& insights, const ReportConfig& config) {
     std::stringstream ss;
 
@@ -4623,6 +4911,63 @@ std::string ReportGenerator::generate_conclusions(const InsightCollection& insig
            << "Use them to guide targeted searches for similar patterns elsewhere in the graph.\n\n";
     }
 
+    // Epistemic Discovery operators
+    if (counts[InsightType::EVIDENCE_DEBT] > 0) {
+        ss << "58. **Validate Evidence-Debt Nodes**: The " << counts[InsightType::EVIDENCE_DEBT]
+           << " evidence-debt findings identify highly influential nodes that are supported by narrow or"
+           << " single-source provenance. Treat conclusions that rest on these nodes with caution and"
+           << " prioritise them for additional evidence collection before downstream use.\n\n";
+    }
+
+    if (counts[InsightType::PREMISE_BOTTLENECK] > 0) {
+        ss << "59. **Stress-Test Hidden Premises**: The " << counts[InsightType::PREMISE_BOTTLENECK]
+           << " premise bottlenecks are assumptions that silently underpin many downstream claims."
+           << " Challenge or verify each one directly — a single false premise can invalidate a large"
+           << " portion of the derived knowledge.\n\n";
+    }
+
+    if (counts[InsightType::CONCEPT_DRIFT] > 0) {
+        ss << "60. **Reconcile Concept-Drift Terms**: The " << counts[InsightType::CONCEPT_DRIFT]
+           << " concept-drift findings flag terms used with materially different meanings across"
+           << " communities or documents. Resolve ambiguity through explicit disambiguation nodes or"
+           << " ontology alignment before cross-community reasoning.\n\n";
+    }
+
+    if (counts[InsightType::CONSENSUS_FRONTIER] > 0) {
+        ss << "61. **Investigate the Consensus Frontier**: The " << counts[InsightType::CONSENSUS_FRONTIER]
+           << " consensus-frontier clusters surface claim families with active disagreement or emerging"
+           << " convergence. High-disagreement clusters are prime targets for literature review or"
+           << " expert adjudication; high-consensus clusters provide the most reliable knowledge base.\n\n";
+    }
+
+    if (counts[InsightType::FAILURE_MODE_TOPOLOGY] > 0) {
+        ss << "62. **Map and Mitigate Failure Modes**: The " << counts[InsightType::FAILURE_MODE_TOPOLOGY]
+           << " failure-mode findings document recurring limitations, breakdowns, and negative results."
+           << " Use these to scope future experiments, set realistic expectations, and guide"
+           << " workaround strategies for known weaknesses.\n\n";
+    }
+
+    if (counts[InsightType::BENCHMARK_DEPENDENCE] > 0) {
+        ss << "63. **Broaden Evaluation Coverage**: The " << counts[InsightType::BENCHMARK_DEPENDENCE]
+           << " benchmark-dependence findings identify claims concentrated on a narrow evaluation"
+           << " regime. Validate these claims on additional benchmarks, metrics, or data regimes"
+           << " before treating them as general results.\n\n";
+    }
+
+    if (counts[InsightType::BOUNDARY_CONDITION_MAP] > 0) {
+        ss << "64. **Document Boundary Conditions**: The " << counts[InsightType::BOUNDARY_CONDITION_MAP]
+           << " boundary-condition findings describe the contexts and qualifiers under which methods"
+           << " or claims hold. Preserve these conditions explicitly in any downstream application"
+           << " or replication — results that ignore them risk out-of-scope generalisation.\n\n";
+    }
+
+    if (counts[InsightType::TRANSLATION_GAP] > 0) {
+        ss << "65. **Bridge Theory-to-Practice Gaps**: The " << counts[InsightType::TRANSLATION_GAP]
+           << " translation-gap findings identify concepts that are theoretically well-developed"
+           << " but weakly connected to evaluation or real-world application evidence."
+           << " These represent the highest-value targets for applied research and benchmarking effort.\n\n";
+    }
+
     ss << "---\n\n";
     ss << "*This report was automatically generated by the Knowledge Discovery Engine. "
        << "All insights should be validated by domain experts before taking action.*\n";
@@ -4725,6 +5070,14 @@ std::string ReportGenerator::generate(const InsightCollection& insights, const R
     report << generate_explanatory_chains_section(by_type[InsightType::EXPLANATORY_CHAIN], config);
     report << generate_schema_violations_section(by_type[InsightType::SCHEMA_VIOLATION], config);
     report << generate_transitive_closure_section(by_type[InsightType::TRANSITIVE_CLOSURE], config);
+    report << generate_evidence_debt_section(by_type[InsightType::EVIDENCE_DEBT], config);
+    report << generate_consensus_frontier_section(by_type[InsightType::CONSENSUS_FRONTIER], config);
+    report << generate_boundary_condition_map_section(by_type[InsightType::BOUNDARY_CONDITION_MAP], config);
+    report << generate_failure_mode_topology_section(by_type[InsightType::FAILURE_MODE_TOPOLOGY], config);
+    report << generate_benchmark_dependence_section(by_type[InsightType::BENCHMARK_DEPENDENCE], config);
+    report << generate_concept_drift_section(by_type[InsightType::CONCEPT_DRIFT], config);
+    report << generate_premise_bottleneck_section(by_type[InsightType::PREMISE_BOTTLENECK], config);
+    report << generate_translation_gap_section(by_type[InsightType::TRANSLATION_GAP], config);
 
     // Conclusions
     report << generate_conclusions(insights, config);
@@ -5565,32 +5918,137 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
     // Add QC stats if available
     if (!config.pipeline_stats.empty() && config.pipeline_stats.contains("quality_control")) {
         auto qc = config.pipeline_stats["quality_control"];
+
+        // Pull counts for the narrative
+        int qc_initial  = qc.value("initial_nodes", 0);
+        int qc_final    = qc.value("final_nodes", 0);
+        int qc_removed  = qc.value("total_removed", 0);
+        double qc_rate  = (qc_initial > 0) ? (100.0 * qc_removed / qc_initial) : 0.0;
+
+        int l1_length    = 0, l1_stopwords = 0, l1_numbers = 0, l1_artifacts = 0, l1_total = 0;
+        int l2_degree    = 0, l2_importance = 0, l2_total = 0;
+        int l3_llm       = 0, l3_total = 0;
+        int labels_simplified = 0;
+        int sem_merged   = 0;
+
+        if (qc.contains("level1")) {
+            auto l1 = qc["level1"];
+            l1_length    = l1.value("removed_by_length", 0);
+            l1_stopwords = l1.value("removed_by_stopwords", 0);
+            l1_numbers   = l1.value("removed_by_numbers", 0);
+            l1_artifacts = l1.value("removed_by_artifacts", 0);
+            l1_total     = l1.value("total_removed", 0);
+            labels_simplified = l1.value("labels_simplified", 0);
+        }
+        if (qc.contains("level1_5")) {
+            sem_merged = qc["level1_5"].value("semantic_duplicates_merged", 0);
+        }
+        if (qc.contains("level2")) {
+            auto l2 = qc["level2"];
+            l2_degree     = l2.value("removed_by_degree", 0);
+            l2_importance = l2.value("removed_by_importance", 0);
+            l2_total      = l2.value("total_removed", 0);
+        }
+        if (qc.contains("level3")) {
+            auto l3 = qc["level3"];
+            l3_llm   = l3.value("removed_by_llm", 0);
+            l3_total = l3.value("total_removed", 0);
+        }
+
+        // Build the qualitative narrative
+        std::ostringstream qc_narrative;
+        if (qc_removed == 0) {
+            qc_narrative << "The quality control pipeline examined all <strong>" << qc_initial
+                << "</strong> extracted entities and found no candidates for removal. "
+                "Every entity passed the rule-based length and stopword checks, had at least the minimum required "
+                "degree in the merged graph, and no LLM or semantic-deduplication passes were requested. "
+                "The graph is used as-is from the extraction stage.";
+        } else {
+            qc_narrative << "The quality control pipeline reduced the graph from <strong>" << qc_initial
+                << "</strong> to <strong>" << qc_final << "</strong> entities ("
+                << std::fixed << std::setprecision(1) << qc_rate << "% removed), "
+                "applying up to three validation levels in sequence.";
+
+            // Level 1 narrative
+            if (l1_total > 0) {
+                qc_narrative << " <strong>Level 1 (rule-based)</strong> removed <strong>" << l1_total << "</strong> entities: ";
+                std::vector<std::string> l1_reasons;
+                if (l1_length > 0)
+                    l1_reasons.push_back(std::to_string(l1_length) + " were too short or too long to represent meaningful concepts");
+                if (l1_stopwords > 0)
+                    l1_reasons.push_back(std::to_string(l1_stopwords) + " were common stopwords carrying no domain-specific meaning");
+                if (l1_numbers > 0)
+                    l1_reasons.push_back(std::to_string(l1_numbers) + " were bare numeric strings or date literals");
+                if (l1_artifacts > 0)
+                    l1_reasons.push_back(std::to_string(l1_artifacts) + " were extraction artefacts such as partial phrases, punctuation fragments, or formatting residue");
+                for (size_t i = 0; i < l1_reasons.size(); ++i) {
+                    if (i > 0) qc_narrative << (i == l1_reasons.size() - 1 ? ", and " : ", ");
+                    qc_narrative << l1_reasons[i];
+                }
+                qc_narrative << ".";
+            }
+            if (labels_simplified > 0) {
+                qc_narrative << " An additional <strong>" << labels_simplified << "</strong> entity labels were "
+                    "simplified — verbose filler phrases such as \"the concept of\" or \"a type of\" were stripped "
+                    "to leave the core noun phrase, improving graph legibility without removing the entity.";
+            }
+
+            // Level 1.5 narrative
+            if (sem_merged > 0) {
+                qc_narrative << " <strong>Level 1.5 (semantic deduplication)</strong> merged <strong>" << sem_merged
+                    << "</strong> near-duplicate entities whose labels referred to the same concept under "
+                    "different surface forms (e.g. singular/plural variants or minor phrasing differences). "
+                    "Their edges were redirected to the canonical form.";
+            }
+
+            // Level 2 narrative
+            if (l2_total > 0) {
+                qc_narrative << " <strong>Level 2 (statistical filtering)</strong> removed <strong>" << l2_total << "</strong> entities: ";
+                std::vector<std::string> l2_reasons;
+                if (l2_degree > 0)
+                    l2_reasons.push_back(std::to_string(l2_degree) + " were isolated or near-isolated leaf nodes with too few connections to contribute meaningfully to graph reasoning");
+                if (l2_importance > 0)
+                    l2_reasons.push_back(std::to_string(l2_importance) + " had an importance score below the configured threshold, indicating low structural relevance relative to the rest of the graph");
+                for (size_t i = 0; i < l2_reasons.size(); ++i) {
+                    if (i > 0) qc_narrative << (i == l2_reasons.size() - 1 ? ", and " : ", ");
+                    qc_narrative << l2_reasons[i];
+                }
+                qc_narrative << ".";
+            }
+
+            // Level 3 narrative
+            if (l3_total > 0) {
+                qc_narrative << " <strong>Level 3 (LLM validation)</strong> reviewed suspicious candidates and removed <strong>"
+                    << l3_llm << "</strong> entities that the language model judged to be "
+                    "non-entities, malformed extractions, or domain-irrelevant strings.";
+            }
+        }
+
         html << R"(
         <section id="qc-stats" style="margin-top: 30px;">
             <h2 style="margin-bottom: 15px;">Quality Control Statistics</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95em;">
-                3-level validation system removes noise, artifacts, and invalid entities to improve graph quality.
-            </p>
+            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95em; text-align: justify; line-height: 1.7;">)"
+            << qc_narrative.str() << R"(</p>
             <div class="stats-bar">
                 <div class="stat">
                     <div class="label">Initial Entities</div>
-                    <div class="value">)" << qc.value("initial_nodes", 0) << R"(</div>
+                    <div class="value">)" << qc_initial << R"(</div>
                 </div>
                 <div class="stat">
                     <div class="label">Final Entities</div>
-                    <div class="value">)" << qc.value("final_nodes", 0) << R"(</div>
+                    <div class="value">)" << qc_final << R"(</div>
                 </div>
                 <div class="stat">
                     <div class="label">Removed</div>
-                    <div class="value">)" << qc.value("total_removed", 0) << R"(</div>
+                    <div class="value">)" << qc_removed << R"(</div>
                 </div>
                 <div class="stat">
                     <div class="label">Removal Rate</div>
-                    <div class="value">)" << std::fixed << std::setprecision(1)
-            << (qc.value("initial_nodes", 0) > 0 ? 100.0 * qc.value("total_removed", 0) / qc.value("initial_nodes", 1) : 0.0) << R"(%</div>
+                    <div class="value">)" << std::fixed << std::setprecision(1) << qc_rate << R"(%</div>
                 </div>
             </div>
 )";
+
 
         if (qc.contains("connectivity")) {
             auto conn = qc["connectivity"];
@@ -6652,6 +7110,30 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 )";
     if (counts[InsightType::TRANSITIVE_CLOSURE] > 0)
         html << R"(                        <li><a href="#module-transitive-closure">Transitive Closure Gaps</a> <span class="count">()" << counts[InsightType::TRANSITIVE_CLOSURE] << R"()</span></li>
+)";
+    if (counts[InsightType::EVIDENCE_DEBT] > 0)
+        html << R"(                        <li><a href="#module-evidence-debt">Evidence Debt</a> <span class="count">()" << counts[InsightType::EVIDENCE_DEBT] << R"()</span></li>
+)";
+    if (counts[InsightType::CONSENSUS_FRONTIER] > 0)
+        html << R"(                        <li><a href="#module-consensus-frontier">Consensus Frontier</a> <span class="count">()" << counts[InsightType::CONSENSUS_FRONTIER] << R"()</span></li>
+)";
+    if (counts[InsightType::BOUNDARY_CONDITION_MAP] > 0)
+        html << R"(                        <li><a href="#module-boundary-condition-map">Boundary Conditions</a> <span class="count">()" << counts[InsightType::BOUNDARY_CONDITION_MAP] << R"()</span></li>
+)";
+    if (counts[InsightType::FAILURE_MODE_TOPOLOGY] > 0)
+        html << R"(                        <li><a href="#module-failure-mode-topology">Failure Mode Topology</a> <span class="count">()" << counts[InsightType::FAILURE_MODE_TOPOLOGY] << R"()</span></li>
+)";
+    if (counts[InsightType::BENCHMARK_DEPENDENCE] > 0)
+        html << R"(                        <li><a href="#module-benchmark-dependence">Benchmark Dependence</a> <span class="count">()" << counts[InsightType::BENCHMARK_DEPENDENCE] << R"()</span></li>
+)";
+    if (counts[InsightType::CONCEPT_DRIFT] > 0)
+        html << R"(                        <li><a href="#module-concept-drift">Concept Drift</a> <span class="count">()" << counts[InsightType::CONCEPT_DRIFT] << R"()</span></li>
+)";
+    if (counts[InsightType::PREMISE_BOTTLENECK] > 0)
+        html << R"(                        <li><a href="#module-premise-bottleneck">Premise Bottleneck</a> <span class="count">()" << counts[InsightType::PREMISE_BOTTLENECK] << R"()</span></li>
+)";
+    if (counts[InsightType::TRANSLATION_GAP] > 0)
+        html << R"(                        <li><a href="#module-translation-gap">Translation Gap</a> <span class="count">()" << counts[InsightType::TRANSLATION_GAP] << R"()</span></li>
 )";
     if (counts[InsightType::MECHANISM_CONSOLIDATION] > 0)
         html << R"(                        <li><a href="#module-mechanism-consolidation">Mechanism Consolidation</a> <span class="count">()" << counts[InsightType::MECHANISM_CONSOLIDATION] << R"()</span></li>
@@ -7797,6 +8279,399 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                 html << R"HTML(
                         <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
             }
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    // EPISTEMIC INSIGHT SECTIONS
+    auto& evidence_debts = by_type[InsightType::EVIDENCE_DEBT];
+    if (!evidence_debts.empty()) {
+        std::vector<Insight> sorted = evidence_debts;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-evidence-debt" class="module" style="border-left-color: var(--theme-causal)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-causal)">Evidence Debt</h2>
+                <p class="definition">High-impact nodes with under-validated provenance.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-causal);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Evidence Debt</strong> detector identifies nodes that carry high structural influence (high centrality, many dependents) but are supported by a narrow or shallow set of evidence sources. These nodes represent epistemic risk: their influence outpaces their validation.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Identifying evidence debt helps prioritise which claims most urgently need additional validation. High-debt nodes are bottlenecks where errors or oversimplifications can propagate widely through the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Node</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_evidence_debt(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& consensus_frontiers = by_type[InsightType::CONSENSUS_FRONTIER];
+    if (!consensus_frontiers.empty()) {
+        std::vector<Insight> sorted = consensus_frontiers;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-consensus-frontier" class="module" style="border-left-color: var(--theme-gap)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-gap)">Consensus Frontier</h2>
+                <p class="definition">Claim clusters with convergence or active disagreement.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-gap);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Consensus Frontier</strong> detector analyses claim clusters to identify whether the literature is converging toward agreement or exhibiting active disagreement. It uses stance polarity and citation patterns to measure the frontier of knowledge formation.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Knowing where consensus is forming (or breaking down) helps researchers focus attention on the most scientifically contested or rapidly evolving areas of a field.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Claim Cluster</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_consensus_frontier(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& boundary_conditions = by_type[InsightType::BOUNDARY_CONDITION_MAP];
+    if (!boundary_conditions.empty()) {
+        std::vector<Insight> sorted = boundary_conditions;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-boundary-condition-map" class="module" style="border-left-color: var(--theme-rule)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-rule)">Boundary Conditions</h2>
+                <p class="definition">Conditions under which methods and claims hold.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-rule);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Boundary Condition Map</strong> operator identifies the conditions, constraints, and assumptions under which a method or claim is stated to hold. It surfaces nodes that carry unresolved or underspecified validity scopes.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Understanding boundary conditions is essential for responsible knowledge reuse. Claims applied outside their validity scope can lead to incorrect inferences or failed replications.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Concept</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_boundary_condition_map(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& failure_modes = by_type[InsightType::FAILURE_MODE_TOPOLOGY];
+    if (!failure_modes.empty()) {
+        std::vector<Insight> sorted = failure_modes;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-failure-mode-topology" class="module" style="border-left-color: var(--theme-surprise)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-surprise)">Failure Mode Topology</h2>
+                <p class="definition">Recurring failure patterns across the literature.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-surprise);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Failure Mode Topology</strong> detector identifies recurring failure patterns across the graph by clustering negation, limitation, and failure-related relations. It surfaces structural motifs associated with systematic weaknesses.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Understanding recurring failure modes enables proactive identification of design traps and anti-patterns, supporting both theory development and practical system design.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Failure Pattern</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_failure_mode_topology(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& benchmark_deps = by_type[InsightType::BENCHMARK_DEPENDENCE];
+    if (!benchmark_deps.empty()) {
+        std::vector<Insight> sorted = benchmark_deps;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-benchmark-dependence" class="module" style="border-left-color: var(--theme-analogy)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-analogy)">Benchmark Dependence</h2>
+                <p class="definition">Claims concentrated on narrow evaluation regimes.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-analogy);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Benchmark Dependence</strong> detector identifies claims and methods whose evaluation evidence is concentrated on a narrow set of benchmarks or evaluation protocols. It scores the diversity of the evaluation regime supporting each claim.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Heavy dependence on specific benchmarks is a known source of generalisation failure. Surfacing these dependencies helps identify which performance claims require broader empirical support.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Claim / Method</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_benchmark_dependence(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& concept_drifts = by_type[InsightType::CONCEPT_DRIFT];
+    if (!concept_drifts.empty()) {
+        std::vector<Insight> sorted = concept_drifts;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-concept-drift" class="module" style="border-left-color: var(--theme-community)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-community)">Concept Drift</h2>
+                <p class="definition">Terms with divergent meanings across communities.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-community);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Concept Drift</strong> detector identifies terms whose semantic usage diverges across different communities or time windows in the corpus. It compares relation neighbourhoods of the same term across sub-communities to measure definitional divergence.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Concept drift creates silent incompatibilities in knowledge integration. Surfaces polysemous terms that need disambiguation before cross-community reasoning can be trusted.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Term</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_concept_drift(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& premise_bottlenecks = by_type[InsightType::PREMISE_BOTTLENECK];
+    if (!premise_bottlenecks.empty()) {
+        std::vector<Insight> sorted = premise_bottlenecks;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-premise-bottleneck" class="module" style="border-left-color: var(--theme-path)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-path)">Premise Bottleneck</h2>
+                <p class="definition">Hidden premises supporting many downstream claims.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-path);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Premise Bottleneck</strong> operator traces implicit premise dependencies across the graph. It identifies nodes that serve as shared foundational assumptions for many downstream claims, creating single points of epistemic failure.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> A hidden premise shared by many claims is a high-leverage point for the entire knowledge structure. If the premise is flawed or contested, all dependent claims are at risk. These bottlenecks should be prioritised for explicit validation.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Premise</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_premise_bottleneck(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
+            html << R"HTML(
+                    </tr>
+)HTML";
+            count++;
+        }
+        html << R"HTML(                </tbody>
+            </table>
+        </section>
+)HTML";
+    }
+
+    auto& translation_gaps = by_type[InsightType::TRANSLATION_GAP];
+    if (!translation_gaps.empty()) {
+        std::vector<Insight> sorted = translation_gaps;
+        std::sort(sorted.begin(), sorted.end(), [](const Insight& a, const Insight& b) {
+            return a.score > b.score;
+        });
+        bool include_llm = config.include_llm_examples && llm_provider_;
+        html << R"HTML(
+        <section id="module-translation-gap" class="module" style="border-left-color: var(--theme-longchain)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-longchain)">Translation Gap</h2>
+                <p class="definition">Theory-rich but practice-weak concepts.</p>
+                <div class="count">Total: )HTML" << sorted.size() << R"HTML(</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-longchain);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Translation Gap</strong> detector identifies concepts that are extensively discussed in theoretical terms but weakly connected to implementation, empirical validation, or practical application nodes. It measures the ratio of theory-facing to practice-facing edges for each node.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Translation gaps highlight where theoretical advances have not yet been operationalised. These represent high-opportunity areas for applied research bridging theory and practice.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Concept</th><th>Score</th>)HTML";
+        if (include_llm) html << R"HTML(<th>Analysis</th>)HTML";
+        html << R"HTML(</tr>
+                </thead>
+                <tbody>
+)HTML";
+        int count = 0;
+        for (const auto& insight : sorted) {
+            if (count >= capped_max_examples(config)) break;
+            std::string label = insight.seed_labels.empty() ? "-" : insight.seed_labels[0];
+            std::string explanation;
+            if (include_llm) explanation = config.use_llm_narratives ? generate_llm_narrative(insight, config) : describe_translation_gap(insight);
+            html << R"HTML(                    <tr>
+                        <td>)HTML" << escape_html(label) << R"HTML(</td>
+                        <td>)HTML" << std::fixed << std::setprecision(2) << insight.score << R"HTML(</td>)HTML";
+            if (include_llm) html << R"HTML(
+                        <td>)HTML" << escape_html(strip_markdown_bold(explanation)) << R"HTML(</td>)HTML";
             html << R"HTML(
                     </tr>
 )HTML";
@@ -10564,6 +11439,32 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 
     html << R"HTML(
         <!-- Suggested Future Work Section -->
+        <style>
+            #future-work .module-content p {
+                text-align: justify;
+                line-height: 1.75;
+                margin-top: 0;
+                margin-bottom: 1.1em;
+            }
+            #future-work .module-content h3 {
+                margin-top: 1.8em;
+                margin-bottom: 0.5em;
+            }
+            #future-work .module-content ul {
+                margin-top: 0;
+                margin-bottom: 1.1em;
+                padding-left: 1.6em;
+            }
+            #future-work .module-content li {
+                text-align: justify;
+                line-height: 1.7;
+                margin-bottom: 0.55em;
+            }
+            #future-work .module-content li ul {
+                margin-top: 0.4em;
+                margin-bottom: 0;
+            }
+        </style>
         <section id="future-work" class="module" style="border-left-color: var(--theme-misc)">
             <div class="module-header">
                 <h2 style="color: var(--theme-misc)">Suggested Future Work</h2>
@@ -10785,29 +11686,108 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 
     html << R"HTML(                </ul>
 
-                <h3>5. Advancing Toward Epistemic Reliability</h3>
-                <p>From an epistemological perspective (justification, grounding, calibration), the system includes:</p>
+                <h3>5. Epistemic Quality of This Analysis</h3>
+                <p>Beyond structural discovery, this run includes <strong>epistemic operators</strong> that assess the quality, reliability, and scope of the knowledge itself. These are the findings that tell you not just <em>what</em> the graph contains, but <em>how much you can trust it</em>.</p>
                 <ul>
-                    <li><strong>Provenance Tracking (✓ Implemented):</strong> Each insight now includes source document links in its JSON output, enabling one-click verification. Spotlight sections in HTML reports display these with the 📄 Sources indicator.</li>
+)HTML";
+
+    int epistemic_total = counts[InsightType::EVIDENCE_DEBT] + counts[InsightType::PREMISE_BOTTLENECK]
+        + counts[InsightType::CONCEPT_DRIFT] + counts[InsightType::CONSENSUS_FRONTIER]
+        + counts[InsightType::FAILURE_MODE_TOPOLOGY] + counts[InsightType::BENCHMARK_DEPENDENCE]
+        + counts[InsightType::BOUNDARY_CONDITION_MAP] + counts[InsightType::TRANSLATION_GAP];
+
+    if (counts[InsightType::EVIDENCE_DEBT] > 0) {
+        html << R"HTML(                    <li><strong>Evidence Debt (✓ Active — )HTML" << counts[InsightType::EVIDENCE_DEBT] << R"HTML( findings):</strong> High-impact nodes with narrow provenance have been identified. Treat any claim that depends heavily on these nodes with additional caution until better-sourced evidence is available.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Evidence Debt (Not triggered):</strong> No nodes with high impact but weak provenance were found — or the operator was not run. Run <code>evidence_debt</code> to audit which claims rest on the thinnest evidence base.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::PREMISE_BOTTLENECK] > 0) {
+        html << R"HTML(                    <li><strong>Premise Bottlenecks (✓ Active — )HTML" << counts[InsightType::PREMISE_BOTTLENECK] << R"HTML( findings):</strong> Hidden assumptions underpinning many downstream claims have been surfaced. Verify these premises directly — they carry the highest epistemic leverage in the knowledge graph.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Premise Bottlenecks (Not triggered):</strong> Run <code>premise_bottleneck</code> to identify assumptions that silently support the largest number of downstream conclusions.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::CONCEPT_DRIFT] > 0) {
+        html << R"HTML(                    <li><strong>Concept Drift (✓ Active — )HTML" << counts[InsightType::CONCEPT_DRIFT] << R"HTML( findings):</strong> Terms used with divergent meanings across communities have been flagged. Resolve these before using the graph for cross-community reasoning or aggregation.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Concept Drift (Not triggered):</strong> Run <code>concept_drift</code> to detect terms whose meaning shifts across document groups or graph communities — a common source of silent incompatibility.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::CONSENSUS_FRONTIER] > 0) {
+        html << R"HTML(                    <li><strong>Consensus Frontier (✓ Active — )HTML" << counts[InsightType::CONSENSUS_FRONTIER] << R"HTML( findings):</strong> Claim clusters with high agreement and active disagreement have been mapped. Use convergent clusters as the reliable knowledge core; treat frontier clusters as research opportunities.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Consensus Frontier (Not triggered):</strong> Run <code>consensus_frontier</code> to distinguish well-settled claims from actively contested propositions across the corpus.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::FAILURE_MODE_TOPOLOGY] > 0) {
+        html << R"HTML(                    <li><strong>Failure Mode Topology (✓ Active — )HTML" << counts[InsightType::FAILURE_MODE_TOPOLOGY] << R"HTML( findings):</strong> Recurring failure patterns and negative results have been mapped. This negative knowledge is often more actionable than another positive finding — use it to scope future experiments and set realistic boundaries.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Failure Mode Topology (Not triggered):</strong> Run <code>failure_mode_topology</code> to discover recurring failure patterns — the pipeline is currently stronger on positive structure than on negative knowledge.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::BENCHMARK_DEPENDENCE] > 0) {
+        html << R"HTML(                    <li><strong>Benchmark Dependence (✓ Active — )HTML" << counts[InsightType::BENCHMARK_DEPENDENCE] << R"HTML( findings):</strong> Claims concentrated on a narrow evaluation regime have been identified. These results should not be treated as general findings without broader validation.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Benchmark Dependence (Not triggered):</strong> Run <code>benchmark_dependence</code> to audit which performance claims are over-reliant on a single benchmark or metric regime.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::BOUNDARY_CONDITION_MAP] > 0) {
+        html << R"HTML(                    <li><strong>Boundary Conditions (✓ Active — )HTML" << counts[InsightType::BOUNDARY_CONDITION_MAP] << R"HTML( findings):</strong> Conditions and qualifiers under which key methods or claims hold have been documented. These constraints are critical for correct replication and application — preserve them explicitly.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Boundary Conditions (Not triggered):</strong> Run <code>boundary_condition_map</code> to discover under what conditions findings hold — this is among the most direct routes to actionable new knowledge.</li>
+)HTML";
+    }
+
+    if (counts[InsightType::TRANSLATION_GAP] > 0) {
+        html << R"HTML(                    <li><strong>Translation Gaps (✓ Active — )HTML" << counts[InsightType::TRANSLATION_GAP] << R"HTML( findings):</strong> Concepts that are theoretically rich but weakly connected to evaluation or application evidence have been found. These are the highest-value targets for applied research investment.</li>
+)HTML";
+    } else {
+        html << R"HTML(                    <li><strong>Translation Gaps (Not triggered):</strong> Run <code>translation_gap</code> to surface concepts where theory is mature but practical application or evaluation is thin.</li>
+)HTML";
+    }
+
+    html << R"HTML(                </ul>
+
+                <h3>6. Advancing Toward Epistemic Reliability</h3>
+                <p>From an epistemological perspective (justification, grounding, calibration), the system now includes:</p>
+                <ul>
+                    <li><strong>Provenance Tracking (✓ Implemented):</strong> Each insight includes source document links in its JSON output, enabling one-click verification. Spotlight sections in HTML reports display these with the 📄 Sources indicator.</li>
+                    <li><strong>Epistemic Operators (✓ Implemented):</strong> The eight new epistemic operators — <code>evidence_debt</code>, <code>premise_bottleneck</code>, <code>concept_drift</code>, <code>consensus_frontier</code>, <code>failure_mode_topology</code>, <code>benchmark_dependence</code>, <code>boundary_condition_map</code>, <code>translation_gap</code> — now assess <em>knowledge quality</em>, not just knowledge structure. This run produced <strong>)HTML" << epistemic_total << R"HTML( epistemic insights</strong>.</li>
                     <li><strong>Confidence Calibration (Recommendation):</strong> Current scores reflect heuristic-based confidence; implement Bayesian or statistical methods for well-calibrated uncertainty estimates.</li>
                     <li><strong>External Validation:</strong> Link discovered entities to authoritative knowledge bases (Wikidata, domain ontologies) to validate extraction accuracy.</li>
                     <li><strong>Human-in-the-Loop Workflows:</strong> Design interfaces for domain experts to approve/reject/refine insights, creating feedback loops for continuous improvement.</li>
-                    <li><strong>Bias Audits:</strong> Analyze whether discovered patterns systematically privilege certain perspectives or domains—implement fairness metrics for knowledge representation.</li>
+                    <li><strong>Bias Audits:</strong> Analyse whether discovered patterns systematically privilege certain perspectives or domains — implement fairness metrics for knowledge representation.</li>
                 </ul>
 
-                <h3>6. Long-Term Research Directions</h3>
-                <p>To truly achieve transformational machine creativity—the ability to restructure conceptual spaces rather than merely navigate them—this project should pursue:</p>
+                <h3>7. Long-Term Research Directions</h3>
+                <p>To truly achieve transformational machine creativity — the ability to restructure conceptual spaces rather than merely navigate them — this project should pursue:</p>
                 <ul>
+                    <li><strong>Qualifier-Aware Extraction (Phase 3 prerequisite):</strong> The <code>boundary_condition_map</code> and <code>benchmark_dependence</code> operators will reach their full potential once the extraction pipeline preserves typed qualifiers (dataset, metric, threshold, assumption, condition) explicitly in the graph.</li>
+                    <li><strong>Proposition Normalisation:</strong> The <code>consensus_frontier</code> operator can be substantially improved with better cross-chunk proposition normalisation, enabling true claim-level consensus measurement rather than node-level approximation.</li>
                     <li><strong>Autonomous Ontology Evolution:</strong> Systems that propose, test, and adopt schema revisions based on recurring anomalies or improved explanatory power.</li>
                     <li><strong>Causal World Models:</strong> Move beyond correlation to build structural causal models enabling counterfactual reasoning ("what would happen if...?").</li>
-                    <li><strong>Meta-Learning Over Operators:</strong> Analyze which discovery operators produce the most valuable insights for specific domains, then adaptively prioritize them.</li>
+                    <li><strong>Meta-Learning Over Operators:</strong> Analyse which discovery operators produce the most valuable insights for specific domains, then adaptively prioritise them.</li>
                     <li><strong>Collaborative Human-AI Knowledge Construction:</strong> Interactive systems where experts and AI co-construct knowledge through dialogue, challenging each other's assumptions.</li>
                     <li><strong>Multimodal Integration:</strong> Extend beyond text to incorporate visual, spatial, and temporal data, grounding abstract concepts in perceptual evidence.</li>
                 </ul>
 
                 <div style="margin-top: 30px; padding: 20px; background: rgba(79, 195, 247, 0.1); border-left: 4px solid var(--theme-misc); border-radius: 8px;">
                     <p style="margin: 0; font-style: italic;">
-                        <strong>Philosophical Positioning:</strong> This project deliberately occupies a middle ground between neural generation (fluent but opaque) and symbolic reasoning (transparent but brittle). The )HTML" << comb_pct << R"HTML(% combinatorial, )HTML" << expl_pct << R"HTML(% exploratory, and )HTML" << trans_pct << R"HTML(% transformational distribution reveals the current epistemological profile. The path forward lies in deepening hybrid neuro-symbolic integration—leveraging neural pattern recognition to generate candidate structures, and symbolic reasoning to validate, explain, and refine them. The ultimate goal is <strong>epistemic reliability over fluent generation</strong>: systems that produce not just plausible claims, but <em>justified, traceable, and contestable</em> knowledge.
+                        <strong>Philosophical Positioning:</strong> This project deliberately occupies a middle ground between neural generation (fluent but opaque) and symbolic reasoning (transparent but brittle). The )HTML" << comb_pct << R"HTML(% combinatorial, )HTML" << expl_pct << R"HTML(% exploratory, and )HTML" << trans_pct << R"HTML(% transformational distribution reveals the current epistemological profile. With the addition of epistemic operators, the system has taken its first step beyond <em>what is in the graph</em> toward <em>how much the graph can be trusted</em>. The path forward lies in deepening hybrid neuro-symbolic integration — leveraging neural pattern recognition to generate candidate structures, and symbolic reasoning to validate, explain, and refine them. The ultimate goal is <strong>epistemic reliability over fluent generation</strong>: systems that produce not just plausible claims, but <em>justified, traceable, and contestable</em> knowledge.
                     </p>
                 </div>
             </div>

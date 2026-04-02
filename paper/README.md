@@ -1,3 +1,7 @@
+# Publication Materials
+
+This folder contains manuscript assets and paper-development notes. It is not the canonical source for the repository's current runtime behavior. For code-accurate implementation docs, use the root [`README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/README.md) and the maintained docs under [`docs/`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/).
+
 # Publication: Fairness-Aware Knowledge Discovery with Bridge-Mediated Analogical Reasoning
 
 This folder contains all materials for the academic publication documenting the novel knowledge discovery features implemented in this project.

@@ -236,6 +236,55 @@ AugmentationData AugmentationRenderer::convert(const InsightCollection& insights
             case InsightType::CONFOUNDER:
                 convert_confounder(insight, data);
                 break;
+            case InsightType::CROSS_COMMUNITY_BRIDGE_MAP:
+                convert_cross_community_bridge_map(insight, data);
+                break;
+            case InsightType::MULTI_RESOLUTION_COMMUNITY:
+                convert_multi_resolution_community(insight, data);
+                break;
+            case InsightType::META_PATTERN:
+                convert_meta_pattern(insight, data);
+                break;
+            // Epistemic Discovery
+            case InsightType::EVIDENCE_DEBT:
+                convert_evidence_debt(insight, data);
+                break;
+            case InsightType::CONSENSUS_FRONTIER:
+                convert_consensus_frontier(insight, data);
+                break;
+            case InsightType::BOUNDARY_CONDITION_MAP:
+                convert_boundary_condition_map(insight, data);
+                break;
+            case InsightType::FAILURE_MODE_TOPOLOGY:
+                convert_failure_mode_topology(insight, data);
+                break;
+            case InsightType::BENCHMARK_DEPENDENCE:
+                convert_benchmark_dependence(insight, data);
+                break;
+            case InsightType::CONCEPT_DRIFT:
+                convert_concept_drift(insight, data);
+                break;
+            case InsightType::PREMISE_BOTTLENECK:
+                convert_premise_bottleneck(insight, data);
+                break;
+            case InsightType::TRANSLATION_GAP:
+                convert_translation_gap(insight, data);
+                break;
+        }
+    }
+
+    // V2: Apply semantic simplification to all augmented node labels
+    for (auto& node : data.nodes) {
+        if (!node.label.empty()) {
+            std::string original_label = node.label;
+            node.label = simplify_label(node.label);
+
+            // Store original if it changed and not already in properties
+            if (node.label != original_label &&
+                node.properties.find("original_label") == node.properties.end() &&
+                node.properties.find("full_description") == node.properties.end()) {
+                node.properties["original_label"] = original_label;
+            }
         }
     }
 
@@ -247,11 +296,21 @@ void AugmentationRenderer::convert_bridge(const Insight& insight, AugmentationDa
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "Bridge: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+
+    // V2: Use short label (just the bridge entity)
+    rel_node.label = insight.seed_labels.empty() ? "bridge" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    if (!insight.seed_labels.empty()) {
+        rel_node.properties["full_description"] = "Bridge: " + insight.seed_labels[0];
+        rel_node.properties["insight_type"] = "bridge";
+    }
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -294,16 +353,26 @@ void AugmentationRenderer::convert_completion(const Insight& insight, Augmentati
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
 
-    std::string label = "Completion: ";
+    // V2: Use short label (first entity)
+    rel_node.label = insight.seed_labels.empty() ? "completion" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    std::string full_desc = "Completion: ";
     for (size_t i = 0; i < insight.seed_labels.size() && i < 2; ++i) {
-        if (i > 0) label += " + ";
-        label += insight.seed_labels[i];
+        if (i > 0) full_desc += " + ";
+        full_desc += insight.seed_labels[i];
     }
-    rel_node.label = label;
+    rel_node.properties["full_description"] = full_desc;
+    rel_node.properties["insight_type"] = "completion";
+    if (insight.seed_labels.size() >= 2) {
+        rel_node.properties["completion_nodes"] = insight.seed_labels[0] + ", " + insight.seed_labels[1];
+    }
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -336,19 +405,37 @@ void AugmentationRenderer::convert_motif(const Insight& insight, AugmentationDat
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
 
-    std::string label = "Motif: {";
-    for (size_t i = 0; i < insight.seed_labels.size() && i < 3; ++i) {
-        if (i > 0) label += ", ";
-        label += insight.seed_labels[i];
+    // V2: Use short label (first entity or motif count)
+    if (!insight.seed_labels.empty()) {
+        rel_node.label = insight.seed_labels[0];
+    } else {
+        rel_node.label = "motif-" + std::to_string(insight.seed_nodes.size());
     }
-    if (insight.seed_labels.size() > 3) label += ", ...";
-    label += "}";
 
-    rel_node.label = label;
+    // V2: Store full motif description in properties
+    std::string full_desc = "Motif: {";
+    for (size_t i = 0; i < insight.seed_labels.size(); ++i) {
+        if (i > 0) full_desc += ", ";
+        full_desc += insight.seed_labels[i];
+    }
+    full_desc += "}";
+    rel_node.properties["full_description"] = full_desc;
+    rel_node.properties["insight_type"] = "motif";
+    rel_node.properties["motif_size"] = std::to_string(insight.seed_nodes.size());
+
+    // Store all motif members
+    std::string members;
+    for (size_t i = 0; i < insight.seed_labels.size(); ++i) {
+        if (i > 0) members += ", ";
+        members += insight.seed_labels[i];
+    }
+    rel_node.properties["motif_members"] = members;
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
 
     data.nodes.push_back(rel_node);
@@ -369,16 +456,21 @@ void AugmentationRenderer::convert_substitution(const Insight& insight, Augmenta
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
 
-    std::string label = "Substitute: ";
-    if (insight.seed_labels.size() >= 2) {
-        label += insight.seed_labels[0] + " <-> " + insight.seed_labels[1];
-    }
+    // V2: Use short label (first entity)
+    rel_node.label = insight.seed_labels.empty() ? "substitute" : insight.seed_labels[0];
 
-    rel_node.label = label;
+    // V2: Store full description in properties
+    if (insight.seed_labels.size() >= 2) {
+        rel_node.properties["full_description"] = "Substitute: " + insight.seed_labels[0] + " <-> " + insight.seed_labels[1];
+        rel_node.properties["substitute_nodes"] = insight.seed_labels[0] + ", " + insight.seed_labels[1];
+    }
+    rel_node.properties["insight_type"] = "substitution";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -411,16 +503,23 @@ void AugmentationRenderer::convert_contradiction(const Insight& insight, Augment
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
 
-    std::string label = "Contradiction: ";
+    // V2: Use short label (first entity)
+    rel_node.label = insight.seed_labels.empty() ? "contradiction" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    std::string full_desc = "Contradiction: ";
     for (size_t i = 0; i < insight.seed_labels.size() && i < 2; ++i) {
-        if (i > 0) label += " + ";
-        label += insight.seed_labels[i];
+        if (i > 0) full_desc += " + ";
+        full_desc += insight.seed_labels[i];
     }
-    rel_node.label = label;
+    rel_node.properties["full_description"] = full_desc;
+    rel_node.properties["insight_type"] = "contradiction";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -442,16 +541,21 @@ void AugmentationRenderer::convert_entity_resolution(const Insight& insight, Aug
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
 
-    std::string label = "Resolve: ";
-    if (insight.seed_labels.size() >= 2) {
-        label += insight.seed_labels[0] + " ≈ " + insight.seed_labels[1];
-    }
+    // V2: Use short label (first entity)
+    rel_node.label = insight.seed_labels.empty() ? "resolve" : insight.seed_labels[0];
 
-    rel_node.label = label;
+    // V2: Store full description in properties
+    if (insight.seed_labels.size() >= 2) {
+        rel_node.properties["full_description"] = "Resolve: " + insight.seed_labels[0] + " ≈ " + insight.seed_labels[1];
+        rel_node.properties["resolved_entities"] = insight.seed_labels[0] + ", " + insight.seed_labels[1];
+    }
+    rel_node.properties["insight_type"] = "entity_resolution";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -488,6 +592,7 @@ void AugmentationRenderer::convert_core_periphery(const Insight& insight, Augmen
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -516,6 +621,7 @@ void AugmentationRenderer::convert_text_similarity(const Insight& insight, Augme
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -545,6 +651,7 @@ void AugmentationRenderer::convert_argument_support(const Insight& insight, Augm
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -564,11 +671,23 @@ void AugmentationRenderer::convert_active_learning(const Insight& insight, Augme
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "Query: " + (insight.description.empty() ? "Validate relation" : insight.description);
+
+    // V2: Use short label (first entity or "query")
+    rel_node.label = insight.seed_labels.empty() ? "query" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    std::string full_desc = "Query: " + (insight.description.empty() ? "Validate relation" : insight.description);
+    rel_node.properties["full_description"] = full_desc;
+    rel_node.properties["insight_type"] = "active_learning";
+    if (!insight.description.empty()) {
+        rel_node.properties["query_text"] = insight.description;
+    }
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -603,6 +722,7 @@ void AugmentationRenderer::convert_method_outcome(const Insight& insight, Augmen
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -620,11 +740,21 @@ void AugmentationRenderer::convert_centrality(const Insight& insight, Augmentati
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "Centrality: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+
+    // V2: Use short label (just the entity)
+    rel_node.label = insight.seed_labels.empty() ? "central" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    if (!insight.seed_labels.empty()) {
+        rel_node.properties["full_description"] = "Centrality: " + insight.seed_labels[0];
+        rel_node.properties["insight_type"] = "centrality";
+    }
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -642,11 +772,21 @@ void AugmentationRenderer::convert_community_detection(const Insight& insight, A
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "Community: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+
+    // V2: Use short label (just the entity)
+    rel_node.label = insight.seed_labels.empty() ? "community" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    if (!insight.seed_labels.empty()) {
+        rel_node.properties["full_description"] = "Community: " + insight.seed_labels[0];
+        rel_node.properties["insight_type"] = "community";
+    }
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -666,11 +806,21 @@ void AugmentationRenderer::convert_k_core(const Insight& insight, AugmentationDa
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "k-Core: " + (insight.seed_labels.empty() ? "" : insight.seed_labels[0]);
+
+    // V2: Use short label (just the entity)
+    rel_node.label = insight.seed_labels.empty() ? "k-core" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    if (!insight.seed_labels.empty()) {
+        rel_node.properties["full_description"] = "k-Core: " + insight.seed_labels[0];
+    }
+    rel_node.properties["insight_type"] = "k_core";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -697,6 +847,7 @@ void AugmentationRenderer::convert_k_truss(const Insight& insight, AugmentationD
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -732,6 +883,7 @@ void AugmentationRenderer::convert_claim_stance(const Insight& insight, Augmenta
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -749,11 +901,19 @@ void AugmentationRenderer::convert_claim_stance(const Insight& insight, Augmenta
 void AugmentationRenderer::convert_relation_induction(const Insight& insight, AugmentationData& data) {
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "Relation Induction";
+
+    // V2: Use short label (first entity or type name)
+    rel_node.label = insight.seed_labels.empty() ? "relation" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    rel_node.properties["full_description"] = "Relation Induction";
+    rel_node.properties["insight_type"] = "relation_induction";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -773,15 +933,22 @@ void AugmentationRenderer::convert_analogical_transfer(const Insight& insight, A
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    std::string label = "Analogy: ";
+
+    // V2: Use short label (first entity)
+    rel_node.label = insight.seed_labels.empty() ? "analogy" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
     if (insight.seed_labels.size() >= 2) {
-        label += insight.seed_labels[0] + " → " + insight.seed_labels[1];
+        rel_node.properties["full_description"] = "Analogy: " + insight.seed_labels[0] + " → " + insight.seed_labels[1];
+        rel_node.properties["analogy_nodes"] = insight.seed_labels[0] + ", " + insight.seed_labels[1];
     }
-    rel_node.label = label;
+    rel_node.properties["insight_type"] = "analogical_transfer";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -810,6 +977,7 @@ void AugmentationRenderer::convert_uncertainty_sampling(const Insight& insight, 
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -829,11 +997,19 @@ void AugmentationRenderer::convert_counterfactual(const Insight& insight, Augmen
 
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
-    rel_node.label = "Counterfactual";
+
+    // V2: Use short label (first entity or type name)
+    rel_node.label = insight.seed_labels.empty() ? "counterfactual" : insight.seed_labels[0];
+
+    // V2: Store full description in properties
+    rel_node.properties["full_description"] = "Counterfactual";
+    rel_node.properties["insight_type"] = "counterfactual";
+
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -862,6 +1038,7 @@ void AugmentationRenderer::convert_hyperedge_prediction(const Insight& insight, 
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
     data.nodes.push_back(rel_node);
@@ -931,6 +1108,7 @@ void AugmentationRenderer::convert_surprise(const Insight& insight, Augmentation
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -962,6 +1140,7 @@ void AugmentationRenderer::convert_community_link(const Insight& insight, Augmen
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1014,6 +1193,7 @@ void AugmentationRenderer::convert_path_rank(const Insight& insight, Augmentatio
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1085,6 +1265,7 @@ void AugmentationRenderer::convert_long_chain(const Insight& insight, Augmentati
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1153,6 +1334,7 @@ void AugmentationRenderer::convert_meta_path(const Insight& insight, Augmentatio
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1207,6 +1389,7 @@ void AugmentationRenderer::convert_hypothesis(const Insight& insight, Augmentati
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1260,6 +1443,7 @@ void AugmentationRenderer::convert_rule(const Insight& insight, AugmentationData
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1301,6 +1485,7 @@ void AugmentationRenderer::convert_embedding_link(const Insight& insight, Augmen
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1341,6 +1526,7 @@ void AugmentationRenderer::convert_author_chain(const Insight& insight, Augmenta
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1378,6 +1564,7 @@ void AugmentationRenderer::convert_causal_chain(const Insight& insight, Augmenta
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1410,6 +1597,7 @@ void AugmentationRenderer::convert_intervention_point(const Insight& insight, Au
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1468,6 +1656,7 @@ void AugmentationRenderer::convert_feedback_loop(const Insight& insight, Augment
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1490,17 +1679,24 @@ void AugmentationRenderer::convert_confounder(const Insight& insight, Augmentati
     AugmentationNode rel_node;
     rel_node.id = make_aug_node_id();
 
-    std::string label = "Confounder: ";
+    // V2: Use short label (just the confounder entity)
+    rel_node.label = insight.seed_labels.size() >= 1 ? insight.seed_labels[0] : "confounder";
+
+    // V2: Store full description in properties
     if (insight.seed_labels.size() >= 3) {
-        label += insight.seed_labels[0] + " confounds " +
-                 insight.seed_labels[1] + " → " + insight.seed_labels[2];
+        std::string full_desc = "Confounder: " + insight.seed_labels[0] + " confounds " +
+                                insight.seed_labels[1] + " → " + insight.seed_labels[2];
+        rel_node.properties["full_description"] = full_desc;
+        rel_node.properties["insight_type"] = "confounder";
+        rel_node.properties["confounded_cause"] = insight.seed_labels[1];
+        rel_node.properties["confounded_effect"] = insight.seed_labels[2];
     }
 
-    rel_node.label = label;
     rel_node.type = "relation";
     rel_node.is_new = true;
     rel_node.insight_id = insight.insight_id;
     rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
     rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
     rel_node.witness_edges = insight.witness_edges;
 
@@ -1592,60 +1788,36 @@ void AugmentationRenderer::export_augmented_html(
         }
     }
 
-    // Build graph data JSON
+    // Build graph data JSON.
+    // Entity nodes only in nodes_json; hyperedges serialised separately as hyperedges_json.
+    // JS reifyHyperedges() converts them to relation nodes + binary links at load time,
+    // keeping the format consistent with the graph.json on-disk representation.
     nlohmann::json nodes_json = nlohmann::json::array();
-    nlohmann::json links_json = nlohmann::json::array();
+    nlohmann::json hyperedges_json = nlohmann::json::array();
 
-    std::map<std::string, int> node_index;
-    int idx = 0;
-
-    // Add entity nodes
     for (const auto& node : graph_.get_all_nodes()) {
         nlohmann::json n;
         n["id"] = node.id;
         n["label"] = node.label;
         n["type"] = "entity";
         n["degree"] = node.degree;
+        if (!node.properties.empty()) {
+            n["properties"] = node.properties;
+        }
         nodes_json.push_back(n);
-        node_index[node.id] = idx++;
     }
 
-    // Add hyperedge nodes and links
-    int edge_idx = 0;
     for (const auto& edge : graph_.get_all_edges()) {
-        std::string edge_node_id = "edge_" + std::to_string(edge_idx);
-
-        nlohmann::json en;
-        en["id"] = edge_node_id;
-        en["label"] = edge.relation;
-        en["type"] = "relation";
-        en["confidence"] = edge.confidence;
-        en["sources"] = edge.sources;
-        en["targets"] = edge.targets;
-        nodes_json.push_back(en);
-        int edge_node_idx = idx++;
-
-        for (const auto& src : edge.sources) {
-            if (node_index.find(src) != node_index.end()) {
-                nlohmann::json link;
-                link["source"] = node_index[src];
-                link["target"] = edge_node_idx;
-                link["type"] = "source";
-                links_json.push_back(link);
-            }
-        }
-
-        for (const auto& tgt : edge.targets) {
-            if (node_index.find(tgt) != node_index.end()) {
-                nlohmann::json link;
-                link["source"] = edge_node_idx;
-                link["target"] = node_index[tgt];
-                link["type"] = "target";
-                links_json.push_back(link);
-            }
-        }
-
-        edge_idx++;
+        nlohmann::json he;
+        he["id"]        = edge.id;
+        he["relation"]  = edge.relation;
+        he["sources"]   = edge.sources;
+        he["targets"]   = edge.targets;
+        he["confidence"]= edge.confidence;
+        if (!edge.source_document.empty()) he["source_document"] = edge.source_document;
+        if (!edge.source_chunk_id.empty())  he["source_chunk_id"] = edge.source_chunk_id;
+        if (!edge.properties.empty())       he["properties"] = edge.properties;
+        hyperedges_json.push_back(he);
     }
 
     // Write HTML with all features from base viewer plus augmentation support
@@ -1849,6 +2021,14 @@ void AugmentationRenderer::export_augmented_html(
             <span>Augmentation (Insight)</span>
         </div>
         <div class="legend-item">
+            <div class="legend-color" style="background: #4A90E2;"></div>
+            <span>Class (General Concept)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #7ED321;"></div>
+            <span>Instance (Specific Example)</span>
+        </div>
+        <div class="legend-item">
             <div class="legend-color" style="background: #4fc3f7; width: 30px; height: 3px;"></div>
             <span>Source Link</span>
         </div>
@@ -1860,6 +2040,10 @@ void AugmentationRenderer::export_augmented_html(
             <div class="legend-color" style="background: #e040fb; width: 30px; height: 3px; border-style: dashed;"></div>
             <span>Augmentation Link</span>
         </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #9E9E9E; width: 30px; height: 3px; border-style: dashed; border-width: 2px;"></div>
+            <span>Hierarchy (instance_of, subclass_of, is_a)</span>
+        </div>
     </div>
 
     <div id="tooltip"></div>
@@ -1867,56 +2051,43 @@ void AugmentationRenderer::export_augmented_html(
     <script>
         const data = {
             nodes: )" << nodes_json.dump() << R"(,
-            links: )" << links_json.dump() << R"(
+            hyperedges: )" << hyperedges_json.dump() << R"(
         };
 
         const augData = )" << aug_json.dump() << R"(;
 
-        // --- PATCH START: Hyperedge Flattening Logic ---
-        // The visualization library requires 1-to-1 links (source -> target).
-        // The raw data contains "hyperedges" (sources[...] -> targets[...]).
-        // We must expand these into individual links.
-
-        const processLinks = (rawLinks) => {
-            const expandedLinks = [];
-
-            rawLinks.forEach(link => {
-                // Check if this is a hyperedge with arrays for sources/targets
-                if (Array.isArray(link.sources) && Array.isArray(link.targets)) {
-                    link.sources.forEach(source => {
-                        link.targets.forEach(target => {
-                            expandedLinks.push({
-                                source: source,
-                                target: target,
-                                label: link.label,
-                                type: link.type || 'relation',
-                                confidence: link.confidence,
-                                // Copy any other necessary properties from the original link
-                                id: link.id ? `${link.id}_${source}_${target}` : undefined
-                            });
-                        });
-                    });
-                } else if (link.source && link.target) {
-                    // If it's already a simple link, keep it
-                    expandedLinks.push(link);
+        // Reify hyperedges: each entry in data.hyperedges becomes a relation node in data.nodes
+        // and two binary links in data.links (entity→relation, relation→entity).
+        // This mirrors the graph.json on-disk format (nodes + hyperedges with sources[]/targets[]).
+        // augData.nodes/links are merged separately by mergeAugmentation() after this step.
+        function reifyHyperedges(d) {
+            const idToIdx = new Map();
+            d.nodes.forEach((n, i) => idToIdx.set(n.id, i));
+            d.links = [];
+            let idx = d.nodes.length;
+            for (const he of (d.hyperedges || [])) {
+                const relNode = {
+                    id: he.id, label: he.relation, type: 'relation',
+                    confidence: he.confidence,
+                    source_document: he.source_document || '',
+                    source_chunk_id: he.source_chunk_id || '',
+                    sources: he.sources, targets: he.targets
+                };
+                if (he.properties) relNode.properties = he.properties;
+                d.nodes.push(relNode);
+                const relIdx = idx++;
+                idToIdx.set(he.id, relIdx);
+                for (const src of (he.sources || [])) {
+                    const si = idToIdx.get(src);
+                    if (si !== undefined) d.links.push({ source: si, target: relIdx, type: 'source' });
                 }
-            });
-
-            return expandedLinks;
-        };
-
-        // Apply the processing to the data object
-        // Note: Adjust 'data.links' or 'data.edges' depending on the exact property name in the raw JSON.
-        // Based on standard graph JSON structures, it is likely 'data.links' or implied as the second array.
-        if (data.links) {
-            data.links = processLinks(data.links);
-        } else if (data.edges) {
-            // Some formats use 'edges' instead of 'links'
-            data.links = processLinks(data.edges);
+                for (const tgt of (he.targets || [])) {
+                    const ti = idToIdx.get(tgt);
+                    if (ti !== undefined) d.links.push({ source: relIdx, target: ti, type: 'target' });
+                }
+            }
         }
-
-        console.log(`Patch applied: Generated ${data.links.length} simple links from hyperedges.`);
-        // --- PATCH END ---
+        reifyHyperedges(data);
 
         (() => {
             const graphDiv = document.getElementById('graph');
@@ -2012,8 +2183,8 @@ void AugmentationRenderer::export_augmented_html(
                         <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
                     </label>
                     <label id="kgSpatialMinRow" style="display:none;">
-                        Min cluster size: <span id="kgMinClusterVal">12</span>
-                        <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="12">
+                        Min cluster size: <span id="kgMinClusterVal">5</span>
+                        <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="5">
                     </label>
                     <label>
                         Palette:
@@ -2148,7 +2319,7 @@ void AugmentationRenderer::export_augmented_html(
                         gid: newIdx,
                         id: augNode.id,
                         label: augNode.label,
-                        type: 'augmentation',
+                        type: 'relation',
                         isAug: true,
                         insightId: augNode.insight_id,
                         confidence: augNode.confidence,
@@ -2166,6 +2337,21 @@ void AugmentationRenderer::export_augmented_html(
 
                     if (srcIdx !== undefined && tgtIdx !== undefined) {
                         data.links.push({ source: srcIdx, target: tgtIdx, type: augLink.type, isAug: true });
+
+                        // Populate sources/targets on aug relation nodes so the info panel can show them
+                        const augNodeIdx = augNodeIdToIdx.get(augLink.source);
+                        const augNodeIdx2 = augNodeIdToIdx.get(augLink.target);
+                        if (augLink.type === 'source' && augNodeIdx2 !== undefined) {
+                            // entity (augLink.source) -> aug node (augLink.target): entity is a source of this relation
+                            const n = data.nodes[augNodeIdx2];
+                            if (!n.sources) n.sources = [];
+                            n.sources.push(augLink.source);
+                        } else if (augLink.type === 'target' && augNodeIdx !== undefined) {
+                            // aug node (augLink.source) -> entity (augLink.target): entity is a target of this relation
+                            const n = data.nodes[augNodeIdx];
+                            if (!n.targets) n.targets = [];
+                            n.targets.push(augLink.target);
+                        }
                     }
                 }
 
@@ -2206,7 +2392,7 @@ void AugmentationRenderer::export_augmented_html(
                 clusterOn: true,
                 clusterMode: 'topology',
                 clusterRadius: 40,
-                minClusterSize: 12,
+                minClusterSize: 5,
                 topoResolution: 1.0,
                 palette: 'classic',
                 autoCluster: true,
@@ -2564,19 +2750,49 @@ void AugmentationRenderer::export_augmented_html(
 
             // Louvain-style topology clustering
             function clusterTopologyLouvain() {
-                const nodes = state.subNodes.filter(n => !n.isAug); // Exclude aug nodes from clustering
-                const links = state.subLinks.filter(l => !l.isAug); // Exclude aug links
+                // Cluster only entity nodes; use ALL links (including aug) so that
+                // augmentation-only mode still has connectivity to project through
+                const nodes = state.subNodes.filter(n => n.type === 'entity' && !n.isAug);
+                if (nodes.length === 0) { state.clusters = []; return; }
+
                 const idxByGid = new Map();
                 for (let i = 0; i < nodes.length; i++) idxByGid.set(nodes[i].gid, i);
 
+                // Build entity co-occurrence by projecting through ALL relation intermediaries
+                // (both base-graph relation nodes and aug nodes, which are type='relation')
                 const adj = Array.from({ length: nodes.length }, () => new Map());
-                for (const e of links) {
-                    const a = idxByGid.get(e.s);
-                    const b = idxByGid.get(e.t);
-                    if (a == null || b == null || a === b) continue;
-                    const w = 1;
-                    adj[a].set(b, (adj[a].get(b) || 0) + w);
-                    adj[b].set(a, (adj[b].get(a) || 0) + w);
+
+                // Collect entity lists incident to each relation/aug node
+                const nodeByGid = new Map();
+                for (const n of state.subNodes) nodeByGid.set(n.gid, n);
+
+                const relToEntities = new Map();
+                for (const e of state.subLinks) {  // include aug links
+                    const src = nodeByGid.get(e.s);
+                    const tgt = nodeByGid.get(e.t);
+                    if (!src || !tgt) continue;
+                    // entity -> relation (base or aug)
+                    if (src.type === 'entity' && !src.isAug && tgt.type === 'relation') {
+                        if (!relToEntities.has(e.t)) relToEntities.set(e.t, []);
+                        relToEntities.get(e.t).push(e.s);
+                    }
+                    // relation (base or aug) -> entity
+                    if (tgt.type === 'entity' && !tgt.isAug && src.type === 'relation') {
+                        if (!relToEntities.has(e.s)) relToEntities.set(e.s, []);
+                        relToEntities.get(e.s).push(e.t);
+                    }
+                }
+
+                // Project: entities sharing a relation node get a co-occurrence edge
+                for (const entityGids of relToEntities.values()) {
+                    const eIdxs = entityGids.map(g => idxByGid.get(g)).filter(i => i !== undefined);
+                    for (let p = 0; p < eIdxs.length; p++) {
+                        for (let q = p + 1; q < eIdxs.length; q++) {
+                            const a = eIdxs[p], b = eIdxs[q];
+                            adj[a].set(b, (adj[a].get(b) || 0) + 1);
+                            adj[b].set(a, (adj[b].get(a) || 0) + 1);
+                        }
+                    }
                 }
 
                 const resolution = state.topoResolution;
@@ -2640,7 +2856,7 @@ void AugmentationRenderer::export_augmented_html(
                     if (!remap.has(c)) remap.set(c, nextId++);
                     nodes[i].__cluster = remap.get(c);
                 }
-                // Set aug nodes to no cluster
+                // Aug nodes are never part of a cluster
                 for (const node of state.subNodes) {
                     if (node.isAug) node.__cluster = -1;
                 }
@@ -2686,6 +2902,14 @@ void AugmentationRenderer::export_augmented_html(
                             const cid = n.__cluster ?? -1;
                             return getClusterColor(cid);
                         }
+                        // Ontology: Color by class/instance level
+                        if (n.properties && n.properties.node_level) {
+                            if (n.properties.node_level === 'class') {
+                                return '#4A90E2';  // Blue for classes
+                            } else if (n.properties.node_level === 'instance') {
+                                return '#7ED321';  // Green for instances
+                            }
+                        }
                         // Default coloring
                         return n.type === 'relation' ? '#ff9800' : '#4fc3f7';
                     })
@@ -2725,7 +2949,15 @@ void AugmentationRenderer::export_augmented_html(
                     .linkDirectionalArrowRelPos(0.5);
 
                 if (Graph.linkLineDash) {
-                    Graph.linkLineDash(l => l.isAug ? [2, 2] : null);
+                    Graph.linkLineDash(l => {
+                        // Augmentation links: dashed
+                        if (l.isAug) return [2, 2];
+                        // Phase 2: Hierarchical relations (instance_of, subclass_of, is_a): dashed
+                        if (l.properties && l.properties.relation_type === 'hierarchical') {
+                            return [4, 4];  // Slightly longer dashes for hierarchy
+                        }
+                        return null;  // Solid line for regular relations
+                    });
                 }
 
                 Graph.refresh();
@@ -3024,6 +3256,14 @@ void AugmentationRenderer::export_augmented_html(
                 if (typeof node.degree === 'number') info += ` deg ${node.degree}`;
                 if (node.isAug && typeof node.confidence === 'number') info += ` conf ${node.confidence.toFixed(2)}`;
                 info += '</span>';
+                // Show base classes for instance nodes
+                if (node.properties && node.properties.node_level === 'instance' && node.properties.base_classes) {
+                    info += `<br/><span style="opacity:0.75; color:#7ED321;">⬆ ${escapeHtml(node.properties.base_classes)}</span>`;
+                }
+                // V2: Show full description for augmented nodes with properties
+                if (node.isAug && node.properties && node.properties.full_description) {
+                    info += `<br/><span style="opacity:0.7; color:#90caf9; font-size:0.9em;">${escapeHtml(node.properties.full_description)}</span>`;
+                }
                 tt.innerHTML = info;
             }));
 
@@ -3098,6 +3338,439 @@ void AugmentationRenderer::export_augmented_html(
 )";
 
     file.close();
+}
+
+// V2: Label simplification helper
+std::string AugmentationRenderer::simplify_label(const std::string& label) {
+    if (label.empty()) return label;
+
+    std::string simplified = label;
+
+    // 1. Trim whitespace
+    size_t start = simplified.find_first_not_of(" \t\n\r");
+    size_t end = simplified.find_last_not_of(" \t\n\r");
+    if (start == std::string::npos) return "";
+    simplified = simplified.substr(start, end - start + 1);
+
+    // 2. Remove common prefix patterns (should already be in properties, but just in case)
+    std::vector<std::string> prefixes = {
+        "Bridge: ", "Confounder: ", "Community: ", "Centrality: ",
+        "Query: ", "k-Core: ", "k-Truss: ", "Motif: ",
+        "Completion: ", "Substitute: ", "Contradiction: ", "Resolve: ",
+        "Analogy: ", "Argument: ", "Text Similar: ", "Core: ", "Periphery: ",
+        "Relation Induction", "Counterfactual", "Uncertainty", "Method/Outcome: "
+    };
+
+    for (const auto& prefix : prefixes) {
+        if (simplified.find(prefix) == 0) {
+            simplified = simplified.substr(prefix.length());
+            break;
+        }
+    }
+
+    // 3. Trim again after prefix removal
+    start = simplified.find_first_not_of(" \t\n\r");
+    end = simplified.find_last_not_of(" \t\n\r");
+    if (start != std::string::npos && end != std::string::npos) {
+        simplified = simplified.substr(start, end - start + 1);
+    }
+
+    // 4. Remove special characters that might clutter labels
+    // Keep only: alphanumeric, spaces, hyphens, underscores
+    std::string cleaned;
+    for (char c : simplified) {
+        if (std::isalnum(c) || c == ' ' || c == '-' || c == '_' || c == '.') {
+            cleaned += c;
+        }
+    }
+    simplified = cleaned;
+
+    // 5. Collapse multiple spaces to single space
+    std::string result;
+    bool prev_space = false;
+    for (char c : simplified) {
+        if (c == ' ') {
+            if (!prev_space) {
+                result += c;
+                prev_space = true;
+            }
+        } else {
+            result += c;
+            prev_space = false;
+        }
+    }
+
+    // 6. Truncate if still too long (>40 chars)
+    if (result.length() > 40) {
+        result = result.substr(0, 37) + "...";
+    }
+
+    return result;
+}
+
+void AugmentationRenderer::convert_cross_community_bridge_map(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    // V2: Short label from the bridge entity
+    rel_node.label = insight.seed_labels.empty() ? "community bridge" : insight.seed_labels[0];
+
+    // V2: Full description from insight description field
+    std::string desc = insight.description.empty()
+        ? "Community Bridge: " + (insight.seed_labels.empty() ? "bridge entity" : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "cross_community_bridge_map";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (const auto& seed : insight.seed_nodes) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(seed);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_multi_resolution_community(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    // V2: Short label from first seed
+    rel_node.label = insight.seed_labels.empty() ? "multi-res community" : insight.seed_labels[0];
+
+    // V2: Full description from insight description field
+    std::string desc = insight.description.empty()
+        ? "Multi-Resolution Community: " + (insight.seed_labels.empty() ? "community" : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "multi_resolution_community";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 10; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_meta_pattern(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+
+    // V2: Short label from first seed
+    rel_node.label = insight.seed_labels.empty() ? "meta-pattern" : insight.seed_labels[0];
+
+    // V2: Full description from insight description field
+    std::string desc = insight.description.empty()
+        ? "Meta-Pattern: " + (insight.seed_labels.empty() ? "structural template" : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "meta_pattern";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 10; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+// =============================================================================
+// Epistemic Discovery converters
+// =============================================================================
+
+void AugmentationRenderer::convert_evidence_debt(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "evidence debt" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Evidence debt: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "evidence_debt";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_consensus_frontier(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "consensus frontier" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Consensus frontier: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "consensus_frontier";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_boundary_condition_map(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "boundary condition" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Boundary condition: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "boundary_condition_map";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_failure_mode_topology(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "failure mode" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Failure mode: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "failure_mode_topology";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_benchmark_dependence(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "benchmark dependence" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Benchmark dependence: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "benchmark_dependence";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_concept_drift(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "concept drift" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Concept drift: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "concept_drift";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_premise_bottleneck(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "premise bottleneck" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Premise bottleneck: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "premise_bottleneck";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
+}
+
+void AugmentationRenderer::convert_translation_gap(const Insight& insight, AugmentationData& data) {
+    if (insight.seed_nodes.empty()) return;
+
+    AugmentationNode rel_node;
+    rel_node.id = make_aug_node_id();
+    rel_node.label = insight.seed_labels.empty() ? "translation gap" : insight.seed_labels[0];
+
+    std::string desc = insight.description.empty()
+        ? "Translation gap: " + (insight.seed_labels.empty() ? insight.seed_nodes[0] : insight.seed_labels[0])
+        : insight.description;
+    rel_node.properties["full_description"] = desc;
+    rel_node.properties["insight_type"] = "translation_gap";
+
+    rel_node.type = "relation";
+    rel_node.is_new = true;
+    rel_node.insight_id = insight.insight_id;
+    rel_node.confidence = insight.score;
+    rel_node.properties["confidence"] = std::to_string(insight.score);
+    rel_node.evidence_chunk_ids = insight.evidence_chunk_ids;
+    rel_node.witness_edges = insight.witness_edges;
+    data.nodes.push_back(rel_node);
+
+    for (size_t i = 0; i < insight.seed_nodes.size() && i < 5; ++i) {
+        AugmentationLink link;
+        link.source = normalize_graph_ref(insight.seed_nodes[i]);
+        link.target = rel_node.id;
+        link.type = "source";
+        link.is_new = true;
+        data.links.push_back(link);
+    }
 }
 
 } // namespace kg
