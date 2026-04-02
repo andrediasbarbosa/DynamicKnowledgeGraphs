@@ -1,33 +1,28 @@
 # Python Knowledge Graph Extractor
 
-Lightweight single-script extractor for PDF -> hypergraph JSON -> interactive HTML.
+This is the lightweight Python-only path in the repository. It is useful when you want direct Azure OpenAI extraction without building the C++ pipeline.
 
-This path is useful for quick Azure OpenAI-driven extraction without building the C++ pipeline.
+## Scope
 
-## What It Does
+What it does:
 
-- Extracts text chunks from PDFs using `pdfplumber`
-- Calls Azure OpenAI for relation extraction
-- Builds hypergraph-style `graph.json`
-- Generates `graph.html` for interactive viewing
+- extracts text from PDFs with `pdfplumber`
+- calls Azure OpenAI for relation extraction
+- builds a hypergraph-style `graph.json`
+- generates an interactive `graph.html`
 
-## Requirements
+What it does not do:
 
-- Python 3.10+
-- Azure OpenAI API key and endpoint
-- Conda (recommended) or `venv`
+- build the `kg` index
+- run the 62-operator discovery registry
+- generate `kg` reports or augmented discovery overlays
+- support staged resume flow
 
-## Install
+For those, use `./build/bin/kg`.
 
-### Conda (recommended)
+## Setup
 
-```bash
-cd src/python_porting
-conda env create -f environment.yml
-conda activate kg-extractor
-```
-
-### Pip/venv
+### `venv`
 
 ```bash
 cd src/python_porting
@@ -36,57 +31,48 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Configure Azure Credentials
+### Conda
 
-Edit `kg_extractor.py` and set:
+```bash
+cd src/python_porting
+conda env create -f environment.yml
+conda activate kg-extractor
+```
+
+## Azure Configuration
+
+Set these directly in `kg_extractor.py`:
 
 - `AZURE_OPENAI_KEY`
 - `AZURE_OPENAI_ENDPOINT`
 
-Preconfigured defaults in code:
+Current defaults in code:
 
-- `AZURE_OPENAI_API_VERSION = "2024-05-01-preview"`
-- `AZURE_OPENAI_DEPLOYMENT = "gpt-5.2"`
+- API version: `2024-05-01-preview`
+- deployment: `gpt-5.2`
 
 ## Run
 
 ```bash
-python kg_extractor.py /path/to/input.pdf --output ./output --verbose
+python kg_extractor.py /path/to/file.pdf --output ./output --verbose
 ```
 
-Options:
+Useful flags:
 
-- `--chunk-size` default `800`
-- `--chunk-overlap` default `100`
-- `--max-chunks` for test runs
+- `--chunk-size`
+- `--chunk-overlap`
+- `--max-chunks`
 
-## Output
+## Outputs
 
 - `output/graph.json`
 - `output/graph.html`
-- `output/README.txt`
 
-View:
+To view:
 
 ```bash
 cd output
 python3 -m http.server 8080
-# open http://localhost:8080/graph.html
 ```
 
-## Known Scope Limits vs C++ `kg`
-
-Not included here:
-
-- 55 discovery operators
-- report generation
-- augmented insight overlays
-- full multi-stage pipeline/resume flow
-
-For those, use the C++ CLI in root: `./build/bin/kg`.
-
-## Troubleshooting
-
-- Credentials missing: set Azure key/endpoint in `kg_extractor.py`.
-- 404/resource errors: verify deployment name and endpoint.
-- Empty graph: increase chunk size or inspect PDF extractability.
+Then open `http://localhost:8080/graph.html`.

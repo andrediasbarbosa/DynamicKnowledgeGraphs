@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <algorithm>
+#include <regex>
 
 using json = nlohmann::json;
 
@@ -307,7 +308,7 @@ ExtractionResult OpenAIProvider::extract_relations(
 GeminiProvider::GeminiProvider(const std::string& api_key, const std::string& model) {
     config_.api_key = api_key;
     config_.model = model;
-    config_.api_base_url = "https://generativelanguage.googleapis.com/v1";
+    config_.api_base_url = "https://generativelanguage.googleapis.com/v1beta";
 }
 
 std::string GeminiProvider::make_request(
@@ -662,14 +663,18 @@ std::string PromptTemplates::relation_extraction_system_prompt() {
     return R"(You are an expert at extracting knowledge relations from text.
 
 Your task is to identify entities and the relationships between them.
-Extract higher-order relationships where multiple entities can be sources or targets.
+
+Focus on:
+- Concrete entities (people, places, things, concepts, methods, technologies, etc.)
+- Clear relationships expressed in the text
+- Explicit statements, not speculative or hypothetical connections
 
 Output JSON format:
 {
   "relations": [
     {
       "sources": ["entity1", "entity2"],
-      "relation": "relationship_type",
+      "relation": "relation_type",
       "targets": ["entity3"],
       "confidence": 0.95
     }
@@ -678,11 +683,76 @@ Output JSON format:
 
 Guidelines:
 - Extract ALL meaningful relationships, not just the most obvious ones
+- Use clear, concise entity names (normalize similar phrasings)
+- Use descriptive relation labels (verbs or verb phrases: "uses", "implements", "causes", "improves")
+- Set confidence based on how explicit the relationship is (0.9-1.0: explicit, 0.7-0.9: implied, 0.5-0.7: weak)
+- For multi-entity relationships, keep all sources and targets together
+- Do not collapse n-ary relationships into pairwise connections
+- Preserve hyperedge structure when multiple entities participate in one relationship
+)";
+}
+
+std::string PromptTemplates::relation_extraction_system_prompt_with_ontology() {
+    return R"(You are an expert at extracting knowledge relations from text.
+
+Your task is to identify entities, classify them as CLASS or INSTANCE, and extract relationships.
+
+**Entity Classification:**
+- **CLASS**: General concepts, types, categories, methods, abstract ideas
+  Examples: "neural network", "optimization algorithm", "machine learning", "CNN", "gradient descent"
+- **INSTANCE**: Specific examples, named entities, concrete implementations, particular models/datasets
+  Examples: "ResNet-50", "Adam optimizer", "GPT-4", "ImageNet 2012", "BERT-base"
+
+**Classification Rules:**
+1. Has version number/year/identifier → INSTANCE (e.g., "BERT-base", "ImageNet 2012", "GPT-4")
+2. Proper noun or branded name → INSTANCE (e.g., "Adam", "BERT", "AlexNet")
+3. Abstract/general concept → CLASS (e.g., "optimization", "neural network", "algorithm")
+4. Category or type descriptor → CLASS (e.g., "method", "technique", "approach")
+
+Output JSON format:
+{
+  "relations": [
+    {
+      "sources": [
+        {"entity": "ResNet-50", "level": "instance"},
+        {"entity": "Adam optimizer", "level": "instance"}
+      ],
+      "relation": "trained_with",
+      "targets": [
+        {"entity": "ImageNet", "level": "instance"}
+      ],
+      "confidence": 0.95
+    }
+  ]
+}
+
+**Special Hierarchy Relations (IMPORTANT - Extract These!):**
+
+1. **instance_of**: An INSTANCE belongs to a CLASS
+   - Pattern: "X is a type of Y", "X is an example of Y", "X is an instance of Y"
+   - Example: {"sources": [{"entity": "ResNet-50", "level": "instance"}], "relation": "instance_of", "targets": [{"entity": "CNN", "level": "class"}]}
+   - Example: {"sources": [{"entity": "Adam", "level": "instance"}], "relation": "instance_of", "targets": [{"entity": "optimization algorithm", "level": "class"}]}
+
+2. **subclass_of**: A CLASS is a subtype of another CLASS
+   - Pattern: "X is a kind of Y", "X is a type of Y", "X is a category of Y"
+   - Example: {"sources": [{"entity": "CNN", "level": "class"}], "relation": "subclass_of", "targets": [{"entity": "neural network", "level": "class"}]}
+   - Example: {"sources": [{"entity": "deep learning", "level": "class"}], "relation": "subclass_of", "targets": [{"entity": "machine learning", "level": "class"}]}
+
+3. **is_a**: General type hierarchy (can be class-to-class or instance-to-class)
+   - Pattern: "X is a Y"
+   - Use when the exact relationship (instance_of vs subclass_of) is ambiguous
+   - Example: {"sources": [{"entity": "optimization", "level": "class"}], "relation": "is_a", "targets": [{"entity": "algorithm", "level": "class"}]}
+
+Guidelines:
+- **ACTIVELY LOOK FOR** type/hierarchy relationships in addition to regular relations
+- Extract ALL meaningful relationships, not just the most obvious ones
 - Use clear, concise entity names
 - Use descriptive relation labels (verbs or verb phrases)
 - Set confidence based on how explicit the relationship is
 - For multi-entity relationships, keep all sources and targets
 - Do not collapse relationships into pairwise connections
+- Always classify each entity as CLASS or INSTANCE
+- When you see "X is a type/kind/example of Y", extract the hierarchy relation!
 )";
 }
 
@@ -933,13 +1003,56 @@ std::vector<ExtractedRelation> parse_relations_json(const std::string& json_str)
             // Try to fix truncated JSON by adding missing closing brackets
             std::string repaired_json = fixed_json;
 
+            // Fix Gemini-specific malformation patterns:
+            // Pattern 1: "field"]}} -> "field": "unknown"}}}
+            repaired_json = std::regex_replace(repaired_json,
+                std::regex(R"(\"(type|strength|temporality|mechanism_type|mechanism_description|confidence|temporal_context|context)\"\s*\]\s*\})"),
+                "\"$1\": \"unknown\"}");
+
+            // Pattern 2: "value"]}} -> "value"}}}  (incomplete string values)
+            repaired_json = std::regex_replace(repaired_json,
+                std::regex(R"(:\s*\"([a-zA-Z0-9_\-]+)\"\s*\]\s*\})"),
+                ": \"$1\"}");
+
+            // Pattern 3: "value]}} -> "value"}}} (missing closing quote)
+            repaired_json = std::regex_replace(repaired_json,
+                std::regex(R"(:\s*\"([a-zA-Z0-9_\-]+)\]\s*\})"),
+                ": \"$1\"}");
+
+            // Pattern 4: "field]}} -> "field": "unknown"}}} (field with no value)
+            repaired_json = std::regex_replace(repaired_json,
+                std::regex(R"(\"([a-zA-Z0-9_\-]+)\"\s*\]\s*\})"),
+                "\"$1\": \"unknown\"}");
+
+            // Pattern 5: Clean up any remaining ]}} sequences that should be just }}
+            repaired_json = std::regex_replace(repaired_json,
+                std::regex(R"(\]\s*\}\s*\}\s*\})"),
+                "}}}");
+
             // Count open brackets
             int open_braces = 0, open_brackets = 0;
+            bool in_string = false;
+            bool escaped = false;
+
             for (char c : repaired_json) {
-                if (c == '{') open_braces++;
-                else if (c == '}') open_braces--;
-                else if (c == '[') open_brackets++;
-                else if (c == ']') open_brackets--;
+                if (escaped) {
+                    escaped = false;
+                    continue;
+                }
+                if (c == '\\') {
+                    escaped = true;
+                    continue;
+                }
+                if (c == '"') {
+                    in_string = !in_string;
+                    continue;
+                }
+                if (!in_string) {
+                    if (c == '{') open_braces++;
+                    else if (c == '}') open_braces--;
+                    else if (c == '[') open_brackets++;
+                    else if (c == ']') open_brackets--;
+                }
             }
 
             // Add missing closing brackets
@@ -970,7 +1083,19 @@ std::vector<ExtractedRelation> parse_relations_json(const std::string& json_str)
 
             if (rel_json.contains("sources")) {
                 for (const auto& src : rel_json["sources"]) {
-                    rel.sources.push_back(src);
+                    if (src.is_object() && src.contains("entity")) {
+                        // New format with entity classification
+                        rel.sources.push_back(src["entity"]);
+                        if (src.contains("level")) {
+                            rel.source_levels.push_back(src["level"]);
+                        } else {
+                            rel.source_levels.push_back("");  // Unknown level
+                        }
+                    } else {
+                        // Old format: just a string (backward compatibility)
+                        rel.sources.push_back(src);
+                        rel.source_levels.push_back("");  // No level info
+                    }
                 }
             }
 
@@ -980,7 +1105,19 @@ std::vector<ExtractedRelation> parse_relations_json(const std::string& json_str)
 
             if (rel_json.contains("targets")) {
                 for (const auto& tgt : rel_json["targets"]) {
-                    rel.targets.push_back(tgt);
+                    if (tgt.is_object() && tgt.contains("entity")) {
+                        // New format with entity classification
+                        rel.targets.push_back(tgt["entity"]);
+                        if (tgt.contains("level")) {
+                            rel.target_levels.push_back(tgt["level"]);
+                        } else {
+                            rel.target_levels.push_back("");  // Unknown level
+                        }
+                    } else {
+                        // Old format: just a string (backward compatibility)
+                        rel.targets.push_back(tgt);
+                        rel.target_levels.push_back("");  // No level info
+                    }
                 }
             }
 
@@ -1115,6 +1252,61 @@ std::string ExtractedRelation::get_normalized_key() const {
     }
 
     return key;
+}
+
+std::string PromptTemplates::causal_ontology_extraction_system_prompt() {
+    return R"(You are an expert at extracting causal relationships AND classifying entities from scientific text.
+
+Your task combines TWO objectives:
+1. Identify causal relationships with detailed metadata
+2. Classify each entity as CLASS (general concept) or INSTANCE (specific example)
+
+**Entity Classification:**
+- **CLASS**: General concepts, types, categories, methods, abstract ideas
+  Examples: "neural network", "optimization algorithm", "machine learning", "disease", "treatment"
+- **INSTANCE**: Specific examples, named entities, concrete implementations
+  Examples: "ResNet-50", "Adam optimizer", "GPT-4", "COVID-19", "aspirin"
+
+**Causal Types:**
+- direct_cause: A directly causes B
+- necessary: A is necessary for B
+- sufficient: A is sufficient for B
+- contributing: A contributes to B
+- preventing: A prevents/inhibits B
+- enabling: A enables B
+
+Output JSON format:
+{
+  "relations": [
+    {
+      "sources": [
+        {"entity": "smoking", "level": "class"},
+        {"entity": "tobacco use", "level": "class"}
+      ],
+      "relation": "causes",
+      "targets": [
+        {"entity": "lung cancer", "level": "class"}
+      ],
+      "confidence": 0.9,
+      "causal": {
+        "type": "direct_cause",
+        "strength": "strong",
+        "mechanism_description": "Carcinogens in smoke damage lung tissue DNA",
+        "temporality": "long_term",
+        "confidence": 0.85
+      }
+    }
+  ]
+}
+
+Guidelines:
+1. **Always classify entities** - every source/target must have "level": "class" or "instance"
+2. **Causal metadata** - include type, strength, mechanism_description, temporality, confidence
+3. **Keep it focused** - mechanism_description should be concise (1-2 sentences)
+4. **Extract ALL causal relations** - don't filter, include all you find
+5. **Confidence scores** - base on text explicitness (0.9-1.0 explicit, 0.7-0.9 implied)
+
+)";
 }
 
 } // namespace kg

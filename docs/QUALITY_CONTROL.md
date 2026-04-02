@@ -1,16 +1,18 @@
 # Graph Quality Control System
 
-**Date:** 2026-03-25
-**Status:** ✅ COMPLETE + Enhanced
-**Build:** ✅ All tests passing
-
 ---
 
 ## Overview
 
-The Quality Control system provides 5-level validation of extracted knowledge graphs to remove noise, simplify verbose labels, merge semantic duplicates, and provide comprehensive connectivity analysis.
+The quality-control pass cleans extracted graphs before indexing and discovery. In the current code it is a 3-level cleaner with two sub-levels:
 
-## 5-Level Architecture
+- Level 1: rule-based filtering
+- Level 1.2: label simplification
+- Level 1.5: semantic deduplication
+- Level 2: statistical filtering
+- Level 3: optional LLM validation
+
+## Cleaning Architecture
 
 ### **Level 1: Rule-Based Filtering** (Fast)
 - Removes single characters and very short labels
@@ -20,7 +22,7 @@ The Quality Control system provides 5-level validation of extracted knowledge gr
 - Validates label length (configurable min/max)
 - Trims whitespace from all labels
 
-### **Level 1.2: Label Simplification** (Fast) 🆕
+### **Level 1.2: Label Simplification** (Fast)
 - Simplifies overly verbose entity names
 - Removes filler phrases: "the process of", "the concept of", "a method for"
 - Trims redundant suffixes: " process", " technique", " method"
@@ -52,7 +54,8 @@ The Quality Control system provides 5-level validation of extracted knowledge gr
 ## Integration
 
 ### **Pipeline Position**
-- **Stage 1.75**: Between extraction and indexing
+- **Stage 1.75** in console output
+- Runs after optional preprocessing and before indexing
 - **Folder**: `Step_3_QualityControl/`
 - **Input**: Raw extracted graph
 - **Output**: Cleaned graph + cleaning report

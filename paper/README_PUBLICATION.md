@@ -1,5 +1,7 @@
 # Publication Draft - Complete Package
 
+This folder documents manuscript preparation, not the live runtime surface of the repository. Treat the root docs as the authoritative source for current code behavior.
+
 This directory contains all files needed for the academic publication:
 **"Fairness-Aware Knowledge Discovery with Bridge-Mediated Analogical Reasoning"**
 

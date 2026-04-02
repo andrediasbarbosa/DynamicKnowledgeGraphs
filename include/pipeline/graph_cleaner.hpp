@@ -221,6 +221,9 @@ private:
         std::shared_ptr<LLMProvider> llm
     ) const;
 
+    // Normalize singular/plural variations (kg -> kg, kgs -> kg, knowledge graph -> knowledge graph, knowledge graphs -> knowledge graph)
+    static std::string normalize_plural(const std::string& label);
+
     // Level 3: LLM validation helpers
     std::vector<bool> batch_validate_entities(
         const std::vector<std::string>& labels,

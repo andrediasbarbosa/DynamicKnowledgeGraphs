@@ -1,61 +1,31 @@
-# Project Documentation
+# Documentation Index
 
-This folder contains all project documentation files organized by topic.
+This folder now contains the maintained, code-facing documentation for the repository. Historical implementation notes, session summaries, and one-off rollout plans were removed so the docs match the active code paths.
 
----
+## Core Docs
 
-## 📚 Documentation Index
+- [`QUICK_START.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUICK_START.md): shortest path to a working `kg` run
+- [`CLI_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CLI_REFERENCE.md): command and option reference for `kg`
+- [`PIPELINE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PIPELINE.md): stage ordering, inputs, outputs, and resume behavior
+- [`OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md): canonical run artifact layout
+- [`PROJECT_OVERVIEW.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PROJECT_OVERVIEW.md): architecture overview
 
-### Core Documentation
-- **[PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md)** - High-level project description and goals
-- **[PIPELINE.md](PIPELINE.md)** - Knowledge discovery pipeline architecture
-- **[FEATURES.md](FEATURES.md)** - Implemented features and capabilities
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes
+## Discovery And QC
 
-### Implementation Details
-- **[KNOWLEDGE_DISCOVERY_CATEGORIES.md](KNOWLEDGE_DISCOVERY_CATEGORIES.md)** - Discovery operator categories
-- **[CATEGORY_REORGANIZATION.md](CATEGORY_REORGANIZATION.md)** - Category system redesign notes
-- **[REPORT_UI_IMPROVEMENTS.md](REPORT_UI_IMPROVEMENTS.md)** - Report interface enhancements
+- [`KNOWLEDGE_DISCOVERY_CATEGORIES.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md): category model used by `InsightType`
+- [`QUALITY_CONTROL.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUALITY_CONTROL.md): graph cleaning and validation stages
+- [`CHANGELOG.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CHANGELOG.md): notable project changes
 
-### Deployment & Operations
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment guide and instructions
-- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
+## Ops Docs
 
-### Architecture & Design
-- **[PHILOSOPHICAL.md](PHILOSOPHICAL.md)** - Design philosophy and principles
-- **[KUZU_UPGRADE_PROPOSAL.md](KUZU_UPGRADE_PROPOSAL.md)** - Database upgrade proposal
+- [`DEPLOYMENT.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/DEPLOYMENT.md): build and runtime setup for `kg`, Graph RAG, and the Python port
+- [`TROUBLESHOOTING.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/TROUBLESHOOTING.md): common failures and recovery steps
 
-### Updates & Tracking
-- **[DOCUMENTATION_UPDATES.md](DOCUMENTATION_UPDATES.md)** - Documentation change log
+## Component Docs
 
----
+- [`src/graph_rag_tool/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/README.md)
+- [`src/graph_rag_tool/backend/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/README.md)
+- [`src/graph_rag_tool/backend/docs/API_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/docs/API_REFERENCE.md)
+- [`src/python_porting/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/python_porting/README.md)
 
-## 🗂️ Other Documentation Locations
-
-### Academic Publication
-All publication-related materials are in:
-- **[../paper/](../paper/)** - LaTeX manuscript, figures, bibliography, generation scripts
-
-### Code Documentation
-- **[../include/](../include/)** - Header files with inline documentation
-- **[../src/](../src/)** - Source files with implementation notes
-- **Component READMEs**:
-  - `src/python_porting/README.md` - Python porting guide
-  - `src/graph_rag_tool/backend/docs/` - Graph RAG tool documentation
-
-### Root Documentation
-- **[../README.md](../README.md)** - Main project README (kept in root for visibility)
-
----
-
-## 📋 Quick Links
-
-**Getting Started**: See [../README.md](../README.md)
-**Pipeline Overview**: See [PIPELINE.md](PIPELINE.md)
-**Feature List**: See [FEATURES.md](FEATURES.md)
-**Troubleshooting**: See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-**Publication**: See [../paper/README.md](../paper/README.md)
-
----
-
-*Last updated: 2026-03-11*
+Generated reports under `runs/` and `output/` are intentionally not indexed here.

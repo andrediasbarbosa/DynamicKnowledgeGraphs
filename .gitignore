@@ -47,3 +47,16 @@ Thumbs.db
 # Test outputs
 Testing/
 CTestTestfile.cmake
+
+# Binary assets and test data — not tracked in the repo
+*.pdf
+*.zip
+tests/
+runs/
+output/
+test_post_fixes/
+test_connectivity/
+test_connectivity2/
+runs_test/
+integration_test_output.log
+paper/.venv/

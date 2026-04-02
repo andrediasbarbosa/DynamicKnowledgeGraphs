@@ -8,6 +8,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <sys/stat.h>
+#include <regex>
 
 using json = nlohmann::json;
 
@@ -49,6 +50,82 @@ std::string normalize_entity_label(const std::string& label) {
     if (label.empty()) return label;
     if (label.find(' ') != std::string::npos) return label;
     return singularize_ascii_word(label);
+}
+
+/**
+ * @brief Classify entity as CLASS or INSTANCE using heuristics
+ *
+ * This is a fallback for entities that weren't classified by the LLM.
+ *
+ * @param label The entity label
+ * @return "class", "instance", or "" if uncertain
+ */
+std::string classify_entity_heuristic(const std::string& label) {
+    if (label.empty()) return "";
+
+    std::string lower_label = label;
+    std::transform(lower_label.begin(), lower_label.end(), lower_label.begin(), ::tolower);
+
+    // Heuristic 1: Contains version number, year, or version indicator → INSTANCE
+    // Examples: "ResNet-50", "BERT-base", "GPT-4", "ImageNet 2012"
+    if (std::regex_search(label, std::regex(R"(\d{4}|\d+\.\d+|v\d+|-\d+|20\d\d)"))) {
+        return "instance";
+    }
+
+    // Heuristic 2: Well-known model/algorithm names (proper nouns) → INSTANCE
+    // These are specific implementations even without version numbers
+    std::vector<std::string> known_instances = {
+        "adam", "sgd", "bert", "gpt", "resnet", "alexnet", "vgg", "imagenet",
+        "coco", "mnist", "cifar", "yolo", "rcnn", "transformer"
+    };
+    for (const auto& known : known_instances) {
+        if (lower_label.find(known) != std::string::npos) {
+            return "instance";
+        }
+    }
+
+    // Heuristic 3: Contains class indicators → CLASS
+    // Examples: "algorithm", "method", "technique", "approach", "model", "network"
+    std::vector<std::string> class_indicators = {
+        "algorithm", "method", "technique", "approach", "process",
+        "system", "framework", "architecture", "type", "category"
+    };
+    for (const auto& indicator : class_indicators) {
+        if (lower_label.find(indicator) != std::string::npos) {
+            return "class";
+        }
+    }
+
+    // Heuristic 4: Abstract concepts → CLASS
+    // Examples: "optimization", "learning", "training", "inference"
+    std::vector<std::string> abstract_concepts = {
+        "optimization", "learning", "training", "inference", "classification",
+        "regression", "clustering", "detection", "segmentation", "generation"
+    };
+    for (const auto& concept : abstract_concepts) {
+        if (lower_label == concept || lower_label.find(concept + " ") != std::string::npos) {
+            return "class";
+        }
+    }
+
+    // Heuristic 5: Capitalized single word (proper noun) → Likely INSTANCE
+    // Examples: "Adam", "BERT" (but not "Neural" which could be part of "neural network")
+    if (label.length() > 2 && std::isupper(label[0]) && label.find(' ') == std::string::npos) {
+        // Check if it's all caps (acronym) or mixed case
+        bool has_lower = false;
+        for (char c : label) {
+            if (std::islower(c)) {
+                has_lower = true;
+                break;
+            }
+        }
+        if (!has_lower || (has_lower && label.length() <= 10)) {
+            return "instance";
+        }
+    }
+
+    // Default: CLASS (more common in research papers for general concepts)
+    return "class";
 }
 
 }  // namespace
@@ -509,6 +586,25 @@ std::vector<ExtractionResult> ExtractionPipeline::extract_from_chunks(
             config_.custom_system_prompt
         );
 
+        // Gemini + causal extraction fallback: if causal extraction fails,
+        // retry with standard extraction (more reliable)
+        if (!result.success &&
+            !config_.custom_system_prompt.empty() &&
+            config_.llm_provider == "gemini" &&
+            config_.custom_system_prompt.find("causal") != std::string::npos) {
+
+            if (config_.verbose && i == 0) {
+                std::cout << "\n  Gemini causal extraction failing, falling back to standard extraction...\n";
+            }
+
+            // Retry with standard extraction (empty custom prompt)
+            result = llm_provider_->extract_relations(
+                chunks[i].text,
+                chunks[i].chunk_id,
+                ""  // Use default standard extraction prompt
+            );
+        }
+
         auto llm_end = std::chrono::high_resolution_clock::now();
         stats_.llm_time_seconds += std::chrono::duration<double>(
             llm_end - llm_start
@@ -574,13 +670,19 @@ Hypergraph ExtractionPipeline::build_graph_from_results(
 
             HyperEdge edge;
             edge.sources.reserve(rel.sources.size());
-            for (const auto& src : rel.sources) {
-                edge.sources.push_back(normalize_entity_label(src));
+            std::vector<std::string> normalized_sources;
+            for (size_t i = 0; i < rel.sources.size(); ++i) {
+                std::string normalized = normalize_entity_label(rel.sources[i]);
+                edge.sources.push_back(normalized);
+                normalized_sources.push_back(normalized);
             }
             edge.relation = rel.relation;
             edge.targets.reserve(rel.targets.size());
-            for (const auto& tgt : rel.targets) {
-                edge.targets.push_back(normalize_entity_label(tgt));
+            std::vector<std::string> normalized_targets;
+            for (size_t i = 0; i < rel.targets.size(); ++i) {
+                std::string normalized = normalize_entity_label(rel.targets[i]);
+                edge.targets.push_back(normalized);
+                normalized_targets.push_back(normalized);
             }
             edge.confidence = rel.confidence;
             edge.source_document = document_id;
@@ -589,7 +691,32 @@ Hypergraph ExtractionPipeline::build_graph_from_results(
             // Copy properties
             edge.properties = rel.properties;
 
+            // Phase 2: Mark hierarchical relations
+            if (edge.relation == "instance_of" || edge.relation == "subclass_of" || edge.relation == "is_a") {
+                edge.properties["relation_type"] = "hierarchical";
+                edge.properties["hierarchy_type"] = edge.relation;
+            }
+
             graph.add_hyperedge(edge);
+
+            // Ontology: Add node_level classification to nodes
+            // Set entity levels from extraction if available
+            for (size_t i = 0; i < normalized_sources.size(); ++i) {
+                if (i < rel.source_levels.size() && !rel.source_levels[i].empty()) {
+                    HyperNode* node = graph.get_node(normalized_sources[i]);
+                    if (node && node->properties.find("node_level") == node->properties.end()) {
+                        node->properties["node_level"] = rel.source_levels[i];
+                    }
+                }
+            }
+            for (size_t i = 0; i < normalized_targets.size(); ++i) {
+                if (i < rel.target_levels.size() && !rel.target_levels[i].empty()) {
+                    HyperNode* node = graph.get_node(normalized_targets[i]);
+                    if (node && node->properties.find("node_level") == node->properties.end()) {
+                        node->properties["node_level"] = rel.target_levels[i];
+                    }
+                }
+            }
         }
     }
 
@@ -608,13 +735,19 @@ Hypergraph ExtractionPipeline::build_graph_from_relations(
 
         HyperEdge edge;
         edge.sources.reserve(rel.sources.size());
-        for (const auto& src : rel.sources) {
-            edge.sources.push_back(normalize_entity_label(src));
+        std::vector<std::string> normalized_sources;
+        for (size_t i = 0; i < rel.sources.size(); ++i) {
+            std::string normalized = normalize_entity_label(rel.sources[i]);
+            edge.sources.push_back(normalized);
+            normalized_sources.push_back(normalized);
         }
         edge.relation = rel.relation;
         edge.targets.reserve(rel.targets.size());
-        for (const auto& tgt : rel.targets) {
-            edge.targets.push_back(normalize_entity_label(tgt));
+        std::vector<std::string> normalized_targets;
+        for (size_t i = 0; i < rel.targets.size(); ++i) {
+            std::string normalized = normalize_entity_label(rel.targets[i]);
+            edge.targets.push_back(normalized);
+            normalized_targets.push_back(normalized);
         }
         edge.confidence = rel.confidence;
         edge.source_document = document_id;
@@ -627,10 +760,137 @@ Hypergraph ExtractionPipeline::build_graph_from_relations(
         // Copy properties
         edge.properties = rel.properties;
 
+        // Phase 2: Mark hierarchical relations
+        if (edge.relation == "instance_of" || edge.relation == "subclass_of" || edge.relation == "is_a") {
+            edge.properties["relation_type"] = "hierarchical";
+            edge.properties["hierarchy_type"] = edge.relation;
+        }
+
         graph.add_hyperedge(edge);
+
+        // Ontology: Add node_level classification to nodes
+        // Set entity levels from extraction if available
+        for (size_t i = 0; i < normalized_sources.size(); ++i) {
+            if (i < rel.source_levels.size() && !rel.source_levels[i].empty()) {
+                HyperNode* node = graph.get_node(normalized_sources[i]);
+                if (node && node->properties.find("node_level") == node->properties.end()) {
+                    node->properties["node_level"] = rel.source_levels[i];
+                }
+            }
+        }
+        for (size_t i = 0; i < normalized_targets.size(); ++i) {
+            if (i < rel.target_levels.size() && !rel.target_levels[i].empty()) {
+                HyperNode* node = graph.get_node(normalized_targets[i]);
+                if (node && node->properties.find("node_level") == node->properties.end()) {
+                    node->properties["node_level"] = rel.target_levels[i];
+                }
+            }
+        }
     }
 
     return graph;
+}
+
+int ExtractionPipeline::apply_heuristic_classification(Hypergraph& graph) {
+    int classified_count = 0;
+
+    // Get all node IDs, then get mutable access to each
+    std::vector<HyperNode> nodes_copy = graph.get_all_nodes();
+
+    for (const auto& node_copy : nodes_copy) {
+        // Get mutable access to the actual node in the graph
+        HyperNode* node = graph.get_node(node_copy.id);
+        if (!node) continue;
+
+        // Skip if already classified
+        if (node->properties.find("node_level") != node->properties.end() &&
+            !node->properties["node_level"].empty()) {
+            continue;
+        }
+
+        // Apply heuristic classification
+        std::string level = classify_entity_heuristic(node->label);
+        if (!level.empty()) {
+            node->properties["node_level"] = level;
+            classified_count++;
+        }
+    }
+
+    return classified_count;
+}
+
+int ExtractionPipeline::augment_instance_base_classes(Hypergraph& graph) {
+    int augmented_count = 0;
+
+    // Set of hierarchical relation types
+    std::set<std::string> hierarchical_relations = {"instance_of", "is_a", "subclass_of"};
+
+    // Get all node IDs, then get mutable access to each
+    std::vector<HyperNode> nodes_copy = graph.get_all_nodes();
+
+    for (const auto& node_copy : nodes_copy) {
+        // Get mutable access to the actual node in the graph
+        HyperNode* node = graph.get_node(node_copy.id);
+        if (!node) continue;
+
+        // Only process instance nodes
+        if (node->properties.find("node_level") == node->properties.end() ||
+            node->properties["node_level"] != "instance") {
+            continue;
+        }
+
+        // Find all edges where this node is a source (pointing to parent classes)
+        std::vector<std::string> parent_classes;
+        std::vector<HyperEdge> all_edges = graph.get_all_edges();
+
+        for (const auto& edge : all_edges) {
+            // Check if this is a hierarchical relation
+            if (hierarchical_relations.find(edge.relation) == hierarchical_relations.end()) {
+                continue;
+            }
+
+            // Check if our node is in the sources
+            bool node_is_source = false;
+            for (const auto& src : edge.sources) {
+                if (src == node->id) {
+                    node_is_source = true;
+                    break;
+                }
+            }
+
+            if (node_is_source) {
+                // Add all targets as parent classes
+                for (const auto& target_id : edge.targets) {
+                    HyperNode* target_node = graph.get_node(target_id);
+                    if (target_node) {
+                        // Use label for readability, fall back to ID if no label
+                        std::string class_name = target_node->label.empty() ?
+                                                 target_id : target_node->label;
+
+                        // Avoid duplicates
+                        if (std::find(parent_classes.begin(), parent_classes.end(), class_name)
+                            == parent_classes.end()) {
+                            parent_classes.push_back(class_name);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Store parent classes in node properties if any found
+        if (!parent_classes.empty()) {
+            // Join with comma
+            std::string base_classes_str;
+            for (size_t i = 0; i < parent_classes.size(); ++i) {
+                if (i > 0) base_classes_str += ", ";
+                base_classes_str += parent_classes[i];
+            }
+            node->properties["base_classes"] = base_classes_str;
+            augmented_count++;
+        }
+    }
+
+    return augmented_count;
 }
 
 Hypergraph ExtractionPipeline::process_pdfs(const std::vector<std::string>& pdf_paths) {

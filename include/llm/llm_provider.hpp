@@ -126,6 +126,10 @@ struct ExtractedRelation {
     // Phase 2: Causal metadata (optional)
     std::optional<CausalMetadata> causal_metadata;  ///< Rich causal information (if causal)
 
+    // Ontology: Entity classification (class vs instance)
+    std::vector<std::string> source_levels;  ///< Level for each source: "class", "instance", or empty
+    std::vector<std::string> target_levels;  ///< Level for each target: "class", "instance", or empty
+
     /**
      * @brief Check if this is a causal relation
      */
@@ -510,9 +514,14 @@ public:
 class PromptTemplates {
 public:
     /**
-     * @brief System prompt for relation extraction
+     * @brief System prompt for relation extraction (standard)
      */
     static std::string relation_extraction_system_prompt();
+
+    /**
+     * @brief System prompt for relation extraction with ontology classification
+     */
+    static std::string relation_extraction_system_prompt_with_ontology();
 
     /**
      * @brief User prompt for relation extraction
@@ -552,6 +561,14 @@ public:
      * @brief Causal JSON format instructions
      */
     static std::string causal_json_format_instructions();
+
+    /**
+     * @brief Combined prompt for causal extraction WITH ontology classification
+     *
+     * This prompt combines causal relationship extraction with entity classification.
+     * Use when both --causal and --with-ontology flags are specified.
+     */
+    static std::string causal_ontology_extraction_system_prompt();
 };
 
 // ============================================================================

@@ -1,121 +1,45 @@
 # Graph RAG Tool
 
-Interactive graph QA UI with FastAPI + Kuzu backend.
+This directory contains two distinct copies of the Graph RAG app:
 
-## Components
+- `backend/`: the active development/runtime copy
+- `deployment/`: a standalone packaged bundle
 
-- `template.html`: frontend (3D graph, chat, DB Explorer panel)
-- `backend/graph_rag_server.py`: backend API + Kuzu integration
-- `graph_data.json`: default graph loaded on startup
-- `uploaded_graph.json`: latest uploaded graph snapshot
+Use `backend/` unless you explicitly want the packaged deployment bundle.
 
-## Quick Start
+## Active Runtime
+
+Start from:
 
 ```bash
 cd src/graph_rag_tool/backend
-./start.sh
+pip install -r requirements.txt
+python graph_rag_server.py
 ```
 
 Open:
 
-- `http://localhost:8000` for the app
-- `http://localhost:8000/docs` for API docs
+- `http://localhost:8000`
+- `http://localhost:8000/docs`
 
-Windows launcher: `src/graph_rag_tool/backend/start.bat`.
+## Main Capabilities
 
-## UI Features
+- 3D graph viewer
+- Graph-RAG, document-RAG, and compare modes through `/api/query`
+- Kuzu-backed explorer for schema, Cypher, entities, relations, paths, and quality metrics
+- upload or reload graph JSON files into the backend
 
-### 1. 3D Graph Viewer
+## Graph Formats
 
-- Loads hypergraph JSON (`nodes + hyperedges`) or pairwise graph JSON (`nodes + links`)
-- Degree filter, neighborhood expansion, search, clustering controls
-- Highlight integration from chat and DB Explorer
+The UI and backend work with either:
 
-### 2. Graph-RAG Chat
+- hypergraph-style JSON: `nodes` + `hyperedges`
+- pairwise graph JSON: `nodes` + `links`
 
-- Uses `/api/query` for natural-language Q&A over Kuzu-backed Cypher results
-- Supports OpenAI, Gemini, OpenAI-compatible, and Azure modes via UI config
+The backend stores pairwise `RELATED` edges in Kuzu and keeps per-entity composite hashes for clean lookup URLs.
 
-### 3. DB Explorer Panel
+## Docs
 
-Open with `🗄️ DB Explorer` button (or `Ctrl+K`/`Cmd+K`).
-
-Tabs:
-
-- `Overview`: entity/relationship stats, top entities, source docs
-- `Schema`: relation-type browser + sample edges
-- `Query`: custom Cypher runner (`/api/cypher`) + JSON/CSV export + history
-- `Explorer`: entity search/details and relation navigation
-- `Paths`: shortest-path search between entities (`/api/path`)
-
-`Esc` closes open side panels.
-
-## Graph Loading
-
-### 1. UI Upload (recommended)
-
-Use header button `📁 Load Graph JSON`.
-
-Upload flow:
-
-1. Validate JSON
-2. Render 3D graph immediately in frontend
-3. Upload to backend (`/api/upload`) and initialize Kuzu
-4. Refresh schema/overview state
-
-### 2. Reload from path
-
-```bash
-curl -X POST http://localhost:8000/api/reload \
-  -H "Content-Type: application/json" \
-  -d '{"json_path":"/absolute/path/to/graph.json"}'
-```
-
-### 3. Upload by API
-
-```bash
-curl -X POST http://localhost:8000/api/upload \
-  -F "file=@/absolute/path/to/graph.json"
-```
-
-## Important Behavior: Auto-Clean on Page Load
-
-The frontend currently calls `POST /api/clean` when the page loads to reset Kuzu tables for a fresh session before upload.
-
-- Good for clean local sessions
-- If you want persistent DB state across page refreshes, remove or disable that call in `template.html`
-
-## Expected JSON Shape
-
-```json
-{
-  "nodes": [
-    {"id": "entity_id", "label": "Entity Name"}
-  ],
-  "hyperedges": [
-    {
-      "id": "edge_0",
-      "sources": ["entity_a"],
-      "targets": ["entity_b"],
-      "relation": "related_to",
-      "confidence": 0.9
-    }
-  ]
-}
-```
-
-Notes:
-
-- Backend maps each hyperedge into pairwise `RELATED` edges for Kuzu.
-- If present, `source_document`, `source_chunk_id`, `edge_id` are preserved.
-
-## API Summary
-
-See `src/graph_rag_tool/backend/README.md` for endpoint details.
-
-## Troubleshooting
-
-- Port in use: stop existing process on `8000`.
-- Empty schema: upload or reload a graph.
-- If viewer renders but query endpoints fail: backend not running or DB not initialized.
-- Startup from wrong directory can break relative paths; use `backend/start.sh`.
+- [`backend/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/README.md)
+- [`backend/docs/API_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/docs/API_REFERENCE.md)
+- `deployment/README.md` for the standalone bundle

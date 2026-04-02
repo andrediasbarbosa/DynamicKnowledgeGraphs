@@ -776,11 +776,12 @@ int cmd_run(const Args& args) {
     std::string existing_run_dir = args.get("run-dir", "").value;
     bool preprocess = args.has("preprocess");
     bool use_causal = args.has("causal");  // Phase 2: Causal extraction mode
+    bool with_ontology = args.has("with-ontology");  // Enable class/instance classification
 
     // Quality control configuration
     bool enable_qc = !args.has("no-qc");  // Quality control enabled by default
     int min_node_length = args.get("min-node-length", "2").as_int();
-    int min_degree = args.get("min-degree", "1").as_int();
+    int min_degree = args.get("min-degree", "2").as_int();
     bool llm_validate = args.has("llm-validate");
     std::string validation_mode = args.get("validation-mode", "suspicious").value;
     bool semantic_dedup = args.has("semantic-dedup");
@@ -955,9 +956,27 @@ int cmd_run(const Args& args) {
         pipeline_config.save_extractions = true;
 
         // Phase 2: Use causal extraction prompts if --causal flag is set
-        if (use_causal) {
+        if (use_causal && with_ontology) {
+            // Both flags: Use combined causal + ontology prompt
+            pipeline_config.custom_system_prompt = PromptTemplates::causal_ontology_extraction_system_prompt();
+            std::cout << "  Causal + Ontology mode: ENABLED (LLM-based classification with causal metadata)\n";
+        }
+        else if (use_causal) {
             pipeline_config.custom_system_prompt = PromptTemplates::causal_extraction_system_prompt();
             std::cout << "  Causal extraction mode: ENABLED\n";
+        }
+        // Ontology: Use ontology extraction prompts if --with-ontology flag is set
+        else if (with_ontology) {
+            pipeline_config.custom_system_prompt = PromptTemplates::relation_extraction_system_prompt_with_ontology();
+            std::cout << "  Ontology classification mode: ENABLED (LLM-based)\n";
+        }
+
+        // Warning: Gemini + ontology extraction known issue
+        if (with_ontology && !use_causal && pipeline_config.llm_provider == "gemini") {
+            std::cout << "\n  ⚠️  WARNING: Gemini models may struggle with ontology classification.\n";
+            std::cout << "  If you see many extraction failures, try:\n";
+            std::cout << "    1. Remove --with-ontology (heuristics will still be applied), OR\n";
+            std::cout << "    2. Use provider=openai in .llm_config.json for LLM-based classification\n\n";
         }
 
         // Validate config
@@ -970,6 +989,14 @@ int cmd_run(const Args& args) {
 
         std::cout << "  Provider: " << pipeline_config.llm_provider << "\n";
         std::cout << "  Model:    " << pipeline_config.llm_model << "\n";
+
+        // Warning: Gemini + causal extraction known issue
+        if (use_causal && pipeline_config.llm_provider == "gemini") {
+            std::cout << "\n  ⚠️  WARNING: Gemini models may struggle with complex causal extraction.\n";
+            std::cout << "  If you see many extraction failures, try:\n";
+            std::cout << "    1. Re-run without --causal flag, OR\n";
+            std::cout << "    2. Use provider=openai in .llm_config.json\n\n";
+        }
 
         // Run extraction pipeline
         ExtractionPipeline pipeline(pipeline_config);
@@ -1206,9 +1233,17 @@ int cmd_run(const Args& args) {
             }
         }
 
-        // Update graph node labels to trimmed versions and deduplicate
-        // Build map: trimmed_label -> list of node_ids with that label
+        // Update graph node labels to trimmed/simplified versions and deduplicate
         // (cleanable_entities now only contains valid entities after cleaning)
+        // Write back simplified labels from cleaner to actual graph nodes
+        for (const auto& ce : cleanable_entities) {
+            HyperNode* node = graph.get_node(ce.id);
+            if (node && node->label != ce.label) {
+                node->label = ce.label;
+            }
+        }
+
+        // Build map: trimmed_label -> list of node_ids with that label
         std::map<std::string, std::vector<std::string>> label_to_ids;
         for (const auto& ce : cleanable_entities) {
             label_to_ids[ce.label].push_back(ce.id);
@@ -1284,6 +1319,42 @@ int cmd_run(const Args& args) {
     }
 
     // =========================================================================
+    // Stage 1.9: Ontology Classification (Class/Instance Detection)
+    // =========================================================================
+    if (with_ontology && from_stage <= 2) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.9: Ontology Classification\n";
+        std::cout << "----------------------------------------------------------------------\n";
+
+        auto ontology_start = std::chrono::steady_clock::now();
+
+        // Apply heuristic classification to entities without node_level
+        int classified = ExtractionPipeline::apply_heuristic_classification(graph);
+
+        auto ontology_duration = std::chrono::steady_clock::now() - ontology_start;
+
+        std::cout << "  Classified " << classified << " entities using heuristics\n";
+        std::cout << "  Node levels: class (general concept) vs instance (specific example)\n";
+
+        // Augment instance nodes with base class information
+        int augmented = ExtractionPipeline::augment_instance_base_classes(graph);
+        std::cout << "  Augmented " << augmented << " instance nodes with base class info\n";
+
+        // Save the graph with ontology classification and augmentation
+        std::string ontology_graph_path = step4_dir + "/graph.json";
+        graph.export_to_json(ontology_graph_path, true);
+        std::cout << "  Saved: Step_4_GraphBuilding/graph.json (with ontology)\n";
+        std::cout << "  Ontology time: " << format_duration(ontology_duration) << "\n";
+    } else if (!with_ontology) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.9: Ontology Classification [DISABLED]\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Use --with-ontology to enable class/instance detection\n";
+    }
+
+    // =========================================================================
     // Stage 2: Build Index
     // =========================================================================
     auto stage2_start = std::chrono::steady_clock::now();
@@ -1349,6 +1420,19 @@ int cmd_run(const Args& args) {
         insights = engine.run_operators(operators);
         insights.source_graph = graph_path;
 
+        // Deduplicate insights if semantic dedup is enabled
+        if (semantic_dedup) {
+            std::cout << "\n  Deduplicating insights (augmented nodes)...\n";
+            int before_count = static_cast<int>(insights.insights.size());
+            DiscoveryEngine::deduplicate_insights(insights, semantic_threshold);
+            int after_count = static_cast<int>(insights.insights.size());
+            int removed = before_count - after_count;
+            if (removed > 0) {
+                std::cout << "  Removed " << removed << " duplicate insights ("
+                          << (100.0 * removed / before_count) << "%)\n";
+            }
+        }
+
         insights.save_to_json(insights_path);
 
         // Count by type
@@ -1375,6 +1459,19 @@ int cmd_run(const Args& args) {
 
         std::cout << "  Loading: insights.json\n";
         insights = InsightCollection::load_from_json(insights_path);
+
+        // Deduplicate insights if semantic dedup is enabled
+        if (semantic_dedup) {
+            std::cout << "  Deduplicating loaded insights...\n";
+            int before_count = static_cast<int>(insights.insights.size());
+            DiscoveryEngine::deduplicate_insights(insights, semantic_threshold);
+            int after_count = static_cast<int>(insights.insights.size());
+            int removed = before_count - after_count;
+            if (removed > 0) {
+                std::cout << "  Removed " << removed << " duplicate insights ("
+                          << (100.0 * removed / before_count) << "%)\n";
+            }
+        }
 
         // Count by type
         for (const auto& ins : insights.insights) {
@@ -1766,6 +1863,7 @@ int main(int argc, char** argv) {
             {"run-dir", "d", "Existing run directory to resume (required if from-stage > 1)", "", false, false},
             {"preprocess", "P", "Normalize relations and merge aliases before indexing", "", false, true},
             {"causal", "C", "Use causal extraction prompts (Phase 2 feature)", "", false, true},
+            {"with-ontology", "O", "Enable class/instance classification for entities", "", false, true},
             // Quality Control flags
             {"no-qc", "", "Disable quality control entirely", "", false, true},
             {"min-node-length", "", "Minimum character length for entity labels", "2", false, false},

@@ -2533,6 +2533,7 @@ std::vector<Insight> DiscoveryEngine::find_relation_induction() {
         if (!list.empty() && !list[0]->sources.empty() && !list[0]->targets.empty()) {
             ins.seed_nodes = {list[0]->sources[0], list[0]->targets[0]};
             ins.seed_labels = {get_node_label(list[0]->sources[0]), get_node_label(list[0]->targets[0])};
+            ins.witness_nodes = ins.seed_nodes;
         }
         for (size_t j = 0; j < ex_limit; ++j) {
             ins.witness_edges.push_back(list[j]->id);
@@ -2559,6 +2560,8 @@ std::vector<Insight> DiscoveryEngine::find_relation_induction() {
     return results;
 }
 
+// REMOVED: Low-value insight (2 insights across 9 runs)
+#if 0
 // ============== ANALOGICAL TRANSFER ==============
 std::vector<Insight> DiscoveryEngine::find_analogical_transfers() {
     std::vector<Insight> results;
@@ -2667,6 +2670,7 @@ std::vector<Insight> DiscoveryEngine::find_analogical_transfers() {
     report_progress("Analogical transfer", 100, 100);
     return results;
 }
+#endif // REMOVED: analogical_transfer
 
 // ============== UNCERTAINTY SAMPLING ==============
 std::vector<Insight> DiscoveryEngine::find_uncertainty_samples() {
@@ -4507,6 +4511,7 @@ std::vector<Insight> DiscoveryEngine::find_community_links() {
                     std::string label_a = get_node_label(a);
                     std::string label_b = get_node_label(b);
                     ins.seed_labels = {label_a.empty() ? a : label_a, label_b.empty() ? b : label_b};
+                    ins.witness_nodes = ins.seed_nodes;
 
                     std::set<std::string> witness_set;
                     if (const auto* n = graph_.get_node(a)) {
@@ -4615,6 +4620,8 @@ std::vector<Insight> DiscoveryEngine::find_author_reference_chains() {
     return insights;
 }
 
+// REMOVED: Low-value insight (1 insight across 9 runs)
+#if 0
 // ============== CO-AUTHORSHIP NETWORKS ==============
 std::vector<Insight> DiscoveryEngine::find_co_authorship_networks() {
     std::vector<Insight> insights;
@@ -4764,6 +4771,7 @@ std::vector<Insight> DiscoveryEngine::find_co_authorship_networks() {
 
     return insights;
 }
+#endif // REMOVED: co_authorship
 
 // ============== CITATION IMPACT ANALYSIS ==============
 std::vector<Insight> DiscoveryEngine::find_citation_impact() {
@@ -4963,6 +4971,7 @@ std::vector<Insight> DiscoveryEngine::find_multi_resolution_communities() {
                 ins.seed_nodes.push_back(members[j]);
                 ins.seed_labels.push_back(get_node_label(members[j]));
             }
+            ins.witness_nodes = ins.seed_nodes;
 
             ins.score_breakdown["resolution"] = level.resolution;
             ins.score_breakdown["size"] = static_cast<double>(members.size());
@@ -5042,6 +5051,7 @@ std::vector<Insight> DiscoveryEngine::find_cross_community_bridge_maps(const Ins
             ins.set_type(InsightType::CROSS_COMMUNITY_BRIDGE_MAP);
             ins.seed_nodes = {bridge};
             ins.seed_labels = {get_node_label(bridge)};
+            ins.witness_nodes = {bridge};
 
             ins.score_breakdown["communities_connected"] = static_cast<double>(connected_communities.size());
             ins.score = std::min(static_cast<double>(connected_communities.size()) / 5.0, 1.0);
@@ -5107,6 +5117,7 @@ std::vector<Insight> DiscoveryEngine::find_meta_patterns(const InsightCollection
                 }
             }
         }
+        ins.witness_nodes = ins.seed_nodes;
 
         ins.score_breakdown["occurrences"] = static_cast<double>(size_patterns.size());
         ins.score_breakdown["pattern_size"] = static_cast<double>(size);
@@ -5724,8 +5735,9 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
             insights = find_claim_stances();
         } else if (op == "relation_induction" || op == "relation-induction" || op == "relation_type") {
             insights = find_relation_induction();
-        } else if (op == "analogical_transfer" || op == "analogical-transfer" || op == "analogy") {
-            insights = find_analogical_transfers();
+        // REMOVED: analogical_transfer (low-value: 2 insights across 9 runs)
+        // } else if (op == "analogical_transfer" || op == "analogical-transfer" || op == "analogy") {
+        //     insights = find_analogical_transfers();
         } else if (op == "uncertainty_sampling" || op == "uncertainty-sampling" || op == "uncertainty") {
             insights = find_uncertainty_samples();
         } else if (op == "counterfactual" || op == "counterfactual-probing") {
@@ -5788,8 +5800,9 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
             insights = find_embedding_links();
         } else if (is_author_chain_op) {
             insights = find_author_reference_chains();
-        } else if (op == "co_authorship" || op == "co-authorship" || op == "coauthorship" || op == "collaboration") {
-            insights = find_co_authorship_networks();
+        // REMOVED: co_authorship (low-value: 1 insight across 9 runs)
+        // } else if (op == "co_authorship" || op == "co-authorship" || op == "coauthorship" || op == "collaboration") {
+        //     insights = find_co_authorship_networks();
         } else if (op == "citation_impact" || op == "citation-impact" || op == "citations" || op == "impact") {
             insights = find_citation_impact();
         } else if (op == "multi_resolution_community" || op == "multi-resolution-community" || op == "multiresolution" || op == "hierarchical_community") {
@@ -5804,14 +5817,16 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
             insights = compute_bias_audit(collection);
         } else if (op == "community_recommendation" || op == "community-recommendation" || op == "recommend" || op == "recommendations") {
             insights = generate_community_recommendations(collection);
-        } else if (op == "mechanism_consolidation" || op == "mechanism-consolidation" || op == "mechanism_cluster" || op == "mechanism-cluster") {
-            insights = find_mechanism_consolidations(collection);
+        // REMOVED: mechanism_consolidation (low-value: 2 insights across 9 runs)
+        // } else if (op == "mechanism_consolidation" || op == "mechanism-consolidation" || op == "mechanism_cluster" || op == "mechanism-cluster") {
+        //     insights = find_mechanism_consolidations(collection);
         } else if (op == "evidence_fusion" || op == "evidence-fusion" || op == "evidence_fusion_link" || op == "evidence-fusion-link") {
             insights = find_evidence_fusion_links(collection);
         } else if (op == "meta_path_anomaly" || op == "meta-path-anomaly" || op == "metapath_anomaly" || op == "metapath-anomaly") {
             insights = find_meta_path_anomalies(collection);
-        } else if (op == "intervention_bottleneck" || op == "intervention-bottleneck") {
-            insights = find_intervention_bottlenecks(collection);
+        // REMOVED: intervention_bottleneck (low-value: 2 insights across 9 runs)
+        // } else if (op == "intervention_bottleneck" || op == "intervention-bottleneck") {
+        //     insights = find_intervention_bottlenecks(collection);
         } else if (op == "competing_mechanism" || op == "competing-mechanism" ||
                    op == "competing_mechanisms" || op == "competing-mechanisms") {
             insights = find_competing_mechanisms(collection);
@@ -5820,6 +5835,22 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
         } else if (op == "cross_community_mechanism_bridge" || op == "cross-community-mechanism-bridge" ||
                    op == "cross_community_bridge" || op == "cross-community-bridge") {
             insights = find_cross_community_mechanism_bridges(collection);
+        } else if (op == "evidence_debt" || op == "evidence-debt") {
+            insights = find_evidence_debt(collection);
+        } else if (op == "consensus_frontier" || op == "consensus-frontier") {
+            insights = find_consensus_frontier(collection);
+        } else if (op == "boundary_condition_map" || op == "boundary-condition-map" || op == "boundary_condition") {
+            insights = find_boundary_condition_map(collection);
+        } else if (op == "failure_mode_topology" || op == "failure-mode-topology" || op == "failure_mode") {
+            insights = find_failure_mode_topology(collection);
+        } else if (op == "benchmark_dependence" || op == "benchmark-dependence") {
+            insights = find_benchmark_dependence(collection);
+        } else if (op == "concept_drift" || op == "concept-drift") {
+            insights = find_concept_drift(collection);
+        } else if (op == "premise_bottleneck" || op == "premise-bottleneck") {
+            insights = find_premise_bottleneck(collection);
+        } else if (op == "translation_gap" || op == "translation-gap") {
+            insights = find_translation_gap(collection);
         }
 
         if (!is_author_chain_op) {
@@ -6679,6 +6710,8 @@ std::vector<Insight> DiscoveryEngine::find_hypotheses_3(const InsightCollection&
 // MECHANISM CONSOLIDATION: Cluster related mechanistic hypotheses and chains
 // =============================================================================
 
+// REMOVED: Low-value insight (2 insights across 9 runs)
+#if 0
 std::vector<Insight> DiscoveryEngine::find_mechanism_consolidations(const InsightCollection& collection) {
     std::vector<Insight> results;
     report_progress("Consolidating mechanisms", 0, 100);
@@ -6903,6 +6936,7 @@ std::vector<Insight> DiscoveryEngine::find_mechanism_consolidations(const Insigh
     report_progress("Consolidating mechanisms", 100, 100);
     return results;
 }
+#endif // REMOVED: mechanism_consolidation
 
 // =============================================================================
 // CAUSAL_CHAIN: Directed Causal Path Detection
@@ -7527,13 +7561,18 @@ std::vector<Insight> DiscoveryEngine::find_taxonomy_induction() {
     std::vector<Insight> results;
     report_progress("Finding taxonomy relationships", 0, 100);
 
-    // Keywords indicating hierarchical relationships
+    // Phase 2: Explicit hierarchical relations (highest priority)
+    std::set<std::string> explicit_hierarchy = {
+        "instance_of", "subclass_of", "is_a"
+    };
+
+    // Keywords indicating hierarchical relationships (fallback)
     std::set<std::string> taxonomy_keywords = {
         "is a", "is an", "type of", "kind of", "subclass of",
         "part of", "contains", "includes", "has a", "category"
     };
 
-    std::vector<std::tuple<std::string, std::string, std::string, std::string>> hierarchical_rels; // child, parent, relation, edge_id
+    std::vector<std::tuple<std::string, std::string, std::string, std::string, double>> hierarchical_rels; // child, parent, relation, edge_id, priority
 
     for (const auto& edge : graph_.get_all_edges()) {
         std::string rel = edge.relation;
@@ -7542,26 +7581,52 @@ std::vector<Insight> DiscoveryEngine::find_taxonomy_induction() {
 
         bool is_taxonomic = false;
         std::string match_type;
-        for (const auto& keyword : taxonomy_keywords) {
-            if (rel_lower.find(keyword) != std::string::npos) {
-                is_taxonomic = true;
-                match_type = keyword;
-                break;
+        double priority = 0.7;  // Default priority
+
+        // Phase 2: Check if this is an explicit hierarchical relation (highest priority)
+        if (edge.properties.find("relation_type") != edge.properties.end() &&
+            edge.properties.at("relation_type") == "hierarchical") {
+            is_taxonomic = true;
+            match_type = edge.relation;  // Use the actual relation name (instance_of, subclass_of, is_a)
+            priority = 1.0;  // Highest priority
+        }
+        // Check for exact match with explicit hierarchy relations
+        else if (explicit_hierarchy.find(rel_lower) != explicit_hierarchy.end()) {
+            is_taxonomic = true;
+            match_type = rel;
+            priority = 1.0;
+        }
+        // Fallback: Check keywords in relation name
+        else {
+            for (const auto& keyword : taxonomy_keywords) {
+                if (rel_lower.find(keyword) != std::string::npos) {
+                    is_taxonomic = true;
+                    match_type = keyword;
+                    priority = 0.7;
+                    break;
+                }
             }
         }
 
         if (is_taxonomic && !edge.sources.empty() && !edge.targets.empty()) {
-            // Determine parent-child direction based on keyword
-            bool sources_are_children = (match_type.find("is a") != std::string::npos ||
-                                        match_type.find("type of") != std::string::npos ||
-                                        match_type.find("part of") != std::string::npos);
+            // Determine parent-child direction
+            // For instance_of and is_a: source is child, target is parent
+            // For subclass_of: source is child class, target is parent class
+            bool sources_are_children = true;  // Default for hierarchical relations
+
+            // Adjust direction for keyword-based relations
+            if (priority < 1.0) {
+                sources_are_children = (match_type.find("is a") != std::string::npos ||
+                                       match_type.find("type of") != std::string::npos ||
+                                       match_type.find("part of") != std::string::npos);
+            }
 
             for (const auto& src : edge.sources) {
                 for (const auto& tgt : edge.targets) {
                     if (sources_are_children) {
-                        hierarchical_rels.push_back({src, tgt, match_type, edge.id}); // src is child, tgt is parent
+                        hierarchical_rels.push_back({src, tgt, match_type, edge.id, priority}); // src is child, tgt is parent
                     } else {
-                        hierarchical_rels.push_back({tgt, src, match_type, edge.id}); // tgt is child, src is parent
+                        hierarchical_rels.push_back({tgt, src, match_type, edge.id, priority}); // tgt is child, src is parent
                     }
                 }
             }
@@ -7570,18 +7635,16 @@ std::vector<Insight> DiscoveryEngine::find_taxonomy_induction() {
 
     report_progress("Finding taxonomy relationships", 50, 100);
 
-    // Sort by relation type (prefer "is a" over "part of")
+    // Sort by priority (prefer explicit hierarchical relations over keyword-based)
     std::sort(hierarchical_rels.begin(), hierarchical_rels.end(),
         [](const auto& a, const auto& b) {
-            bool a_is_a = (std::get<2>(a).find("is a") != std::string::npos);
-            bool b_is_a = (std::get<2>(b).find("is a") != std::string::npos);
-            return a_is_a > b_is_a; // Prefer "is a" relationships
+            return std::get<4>(a) > std::get<4>(b); // Sort by priority (highest first)
         });
 
     // Create insights
     size_t max_taxonomy = std::min(hierarchical_rels.size(), static_cast<size_t>(20));
     for (size_t i = 0; i < max_taxonomy; ++i) {
-        const auto& [child, parent, rel_type, edge_id] = hierarchical_rels[i];
+        const auto& [child, parent, rel_type, edge_id, priority] = hierarchical_rels[i];
 
         Insight ins;
         ins.insight_id = make_insight_id(InsightType::TAXONOMY);
@@ -7594,8 +7657,8 @@ std::vector<Insight> DiscoveryEngine::find_taxonomy_induction() {
         ins.description = "Taxonomy: '" + get_node_label(child) + "' " +
                          rel_type + " '" + get_node_label(parent) + "'";
 
-        // Score based on relation type clarity
-        double score = (rel_type.find("is a") != std::string::npos) ? 1.0 : 0.7;
+        // Score based on priority (1.0 for explicit hierarchical, 0.7 for keyword-based)
+        double score = priority;
         ins.score = score;
         ins.score_breakdown["relation_type"] = score;
         ins.score_breakdown["confidence"] = score;
@@ -9216,6 +9279,8 @@ std::vector<Insight> DiscoveryEngine::find_meta_path_anomalies(const InsightColl
 // INTERVENTION_BOTTLENECK: Critical bottleneck nodes in causal chains
 // =============================================================================
 
+// REMOVED: Low-value insight (2 insights across 9 runs)
+#if 0
 std::vector<Insight> DiscoveryEngine::find_intervention_bottlenecks(const InsightCollection& collection) {
     std::vector<Insight> results;
     report_progress("Intervention bottlenecks", 0, 100);
@@ -9368,6 +9433,7 @@ std::vector<Insight> DiscoveryEngine::find_intervention_bottlenecks(const Insigh
     report_progress("Intervention bottlenecks", 100, 100);
     return results;
 }
+#endif // REMOVED: intervention_bottleneck
 
 // =============================================================================
 // COMPETING_MECHANISM: Alternative mechanism sets for same outcome
@@ -10016,6 +10082,1127 @@ std::vector<Insight> DiscoveryEngine::apply_causal_filter(const std::vector<Insi
     }
 
     return filtered;
+}
+
+// ============================================================================
+// Semantic Deduplication of Insights
+// ============================================================================
+
+void DiscoveryEngine::deduplicate_insights(InsightCollection& insights, double similarity_threshold) {
+    if (insights.insights.empty()) return;
+
+    // Helper: Normalize label for comparison
+    auto normalize_label = [](const std::string& label) -> std::string {
+        std::string normalized = label;
+        std::transform(normalized.begin(), normalized.end(), normalized.begin(), ::tolower);
+
+        // Remove trailing filler words
+        const std::vector<std::string> fillers = {
+            " technique", " techniques", " method", " methods",
+            " approach", " approaches", " algorithm", " algorithms",
+            " system", " systems", " framework", " frameworks",
+            " process", " processes", " procedure", " procedures",
+            " strategy", " strategies", " mechanism", " mechanisms"
+        };
+
+        for (const auto& filler : fillers) {
+            size_t pos = normalized.rfind(filler);
+            if (pos != std::string::npos && pos + filler.length() == normalized.length()) {
+                normalized = normalized.substr(0, pos);
+                break;
+            }
+        }
+
+        return normalized;
+    };
+
+    // Helper: Compute Levenshtein distance
+    auto levenshtein_distance = [](const std::string& s1, const std::string& s2) -> int {
+        const size_t m = s1.length();
+        const size_t n = s2.length();
+
+        if (m == 0) return static_cast<int>(n);
+        if (n == 0) return static_cast<int>(m);
+
+        std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1));
+
+        for (size_t i = 0; i <= m; i++) dp[i][0] = static_cast<int>(i);
+        for (size_t j = 0; j <= n; j++) dp[0][j] = static_cast<int>(j);
+
+        for (size_t i = 1; i <= m; i++) {
+            for (size_t j = 1; j <= n; j++) {
+                int cost = (std::tolower(s1[i-1]) == std::tolower(s2[j-1])) ? 0 : 1;
+                dp[i][j] = std::min({
+                    dp[i-1][j] + 1,      // deletion
+                    dp[i][j-1] + 1,      // insertion
+                    dp[i-1][j-1] + cost  // substitution
+                });
+            }
+        }
+
+        return dp[m][n];
+    };
+
+    // Helper: Create canonical key for grouping
+    auto create_canonical_key = [&normalize_label](const Insight& insight) -> std::string {
+        std::string key = insight_type_to_string(insight.type) + ":";
+
+        // Add normalized seed labels (sorted for consistency)
+        std::vector<std::string> normalized_labels;
+        for (const auto& label : insight.seed_labels) {
+            normalized_labels.push_back(normalize_label(label));
+        }
+        std::sort(normalized_labels.begin(), normalized_labels.end());
+
+        for (const auto& label : normalized_labels) {
+            key += label + ",";
+        }
+
+        return key;
+    };
+
+    // Group insights by canonical key
+    std::map<std::string, std::vector<size_t>> groups;
+
+    for (size_t i = 0; i < insights.insights.size(); i++) {
+        const auto& insight = insights.insights[i];
+        std::string key = create_canonical_key(insight);
+        groups[key].push_back(i);
+    }
+
+    // Mark duplicates for removal
+    std::set<size_t> indices_to_remove;
+    int groups_merged = 0;
+    int insights_removed = 0;
+
+    for (auto& [key, group_indices] : groups) {
+        if (group_indices.size() <= 1) continue;
+
+        // Within each group, check for fuzzy duplicates
+        std::vector<std::pair<size_t, double>> scored_insights;
+        for (size_t idx : group_indices) {
+            scored_insights.push_back({idx, insights.insights[idx].score});
+        }
+
+        // Sort by score (descending)
+        std::sort(scored_insights.begin(), scored_insights.end(),
+                 [](const auto& a, const auto& b) { return a.second > b.second; });
+
+        // Keep the highest-scored insight, mark others for removal if similar enough
+        size_t keeper_idx = scored_insights[0].first;
+        const auto& keeper = insights.insights[keeper_idx];
+
+        for (size_t i = 1; i < scored_insights.size(); i++) {
+            size_t candidate_idx = scored_insights[i].first;
+            const auto& candidate = insights.insights[candidate_idx];
+
+            // Check if seed_labels are similar enough
+            bool is_duplicate = false;
+
+            if (keeper.seed_labels.size() == candidate.seed_labels.size()) {
+                // Compare all seed labels
+                size_t matching_labels = 0;
+
+                for (size_t j = 0; j < keeper.seed_labels.size(); j++) {
+                    const std::string& label1 = keeper.seed_labels[j];
+                    const std::string& label2 = candidate.seed_labels[j];
+
+                    // Compute similarity
+                    int dist = levenshtein_distance(label1, label2);
+                    size_t max_len = std::max(label1.length(), label2.length());
+                    double similarity = (max_len > 0) ? (1.0 - (double)dist / max_len) : 1.0;
+
+                    if (similarity >= similarity_threshold) {
+                        matching_labels++;
+                    }
+                }
+
+                // If most labels match, consider it a duplicate
+                if (matching_labels >= keeper.seed_labels.size() * 0.8) {
+                    is_duplicate = true;
+                }
+            }
+
+            if (is_duplicate) {
+                indices_to_remove.insert(candidate_idx);
+                insights_removed++;
+            }
+        }
+
+        if (indices_to_remove.size() > 0) {
+            groups_merged++;
+        }
+    }
+
+    // Remove duplicates (iterate backwards to preserve indices)
+    std::vector<Insight> deduplicated;
+    for (size_t i = 0; i < insights.insights.size(); i++) {
+        if (indices_to_remove.find(i) == indices_to_remove.end()) {
+            deduplicated.push_back(std::move(insights.insights[i]));
+        }
+    }
+
+    insights.insights = std::move(deduplicated);
+
+    if (insights_removed > 0) {
+        std::cout << "  Deduplicated insights: merged " << groups_merged
+                  << " groups, removed " << insights_removed << " duplicates\n";
+    }
+}
+
+// =============================================================================
+// EPISTEMIC DISCOVERY OPERATORS
+// =============================================================================
+
+namespace {
+// Generic-term penalty: skip seeds with uninformative labels
+bool is_generic_epistemic_label(const std::string& label) {
+    static const std::vector<std::string> generic_terms = {
+        "kg", "graph", "method", "entity", "relation", "knowledge", "model",
+        "node", "edge", "data", "system", "approach", "technique", "framework"
+    };
+    std::string lower = label;
+    std::transform(lower.begin(), lower.end(), lower.begin(),
+                   [](unsigned char c){ return static_cast<char>(std::tolower(c)); });
+    for (const auto& term : generic_terms) {
+        if (lower == term) return true;
+    }
+    return false;
+}
+} // anonymous namespace
+
+// -----------------------------------------------------------------------------
+// evidence_debt: High-impact nodes with narrow evidence provenance
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_evidence_debt(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding evidence debt", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Count how many insights each node appears in (impact) and collect their evidence
+    struct NodeStats {
+        std::string id;
+        std::string label;
+        int insight_count = 0;
+        std::set<std::string> all_sources;
+        std::set<std::string> all_chunks;
+        std::set<std::string> operator_types;
+        std::vector<std::string> witness_edges;
+    };
+
+    std::unordered_map<std::string, NodeStats> stats;
+
+    for (const auto& ins : collection.insights) {
+        std::string type_str = insight_type_to_string(ins.type);
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& st = stats[nid];
+            st.id = nid;
+            if (i < ins.seed_labels.size()) st.label = ins.seed_labels[i];
+            st.insight_count++;
+            for (const auto& src : ins.source_documents) st.all_sources.insert(src);
+            for (const auto& cid : ins.evidence_chunk_ids) st.all_chunks.insert(cid);
+            st.operator_types.insert(type_str);
+            for (const auto& we : ins.witness_edges) {
+                if (st.witness_edges.size() < 8) st.witness_edges.push_back(we);
+            }
+        }
+    }
+
+    // Score: impact * support_gap
+    int max_count = 1;
+    for (const auto& [id, st] : stats) max_count = std::max(max_count, st.insight_count);
+
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        double impact_score;
+        double support_gap;
+        int source_div;
+        int chunk_div;
+        int op_div;
+        std::vector<std::string> witness_edges;
+    };
+
+    std::vector<Candidate> candidates;
+    for (const auto& [id, st] : stats) {
+        if (st.label.empty() || is_generic_epistemic_label(st.label)) continue;
+        if (st.insight_count < 2) continue;
+
+        double impact = static_cast<double>(st.insight_count) / max_count;
+        int src_div = static_cast<int>(st.all_sources.size());
+        int chunk_div = static_cast<int>(st.all_chunks.size());
+        int op_div = static_cast<int>(st.operator_types.size());
+
+        // support_gap: high when evidence diversity is low relative to impact
+        double max_expected_sources = std::max(1.0, static_cast<double>(st.insight_count) * 0.5);
+        double support_gap = 1.0 - std::min(1.0, src_div / max_expected_sources);
+        support_gap = std::max(support_gap, chunk_div <= 1 ? 0.8 : 0.2);
+
+        double score = impact * support_gap;
+        if (score < 0.15) continue;
+
+        candidates.push_back({id, st.label, score, impact, support_gap,
+                              src_div, chunk_div, op_div, st.witness_edges});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::EVIDENCE_DEBT);
+        ins.set_type(InsightType::EVIDENCE_DEBT);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["impact_score"] = c.impact_score;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.source_div);
+        ins.score_breakdown["chunk_diversity"] = static_cast<double>(c.chunk_div);
+        ins.score_breakdown["operator_diversity"] = static_cast<double>(c.op_div);
+        ins.score_breakdown["support_gap"] = c.support_gap;
+        ins.novelty_tags = {"epistemic", "under_supported", "high_impact"};
+
+        std::stringstream desc;
+        desc << "Evidence debt: '" << c.label << "' is highly influential in downstream insights"
+             << " but is supported by narrow provenance (sources=" << c.source_div
+             << ", chunks=" << c.chunk_div << ") and should be treated as under-validated.";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding evidence debt", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// consensus_frontier: Claim clusters with convergence or active disagreement
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_consensus_frontier(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding consensus frontier", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Group seed-node pairs that appear in both supporting and contradicting insights
+    // Use contradiction and claim_stance insights to measure disagreement
+    struct ClaimCluster {
+        std::vector<std::string> seed_nodes;
+        std::vector<std::string> seed_labels;
+        int support_count = 0;
+        int oppose_count = 0;
+        int neutral_count = 0;
+        std::set<std::string> sources;
+        std::vector<std::string> witness_edges;
+    };
+
+    // Index insights by their primary seed node
+    std::unordered_map<std::string, std::vector<size_t>> node_to_insights;
+    for (size_t i = 0; i < collection.insights.size(); ++i) {
+        for (const auto& nid : collection.insights[i].seed_nodes) {
+            node_to_insights[nid].push_back(i);
+        }
+    }
+
+    std::map<std::string, ClaimCluster> clusters;
+
+    for (size_t i = 0; i < collection.insights.size(); ++i) {
+        const auto& ins = collection.insights[i];
+        if (ins.seed_nodes.empty()) continue;
+
+        std::string key = ins.seed_nodes[0];
+        auto& cl = clusters[key];
+        if (cl.seed_nodes.empty()) {
+            cl.seed_nodes = ins.seed_nodes;
+            cl.seed_labels = ins.seed_labels;
+        }
+
+        for (const auto& src : ins.source_documents) cl.sources.insert(src);
+        for (const auto& we : ins.witness_edges) {
+            if (cl.witness_edges.size() < 8) cl.witness_edges.push_back(we);
+        }
+
+        if (ins.type == InsightType::CONTRADICTION || ins.type == InsightType::CLAIM_STANCE) {
+            // Check novelty_tags for stance
+            bool is_oppose = false;
+            for (const auto& t : ins.novelty_tags) {
+                if (t == "contra" || t == "oppose" || t == "negative" || t == "contradiction") {
+                    is_oppose = true; break;
+                }
+            }
+            if (is_oppose) cl.oppose_count++;
+            else cl.support_count++;
+        } else {
+            cl.neutral_count++;
+        }
+    }
+
+    struct Candidate {
+        std::string key;
+        double score;
+        double consensus;
+        double disagreement;
+        double frontier;
+        ClaimCluster cl;
+    };
+
+    std::vector<Candidate> candidates;
+    for (auto& [key, cl] : clusters) {
+        if (cl.seed_labels.empty() || is_generic_epistemic_label(cl.seed_labels[0])) continue;
+        int total = cl.support_count + cl.oppose_count + cl.neutral_count;
+        if (total < 3) continue;
+
+        double src_div = static_cast<double>(cl.sources.size());
+        double consensus = total > 0 ? static_cast<double>(cl.support_count) / total : 0.0;
+        double disagreement = total > 0 ? static_cast<double>(cl.oppose_count) / total : 0.0;
+        double frontier = 1.0 - std::abs(consensus - 0.5) * 2.0; // high when near 50/50
+
+        double score = 0.4 * src_div / std::max(1.0, src_div + 1.0)
+                     + 0.3 * disagreement
+                     + 0.3 * frontier;
+        if (score < 0.1) continue;
+
+        candidates.push_back({key, score, consensus, disagreement, frontier, cl});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CONSENSUS_FRONTIER);
+        ins.set_type(InsightType::CONSENSUS_FRONTIER);
+        ins.seed_nodes = c.cl.seed_nodes;
+        ins.seed_labels = c.cl.seed_labels;
+        ins.witness_edges = c.cl.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["support_count"] = static_cast<double>(c.cl.support_count);
+        ins.score_breakdown["oppose_count"] = static_cast<double>(c.cl.oppose_count);
+        ins.score_breakdown["neutral_count"] = static_cast<double>(c.cl.neutral_count);
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.cl.sources.size());
+        ins.score_breakdown["consensus"] = c.consensus;
+        ins.score_breakdown["disagreement"] = c.disagreement;
+        ins.score_breakdown["frontier_uncertainty"] = c.frontier;
+        ins.novelty_tags = {"epistemic", "consensus", "disagreement"};
+
+        std::string label = c.cl.seed_labels.empty() ? c.key : c.cl.seed_labels[0];
+        std::stringstream desc;
+        desc << "Consensus frontier: the claim family around '" << label
+             << "' has partial convergence (consensus=" << std::fixed << std::setprecision(2)
+             << c.consensus << ", disagreement=" << c.disagreement
+             << ") and remains actively contested across sources.";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding consensus frontier", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// boundary_condition_map: Conditions under which methods/claims hold
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_boundary_condition_map(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding boundary condition map", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Look for method_outcome insights where the same node appears in both
+    // high-score (positive) and lower-score (negative/conditional) insights
+    struct NodeProfile {
+        std::string id;
+        std::string label;
+        std::vector<double> scores;
+        std::set<std::string> sources;
+        std::vector<std::string> witness_edges;
+        int method_outcome_count = 0;
+        int other_count = 0;
+    };
+
+    std::unordered_map<std::string, NodeProfile> profiles;
+
+    for (const auto& ins : collection.insights) {
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& p = profiles[nid];
+            p.id = nid;
+            if (i < ins.seed_labels.size()) p.label = ins.seed_labels[i];
+            p.scores.push_back(ins.score);
+            for (const auto& src : ins.source_documents) p.sources.insert(src);
+            for (const auto& we : ins.witness_edges) {
+                if (p.witness_edges.size() < 8) p.witness_edges.push_back(we);
+            }
+            if (ins.type == InsightType::METHOD_OUTCOME) p.method_outcome_count++;
+            else p.other_count++;
+        }
+    }
+
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        double condition_specificity;
+        double scope_gap;
+        int src_div;
+        NodeProfile p;
+    };
+
+    std::vector<Candidate> candidates;
+    for (auto& [id, p] : profiles) {
+        if (p.label.empty() || is_generic_epistemic_label(p.label)) continue;
+        if (p.scores.size() < 3) continue;
+        if (p.method_outcome_count < 1) continue;
+
+        // Measure score variance (high variance = appears under different conditions)
+        double sum = 0.0, sum2 = 0.0;
+        for (double s : p.scores) { sum += s; sum2 += s * s; }
+        double mean = sum / p.scores.size();
+        double variance = sum2 / p.scores.size() - mean * mean;
+        double condition_specificity = std::min(1.0, std::sqrt(variance) * 3.0);
+
+        int src_div = static_cast<int>(p.sources.size());
+        double scope_gap = 1.0 - std::min(1.0, static_cast<double>(src_div) / 5.0);
+        double score = 0.5 * condition_specificity + 0.3 * scope_gap
+                     + 0.2 * std::min(1.0, static_cast<double>(p.method_outcome_count) / 3.0);
+
+        if (score < 0.15) continue;
+        candidates.push_back({id, p.label, score, condition_specificity, scope_gap, src_div, p});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::BOUNDARY_CONDITION_MAP);
+        ins.set_type(InsightType::BOUNDARY_CONDITION_MAP);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.p.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["condition_specificity"] = c.condition_specificity;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.src_div);
+        ins.score_breakdown["scope_gap"] = c.scope_gap;
+        ins.score_breakdown["method_outcome_count"] = static_cast<double>(c.p.method_outcome_count);
+        ins.novelty_tags = {"epistemic", "boundary_condition", "scope"};
+
+        std::stringstream desc;
+        desc << "Boundary condition: '" << c.label
+             << "' shows high score variance across method-outcome insights (condition_specificity="
+             << std::fixed << std::setprecision(2) << c.condition_specificity
+             << "), suggesting its effectiveness is strongly context-dependent.";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding boundary condition map", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// failure_mode_topology: Recurring failure patterns across the graph
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_failure_mode_topology(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding failure mode topology", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Find nodes that appear in contradiction insights or have low scores,
+    // forming recurring failure patterns
+    struct NodeFailure {
+        std::string id;
+        std::string label;
+        int contradiction_count = 0;
+        int low_score_count = 0;
+        std::set<std::string> sources;
+        std::vector<std::string> witness_edges;
+        double min_score = 1.0;
+    };
+
+    std::unordered_map<std::string, NodeFailure> failures;
+
+    for (const auto& ins : collection.insights) {
+        bool is_failure = (ins.type == InsightType::CONTRADICTION ||
+                           ins.type == InsightType::CLAIM_STANCE ||
+                           ins.type == InsightType::SCHEMA_VIOLATION);
+        bool is_low_score = (ins.score < 0.3 && ins.score > 0.0);
+
+        if (!is_failure && !is_low_score) continue;
+
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& f = failures[nid];
+            f.id = nid;
+            if (i < ins.seed_labels.size()) f.label = ins.seed_labels[i];
+            if (is_failure) f.contradiction_count++;
+            if (is_low_score) f.low_score_count++;
+            f.min_score = std::min(f.min_score, ins.score);
+            for (const auto& src : ins.source_documents) f.sources.insert(src);
+            for (const auto& we : ins.witness_edges) {
+                if (f.witness_edges.size() < 8) f.witness_edges.push_back(we);
+            }
+        }
+    }
+
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        int recurrence;
+        int src_div;
+        NodeFailure f;
+    };
+
+    std::vector<Candidate> candidates;
+    for (auto& [id, f] : failures) {
+        if (f.label.empty() || is_generic_epistemic_label(f.label)) continue;
+        int recurrence = f.contradiction_count + f.low_score_count;
+        if (recurrence < 1) continue;
+
+        int src_div = static_cast<int>(f.sources.size());
+        double failure_recurrence = std::min(1.0, static_cast<double>(recurrence) / 5.0);
+        double impact_severity = 1.0 - f.min_score;
+        double score = 0.4 * failure_recurrence + 0.3 * impact_severity
+                     + 0.3 * std::min(1.0, static_cast<double>(src_div) / 3.0);
+
+        if (score < 0.1) continue;
+        candidates.push_back({id, f.label, score, recurrence, src_div, f});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::FAILURE_MODE_TOPOLOGY);
+        ins.set_type(InsightType::FAILURE_MODE_TOPOLOGY);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.f.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["failure_recurrence"] = static_cast<double>(c.f.contradiction_count);
+        ins.score_breakdown["low_score_count"] = static_cast<double>(c.f.low_score_count);
+        ins.score_breakdown["context_diversity"] = static_cast<double>(c.src_div);
+        ins.score_breakdown["impact_severity"] = 1.0 - c.f.min_score;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.src_div);
+        ins.novelty_tags = {"epistemic", "failure_mode", "negative_result"};
+
+        std::stringstream desc;
+        desc << "Failure mode: '" << c.label
+             << "' appears in " << c.recurrence
+             << " contradiction or low-confidence insights, suggesting a recurring failure pattern.";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding failure mode topology", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// benchmark_dependence: Claims concentrated on narrow evaluation regimes
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_benchmark_dependence(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding benchmark dependence", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Find nodes from method_outcome insights that appear in only a narrow
+    // set of evidence sources (high benchmark concentration)
+    struct NodeEval {
+        std::string id;
+        std::string label;
+        std::set<std::string> sources;
+        std::set<std::string> chunks;
+        int method_outcome_count = 0;
+        int total_count = 0;
+        std::vector<std::string> witness_edges;
+    };
+
+    std::unordered_map<std::string, NodeEval> evals;
+
+    for (const auto& ins : collection.insights) {
+        if (ins.type != InsightType::METHOD_OUTCOME) continue;
+
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& e = evals[nid];
+            e.id = nid;
+            if (i < ins.seed_labels.size()) e.label = ins.seed_labels[i];
+            e.method_outcome_count++;
+            e.total_count++;
+            for (const auto& src : ins.source_documents) e.sources.insert(src);
+            for (const auto& cid : ins.evidence_chunk_ids) e.chunks.insert(cid);
+            for (const auto& we : ins.witness_edges) {
+                if (e.witness_edges.size() < 8) e.witness_edges.push_back(we);
+            }
+        }
+    }
+
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        double benchmark_concentration;
+        double generalization_gap;
+        int src_div;
+        NodeEval e;
+    };
+
+    std::vector<Candidate> candidates;
+    for (auto& [id, e] : evals) {
+        if (e.label.empty() || is_generic_epistemic_label(e.label)) continue;
+        if (e.method_outcome_count < 2) continue;
+
+        int src_div = static_cast<int>(e.sources.size());
+        int chunk_div = static_cast<int>(e.chunks.size());
+
+        // High concentration = few sources relative to number of outcomes
+        double benchmark_concentration = 1.0 - std::min(1.0, static_cast<double>(src_div) / std::max(1, e.method_outcome_count));
+        double metric_concentration = 1.0 - std::min(1.0, static_cast<double>(chunk_div) / std::max(1, e.method_outcome_count));
+        double generalization_gap = (benchmark_concentration + metric_concentration) / 2.0;
+
+        double score = 0.4 * benchmark_concentration + 0.3 * generalization_gap
+                     + 0.3 * std::min(1.0, static_cast<double>(e.method_outcome_count) / 5.0);
+
+        if (score < 0.15) continue;
+        candidates.push_back({id, e.label, score, benchmark_concentration, generalization_gap, src_div, e});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::BENCHMARK_DEPENDENCE);
+        ins.set_type(InsightType::BENCHMARK_DEPENDENCE);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.e.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["benchmark_concentration"] = c.benchmark_concentration;
+        ins.score_breakdown["metric_concentration"] = c.generalization_gap;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.src_div);
+        ins.score_breakdown["generalization_gap"] = c.generalization_gap;
+        ins.score_breakdown["method_outcome_count"] = static_cast<double>(c.e.method_outcome_count);
+        ins.novelty_tags = {"epistemic", "evaluation_brittleness", "benchmark_dependence"};
+
+        std::stringstream desc;
+        desc << "Benchmark dependence: claims about '" << c.label
+             << "' are concentrated on a narrow evaluation regime (sources=" << c.src_div
+             << ", method_outcomes=" << c.e.method_outcome_count
+             << ") and may not generalize beyond the observed benchmarks.";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding benchmark dependence", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// concept_drift: Terms with divergent meanings across communities
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_concept_drift(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding concept drift", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Find nodes that appear in insights from very different communities
+    // Use community_detection/community_link insights
+    struct NodeCommunity {
+        std::string id;
+        std::string label;
+        std::set<std::string> community_keys; // community insight IDs or seed pairs
+        std::set<std::string> sources;
+        std::vector<std::string> witness_edges;
+        int total_appearances = 0;
+    };
+
+    std::unordered_map<std::string, NodeCommunity> node_communities;
+
+    // First pass: collect community context for each node
+    for (const auto& ins : collection.insights) {
+        bool is_community = (ins.type == InsightType::COMMUNITY_DETECTION ||
+                             ins.type == InsightType::COMMUNITY_LINK ||
+                             ins.type == InsightType::MULTI_RESOLUTION_COMMUNITY);
+
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& nc = node_communities[nid];
+            nc.id = nid;
+            if (i < ins.seed_labels.size()) nc.label = ins.seed_labels[i];
+            nc.total_appearances++;
+            for (const auto& src : ins.source_documents) nc.sources.insert(src);
+            for (const auto& we : ins.witness_edges) {
+                if (nc.witness_edges.size() < 8) nc.witness_edges.push_back(we);
+            }
+            if (is_community) {
+                nc.community_keys.insert(ins.insight_id);
+            }
+        }
+    }
+
+    // Second pass: check graph neighborhoods for divergence
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        double neighborhood_divergence;
+        double community_spread;
+        int src_div;
+        NodeCommunity nc;
+    };
+
+    std::vector<Candidate> candidates;
+
+    for (auto& [id, nc] : node_communities) {
+        if (nc.label.empty() || is_generic_epistemic_label(nc.label)) continue;
+        if (nc.total_appearances < 3) continue;
+
+        // Measure neighborhood diversity in the actual graph
+        const auto* node = graph_.get_node(id);
+        if (!node) continue;
+
+        std::set<std::string> relation_types;
+        int neighbor_count = 0;
+        for (const auto& eid : node->incident_edges) {
+            const auto* edge = graph_.get_hyperedge(eid);
+            if (!edge) continue;
+            relation_types.insert(edge->relation);
+            neighbor_count++;
+        }
+
+        if (neighbor_count < 2) continue;
+
+        // High divergence = many different relation types relative to degree
+        double neighborhood_divergence = std::min(1.0,
+            static_cast<double>(relation_types.size()) / std::max(1, neighbor_count));
+
+        int src_div = static_cast<int>(nc.sources.size());
+        double community_spread = std::min(1.0, static_cast<double>(nc.community_keys.size()) / 3.0);
+
+        double score = 0.4 * neighborhood_divergence + 0.35 * community_spread
+                     + 0.25 * std::min(1.0, static_cast<double>(src_div) / 5.0);
+
+        if (score < 0.15) continue;
+        candidates.push_back({id, nc.label, score, neighborhood_divergence, community_spread, src_div, nc});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::CONCEPT_DRIFT);
+        ins.set_type(InsightType::CONCEPT_DRIFT);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.nc.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["neighborhood_divergence"] = c.neighborhood_divergence;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.src_div);
+        ins.score_breakdown["community_spread"] = c.community_spread;
+        ins.score_breakdown["total_appearances"] = static_cast<double>(c.nc.total_appearances);
+        ins.novelty_tags = {"epistemic", "concept_drift", "semantic_shift"};
+
+        std::stringstream desc;
+        desc << "Concept drift: '" << c.label
+             << "' is used with materially different local meanings across the graph"
+             << " (neighborhood_divergence=" << std::fixed << std::setprecision(2)
+             << c.neighborhood_divergence << ", community_spread=" << c.community_spread << ").";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding concept drift", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// premise_bottleneck: Hidden premises that many downstream claims rely on
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_premise_bottleneck(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding premise bottleneck", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Look at logical_entailment, rule, and argument_support insights
+    // Find seed_nodes that appear repeatedly across many such insights
+    struct PremiseStats {
+        std::string id;
+        std::string label;
+        int downstream_count = 0;
+        std::set<std::string> sources;
+        std::set<std::string> operator_types;
+        std::vector<std::string> witness_edges;
+    };
+
+    std::unordered_map<std::string, PremiseStats> premise_stats;
+
+    static const std::set<InsightType> reasoning_types = {
+        InsightType::LOGICAL_ENTAILMENT,
+        InsightType::RULE,
+        InsightType::ARGUMENT_SUPPORT,
+        InsightType::COMPOSITIONAL_REASONING,
+        InsightType::EXPLANATORY_CHAIN,
+        InsightType::CAUSAL_CHAIN
+    };
+
+    for (const auto& ins : collection.insights) {
+        if (reasoning_types.find(ins.type) == reasoning_types.end()) continue;
+
+        std::string type_str = insight_type_to_string(ins.type);
+
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& ps = premise_stats[nid];
+            ps.id = nid;
+            if (i < ins.seed_labels.size()) ps.label = ins.seed_labels[i];
+            ps.downstream_count++;
+            ps.operator_types.insert(type_str);
+            for (const auto& src : ins.source_documents) ps.sources.insert(src);
+            for (const auto& we : ins.witness_edges) {
+                if (ps.witness_edges.size() < 8) ps.witness_edges.push_back(we);
+            }
+        }
+    }
+
+    int max_downstream = 1;
+    for (const auto& [id, ps] : premise_stats) {
+        max_downstream = std::max(max_downstream, ps.downstream_count);
+    }
+
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        double indispensability;
+        int downstream_count;
+        int src_div;
+        PremiseStats ps;
+    };
+
+    std::vector<Candidate> candidates;
+    for (auto& [id, ps] : premise_stats) {
+        if (ps.label.empty() || is_generic_epistemic_label(ps.label)) continue;
+        if (ps.downstream_count < 2) continue;
+
+        double indispensability = static_cast<double>(ps.downstream_count) / max_downstream;
+        int src_div = static_cast<int>(ps.sources.size());
+        double premise_specificity = std::min(1.0, static_cast<double>(ps.operator_types.size()) / 4.0);
+
+        // Genericity penalty: penalize if it appears in too many operators (might be structural)
+        double genericity_penalty = ps.downstream_count > 10
+            ? std::min(0.5, static_cast<double>(ps.downstream_count - 10) / 20.0)
+            : 0.0;
+
+        double score = 0.4 * indispensability + 0.3 * premise_specificity
+                     + 0.2 * std::min(1.0, static_cast<double>(src_div) / 3.0)
+                     - 0.1 * genericity_penalty;
+
+        if (score < 0.15) continue;
+        candidates.push_back({id, ps.label, score, indispensability, ps.downstream_count, src_div, ps});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::PREMISE_BOTTLENECK);
+        ins.set_type(InsightType::PREMISE_BOTTLENECK);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.ps.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["downstream_claim_count"] = static_cast<double>(c.downstream_count);
+        ins.score_breakdown["indispensability"] = c.indispensability;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.src_div);
+        ins.score_breakdown["operator_diversity"] = static_cast<double>(c.ps.operator_types.size());
+        ins.novelty_tags = {"epistemic", "premise", "dependency"};
+
+        std::stringstream desc;
+        desc << "Premise bottleneck: '" << c.label
+             << "' acts as a hidden premise for " << c.downstream_count
+             << " downstream reasoning and integration claims.";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding premise bottleneck", 100, 100);
+    return results;
+}
+
+// -----------------------------------------------------------------------------
+// translation_gap: Theory-rich but practice-weak concept nodes
+// -----------------------------------------------------------------------------
+std::vector<Insight> DiscoveryEngine::find_translation_gap(const InsightCollection& collection) {
+    std::vector<Insight> results;
+    report_progress("Finding translation gap", 0, 100);
+
+    if (collection.insights.empty()) return results;
+
+    // Find nodes that have many theoretical relationships (taxonomy, domain_bridge)
+    // but few practical/outcome relationships (method_outcome, intervention_point)
+    struct NodeBalance {
+        std::string id;
+        std::string label;
+        int theory_count = 0;
+        int application_count = 0;
+        std::set<std::string> sources;
+        std::vector<std::string> witness_edges;
+    };
+
+    static const std::set<InsightType> theory_types = {
+        InsightType::TAXONOMY,
+        InsightType::DOMAIN_BRIDGE,
+        InsightType::LOGICAL_ENTAILMENT,
+        InsightType::COMPOSITIONAL_REASONING,
+        InsightType::RELATION_INDUCTION,
+        InsightType::ANALOGICAL_TRANSFER
+    };
+
+    static const std::set<InsightType> application_types = {
+        InsightType::METHOD_OUTCOME,
+        InsightType::INTERVENTION_POINT,
+        InsightType::CAUSAL_CHAIN,
+        InsightType::FEEDBACK_LOOP,
+        InsightType::CONFOUNDER
+    };
+
+    std::unordered_map<std::string, NodeBalance> balances;
+
+    for (const auto& ins : collection.insights) {
+        bool is_theory = (theory_types.find(ins.type) != theory_types.end());
+        bool is_application = (application_types.find(ins.type) != application_types.end());
+        if (!is_theory && !is_application) continue;
+
+        for (size_t i = 0; i < ins.seed_nodes.size(); ++i) {
+            const auto& nid = ins.seed_nodes[i];
+            auto& b = balances[nid];
+            b.id = nid;
+            if (i < ins.seed_labels.size()) b.label = ins.seed_labels[i];
+            if (is_theory) b.theory_count++;
+            if (is_application) b.application_count++;
+            for (const auto& src : ins.source_documents) b.sources.insert(src);
+            for (const auto& we : ins.witness_edges) {
+                if (b.witness_edges.size() < 8) b.witness_edges.push_back(we);
+            }
+        }
+    }
+
+    struct Candidate {
+        std::string id;
+        std::string label;
+        double score;
+        double theory_strength;
+        double application_coverage;
+        double gap_size;
+        int src_div;
+        NodeBalance b;
+    };
+
+    std::vector<Candidate> candidates;
+    int max_theory = 1;
+    for (const auto& [id, b] : balances) max_theory = std::max(max_theory, b.theory_count);
+
+    for (auto& [id, b] : balances) {
+        if (b.label.empty() || is_generic_epistemic_label(b.label)) continue;
+        if (b.theory_count < 2) continue;
+        // Must have significantly more theory than application
+        if (b.application_count >= b.theory_count) continue;
+
+        double theory_strength = static_cast<double>(b.theory_count) / max_theory;
+        double application_coverage = static_cast<double>(b.application_count)
+                                     / std::max(1, b.theory_count);
+        double gap_size = 1.0 - application_coverage;
+        int src_div = static_cast<int>(b.sources.size());
+
+        double score = 0.35 * theory_strength + 0.35 * gap_size
+                     + 0.3 * std::min(1.0, static_cast<double>(src_div) / 3.0);
+
+        if (score < 0.15) continue;
+        candidates.push_back({id, b.label, score, theory_strength, application_coverage, gap_size, src_div, b});
+    }
+
+    std::sort(candidates.begin(), candidates.end(),
+              [](const Candidate& a, const Candidate& b){ return a.score > b.score; });
+
+    size_t max_results = 15;
+    for (size_t i = 0; i < std::min(max_results, candidates.size()); ++i) {
+        const auto& c = candidates[i];
+        Insight ins;
+        ins.insight_id = make_insight_id(InsightType::TRANSLATION_GAP);
+        ins.set_type(InsightType::TRANSLATION_GAP);
+        ins.seed_nodes = {c.id};
+        ins.seed_labels = {c.label};
+        ins.witness_edges = c.b.witness_edges;
+        ins.evidence_chunk_ids = get_chunk_ids(ins.witness_edges);
+        ins.source_documents = get_source_documents(ins.witness_edges);
+        ins.score = c.score;
+        ins.score_breakdown["theory_strength"] = c.theory_strength;
+        ins.score_breakdown["application_coverage"] = c.application_coverage;
+        ins.score_breakdown["evaluation_coverage"] = c.application_coverage;
+        ins.score_breakdown["gap_size"] = c.gap_size;
+        ins.score_breakdown["source_diversity"] = static_cast<double>(c.src_div);
+        ins.novelty_tags = {"epistemic", "theory_to_practice", "translation_gap"};
+
+        std::stringstream desc;
+        desc << "Translation gap: '" << c.label
+             << "' is conceptually well-connected (theory_count=" << c.b.theory_count << ")"
+             << " but weakly linked to concrete evaluation and application evidence"
+             << " (application_count=" << c.b.application_count << ").";
+        ins.description = desc.str();
+
+        results.push_back(ins);
+    }
+
+    report_progress("Finding translation gap", 100, 100);
+    return results;
 }
 
 } // namespace kg
