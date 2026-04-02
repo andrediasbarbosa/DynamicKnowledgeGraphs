@@ -1,0 +1,31 @@
+# Graph-RAG Tool - Corporate Deployment (Azure-Only)
+# Minimal dependencies for corporate environments behind firewall
+# NO sentence-transformers - uses Azure OpenAI embeddings only
+
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+
+# Graph Database
+kuzu==0.7.1
+
+# LLM API (Azure OpenAI)
+openai==1.54.0
+
+# Data Validation
+pydantic==2.9.0
+
+# Vector Operations (for similarity calculations)
+numpy==1.24.3  # Pre-built wheels available for Windows
+
+# Installation:
+# 1. pip install -r requirements-azure.txt
+# 2. set EMBEDDING_MODE=azure  (Windows CMD)
+# 3. $env:EMBEDDING_MODE = "azure"  (PowerShell)
+# 4. python graph_rag_server.py
+# 5. Call /api/generate-embeddings with Azure credentials
+
+# Note: No model downloads required - works behind corporate firewall
+# Embeddings: Azure OpenAI text-embedding-3-small (1536 dimensions)
+# Cost: ~$0.0001 per 1K tokens

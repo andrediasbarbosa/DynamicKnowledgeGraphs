@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changing-Cordoba-An-Essay-on-the-first-Cordoban-Caliph Knowledge Discovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4fc3f7;
+            --secondary: #fbbf24;
+            --accent: #e879f9;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.2);
+            --theme-surprise: #e879f9;
+            --theme-gap: #fbbf24;
+            --theme-rule: #818cf8;
+            --theme-motif: #4ade80;
+            --theme-path: #38bdf8;
+            --theme-longchain: #a3e635;
+            --theme-metapath: #38bdf8;
+            --theme-community: #f97316;
+            --theme-hypothesis: #22d3ee;
+            --theme-mechanism: #22d3ee;
+            --theme-intersection-bridge: #06b6d4;
+            --theme-fusion: #06b6d4;
+            --theme-anomaly: #fb7185;
+            --theme-bottleneck: #f97316;
+            --theme-competing: #8b5cf6;
+            --theme-repair: #10b981;
+            --theme-crosscommunity: #0ea5e9;
+            --theme-author: #facc15;
+            --theme-contradiction: #f87171;
+            --theme-resolution: #34d399;
+            --theme-core: #60a5fa;
+            --theme-text: #a78bfa;
+            --theme-argument: #38bdf8;
+            --theme-active: #f59e0b;
+            --theme-method: #10b981;
+            --theme-centrality: #14b8a6;
+            --theme-community-detect: #3b82f6;
+            --theme-k-core: #f59e0b;
+            --theme-k-truss: #84cc16;
+            --theme-claim: #ec4899;
+            --theme-relation: #0ea5e9;
+            --theme-analogy: #a855f7;
+            --theme-uncertainty: #f97316;
+            --theme-counterfactual: #64748b;
+            --theme-hyperedge: #22c55e;
+            --theme-constrained: #eab308;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+        header h1 {
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .meta span { margin: 0 10px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        .card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+        .card-link:hover .card {
+            border-color: rgba(79, 195, 247, 0.5);
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            color: var(--primary);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .card .value {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        .card.bridges .value { color: var(--primary); }
+        .card.surprises .value { color: var(--theme-surprise); }
+        .card.completions .value { color: var(--theme-gap); }
+        .card.motifs .value { color: var(--theme-motif); }
+        .card.community .value { color: var(--theme-community); }
+        .card.pathrank .value { color: var(--theme-path); }
+        .card.longchain .value { color: var(--theme-longchain); }
+        .card.metapathpattern .value { color: var(--theme-metapath); }
+        .card.rules .value { color: var(--theme-rule); }
+        .card.embedding .value { color: var(--secondary); }
+        .card.hypothesis .value { color: var(--theme-hypothesis); }
+        .card.mechanism .value { color: var(--theme-mechanism); }
+        .card.intersectionbridge .value { color: var(--theme-intersection-bridge); }
+        .card.fusion .value { color: var(--theme-fusion); }
+        .card.anomaly .value { color: var(--theme-anomaly); }
+        .card.bottleneck .value { color: var(--theme-bottleneck); }
+        .card.competing .value { color: var(--theme-competing); }
+        .card.repair .value { color: var(--theme-repair); }
+        .card.crosscommunity .value { color: var(--theme-crosscommunity); }
+        .card.authorchain .value { color: var(--theme-author); }
+        .card.coauthorship .value { color: var(--theme-author); }
+        .card.citations .value { color: var(--theme-author); }
+        .card.contradiction .value { color: var(--theme-contradiction); }
+        .card.resolution .value { color: var(--theme-resolution); }
+        .card.coreperiphery .value { color: var(--theme-core); }
+        .card.textsimilarity .value { color: var(--theme-text); }
+        .card.argumentsupport .value { color: var(--theme-argument); }
+        .card.activelearning .value { color: var(--theme-active); }
+        .card.methodoutcome .value { color: var(--theme-method); }
+        .card.centrality .value { color: var(--theme-centrality); }
+        .card.communitydetect .value { color: var(--theme-community-detect); }
+        .card.kcore .value { color: var(--theme-k-core); }
+        .card.ktruss .value { color: var(--theme-k-truss); }
+        .card.claimstance .value { color: var(--theme-claim); }
+        .card.relationinduction .value { color: var(--theme-relation); }
+        .card.analogical .value { color: var(--theme-analogy); }
+        .card.uncertainty .value { color: var(--theme-uncertainty); }
+        .card.counterfactual .value { color: var(--theme-counterfactual); }
+        .card.hyperedge .value { color: var(--theme-hyperedge); }
+        .card.constrainedrule .value { color: var(--theme-constrained); }
+
+        /* Category overview styles */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+        .category-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            border-color: rgba(79, 195, 247, 0.4);
+            transform: translateY(-4px);
+        }
+        .category-card.combinatorial {
+            border-left: 4px solid #4ade80;
+        }
+        .category-card.exploratory {
+            border-left: 4px solid #4fc3f7;
+        }
+        .category-card.transformational {
+            border-left: 4px solid #e879f9;
+        }
+        .category-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+        .category-card h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+        .category-card.combinatorial h3 { color: #4ade80; }
+        .category-card.exploratory h3 { color: #4fc3f7; }
+        .category-card.transformational h3 { color: #e879f9; }
+        .category-card .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .category-card .description {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .category-card .stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .category-card .stat-item {
+            text-align: center;
+        }
+        .category-card .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .category-card.combinatorial .stat-value { color: #4ade80; }
+        .category-card.exploratory .stat-value { color: #4fc3f7; }
+        .category-card.transformational .stat-value { color: #e879f9; }
+        .category-card .stat-label {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+        section h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        section > p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .insight {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .insight.surprise { border-left-color: var(--accent); }
+        .insight.completion { border-left-color: var(--secondary); }
+        .insight.motif { border-left-color: #66bb6a; }
+        .insight.rule { border-left-color: #ab47bc; }
+        .insight.contradiction { border-left-color: var(--theme-contradiction); }
+        .insight.entity-resolution { border-left-color: var(--theme-resolution); }
+        .insight.core-periphery { border-left-color: var(--theme-core); }
+        .insight.text-similarity { border-left-color: var(--theme-text); }
+        .insight.argument-support { border-left-color: var(--theme-argument); }
+        .insight.active-learning { border-left-color: var(--theme-active); }
+        .insight.method-outcome { border-left-color: var(--theme-method); }
+        .insight h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .insight.surprise h4 { color: var(--accent); }
+        .insight.contradiction h4 { color: var(--theme-contradiction); }
+        .insight.entity-resolution h4 { color: var(--theme-resolution); }
+        .insight.core-periphery h4 { color: var(--theme-core); }
+        .insight.text-similarity h4 { color: var(--theme-text); }
+        .insight.argument-support h4 { color: var(--theme-argument); }
+        .insight.active-learning h4 { color: var(--theme-active); }
+        .insight.method-outcome h4 { color: var(--theme-method); }
+        .insight p { margin-bottom: 10px; }
+        .evidence {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .entity {
+            background: rgba(79, 195, 247, 0.2);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .module {
+            background: rgba(15, 23, 42, 0.65);
+            border-radius: 14px;
+            padding: 24px;
+            margin: 30px 0;
+            border: 1px solid var(--border);
+            border-left-width: 4px;
+        }
+        .module-header h2 {
+            margin-bottom: 8px;
+        }
+        .module-header .definition {
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .module-header .count {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+        .spotlight {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 10px;
+            padding: 16px;
+            margin: 18px 0;
+        }
+        .spotlight h3 {
+            margin-bottom: 8px;
+            font-size: 1.05em;
+            color: var(--text);
+        }
+        .spotlight .narrative {
+            font-size: 1.05em;
+            color: var(--text);
+        }
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 10px 0 30px;
+        }
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .stat .label {
+            font-size: 0.78em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .stat .value {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 8px;
+        }
+        .data-table th, .data-table td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table th {
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .data-table td:last-child {
+            text-align: right;
+            font-weight: 500;
+        }
+        .recommendations {
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .recommendations h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .recommendations ol {
+            margin-left: 20px;
+        }
+        .recommendations li {
+            margin: 10px 0;
+        }
+        .recommendations strong {
+            color: var(--primary);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        .toc {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: var(--primary);
+        }
+        .toc .count {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .toc .category-toc > a {
+            font-weight: 600;
+            font-size: 1.05em;
+            display: block;
+            margin: 12px 0 8px 0;
+            color: var(--primary);
+        }
+        .toc .sub-toc {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        .toc .sub-toc li {
+            margin: 6px 0;
+        }
+
+        /* Category section headers */
+        .category-section-header {
+            margin: 50px 0 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            border-radius: 16px;
+            border-left: 5px solid var(--primary);
+        }
+        .category-section-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+            color: var(--primary);
+        }
+        .category-section-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1.1em;
+        }
+
+        /* Interactive features CSS */
+        .search-controls {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .search-controls input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .search-controls input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .filter-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-group label {
+            cursor: pointer;
+            padding: 6px 12px;
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .filter-group label:hover {
+            background: rgba(79, 195, 247, 0.2);
+        }
+        .filter-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+        .highlighted {
+            background: rgba(251, 191, 36, 0.3) !important;
+            box-shadow: 0 0 0 2px var(--theme-gap);
+            animation: pulse 0.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .entity, .data-table td:first-child {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .entity:hover, .data-table td:first-child:hover {
+            background: rgba(79, 195, 247, 0.15);
+        }
+        section h2 {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding-left: 30px;
+        }
+        section h2::before {
+            content: '▼';
+            position: absolute;
+            left: 0;
+            transition: transform 0.2s;
+        }
+        section.collapsed h2::before {
+            transform: rotate(-90deg);
+        }
+        .export-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        .load-more-btn {
+            margin: 15px auto;
+            display: block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .load-more-btn:hover {
+            background: rgba(79, 195, 247, 0.8);
+        }
+        .chart-container {
+            max-width: 700px;
+            min-height: 250px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        @media print {
+            .search-controls, .export-btn, .load-more-btn, .chart-container {
+                display: none !important;
+            }
+            section.collapsed > *:not(h2) {
+                display: block !important;
+            }
+            section h2::before {
+                content: '' !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Changing-Cordoba-An-Essay-on-the-first-Cordoban-Caliph Knowledge Discovery</h1>
+            <div class="meta">
+                <span>Generated: 2026-03-10 15:20:32 UTC</span>
+                <span>|</span>
+                <span>Source: Changing-Cordoba-An-Essay-on-the-first-Cordoban-Caliph.pdf, CompanionToCordoba.pdf, Heritage of Al-Andaluz.pdf, HIST351-4.1-Al-Andalus.pdf, Visual Construction Umayyad.pdf</span>
+                <span>|</span>
+                <span>Run ID: run_20260208_235615</span>
+            </div>
+        </header>
+
+        <section id="statistics" class="stats-bar">
+            <div class="stat">
+                <div class="label">Total Entities</div>
+                <div class="value">1037</div>
+            </div>
+            <div class="stat">
+                <div class="label">Total Relationships</div>
+                <div class="value">530</div>
+            </div>
+            <div class="stat">
+                <div class="label">Average Degree</div>
+                <div class="value">1.40</div>
+            </div>
+            <div class="stat">
+                <div class="label">Insights Discovered</div>
+                <div class="value">120</div>
+            </div>
+        </section>
+
+        <section id="categories">
+            <h2>Knowledge Discovery Categories</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">
+                Insights are classified into three categories based on how they generate new knowledge from the graph structure.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95em;">
+                <strong>Average Score</strong> indicates the mean confidence/quality score across all insights in each category,
+                ranging from 0.0 (low confidence) to 1.0 (high confidence). Higher scores suggest more reliable or significant discoveries.
+            </p>
+
+            <div class="categories-grid">
+
+                <div class="category-card combinatorial">
+                    <div class="icon">🧩</div>
+                    <h3>Combinatorial</h3>
+                    <div class="subtitle">Pattern Detection & Structural Combinations</div>
+                    <div class="description">
+                        These insights emerge from combining existing knowledge in new ways,
+                        identifying patterns, structures, and motifs that reveal the underlying
+                        organization of the knowledge graph.
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">65</div>
+                            <div class="stat-label">Insights</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1.00</div>
+                            <div class="stat-label">Avg Score</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card exploratory">
+                    <div class="icon">🔍</div>
+                    <h3>Exploratory</h3>
+                    <div class="subtitle">Path Finding & Connection Discovery</div>
+                    <div class="description">
+                        These insights discover new connections, paths, and bridges between concepts,
+                        exploring previously unexplored areas of the knowledge space and revealing
+                        hidden relationships.
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">20</div>
+                            <div class="stat-label">Insights</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1.00</div>
+                            <div class="stat-label">Avg Score</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-card transformational">
+                    <div class="icon">🔄</div>
+                    <h3>Transformational</h3>
+                    <div class="subtitle">Reframing & Perspective Shifts</div>
+                    <div class="description">
+                        These insights transform understanding by reframing concepts, generating
+                        hypotheses, identifying contradictions, and suggesting alternative causal
+                        mechanisms or paradigms.
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">35</div>
+                            <div class="stat-label">Insights</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">1.00</div>
+                            <div class="stat-label">Avg Score</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>Executive Summary</h2>
+            <p>This report presents the results of automated knowledge discovery analysis.
+               A total of <strong>120 insights</strong> were identified.</p>
+
+            <div class="summary-cards">
+                <a class="card-link" href="#module-core-periphery">
+                    <div class="card coreperiphery">
+                        <h3>Core–Periphery</h3>
+                        <div class="value">15</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-centrality">
+                    <div class="card centrality">
+                        <h3>Centrality</h3>
+                        <div class="value">1</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-community-detection">
+                    <div class="card communitydetect">
+                        <h3>Communities</h3>
+                        <div class="value">1</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-k-core">
+                    <div class="card kcore">
+                        <h3>k-Core</h3>
+                        <div class="value">1</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-k-truss">
+                    <div class="card ktruss">
+                        <h3>k-Truss</h3>
+                        <div class="value">37</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-cross-community-bridge-map">
+                    <div class="card crosscommunity">
+                        <h3>Community Bridge Maps</h3>
+                        <div class="value">2</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-meta-pattern">
+                    <div class="card metapathpattern">
+                        <h3>Meta-Patterns</h3>
+                        <div class="value">1</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-confounder">
+                    <div class="card confounder">
+                        <h3>Confounders</h3>
+                        <div class="value">15</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-taxonomy">
+                    <div class="card taxonomy">
+                        <h3>Taxonomic Relations</h3>
+                        <div class="value">7</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-domain-bridge">
+                    <div class="card domain-bridge">
+                        <h3>Domain Bridges</h3>
+                        <div class="value">20</div>
+                    </div>
+                </a>
+                <a class="card-link" href="#module-logical-entailment">
+                    <div class="card logical-entailment">
+                        <h3>Logical Entailments</h3>
+                        <div class="value">20</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Interactive Chart -->
+            <div class="chart-container">
+                <canvas id="insightChart"></canvas>
+            </div>
+        </section>
+
+        <nav class="toc">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#statistics">Knowledge Graph Statistics</a></li>
+                <li><a href="#categories">Knowledge Discovery Categories</a></li>
+                <li class="category-toc"><a href="#combinatorial-section">🧩 Combinatorial Insights</a>
+                    <ul class="sub-toc">
+                        <li><a href="#module-k-core">K-Core Subgraphs</a> <span class="count">(1)</span></li>
+                        <li><a href="#module-k-truss">K-Truss Subgraphs</a> <span class="count">(37)</span></li>
+                        <li><a href="#module-community-detection">Community Detection</a> <span class="count">(1)</span></li>
+                        <li><a href="#module-core-periphery">Core–Periphery</a> <span class="count">(15)</span></li>
+                        <li><a href="#module-taxonomy">Taxonomic Relations</a> <span class="count">(7)</span></li>
+                        <li><a href="#module-centrality">Centrality Analysis</a> <span class="count">(1)</span></li>
+                    </ul>
+                </li>
+                <li class="category-toc"><a href="#exploratory-section">🔍 Exploratory Insights</a>
+                    <ul class="sub-toc">
+                        <li><a href="#module-domain-bridge">Domain Bridges</a> <span class="count">(20)</span></li>
+                        <li><a href="#module-cross-community-bridge-map">Cross-Community Bridge Maps</a> <span class="count">(2)</span></li>
+                        <li><a href="#module-meta-pattern">Meta-Patterns</a> <span class="count">(1)</span></li>
+                    </ul>
+                </li>
+                <li class="category-toc"><a href="#transformational-section">🔄 Transformational Insights</a>
+                    <ul class="sub-toc">
+                        <li><a href="#module-confounder">Confounders</a> <span class="count">(15)</span></li>
+                        <li><a href="#module-logical-entailment">Logical Entailments</a> <span class="count">(20)</span></li>
+                    </ul>
+                </li>
+                <li><a href="#recommendations">Conclusions &amp; Recommendations</a></li>
+            </ul>
+        </nav>
+
+        <div class="category-section-header" id="combinatorial-section">
+            <h2>🧩 Combinatorial Insights</h2>
+            <p>Pattern Detection & Structural Combinations - insights that emerge from combining existing knowledge in new ways and identifying patterns</p>
+        </div>
+
+        <section id="module-core-periphery" class="module" style="border-left-color: var(--theme-core)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-core)">Core–Periphery / Hub–Authority</h2>
+                <p class="definition">Maps central hubs versus peripheral entities using degree, hub/authority, and integration signals.</p>
+                <div class="count">Total: 15</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-core);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Core–Periphery</strong> operator combines degree centrality, hub/authority balance (source vs. target roles), and hub integration scores to identify structurally central entities. Low-scoring nodes are treated as peripheral.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Core nodes anchor the graph’s structure, while peripheral nodes may represent niche concepts or sparse evidence. Understanding both helps prioritize validation and curation.</p>
+            </div>
+            <div class="spotlight">
+                <h3>Top Insight Analysis</h3>
+                <p class="narrative">The analysis reveals that the entity &quot;North Africa&quot; is positioned on the periphery of the knowledge graph, indicating it plays a minimal role in the overall structure and connections within the graph. With a degree centrality, hub score, and authority score of zero, it suggests that &quot;North Africa&quot; is not frequently referenced or linked to other entities in this dataset. This finding is significant because it may imply that there is limited information or relationships associated with North Africa in the current context, which could hinder a comprehensive understanding of the region's relevance in the broader domain. Understanding this peripheral status could prompt further investigation into why North Africa is underrepresented and how it might be better integrated into discussions or analyses related to the area.</p>
+            </div>
+            <!-- Core Nodes -->
+            <h4 style="color: var(--theme-core); margin-top: 20px; margin-bottom: 10px;">🔵 Core Nodes (Highly Connected Hubs)</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Degree</th><th>Hub</th><th>Authority</th></tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(74, 222, 128, 0.05);">
+                        <td><strong><span class="entity">al-andalus</span></strong></td>
+                        <td>1.00</td>
+                        <td>1.00</td>
+                        <td>1.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Periphery Nodes -->
+            <h4 style="color: var(--text-muted); margin-top: 30px; margin-bottom: 10px;">⚪ Periphery Nodes (Low Connectivity)</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Degree</th><th>Hub</th><th>Authority</th></tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">north africa</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">muslim population</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">caliph of the umayyad caliphate</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">islamic law</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">jiha al-gharbiyya</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">jiha al-jawfiyya</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">al-madīnat al-zāhira</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">political history of al-andalus</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">gibraltar</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr style="background: rgba(148, 163, 184, 0.03);">
+                        <td><span class="entity">epigraph</span></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="module-centrality" class="module" style="border-left-color: var(--theme-centrality)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-centrality)">Centrality</h2>
+                <p class="definition">Ranks entities by structural importance in the bipartite projection.</p>
+                <div class="count">Total: 1</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-centrality);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Centrality</strong> operator runs PageRank on the bipartite graph formed by entities and hyperedges, highlighting structurally influential nodes.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Central entities are often critical for connecting multiple relationship contexts.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Centrality</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="entity">al-andalus</span></td>
+                        <td>1.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="module-community-detection" class="module" style="border-left-color: var(--theme-community-detect)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-community-detect)">Community Detection</h2>
+                <p class="definition">Finds dense clusters via Louvain on the projected graph.</p>
+                <div class="count">Total: 1</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-community-detect);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Community Detection</strong> operator clusters entities using a Louvain-style modularity optimization on the projected graph.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Communities represent topic or subdomain structure in the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Representative Entities</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="entity">muslim</span> + <span class="entity">christian</span> + <span class="entity">jew</span></td>
+                        <td>1.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="module-k-core" class="module" style="border-left-color: var(--theme-k-core)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-k-core)">k-Core Nodes</h2>
+                <p class="definition">Highlights entities in tightly connected cores.</p>
+                <div class="count">Total: 1</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-k-core);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>k-Core</strong> operator computes the core number of each node on the projected graph, identifying the largest k for which the node remains connected to at least k neighbors. Higher core numbers indicate denser local connectivity.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> k-cores reveal robust, tightly knit regions that often represent stable conceptual hubs or well-supported areas of the knowledge graph.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entity</th><th>Core Number</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="entity">ahmed toufiq</span></td>
+                        <td>8</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="module-k-truss" class="module" style="border-left-color: var(--theme-k-truss)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-k-truss)">k-Truss Edges</h2>
+                <p class="definition">Finds triangle-reinforced edges in the projected graph.</p>
+                <div class="count">Total: 37</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-k-truss);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>k-Truss</strong> operator scores edges by the number of shared neighbors (triangles) in the projected graph. Edges supported by many triangles are retained in higher-order trusses.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Triangle-reinforced edges often indicate cohesive substructures and more reliable associations.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entities</th><th>Triangle Support</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="entity">antoine m. wilmering</span> + <span class="entity">jack soultanian</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">antoine m. wilmering</span> + <span class="entity">le minbar de la mosquée kutubiyya</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">antoine m. wilmering</span> + <span class="entity">stefano carboni</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">andrew zawacki</span> + <span class="entity">hbibi el mostafa</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">christian</span> + <span class="entity">jew</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">jonathan bloom</span> + <span class="entity">mark d. minor</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">jonathan bloom</span> + <span class="entity">stefano carboni</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">jonathan bloom</span> + <span class="entity">le minbar de la mosquée kutubiyya</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">jack soultanian</span> + <span class="entity">stefano carboni</span></td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">ahmed toufiq</span> + <span class="entity">andrew zawacki</span></td>
+                        <td>7</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="module-taxonomy" class="module" style="border-left-color: var(--theme-motif)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-motif)">Taxonomy</h2>
+                <p class="definition">Hierarchical is-a and part-of relationships.</p>
+                <div class="count">Total: 7</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-motif);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Taxonomy</strong> detector identifies hierarchical edges (is-a, instance-of, type-of, part-of, subclass-of) in the graph and assembles them into consistent hierarchical trees. It resolves cross-edges, detects inconsistencies (e.g., circular inheritance), and scores relations by consistency and evidence support.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Explicit taxonomic structure enables class-level inference, improves ontological consistency, and supports classification algorithms that exploit the hierarchy. It is foundational for knowledge graph reasoning: an entity that is-a X inherits all properties of X without requiring them to be explicitly stated for each instance.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Hierarchy</th><th>Confidence</th><th>Explanation</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="entity">josé martínez delgado</span> + <span class="entity">university of granada</span></td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a clear hierarchical relationship indicating that &quot;José Martínez Delgado&quot; is classified as part of the &quot;University of Granada.&quot; This finding is significant because it suggests that José Martínez Delgado is likely a notable figure associated with the university, possibly as a faculty member, researcher, or alumnus. Understanding this relationship helps clarify the connections between individuals and institutions within the academic domain, which can enhance our knowledge of their contributions and influence in their respective fields.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">maría antonia martínez-núñez</span> + <span class="entity">arabic and islamic study</span></td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that María Antonia Martínez-Núñez is classified under the category of Arabic and Islamic study, indicating a hierarchical relationship where she is recognized as a significant figure within this academic field. This finding is significant because it highlights her contributions or relevance to the study of Arabic and Islamic culture, potentially guiding researchers and students to her work for deeper insights. Understanding this relationship can enhance our comprehension of the domain by illustrating how individual scholars fit into broader academic classifications, thereby enriching the discourse around Arabic and Islamic studies.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">maría antonia martínez-núñez</span> + <span class="entity">university of malaga</span></td>
+                        <td>1.00</td>
+                        <td>The analysis has revealed a clear hierarchical relationship indicating that María Antonia Martínez-Núñez is associated with the University of Malaga, suggesting that she is either a member of the university or holds a significant role within it. This finding is significant because it helps clarify the organizational structure of academic entities, showing how individuals are connected to institutions. Understanding this relationship can enhance our knowledge of academic networks and the influence of specific individuals within educational contexts, potentially guiding future research or collaborations in the field.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">alberto javier montejo</span> + <span class="entity">junta de andalucía</span></td>
+                        <td>1.00</td>
+                        <td>The analysis has revealed a clear hierarchical relationship where &quot;Alberto Javier Montejo&quot; is classified as part of the &quot;Junta de Andalucía.&quot; This means that he holds a position or role within this governmental body, which is significant because it highlights his connection to regional governance in Andalusia, Spain. Understanding this relationship helps clarify the structure of political entities in the region and can provide insights into how individual roles contribute to broader governmental functions. This finding emphasizes the importance of individuals within organizational frameworks, illustrating how personal identities are intertwined with institutional structures.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">alberto león muñoz</span> + <span class="entity">university of córdoba</span></td>
+                        <td>1.00</td>
+                        <td>The analysis has revealed a clear hierarchical relationship indicating that &quot;Alberto León Muñoz&quot; is classified as part of or associated with the &quot;University of Córdoba.&quot; This finding is significant because it highlights the connection between an individual and an academic institution, suggesting that Alberto León Muñoz may be a notable figure within that university, possibly as a faculty member or researcher. Understanding this relationship can enhance our knowledge of the academic landscape, illustrating how individuals contribute to and are categorized within educational institutions.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">carlos márquez</span> + <span class="entity">university of córdoba</span></td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a hierarchical relationship indicating that &quot;Carlos Márquez&quot; is classified as a part of or associated with the &quot;University of Córdoba.&quot; This finding is significant because it suggests that Carlos Márquez may be an important figure within the university, potentially as a faculty member, researcher, or notable alumnus. Understanding this relationship helps clarify the connections between individuals and institutions in the academic domain, which can enhance our knowledge of academic networks and influence within educational settings.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">josé martínez delgado</span> + <span class="entity">hebrew language</span></td>
+                        <td>1.00</td>
+                        <td>The analysis has revealed a surprising hierarchical relationship where &quot;José Martínez Delgado&quot; is classified as a type of &quot;Hebrew language.&quot; This finding suggests that there may be a specific context or framework in which José Martínez Delgado is associated with the Hebrew language, possibly indicating his contributions to its study or a unique perspective he offers. Understanding this relationship could enhance our comprehension of how individuals and languages interact within cultural or academic domains, potentially leading to new insights about language influence and identity.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="category-section-header" id="exploratory-section">
+            <h2>🔍 Exploratory Insights</h2>
+            <p>Path Finding & Connection Discovery - insights that discover new connections, paths, and bridges between concepts</p>
+        </div>
+
+        <section id="module-cross-community-bridge-map" class="module" style="border-left-color: var(--theme-bridge)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-bridge)">Cross-Community Bridge Mapping</h2>
+                <p class="definition">Maps bridge entities to the communities they connect, revealing inter-cluster knowledge flow.</p>
+                <div class="count">Total: 2</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-bridge);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Bridge Mapping</strong> operator takes previously identified bridges and determines which communities each bridge connects. It scores bridges by the number of distinct communities they link.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Bridges that connect many communities are critical for cross-domain knowledge transfer. High-connectivity bridges enable interdisciplinary synthesis and represent boundary-spanning concepts.</p>
+            </div>
+
+            <div class="insight bridge-map">
+                <h4>1. al-andalus</h4>
+                <p><strong>Communities Connected:</strong> 7</p>
+                <p>Bridge 'al-andalus' connects 7 communities</p>
+            </div>
+
+            <div class="insight bridge-map">
+                <h4>2. great mosque of cordoba</h4>
+                <p><strong>Communities Connected:</strong> 5</p>
+                <p>Bridge 'great mosque of cordoba' connects 5 communities</p>
+            </div>
+        </section>
+
+        <section id="module-meta-pattern" class="module" style="border-left-color: var(--theme-motif)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-motif)">Meta-Pattern Discovery</h2>
+                <p class="definition">Identifies patterns across patterns—recurring structural templates that appear multiple times.</p>
+                <div class="count">Total: 1</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-motif);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Meta-Pattern</strong> operator analyzes existing patterns (motifs, k-trusses) to find structural similarities. It groups patterns by size and identifies frequently recurring configurations.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Meta-patterns reveal the "grammar" of the knowledge graph—fundamental structural building blocks that recur across domains. They enable pattern-based querying and structural abstraction.</p>
+            </div>
+
+            <div class="insight meta-pattern">
+                <h4>1. 2-node pattern (57 occurrences)</h4>
+                <p><strong>Sample instances:</strong> god, muhammad | caliphate of al-andalus, roman baetica | hugh kennedy, muslim spain and portugal | god, jerusalem | cneru research unit, hum 882 research group</p>
+            </div>
+        </section>
+
+        <section id="module-domain-bridge" class="module" style="border-left-color: var(--theme-crosscommunity)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-crosscommunity)">Domain Bridges</h2>
+                <p class="definition">Cross-domain or interdisciplinary connector nodes.</p>
+                <div class="count">Total: 20</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-crosscommunity);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Domain Bridge</strong> detector computes cross-community edge ratios for each node. Nodes with a high proportion of edges crossing community boundaries — connecting to entities in multiple distinct clusters with diverse relation types — are flagged as domain bridges. The score reflects both the number of domains bridged and the semantic diversity of relations.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Domain bridges sit at the intellectual intersection of multiple fields. They often represent the most productive areas for interdisciplinary research, as they connect concepts that are independently studied but rarely linked. These nodes are prime starting points for cross-domain hypothesis generation.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Bridge</th><th>Domains</th><th>Strength</th><th>Significance</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>spanish identity</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the concept of &quot;Spanish identity&quot; serves as a crucial link between eight different fields of knowledge. This means that insights and information from these separate areas can be shared and integrated, fostering a richer understanding of Spanish identity from various perspectives. The significance of this finding lies in its potential to enhance interdisciplinary collaboration, allowing researchers and scholars to explore how Spanish identity influences and is influenced by diverse domains. Ultimately, this could lead to a more comprehensive understanding of cultural, social, and historical factors that shape Spanish identity today.</td>
+                    </tr>
+                    <tr>
+                        <td>great mosque</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the term &quot;great mosque&quot; serves as a crucial link between five different fields of knowledge, acting as a domain bridge. This is significant because it highlights how a single concept can facilitate the exchange of ideas and insights across various disciplines, potentially enriching our understanding of cultural, architectural, religious, and historical contexts. By recognizing the &quot;great mosque&quot; as a connector, we can better appreciate the interconnectedness of these domains and explore how they influence one another, leading to a more comprehensive view of the subject.</td>
+                    </tr>
+                    <tr>
+                        <td>mihrab</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the term &quot;mihrab&quot; serves as a crucial connection point between five different domains or disciplines. This means that &quot;mihrab&quot; is not just relevant in one area, but it bridges various fields, allowing for the sharing of knowledge and insights across these separate domains. The significance of this finding lies in its potential to foster interdisciplinary collaboration and innovation, as it highlights how concepts from one field can inform and enhance understanding in another. By recognizing &quot;mihrab&quot; as a domain bridge, researchers and practitioners can explore new perspectives and applications that may not have been considered within isolated disciplines.</td>
+                    </tr>
+                    <tr>
+                        <td>a companion to late antique and medieval islamic cordoba</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the entity &quot;a companion to late antique and medieval Islamic Cordoba&quot; serves as a crucial link between five different domains of knowledge. This is significant because it highlights how this particular work can facilitate the exchange of ideas and insights across various fields, such as history, culture, religion, and art. By bridging these separate areas, it enhances our understanding of the interconnectedness of disciplines during a pivotal time in history, suggesting that studying this companion could lead to richer, more comprehensive insights into the late antique and medieval periods.</td>
+                    </tr>
+                    <tr>
+                        <td>umayyad</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the node &quot;umayyad&quot; serves as a domain bridge, linking five different areas of knowledge or disciplines. This is significant because it suggests that the Umayyad period, which is often studied in isolation within historical contexts, can provide valuable insights across various fields, such as politics, culture, religion, and economics. By recognizing this connection, researchers and scholars can foster interdisciplinary collaboration, leading to a richer and more nuanced understanding of the Umayyad influence and its broader implications in history.</td>
+                    </tr>
+                    <tr>
+                        <td>islamic culture</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that &quot;Islamic culture&quot; serves as a crucial connection point, or domain bridge, linking five different areas of knowledge. This is significant because it highlights how Islamic culture can facilitate the exchange of ideas and insights across various disciplines, promoting a richer understanding of both the culture itself and the fields it intersects with. By recognizing this connection, researchers and scholars can explore interdisciplinary approaches that enhance our comprehension of Islamic culture and its broader impact on society and other domains.</td>
+                    </tr>
+                    <tr>
+                        <td>antonio monterroso-checa</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that Antonio Monterroso-Checa serves as a crucial link between five different fields of knowledge, acting as a domain bridge. This is significant because it suggests that he has the potential to facilitate the exchange of ideas and insights across these diverse areas, which can lead to innovative solutions and a deeper understanding of complex issues. By connecting these separate domains, his work may encourage interdisciplinary collaboration, ultimately enriching the research landscape and fostering new discoveries.</td>
+                    </tr>
+                    <tr>
+                        <td>dome of the rock</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the &quot;Dome of the Rock&quot; serves as a crucial connection point between five different domains or disciplines. This means that it is not just an important religious or historical site, but also a bridge that facilitates the sharing of knowledge and insights across various fields, such as architecture, history, religion, culture, and politics. Understanding this connection can enhance our appreciation of the Dome's significance, as it highlights how a single entity can influence and enrich multiple areas of study, fostering interdisciplinary collaboration and deeper insights into its broader impact.</td>
+                    </tr>
+                    <tr>
+                        <td>imam ghazali</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that the figure of Imam Ghazali serves as a crucial link between six different domains of knowledge, acting as a domain bridge. This is significant because it highlights how his ideas and teachings can facilitate the transfer of insights across various fields, promoting interdisciplinary understanding. By recognizing Imam Ghazali's role in connecting these separate areas, we can better appreciate the broader impact of his work and how it can inform contemporary discussions in multiple disciplines. This discovery encourages further exploration of how historical figures can influence diverse fields of study today.</td>
+                    </tr>
+                    <tr>
+                        <td>córdoba</td>
+                        <td>-</td>
+                        <td>1.00</td>
+                        <td>The discovery reveals that the node &quot;córdoba&quot; serves as a domain bridge, linking six different areas of knowledge or disciplines. This is significant because it suggests that insights and information can flow between these otherwise separate domains, fostering interdisciplinary collaboration and innovation. Understanding how &quot;córdoba&quot; connects these diverse fields could lead to new perspectives and solutions that might not emerge within a single discipline, highlighting the importance of cross-domain interactions in knowledge advancement.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="category-section-header" id="transformational-section">
+            <h2>🔄 Transformational Insights</h2>
+            <p>Reframing & Perspective Shifts - insights that transform understanding by reframing concepts, generating hypotheses, and suggesting alternative explanations</p>
+        </div>
+
+        <section id="module-confounder" class="module" style="border-left-color: var(--theme-anomaly)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-anomaly)">Confounders</h2>
+                <p class="definition">Potential confounding variables in causal relationships.</p>
+                <div class="count">Total: 15</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-anomaly);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Confounder Detector</strong> searches for third variables connected to both ends of a suspected causal relation. For each candidate causal pair A &rarr; C, it identifies entities B that share edges with both A and C, scoring B by how strongly it is associated with each endpoint and how likely it is to be a genuine shared cause rather than a coincidental neighbor.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Confounders can make spurious correlations appear causal. Identifying them early guides researchers to control for these variables in statistical or experimental analyses, preventing false causal conclusions and improving the credibility of derived hypotheses.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Confounder</th><th>Relation</th><th>Association</th><th>Impact</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>abrahamic tradition</td>
+                        <td>jew → almohad</td>
+                        <td>1.00</td>
+                        <td>The analysis has identified a potential confounder in the relationship between the concepts of 'jew,' 'abrahamic tradition,' and 'almohad.' This means that the presence of 'jew' may influence both the 'abrahamic tradition' and the 'almohad,' suggesting that it could be a common factor affecting how these two entities relate to each other. Understanding this connection is significant because it highlights the importance of considering shared influences when studying cultural or religious dynamics. This finding could lead to a deeper comprehension of how different traditions interact and evolve, particularly in historical contexts where these influences are prominent.</td>
+                    </tr>
+                    <tr>
+                        <td>abdullah geelah</td>
+                        <td>al-andalus → al-andalus</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that 'al-andalus' acts as a confounder in the relationship involving 'abdullah geelah' and itself. This means that 'al-andalus' influences both 'abdullah geelah' and the broader context of 'al-andalus', suggesting that any observed effects between these entities might be misleading if we don't account for this common influence. Understanding this confounding relationship is significant because it highlights the need to control for 'al-andalus' when examining the dynamics involving 'abdullah geelah', ensuring that our conclusions about their interactions are accurate. This finding emphasizes the complexity of relationships within historical or cultural contexts, where one entity can significantly shape the understanding of others.</td>
+                    </tr>
+                    <tr>
+                        <td>aesed</td>
+                        <td>al-andalus → ancient egypt</td>
+                        <td>1.00</td>
+                        <td>The analysis has identified 'al-andalus' as a potential confounder in the relationship between 'aesed' and 'ancient egypt.' This means that 'al-andalus' may influence both of these entities, suggesting that any observed connections between 'aesed' and 'ancient egypt' could be misleading if we don't account for the impact of 'al-andalus.' Understanding this confounding relationship is significant because it highlights the importance of considering common causes in historical or cultural studies, which can lead to more accurate interpretations of how these entities interact. By recognizing 'al-andalus' as a common influence, researchers can better understand the dynamics at play and avoid drawing incorrect conclusions about the relationships between these historical contexts.</td>
+                    </tr>
+                    <tr>
+                        <td>aesed</td>
+                        <td>al-andalus → almoravid</td>
+                        <td>1.00</td>
+                        <td>The analysis has identified 'al-andalus' as a confounder in the relationship between 'aesed' and 'almoravid.' This means that 'al-andalus' influences both of these entities, suggesting that any observed connection between 'aesed' and 'almoravid' might actually be driven by their shared association with 'al-andalus.' Understanding this relationship is significant because it highlights the importance of considering common causes when analyzing historical or cultural interactions, ensuring that conclusions drawn about 'aesed' and 'almoravid' are accurate and not misleading. This finding can help researchers better understand the dynamics of these entities within the broader context of their historical significance.</td>
+                    </tr>
+                    <tr>
+                        <td>aesed</td>
+                        <td>al-andalus → al-andalus</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that 'al-andalus' acts as a confounder in the relationship between 'aesed' and itself, meaning it influences both entities. This is significant because it suggests that any observed effects or relationships involving 'aesed' may actually be driven by 'al-andalus', rather than a direct connection between 'aesed' and 'al-andalus'. Understanding this confounding effect is crucial for accurately interpreting the dynamics within this domain, as it highlights the need to control for 'al-andalus' when analyzing the interactions between these entities.</td>
+                    </tr>
+                    <tr>
+                        <td>agricultural process</td>
+                        <td>spain → al-andalus</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that 'Spain' acts as a confounder in the relationship between 'agricultural process' and 'Al-Andalus.' This means that Spain influences both the agricultural practices and the historical context of Al-Andalus, suggesting that any observed effects between these two entities might actually be driven by their shared connection to Spain. Understanding this confounding relationship is significant because it highlights the importance of considering broader geographical and historical factors when studying agricultural developments in Al-Andalus, ensuring that conclusions drawn are accurate and reflective of the true influences at play.</td>
+                    </tr>
+                    <tr>
+                        <td>aesed</td>
+                        <td>al-andalus → alfonso, esperanza</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that 'al-andalus' acts as a confounder in the relationships involving 'aesed' and 'alfonso, esperanza.' This means that 'al-andalus' influences both of these entities, suggesting that any observed effects between them might actually be due to the impact of 'al-andalus' rather than a direct relationship. Understanding this connection is significant because it highlights the importance of considering common causes when analyzing relationships in historical or cultural contexts. By recognizing 'al-andalus' as a potential confounder, researchers can gain clearer insights into how these entities interact and the broader implications of their relationships.</td>
+                    </tr>
+                    <tr>
+                        <td>al-andalus</td>
+                        <td>al-andalus → alfonso, esperanza</td>
+                        <td>1.00</td>
+                        <td>The analysis has identified 'al-andalus' as a potential confounder in the relationship between 'alfonso' and 'esperanza.' This means that 'al-andalus' may influence both 'alfonso' and 'esperanza,' suggesting that any observed effects between these two entities could be misleading if we don't account for 'al-andalus.' Understanding this connection is significant because it highlights the importance of considering common causes in causal relationships, which can lead to more accurate interpretations of historical or cultural dynamics in the context of al-Andalus. This finding encourages further investigation into how 'al-andalus' shapes the interactions between these figures, potentially revealing deeper insights into their roles and influences.</td>
+                    </tr>
+                    <tr>
+                        <td>al-andalus</td>
+                        <td>al-andalus → almoravid</td>
+                        <td>1.00</td>
+                        <td>The analysis has identified 'al-andalus' as a potential confounder in the relationship between itself and 'almoravid.' This means that 'al-andalus' may influence both entities, suggesting that any observed effects between them could be misleading if we don't account for this shared influence. Understanding this connection is significant because it highlights the importance of considering common causes in historical or cultural studies, which can lead to more accurate interpretations of their interactions. This finding encourages researchers to control for 'al-andalus' when examining its relationship with 'almoravid' to ensure a clearer understanding of their dynamics.</td>
+                    </tr>
+                    <tr>
+                        <td>abrahamic tradition</td>
+                        <td>jew → ambassador</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed that the term &quot;jew&quot; acts as a confounder in the relationship between &quot;abrahamic tradition&quot; and &quot;ambassador.&quot; This means that &quot;jew&quot; influences both of these concepts, suggesting that any observed connections between them might be affected by this common factor. Understanding this relationship is significant because it highlights the importance of considering cultural and religious contexts when examining diplomatic roles and traditions. This finding could lead to a deeper exploration of how identity shapes interactions within the framework of Abrahamic traditions and their representation in diplomatic settings.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="module-logical-entailment" class="module" style="border-left-color: var(--theme-rule)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-rule)">Logical Entailments</h2>
+                <p class="definition">Inferred implications (if X and Y, then Z).</p>
+                <div class="count">Total: 20</div>
+            </div>
+            <div class="method-explanation" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top: 0; color: var(--theme-rule);">How This Method Works</h4>
+                <p style="margin-bottom: 10px;">The <strong>Logical Entailment</strong> detector applies a set of first-order inference rules to derive implicit facts from the graph. For example: if A is-a B and B has-property P, then A has-property P. Rules are applied iteratively until a fixed point, and each derived fact is scored by the confidence of the rule chain that produced it.</p>
+                <p style="margin-bottom: 0;"><em>Why it matters:</em> Logical entailments can significantly densify the knowledge graph with reliable implicit knowledge — facts that are not explicitly stated but necessarily follow from what is. They reduce redundant explicit assertions needed and reveal implied relations that improve downstream reasoning quality without requiring additional data collection.</p>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Entailment</th><th>Confidence</th><th>Reasoning</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="entity">juan pedro monferrer-sala</span> + <span class="entity">antonio monterroso-checa</span> + <span class="entity">juan pedro monferrer-sala</span> and 3 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection between the entities Juan Pedro Monferrer-Sala, Antonio Monterroso-Checa, and the Mosque of the Palace of Madīnat al-Zahrāʾ, leading to the conclusion that they are related to the work titled &quot;A Companion to Late Antique and Medieval Islamic Cordoba.&quot; This finding is significant because it suggests that both Monferrer-Sala and Monterroso-Checa are key figures in the study of Islamic history in Córdoba, particularly during a transformative period. Understanding this relationship enhances our knowledge of how these scholars contribute to the broader narrative of Islamic culture and architecture in medieval Spain, potentially guiding future research in this domain.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">maimonide</span> + <span class="entity">ibn bajjah</span> + <span class="entity">ibn tufail</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if we consider the figures Maimonides, Ibn Bajjah, Ibn Tufail, and Nur al-Din al-Betrugi together, they collectively imply the concept of a planetary model. This finding is significant because it highlights the interconnectedness of these historical scholars, suggesting that their ideas and contributions may have collectively influenced the development of astronomical models in their time. Understanding this relationship can deepen our appreciation of how knowledge was shared and built upon in the medieval period, particularly in the fields of philosophy and science.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">latin translation</span> + <span class="entity">arabic translation</span> + <span class="entity">hebrew translation</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if there are translations in Latin, Arabic, Hebrew, and Castilian, then this collectively implies the presence of &quot;Ferdinand.&quot; This finding is significant because it suggests that these translations are interconnected in a way that points to a specific historical or cultural figure, likely Ferdinand, who may have played a role in the dissemination of these languages or texts. Understanding this relationship can enhance our comprehension of how different languages and cultures influence each other, particularly in historical contexts where figures like Ferdinand were pivotal.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">córdoba</span> + <span class="entity">caliphate</span> + <span class="entity">sistan</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if we consider the entities córdoba, caliphate, sistan, and afghanistan together, we can infer a relationship to europe. This finding is significant because it highlights how historical and geographical contexts, such as the influence of the caliphate in regions like córdoba and afghanistan, can be linked to broader cultural or political implications in europe. Understanding this relationship can enhance our comprehension of historical interactions and exchanges between these regions, shedding light on how past events continue to shape contemporary dynamics.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">tribute</span> + <span class="entity">mali</span> + <span class="entity">burkina faso</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if there is a tribute associated with Mali and Burkina Faso, and linked to Alain George, then it implies the presence of gold. This finding is significant because it suggests that tributes in this context may be tied to valuable resources, specifically gold, which could reflect economic or cultural practices in these regions. Understanding this relationship can enhance our knowledge of the historical and economic dynamics in West Africa, particularly how tribute systems may relate to resource distribution and wealth.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">culture</span> + <span class="entity">academic interaction</span> + <span class="entity">umayyad caliph</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that when there is a combination of culture, academic interaction, and the influence of both the Umayyad and Abbasid caliphs, it leads to advancements in science. This finding is significant because it highlights the role of cultural and academic exchanges during these historical periods in fostering scientific progress. Understanding this relationship can deepen our appreciation of how political and cultural environments contribute to intellectual developments, particularly in the context of the rich history of the Islamic Golden Age.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">al-hakam ii</span> + <span class="entity">astronomer</span> + <span class="entity">ish.āq b. ibrāhı̄m</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if 'al-hakam ii' is associated with 'astronomer' and 'ish.āq b. ibrāhı̄m', then it can be inferred that 'qibla' is also relevant. This finding is significant because it highlights the role of al-hakam ii, a historical figure, in the context of astronomy and religious practices, particularly in determining the direction of prayer in Islam. Understanding this relationship enhances our knowledge of how scientific and religious elements intertwined during al-hakam ii's time, suggesting that his contributions may have influenced both astronomical studies and Islamic practices.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">al-andalus</span> + <span class="entity">emirate of córdoba</span> + <span class="entity">umayyad</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if we consider the concepts of al-andalus, the emirate of Córdoba, the Umayyad dynasty, and the Abbasid dynasty together, they collectively imply the significance of Córdoba. This finding is significant because it highlights Córdoba's central role in the historical and cultural landscape of al-Andalus, particularly during the Umayyad period. Understanding this relationship can deepen our insight into the political and cultural dynamics of medieval Spain, illustrating how these entities interacted and influenced one another in shaping the region's history.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">milwright</span> + <span class="entity">analysi</span> + <span class="entity">grabar</span> and 2 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a strong logical connection indicating that if the concepts of 'milwright,' 'analysi,' 'grabar,' and 'oleg grabar' are present, then they imply the existence of the 'dome of the rock.' This finding is significant because it suggests that these entities are interconnected in a way that points to a specific cultural or historical landmark, the Dome of the Rock, which is an important site in Jerusalem. Understanding this relationship can enhance our knowledge of how different fields, such as craftsmanship (milwright), analysis (analysi), and individuals (like Oleg Grabar, a noted scholar), contribute to the appreciation and interpretation of significant architectural and historical sites.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="entity">jew</span> + <span class="entity">christian</span> + <span class="entity">martyrs of córdoba</span> and 3 others</td>
+                        <td>1.00</td>
+                        <td>The analysis revealed a logical relationship indicating that if we consider the concepts of 'jew', 'christian', 'martyrs of córdoba', 'qubba', and 'supreme power', it implies the presence of 'islam'. This finding is significant because it highlights the interconnectedness of these religious and cultural entities, suggesting that they share a common historical or ideological context. Understanding this relationship can deepen our insight into the dynamics between these groups, particularly in terms of their historical interactions and the evolution of religious thought in the region.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="recommendations">
+            <h2>Conclusions &amp; Recommendations</h2>
+            <div class="recommendations">
+                <h3>Based on the analysis of 120 discovered insights:</h3>
+                <ol>
+                    <li><strong>Review Core–Periphery Roles:</strong> The 15 core-periphery insights highlight which entities anchor the graph versus those on the periphery.</li>
+                    <li><strong>Review Central Entities:</strong> The 1 centrality findings highlight influential entities to prioritize for curation.</li>
+                    <li><strong>Inspect Community Clusters:</strong> The 1 detected communities can guide topic segmentation or subgraph analysis.</li>
+                    <li><strong>Assess k-Core Nodes:</strong> The 1 k-core entities represent dense cores worth validating or expanding.</li>
+                    <li><strong>Validate k-Truss Links:</strong> The 37 k-truss edges reflect strong local cohesion and should be verified.</li>
+                    <li><strong>Control for Confounders:</strong> The 15 identified confounders connect to both ends of suspected causal relations. Account for these in experimental or statistical analyses.</li>
+                    <li><strong>Refine Taxonomic Structure:</strong> The 7 taxonomic relations surface is-a and part-of hierarchies. Use them to improve ontological consistency and support classification tasks.</li>
+                    <li><strong>Leverage Domain Bridges:</strong> The 20 domain bridge nodes connect distinct disciplines. These are prime candidates for interdisciplinary hypotheses and cross-domain knowledge transfer.</li>
+                    <li><strong>Expand via Logical Entailments:</strong> The 20 entailments derive implicit implications from existing relations. Validate and add confirmed entailments to enrich the knowledge graph.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Suggested Future Work Section -->
+        <section id="future-work" class="module" style="border-left-color: var(--theme-misc)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-misc)">Suggested Future Work</h2>
+                <p class="definition">Tailored research directions based on the epistemological distribution and gaps in this analysis</p>
+            </div>
+            <div class="module-content">
+                <h3>Epistemological Analysis of This Report</h3>
+                <p>This analysis generated <strong>120 insights</strong> distributed across Margaret Boden's creativity framework as follows:</p>
+                <ul>
+                    <li>🧩 <strong>Combinatorial</strong> (Pattern Detection): 65 (54.2%)</li>
+                    <li>🔍 <strong>Exploratory</strong> (Connection Discovery): 20 (16.7%)</li>
+                    <li>🔄 <strong>Transformational</strong> (Conceptual Reframing): 35 (29.2%)</li>
+                </ul>
+
+                <h3>1. Category Distribution Insights</h3>
+                <p><strong>Dominant Mode: Combinatorial (Pattern-Based)</strong></p>
+                <p>This report is <em>pattern-heavy</em>, with 54.2% of insights emerging from structural combinations and motif detection. This suggests:</p>
+                <ul>
+                    <li><strong>Strength:</strong> The knowledge graph contains rich, detectable structural patterns suitable for automated discovery.</li>
+                    <li><strong>Opportunity:</strong> To advance toward exploratory and transformational modes, implement deeper path-traversal operators and hypothesis generation mechanisms.</li>
+                    <li><strong>Next Steps:</strong> Develop meta-pattern operators that identify patterns <em>across patterns</em>, enabling cross-domain structural mappings.</li>
+                </ul>
+
+                <h3>3. Missing or Underrepresented Insight Types</h3>
+                <p>The following capabilities were not utilized in this analysis, suggesting areas for expansion:</p>
+                <ul>
+                    <li><strong>Citation/Influence Networks (Missing):</strong> No author chains or diffusion pathways detected. If analyzing academic literature:
+                        <ul>
+                            <li>Extract author and citation metadata during PDF processing</li>
+                            <li>Implement citation network analysis to map scholarly influence</li>
+                            <li><em>Recommendation:</em> Add bibliometric operators to reveal knowledge transmission pathways and intellectual lineages</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>4. Leveraging Strong Discovery Areas</h3>
+                <p>Based on the insight types that <em>were</em> successfully generated, prioritize the following extensions:</p>
+                <ul>
+                    <li><strong>Community Structure (✓ Active):</strong> With 1 community-related insights:
+                        <ul>
+                            <li>Implement multi-resolution community detection to reveal hierarchical structure</li>
+                            <li>Develop cross-community bridge analysis to identify interdisciplinary synthesis opportunities</li>
+                            <li>Use community labels as features for supervised learning tasks (e.g., entity classification)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Bridge Entities (✓ Active):</strong> The 20 bridge nodes identified are prime candidates for:
+                        <ul>
+                            <li>Cross-domain knowledge transfer and analogy generation</li>
+                            <li>Interdisciplinary hypothesis formulation</li>
+                            <li>Targeted expert interviews (bridges often represent boundary-spanning concepts)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>5. Advancing Toward Epistemic Reliability</h3>
+                <p>From an epistemological perspective (justification, grounding, calibration), this report would benefit from:</p>
+                <ul>
+                    <li><strong>Provenance Tracking:</strong> Augment each insight with direct links to source documents, enabling one-click verification of claims against original text.</li>
+                    <li><strong>Confidence Calibration:</strong> Current scores reflect heuristic-based confidence; implement Bayesian or statistical methods for well-calibrated uncertainty estimates.</li>
+                    <li><strong>External Validation:</strong> Link discovered entities to authoritative knowledge bases (Wikidata, domain ontologies) to validate extraction accuracy.</li>
+                    <li><strong>Human-in-the-Loop Workflows:</strong> Design interfaces for domain experts to approve/reject/refine insights, creating feedback loops for continuous improvement.</li>
+                    <li><strong>Bias Audits:</strong> Analyze whether discovered patterns systematically privilege certain perspectives or domains—implement fairness metrics for knowledge representation.</li>
+                </ul>
+
+                <h3>6. Long-Term Research Directions</h3>
+                <p>To truly achieve transformational machine creativity—the ability to restructure conceptual spaces rather than merely navigate them—this project should pursue:</p>
+                <ul>
+                    <li><strong>Autonomous Ontology Evolution:</strong> Systems that propose, test, and adopt schema revisions based on recurring anomalies or improved explanatory power.</li>
+                    <li><strong>Causal World Models:</strong> Move beyond correlation to build structural causal models enabling counterfactual reasoning ("what would happen if...?").</li>
+                    <li><strong>Meta-Learning Over Operators:</strong> Analyze which discovery operators produce the most valuable insights for specific domains, then adaptively prioritize them.</li>
+                    <li><strong>Collaborative Human-AI Knowledge Construction:</strong> Interactive systems where experts and AI co-construct knowledge through dialogue, challenging each other's assumptions.</li>
+                    <li><strong>Multimodal Integration:</strong> Extend beyond text to incorporate visual, spatial, and temporal data, grounding abstract concepts in perceptual evidence.</li>
+                </ul>
+
+                <div style="margin-top: 30px; padding: 20px; background: rgba(79, 195, 247, 0.1); border-left: 4px solid var(--theme-misc); border-radius: 8px;">
+                    <p style="margin: 0; font-style: italic;">
+                        <strong>Philosophical Positioning:</strong> This project deliberately occupies a middle ground between neural generation (fluent but opaque) and symbolic reasoning (transparent but brittle). The 54.2% combinatorial, 16.7% exploratory, and 29.2% transformational distribution reveals the current epistemological profile. The path forward lies in deepening hybrid neuro-symbolic integration—leveraging neural pattern recognition to generate candidate structures, and symbolic reasoning to validate, explain, and refine them. The ultimate goal is <strong>epistemic reliability over fluent generation</strong>: systems that produce not just plausible claims, but <em>justified, traceable, and contestable</em> knowledge.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>This report was automatically generated by the Knowledge Discovery Engine.<br>
+            All insights should be validated by domain experts before taking action.</p>
+        </footer>
+    </div>
+
+    <!-- Export Button -->
+    <button class="export-btn" id="exportBtn">Export PDF</button>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Interactive Features JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ====================================================================
+        // 0. BUTTON EVENT LISTENERS
+        // ====================================================================
+        const expandAllBtn = document.getElementById('expandAllBtn');
+        const collapseAllBtn = document.getElementById('collapseAllBtn');
+        const exportBtn = document.getElementById('exportBtn');
+
+        if (expandAllBtn) {
+            expandAllBtn.addEventListener('click', function() {
+                document.querySelectorAll('section:not(#statistics)').forEach(s => {
+                    s.classList.remove('collapsed');
+                    Array.from(s.children).forEach((child, idx) => {
+                        if (idx > 0) child.style.display = '';
+                    });
+                });
+            });
+        }
+
+        if (collapseAllBtn) {
+            collapseAllBtn.addEventListener('click', function() {
+                document.querySelectorAll('section:not(#statistics)').forEach(s => {
+                    s.classList.add('collapsed');
+                    Array.from(s.children).forEach((child, idx) => {
+                        if (idx > 0) child.style.display = 'none';
+                    });
+                });
+            });
+        }
+
+        if (exportBtn) {
+            exportBtn.addEventListener('click', function() {
+                window.print();
+            });
+        }
+
+        // ====================================================================
+        // 1. COLLAPSIBLE SECTIONS
+        // ====================================================================
+        const allSections = Array.from(document.querySelectorAll('section:not(#statistics)'));
+        allSections.forEach((section, index) => {
+            const header = section.querySelector('h2');
+            if (!header) return;
+
+            // Start all sections collapsed
+            section.classList.add('collapsed');
+            const children = Array.from(section.children);
+            children.forEach((child, idx) => {
+                if (idx > 0) { // Skip the h2
+                    child.style.display = 'none';
+                }
+            });
+
+            // Expand the first two sections (categories overview and executive summary)
+            if (index < 2) {
+                section.classList.remove('collapsed');
+                children.forEach((child, idx) => {
+                    if (idx > 0) {
+                        child.style.display = '';
+                    }
+                });
+            }
+
+            header.addEventListener('click', function() {
+                section.classList.toggle('collapsed');
+                const children = Array.from(section.children);
+                children.forEach((child, idx) => {
+                    if (idx > 0) { // Skip the h2
+                        child.style.display = section.classList.contains('collapsed') ? 'none' : '';
+                    }
+                });
+            });
+        });
+
+        // ====================================================================
+        // 2. SEARCH FUNCTIONALITY
+        // ====================================================================
+        const searchBox = document.getElementById('searchBox');
+        if (searchBox) {
+            searchBox.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                let visibleCount = 0;
+
+                // Search through table rows
+                document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    const matches = text.includes(query);
+                    row.style.display = matches ? '' : 'none';
+                    if (matches) visibleCount++;
+                });
+
+                // Search through clusters
+                document.querySelectorAll('.cluster').forEach(cluster => {
+                    const text = cluster.textContent.toLowerCase();
+                    cluster.style.display = text.includes(query) ? '' : 'none';
+                });
+
+                // Search through module sections - show/hide entire sections
+                document.querySelectorAll('section[id^="module-"]').forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    if (query === '') {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = text.includes(query) ? '' : 'none';
+                    }
+                });
+
+                updateVisibleCounts();
+            });
+        }
+
+        // ====================================================================
+        // 3. CONFIDENCE FILTERING
+        // ====================================================================
+        document.querySelectorAll('.filter-score').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const activeFilters = Array.from(document.querySelectorAll('.filter-score:checked'))
+                    .map(cb => cb.value);
+
+                document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                    const scoreCell = row.querySelector('td:nth-child(2)');
+                    if (!scoreCell) return;
+
+                    const scoreText = scoreCell.textContent.trim();
+                    const score = parseFloat(scoreText);
+
+                    if (isNaN(score)) {
+                        row.style.display = '';
+                        return;
+                    }
+
+                    let show = false;
+                    if (activeFilters.includes('high') && score >= 0.7) show = true;
+                    if (activeFilters.includes('med') && score >= 0.4 && score < 0.7) show = true;
+                    if (activeFilters.includes('low') && score < 0.4) show = true;
+
+                    row.style.display = show ? '' : 'none';
+                });
+
+                updateVisibleCounts();
+            });
+        });
+
+        function updateVisibleCounts() {
+            document.querySelectorAll('section[id^="module-"]').forEach(section => {
+                const table = section.querySelector('.data-table tbody');
+                if (!table) return;
+
+                const total = table.querySelectorAll('tr').length;
+                const visible = table.querySelectorAll('tr:not([style*="display: none"])').length;
+
+                const countEl = section.querySelector('.module-header .count');
+                if (countEl && total > 0) {
+                    const originalText = countEl.textContent;
+                    if (visible < total) {
+                        countEl.textContent = originalText.replace(/Total: \d+/, `Showing: ${visible} / ${total}`);
+                    } else {
+                        countEl.textContent = originalText.replace(/Showing: \d+ \/ /, 'Total: ');
+                    }
+                }
+            });
+        }
+
+        // ====================================================================
+        // 4. ENTITY HIGHLIGHTING (Cross-Reference)
+        // ====================================================================
+        function highlightEntity(entityName) {
+            // Clear previous highlights
+            document.querySelectorAll('.highlighted').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+
+            if (!entityName) return;
+
+            const normalizedSearch = entityName.toLowerCase().trim();
+            let firstMatch = null;
+
+            // Highlight in tables
+            document.querySelectorAll('.data-table td').forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(normalizedSearch)) {
+                    cell.classList.add('highlighted');
+                    if (!firstMatch) firstMatch = cell;
+                }
+            });
+
+            // Highlight entity badges
+            document.querySelectorAll('.entity').forEach(badge => {
+                if (badge.textContent.toLowerCase().includes(normalizedSearch)) {
+                    badge.classList.add('highlighted');
+                    if (!firstMatch) firstMatch = badge;
+                }
+            });
+
+            // Scroll to first match
+            if (firstMatch) {
+                firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Add click handlers to entities
+        document.querySelectorAll('.entity, .data-table td:first-child').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const entityName = this.textContent.trim();
+                highlightEntity(entityName);
+            });
+        });
+
+        // ====================================================================
+        // 5. LAZY LOADING FOR LARGE TABLES
+        // ====================================================================
+        document.querySelectorAll('.data-table tbody').forEach(tbody => {
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const INITIAL_ROWS = 20;
+
+            if (rows.length <= INITIAL_ROWS) return; // Skip small sections
+
+            // Hide rows after INITIAL_ROWS
+            rows.slice(INITIAL_ROWS).forEach(row => {
+                row.style.display = 'none';
+                row.dataset.lazyHidden = 'true';
+            });
+
+            // Create "Load More" button
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.className = 'load-more-btn';
+            loadMoreBtn.textContent = `Load ${rows.length - INITIAL_ROWS} more...`;
+
+            loadMoreBtn.addEventListener('click', function() {
+                rows.forEach(row => {
+                    if (row.dataset.lazyHidden === 'true') {
+                        row.style.display = '';
+                        delete row.dataset.lazyHidden;
+                    }
+                });
+                this.remove();
+            });
+
+            tbody.parentElement.insertAdjacentElement('afterend', loadMoreBtn);
+        });
+
+        // ====================================================================
+        // 6. INTERACTIVE CHART
+        // ====================================================================
+        const chartCanvas = document.getElementById('insightChart');
+        if (chartCanvas && typeof Chart !== 'undefined') {
+            // Collect category counts from category cards
+            const categoryData = {
+                'Combinatorial': 0,
+                'Exploratory': 0,
+                'Transformational': 0
+            };
+
+            // Get data from the category overview cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                const title = card.querySelector('h3');
+                const statItems = card.querySelectorAll('.stat-item');
+                if (title && statItems.length > 0) {
+                    const categoryName = title.textContent.trim();
+                    // First stat-item contains the count
+                    const countValue = statItems[0].querySelector('.stat-value');
+                    const count = countValue ? parseInt(countValue.textContent.trim()) || 0 : 0;
+                    if (categoryData.hasOwnProperty(categoryName)) {
+                        categoryData[categoryName] = count;
+                    }
+                }
+            });
+
+            const totalInsights = Object.values(categoryData).reduce((a, b) => a + b, 0);
+
+            if (totalInsights > 0) {
+                new Chart(chartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['🧩 Combinatorial', '🔍 Exploratory', '🔄 Transformational'],
+                        datasets: [{
+                            label: 'Number of Insights',
+                            data: [
+                                categoryData['Combinatorial'],
+                                categoryData['Exploratory'],
+                                categoryData['Transformational']
+                            ],
+                            backgroundColor: [
+                                'rgba(74, 222, 128, 0.7)',   // Green for Combinatorial
+                                'rgba(79, 195, 247, 0.7)',   // Blue for Exploratory
+                                'rgba(232, 121, 249, 0.7)'   // Purple for Transformational
+                            ],
+                            borderColor: [
+                                'rgba(74, 222, 128, 1)',
+                                'rgba(79, 195, 247, 1)',
+                                'rgba(232, 121, 249, 1)'
+                            ],
+                            borderWidth: 2,
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Insight Distribution by Category',
+                                color: '#f8fafc',
+                                font: { size: 16, weight: 'bold' },
+                                padding: { bottom: 20 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                padding: 12,
+                                titleColor: '#f8fafc',
+                                bodyColor: '#f8fafc',
+                                borderColor: 'rgba(148, 163, 184, 0.3)',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        const value = context.parsed.x || 0;
+                                        const percentage = ((value / totalInsights) * 100).toFixed(1);
+                                        return `${value} insights (${percentage}%)`;
+                                    },
+                                    afterLabel: function(context) {
+                                        const descriptions = [
+                                            'Pattern Detection & Structural Combinations',
+                                            'Path Finding & Connection Discovery',
+                                            'Reframing & Perspective Shifts'
+                                        ];
+                                        return descriptions[context.dataIndex];
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 11 }
+                                },
+                                grid: {
+                                    color: 'rgba(148, 163, 184, 0.1)'
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#f8fafc',
+                                    font: { size: 13, weight: '600' },
+                                    padding: 10
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        onClick: (event, activeElements) => {
+                            if (activeElements.length > 0) {
+                                const index = activeElements[0].index;
+                                const sectionIds = [
+                                    '#combinatorial-section',
+                                    '#exploratory-section',
+                                    '#transformational-section'
+                                ];
+                                const section = document.querySelector(sectionIds[index]);
+                                if (section) {
+                                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // ====================================================================
+        // 7. KEYBOARD SHORTCUTS
+        // ====================================================================
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K: Focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                if (searchBox) searchBox.focus();
+            }
+
+            // Escape: Clear search and highlights
+            if (e.key === 'Escape') {
+                if (searchBox) {
+                    searchBox.value = '';
+                    searchBox.dispatchEvent(new Event('input'));
+                }
+                highlightEntity(null);
+            }
+        });
+
+        console.log('Interactive report features loaded successfully');
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+
+======================================================================
+  Knowledge Discovery Pipeline
+======================================================================
+
+Resuming run: run_20260322_192030
+From stage:   5 (report)
+Run dir:      runs_test/run_20260322_192030
+
+----------------------------------------------------------------------
+  Stage 1: Knowledge Extraction [SKIPPED - loading existing]
+----------------------------------------------------------------------
+  Loading: graph.json
+  Loaded: 102 entities, 44 relationships
+  Stage 1 time: 16ms
+
+----------------------------------------------------------------------
+  Stage 2: Building Index [SKIPPED - loading existing]
+----------------------------------------------------------------------
+  Loading: index.json
+  Loaded index with 3 s-component sets
+  Stage 2 time: 8ms
+
+----------------------------------------------------------------------
+  Stage 3: Knowledge Discovery [SKIPPED - loading existing]
+----------------------------------------------------------------------
+  Loading: insights.json
+  Loaded 101 insights
+  Stage 3 time: 15ms
+
+----------------------------------------------------------------------
+  Stage 4: Generating Visualizations [SKIPPED]
+----------------------------------------------------------------------
+  Using existing visualization files
+  Stage 4 time: 0ms
+
+----------------------------------------------------------------------
+  Stage 5: Generating Reports
+----------------------------------------------------------------------
+  LLM examples enabled for report synthesis.
+  Saved: Step_5_Discovery/report.md
+  Saved: Step_5_Discovery/report.html
+  Saved: Step_5_Discovery/pattern_library.json
+  Stage 5 time: 105.07s
+
+----------------------------------------------------------------------
+  Stage 6: Finalizing
+----------------------------------------------------------------------
+  Saved: manifest.json
+  Saved: README.txt
+  Stage 6 time: 15ms
+
+======================================================================
+  Pipeline Complete!
+======================================================================
+
+Run ID:       run_20260322_192030
+Output:       runs_test/run_20260322_192030/
+Entities:     102
+Relations:    44
+Insights:     101
+
+To view results:
+  cd runs_test/run_20260322_192030 && python3 -m http.server 8080
+  Open: http://localhost:8080/graph_augmented.html
+  Or:   http://localhost:8080/report.html
+
+Total runtime: 1.75 minutes
+

@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relational Data on KGs Knowledge Discovery (Augmented)</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.75.0/dist/3d-force-graph.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            overflow: hidden;
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #header h1 { font-size: 1.5em; font-weight: 500; }
+        #stats { font-size: 0.9em; opacity: 0.8; }
+        #graph { width: 100vw; height: 100vh; }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        #controls label { display: block; margin-bottom: 8px; font-size: 0.85em; }
+        #controls input[type="range"] { width: 150px; }
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 16px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            font-size: 0.9em;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #tooltip h3 { margin-bottom: 6px; color: #4fc3f7; }
+        #tooltip .detail { color: #aaa; margin: 3px 0; }
+        #legend {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.85em;
+        }
+        #legend h3 { margin-bottom: 10px; font-size: 1em; }
+        .legend-item { display: flex; align-items: center; margin: 6px 0; }
+        .legend-color { width: 16px; height: 16px; border-radius: 3px; margin-right: 10px; }
+        .kg-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+        .kg-input {
+            width: 220px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #eee;
+            outline: none;
+        }
+        .kg-input::placeholder { color: rgba(255,255,255,0.55); }
+        .kg-btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #eee;
+            cursor: pointer;
+            user-select: none;
+        }
+        .kg-btn:hover { background: rgba(255,255,255,0.12); }
+        .kg-btn:active { transform: translateY(1px); }
+        #kgHud {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            z-index: 120;
+            pointer-events: none;
+        }
+        #kgOverlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        #kgOverlay.show { opacity: 1; pointer-events: all; }
+        #kgOverlay .panel {
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 18px;
+            width: min(520px, 92vw);
+            color: #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        #kgOverlay .title { font-size: 14px; color: #4fc3f7; margin-bottom: 8px; }
+        #kgOverlay .sub { font-size: 12px; color: rgba(255,255,255,0.75); }
+        .aug-section {
+            border-top: 1px solid #e040fb;
+            margin-top: 12px;
+            padding-top: 10px;
+        }
+        .aug-section > label:first-child { color: #e040fb; font-weight: 600; }
+        #augDetails {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(224, 64, 251, 0.1);
+            border-radius: 8px;
+            font-size: 0.8em;
+            display: none;
+        }
+        #augDetails.show { display: block; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Relational Data on KGs Knowledge Discovery (Augmented)</h1>
+        <div id="stats">
+            Entities: 297 |
+            Relations: 182 |
+            Augmentations: 110
+        </div>
+    </div>
+
+    <div id="graph"></div>
+
+    <div id="controls">
+        <label>
+            Min Entity Degree: <span id="degreeValue">5</span>
+            <input type="range" id="minDegree" min="1" max="20" step="1" value="5">
+        </label>
+        <label>
+            Link Strength:
+            <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="0.5">
+        </label>
+        <label>
+            Node Repulsion:
+            <input type="range" id="repulsion" min="100" max="1000" step="50" value="400">
+        </label>
+        <label>
+            <input type="checkbox" id="showLabels"> Show Labels (high-degree only)
+        </label>
+        <div id="filterStats" style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            Showing: <span id="visibleNodes">0</span> nodes, <span id="visibleLinks">0</span> links
+        </div>
+    </div>
+
+    <div id="legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7;"></div>
+            <span>Entity Node</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800;"></div>
+            <span>Relation (Hyperedge)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb;"></div>
+            <span>Augmentation (Insight)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7; width: 30px; height: 3px;"></div>
+            <span>Source Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800; width: 30px; height: 3px;"></div>
+            <span>Target Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb; width: 30px; height: 3px; border-style: dashed;"></div>
+            <span>Augmentation Link</span>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script>
+        const data = {
+            nodes: [{"degree":1,"id":"3:04","label":"3:04","type":"entity"},{"degree":1,"id":"3:15","label":"3:15","type":"entity"},{"degree":2,"id":"a1","label":"a1","type":"entity"},{"degree":3,"id":"a2","label":"a2","type":"entity"},{"degree":2,"id":"a3","label":"a3","type":"entity"},{"degree":1,"id":"after trigger","label":"AFTER Trigger","type":"entity"},{"degree":1,"id":"algorithm for incremental maintenance","label":"algorithm for incremental maintenance","type":"entity"},{"degree":1,"id":"arenas, m.","label":"Arenas, M.","type":"entity"},{"degree":1,"id":"arruda","label":"Arruda","type":"entity"},{"degree":1,"id":"article","label":"article","type":"entity"},{"degree":1,"id":"artist","label":"Artist","type":"entity"},{"degree":1,"id":"artist credit","label":"Artist Credit","type":"entity"},{"degree":4,"id":"artist(r)","label":"Artist(r)","type":"entity"},{"degree":1,"id":"artistcredit","label":"ArtistCredit","type":"entity"},{"degree":2,"id":"attribute","label":"attribute","type":"entity"},{"degree":1,"id":"attribute a","label":"attribute A","type":"entity"},{"degree":1,"id":"automatic construction","label":"automatic construction","type":"entity"},{"degree":1,"id":"b","label":"B","type":"entity"},{"degree":1,"id":"barceló, p.","label":"Barceló, P.","type":"entity"},{"degree":3,"id":"base entity","label":"base entities","type":"entity"},{"degree":1,"id":"before trigger","label":"BEFORE Trigger","type":"entity"},{"degree":1,"id":"blakeley et al.","label":"Blakeley et al.","type":"entity"},{"degree":1,"id":"brito","label":"Brito","type":"entity"},{"degree":1,"id":"c","label":"C","type":"entity"},{"degree":1,"id":"calvanese, d.","label":"Calvanese, D.","type":"entity"},{"degree":1,"id":"carlos brito","label":"Carlos Brito","type":"entity"},{"degree":2,"id":"casanova","label":"Casanova","type":"entity"},{"degree":4,"id":"changeset","label":"changeset","type":"entity"},{"degree":2,"id":"changeset h∆− (u), ∆+ (u)i","label":"changeset h∆− (u), ∆+ (u)i","type":"entity"},{"degree":1,"id":"changeset h∆−(u)","label":"changeset h∆−(u)","type":"entity"},{"degree":1,"id":"changeset ∆+","label":"changeset ∆+","type":"entity"},{"degree":1,"id":"changeset ∆+(u)","label":"changeset ∆+(u)","type":"entity"},{"degree":1,"id":"changeset ∆−","label":"changeset ∆−","type":"entity"},{"degree":1,"id":"christophide","label":"Christophide","type":"entity"},{"degree":1,"id":"class c","label":"class C","type":"entity"},{"degree":1,"id":"class d","label":"class D","type":"entity"},{"degree":1,"id":"classes d","label":"classes D","type":"entity"},{"degree":1,"id":"classes g","label":"classes G","type":"entity"},{"degree":6,"id":"cookin' on 3 b.","label":"Cookin' on 3 B.","type":"entity"},{"degree":3,"id":"cookin's on 3 b.","label":"Cookin's on 3 B.","type":"entity"},{"degree":1,"id":"cookin’s on 3 b.","label":"Cookin’s on 3 B.","type":"entity"},{"degree":6,"id":"credit","label":"Credit","type":"entity"},{"degree":1,"id":"cruz","label":"Cruz","type":"entity"},{"degree":1,"id":"ctr ψd","label":"CTR ψD","type":"entity"},{"degree":1,"id":"ctr ψg","label":"CTR ψG","type":"entity"},{"degree":2,"id":"d","label":"D","type":"entity"},{"degree":1,"id":"dance","label":"dance","type":"entity"},{"degree":1,"id":"data graph","label":"data graph","type":"entity"},{"degree":1,"id":"data integration","label":"data integration","type":"entity"},{"degree":1,"id":"data restructuring","label":"data restructuring","type":"entity"},{"degree":1,"id":"data source update","label":"data source update","type":"entity"},{"degree":1,"id":"data to ontology","label":"data to ontologies","type":"entity"},{"degree":2,"id":"database state","label":"database state","type":"entity"},{"degree":3,"id":"database state σ0","label":"database state σ0","type":"entity"},{"degree":4,"id":"database state σ1","label":"database state σ1","type":"entity"},{"degree":2,"id":"database states σ0","label":"database states σ0","type":"entity"},{"degree":2,"id":"database states σ1","label":"database states σ1","type":"entity"},{"degree":1,"id":"database tuple","label":"database tuple","type":"entity"},{"degree":1,"id":"dataset difference","label":"dataset differences","type":"entity"},{"degree":1,"id":"datatype property","label":"datatype property","type":"entity"},{"degree":2,"id":"datatype property p","label":"datatype property P","type":"entity"},{"degree":1,"id":"davidson, s.b.","label":"Davidson, S.B.","type":"entity"},{"degree":1,"id":"dbpedia","label":"DBpedia","type":"entity"},{"degree":3,"id":"dc:title","label":"dc:title","type":"entity"},{"degree":1,"id":"de giacomo, g.","label":"De Giacomo, G.","type":"entity"},{"degree":1,"id":"deletion component d","label":"deletion component D","type":"entity"},{"degree":1,"id":"deletion component ∆−(u)","label":"deletion component ∆−(u)","type":"entity"},{"degree":1,"id":"delta+(u)","label":"Delta+(u)","type":"entity"},{"degree":1,"id":"delta-(u)","label":"Delta-(u)","type":"entity"},{"degree":2,"id":"don't you know","label":"Don't You Know","type":"entity"},{"degree":1,"id":"dong","label":"Dong","type":"entity"},{"degree":1,"id":"endris et al.","label":"Endris et al.","type":"entity"},{"degree":3,"id":"enterprise knowledge graph","label":"Enterprise knowledge graphs","type":"entity"},{"degree":2,"id":"f","label":"F","type":"entity"},{"degree":1,"id":"f1","label":"F1","type":"entity"},{"degree":1,"id":"f2","label":"F2","type":"entity"},{"degree":1,"id":"faisal et al.","label":"Faisal et al.","type":"entity"},{"degree":1,"id":"fn-1","label":"Fn-1","type":"entity"},{"degree":3,"id":"foaf:name","label":"foaf:name","type":"entity"},{"degree":1,"id":"foreign key f","label":"foreign key F","type":"entity"},{"degree":2,"id":"formal framework","label":"formal framework","type":"entity"},{"degree":3,"id":"formalism","label":"formalism","type":"entity"},{"degree":1,"id":"foundations of data exchange","label":"Foundations of Data Exchange","type":"entity"},{"degree":1,"id":"framework for mapping rule","label":"framework for mapping rules","type":"entity"},{"degree":1,"id":"full view rematerialization","label":"full view rematerialization","type":"entity"},{"degree":1,"id":"genre","label":"Genre","type":"entity"},{"degree":1,"id":"heterogeneous data source","label":"heterogeneous data sources","type":"entity"},{"degree":1,"id":"i","label":"I","type":"entity"},{"degree":1,"id":"identification of relevant tuple","label":"identification of relevant tuples","type":"entity"},{"degree":0,"id":"incremental export of relational databa","label":"incremental export of relational databases","type":"entity"},{"degree":1,"id":"incremental maintenance","label":"incremental maintenance","type":"entity"},{"degree":1,"id":"incremental maintenance strategy","label":"incremental maintenance strategy","type":"entity"},{"degree":1,"id":"incremental refresh mechanism","label":"incremental refresh mechanism","type":"entity"},{"degree":1,"id":"information in knowledge graph","label":"information in knowledge graph","type":"entity"},{"degree":1,"id":"input relational source","label":"input relational source","type":"entity"},{"degree":1,"id":"insertion component i","label":"insertion component I","type":"entity"},{"degree":1,"id":"insertion component ∆+(u)","label":"insertion component ∆+(u)","type":"entity"},{"degree":1,"id":"instances x","label":"instances x","type":"entity"},{"degree":1,"id":"jin, x.","label":"Jin, X.","type":"entity"},{"degree":1,"id":"konstantinou et al.","label":"Konstantinou et al.","type":"entity"},{"degree":1,"id":"konstantinou, n.","label":"Konstantinou, N.","type":"entity"},{"degree":1,"id":"kouis, d.","label":"Kouis, D.","type":"entity"},{"degree":8,"id":"kung","label":"Kung","type":"entity"},{"degree":7,"id":"kylie auldist","label":"Kylie Auldist","type":"entity"},{"degree":1,"id":"lembo, d.","label":"Lembo, D.","type":"entity"},{"degree":1,"id":"lemo","label":"Lemo","type":"entity"},{"degree":1,"id":"length","label":"length","type":"entity"},{"degree":2,"id":"lenzerini, m.","label":"Lenzerini, M.","type":"entity"},{"degree":1,"id":"liao, h.","label":"Liao, H.","type":"entity"},{"degree":1,"id":"libkin, l.","label":"Libkin, L.","type":"entity"},{"degree":1,"id":"liefke, h.","label":"Liefke, H.","type":"entity"},{"degree":1,"id":"linkedgeodata","label":"LinkedGeoData","type":"entity"},{"degree":1,"id":"m","label":"M","type":"entity"},{"degree":2,"id":"m1","label":"m1","type":"entity"},{"degree":1,"id":"mandatory constraint","label":"mandatory constraint","type":"entity"},{"degree":1,"id":"mapping","label":"mapping","type":"entity"},{"degree":1,"id":"mapping definition annotation","label":"mapping definition annotation","type":"entity"},{"degree":1,"id":"marco antonio casanova","label":"Marco Antonio Casanova","type":"entity"},{"degree":1,"id":"materialized rdb2rdf view","label":"materialized RDB2RDF view","type":"entity"},{"degree":2,"id":"mbz:ga1","label":"mbz:ga1","type":"entity"},{"degree":2,"id":"mbz:ga2","label":"mbz:ga2","type":"entity"},{"degree":2,"id":"mbz:ga3","label":"mbz:ga3","type":"entity"},{"degree":1,"id":"mbz:r.ga1","label":"mbz:r.ga1","type":"entity"},{"degree":1,"id":"mbz:r.ga2","label":"mbz:r.ga2","type":"entity"},{"degree":1,"id":"mbz:r.ga3","label":"mbz:r.ga3","type":"entity"},{"degree":2,"id":"mbz:t1","label":"mbz:t1","type":"entity"},{"degree":1,"id":"mbz:t2","label":"mbz:t2","type":"entity"},{"degree":2,"id":"medium","label":"Medium","type":"entity"},{"degree":1,"id":"mitrou, n.","label":"Mitrou, N.","type":"entity"},{"degree":3,"id":"mo:duration","label":"mo:duration","type":"entity"},{"degree":3,"id":"mo:musicartist","label":"mo:MusicArtist","type":"entity"},{"degree":1,"id":"mo:record","label":"mo:Record","type":"entity"},{"degree":1,"id":"mo:signal","label":"mo:Signal","type":"entity"},{"degree":2,"id":"mo:solomusicartist","label":"mo:SoloMusicArtist","type":"entity"},{"degree":3,"id":"mo:track_count","label":"mo:track_count","type":"entity"},{"degree":1,"id":"motik","label":"Motik","type":"entity"},{"degree":1,"id":"murlak, f.","label":"Murlak, F.","type":"entity"},{"degree":3,"id":"music artist","label":"Music Artist","type":"entity"},{"degree":1,"id":"music group","label":"Music Group","type":"entity"},{"degree":1,"id":"musicbrainz","label":"MusicBrainz","type":"entity"},{"degree":1,"id":"named graph","label":"named graphs","type":"entity"},{"degree":1,"id":"namespace p","label":"namespace P","type":"entity"},{"degree":1,"id":"narciso arruda","label":"Narciso Arruda","type":"entity"},{"degree":1,"id":"new rdf state","label":"new RDF states","type":"entity"},{"degree":1,"id":"new view state m(σ1)","label":"new view state M(σ1)","type":"entity"},{"degree":1,"id":"nugent","label":"Nugent","type":"entity"},{"degree":1,"id":"object property","label":"object property","type":"entity"},{"degree":1,"id":"object property p","label":"object property P","type":"entity"},{"degree":1,"id":"object-preserving rdb2rdf view","label":"Object-Preserving RDB2RDF Views","type":"entity"},{"degree":1,"id":"object-preserving view mapping","label":"object-preserving view mappings","type":"entity"},{"degree":1,"id":"old rdf state","label":"old RDF states","type":"entity"},{"degree":1,"id":"ontology","label":"ontology","type":"entity"},{"degree":1,"id":"oracle","label":"Oracle","type":"entity"},{"degree":1,"id":"otr","label":"OTR","type":"entity"},{"degree":4,"id":"owl:datatypeproperty","label":"owl:DatatypeProperty","type":"entity"},{"degree":2,"id":"owl:thing","label":"owl:Thing","type":"entity"},{"degree":2,"id":"p","label":"p","type":"entity"},{"degree":1,"id":"pairs (r∗, r∗)","label":"pairs (r∗, R∗)","type":"entity"},{"degree":1,"id":"path","label":"path","type":"entity"},{"degree":1,"id":"pequeno","label":"Pequeno","type":"entity"},{"degree":4,"id":"pivot relation","label":"pivot relation","type":"entity"},{"degree":1,"id":"pivot relation r","label":"pivot relation R","type":"entity"},{"degree":1,"id":"pivot relation r*","label":"pivot relation R*","type":"entity"},{"degree":1,"id":"pivot relation r∗","label":"pivot relation R∗","type":"entity"},{"degree":4,"id":"pivot tuple","label":"pivot tuple","type":"entity"},{"degree":1,"id":"pivot(Ψ)","label":"pivot(Ψ)","type":"entity"},{"degree":1,"id":"poggi, a.","label":"Poggi, A.","type":"entity"},{"degree":1,"id":"pontifı́cia universidade católica do rio de janeiro","label":"Pontifı́cia Universidade Católica do Rio de Janeiro","type":"entity"},{"degree":1,"id":"pop","label":"pop","type":"entity"},{"degree":1,"id":"post-update state σ1","label":"post-update state σ1","type":"entity"},{"degree":1,"id":"postgresql","label":"PostgreSQL","type":"entity"},{"degree":1,"id":"pre-update state σ0","label":"pre-update state σ0","type":"entity"},{"degree":1,"id":"predicate h","label":"predicate H","type":"entity"},{"degree":1,"id":"previous work","label":"previous work","type":"entity"},{"degree":1,"id":"primary key","label":"primary key","type":"entity"},{"degree":1,"id":"priyatna, f.","label":"Priyatna, F.","type":"entity"},{"degree":1,"id":"q1","label":"q1","type":"entity"},{"degree":1,"id":"q2","label":"q2","type":"entity"},{"degree":1,"id":"quadruple","label":"quadruple","type":"entity"},{"degree":1,"id":"query performance","label":"query performance","type":"entity"},{"degree":9,"id":"r","label":"R","type":"entity"},{"degree":2,"id":"r1","label":"R1","type":"entity"},{"degree":2,"id":"r2","label":"R2","type":"entity"},{"degree":1,"id":"r2rml mapping pattern","label":"R2RML mapping patterns","type":"entity"},{"degree":2,"id":"r3","label":"R3","type":"entity"},{"degree":15,"id":"rdb2rdf view","label":"RDB2RDF view","type":"entity"},{"degree":1,"id":"rdb2rdf view synchronization tool","label":"RDB2RDF view synchronization tool","type":"entity"},{"degree":2,"id":"rdf dataset","label":"RDF dataset","type":"entity"},{"degree":1,"id":"rdf quad","label":"RDF quads","type":"entity"},{"degree":4,"id":"rdf state","label":"RDF State","type":"entity"},{"degree":1,"id":"rdf state ∆+","label":"RDF state ∆+","type":"entity"},{"degree":1,"id":"rdf state ∆−","label":"RDF state ∆−","type":"entity"},{"degree":2,"id":"rdf state[r∗]","label":"RDF State[R∗]","type":"entity"},{"degree":1,"id":"rdf update propagation approach","label":"RDF update propagation approach","type":"entity"},{"degree":2,"id":"record","label":"Record","type":"entity"},{"degree":2,"id":"recording","label":"Recording","type":"entity"},{"degree":1,"id":"recording(r)","label":"Recording(r)","type":"entity"},{"degree":2,"id":"recordingtag","label":"RecordingTag","type":"entity"},{"degree":2,"id":"relation","label":"relation","type":"entity"},{"degree":3,"id":"relation name","label":"relation name","type":"entity"},{"degree":11,"id":"relation r","label":"relation R","type":"entity"},{"degree":1,"id":"relation s","label":"relation S","type":"entity"},{"degree":1,"id":"relational data source","label":"relational data sources","type":"entity"},{"degree":1,"id":"relational database","label":"relational database","type":"entity"},{"degree":1,"id":"relational database engine","label":"relational database engine","type":"entity"},{"degree":1,"id":"relational database to rdf mapping","label":"relational database to RDF mapping","type":"entity"},{"degree":3,"id":"release","label":"Release","type":"entity"},{"degree":1,"id":"release(r3)","label":"Release(r3)","type":"entity"},{"degree":1,"id":"releasegroup","label":"ReleaseGroup","type":"entity"},{"degree":1,"id":"releasegroup(r3)","label":"ReleaseGroup(r3)","type":"entity"},{"degree":1,"id":"relevant relation","label":"relevant relations","type":"entity"},{"degree":1,"id":"relevant tuple","label":"relevant tuples","type":"entity"},{"degree":1,"id":"relevant tuples identification","label":"relevant tuples identification","type":"entity"},{"degree":2,"id":"relevant tuples p0","label":"relevant tuples P0","type":"entity"},{"degree":2,"id":"relevant tuples p1","label":"relevant tuples P1","type":"entity"},{"degree":1,"id":"relevant tuples rta","label":"relevant tuples RTA","type":"entity"},{"degree":2,"id":"rn","label":"Rn","type":"entity"},{"degree":1,"id":"rnew","label":"rnew","type":"entity"},{"degree":1,"id":"rold","label":"rold","type":"entity"},{"degree":1,"id":"rosati, r.","label":"Rosati, R.","type":"entity"},{"degree":1,"id":"rt a(u)","label":"RT A(u)","type":"entity"},{"degree":1,"id":"rt b(u)","label":"RT B(u)","type":"entity"},{"degree":1,"id":"rule language","label":"rule language","type":"entity"},{"degree":1,"id":"rusu","label":"Rusu","type":"entity"},{"degree":7,"id":"s","label":"S","type":"entity"},{"degree":1,"id":"sequeda, j.","label":"Sequeda, J.","type":"entity"},{"degree":1,"id":"sets d and i","label":"sets D and I","type":"entity"},{"degree":1,"id":"solo music artist","label":"Solo Music Artist","type":"entity"},{"degree":1,"id":"solomusicartist","label":"SoloMusicArtist","type":"entity"},{"degree":1,"id":"source data","label":"source data","type":"entity"},{"degree":2,"id":"source database","label":"source database","type":"entity"},{"degree":1,"id":"spanos, d.e.","label":"Spanos, D.E.","type":"entity"},{"degree":1,"id":"staab","label":"Staab","type":"entity"},{"degree":2,"id":"t","label":"T","type":"entity"},{"degree":2,"id":"t2","label":"t2","type":"entity"},{"degree":1,"id":"tag","label":"Tag","type":"entity"},{"degree":1,"id":"tag(r5)","label":"Tag(r5)","type":"entity"},{"degree":1,"id":"thing","label":"Thing","type":"entity"},{"degree":6,"id":"this girl","label":"This Girl","type":"entity"},{"degree":1,"id":"tool","label":"tool","type":"entity"},{"degree":1,"id":"tr pattern","label":"TR Patterns","type":"entity"},{"degree":7,"id":"track","label":"Track","type":"entity"},{"degree":1,"id":"track(r3)","label":"Track(r3)","type":"entity"},{"degree":3,"id":"transformation rule","label":"transformation rules","type":"entity"},{"degree":1,"id":"transformation rule pattern","label":"Transformation Rule Pattern","type":"entity"},{"degree":2,"id":"transformation rule Ψ","label":"transformation rule Ψ","type":"entity"},{"degree":1,"id":"transformation rules impactedt rs","label":"transformation rules ImpactedT Rs","type":"entity"},{"degree":3,"id":"transformation rules m","label":"transformation rules M","type":"entity"},{"degree":1,"id":"transformation rules relevantt rs","label":"transformation rules RelevantT Rs","type":"entity"},{"degree":1,"id":"transformation rules Ψ","label":"transformation rules Ψ","type":"entity"},{"degree":1,"id":"trg_compute_delta_minus_r_stmt_internal","label":"trg_compute_delta_minus_R_stmt_internal","type":"entity"},{"degree":1,"id":"trg_compute_delta_plus_r_stmt_internal","label":"trg_compute_delta_plus_R_stmt_internal","type":"entity"},{"degree":2,"id":"trg_compute_delta_r_stmt","label":"trg_compute_delta_R_stmt","type":"entity"},{"degree":3,"id":"trigger","label":"trigger","type":"entity"},{"degree":4,"id":"triple","label":"triple","type":"entity"},{"degree":1,"id":"triple mapping","label":"triple mapping","type":"entity"},{"degree":4,"id":"tuple","label":"tuple","type":"entity"},{"degree":2,"id":"tuple r","label":"tuple r","type":"entity"},{"degree":1,"id":"tuple r1","label":"tuple r1","type":"entity"},{"degree":1,"id":"tuple r2","label":"tuple r2","type":"entity"},{"degree":2,"id":"tuple s","label":"tuple s","type":"entity"},{"degree":3,"id":"tuple variable","label":"tuple variable","type":"entity"},{"degree":1,"id":"tuples related to r","label":"tuples related to r","type":"entity"},{"degree":1,"id":"tzitzika","label":"Tzitzika","type":"entity"},{"degree":2,"id":"u","label":"u","type":"entity"},{"degree":1,"id":"unified data layer","label":"unified data layer","type":"entity"},{"degree":1,"id":"universidade autónoma de lisboa","label":"Universidade Autónoma de Lisboa","type":"entity"},{"degree":1,"id":"universidade federal do ceará","label":"Universidade Federal do Ceará","type":"entity"},{"degree":3,"id":"update","label":"update","type":"entity"},{"degree":1,"id":"update operation","label":"update operation","type":"entity"},{"degree":12,"id":"update u","label":"update u","type":"entity"},{"degree":1,"id":"updates on relation r","label":"updates on relation R","type":"entity"},{"degree":1,"id":"updates to source","label":"updates to source","type":"entity"},{"degree":4,"id":"v","label":"V","type":"entity"},{"degree":1,"id":"valéria magalhães pequeno","label":"Valéria Magalhães Pequeno","type":"entity"},{"degree":1,"id":"vânia maria ponte vidal","label":"Vânia Maria Ponte Vidal","type":"entity"},{"degree":2,"id":"vidal","label":"Vidal","type":"entity"},{"degree":1,"id":"vidal et al.","label":"Vidal et al.","type":"entity"},{"degree":1,"id":"view maintenance for hierarchical data","label":"view maintenance for hierarchical data","type":"entity"},{"degree":1,"id":"view mappings m","label":"view mappings M","type":"entity"},{"degree":1,"id":"villazón-terrazas, b.","label":"Villazón-Terrazas, B.","type":"entity"},{"degree":1,"id":"volz","label":"Volz","type":"entity"},{"degree":1,"id":"w","label":"W","type":"entity"},{"degree":1,"id":"wu","label":"Wu","type":"entity"},{"degree":1,"id":"x","label":"x","type":"entity"},{"degree":2,"id":"xsd:integer","label":"xsd:integer","type":"entity"},{"degree":2,"id":"xsd:string","label":"xsd:string","type":"entity"},{"degree":1,"id":"zegini","label":"Zegini","type":"entity"},{"degree":1,"id":"zhao","label":"Zhao","type":"entity"},{"degree":1,"id":"Ψ 5","label":"Ψ 5","type":"entity"},{"degree":3,"id":"Ψ 7","label":"Ψ 7","type":"entity"},{"degree":2,"id":"Ψ 8","label":"Ψ 8","type":"entity"},{"degree":2,"id":"σ0","label":"σ0","type":"entity"},{"degree":1,"id":"σ0(r)","label":"σ0(R)","type":"entity"},{"degree":1,"id":"σ1","label":"σ1","type":"entity"},{"degree":2,"id":"φ","label":"φ","type":"entity"},{"degree":2,"id":"Ω","label":"Ω","type":"entity"},{"confidence":0.95,"id":"edge_0","label":"integrate","sources":["enterprise knowledge graph","rdb2rdf view"],"targets":["relational data source"],"type":"relation"},{"confidence":0.9,"id":"edge_1","label":"improve","sources":["rdb2rdf view"],"targets":["query performance"],"type":"relation"},{"confidence":0.95,"id":"edge_2","label":"translate","sources":["mapping"],"targets":["input relational source"],"type":"relation"},{"confidence":0.95,"id":"edge_3","label":"computes","sources":["update u","database state σ0"],"targets":["relevant tuples p0"],"type":"relation"},{"confidence":0.95,"id":"edge_4","label":"contains","sources":["relevant tuples p0"],"targets":["rdf state ∆−"],"type":"relation"},{"confidence":0.95,"id":"edge_5","label":"computes","sources":["update u","database state σ1"],"targets":["relevant tuples p1"],"type":"relation"},{"confidence":0.95,"id":"edge_6","label":"contains","sources":["relevant tuples p1"],"targets":["rdf state ∆+"],"type":"relation"},{"confidence":0.9,"id":"edge_7","label":"is relevant to","sources":["transformation rules m","relation r"],"targets":["transformation rules relevantt rs"],"type":"relation"},{"confidence":0.9,"id":"edge_8","label":"impacts","sources":["transformation rules m","relation r","pivot relation r*"],"targets":["transformation rules impactedt rs"],"type":"relation"},{"confidence":0.95,"id":"edge_9","label":"applies to","sources":["update u","relation r"],"targets":["database state σ0"],"type":"relation"},{"confidence":0.9,"id":"edge_10","label":"is defined as","sources":["changeset ∆−","update u"],"targets":["rdf state[r∗]"],"type":"relation"},{"confidence":0.85,"id":"edge_11","label":"is set of","sources":["relevant tuples rta","update u"],"targets":["pairs (r∗, r∗)"],"type":"relation"},{"confidence":0.8,"id":"edge_12","label":"is relevant to","sources":["transformation rules m","relation r"],"targets":["pivot relation r∗"],"type":"relation"},{"confidence":0.95,"id":"edge_13","label":"maintains","sources":["materialized rdb2rdf view"],"targets":["updates to source"],"type":"relation"},{"confidence":0.9,"id":"edge_14","label":"is defined as","sources":["changeset ∆+","update u"],"targets":["rdf state[r∗]"],"type":"relation"},{"confidence":0.95,"id":"edge_15","label":"produces transition","sources":["update u","relation r"],"targets":["database state σ1"],"type":"relation"},{"confidence":0.9,"id":"edge_16","label":"are relevant to","sources":["transformation rules Ψ","relation r"],"targets":["updates on relation r"],"type":"relation"},{"confidence":0.85,"id":"edge_17","label":"affects tuples in","sources":["transformation rule Ψ","relation r"],"targets":["deletion component d"],"type":"relation"},{"confidence":0.85,"id":"edge_18","label":"affects tuples in","sources":["transformation rule Ψ","relation r"],"targets":["insertion component i"],"type":"relation"},{"confidence":0.9,"id":"edge_19","label":"evaluates over","sources":["rt b(u)","pre-update state σ0"],"targets":["deletion component ∆−(u)"],"type":"relation"},{"confidence":0.9,"id":"edge_20","label":"evaluates over","sources":["rt a(u)","post-update state σ1"],"targets":["insertion component ∆+(u)"],"type":"relation"},{"confidence":0.95,"id":"edge_21","label":"is relevant to","sources":["track","Ψ 5","Ψ 7","Ψ 8"],"targets":["track"],"type":"relation"},{"confidence":0.95,"id":"edge_22","label":"relates to","sources":["track","Ψ 7"],"targets":["a1","a2"],"type":"relation"},{"confidence":0.95,"id":"edge_23","label":"relates to","sources":["track","Ψ 7"],"targets":["a2","a3"],"type":"relation"},{"confidence":0.95,"id":"edge_24","label":"outperforms","sources":["incremental maintenance"],"targets":["full view rematerialization"],"type":"relation"},{"confidence":0.95,"id":"edge_25","label":"relates to","sources":["track","Ψ 8"],"targets":["m1"],"type":"relation"},{"confidence":0.95,"id":"edge_26","label":"is relevant to","sources":["a1","a2","a3","m1"],"targets":["u"],"type":"relation"},{"confidence":0.95,"id":"edge_27","label":"is relevant to","sources":["rnew","rold"],"targets":["u"],"type":"relation"},{"confidence":0.95,"id":"edge_28","label":"collaborates with","sources":["kung","cookin' on 3 b."],"targets":["kylie auldist"],"type":"relation"},{"confidence":0.95,"id":"edge_29","label":"releases track","sources":["kung","cookin' on 3 b."],"targets":["this girl"],"type":"relation"},{"confidence":0.95,"id":"edge_30","label":"features","sources":["cookin' on 3 b."],"targets":["kylie auldist"],"type":"relation"},{"confidence":0.9,"id":"edge_31","label":"has length","sources":["this girl"],"targets":["3:15"],"type":"relation"},{"confidence":0.9,"id":"edge_32","label":"has length","sources":["don't you know"],"targets":["3:04"],"type":"relation"},{"confidence":0.95,"id":"edge_33","label":"provides information from","sources":["pivot(Ψ)","σ0"],"targets":["d"],"type":"relation"},{"confidence":0.9,"id":"edge_34","label":"evaluates under","sources":["r","σ0"],"targets":["σ1"],"type":"relation"},{"confidence":0.95,"id":"edge_35","label":"publish","sources":["dbpedia","linkedgeodata"],"targets":["changeset"],"type":"relation"},{"confidence":0.95,"id":"edge_36","label":"reconstructs state as","sources":["r","i","d"],"targets":["σ0(r)"],"type":"relation"},{"confidence":0.85,"id":"edge_37","label":"executes after","sources":["trigger","r"],"targets":["update"],"type":"relation"},{"confidence":0.9,"id":"edge_38","label":"computes","sources":["trg_compute_delta_r_stmt","trg_compute_delta_minus_r_stmt_internal"],"targets":["delta-(u)"],"type":"relation"},{"confidence":0.9,"id":"edge_39","label":"computes","sources":["trg_compute_delta_r_stmt","trg_compute_delta_plus_r_stmt_internal"],"targets":["delta+(u)"],"type":"relation"},{"confidence":0.95,"id":"edge_40","label":"made","sources":["cookin's on 3 b.","kylie auldist"],"targets":["this girl"],"type":"relation"},{"confidence":0.9,"id":"edge_41","label":"made","sources":["cookin's on 3 b.","kung"],"targets":["this girl","t2"],"type":"relation"},{"confidence":0.95,"id":"edge_42","label":"made","sources":["kung"],"targets":["t2"],"type":"relation"},{"confidence":0.85,"id":"edge_43","label":"genre","sources":["cookin's on 3 b.","kung"],"targets":["q1","q2"],"type":"relation"},{"confidence":0.95,"id":"edge_44","label":"type","sources":["kylie auldist"],"targets":["solomusicartist"],"type":"relation"},{"confidence":0.95,"id":"edge_45","label":"preserve","sources":["rdb2rdf view","source database"],"targets":["base entity"],"type":"relation"},{"confidence":0.95,"id":"edge_46","label":"capture","sources":["changeset"],"targets":["dataset difference"],"type":"relation"},{"confidence":0.9,"id":"edge_47","label":"includes","sources":["formal framework"],"targets":["rule language"],"type":"relation"},{"confidence":0.95,"id":"edge_48","label":"stored in","sources":["rdb2rdf view"],"targets":["rdf dataset"],"type":"relation"},{"confidence":0.95,"id":"edge_49","label":"maintain","sources":["changeset","formal framework"],"targets":["rdb2rdf view"],"type":"relation"},{"confidence":0.9,"id":"edge_50","label":"generates","sources":["tool"],"targets":["trigger"],"type":"relation"},{"confidence":0.95,"id":"edge_51","label":"wrote","sources":["jin, x.","liao, h."],"targets":["algorithm for incremental maintenance"],"type":"relation"},{"confidence":0.9,"id":"edge_52","label":"developed","sources":["konstantinou, n.","spanos, d.e.","kouis, d.","mitrou, n."],"targets":["incremental export of relational databas"],"type":"relation"},{"confidence":0.95,"id":"edge_53","label":"discussed","sources":["lenzerini, m."],"targets":["data integration"],"type":"relation"},{"confidence":0.9,"id":"edge_54","label":"presented","sources":["liefke, h.","davidson, s.b."],"targets":["view maintenance for hierarchical data"],"type":"relation"},{"confidence":0.95,"id":"edge_55","label":"authored","sources":["murlak, f.","libkin, l.","barceló, p.","arenas, m."],"targets":["foundations of data exchange"],"type":"relation"},{"confidence":0.9,"id":"edge_56","label":"linked","sources":["poggi, a.","lembo, d.","calvanese, d.","de giacomo, g.","lenzerini, m.","rosati, r."],"targets":["data to ontology"],"type":"relation"},{"confidence":0.95,"id":"edge_57","label":"computes changeset for","sources":["update u","database states σ0","database states σ1"],"targets":["w"],"type":"relation"},{"confidence":0.85,"id":"edge_58","label":"explored","sources":["sequeda, j.","priyatna, f.","villazón-terrazas, b."],"targets":["relational database to rdf mapping"],"type":"relation"},{"confidence":0.95,"id":"edge_59","label":"co-author","sources":["vidal","lemo"],"targets":["casanova"],"type":"relation"},{"confidence":0.95,"id":"edge_60","label":"co-author","sources":["vidal","pequeno"],"targets":["casanova","arruda","cruz","brito"],"type":"relation"},{"confidence":0.95,"id":"edge_61","label":"co-author","sources":["volz","staab"],"targets":["motik"],"type":"relation"},{"confidence":0.95,"id":"edge_62","label":"co-author","sources":["zegini","tzitzika"],"targets":["christophide"],"type":"relation"},{"confidence":0.95,"id":"edge_63","label":"co-author","sources":["zhao","rusu"],"targets":["dong","wu","nugent"],"type":"relation"},{"confidence":0.9,"id":"edge_64","label":"references","sources":["artist credit"],"targets":["credit"],"type":"relation"},{"confidence":0.9,"id":"edge_65","label":"references","sources":["release"],"targets":["credit"],"type":"relation"},{"confidence":0.9,"id":"edge_66","label":"references","sources":["medium"],"targets":["release"],"type":"relation"},{"confidence":0.95,"id":"edge_67","label":"references","sources":["track"],"targets":["medium"],"type":"relation"},{"confidence":0.9,"id":"edge_68","label":"is correctly computed if","sources":["changeset h∆− (u), ∆+ (u)i"],"targets":["new view state m(σ1)"],"type":"relation"},{"confidence":0.95,"id":"edge_69","label":"references","sources":["track"],"targets":["credit"],"type":"relation"},{"confidence":0.95,"id":"edge_70","label":"references","sources":["recording"],"targets":["credit"],"type":"relation"},{"confidence":0.95,"id":"edge_71","label":"references","sources":["recordingtag"],"targets":["recording"],"type":"relation"},{"confidence":0.95,"id":"edge_72","label":"references","sources":["recordingtag"],"targets":["tag"],"type":"relation"},{"confidence":0.95,"id":"edge_73","label":"references","sources":["releasegroup"],"targets":["credit"],"type":"relation"},{"confidence":0.95,"id":"edge_74","label":"makes","sources":["music artist"],"targets":["thing"],"type":"relation"},{"confidence":0.95,"id":"edge_75","label":"contains","sources":["record"],"targets":["track"],"type":"relation"},{"confidence":0.95,"id":"edge_76","label":"includes","sources":["release"],"targets":["record"],"type":"relation"},{"confidence":0.95,"id":"edge_77","label":"belongs to","sources":["music artist"],"targets":["genre"],"type":"relation"},{"confidence":0.95,"id":"edge_78","label":"is a type of","sources":["solo music artist","music group"],"targets":["music artist"],"type":"relation"},{"confidence":0.85,"id":"edge_79","label":"depends on","sources":["changeset h∆− (u), ∆+ (u)i"],"targets":["update u","database states σ0","database states σ1","view mappings m"],"type":"relation"},{"confidence":0.95,"id":"edge_80","label":"is a","sources":["foaf:name"],"targets":["owl:datatypeproperty"],"type":"relation"},{"confidence":0.95,"id":"edge_81","label":"has domain","sources":["foaf:name"],"targets":["owl:thing"],"type":"relation"},{"confidence":0.95,"id":"edge_82","label":"has range","sources":["foaf:name"],"targets":["xsd:string"],"type":"relation"},{"confidence":0.95,"id":"edge_83","label":"is a","sources":["dc:title"],"targets":["owl:datatypeproperty"],"type":"relation"},{"confidence":0.95,"id":"edge_84","label":"has domain","sources":["dc:title"],"targets":["owl:thing"],"type":"relation"},{"confidence":0.95,"id":"edge_85","label":"has range","sources":["dc:title"],"targets":["xsd:string"],"type":"relation"},{"confidence":0.95,"id":"edge_86","label":"is a","sources":["mo:duration"],"targets":["owl:datatypeproperty"],"type":"relation"},{"confidence":0.95,"id":"edge_87","label":"has domain","sources":["mo:duration"],"targets":["mo:signal"],"type":"relation"},{"confidence":0.95,"id":"edge_88","label":"has range","sources":["mo:duration"],"targets":["xsd:integer"],"type":"relation"},{"confidence":0.95,"id":"edge_89","label":"is a","sources":["mo:track_count"],"targets":["owl:datatypeproperty"],"type":"relation"},{"confidence":0.95,"id":"edge_90","label":"preserve","sources":["rdb2rdf view"],"targets":["base entity"],"type":"relation"},{"confidence":0.95,"id":"edge_91","label":"has domain","sources":["mo:track_count"],"targets":["mo:record"],"type":"relation"},{"confidence":0.95,"id":"edge_92","label":"has range","sources":["mo:track_count"],"targets":["xsd:integer"],"type":"relation"},{"confidence":0.9,"id":"edge_93","label":"correspond to","sources":["rdb2rdf view"],"targets":["database tuple"],"type":"relation"},{"confidence":0.95,"id":"edge_94","label":"maintain","sources":["rdb2rdf view"],"targets":["data graph"],"type":"relation"},{"confidence":0.85,"id":"edge_95","label":"are affected by","sources":["relevant tuple"],"targets":["update"],"type":"relation"},{"confidence":0.9,"id":"edge_96","label":"specifies","sources":["formalism"],"targets":["object-preserving view mapping"],"type":"relation"},{"confidence":0.8,"id":"edge_97","label":"supports","sources":["formalism"],"targets":["identification of relevant tuple","automatic construction"],"type":"relation"},{"confidence":0.95,"id":"edge_98","label":"synchronizes with","sources":["rdb2rdf view","relational database"],"targets":["rdb2rdf view synchronization tool"],"type":"relation"},{"confidence":0.95,"id":"edge_99","label":"computes","sources":["trigger"],"targets":["changeset"],"type":"relation"},{"confidence":0.9,"id":"edge_100","label":"affects","sources":["source database"],"targets":["rdb2rdf view"],"type":"relation"},{"confidence":0.9,"id":"edge_101","label":"defines","sources":["update operation"],"targets":["before trigger","after trigger"],"type":"relation"},{"confidence":0.85,"id":"edge_102","label":"specifies","sources":["formalism"],"targets":["object-preserving rdb2rdf view"],"type":"relation"},{"confidence":0.95,"id":"edge_103","label":"implements","sources":["blakeley et al.","oracle"],"targets":["incremental refresh mechanism"],"type":"relation"},{"confidence":0.9,"id":"edge_104","label":"enables","sources":["rdb2rdf view","data source update"],"targets":["relevant tuples identification"],"type":"relation"},{"confidence":0.98,"id":"edge_105","label":"affiliated with","sources":["vânia maria ponte vidal","narciso arruda","carlos brito"],"targets":["universidade federal do ceará"],"type":"relation"},{"confidence":0.85,"id":"edge_106","label":"requires","sources":["konstantinou et al.","triple mapping"],"targets":["mapping definition annotation"],"type":"relation"},{"confidence":0.9,"id":"edge_107","label":"introduce","sources":["endris et al.","faisal et al."],"targets":["rdf update propagation approach"],"type":"relation"},{"confidence":0.95,"id":"edge_108","label":"propose","sources":["vidal et al.","rdb2rdf view"],"targets":["incremental maintenance strategy"],"type":"relation"},{"confidence":0.9,"id":"edge_109","label":"extends","sources":["article","previous work"],"targets":["framework for mapping rule"],"type":"relation"},{"confidence":0.95,"id":"edge_110","label":"relate","sources":["r","s"],"targets":["f"],"type":"relation"},{"confidence":0.9,"id":"edge_111","label":"induces","sources":["f","r"],"targets":["s"],"type":"relation"},{"confidence":0.85,"id":"edge_112","label":"connects","sources":["r","s"],"targets":["tuple"],"type":"relation"},{"confidence":0.9,"id":"edge_113","label":"has","sources":["Ω","r"],"targets":["primary key"],"type":"relation"},{"confidence":0.85,"id":"edge_114","label":"has","sources":["Ω","attribute"],"targets":["mandatory constraint"],"type":"relation"},{"confidence":0.95,"id":"edge_115","label":"is a relational schema","sources":["r","t"],"targets":["s"],"type":"relation"},{"confidence":0.98,"id":"edge_116","label":"affiliated with","sources":["valéria magalhães pequeno"],"targets":["universidade autónoma de lisboa"],"type":"relation"},{"confidence":0.95,"id":"edge_117","label":"is connected by","sources":["r1","r2"],"targets":["f1"],"type":"relation"},{"confidence":0.95,"id":"edge_118","label":"is connected by","sources":["r2","r3"],"targets":["f2"],"type":"relation"},{"confidence":0.95,"id":"edge_119","label":"is connected by","sources":["r3","rn"],"targets":["fn-1"],"type":"relation"},{"confidence":0.9,"id":"edge_120","label":"is connected through","sources":["r1","rn"],"targets":["φ"],"type":"relation"},{"confidence":0.9,"id":"edge_121","label":"is related through","sources":["t","p"],"targets":["φ"],"type":"relation"},{"confidence":0.95,"id":"edge_122","label":"defines","sources":["v","s"],"targets":["m"],"type":"relation"},{"confidence":0.9,"id":"edge_123","label":"preserves","sources":["v","s"],"targets":["base entity"],"type":"relation"},{"confidence":0.85,"id":"edge_124","label":"corresponds to","sources":["v","s"],"targets":["tuple"],"type":"relation"},{"confidence":0.9,"id":"edge_125","label":"maps to","sources":["c","p"],"targets":["v"],"type":"relation"},{"confidence":0.95,"id":"edge_126","label":"establishes equivalence","sources":["r","x"],"targets":["b"],"type":"relation"},{"confidence":0.98,"id":"edge_127","label":"affiliated with","sources":["marco antonio casanova"],"targets":["pontifı́cia universidade católica do rio de janeiro"],"type":"relation"},{"confidence":0.9,"id":"edge_128","label":"is related to","sources":["tuple r","tuple s"],"targets":["foreign key f"],"type":"relation"},{"confidence":0.85,"id":"edge_129","label":"obtains URI from","sources":["namespace p","attribute a"],"targets":["tuple s"],"type":"relation"},{"confidence":0.8,"id":"edge_130","label":"matches with","sources":["class c","tuple r"],"targets":["pivot relation r"],"type":"relation"},{"confidence":0.88,"id":"edge_131","label":"relates to","sources":["tuple r1","tuple r2"],"targets":["predicate h"],"type":"relation"},{"confidence":0.87,"id":"edge_132","label":"defines values for","sources":["datatype property p","class d"],"targets":["instances x"],"type":"relation"},{"confidence":0.95,"id":"edge_133","label":"correspond to","sources":["pivot tuple","tuples related to r"],"targets":["datatype property p"],"type":"relation"},{"confidence":0.9,"id":"edge_134","label":"define instances of","sources":["otr","pivot relation"],"targets":["object property p"],"type":"relation"},{"confidence":0.9,"id":"edge_135","label":"define instances of","sources":["ctr ψd","ctr ψg"],"targets":["classes d","classes g"],"type":"relation"},{"confidence":0.85,"id":"edge_136","label":"support","sources":["tr pattern"],"targets":["data restructuring","r2rml mapping pattern"],"type":"relation"},{"confidence":0.95,"id":"edge_137","label":"built on","sources":["musicbrainz","postgresql"],"targets":["relational database engine"],"type":"relation"},{"confidence":0.95,"id":"edge_138","label":"consolidate and integrate","sources":["enterprise knowledge graph"],"targets":["heterogeneous data source"],"type":"relation"},{"confidence":0.9,"id":"edge_139","label":"represent N:M relationship","sources":["artist","credit"],"targets":["artistcredit"],"type":"relation"},{"confidence":0.9,"id":"edge_140","label":"associates","sources":["transformation rule pattern","relation name"],"targets":["tuple variable"],"type":"relation"},{"confidence":0.9,"id":"edge_141","label":"is associated with","sources":["object property","relation name"],"targets":["tuple variable"],"type":"relation"},{"confidence":0.85,"id":"edge_142","label":"relates","sources":["path","relation"],"targets":["relation"],"type":"relation"},{"confidence":0.9,"id":"edge_143","label":"is associated with","sources":["datatype property","relation name"],"targets":["tuple variable"],"type":"relation"},{"confidence":0.8,"id":"edge_144","label":"are attributes of","sources":["attribute","relation"],"targets":["relation"],"type":"relation"},{"confidence":0.95,"id":"edge_145","label":"collaborates with","sources":["kung","cookin' on 3 b."],"targets":["kylie auldist"],"type":"relation"},{"confidence":0.9,"id":"edge_146","label":"releases track","sources":["kung","cookin' on 3 b."],"targets":["this girl"],"type":"relation"},{"confidence":0.95,"id":"edge_147","label":"features artist","sources":["cookin' on 3 b."],"targets":["kylie auldist"],"type":"relation"},{"confidence":0.85,"id":"edge_148","label":"has medium","sources":["this girl"],"targets":["pop"],"type":"relation"},{"confidence":0.95,"id":"edge_149","label":"provide","sources":["enterprise knowledge graph"],"targets":["unified data layer"],"type":"relation"},{"confidence":0.85,"id":"edge_150","label":"has medium","sources":["don't you know"],"targets":["dance"],"type":"relation"},{"confidence":0.95,"id":"edge_151","label":"creates","sources":["artist(r)"],"targets":["track(r3)"],"type":"relation"},{"confidence":0.95,"id":"edge_152","label":"creates","sources":["artist(r)"],"targets":["release(r3)"],"type":"relation"},{"confidence":0.95,"id":"edge_153","label":"creates","sources":["artist(r)"],"targets":["releasegroup(r3)"],"type":"relation"},{"confidence":0.9,"id":"edge_154","label":"hasGenre","sources":["artist(r)"],"targets":["tag(r5)"],"type":"relation"},{"confidence":0.85,"id":"edge_155","label":"hasDuration","sources":["recording(r)"],"targets":["length"],"type":"relation"},{"confidence":0.95,"id":"edge_156","label":"isTypeOf","sources":["mbz:r.ga1","mbz:r.ga1"],"targets":["mo:musicartist","mo:solomusicartist"],"type":"relation"},{"confidence":0.95,"id":"edge_157","label":"isTypeOf","sources":["mbz:r.ga2"],"targets":["mo:musicartist"],"type":"relation"},{"confidence":0.95,"id":"edge_158","label":"isTypeOf","sources":["mbz:r.ga3"],"targets":["mo:musicartist","mo:solomusicartist"],"type":"relation"},{"confidence":0.95,"id":"edge_159","label":"hasName","sources":["mbz:ga1"],"targets":["kung"],"type":"relation"},{"confidence":0.95,"id":"edge_160","label":"describes","sources":["ontology"],"targets":["information in knowledge graph"],"type":"relation"},{"confidence":0.95,"id":"edge_161","label":"hasName","sources":["mbz:ga2"],"targets":["cookin’s on 3 b."],"type":"relation"},{"confidence":0.95,"id":"edge_162","label":"hasName","sources":["mbz:ga3"],"targets":["kylie auldist"],"type":"relation"},{"confidence":0.95,"id":"edge_163","label":"made","sources":["mbz:ga1"],"targets":["mbz:t2"],"type":"relation"},{"confidence":0.95,"id":"edge_164","label":"made","sources":["mbz:ga2"],"targets":["mbz:t1"],"type":"relation"},{"confidence":0.95,"id":"edge_165","label":"made","sources":["mbz:ga3"],"targets":["mbz:t1"],"type":"relation"},{"confidence":0.9,"id":"edge_166","label":"produce","sources":["triple","pivot relation"],"targets":["tuple"],"type":"relation"},{"confidence":0.95,"id":"edge_167","label":"store","sources":["named graph"],"targets":["rdf dataset"],"type":"relation"},{"confidence":0.85,"id":"edge_168","label":"represent","sources":["quadruple"],"targets":["triple"],"type":"relation"},{"confidence":0.8,"id":"edge_169","label":"detect","sources":["triple","pivot tuple"],"targets":["update"],"type":"relation"},{"confidence":0.9,"id":"edge_170","label":"apply","sources":["transformation rule","database state"],"targets":["triple"],"type":"relation"},{"confidence":0.95,"id":"edge_171","label":"translates","sources":["rdb2rdf view"],"targets":["source data"],"type":"relation"},{"confidence":0.95,"id":"edge_172","label":"generates","sources":["rdf state","pivot tuple"],"targets":["rdf quad"],"type":"relation"},{"confidence":0.9,"id":"edge_173","label":"defines","sources":["transformation rule","rdb2rdf view"],"targets":["rdf state"],"type":"relation"},{"confidence":0.95,"id":"edge_174","label":"evaluates","sources":["tuple","database state"],"targets":["rdf state"],"type":"relation"},{"confidence":0.9,"id":"edge_175","label":"applies to","sources":["pivot relation","transformation rule"],"targets":["rdf state"],"type":"relation"},{"confidence":0.85,"id":"edge_176","label":"contains","sources":["rdb2rdf view","pivot relation"],"targets":["pivot tuple"],"type":"relation"},{"confidence":0.95,"id":"edge_177","label":"affects","sources":["update u","relation r"],"targets":["database state σ1"],"type":"relation"},{"confidence":0.9,"id":"edge_178","label":"defines","sources":["update u","relation r"],"targets":["sets d and i"],"type":"relation"},{"confidence":0.95,"id":"edge_179","label":"results in","sources":["relation r","database state σ0"],"targets":["database state σ1"],"type":"relation"},{"confidence":0.9,"id":"edge_180","label":"contains","sources":["changeset h∆−(u)","changeset ∆+(u)"],"targets":["old rdf state","new rdf state"],"type":"relation"},{"confidence":0.85,"id":"edge_181","label":"identified by","sources":["relevant relation","update u"],"targets":["relation s"],"type":"relation"}],
+            links: [{"source":72,"target":297,"type":"source"},{"source":185,"target":297,"type":"source"},{"source":297,"target":202,"type":"target"},{"source":185,"target":298,"type":"source"},{"source":298,"target":179,"type":"target"},{"source":115,"target":299,"type":"source"},{"source":299,"target":94,"type":"target"},{"source":270,"target":300,"type":"source"},{"source":53,"target":300,"type":"source"},{"source":300,"target":213,"type":"target"},{"source":213,"target":301,"type":"source"},{"source":301,"target":191,"type":"target"},{"source":270,"target":302,"type":"source"},{"source":54,"target":302,"type":"source"},{"source":302,"target":214,"type":"target"},{"source":214,"target":303,"type":"source"},{"source":303,"target":190,"type":"target"},{"source":247,"target":304,"type":"source"},{"source":200,"target":304,"type":"source"},{"source":304,"target":248,"type":"target"},{"source":247,"target":305,"type":"source"},{"source":200,"target":305,"type":"source"},{"source":162,"target":305,"type":"source"},{"source":305,"target":246,"type":"target"},{"source":270,"target":306,"type":"source"},{"source":200,"target":306,"type":"source"},{"source":306,"target":53,"type":"target"},{"source":32,"target":307,"type":"source"},{"source":270,"target":307,"type":"source"},{"source":307,"target":192,"type":"target"},{"source":215,"target":308,"type":"source"},{"source":270,"target":308,"type":"source"},{"source":308,"target":157,"type":"target"},{"source":247,"target":309,"type":"source"},{"source":200,"target":309,"type":"source"},{"source":309,"target":163,"type":"target"},{"source":118,"target":310,"type":"source"},{"source":310,"target":272,"type":"target"},{"source":30,"target":311,"type":"source"},{"source":270,"target":311,"type":"source"},{"source":311,"target":192,"type":"target"},{"source":270,"target":312,"type":"source"},{"source":200,"target":312,"type":"source"},{"source":312,"target":54,"type":"target"},{"source":249,"target":313,"type":"source"},{"source":200,"target":313,"type":"source"},{"source":313,"target":271,"type":"target"},{"source":245,"target":314,"type":"source"},{"source":200,"target":314,"type":"source"},{"source":314,"target":65,"type":"target"},{"source":245,"target":315,"type":"source"},{"source":200,"target":315,"type":"source"},{"source":315,"target":95,"type":"target"},{"source":221,"target":316,"type":"source"},{"source":171,"target":316,"type":"source"},{"source":316,"target":66,"type":"target"},{"source":220,"target":317,"type":"source"},{"source":169,"target":317,"type":"source"},{"source":317,"target":96,"type":"target"},{"source":241,"target":318,"type":"source"},{"source":289,"target":318,"type":"source"},{"source":290,"target":318,"type":"source"},{"source":291,"target":318,"type":"source"},{"source":318,"target":241,"type":"target"},{"source":241,"target":319,"type":"source"},{"source":290,"target":319,"type":"source"},{"source":319,"target":2,"type":"target"},{"source":319,"target":3,"type":"target"},{"source":241,"target":320,"type":"source"},{"source":290,"target":320,"type":"source"},{"source":320,"target":3,"type":"target"},{"source":320,"target":4,"type":"target"},{"source":90,"target":321,"type":"source"},{"source":321,"target":84,"type":"target"},{"source":241,"target":322,"type":"source"},{"source":291,"target":322,"type":"source"},{"source":322,"target":113,"type":"target"},{"source":2,"target":323,"type":"source"},{"source":3,"target":323,"type":"source"},{"source":4,"target":323,"type":"source"},{"source":113,"target":323,"type":"source"},{"source":323,"target":264,"type":"target"},{"source":217,"target":324,"type":"source"},{"source":218,"target":324,"type":"source"},{"source":324,"target":264,"type":"target"},{"source":102,"target":325,"type":"source"},{"source":38,"target":325,"type":"source"},{"source":325,"target":103,"type":"target"},{"source":102,"target":326,"type":"source"},{"source":38,"target":326,"type":"source"},{"source":326,"target":238,"type":"target"},{"source":38,"target":327,"type":"source"},{"source":327,"target":103,"type":"target"},{"source":238,"target":328,"type":"source"},{"source":328,"target":1,"type":"target"},{"source":69,"target":329,"type":"source"},{"source":329,"target":0,"type":"target"},{"source":165,"target":330,"type":"source"},{"source":292,"target":330,"type":"source"},{"source":330,"target":45,"type":"target"},{"source":180,"target":331,"type":"source"},{"source":292,"target":331,"type":"source"},{"source":331,"target":294,"type":"target"},{"source":62,"target":332,"type":"source"},{"source":111,"target":332,"type":"source"},{"source":332,"target":27,"type":"target"},{"source":180,"target":333,"type":"source"},{"source":87,"target":333,"type":"source"},{"source":45,"target":333,"type":"source"},{"source":333,"target":293,"type":"target"},{"source":253,"target":334,"type":"source"},{"source":180,"target":334,"type":"source"},{"source":334,"target":268,"type":"target"},{"source":252,"target":335,"type":"source"},{"source":250,"target":335,"type":"source"},{"source":335,"target":68,"type":"target"},{"source":252,"target":336,"type":"source"},{"source":251,"target":336,"type":"source"},{"source":336,"target":67,"type":"target"},{"source":39,"target":337,"type":"source"},{"source":103,"target":337,"type":"source"},{"source":337,"target":238,"type":"target"},{"source":39,"target":338,"type":"source"},{"source":102,"target":338,"type":"source"},{"source":338,"target":238,"type":"target"},{"source":338,"target":234,"type":"target"},{"source":102,"target":339,"type":"source"},{"source":339,"target":234,"type":"target"},{"source":39,"target":340,"type":"source"},{"source":102,"target":340,"type":"source"},{"source":340,"target":176,"type":"target"},{"source":340,"target":177,"type":"target"},{"source":103,"target":341,"type":"source"},{"source":341,"target":228,"type":"target"},{"source":185,"target":342,"type":"source"},{"source":230,"target":342,"type":"source"},{"source":342,"target":19,"type":"target"},{"source":27,"target":343,"type":"source"},{"source":343,"target":58,"type":"target"},{"source":80,"target":344,"type":"source"},{"source":344,"target":222,"type":"target"},{"source":185,"target":345,"type":"source"},{"source":345,"target":187,"type":"target"},{"source":27,"target":346,"type":"source"},{"source":80,"target":346,"type":"source"},{"source":346,"target":185,"type":"target"},{"source":239,"target":347,"type":"source"},{"source":347,"target":253,"type":"target"},{"source":98,"target":348,"type":"source"},{"source":108,"target":348,"type":"source"},{"source":348,"target":6,"type":"target"},{"source":100,"target":349,"type":"source"},{"source":231,"target":349,"type":"source"},{"source":101,"target":349,"type":"source"},{"source":128,"target":349,"type":"source"},{"source":107,"target":350,"type":"source"},{"source":350,"target":48,"type":"target"},{"source":110,"target":351,"type":"source"},{"source":61,"target":351,"type":"source"},{"source":351,"target":278,"type":"target"},{"source":136,"target":352,"type":"source"},{"source":109,"target":352,"type":"source"},{"source":18,"target":352,"type":"source"},{"source":7,"target":352,"type":"source"},{"source":352,"target":82,"type":"target"},{"source":166,"target":353,"type":"source"},{"source":104,"target":353,"type":"source"},{"source":24,"target":353,"type":"source"},{"source":64,"target":353,"type":"source"},{"source":107,"target":353,"type":"source"},{"source":219,"target":353,"type":"source"},{"source":353,"target":51,"type":"target"},{"source":270,"target":354,"type":"source"},{"source":55,"target":354,"type":"source"},{"source":56,"target":354,"type":"source"},{"source":354,"target":282,"type":"target"},{"source":225,"target":355,"type":"source"},{"source":175,"target":355,"type":"source"},{"source":280,"target":355,"type":"source"},{"source":355,"target":205,"type":"target"},{"source":276,"target":356,"type":"source"},{"source":105,"target":356,"type":"source"},{"source":356,"target":26,"type":"target"},{"source":276,"target":357,"type":"source"},{"source":159,"target":357,"type":"source"},{"source":357,"target":26,"type":"target"},{"source":357,"target":8,"type":"target"},{"source":357,"target":42,"type":"target"},{"source":357,"target":22,"type":"target"},{"source":281,"target":358,"type":"source"},{"source":232,"target":358,"type":"source"},{"source":358,"target":135,"type":"target"},{"source":287,"target":359,"type":"source"},{"source":263,"target":359,"type":"source"},{"source":359,"target":33,"type":"target"},{"source":288,"target":360,"type":"source"},{"source":223,"target":360,"type":"source"},{"source":360,"target":70,"type":"target"},{"source":360,"target":283,"type":"target"},{"source":360,"target":145,"type":"target"},{"source":11,"target":361,"type":"source"},{"source":361,"target":41,"type":"target"},{"source":206,"target":362,"type":"source"},{"source":362,"target":41,"type":"target"},{"source":127,"target":363,"type":"source"},{"source":363,"target":206,"type":"target"},{"source":241,"target":364,"type":"source"},{"source":364,"target":127,"type":"target"},{"source":28,"target":365,"type":"source"},{"source":365,"target":144,"type":"target"},{"source":241,"target":366,"type":"source"},{"source":366,"target":41,"type":"target"},{"source":195,"target":367,"type":"source"},{"source":367,"target":41,"type":"target"},{"source":197,"target":368,"type":"source"},{"source":368,"target":195,"type":"target"},{"source":197,"target":369,"type":"source"},{"source":369,"target":235,"type":"target"},{"source":208,"target":370,"type":"source"},{"source":370,"target":41,"type":"target"},{"source":137,"target":371,"type":"source"},{"source":371,"target":237,"type":"target"},{"source":194,"target":372,"type":"source"},{"source":372,"target":241,"type":"target"},{"source":206,"target":373,"type":"source"},{"source":373,"target":194,"type":"target"},{"source":137,"target":374,"type":"source"},{"source":374,"target":85,"type":"target"},{"source":227,"target":375,"type":"source"},{"source":138,"target":375,"type":"source"},{"source":375,"target":137,"type":"target"},{"source":28,"target":376,"type":"source"},{"source":376,"target":270,"type":"target"},{"source":376,"target":55,"type":"target"},{"source":376,"target":56,"type":"target"},{"source":376,"target":279,"type":"target"},{"source":78,"target":377,"type":"source"},{"source":377,"target":154,"type":"target"},{"source":78,"target":378,"type":"source"},{"source":378,"target":155,"type":"target"},{"source":78,"target":379,"type":"source"},{"source":379,"target":286,"type":"target"},{"source":63,"target":380,"type":"source"},{"source":380,"target":154,"type":"target"},{"source":63,"target":381,"type":"source"},{"source":381,"target":155,"type":"target"},{"source":63,"target":382,"type":"source"},{"source":382,"target":286,"type":"target"},{"source":129,"target":383,"type":"source"},{"source":383,"target":154,"type":"target"},{"source":129,"target":384,"type":"source"},{"source":384,"target":132,"type":"target"},{"source":129,"target":385,"type":"source"},{"source":385,"target":285,"type":"target"},{"source":134,"target":386,"type":"source"},{"source":386,"target":154,"type":"target"},{"source":185,"target":387,"type":"source"},{"source":387,"target":19,"type":"target"},{"source":134,"target":388,"type":"source"},{"source":388,"target":131,"type":"target"},{"source":134,"target":389,"type":"source"},{"source":389,"target":285,"type":"target"},{"source":185,"target":390,"type":"source"},{"source":390,"target":57,"type":"target"},{"source":185,"target":391,"type":"source"},{"source":391,"target":47,"type":"target"},{"source":211,"target":392,"type":"source"},{"source":392,"target":268,"type":"target"},{"source":81,"target":393,"type":"source"},{"source":393,"target":149,"type":"target"},{"source":81,"target":394,"type":"source"},{"source":394,"target":88,"type":"target"},{"source":394,"target":16,"type":"target"},{"source":185,"target":395,"type":"source"},{"source":203,"target":395,"type":"source"},{"source":395,"target":186,"type":"target"},{"source":253,"target":396,"type":"source"},{"source":396,"target":27,"type":"target"},{"source":230,"target":397,"type":"source"},{"source":397,"target":185,"type":"target"},{"source":269,"target":398,"type":"source"},{"source":398,"target":20,"type":"target"},{"source":398,"target":5,"type":"target"},{"source":81,"target":399,"type":"source"},{"source":399,"target":148,"type":"target"},{"source":21,"target":400,"type":"source"},{"source":152,"target":400,"type":"source"},{"source":400,"target":92,"type":"target"},{"source":185,"target":401,"type":"source"},{"source":50,"target":401,"type":"source"},{"source":401,"target":212,"type":"target"},{"source":275,"target":402,"type":"source"},{"source":142,"target":402,"type":"source"},{"source":25,"target":402,"type":"source"},{"source":402,"target":267,"type":"target"},{"source":99,"target":403,"type":"source"},{"source":255,"target":403,"type":"source"},{"source":403,"target":116,"type":"target"},{"source":71,"target":404,"type":"source"},{"source":76,"target":404,"type":"source"},{"source":404,"target":193,"type":"target"},{"source":277,"target":405,"type":"source"},{"source":185,"target":405,"type":"source"},{"source":405,"target":91,"type":"target"},{"source":9,"target":406,"type":"source"},{"source":173,"target":406,"type":"source"},{"source":406,"target":83,"type":"target"},{"source":180,"target":407,"type":"source"},{"source":224,"target":407,"type":"source"},{"source":407,"target":73,"type":"target"},{"source":73,"target":408,"type":"source"},{"source":180,"target":408,"type":"source"},{"source":408,"target":224,"type":"target"},{"source":180,"target":409,"type":"source"},{"source":224,"target":409,"type":"source"},{"source":409,"target":256,"type":"target"},{"source":296,"target":410,"type":"source"},{"source":180,"target":410,"type":"source"},{"source":410,"target":174,"type":"target"},{"source":296,"target":411,"type":"source"},{"source":14,"target":411,"type":"source"},{"source":411,"target":114,"type":"target"},{"source":180,"target":412,"type":"source"},{"source":233,"target":412,"type":"source"},{"source":412,"target":224,"type":"target"},{"source":274,"target":413,"type":"source"},{"source":413,"target":266,"type":"target"},{"source":181,"target":414,"type":"source"},{"source":182,"target":414,"type":"source"},{"source":414,"target":74,"type":"target"},{"source":182,"target":415,"type":"source"},{"source":184,"target":415,"type":"source"},{"source":415,"target":75,"type":"target"},{"source":184,"target":416,"type":"source"},{"source":216,"target":416,"type":"source"},{"source":416,"target":77,"type":"target"},{"source":181,"target":417,"type":"source"},{"source":216,"target":417,"type":"source"},{"source":417,"target":295,"type":"target"},{"source":233,"target":418,"type":"source"},{"source":156,"target":418,"type":"source"},{"source":418,"target":295,"type":"target"},{"source":273,"target":419,"type":"source"},{"source":224,"target":419,"type":"source"},{"source":419,"target":112,"type":"target"},{"source":273,"target":420,"type":"source"},{"source":224,"target":420,"type":"source"},{"source":420,"target":19,"type":"target"},{"source":273,"target":421,"type":"source"},{"source":224,"target":421,"type":"source"},{"source":421,"target":256,"type":"target"},{"source":23,"target":422,"type":"source"},{"source":156,"target":422,"type":"source"},{"source":422,"target":273,"type":"target"},{"source":180,"target":423,"type":"source"},{"source":284,"target":423,"type":"source"},{"source":423,"target":17,"type":"target"},{"source":117,"target":424,"type":"source"},{"source":424,"target":167,"type":"target"},{"source":257,"target":425,"type":"source"},{"source":260,"target":425,"type":"source"},{"source":425,"target":79,"type":"target"},{"source":141,"target":426,"type":"source"},{"source":15,"target":426,"type":"source"},{"source":426,"target":260,"type":"target"},{"source":34,"target":427,"type":"source"},{"source":257,"target":427,"type":"source"},{"source":427,"target":161,"type":"target"},{"source":258,"target":428,"type":"source"},{"source":259,"target":428,"type":"source"},{"source":428,"target":172,"type":"target"},{"source":60,"target":429,"type":"source"},{"source":35,"target":429,"type":"source"},{"source":429,"target":97,"type":"target"},{"source":164,"target":430,"type":"source"},{"source":262,"target":430,"type":"source"},{"source":430,"target":60,"type":"target"},{"source":153,"target":431,"type":"source"},{"source":160,"target":431,"type":"source"},{"source":431,"target":147,"type":"target"},{"source":43,"target":432,"type":"source"},{"source":44,"target":432,"type":"source"},{"source":432,"target":36,"type":"target"},{"source":432,"target":37,"type":"target"},{"source":240,"target":433,"type":"source"},{"source":433,"target":49,"type":"target"},{"source":433,"target":183,"type":"target"},{"source":139,"target":434,"type":"source"},{"source":170,"target":434,"type":"source"},{"source":434,"target":204,"type":"target"},{"source":72,"target":435,"type":"source"},{"source":435,"target":86,"type":"target"},{"source":10,"target":436,"type":"source"},{"source":41,"target":436,"type":"source"},{"source":436,"target":13,"type":"target"},{"source":244,"target":437,"type":"source"},{"source":199,"target":437,"type":"source"},{"source":437,"target":261,"type":"target"},{"source":146,"target":438,"type":"source"},{"source":199,"target":438,"type":"source"},{"source":438,"target":261,"type":"target"},{"source":158,"target":439,"type":"source"},{"source":198,"target":439,"type":"source"},{"source":439,"target":198,"type":"target"},{"source":59,"target":440,"type":"source"},{"source":199,"target":440,"type":"source"},{"source":440,"target":261,"type":"target"},{"source":14,"target":441,"type":"source"},{"source":198,"target":441,"type":"source"},{"source":441,"target":198,"type":"target"},{"source":102,"target":442,"type":"source"},{"source":38,"target":442,"type":"source"},{"source":442,"target":103,"type":"target"},{"source":102,"target":443,"type":"source"},{"source":38,"target":443,"type":"source"},{"source":443,"target":238,"type":"target"},{"source":38,"target":444,"type":"source"},{"source":444,"target":103,"type":"target"},{"source":238,"target":445,"type":"source"},{"source":445,"target":168,"type":"target"},{"source":72,"target":446,"type":"source"},{"source":446,"target":265,"type":"target"},{"source":69,"target":447,"type":"source"},{"source":447,"target":46,"type":"target"},{"source":12,"target":448,"type":"source"},{"source":448,"target":242,"type":"target"},{"source":12,"target":449,"type":"source"},{"source":449,"target":207,"type":"target"},{"source":12,"target":450,"type":"source"},{"source":450,"target":209,"type":"target"},{"source":12,"target":451,"type":"source"},{"source":451,"target":236,"type":"target"},{"source":196,"target":452,"type":"source"},{"source":452,"target":106,"type":"target"},{"source":122,"target":453,"type":"source"},{"source":122,"target":453,"type":"source"},{"source":453,"target":130,"type":"target"},{"source":453,"target":133,"type":"target"},{"source":123,"target":454,"type":"source"},{"source":454,"target":130,"type":"target"},{"source":124,"target":455,"type":"source"},{"source":455,"target":130,"type":"target"},{"source":455,"target":133,"type":"target"},{"source":119,"target":456,"type":"source"},{"source":456,"target":102,"type":"target"},{"source":151,"target":457,"type":"source"},{"source":457,"target":93,"type":"target"},{"source":120,"target":458,"type":"source"},{"source":458,"target":40,"type":"target"},{"source":121,"target":459,"type":"source"},{"source":459,"target":103,"type":"target"},{"source":119,"target":460,"type":"source"},{"source":460,"target":126,"type":"target"},{"source":120,"target":461,"type":"source"},{"source":461,"target":125,"type":"target"},{"source":121,"target":462,"type":"source"},{"source":462,"target":125,"type":"target"},{"source":254,"target":463,"type":"source"},{"source":160,"target":463,"type":"source"},{"source":463,"target":256,"type":"target"},{"source":140,"target":464,"type":"source"},{"source":464,"target":187,"type":"target"},{"source":178,"target":465,"type":"source"},{"source":465,"target":254,"type":"target"},{"source":254,"target":466,"type":"source"},{"source":164,"target":466,"type":"source"},{"source":466,"target":268,"type":"target"},{"source":243,"target":467,"type":"source"},{"source":52,"target":467,"type":"source"},{"source":467,"target":254,"type":"target"},{"source":185,"target":468,"type":"source"},{"source":468,"target":229,"type":"target"},{"source":189,"target":469,"type":"source"},{"source":164,"target":469,"type":"source"},{"source":469,"target":188,"type":"target"},{"source":243,"target":470,"type":"source"},{"source":185,"target":470,"type":"source"},{"source":470,"target":189,"type":"target"},{"source":256,"target":471,"type":"source"},{"source":52,"target":471,"type":"source"},{"source":471,"target":189,"type":"target"},{"source":160,"target":472,"type":"source"},{"source":243,"target":472,"type":"source"},{"source":472,"target":189,"type":"target"},{"source":185,"target":473,"type":"source"},{"source":160,"target":473,"type":"source"},{"source":473,"target":164,"type":"target"},{"source":270,"target":474,"type":"source"},{"source":200,"target":474,"type":"source"},{"source":474,"target":54,"type":"target"},{"source":270,"target":475,"type":"source"},{"source":200,"target":475,"type":"source"},{"source":475,"target":226,"type":"target"},{"source":200,"target":476,"type":"source"},{"source":53,"target":476,"type":"source"},{"source":476,"target":54,"type":"target"},{"source":29,"target":477,"type":"source"},{"source":31,"target":477,"type":"source"},{"source":477,"target":150,"type":"target"},{"source":477,"target":143,"type":"target"},{"source":210,"target":478,"type":"source"},{"source":270,"target":478,"type":"source"},{"source":478,"target":201,"type":"target"}]
+        };
+
+        const augData = {"links":[{"is_new":true,"source":"pivot relation r","target":"aug:n:000001","type":"source"},{"is_new":true,"source":"pivot relation r∗","target":"aug:n:000001","type":"source"},{"is_new":true,"source":"pivot relation r","target":"aug:n:000002","type":"source"},{"is_new":true,"source":"pivot relation r*","target":"aug:n:000002","type":"source"},{"is_new":true,"source":"pivot relation r*","target":"aug:n:000003","type":"source"},{"is_new":true,"source":"pivot relation r∗","target":"aug:n:000003","type":"source"},{"is_new":true,"source":"cookin's on 3 b.","target":"aug:n:000004","type":"source"},{"is_new":true,"source":"cookin’s on 3 b.","target":"aug:n:000004","type":"source"},{"is_new":true,"source":"update u","target":"aug:n:000005","type":"source"},{"is_new":true,"source":"a1","target":"aug:n:000006","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000006","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000007","type":"source"},{"is_new":true,"source":"kylie auldist","target":"aug:n:000008","type":"source"},{"is_new":true,"source":"kung","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"object property","target":"aug:n:000010","type":"source"},{"is_new":true,"source":"tuple variable","target":"aug:n:000010","type":"source"},{"is_new":true,"source":"t","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"s","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"r","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"s","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"mo:track_count","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"owl:datatypeproperty","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"mo:duration","target":"aug:n:000014","type":"source"},{"is_new":true,"source":"owl:datatypeproperty","target":"aug:n:000014","type":"source"},{"is_new":true,"source":"dc:title","target":"aug:n:000015","type":"source"},{"is_new":true,"source":"owl:datatypeproperty","target":"aug:n:000015","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000016","type":"source"},{"is_new":true,"source":"aug:n:000016","target":"changeset","type":"confounded"},{"is_new":true,"source":"aug:n:000016","target":"data graph","type":"confounded"},{"is_new":true,"source":"music group","target":"aug:n:000017","type":"source"},{"is_new":true,"source":"music artist","target":"aug:n:000017","type":"source"},{"is_new":true,"source":"solo music artist","target":"aug:n:000018","type":"source"},{"is_new":true,"source":"music artist","target":"aug:n:000018","type":"source"},{"is_new":true,"source":"relation name","target":"aug:n:000019","type":"source"},{"is_new":true,"source":"tuple variable","target":"aug:n:000019","type":"source"},{"is_new":true,"source":"datatype property","target":"aug:n:000020","type":"source"},{"is_new":true,"source":"tuple variable","target":"aug:n:000020","type":"source"},{"is_new":true,"source":"relation name","target":"aug:n:000021","type":"source"},{"is_new":true,"source":"tuple variable","target":"aug:n:000021","type":"source"},{"is_new":true,"source":"rdf state","target":"aug:n:000022","type":"source"},{"is_new":true,"source":"rdf state ∆+","target":"aug:n:000022","type":"source"},{"is_new":true,"source":"rdf state","target":"aug:n:000023","type":"source"},{"is_new":true,"source":"rdf state ∆−","target":"aug:n:000023","type":"source"},{"is_new":true,"source":"changeset ∆+","target":"aug:n:000024","type":"source"},{"is_new":true,"source":"changeset ∆−","target":"aug:n:000024","type":"source"},{"is_new":true,"source":"update u","target":"aug:n:000025","type":"source"},{"is_new":true,"source":"aug:n:000025","target":"database state σ0","type":"confounded"},{"is_new":true,"source":"aug:n:000025","target":"database state σ1","type":"confounded"},{"is_new":true,"source":"rdf state ∆+","target":"aug:n:000026","type":"source"},{"is_new":true,"source":"rdf state ∆−","target":"aug:n:000026","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000027","type":"source"},{"is_new":true,"source":"aug:n:000027","target":"data graph","type":"confounded"},{"is_new":true,"source":"aug:n:000027","target":"formal framework","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"aug:n:000028","target":"data graph","type":"confounded"},{"is_new":true,"source":"aug:n:000028","target":"database tuple","type":"confounded"},{"is_new":true,"source":"update u","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"aug:n:000029","target":"changeset h∆− (u), ∆+ (u)i","type":"confounded"},{"is_new":true,"source":"aug:n:000029","target":"database state σ1","type":"confounded"},{"is_new":true,"source":"changeset","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"changeset ∆−","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"foaf:name","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"owl:datatypeproperty","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"data to ontology","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"poggi, a.","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"Ψ 7","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"m1","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"database state σ0","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"database states σ0","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"changeset ∆+","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"changeset ∆−","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"delta+(u)","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"delta-(u)","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"changeset","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"changeset ∆+","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000038","type":"source"},{"is_new":true,"source":"aug:n:000038","target":"base entity","type":"confounded"},{"is_new":true,"source":"aug:n:000038","target":"changeset","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000039","type":"source"},{"is_new":true,"source":"aug:n:000039","target":"changeset","type":"confounded"},{"is_new":true,"source":"aug:n:000039","target":"database tuple","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000040","type":"source"},{"is_new":true,"source":"aug:n:000040","target":"changeset","type":"confounded"},{"is_new":true,"source":"aug:n:000040","target":"formal framework","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000041","type":"source"},{"is_new":true,"source":"aug:n:000041","target":"changeset","type":"confounded"},{"is_new":true,"source":"aug:n:000041","target":"incremental maintenance strategy","type":"confounded"},{"is_new":true,"source":"update u","target":"aug:n:000042","type":"source"},{"is_new":true,"source":"aug:n:000042","target":"changeset h∆− (u), ∆+ (u)i","type":"confounded"},{"is_new":true,"source":"aug:n:000042","target":"database state σ0","type":"confounded"},{"is_new":true,"source":"Ψ 8","target":"aug:n:000043","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000043","type":"source"},{"is_new":true,"source":"Ψ 8","target":"aug:n:000044","type":"source"},{"is_new":true,"source":"a1","target":"aug:n:000044","type":"source"},{"is_new":true,"source":"relation r","target":"aug:n:000045","type":"source"},{"is_new":true,"source":"Ψ 5","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"a3","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"Ψ 5","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"Ψ 5","target":"aug:n:000048","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000048","type":"source"},{"is_new":true,"source":"Ψ 8","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"Ψ 8","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"a3","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"Ψ 5","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"a1","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"casanova","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"vidal","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"database state σ1","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"database states σ1","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"Ψ 5","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"m1","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"s","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"r","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"lenzerini, m.","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"rosati, r.","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"aug:n:000058","target":"base entity","type":"confounded"},{"is_new":true,"source":"aug:n:000058","target":"data graph","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"aug:n:000059","target":"base entity","type":"confounded"},{"is_new":true,"source":"aug:n:000059","target":"database tuple","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"aug:n:000060","target":"base entity","type":"confounded"},{"is_new":true,"source":"aug:n:000060","target":"incremental maintenance strategy","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"aug:n:000061","target":"base entity","type":"confounded"},{"is_new":true,"source":"aug:n:000061","target":"formal framework","type":"confounded"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"aug:n:000062","target":"data graph","type":"confounded"},{"is_new":true,"source":"aug:n:000062","target":"incremental maintenance strategy","type":"confounded"},{"is_new":true,"source":"data to ontology","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"lenzerini, m.","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"poggi, a.","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"rosati, r.","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"a1","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"a3","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"de giacomo, g.","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"lembo, d.","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"lembo, d.","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"rosati, r.","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"a3","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"lenzerini, m.","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"rosati, r.","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"data to ontology","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"de giacomo, g.","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"poggi, a.","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"de giacomo, g.","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"lenzerini, m.","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"data to ontology","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"de giacomo, g.","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"de giacomo, g.","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"rosati, r.","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"lembo, d.","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"lenzerini, m.","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"de giacomo, g.","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"lenzerini, m.","target":"aug:n:000078","type":"source"},{"is_new":true,"source":"poggi, a.","target":"aug:n:000078","type":"source"},{"is_new":true,"source":"data to ontology","target":"aug:n:000079","type":"source"},{"is_new":true,"source":"lembo, d.","target":"aug:n:000079","type":"source"},{"is_new":true,"source":"track","target":"aug:n:000080","type":"source"},{"is_new":true,"source":"Ψ 7","target":"aug:n:000080","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000081","type":"source"},{"is_new":true,"source":"lembo, d.","target":"aug:n:000081","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000082","type":"source"},{"is_new":true,"source":"poggi, a.","target":"aug:n:000082","type":"source"},{"is_new":true,"source":"cookin's on 3 b.","target":"aug:n:000083","type":"source"},{"is_new":true,"source":"kung","target":"aug:n:000083","type":"source"},{"is_new":true,"source":"trigger","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"r","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"relevant tuple","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"triple","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"pivot tuple","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"update","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"data to ontology","target":"aug:n:000085","type":"source"},{"is_new":true,"source":"rosati, r.","target":"aug:n:000085","type":"source"},{"is_new":true,"source":"calvanese, d.","target":"aug:n:000086","type":"source"},{"is_new":true,"source":"update u","target":"aug:n:000087","type":"source"},{"is_new":true,"source":"relation r","target":"aug:n:000087","type":"source"},{"is_new":true,"source":"database state σ1","target":"aug:n:000087","type":"source"},{"is_new":true,"source":"mbz:ga1","target":"aug:n:000088","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000089","type":"source"},{"is_new":true,"source":"incremental export of relational databa","target":"aug:n:000090","type":"source"},{"is_new":true,"source":"r1","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"rn","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"t","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"p","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"φ","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"track","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"Ψ 5","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"Ψ 7","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"Ψ 8","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"record","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"track","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"source database","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"rdb2rdf view","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"v","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"s","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"base entity","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"artist credit","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"release","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"track","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"recording","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"releasegroup","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"credit","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"track","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"Ψ 7","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"track","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"Ψ 7","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"a2","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"lembo, d.","target":"aug:n:000096","type":"source"},{"is_new":true,"source":"poggi, a.","target":"aug:n:000096","type":"source"},{"is_new":true,"source":"f","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"r","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"r","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"t","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"s","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"changeset ∆−","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"update u","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"changeset ∆+","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"update u","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"rdf state[r∗]","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"foaf:name","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"dc:title","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"mo:duration","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"mo:track_count","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"owl:datatypeproperty","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"mbz:r.ga1","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"mbz:r.ga1","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"mbz:r.ga2","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"mbz:r.ga3","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"mo:musicartist","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"konstantinou, n.","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"spanos, d.e.","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"kouis, d.","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"mitrou, n.","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"incremental export of relational databa","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"murlak, f.","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"libkin, l.","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"barceló, p.","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"arenas, m.","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"foundations of data exchange","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"vidal","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"lemo","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"vidal","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"pequeno","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"casanova","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"vânia maria ponte vidal","target":"aug:n:000104","type":"source"},{"is_new":true,"source":"narciso arruda","target":"aug:n:000104","type":"source"},{"is_new":true,"source":"carlos brito","target":"aug:n:000104","type":"source"},{"is_new":true,"source":"universidade federal do ceará","target":"aug:n:000104","type":"source"},{"is_new":true,"source":"sequeda, j.","target":"aug:n:000105","type":"source"},{"is_new":true,"source":"priyatna, f.","target":"aug:n:000105","type":"source"},{"is_new":true,"source":"villazón-terrazas, b.","target":"aug:n:000105","type":"source"},{"is_new":true,"source":"relational database to rdf mapping","target":"aug:n:000105","type":"source"},{"is_new":true,"source":"path","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"relation","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"attribute","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"relation","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"relation","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"transformation rules m","target":"aug:n:000107","type":"source"},{"is_new":true,"source":"relation r","target":"aug:n:000107","type":"source"},{"is_new":true,"source":"pivot relation r*","target":"aug:n:000107","type":"source"},{"is_new":true,"source":"transformation rules impactedt rs","target":"aug:n:000107","type":"source"},{"is_new":true,"source":"mbz:r.ga1","target":"aug:n:000108","type":"source"},{"is_new":true,"source":"mbz:r.ga1","target":"aug:n:000108","type":"source"},{"is_new":true,"source":"mbz:r.ga3","target":"aug:n:000108","type":"source"},{"is_new":true,"source":"mo:solomusicartist","target":"aug:n:000108","type":"source"},{"is_new":true,"source":"cookin's on 3 b.","target":"aug:n:000109","type":"source"},{"is_new":true,"source":"kung","target":"aug:n:000109","type":"source"},{"is_new":true,"source":"kung","target":"aug:n:000109","type":"source"},{"is_new":true,"source":"t2","target":"aug:n:000109","type":"source"},{"is_new":true,"source":"dbpedia","target":"aug:n:000110","type":"source"},{"is_new":true,"source":"linkedgeodata","target":"aug:n:000110","type":"source"},{"is_new":true,"source":"trigger","target":"aug:n:000110","type":"source"},{"is_new":true,"source":"changeset","target":"aug:n:000110","type":"source"}],"meta":{"created_utc":"2026-03-11T17:25:10Z","notes":"Overlay candidates only; not ground truth.","run_id":"run_20260311_171611","source":"kg render"},"nodes":[{"confidence":1.0000000000000002,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_18","Relational_Data_on_KGs_chunk_8"],"id":"aug:n:000001","insight_id":"run_20260311_171611:text_similarity:000799","is_new":true,"label":"Text Similar: pivot relation R ~ pivot relation R∗","type":"relation","witness_edges":["edge_52","edge_109"]},{"confidence":1.0000000000000002,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_17","Relational_Data_on_KGs_chunk_8"],"id":"aug:n:000002","insight_id":"run_20260311_171611:text_similarity:000798","is_new":true,"label":"Text Similar: pivot relation R ~ pivot relation R*","type":"relation","witness_edges":["edge_52","edge_105"]},{"confidence":1.0000000000000002,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_18","Relational_Data_on_KGs_chunk_17"],"id":"aug:n:000003","insight_id":"run_20260311_171611:text_similarity:000797","is_new":true,"label":"Text Similar: pivot relation R* ~ pivot relation R∗","type":"relation","witness_edges":["edge_105","edge_109"]},{"confidence":1.0000000000000002,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_13","Relational_Data_on_KGs_chunk_23"],"id":"aug:n:000004","insight_id":"run_20260311_171611:text_similarity:000796","is_new":true,"label":"Text Similar: Cookin's on 3 B. ~ Cookin’s on 3 B.","type":"relation","witness_edges":["edge_134","edge_135","edge_137","edge_80"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000005","insight_id":"run_20260311_171611:domain_bridge:000738","is_new":true,"label":"Domain bridge: 'update u' connects 10 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_20"],"id":"aug:n:000006","insight_id":"run_20260311_171611:k_truss:000589","is_new":true,"label":"k-Truss: a1 — a2","type":"relation","witness_edges":["edge_118","edge_121"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000007","insight_id":"run_20260311_171611:domain_bridge:000737","is_new":true,"label":"Domain bridge: 'RDB2RDF view' connects 13 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000008","insight_id":"run_20260311_171611:domain_bridge:000742","is_new":true,"label":"Domain bridge: 'Kylie Auldist' connects 6 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000009","insight_id":"run_20260311_171611:domain_bridge:000743","is_new":true,"label":"Domain bridge: 'Kung' connects 5 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000010","insight_id":"run_20260311_171611:taxonomy:000728","is_new":true,"label":"Taxonomy: 'object property' is a 'tuple variable'","type":"relation","witness_edges":["edge_62"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000011","insight_id":"run_20260311_171611:taxonomy:000727","is_new":true,"label":"Taxonomy: 'T' is a 'S'","type":"relation","witness_edges":["edge_39"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000012","insight_id":"run_20260311_171611:taxonomy:000726","is_new":true,"label":"Taxonomy: 'R' is a 'S'","type":"relation","witness_edges":["edge_39"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000013","insight_id":"run_20260311_171611:taxonomy:000725","is_new":true,"label":"Taxonomy: 'mo:track_count' is a 'owl:DatatypeProperty'","type":"relation","witness_edges":["edge_179"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000014","insight_id":"run_20260311_171611:taxonomy:000724","is_new":true,"label":"Taxonomy: 'mo:duration' is a 'owl:DatatypeProperty'","type":"relation","witness_edges":["edge_176"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000015","insight_id":"run_20260311_171611:taxonomy:000723","is_new":true,"label":"Taxonomy: 'dc:title' is a 'owl:DatatypeProperty'","type":"relation","witness_edges":["edge_173"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000016","insight_id":"run_20260311_171611:confounder:000769","is_new":true,"label":"Confounder: RDB2RDF view confounds changeset → data graph","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000017","insight_id":"run_20260311_171611:taxonomy:000721","is_new":true,"label":"Taxonomy: 'Music Group' is a 'Music Artist'","type":"relation","witness_edges":["edge_169"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000018","insight_id":"run_20260311_171611:taxonomy:000720","is_new":true,"label":"Taxonomy: 'Solo Music Artist' is a 'Music Artist'","type":"relation","witness_edges":["edge_169"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000019","insight_id":"run_20260311_171611:taxonomy:000719","is_new":true,"label":"Taxonomy: 'relation name' is a 'tuple variable'","type":"relation","witness_edges":["edge_62"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000020","insight_id":"run_20260311_171611:taxonomy:000718","is_new":true,"label":"Taxonomy: 'datatype property' is a 'tuple variable'","type":"relation","witness_edges":["edge_64"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000021","insight_id":"run_20260311_171611:taxonomy:000717","is_new":true,"label":"Taxonomy: 'relation name' is a 'tuple variable'","type":"relation","witness_edges":["edge_64"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_17","Relational_Data_on_KGs_chunk_15"],"id":"aug:n:000022","insight_id":"run_20260311_171611:text_similarity:000800","is_new":true,"label":"Text Similar: RDF State ~ RDF state ∆+","type":"relation","witness_edges":["edge_90","edge_91","edge_92","edge_103"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_17","Relational_Data_on_KGs_chunk_15"],"id":"aug:n:000023","insight_id":"run_20260311_171611:text_similarity:000808","is_new":true,"label":"Text Similar: RDF State ~ RDF state ∆−","type":"relation","witness_edges":["edge_90","edge_91","edge_92","edge_101"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_18"],"id":"aug:n:000024","insight_id":"run_20260311_171611:entity_resolution:000778","is_new":true,"label":"Resolve: changeset ∆+ ≈ changeset ∆−","type":"relation","witness_edges":["edge_110","edge_107"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000025","insight_id":"run_20260311_171611:confounder:000777","is_new":true,"label":"Confounder: update u confounds database state σ0 → database state σ1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_17"],"id":"aug:n:000026","insight_id":"run_20260311_171611:text_similarity:000807","is_new":true,"label":"Text Similar: RDF state ∆+ ~ RDF state ∆−","type":"relation","witness_edges":["edge_103","edge_101"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000027","insight_id":"run_20260311_171611:confounder:000776","is_new":true,"label":"Confounder: RDB2RDF view confounds data graph → formal framework","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000028","insight_id":"run_20260311_171611:confounder:000775","is_new":true,"label":"Confounder: RDB2RDF view confounds data graph → database tuple","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000029","insight_id":"run_20260311_171611:confounder:000774","is_new":true,"label":"Confounder: update u confounds changeset h∆− (u), ∆+ (u)i → database state σ1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_18","Relational_Data_on_KGs_chunk_3","Relational_Data_on_KGs_chunk_1"],"id":"aug:n:000030","insight_id":"run_20260311_171611:text_similarity:000806","is_new":true,"label":"Text Similar: changeset ~ changeset ∆−","type":"relation","witness_edges":["edge_13","edge_14","edge_24","edge_107"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000031","insight_id":"run_20260311_171611:taxonomy:000722","is_new":true,"label":"Taxonomy: 'foaf:name' is a 'owl:DatatypeProperty'","type":"relation","witness_edges":["edge_170"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000032","insight_id":"run_20260311_171611:k_truss:000588","is_new":true,"label":"k-Truss: data to ontologies — Poggi, A.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000033","insight_id":"run_20260311_171611:meta_path:001789","is_new":true,"label":"MetaPath: Ψ 7 <-> m1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_2","Relational_Data_on_KGs_chunk_18","Relational_Data_on_KGs_chunk_17","Relational_Data_on_KGs_chunk_16"],"id":"aug:n:000034","insight_id":"run_20260311_171611:text_similarity:000801","is_new":true,"label":"Text Similar: database state σ0 ~ database states σ0","type":"relation","witness_edges":["edge_97","edge_100","edge_106","edge_15","edge_17"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_18"],"id":"aug:n:000035","insight_id":"run_20260311_171611:text_similarity:000804","is_new":true,"label":"Text Similar: changeset ∆+ ~ changeset ∆−","type":"relation","witness_edges":["edge_110","edge_107"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_22"],"id":"aug:n:000036","insight_id":"run_20260311_171611:text_similarity:000803","is_new":true,"label":"Text Similar: Delta+(u) ~ Delta-(u)","type":"relation","witness_edges":["edge_133","edge_132"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_18","Relational_Data_on_KGs_chunk_3","Relational_Data_on_KGs_chunk_1"],"id":"aug:n:000037","insight_id":"run_20260311_171611:text_similarity:000805","is_new":true,"label":"Text Similar: changeset ~ changeset ∆+","type":"relation","witness_edges":["edge_13","edge_14","edge_24","edge_110"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000038","insight_id":"run_20260311_171611:confounder:000768","is_new":true,"label":"Confounder: RDB2RDF view confounds base entities → changeset","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000039","insight_id":"run_20260311_171611:confounder:000770","is_new":true,"label":"Confounder: RDB2RDF view confounds changeset → database tuple","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000040","insight_id":"run_20260311_171611:confounder:000771","is_new":true,"label":"Confounder: RDB2RDF view confounds changeset → formal framework","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000041","insight_id":"run_20260311_171611:confounder:000772","is_new":true,"label":"Confounder: RDB2RDF view confounds changeset → incremental maintenance strategy","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000042","insight_id":"run_20260311_171611:confounder:000773","is_new":true,"label":"Confounder: update u confounds changeset h∆− (u), ∆+ (u)i → database state σ0","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000043","insight_id":"run_20260311_171611:meta_path:001787","is_new":true,"label":"MetaPath: Ψ 8 <-> a2","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000044","insight_id":"run_20260311_171611:meta_path:001788","is_new":true,"label":"MetaPath: Ψ 8 <-> a1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000045","insight_id":"run_20260311_171611:domain_bridge:000739","is_new":true,"label":"Domain bridge: 'relation R' connects 9 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000046","insight_id":"run_20260311_171611:meta_path:001791","is_new":true,"label":"MetaPath: Ψ 5 <-> a3","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000047","insight_id":"run_20260311_171611:meta_path:001792","is_new":true,"label":"MetaPath: Ψ 5 <-> a2","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000048","insight_id":"run_20260311_171611:meta_path:001793","is_new":true,"label":"MetaPath: Ψ 5 <-> a2","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000049","insight_id":"run_20260311_171611:meta_path:001794","is_new":true,"label":"MetaPath: Ψ 8 <-> a2","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000050","insight_id":"run_20260311_171611:meta_path:001795","is_new":true,"label":"MetaPath: Ψ 8 <-> a3","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000051","insight_id":"run_20260311_171611:meta_path:001796","is_new":true,"label":"MetaPath: Ψ 5 <-> a1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_26"],"id":"aug:n:000052","insight_id":"run_20260311_171611:k_truss:000594","is_new":true,"label":"k-Truss: Casanova — Vidal","type":"relation","witness_edges":["edge_151","edge_152"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_2","Relational_Data_on_KGs_chunk_17","Relational_Data_on_KGs_chunk_16"],"id":"aug:n:000053","insight_id":"run_20260311_171611:text_similarity:000802","is_new":true,"label":"Text Similar: database state σ1 ~ database states σ1","type":"relation","witness_edges":["edge_95","edge_97","edge_102","edge_15","edge_17"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000054","insight_id":"run_20260311_171611:meta_path:001790","is_new":true,"label":"MetaPath: Ψ 5 <-> m1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000055","insight_id":"run_20260311_171611:domain_bridge:000741","is_new":true,"label":"Domain bridge: 'S' connects 7 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000056","insight_id":"run_20260311_171611:domain_bridge:000740","is_new":true,"label":"Domain bridge: 'R' connects 9 different domains","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000057","insight_id":"run_20260311_171611:k_truss:000613","is_new":true,"label":"k-Truss: Lenzerini, M. — Rosati, R.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000058","insight_id":"run_20260311_171611:confounder:000767","is_new":true,"label":"Confounder: RDB2RDF view confounds base entities → data graph","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000059","insight_id":"run_20260311_171611:confounder:000766","is_new":true,"label":"Confounder: RDB2RDF view confounds base entities → database tuple","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000060","insight_id":"run_20260311_171611:confounder:000765","is_new":true,"label":"Confounder: RDB2RDF view confounds base entities → incremental maintenance strategy","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000061","insight_id":"run_20260311_171611:confounder:000764","is_new":true,"label":"Confounder: RDB2RDF view confounds base entities → formal framework","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000062","insight_id":"run_20260311_171611:confounder:000763","is_new":true,"label":"Confounder: RDB2RDF view confounds data graph → incremental maintenance strategy","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000063","insight_id":"run_20260311_171611:k_truss:000598","is_new":true,"label":"k-Truss: data to ontologies — Lenzerini, M.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000064","insight_id":"run_20260311_171611:k_truss:000596","is_new":true,"label":"k-Truss: Poggi, A. — Rosati, R.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_20"],"id":"aug:n:000065","insight_id":"run_20260311_171611:k_truss:000595","is_new":true,"label":"k-Truss: a1 — a3","type":"relation","witness_edges":["edge_121"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000066","insight_id":"run_20260311_171611:k_truss:000600","is_new":true,"label":"k-Truss: De Giacomo, G. — Lembo, D.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000067","insight_id":"run_20260311_171611:k_truss:000593","is_new":true,"label":"k-Truss: Lembo, D. — Rosati, R.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_20"],"id":"aug:n:000068","insight_id":"run_20260311_171611:k_truss:000592","is_new":true,"label":"k-Truss: a2 — a3","type":"relation","witness_edges":["edge_119","edge_121"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000069","insight_id":"run_20260311_171611:k_truss:000591","is_new":true,"label":"k-Truss: Calvanese, D. — Lenzerini, M.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000070","insight_id":"run_20260311_171611:k_truss:000590","is_new":true,"label":"k-Truss: Calvanese, D. — Rosati, R.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000071","insight_id":"run_20260311_171611:k_truss:000597","is_new":true,"label":"k-Truss: Calvanese, D. — data to ontologies","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000072","insight_id":"run_20260311_171611:k_truss:000599","is_new":true,"label":"k-Truss: De Giacomo, G. — Poggi, A.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000073","insight_id":"run_20260311_171611:k_truss:000601","is_new":true,"label":"k-Truss: De Giacomo, G. — Lenzerini, M.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000074","insight_id":"run_20260311_171611:k_truss:000602","is_new":true,"label":"k-Truss: data to ontologies — De Giacomo, G.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000075","insight_id":"run_20260311_171611:k_truss:000603","is_new":true,"label":"k-Truss: De Giacomo, G. — Rosati, R.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000076","insight_id":"run_20260311_171611:k_truss:000604","is_new":true,"label":"k-Truss: Lembo, D. — Lenzerini, M.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000077","insight_id":"run_20260311_171611:k_truss:000605","is_new":true,"label":"k-Truss: Calvanese, D. — De Giacomo, G.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000078","insight_id":"run_20260311_171611:k_truss:000606","is_new":true,"label":"k-Truss: Lenzerini, M. — Poggi, A.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000079","insight_id":"run_20260311_171611:k_truss:000608","is_new":true,"label":"k-Truss: data to ontologies — Lembo, D.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_20"],"id":"aug:n:000080","insight_id":"run_20260311_171611:k_truss:000609","is_new":true,"label":"k-Truss: Track — Ψ 7","type":"relation","witness_edges":["edge_117","edge_118","edge_119"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000081","insight_id":"run_20260311_171611:k_truss:000610","is_new":true,"label":"k-Truss: Calvanese, D. — Lembo, D.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000082","insight_id":"run_20260311_171611:k_truss:000611","is_new":true,"label":"k-Truss: Calvanese, D. — Poggi, A.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_23"],"id":"aug:n:000083","insight_id":"run_20260311_171611:k_truss:000587","is_new":true,"label":"k-Truss: Cookin's on 3 B. — Kung","type":"relation","witness_edges":["edge_135","edge_137"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000084","insight_id":"run_20260311_171611:logical_entailment:001183","is_new":true,"label":"IF 'trigger' AND 'R' AND 'relevant tuples' AND 'triple' A...","type":"relation","witness_edges":["edge_131","edge_131","edge_20","edge_88","edge_88"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000085","insight_id":"run_20260311_171611:k_truss:000607","is_new":true,"label":"k-Truss: data to ontologies — Rosati, R.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000086","insight_id":"run_20260311_171611:k_core:000549","is_new":true,"label":"k-Core: Calvanese, D.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_2","Relational_Data_on_KGs_chunk_16","Relational_Data_on_KGs_chunk_17","Relational_Data_on_KGs_chunk_18"],"id":"aug:n:000087","insight_id":"run_20260311_171611:community_detection:000522","is_new":true,"label":"Community: update u","type":"relation","witness_edges":["edge_106","edge_102","edge_99","edge_96","edge_100","edge_95","edge_17","edge_15"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_13"],"id":"aug:n:000088","insight_id":"run_20260311_171611:relation_induction:001163","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_79","edge_80","edge_81"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_2","Relational_Data_on_KGs_chunk_1","Relational_Data_on_KGs_chunk_0"],"id":"aug:n:000089","insight_id":"run_20260311_171611:centrality:000492","is_new":true,"label":"Centrality: RDB2RDF view","type":"relation","witness_edges":["edge_0","edge_1","edge_2","edge_9","edge_18","edge_19"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000090","insight_id":"run_20260311_171611:core_periphery:000472","is_new":true,"label":"Periphery: incremental export of relational databases","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000091","insight_id":"run_20260311_171611:logical_entailment:001188","is_new":true,"label":"IF 'R1' AND 'Rn' AND 'T' AND 'p' THEN 'φ'","type":"relation","witness_edges":["edge_43","edge_43","edge_44","edge_44"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000092","insight_id":"run_20260311_171611:logical_entailment:001184","is_new":true,"label":"IF 'Track' AND 'Ψ 5' AND 'Ψ 7' AND 'Ψ 8' AND 'Record' ...","type":"relation","witness_edges":["edge_117","edge_117","edge_117","edge_117","edge_166"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000093","insight_id":"run_20260311_171611:logical_entailment:001185","is_new":true,"label":"IF 'RDB2RDF view' AND 'source database' AND 'RDB2RDF view...","type":"relation","witness_edges":["edge_139","edge_139","edge_18","edge_46","edge_46"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000094","insight_id":"run_20260311_171611:logical_entailment:001186","is_new":true,"label":"IF 'Artist Credit' AND 'Release' AND 'Track' AND 'Recordi...","type":"relation","witness_edges":["edge_156","edge_157","edge_160","edge_161","edge_164"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000095","insight_id":"run_20260311_171611:logical_entailment:001187","is_new":true,"label":"IF 'Track' AND 'Ψ 7' AND 'Track' AND 'Ψ 7' THEN 'a2'","type":"relation","witness_edges":["edge_118","edge_118","edge_119","edge_119"]},{"confidence":1.0,"evidence_chunk_ids":["Relational_Data_on_KGs_chunk_25"],"id":"aug:n:000096","insight_id":"run_20260311_171611:k_truss:000612","is_new":true,"label":"k-Truss: Lembo, D. — Poggi, A.","type":"relation","witness_edges":["edge_149"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000097","insight_id":"run_20260311_171611:logical_entailment:001189","is_new":true,"label":"IF 'F' AND 'R' AND 'R' AND 'T' THEN 'S'","type":"relation","witness_edges":["edge_35","edge_35","edge_39","edge_39"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000098","insight_id":"run_20260311_171611:logical_entailment:001191","is_new":true,"label":"IF 'changeset ∆−' AND 'update u' AND 'changeset ∆+'...","type":"relation","witness_edges":["edge_107","edge_107","edge_110","edge_110"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000099","insight_id":"run_20260311_171611:logical_entailment:001192","is_new":true,"label":"IF 'foaf:name' AND 'dc:title' AND 'mo:duration' AND 'mo:t...","type":"relation","witness_edges":["edge_170","edge_173","edge_176","edge_179"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000100","insight_id":"run_20260311_171611:logical_entailment:001193","is_new":true,"label":"IF 'mbz:r.ga1' AND 'mbz:r.ga1' AND 'mbz:r.ga2' AND 'mbz:r...","type":"relation","witness_edges":["edge_76","edge_76","edge_77","edge_78"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000101","insight_id":"run_20260311_171611:logical_entailment:001194","is_new":true,"label":"IF 'Konstantinou, N.' AND 'Spanos, D.E.' AND 'Kouis, D.' ...","type":"relation","witness_edges":["edge_145","edge_145","edge_145","edge_145"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000102","insight_id":"run_20260311_171611:logical_entailment:001195","is_new":true,"label":"IF 'Murlak, F.' AND 'Libkin, L.' AND 'Barceló, P.' AND ...","type":"relation","witness_edges":["edge_148","edge_148","edge_148","edge_148"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000103","insight_id":"run_20260311_171611:logical_entailment:001196","is_new":true,"label":"IF 'Vidal' AND 'Lemo' AND 'Vidal' AND 'Pequeno' THEN 'Cas...","type":"relation","witness_edges":["edge_151","edge_151","edge_152","edge_152"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000104","insight_id":"run_20260311_171611:logical_entailment:001197","is_new":true,"label":"IF 'Vânia Maria Ponte Vidal' AND 'Narciso Arruda' AND '...","type":"relation","witness_edges":["edge_3","edge_3","edge_3"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000105","insight_id":"run_20260311_171611:logical_entailment:001198","is_new":true,"label":"IF 'Sequeda, J.' AND 'Priyatna, F.' AND 'Villazón-Terra...","type":"relation","witness_edges":["edge_150","edge_150","edge_150"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000106","insight_id":"run_20260311_171611:logical_entailment:001190","is_new":true,"label":"IF 'path' AND 'relation' AND 'attribute' AND 'relation' T...","type":"relation","witness_edges":["edge_63","edge_63","edge_65","edge_65"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000107","insight_id":"run_20260311_171611:logical_entailment:001202","is_new":true,"label":"IF 'transformation rules M' AND 'relation R' AND 'pivot r...","type":"relation","witness_edges":["edge_105","edge_105","edge_105"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000108","insight_id":"run_20260311_171611:logical_entailment:001201","is_new":true,"label":"IF 'mbz:r.ga1' AND 'mbz:r.ga1' AND 'mbz:r.ga3' THEN 'mo:S...","type":"relation","witness_edges":["edge_76","edge_76","edge_78"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000109","insight_id":"run_20260311_171611:logical_entailment:001199","is_new":true,"label":"IF 'Cookin's on 3 B.' AND 'Kung' AND 'Kung' THEN 't2'","type":"relation","witness_edges":["edge_135","edge_135","edge_136"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000110","insight_id":"run_20260311_171611:logical_entailment:001200","is_new":true,"label":"IF 'DBpedia' AND 'LinkedGeoData' AND 'trigger' THEN 'chan...","type":"relation","witness_edges":["edge_13","edge_13","edge_24"]}]};
+
+        // --- PATCH START: Hyperedge Flattening Logic ---
+        // The visualization library requires 1-to-1 links (source -> target).
+        // The raw data contains "hyperedges" (sources[...] -> targets[...]).
+        // We must expand these into individual links.
+
+        const processLinks = (rawLinks) => {
+            const expandedLinks = [];
+
+            rawLinks.forEach(link => {
+                // Check if this is a hyperedge with arrays for sources/targets
+                if (Array.isArray(link.sources) && Array.isArray(link.targets)) {
+                    link.sources.forEach(source => {
+                        link.targets.forEach(target => {
+                            expandedLinks.push({
+                                source: source,
+                                target: target,
+                                label: link.label,
+                                type: link.type || 'relation',
+                                confidence: link.confidence,
+                                // Copy any other necessary properties from the original link
+                                id: link.id ? `${link.id}_${source}_${target}` : undefined
+                            });
+                        });
+                    });
+                } else if (link.source && link.target) {
+                    // If it's already a simple link, keep it
+                    expandedLinks.push(link);
+                }
+            });
+
+            return expandedLinks;
+        };
+
+        // Apply the processing to the data object
+        // Note: Adjust 'data.links' or 'data.edges' depending on the exact property name in the raw JSON.
+        // Based on standard graph JSON structures, it is likely 'data.links' or implied as the second array.
+        if (data.links) {
+            data.links = processLinks(data.links);
+        } else if (data.edges) {
+            // Some formats use 'edges' instead of 'links'
+            data.links = processLinks(data.edges);
+        }
+
+        console.log(`Patch applied: Generated ${data.links.length} simple links from hyperedges.`);
+        // --- PATCH END ---
+
+        (() => {
+            const graphDiv = document.getElementById('graph');
+            const controls = document.getElementById('controls');
+
+            if (typeof ForceGraph3D !== 'function' || typeof THREE === 'undefined') {
+                alert('Missing WebGL libs. Serve via http://localhost.');
+                return;
+            }
+
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const ric = window.requestIdleCallback || ((cb) => setTimeout(() => cb({ timeRemaining: () => 0 }), 0));
+            const rafThrottle = (fn) => {
+                let scheduled = false;
+                return (...args) => {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(() => { scheduled = false; fn(...args); });
+                };
+            };
+
+            // Overlay
+            let overlay = document.getElementById('kgOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'kgOverlay';
+                overlay.innerHTML = '<div class="panel"><div class="title">Working...</div><div class="sub">Building subgraph</div></div>';
+                document.body.appendChild(overlay);
+            }
+            const overlayTitle = overlay.querySelector('.title');
+            const overlaySub = overlay.querySelector('.sub');
+
+            function showOverlay(title, sub) {
+                if (overlayTitle) overlayTitle.textContent = title || 'Working...';
+                if (overlaySub) overlaySub.textContent = sub || '';
+                overlay.classList.add('show');
+            }
+            function hideOverlay() { overlay.classList.remove('show'); }
+
+            let hud = document.getElementById('kgHud');
+            if (!hud) {
+                hud = document.createElement('div');
+                hud.id = 'kgHud';
+                hud.textContent = '3D: initializing...';
+                document.body.appendChild(hud);
+            }
+
+            // Add extra controls - matching graph.html with augmentation additions
+            controls.insertAdjacentHTML('beforeend', `
+                <div class="kg-row">
+                    <input class="kg-input" id="kgSearch" placeholder="Search node (press /)..." />
+                    <button class="kg-btn" id="kgGo">Go</button>
+                </div>
+                <div class="kg-row">
+                    <button class="kg-btn" id="kgExpand1">+ 1 hop</button>
+                    <button class="kg-btn" id="kgExpand2">+ 2 hops</button>
+                    <button class="kg-btn" id="kgReset">Reset</button>
+                    <button class="kg-btn" id="kgCamReset">Reset camera</button>
+                </div>
+                <label style="margin-top:10px;">
+                    <input type="checkbox" id="kgAutoFreeze" checked> Auto-freeze physics
+                </label>
+                <label>
+                    <input type="checkbox" id="kgArrows"> Directional arrows
+                </label>
+                <label>
+                    Max nodes: <span id="kgMaxNodesVal">2500</span>
+                    <input type="range" id="kgMaxNodes" min="200" max="8000" step="100" value="2500">
+                </label>
+                <label>
+                    Depth spread: <span id="kgDepthVal">120</span>
+                    <input type="range" id="kgDepth" min="0" max="600" step="10" value="120">
+                </label>
+
+                <div style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                    <label style="font-weight:600; color:#4fc3f7;">Clustering</label>
+                    <label style="margin-top:6px;">
+                        <input type="checkbox" id="kgClusterOn" checked> Cluster coloring
+                    </label>
+                    <label>
+                        Clustering mode:
+                        <select id="kgClusterMode" class="kg-input" style="width: 180px;">
+                            <option value="topology" selected>Topology (Louvain)</option>
+                            <option value="spatial">Spatial (DBSCAN)</option>
+                        </select>
+                    </label>
+                    <label id="kgTopoResRow">
+                        Resolution: <span id="kgTopoResVal">1.00</span>
+                        <input type="range" id="kgTopoRes" min="0.20" max="3.00" step="0.05" value="1.00">
+                    </label>
+                    <label id="kgSpatialRadiusRow" style="display:none;">
+                        Cluster radius: <span id="kgClusterRadiusVal">40</span>
+                        <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
+                    </label>
+                    <label id="kgSpatialMinRow" style="display:none;">
+                        Min cluster size: <span id="kgMinClusterVal">12</span>
+                        <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="12">
+                    </label>
+                    <label>
+                        Palette:
+                        <select id="kgPalette" class="kg-input" style="width: 180px;">
+                            <option value="classic" selected>Classic</option>
+                            <option value="pastel">Pastel</option>
+                            <option value="neon">Neon</option>
+                            <option value="mono">Mono + accent</option>
+                        </select>
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="kgRecluster">Cluster now</button>
+                        <label style="margin:0;">
+                            <input type="checkbox" id="kgAutoCluster" checked> Auto (on freeze)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="aug-section" style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                    <label style="font-weight:600; color:#e040fb;">Augmentation Layer</label>
+                    <label style="margin-top:8px;">
+                        <input type="checkbox" id="showAug"> Show Augmentations
+                    </label>
+                    <label>
+                        Aug Opacity: <span id="augOpacityVal">1.0</span>
+                        <input type="range" id="augOpacity" min="0.1" max="1" step="0.1" value="1.0">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="augOnlyMode"> Augmentation-only mode
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="focusAug">Focus Aug</button>
+                    </div>
+                    <div id="augDetails">
+                        <strong>Insight Details</strong>
+                        <div id="augInfo">Click an augmentation node.</div>
+                    </div>
+                </div>
+
+                <div id="kgDetails" style="margin-top:10px; font-size:0.82em; color:#cfcfcf; line-height:1.35;"></div>
+            `);
+
+            const minDegreeEl = document.getElementById('minDegree');
+            const degreeValueEl = document.getElementById('degreeValue');
+            const linkStrengthEl = document.getElementById('linkStrength');
+            const repulsionEl = document.getElementById('repulsion');
+            const showLabelsEl = document.getElementById('showLabels');
+            const searchEl = document.getElementById('kgSearch');
+            const goBtn = document.getElementById('kgGo');
+            const exp1Btn = document.getElementById('kgExpand1');
+            const exp2Btn = document.getElementById('kgExpand2');
+            const resetBtn = document.getElementById('kgReset');
+            const camResetBtn = document.getElementById('kgCamReset');
+            const autoFreezeEl = document.getElementById('kgAutoFreeze');
+            const arrowsEl = document.getElementById('kgArrows');
+            const maxNodesEl = document.getElementById('kgMaxNodes');
+            const maxNodesValEl = document.getElementById('kgMaxNodesVal');
+            const depthEl = document.getElementById('kgDepth');
+            const depthValEl = document.getElementById('kgDepthVal');
+            const detailsEl = document.getElementById('kgDetails');
+            console.log('detailsEl found:', detailsEl);
+
+            // Clustering controls
+            const clusterOnEl = document.getElementById('kgClusterOn');
+            const clusterModeEl = document.getElementById('kgClusterMode');
+            const clusterRadiusEl = document.getElementById('kgClusterRadius');
+            const clusterRadiusValEl = document.getElementById('kgClusterRadiusVal');
+            const minClusterEl = document.getElementById('kgMinCluster');
+            const minClusterValEl = document.getElementById('kgMinClusterVal');
+            const topoResEl = document.getElementById('kgTopoRes');
+            const topoResValEl = document.getElementById('kgTopoResVal');
+            const paletteEl = document.getElementById('kgPalette');
+            const reclusterBtn = document.getElementById('kgRecluster');
+            const autoClusterEl = document.getElementById('kgAutoCluster');
+            const topoResRow = document.getElementById('kgTopoResRow');
+            const spatialRadiusRow = document.getElementById('kgSpatialRadiusRow');
+            const spatialMinRow = document.getElementById('kgSpatialMinRow');
+
+            // Augmentation controls
+            const showAugEl = document.getElementById('showAug');
+            const augOpacityEl = document.getElementById('augOpacity');
+            const augOpacityValEl = document.getElementById('augOpacityVal');
+            const augOnlyEl = document.getElementById('augOnlyMode');
+            const focusAugBtn = document.getElementById('focusAug');
+            const augDetailsEl = document.getElementById('augDetails');
+            const augInfoEl = document.getElementById('augInfo');
+
+            // ---- PHASE 1: Index base graph only (fast) ----
+            const N = data.nodes.length;
+            for (let i = 0; i < N; i++) {
+                const n = data.nodes[i];
+                n.gid = i;
+                n.isAug = false;
+            }
+
+            // Build base edges index
+            let edges = new Array(data.links.length);
+            let incident = Array.from({ length: N }, () => []);
+            for (let i = 0; i < data.links.length; i++) {
+                const l = data.links[i];
+                const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                edges[i] = { s, t, type: l.type, isAug: false };
+                incident[s].push(i);
+                incident[t].push(i);
+            }
+
+            // Build entity degree list for filtering
+            const entityByDegree = [];
+            for (let i = 0; i < N; i++) {
+                if (data.nodes[i].type === 'entity') entityByDegree.push(i);
+            }
+            entityByDegree.sort((a, b) => ((data.nodes[b].degree || 0) - (data.nodes[a].degree || 0)));
+
+            let labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+
+            // Store augmentation data for later merge
+            let augmentationMerged = false;
+            const nodeIdToIdx = new Map();
+            for (let i = 0; i < N; i++) nodeIdToIdx.set(data.nodes[i].id, i);
+
+            // Function to merge augmentation data (called on demand)
+            function mergeAugmentation() {
+                if (augmentationMerged) return;
+                augmentationMerged = true;
+                console.log('Merging augmentation data...');
+
+                const augNodeIdToIdx = new Map();
+                for (const augNode of augData.nodes) {
+                    const newIdx = data.nodes.length;
+                    data.nodes.push({
+                        gid: newIdx,
+                        id: augNode.id,
+                        label: augNode.label,
+                        type: 'augmentation',
+                        isAug: true,
+                        insightId: augNode.insight_id,
+                        confidence: augNode.confidence,
+                        evidenceChunks: augNode.evidence_chunk_ids || [],
+                        witnessEdges: augNode.witness_edges || []
+                    });
+                    augNodeIdToIdx.set(augNode.id, newIdx);
+                }
+
+                for (const augLink of augData.links) {
+                    let srcIdx = nodeIdToIdx.get(augLink.source);
+                    if (srcIdx === undefined) srcIdx = augNodeIdToIdx.get(augLink.source);
+                    let tgtIdx = nodeIdToIdx.get(augLink.target);
+                    if (tgtIdx === undefined) tgtIdx = augNodeIdToIdx.get(augLink.target);
+
+                    if (srcIdx !== undefined && tgtIdx !== undefined) {
+                        data.links.push({ source: srcIdx, target: tgtIdx, type: augLink.type, isAug: true });
+                    }
+                }
+
+                // Rebuild edges and incident arrays
+                edges = new Array(data.links.length);
+                incident = Array.from({ length: data.nodes.length }, () => []);
+                for (let i = 0; i < data.links.length; i++) {
+                    const l = data.links[i];
+                    const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                    const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                    edges[i] = { s, t, type: l.type, isAug: !!l.isAug };
+                    incident[s].push(i);
+                    incident[t].push(i);
+                }
+
+                labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+                console.log(`After merge: ${data.nodes.length} nodes, ${data.links.length} links`);
+            }
+
+            // State - matching graph.html with augmentation additions
+            const state = {
+                minDegree: +minDegreeEl.value,
+                linkStrength: +linkStrengthEl.value,
+                repulsion: +repulsionEl.value,
+                showLabels: !!showLabelsEl.checked,
+                autoFreeze: true,
+                showArrows: false,
+                maxNodes: +maxNodesEl.value,
+                depthSpread: +depthEl.value,
+                selectedGid: null,
+                visible: new Set(),
+                subNodes: [],
+                subLinks: [],
+                subNodesByGid: new Map(),
+                graph: null,
+                fps: { t0: performance.now(), frames: 0, value: 0 },
+                // Clustering state
+                clusterOn: true,
+                clusterMode: 'topology',
+                clusterRadius: 40,
+                minClusterSize: 12,
+                topoResolution: 1.0,
+                palette: 'classic',
+                autoCluster: true,
+                clusters: [],
+                clusterLabels: [],
+                // Augmentation state
+                showAug: true,  // Start in augmentation-only mode
+                augOpacity: 1.0,
+                augOnlyMode: true,
+                degreeDebounce: null
+            };
+
+            function applyDepth() {
+                const spread = state.depthSpread;
+                for (let i = 0; i < data.nodes.length; i++) {
+                    const n = data.nodes[i];
+                    const base = n.isAug ? 0.6 : (n.type === 'relation' ? 0.45 : 1.0);
+                    n.z = (Math.random() - 0.5) * spread * base;
+                    if (n.isAug) n.z += spread * 0.3; // Float augmentation slightly above
+                }
+            }
+
+            function seedVisibleByDegree(minDegree, maxNodes) {
+                const vis = new Set();
+
+                // Always include augmentation nodes if enabled or in aug-only mode
+                if (state.showAug || state.augOnlyMode) {
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug) vis.add(i);
+                    }
+                }
+
+                if (state.augOnlyMode) {
+                    // Only show augmentation and connected nodes
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug && incident[i]) {
+                            vis.add(i);  // Ensure the aug node itself is added
+                            for (const ei of incident[i]) {
+                                const e = edges[ei];
+                                if (!e) continue;
+                                const other = (e.s === i) ? e.t : e.s;
+                                vis.add(other);
+                            }
+                        }
+                    }
+                    return vis;
+                }
+
+                if (!state.augOnlyMode) {
+                    for (let k = 0; k < entityByDegree.length && vis.size < maxNodes; k++) {
+                        const idx = entityByDegree[k];
+                        const n = data.nodes[idx];
+                        if ((n.degree || 0) >= minDegree) vis.add(idx);
+                        else break;
+                    }
+                }
+
+                if (!state.augOnlyMode && vis.size < 50) {
+                    for (let k = 0; k < Math.min(200, entityByDegree.length) && vis.size < Math.min(maxNodes, 200); k++) {
+                        vis.add(entityByDegree[k]);
+                    }
+                }
+
+                const relQueue = [];
+                for (const idx of vis) {
+                    if (!incident[idx]) continue;
+                    for (const ei of incident[idx]) {
+                        const e = edges[ei];
+                        if (!e) continue;
+                        const other = (e.s === idx) ? e.t : e.s;
+                        if (data.nodes[other] && (data.nodes[other].type === 'relation' || data.nodes[other].isAug) && !vis.has(other)) {
+                            relQueue.push(other);
+                        }
+                    }
+                }
+                for (let i = 0; i < relQueue.length && vis.size < maxNodes; i++) vis.add(relQueue[i]);
+
+                if (state.selectedGid != null) vis.add(state.selectedGid);
+                return vis;
+            }
+
+            function buildSubgraphFromVisible() {
+                const subNodes = [];
+                state.visible.forEach(i => {
+                    if (data.nodes[i]) subNodes.push(data.nodes[i]);
+                });
+
+                const edgeIds = new Set();
+                for (const i of state.visible) {
+                    if (incident[i]) {
+                        for (const ei of incident[i]) edgeIds.add(ei);
+                    }
+                }
+
+                const subLinks = [];
+                edgeIds.forEach(ei => {
+                    const e = edges[ei];
+                    if (!e) return;
+                    if (state.visible.has(e.s) && state.visible.has(e.t)) {
+                        // Filter augmentation links if showAug is off
+                        if (e.isAug && !state.showAug) return;
+                        subLinks.push(e);
+                    }
+                });
+
+                state.subNodes = subNodes;
+                state.subLinks = subLinks;
+
+                const vn = document.getElementById('visibleNodes');
+                const vl = document.getElementById('visibleLinks');
+                if (vn) vn.textContent = String(subNodes.length);
+                if (vl) vl.textContent = String(subLinks.length);
+            }
+
+            function rebuildSubgraphIndex() {
+                state.subNodesByGid = new Map();
+                for (const n of state.subNodes) state.subNodesByGid.set(n.gid, n);
+            }
+
+            function updateDetails(node) {
+                if (!detailsEl) return;
+                if (!node) {
+                    detailsEl.innerHTML = '<span style="opacity:0.8;">Click a node to see details.</span>';
+                    augDetailsEl.classList.remove('show');
+                    return;
+                }
+
+                const lines = [];
+                lines.push(`<div><b>${escapeHtml(node.label || node.id || 'Node')}</b></div>`);
+                lines.push(`<div style="opacity:0.85;">type: <code>${escapeHtml(node.type || '')}</code></div>`);
+
+                if (node.isAug) {
+                    augDetailsEl.classList.add('show');
+                    let augHtml = `<strong>${escapeHtml(node.label)}</strong><br>`;
+                    if (node.insightId) augHtml += `Insight: ${escapeHtml(node.insightId)}<br>`;
+                    if (typeof node.confidence === 'number') augHtml += `Confidence: ${node.confidence.toFixed(3)}<br>`;
+                    if (node.evidenceChunks && node.evidenceChunks.length) {
+                        augHtml += `Evidence: ${escapeHtml(node.evidenceChunks.slice(0, 3).join(', '))}`;
+                        if (node.evidenceChunks.length > 3) augHtml += '...';
+                    }
+                    augInfoEl.innerHTML = augHtml;
+                    // Also show degree and relation info for augmented nodes
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                    }
+                } else {
+                    augDetailsEl.classList.remove('show');
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                        if (typeof node.confidence === 'number') lines.push(`<div style="opacity:0.85;">confidence: <code>${node.confidence}</code></div>`);
+                    }
+                }
+                detailsEl.innerHTML = lines.join('');
+            }
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            }
+
+            function expandSelected(hops) {
+                if (state.selectedGid == null) return;
+
+                const maxNodes = state.maxNodes;
+                const q = [state.selectedGid];
+                const dist = new Map([[state.selectedGid, 0]]);
+
+                while (q.length) {
+                    const u = q.shift();
+                    const d = dist.get(u) || 0;
+                    if (d >= hops) continue;
+
+                    for (const ei of incident[u]) {
+                        const e = edges[ei];
+                        const v = (e.s === u) ? e.t : e.s;
+                        if (!dist.has(v)) {
+                            dist.set(v, d + 1);
+                            q.push(v);
+                        }
+                        if (state.visible.size < maxNodes) state.visible.add(v);
+                    }
+                    if (state.visible.size >= maxNodes) break;
+                }
+
+                rebuildAndRender('Expanding neighborhood...');
+            }
+
+            // Graph init
+            graphDiv.innerHTML = '';
+
+            const Graph = ForceGraph3D()(graphDiv)
+                .nodeId('gid')
+                .nodeLabel(n => (n.label || n.id || ''))
+                .backgroundColor('rgba(0,0,0,0)')
+                .showNavInfo(false)
+                .enableNodeDrag(true)
+                .linkSource('source')
+                .linkTarget('target')
+                .cooldownTime(2000)  // Prevent runaway physics simulation
+                .warmupTicks(0);     // Don't pre-calculate - let rebuildAndRender handle it
+
+            state.graph = Graph;
+
+            // -------------------- CLUSTERING (from graph.html) --------------------
+            const PALETTES = {
+                classic: ['#4fc3f7','#ff9800','#ab47bc','#66bb6a','#ef5350','#ffa726','#26c6da','#8d6e63','#78909c','#d4e157'],
+                pastel:  ['#a3d5ff','#ffd6a5','#bdb2ff','#caffbf','#ffadad','#fdffb6','#9bf6ff','#ffc6ff','#b8f2e6','#f1c0e8'],
+                neon:    ['#00e5ff','#ffea00','#ff1744','#76ff03','#e040fb','#ff9100','#1de9b6','#f500ff','#00c853','#2979ff'],
+                mono:    ['#4fc3f7','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc']
+            };
+
+            function getClusterColor(cid) {
+                if (cid == null || cid < 0) return '#4fc3f7';
+                const pal = PALETTES[state.palette] || PALETTES.classic;
+                return pal[cid % pal.length];
+            }
+
+            function clearClusterLabels() {
+                if (!state.clusterLabels?.length) return;
+                const scene = Graph.scene();
+                for (const s of state.clusterLabels) scene.remove(s);
+                state.clusterLabels = [];
+            }
+
+            function drawClusterLabels() {
+                clearClusterLabels();
+                if (!state.clusterOn || typeof SpriteText === 'undefined') return;
+
+                const scene = Graph.scene();
+                for (const cl of state.clusters) {
+                    const rep = state.subNodesByGid.get(cl.repGid);
+                    if (!rep) continue;
+
+                    const labelTxt = (rep.label || rep.id || `Cluster ${cl.id}`);
+                    const sprite = new SpriteText(labelTxt);
+                    sprite.fontFace = 'Arial Black';
+                    sprite.textHeight = 10;
+                    sprite.color = 'rgba(255,255,255,0.95)';
+                    sprite.backgroundColor = 'rgba(0,0,0,0.50)';
+                    sprite.padding = 6;
+                    sprite.borderRadius = 10;
+                    sprite.material.depthWrite = false;
+
+                    sprite.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+                    scene.add(sprite);
+                    state.clusterLabels.push(sprite);
+                }
+            }
+
+            function chooseRepresentative(clusterNodeGids) {
+                let cx = 0, cy = 0, cz = 0, cnt = 0;
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n) continue;
+                    cx += (n.x || 0); cy += (n.y || 0); cz += (n.z || 0);
+                    cnt++;
+                }
+                if (!cnt) return clusterNodeGids[0] ?? null;
+                cx /= cnt; cy /= cnt; cz /= cnt;
+
+                let bestGid = null;
+                let bestD = Infinity;
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n || n.type !== 'entity') continue;
+                    const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+                    const d2 = dx*dx + dy*dy + dz*dz;
+                    if (d2 < bestD) { bestD = d2; bestGid = gid; }
+                }
+                if (bestGid != null) return bestGid;
+
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n) continue;
+                    const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+                    const d2 = dx*dx + dy*dy + dz*dz;
+                    if (d2 < bestD) { bestD = d2; bestGid = gid; }
+                }
+                return bestGid;
+            }
+
+            // DBSCAN spatial clustering
+            function clusterSpatialDBSCAN() {
+                const eps = state.clusterRadius;
+                const minPts = state.minClusterSize;
+
+                const nodes = state.subNodes.filter(n => !n.isAug); // Exclude aug nodes
+                const n = nodes.length;
+                const labels = new Array(n).fill(0);
+                let cid = 0;
+
+                const eps2 = eps * eps;
+                function regionQuery(i) {
+                    const ni = nodes[i];
+                    const xi = ni.x || 0, yi = ni.y || 0, zi = ni.z || 0;
+                    const res = [];
+                    for (let j = 0; j < n; j++) {
+                        const nj = nodes[j];
+                        const dx = (nj.x || 0) - xi, dy = (nj.y || 0) - yi, dz = (nj.z || 0) - zi;
+                        if ((dx*dx + dy*dy + dz*dz) <= eps2) res.push(j);
+                    }
+                    return res;
+                }
+
+                function expandCluster(i, neighbors, cid) {
+                    labels[i] = cid;
+                    for (let k = 0; k < neighbors.length; k++) {
+                        const j = neighbors[k];
+                        if (labels[j] === -1) labels[j] = cid;
+                        if (labels[j] !== 0) continue;
+                        labels[j] = cid;
+                        const n2 = regionQuery(j);
+                        if (n2.length >= minPts) {
+                            for (const x of n2) neighbors.push(x);
+                        }
+                    }
+                }
+
+                for (let i = 0; i < n; i++) {
+                    if (labels[i] !== 0) continue;
+                    const neighbors = regionQuery(i);
+                    if (neighbors.length < minPts) {
+                        labels[i] = -1;
+                    } else {
+                        cid++;
+                        expandCluster(i, neighbors, cid);
+                    }
+                }
+
+                for (let i = 0; i < n; i++) {
+                    nodes[i].__cluster = labels[i] > 0 ? (labels[i] - 1) : -1;
+                }
+                // Set aug nodes to no cluster
+                for (const node of state.subNodes) {
+                    if (node.isAug) node.__cluster = -1;
+                }
+
+                const groups = new Map();
+                for (const node of nodes) {
+                    const c = node.__cluster ?? -1;
+                    if (c < 0) continue;
+                    if (!groups.has(c)) groups.set(c, []);
+                    groups.get(c).push(node.gid);
+                }
+
+                state.clusters = [];
+                for (const [id, gids] of groups.entries()) {
+                    const rep = chooseRepresentative(gids);
+                    state.clusters.push({ id, nodes: gids, repGid: rep });
+                }
+            }
+
+            // Louvain-style topology clustering
+            function clusterTopologyLouvain() {
+                const nodes = state.subNodes.filter(n => !n.isAug); // Exclude aug nodes from clustering
+                const links = state.subLinks.filter(l => !l.isAug); // Exclude aug links
+                const idxByGid = new Map();
+                for (let i = 0; i < nodes.length; i++) idxByGid.set(nodes[i].gid, i);
+
+                const adj = Array.from({ length: nodes.length }, () => new Map());
+                for (const e of links) {
+                    const a = idxByGid.get(e.s);
+                    const b = idxByGid.get(e.t);
+                    if (a == null || b == null || a === b) continue;
+                    const w = 1;
+                    adj[a].set(b, (adj[a].get(b) || 0) + w);
+                    adj[b].set(a, (adj[b].get(a) || 0) + w);
+                }
+
+                const resolution = state.topoResolution;
+                const n = nodes.length;
+                let community = new Array(n);
+                for (let i = 0; i < n; i++) community[i] = i;
+
+                let k = new Array(n).fill(0);
+                let m2 = 0;
+                for (let i = 0; i < n; i++) {
+                    let sum = 0;
+                    for (const w of adj[i].values()) sum += w;
+                    k[i] = sum;
+                    m2 += sum;
+                }
+                if (m2 === 0) {
+                    for (const node of state.subNodes) node.__cluster = -1;
+                    state.clusters = [];
+                    return;
+                }
+
+                let tot = new Array(n).fill(0);
+                for (let i = 0; i < n; i++) tot[community[i]] += k[i];
+
+                function neighCommWeights(i) {
+                    const map = new Map();
+                    for (const [j, w] of adj[i].entries()) {
+                        const cj = community[j];
+                        map.set(cj, (map.get(cj) || 0) + w);
+                    }
+                    return map;
+                }
+
+                let changed = true;
+                let iter = 0;
+                while (changed && iter < 30) {
+                    changed = false;
+                    iter++;
+                    for (let i = 0; i < n; i++) {
+                        const ci = community[i];
+                        const ki = k[i];
+                        tot[ci] -= ki;
+                        const ncw = neighCommWeights(i);
+                        let bestC = ci;
+                        let bestGain = 0;
+                        for (const [c, wic] of ncw.entries()) {
+                            const totC = tot[c];
+                            const gain = wic - resolution * ki * totC / m2;
+                            if (gain > bestGain) { bestGain = gain; bestC = c; }
+                        }
+                        community[i] = bestC;
+                        tot[bestC] += ki;
+                        if (bestC !== ci) changed = true;
+                    }
+                }
+
+                const remap = new Map();
+                let nextId = 0;
+                for (let i = 0; i < n; i++) {
+                    const c = community[i];
+                    if (!remap.has(c)) remap.set(c, nextId++);
+                    nodes[i].__cluster = remap.get(c);
+                }
+                // Set aug nodes to no cluster
+                for (const node of state.subNodes) {
+                    if (node.isAug) node.__cluster = -1;
+                }
+
+                const groups = new Map();
+                for (const node of nodes) {
+                    const c = node.__cluster ?? -1;
+                    if (c < 0) continue;
+                    if (!groups.has(c)) groups.set(c, []);
+                    groups.get(c).push(node.gid);
+                }
+
+                state.clusters = [];
+                for (const [id, gids] of groups.entries()) {
+                    const rep = chooseRepresentative(gids);
+                    state.clusters.push({ id, nodes: gids, repGid: rep });
+                }
+            }
+
+            function runClustering() {
+                if (state.clusterMode === 'spatial') {
+                    clusterSpatialDBSCAN();
+                } else {
+                    clusterTopologyLouvain();
+                }
+                applyStyles();
+                drawClusterLabels();
+            }
+
+            function applyStyles() {
+                const showAug = state.showAug;
+                const opacity = state.augOpacity;
+                const clusteringEnabled = !!state.clusterOn;
+
+                Graph
+                    .nodeColor(n => {
+                        // Augmentation nodes always purple
+                        if (n.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity})` : 'rgba(224, 64, 251, 0.1)';
+                        }
+                        // If clustering enabled, use cluster color
+                        if (clusteringEnabled) {
+                            const cid = n.__cluster ?? -1;
+                            return getClusterColor(cid);
+                        }
+                        // Default coloring
+                        return n.type === 'relation' ? '#ff9800' : '#4fc3f7';
+                    })
+                    .nodeVal(n => {
+                        if (n.isAug) return showAug ? 4 : 1;
+                        return n.type === 'relation' ? 1.5 : Math.max(1.2, 1 + (n.degree || 0) * 0.06);
+                    })
+                    .linkColor(l => {
+                        // Augmentation links always purple
+                        if (l.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity * 0.7})` : 'rgba(224, 64, 251, 0.05)';
+                        }
+                        // If clustering enabled, color by cluster
+                        if (clusteringEnabled) {
+                            const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                            const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                            const ca = a ? (a.__cluster ?? -1) : -1;
+                            const cb = b ? (b.__cluster ?? -1) : -1;
+
+                            if (ca >= 0 && ca === cb) return getClusterColor(ca);
+                            return 'rgba(255,255,255,0.10)';
+                        }
+                        return l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)';
+                    })
+                    .linkWidth(l => {
+                        if (l.isAug) return 1.5;
+                        if (clusteringEnabled) {
+                            const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                            const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                            const ca = a ? (a.__cluster ?? -1) : -1;
+                            const cb = b ? (b.__cluster ?? -1) : -1;
+                            return (ca >= 0 && ca === cb) ? 0.9 : 0.35;
+                        }
+                        return 0.6;
+                    })
+                    .linkDirectionalArrowLength(state.showArrows ? 3 : 0)
+                    .linkDirectionalArrowRelPos(0.5);
+
+                if (Graph.linkLineDash) {
+                    Graph.linkLineDash(l => l.isAug ? [2, 2] : null);
+                }
+
+                Graph.refresh();
+            }
+
+            // Apply 3D text labels only to important/selected nodes (prevents performance freeze)
+            function applyLabels() {
+                state.showLabels = !!showLabelsEl.checked;
+                if (typeof SpriteText === 'undefined') return;
+
+                Graph.nodeThreeObject(node => {
+                    if (!state.showLabels) return null;
+
+                    const isSelected = (state.selectedGid != null && node.gid === state.selectedGid);
+                    // Only show labels for high-degree entities or augmentation nodes
+                    const important = (node.type === 'entity' && (node.degree || 0) >= Math.max(40, state.minDegree));
+                    const isAugNode = node.isAug;
+                    if (!isSelected && !important && !isAugNode) return null;
+
+                    const sprite = new SpriteText(node.label || node.id || '');
+                    sprite.textHeight = isSelected ? 6 : (isAugNode ? 5 : 4);
+                    sprite.color = isAugNode ? 'rgba(224, 64, 251, 0.95)' : 'rgba(255,255,255,0.9)';
+                    sprite.backgroundColor = 'rgba(0,0,0,0.35)';
+                    sprite.padding = 2;
+                    sprite.borderRadius = 6;
+                    sprite.material.depthWrite = false;
+                    sprite.position.y = 8;
+                    return sprite;
+                }).nodeThreeObjectExtend(true);
+
+                Graph.refresh();
+            }
+
+            // Apply physics forces (matching graph.html)
+            function applyForces() {
+                if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+                if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength);
+            }
+
+            // Apply freeze settings
+            function applyFreeze() {
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+            }
+
+            function rebuildAndRender(msg) {
+                showOverlay(msg || 'Updating...', 'Filtering & rebuilding visible subgraph');
+
+                ric(() => {
+                    buildSubgraphFromVisible();
+                    rebuildSubgraphIndex();
+
+                    const gdata = {
+                        nodes: state.subNodes,
+                        links: state.subLinks.map(e => ({ source: e.s, target: e.t, type: e.type, isAug: e.isAug }))
+                    };
+
+                    Graph.graphData(gdata);
+                    applyForces();
+                    applyFreeze();
+                    applyStyles();
+                    applyLabels();
+
+                    Graph.d3ReheatSimulation();
+
+                    // Cluster after a short delay for layout to settle
+                    if (state.autoCluster && state.clusterOn) {
+                        setTimeout(() => runClustering(), 1400);
+                    }
+
+                    hideOverlay();
+                    updateHud();
+                });
+            }
+
+            function rebuildFromDegree() {
+                showOverlay('Seeding visible subgraph...', 'Using degree threshold + caps');
+                ric(() => {
+                    state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+                    if (state.selectedGid != null) state.visible.add(state.selectedGid);
+                    rebuildAndRender('Rendering subgraph...');
+                });
+            }
+
+            function updateHud() {
+                const now = performance.now();
+                state.fps.frames++;
+                const dt = now - state.fps.t0;
+                if (dt >= 800) {
+                    state.fps.value = Math.round((state.fps.frames * 1000) / dt);
+                    state.fps.frames = 0;
+                    state.fps.t0 = now;
+                }
+                const augCount = state.subNodes.filter(n => n.isAug).length;
+                hud.textContent = `3D | ${state.subNodes.length} nodes | ${state.subLinks.length} links | ${augCount} aug | ${state.fps.value} fps`;
+            }
+
+            // Camera reset function
+            function resetCamera() {
+                Graph.cameraPosition({ x: 0, y: 0, z: 420 }, { x: 0, y: 0, z: 0 }, 700);
+            }
+
+            // Event handlers
+            Graph.onNodeClick(node => {
+                console.log('Node clicked:', node);
+                state.selectedGid = node ? node.gid : null;
+                console.log('Calling updateDetails with node:', node ? node.label : null);
+                updateDetails(node);
+            });
+
+            // Debounced degree filter - uses rebuildFromDegree to properly seed visible nodes
+            minDegreeEl.addEventListener('input', () => {
+                state.minDegree = +minDegreeEl.value;
+                degreeValueEl.textContent = String(state.minDegree);
+                if (state.degreeDebounce) clearTimeout(state.degreeDebounce);
+                state.degreeDebounce = setTimeout(() => rebuildFromDegree(), 150);
+            });
+
+            linkStrengthEl.addEventListener('input', () => {
+                state.linkStrength = +linkStrengthEl.value;
+                applyForces();
+                Graph.d3ReheatSimulation();
+            });
+
+            repulsionEl.addEventListener('input', () => {
+                state.repulsion = +repulsionEl.value;
+                applyForces();
+                Graph.d3ReheatSimulation();
+            });
+
+            // Debounced max nodes control
+            maxNodesEl.addEventListener('input', () => {
+                state.maxNodes = +maxNodesEl.value;
+                maxNodesValEl.textContent = String(state.maxNodes);
+                if (state.maxNodesDebounce) clearTimeout(state.maxNodesDebounce);
+                state.maxNodesDebounce = setTimeout(() => rebuildFromDegree(), 200);
+            });
+
+            depthEl.addEventListener('input', () => {
+                state.depthSpread = +depthEl.value;
+                depthValEl.textContent = String(state.depthSpread);
+                applyDepth();
+                Graph.refresh();
+            });
+
+            goBtn.addEventListener('click', () => {
+                const q = (searchEl.value || '').trim().toLowerCase();
+                if (!q) return;
+                let idx = labelsLower.indexOf(q);
+                if (idx === -1) {
+                    for (let i = 0; i < labelsLower.length; i++) {
+                        if (labelsLower[i].includes(q)) { idx = i; break; }
+                    }
+                }
+                if (idx === -1) {
+                    detailsEl.innerHTML = `<div style="color:#ffb74d;">No match for "${escapeHtml(q)}".</div>`;
+                    return;
+                }
+                state.selectedGid = idx;
+                state.visible.add(idx);
+                rebuildAndRender('Searching...');
+                updateDetails(data.nodes[idx]);
+            });
+
+            searchEl.addEventListener('keydown', e => { if (e.key === 'Enter') goBtn.click(); });
+
+            exp1Btn.addEventListener('click', () => expandSelected(1));
+            exp2Btn.addEventListener('click', () => expandSelected(2));
+            resetBtn.addEventListener('click', () => {
+                state.selectedGid = null;
+                updateDetails(null);
+                rebuildAndRender('Resetting view...');
+            });
+            camResetBtn.addEventListener('click', resetCamera);
+
+            showAugEl.addEventListener('change', () => {
+                state.showAug = showAugEl.checked;
+                if (state.showAug) mergeAugmentation();  // Merge aug data on first enable
+                rebuildAndRender('Toggling augmentation...');
+            });
+
+            augOpacityEl.addEventListener('input', () => {
+                state.augOpacity = +augOpacityEl.value;
+                augOpacityValEl.textContent = state.augOpacity.toFixed(1);
+                applyStyles();
+            });
+
+            augOnlyEl.addEventListener('change', () => {
+                state.augOnlyMode = augOnlyEl.checked;
+                if (state.augOnlyMode) {
+                    mergeAugmentation();  // Merge aug data if entering aug-only mode
+                    // Also enable showAug when entering aug-only mode
+                    state.showAug = true;
+                    showAugEl.checked = true;
+                } else {
+                    state.showAug = false;
+                    if (showAugEl) showAugEl.checked = false;
+                }
+                // Reseed visible nodes so we return to the same base-graph view as graph.html.
+                rebuildFromDegree();
+            });
+
+            focusAugBtn.addEventListener('click', () => {
+                const augNodes = state.subNodes.filter(n => n.isAug);
+                if (augNodes.length === 0) return;
+
+                let cx = 0, cy = 0, cz = 0;
+                for (const n of augNodes) {
+                    cx += n.x || 0;
+                    cy += n.y || 0;
+                    cz += n.z || 0;
+                }
+                cx /= augNodes.length;
+                cy /= augNodes.length;
+                cz /= augNodes.length;
+
+                Graph.cameraPosition({ x: cx, y: cy, z: cz + 300 }, { x: cx, y: cy, z: cz }, 1000);
+            });
+
+            // Directional arrows toggle
+            arrowsEl.addEventListener('change', () => {
+                state.showArrows = !!arrowsEl.checked;
+                applyStyles();
+            });
+
+            // Show labels toggle (only renders labels for high-degree/selected nodes)
+            showLabelsEl.addEventListener('change', () => {
+                applyLabels();
+            });
+
+            // Clustering event handlers
+            clusterOnEl.addEventListener('change', () => {
+                state.clusterOn = !!clusterOnEl.checked;
+                if (state.clusterOn) runClustering();
+                else {
+                    clearClusterLabels();
+                    applyStyles();
+                }
+            });
+
+            clusterModeEl.addEventListener('change', () => {
+                state.clusterMode = clusterModeEl.value;
+                if (state.clusterMode === 'spatial') {
+                    topoResRow.style.display = 'none';
+                    spatialRadiusRow.style.display = '';
+                    spatialMinRow.style.display = '';
+                } else {
+                    topoResRow.style.display = '';
+                    spatialRadiusRow.style.display = 'none';
+                    spatialMinRow.style.display = 'none';
+                }
+                if (state.clusterOn) runClustering();
+            });
+
+            clusterRadiusEl.addEventListener('input', () => {
+                state.clusterRadius = +clusterRadiusEl.value;
+                clusterRadiusValEl.textContent = String(state.clusterRadius);
+            });
+            clusterRadiusEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            minClusterEl.addEventListener('input', () => {
+                state.minClusterSize = +minClusterEl.value;
+                minClusterValEl.textContent = String(state.minClusterSize);
+            });
+            minClusterEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            topoResEl.addEventListener('input', () => {
+                state.topoResolution = +topoResEl.value;
+                topoResValEl.textContent = state.topoResolution.toFixed(2);
+            });
+            topoResEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            paletteEl.addEventListener('change', () => {
+                state.palette = paletteEl.value;
+                applyStyles();
+                drawClusterLabels();
+            });
+
+            reclusterBtn.addEventListener('click', () => runClustering());
+
+            autoClusterEl.addEventListener('change', () => {
+                state.autoCluster = !!autoClusterEl.checked;
+            });
+
+            // Tooltip hover
+            Graph.onNodeHover(rafThrottle((node) => {
+                const tt = document.getElementById('tooltip');
+                if (!tt) return;
+                if (!node) { tt.style.opacity = 0; return; }
+                tt.style.opacity = 1;
+                let info = `<strong>${escapeHtml(node.label || node.id || '')}</strong><br/>`;
+                info += `<span style="opacity:0.85;">${escapeHtml(node.type || '')}`;
+                if (typeof node.degree === 'number') info += ` deg ${node.degree}`;
+                if (node.isAug && typeof node.confidence === 'number') info += ` conf ${node.confidence.toFixed(2)}`;
+                info += '</span>';
+                tt.innerHTML = info;
+            }));
+
+            // Auto-freeze handler
+            autoFreezeEl.addEventListener('change', () => {
+                state.autoFreeze = !!autoFreezeEl.checked;
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+                Graph.d3ReheatSimulation();
+            });
+
+            // FPS counter
+            if (Graph.onRenderFramePost) {
+                Graph.onRenderFramePost(updateHud);
+            } else {
+                setInterval(updateHud, 250);
+            }
+
+            // Window resize
+            window.addEventListener('resize', () => {
+                Graph.width(window.innerWidth);
+                Graph.height(window.innerHeight);
+            });
+
+            // ---- Boot sequence (matching graph.html exactly) ----
+            // Start in augmentation-only mode, but allow user to toggle back
+            state.showAug = true;
+            state.augOnlyMode = true;
+            if (showAugEl) showAugEl.checked = true;
+            if (augOnlyEl) augOnlyEl.checked = true;
+            mergeAugmentation();
+
+            // Function to update cluster mode UI (matching graph.html)
+            function updateClusterModeUI() {
+                if (state.clusterMode === 'spatial') {
+                    if (topoResRow) topoResRow.style.display = 'none';
+                    if (spatialRadiusRow) spatialRadiusRow.style.display = '';
+                    if (spatialMinRow) spatialMinRow.style.display = '';
+                } else {
+                    if (topoResRow) topoResRow.style.display = '';
+                    if (spatialRadiusRow) spatialRadiusRow.style.display = 'none';
+                    if (spatialMinRow) spatialMinRow.style.display = 'none';
+                }
+            }
+
+            // Initialize UI (matching graph.html boot sequence exactly)
+            updateDetails(null);
+            if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+            if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+            if (clusterRadiusValEl) clusterRadiusValEl.textContent = String(state.clusterRadius);
+            if (minClusterValEl) minClusterValEl.textContent = String(state.minClusterSize);
+            if (topoResValEl) topoResValEl.textContent = state.topoResolution.toFixed(2);
+            updateClusterModeUI();
+
+            applyDepth();
+            resetCamera();
+            console.log(`Boot: minDegree=${state.minDegree}, maxNodes=${state.maxNodes}`);
+            state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+            console.log(`After seedVisibleByDegree: ${state.visible.size} visible nodes`);
+            buildSubgraphFromVisible();
+            console.log(`After buildSubgraph: ${state.subNodes.length} subNodes, ${state.subLinks.length} subLinks`);
+
+            hideOverlay();
+            rebuildAndRender('Rendering initial 3D view...');
+        })();
+    </script>
+</body>
+</html>

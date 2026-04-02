@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Kuzu Database
+graph_rag_db/
+
+# User Data
+data/*.json
+!data/.gitkeep
+
+# Logs
+*.log
+backend.log
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporary Files
+uploaded_graph.json
+*.tmp
+*.temp
+
+# Backup Files
+*.backup
+*.backup[0-9]
+*.bak

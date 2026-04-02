@@ -543,11 +543,24 @@ public:
     std::vector<Insight> find_schema_violations();       // Entities/relations violating expected patterns
     std::vector<Insight> find_transitive_closure_gaps(); // Missing links implied by transitive relations
 
+    // Epistemic Discovery operators
+    std::vector<Insight> find_evidence_debt(const InsightCollection& collection);
+    std::vector<Insight> find_consensus_frontier(const InsightCollection& collection);
+    std::vector<Insight> find_boundary_condition_map(const InsightCollection& collection);
+    std::vector<Insight> find_failure_mode_topology(const InsightCollection& collection);
+    std::vector<Insight> find_benchmark_dependence(const InsightCollection& collection);
+    std::vector<Insight> find_concept_drift(const InsightCollection& collection);
+    std::vector<Insight> find_premise_bottleneck(const InsightCollection& collection);
+    std::vector<Insight> find_translation_gap(const InsightCollection& collection);
+
     // Run multiple operators
     InsightCollection run_operators(const std::vector<std::string>& operators);
 
     // Run all operators
     InsightCollection run_all();
+
+    // Semantic deduplication of insights (for augmented nodes)
+    static void deduplicate_insights(InsightCollection& insights, double similarity_threshold = 0.85);
 
 private:
     const Hypergraph& graph_;

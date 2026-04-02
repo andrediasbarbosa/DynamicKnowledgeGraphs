@@ -95,7 +95,16 @@ enum class InsightType {
     SCHEMA_VIOLATION,    // Entities or relations that violate expected patterns
     TRANSITIVE_CLOSURE,  // Missing links implied by transitive relations
     BIAS_AUDIT,         // Fairness and representation analysis of insights
-    COMMUNITY_RECOMMENDATION  // Entity recommendations based on community structure
+    COMMUNITY_RECOMMENDATION,  // Entity recommendations based on community structure
+    // Epistemic Discovery
+    EVIDENCE_DEBT,        // High-impact nodes with narrow evidence provenance
+    CONSENSUS_FRONTIER,   // Claim clusters with convergence or active disagreement
+    BOUNDARY_CONDITION_MAP, // Conditions under which methods/claims hold
+    FAILURE_MODE_TOPOLOGY,  // Recurring failure patterns across the graph
+    BENCHMARK_DEPENDENCE,   // Claims concentrated on narrow evaluation regimes
+    CONCEPT_DRIFT,          // Terms with divergent meanings across communities
+    PREMISE_BOTTLENECK,     // Hidden premises that many downstream claims rely on
+    TRANSLATION_GAP         // Theory-rich but practice-weak concept nodes
 };
 
 inline std::string insight_type_to_string(InsightType type) {
@@ -159,6 +168,14 @@ inline std::string insight_type_to_string(InsightType type) {
         case InsightType::TRANSITIVE_CLOSURE: return "transitive_closure";
         case InsightType::BIAS_AUDIT: return "bias_audit";
         case InsightType::COMMUNITY_RECOMMENDATION: return "community_recommendation";
+        case InsightType::EVIDENCE_DEBT: return "evidence_debt";
+        case InsightType::CONSENSUS_FRONTIER: return "consensus_frontier";
+        case InsightType::BOUNDARY_CONDITION_MAP: return "boundary_condition_map";
+        case InsightType::FAILURE_MODE_TOPOLOGY: return "failure_mode_topology";
+        case InsightType::BENCHMARK_DEPENDENCE: return "benchmark_dependence";
+        case InsightType::CONCEPT_DRIFT: return "concept_drift";
+        case InsightType::PREMISE_BOTTLENECK: return "premise_bottleneck";
+        case InsightType::TRANSLATION_GAP: return "translation_gap";
         default: return "unknown";
     }
 }
@@ -222,6 +239,14 @@ inline InsightType string_to_insight_type(const std::string& s) {
     if (s == "explanatory_chain" || s == "explanatory-chain" || s == "explanation" || s == "explanatory_chains") return InsightType::EXPLANATORY_CHAIN;
     if (s == "schema_violation" || s == "schema-violation" || s == "schema_violations" || s == "schema") return InsightType::SCHEMA_VIOLATION;
     if (s == "transitive_closure" || s == "transitive-closure" || s == "transitive" || s == "closure") return InsightType::TRANSITIVE_CLOSURE;
+    if (s == "evidence_debt" || s == "evidence-debt") return InsightType::EVIDENCE_DEBT;
+    if (s == "consensus_frontier" || s == "consensus-frontier") return InsightType::CONSENSUS_FRONTIER;
+    if (s == "boundary_condition_map" || s == "boundary-condition-map" || s == "boundary_condition") return InsightType::BOUNDARY_CONDITION_MAP;
+    if (s == "failure_mode_topology" || s == "failure-mode-topology" || s == "failure_mode") return InsightType::FAILURE_MODE_TOPOLOGY;
+    if (s == "benchmark_dependence" || s == "benchmark-dependence") return InsightType::BENCHMARK_DEPENDENCE;
+    if (s == "concept_drift" || s == "concept-drift") return InsightType::CONCEPT_DRIFT;
+    if (s == "premise_bottleneck" || s == "premise-bottleneck") return InsightType::PREMISE_BOTTLENECK;
+    if (s == "translation_gap" || s == "translation-gap") return InsightType::TRANSLATION_GAP;
     return InsightType::BRIDGE; // default
 }
 
@@ -297,6 +322,19 @@ inline InsightCategory get_insight_category(InsightType type) {
         case InsightType::TEXT_SIMILARITY:
         case InsightType::ARGUMENT_SUPPORT:
         case InsightType::METHOD_OUTCOME:
+            return InsightCategory::EXPLORATORY;
+
+        // Epistemic Discovery
+        case InsightType::EVIDENCE_DEBT:
+        case InsightType::CONSENSUS_FRONTIER:
+        case InsightType::BOUNDARY_CONDITION_MAP:
+        case InsightType::FAILURE_MODE_TOPOLOGY:
+        case InsightType::BENCHMARK_DEPENDENCE:
+        case InsightType::CONCEPT_DRIFT:
+        case InsightType::PREMISE_BOTTLENECK:
+            return InsightCategory::TRANSFORMATIONAL;
+
+        case InsightType::TRANSLATION_GAP:
             return InsightCategory::EXPLORATORY;
 
         default:

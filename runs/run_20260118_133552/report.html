@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>three_essays_cs_music_history Knowledge Discovery</title>
+    <style>
+        :root {
+            --primary: #4fc3f7;
+            --secondary: #ff9800;
+            --accent: #e040fb;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text: #e0e0e0;
+            --text-muted: #9e9e9e;
+            --border: rgba(255,255,255,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+        header h1 {
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .meta span { margin: 0 10px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        .card h3 {
+            color: var(--primary);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .card .value {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        .card.bridges .value { color: var(--primary); }
+        .card.surprises .value { color: var(--accent); }
+        .card.completions .value { color: var(--secondary); }
+        .card.motifs .value { color: #66bb6a; }
+        section {
+            margin: 40px 0;
+        }
+        section h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        section > p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .insight {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .insight.surprise { border-left-color: var(--accent); }
+        .insight.completion { border-left-color: var(--secondary); }
+        .insight.motif { border-left-color: #66bb6a; }
+        .insight h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .insight.surprise h4 { color: var(--accent); }
+        .insight p { margin-bottom: 10px; }
+        .evidence {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .entity {
+            background: rgba(79, 195, 247, 0.2);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .stats-table th, .stats-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .stats-table th {
+            background: rgba(0,0,0,0.3);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .stats-table td:last-child {
+            text-align: right;
+            font-weight: 500;
+        }
+        .recommendations {
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .recommendations h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .recommendations ol {
+            margin-left: 20px;
+        }
+        .recommendations li {
+            margin: 10px 0;
+        }
+        .recommendations strong {
+            color: var(--primary);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        .toc {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: var(--primary);
+        }
+        .toc .count {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>three_essays_cs_music_history Knowledge Discovery</h1>
+            <div class="meta">
+                <span>Generated: 2026-01-18 13:38:04 UTC</span>
+                <span>|</span>
+                <span>Source: three_essays_cs_music_history.pdf</span>
+                <span>|</span>
+                <span>Run ID: run_20260118_133552</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Executive Summary</h2>
+            <p>This report presents the results of automated knowledge discovery analysis.
+               A total of <strong>76 insights</strong> were identified.</p>
+
+            <div class="summary-cards">
+                <div class="card bridges">
+                    <h3>Bridge Entities</h3>
+                    <div class="value">26</div>
+                </div>
+                <div class="card surprises">
+                    <h3>Surprising Discoveries</h3>
+                    <div class="value">50</div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="toc">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#statistics">Knowledge Graph Statistics</a></li>
+                <li><a href="#bridges">Bridge Entities</a> <span class="count">(26)</span></li>
+                <li><a href="#surprises">Surprising Discoveries</a> <span class="count">(50)</span></li>
+                <li><a href="#recommendations">Conclusions &amp; Recommendations</a></li>
+            </ul>
+        </nav>
+
+        <section id="statistics">
+            <h2>Knowledge Graph Statistics</h2>
+            <table class="stats-table">
+                <tr><th>Metric</th><th>Value</th></tr>
+                <tr><td>Total Entities</td><td>220</td></tr>
+                <tr><td>Total Relationships</td><td>106</td></tr>
+                <tr><td>Average Degree</td><td>1.23</td></tr>
+                <tr><td>Max Degree</td><td>11</td></tr>
+                <tr><td>Insights Discovered</td><td>76</td></tr>
+            </table>
+        </section>
+
+        <section id="bridges">
+            <h2>Bridge Entities</h2>
+            <p>Bridge entities connect otherwise disconnected parts of the knowledge graph,
+               serving as critical junctions for information flow.</p>
+
+            <div class="insight">
+                <h4>1. compiler</h4>
+                <p>The entity <span class="entity">compiler</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">assumptions</span>, <span class="entity">code</span>, <span class="entity">compiler</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_4 and 4 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>2. scholar</h4>
+                <p>The entity <span class="entity">scholar</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">correction</span>, <span class="entity">experiment</span>, <span class="entity">footnotes</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_14 and 1 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>3. lines</h4>
+                <p>The entity <span class="entity">lines</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">composer</span>, <span class="entity">distinct</span>, <span class="entity">hear others</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_9 and 2 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>4. piece</h4>
+                <p>The entity <span class="entity">piece</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">argumentative</span>, <span class="entity">ceremonial</span>, <span class="entity">intimate</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_9 and 1 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>5. meaning</h4>
+                <p>The entity <span class="entity">meaning</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">Imitation</span>, <span class="entity">meaning</span>, <span class="entity">output</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_8 and 1 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>6. voice</h4>
+                <p>The entity <span class="entity">voice</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">change</span>, <span class="entity">consonance</span>, <span class="entity">listener</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_7 and 1 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>7. compilers</h4>
+                <p>The entity <span class="entity">compilers</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">abstraction</span>, <span class="entity">compilers</span>, <span class="entity">intermediate representation</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_4 and 2 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>8. program</h4>
+                <p>The entity <span class="entity">program</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">clumsy</span>, <span class="entity">compilers</span>, <span class="entity">contradictory</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_2 and 1 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>9. counterpoint</h4>
+                <p>The entity <span class="entity">counterpoint</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">choral writing</span>, <span class="entity">counterpoint</span>, <span class="entity">film scores</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_10 and 1 other sources</p>
+            </div>
+
+            <div class="insight">
+                <h4>10. Counterpoint</h4>
+                <p>The entity <span class="entity">Counterpoint</span> serves as a critical bridge
+                   in the knowledge graph, connecting 0 separate clusters of information.
+ Through this entity, concepts like <span class="entity">Counterpoint</span>, <span class="entity">art of conversation</span>, <span class="entity">independent melodies</span> become interconnected.</p>
+                <p class="evidence">Evidence from: three_essays_cs_music_history_chunk_8 and 1 other sources</p>
+            </div>
+        </section>
+
+        <section id="surprises">
+            <h2>Surprising Discoveries</h2>
+            <p>These connections are statistically unusual given the overall structure of the knowledge graph.
+               They may represent novel findings or unexpected relationships worth investigating.</p>
+
+            <div class="insight surprise">
+                <h4>1. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">debate</span> and <span class="entity">permanent rupture</span> and <span class="entity">social etiquette</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_16</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>2. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">contexts</span> and <span class="entity">fugue</span> and <span class="entity">multiple registers</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_9</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>3. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">cache misses</span> and <span class="entity">decisions</span> and <span class="entity">performance</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_3</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>4. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">catalogs</span> and <span class="entity">exchange</span> and <span class="entity">lists</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_15</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>5. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">acknowledgments</span> and <span class="entity">dedications</span> and <span class="entity">politeness formulas</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_12</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>6. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">Knowledge</span> and <span class="entity">inventories</span> and <span class="entity">machinery of addresses</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_16</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>7. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">Errata sheets</span> and <span class="entity">learned reviews</span> and <span class="entity">marginal notes</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_13</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>8. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">boundaries</span> and <span class="entity">improvements</span> and <span class="entity">memory aliasing</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_2</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>9. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">benign</span> and <span class="entity">biting</span> and <span class="entity">pitches</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_8</p>
+            </div>
+
+            <div class="insight surprise">
+                <h4>10. Unexpected Connection</h4>
+                <p>An unexpected connection was found: the combination of <span class="entity">academies</span> and <span class="entity">observations</span> and <span class="entity">prizes</span> is statistically rare in this knowledge domain.
+                   With a surprise score of 0.47,
+                   this represents a potentially novel relationship.</p>
+                <p class="evidence">Found in: three_essays_cs_music_history_chunk_14</p>
+            </div>
+        </section>
+
+        <section id="recommendations">
+            <h2>Conclusions &amp; Recommendations</h2>
+            <div class="recommendations">
+                <h3>Based on the analysis of 76 discovered insights:</h3>
+                <ol>
+                    <li><strong>Protect Bridge Entities:</strong> The 26 identified bridge entities are critical for knowledge connectivity. Consider documenting these thoroughly.</li>
+                    <li><strong>Investigate Surprises:</strong> The 50 surprising connections warrant manual review to determine if they represent genuine discoveries.</li>
+                </ol>
+            </div>
+        </section>
+
+        <footer>
+            <p>This report was automatically generated by the Knowledge Discovery Engine.<br>
+            All insights should be validated by domain experts before taking action.</p>
+        </footer>
+    </div>
+</body>
+</html>

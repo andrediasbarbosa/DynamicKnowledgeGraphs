@@ -233,6 +233,28 @@ public:
      */
     void set_config(const PipelineConfig& config);
 
+    /**
+     * @brief Apply heuristic classification to nodes without node_level
+     *
+     * This fills in missing node_level properties using heuristics for
+     * entities that weren't classified by the LLM during extraction.
+     *
+     * @param graph The hypergraph to classify
+     * @return Number of nodes classified
+     */
+    static int apply_heuristic_classification(Hypergraph& graph);
+
+    /**
+     * @brief Augment instance nodes with their base class information
+     *
+     * For nodes with node_level="instance", follows instance_of/is_a edges
+     * to find parent classes and stores them in the "base_classes" property.
+     *
+     * @param graph The hypergraph to augment
+     * @return Number of instance nodes augmented
+     */
+    static int augment_instance_base_classes(Hypergraph& graph);
+
 private:
     PipelineConfig config_;
     PipelineStatistics stats_;

@@ -2,11 +2,145 @@
 
 ## [Unreleased]
 
+### Fixed (2026-04-02)
+- **3D Viewer: Clustering Labels Missing in All Three Viewers**
+  - Root cause: `clusterTopologyLouvain()` built adjacency from `subLinks` which in the reified hyperedge format are only entity→relation and relation→entity edges. This bipartite star structure produces Louvain communities of size 2-3, all below the `minClusterSize` threshold, so no labels were drawn.
+  - Fix: Added an entity co-occurrence projection pass after the raw adjacency build in all three Louvain functions. For each relation node, all entity pairs that share it receive a direct co-occurrence edge. Louvain then finds meaningful entity clusters.
+  - Applied to: `src/graph/hypergraph_extended.cpp` (graph.html and graph_rag.html sections), `src/render/augmentation_renderer.cpp` (graph_augmented.html section).
+
+- **3D Viewer: Clustering Labels Missing in `graph_augmented.html` (Augmentation-Only Mode)**
+  - Additional root cause specific to the augmented viewer: in augmentation-only mode all visible links are `isAug: true`. The Louvain function filtered them out (`subLinks.filter(l => !l.isAug)`), leaving an empty adjacency (`m2 === 0`), so no clusters were formed.
+  - Fix: Rewrote `clusterTopologyLouvain()` in `augmentation_renderer.cpp` to build entity co-occurrence through ALL relation intermediaries (base graph relation nodes and aug nodes) using all `subLinks`, regardless of `isAug`. Entity nodes are still the only nodes assigned cluster IDs.
+
+- **3D Viewer: Augmented Nodes Missing Sources/Targets in Info Panel**
+  - `updateDetails()` showed `sources` and `targets` for relation nodes, but augmented nodes had neither field populated.
+  - Root cause: `mergeAugmentation()` created aug node objects without `sources`/`targets` fields; the info was only in the separate `augData.links` array.
+  - Fix: `mergeAugmentation()` now writes back entity IDs to `node.sources` / `node.targets` on each aug node as it processes `augData.links`.
+
+- **3D Viewer: Augmented Node Type Was `'augmentation'` Instead of `'relation'`**
+  - `updateDetails()` gated the sources/targets display on `node.type === 'relation'`, so aug nodes (typed as `'augmentation'`) never showed them even when the arrays were present.
+  - Fix: Aug nodes now created with `type: 'relation'` in `mergeAugmentation()`.
+
+### Changed (2026-04-02)
+- **`minClusterSize` Default Reduced from 12 to 5**
+  - Previous default of 12 was too high for typical corpus sizes and suppressed all cluster labels on smaller runs.
+  - Changed in JS state defaults and HTML slider defaults for all three viewers (`graph.html`, `graph_rag.html`, `graph_augmented.html`).
+
+- **Documentation Cleanup**
+  - Removed outdated design/patch specification files from `References/`:
+    - `hypergraph_knowledge_discovery_spec.md` (v0.2 design, referenced old file names and 6-operator system)
+    - `KG_Brave_Optimization_PatchSpec.md` (manual HTML patching approach, superseded by code generation)
+    - `KG_Brave_Optimization_PatchSpec_3D_Clustering.md` (design proposal, features now implemented directly)
+    - `New_Hypotheses_spec.md` (described NeSy constraint engine and test planning not implemented)
+    - `Report_Updates.md` (old UI proposal, superseded by 2026-03-06 report reorganization)
+  - Removed junk files: `Claude Setup.exe`, `New Text Document.txt`, `Hypergraph.cpp`
+  - Documentation set reduced to current code-facing guides only in `docs/`.
+
+### Changed (previous 2026-04-02 entry)
+- Rewrote the canonical docs to match the active `kg` CLI, stage folder layout, 62-operator default registry, Graph RAG backend startup path, and Python-port scope.
+- Removed stale plans, audits, completion notes, and duplicate Graph RAG docs that no longer described the active code paths.
+
+### Added (2026-03-30)
+- **Epistemic Discovery Operators** added to the active codebase:
+  - `evidence_debt`
+  - `consensus_frontier`
+  - `boundary_condition_map`
+  - `failure_mode_topology`
+  - `benchmark_dependence`
+  - `concept_drift`
+  - `premise_bottleneck`
+  - `translation_gap`
+- **Operator Count Update**:
+  - `all_discovery_operators()` now returns **62** operators
+  - `InsightType` now contains **67** total types
+  - `bias_audit` and `community_recommendation` are implemented but not in the default registry
+  - 4 deprecated legacy types remain in the enum for compatibility
+- **Documentation Sync**:
+  - Updated README, pipeline, overview, operator registry, category, and analysis docs to reflect current code and operator counts
+
+### Fixed (2026-03-29)
+- **Witness Nodes Bug** in 5 insight types (195 insights restored)
+  - Fixed `relation_induction`: Now properly populates witness_nodes (68 insights)
+  - Fixed `cross_community_bridge_map`: Now properly populates witness_nodes (71 insights)
+  - Fixed `community_link`: Now properly populates witness_nodes (37 insights)
+  - Fixed `meta_pattern`: Now properly populates witness_nodes (6 insights)
+  - Fixed `multi_resolution_community`: Now properly populates witness_nodes (13 insights)
+  - **Impact**: 19% of insights (195 total) now properly connected to graph nodes
+  - **Root Cause**: Missing `ins.witness_nodes = ins.seed_nodes;` assignments
+  - Follow-up fix note was later removed during documentation cleanup
+
+### Removed (2026-03-29)
+- **Low-Value Insight Types** (4 types, 7 total insights)
+  - ~~`analogical_transfer`~~: Only 2 insights across 9 runs (0.2%) - **DEPRECATED**
+  - ~~`co_authorship`~~: Only 1 insight across 9 runs (0.1%) - **DEPRECATED**
+  - ~~`mechanism_consolidation`~~: Only 2 insights across 9 runs (0.2%) - **DEPRECATED**
+  - ~~`intervention_bottleneck`~~: Only 2 insights across 9 runs (0.2%) - **DEPRECATED**
+  - **Impact**: ~5% faster discovery stage, cleaner pipeline
+  - **Reason**: A later audit showed minimal value
+  - Functions disabled with `#if 0` blocks, can be re-enabled if needed
+
+### Added (2026-03-25)
+- **Level 1.2: Label Simplification** in Quality Control
+  - Automatically simplifies verbose entity names
+  - Removes filler phrases: "the process of", "the concept of", "a method for", etc.
+  - Trims redundant suffixes: " process", " technique", " method"
+  - Example: "the process of machine learning algorithms" → "machine learning algorithms"
+  - Tracked in `labels_simplified` metric in cleaning reports
+  - Reduces noise from overly descriptive entity names
+
+- **Hub Node Identification** in Connectivity Analysis
+  - Identifies the highest-degree node in the largest connected component
+  - Represents the central concept in the knowledge graph
+  - Displayed in all reports (HTML/JSON/console)
+  - Format: `Hub: "machine learning" (degree: 45)`
+  - Helps identify the most interconnected entity
+
+- **Enhanced Connectivity Reporting**
+  - Added `hub_node_label` and `hub_node_degree` to JSON reports
+  - Updated HTML quality control report with hub node display
+  - Improved console output with hub node information
+  - Restructured JSON for better organization (nested level1/level2/level3 objects)
+
+### Changed (2026-03-25)
+- **LLM Provider Configuration**
+  - Switched from OpenAI to Google Gemini support
+  - Updated hardcoded model defaults: `gemini-1.5-flash` → `gemini-2.5-flash`
+  - Fixed API compatibility issues with Gemini
+  - Model configuration now supports latest Gemini models
+
+- **Documentation Updates**
+  - Updated `QUALITY_CONTROL.md` with new features (Level 1.2, Hub Node)
+  - Enhanced examples and algorithm flow documentation
+  - Updated metric descriptions and interpretations
+
+### Removed (2026-03-25)
+- **Obsolete Documentation Files** (12 files removed)
+  - All `PHASE1_DAY*.md` daily summary files
+  - All `PHASE2_DAY*.md` daily summary files
+  - `SESSION_SUMMARY_*.md` session logs
+  - `CATEGORY_REORGANIZATION.md` (outdated)
+  - `CLEANUP_AUDIT.md` (outdated)
+  - `DOCUMENTATION_UPDATES.md` (meta-doc no longer needed)
+  - `PHASE1_PROGRESS.md` (progress tracking, obsolete)
+  - `PHASE1_DEDUPLICATION_DESIGN.md` (superseded by QUALITY_CONTROL.md)
+  - `PHASE2_ENHANCEMENT_PLAN.md` and `PHASE2_PLAN.md` (planning docs, obsolete)
+  - `VISUAL_ENHANCEMENTS_*.md` (multiple versions, obsolete)
+  - `REPORT_UI_IMPROVEMENTS.md` (merged into other docs)
+  - `KUZU_UPGRADE_PROPOSAL.md` (proposal, no longer needed)
+  - Streamlined docs/ directory from 42 to 18 files
+
+### Fixed (2026-03-25)
+- **Gemini LLM Integration**
+  - Fixed model name incompatibility (v1beta API requires different model names)
+  - Updated C++ code to use `gemini-2.5-flash` instead of non-existent `gemini-1.5-flash`
+  - Fixed API endpoint format for Gemini generateContent calls
+  - Tested and verified Gemini API connectivity
+
 ### Added (2026-03-06)
 - **Knowledge Discovery Category System**:
   - Introduced 3-category classification for insights: **Combinatorial** (pattern detection), **Exploratory** (path finding), **Transformational** (reframing)
   - Added `InsightCategory` enum and automatic category assignment in `include/discovery/insight.hpp`
-  - Updated all 67+ insight types with automatic category mapping
+  - Updated all 67 insight types with automatic category mapping
   - Category distribution now included in JSON output and reports
   - Documentation: `KNOWLEDGE_DISCOVERY_CATEGORIES.md`
 
@@ -21,7 +155,7 @@
   - **Removed clutter**: Removed search box and filter controls for simplified interface
   - **Category section headers**: Beautiful gradient headers dividing content into 3 main sections
   - **Better performance**: Faster initial page load with collapsed sections
-  - See: `REPORT_UI_IMPROVEMENTS.md` and `CATEGORY_REORGANIZATION.md`
+  - See current docs: `KNOWLEDGE_DISCOVERY_CATEGORIES.md` and `PROJECT_OVERVIEW.md`
 
 ### Added (2026-02-21)
 - **Kuzu Explorer Enhancements**:
@@ -50,7 +184,6 @@
   - Separate requirements files: `requirements.txt` and `requirements-azure.txt`
 - **Documentation Consolidation**: Created 4 comprehensive guides
   - `DEPLOYMENT.md` - Complete deployment instructions (Windows/Linux, Local/Azure)
-  - `FEATURES.md` - Full feature guide (RAG modes, UI components, capabilities)
   - `TROUBLESHOOTING.md` - Common issues and solutions
   - Updated `README.md` with clear navigation to all docs
 
@@ -120,7 +253,7 @@
 
 ### Changed (2026-02-20)
 - **Documentation Consolidation**: Merged overlapping Markdown guides into a smaller canonical set aligned with current code paths and runtime behavior.
-  - Root canonical docs: `README.md`, `CHANGELOG.md`, `KUZU_UPGRADE_PROPOSAL.md`
+  - Root canonical docs: `README.md`, `CHANGELOG.md`, `docs/PROJECT_OVERVIEW.md`
   - Submodule canonical docs: `src/graph_rag_tool/README.md`, `src/graph_rag_tool/backend/README.md`, `src/python_porting/README.md`
   - Removed legacy or duplicate docs that overlapped these guides (pipeline, config, setup, status, and quickstart variants).
 

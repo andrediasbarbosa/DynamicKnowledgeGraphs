@@ -70,6 +70,24 @@ if(HAVE_POPPLER)
 endif()
 
 # ==============================================================================
+# LLM Provider Library (must come before Hypergraph due to CausalMetadata)
+# ==============================================================================
+
+add_library(llm_provider
+    src/llm/llm_provider.cpp
+    src/llm/causal_metadata.cpp  # Phase 2: Causal metadata
+)
+
+target_include_directories(llm_provider PUBLIC
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(llm_provider PUBLIC
+    ${CURL_LIBRARIES}
+    nlohmann_json::nlohmann_json
+)
+
+# ==============================================================================
 # Hypergraph Library
 # ==============================================================================
 
@@ -84,6 +102,7 @@ target_include_directories(hypergraph PUBLIC
 
 target_link_libraries(hypergraph PUBLIC
     nlohmann_json::nlohmann_json
+    llm_provider
 )
 
 # ==============================================================================
@@ -108,29 +127,12 @@ else()
 endif()
 
 # ==============================================================================
-# LLM Provider Library
-# ==============================================================================
-
-add_library(llm_provider
-    src/llm/llm_provider.cpp
-    src/llm/causal_metadata.cpp  # Phase 2: Causal metadata
-)
-
-target_include_directories(llm_provider PUBLIC
-    ${CMAKE_SOURCE_DIR}/include
-)
-
-target_link_libraries(llm_provider PUBLIC
-    ${CURL_LIBRARIES}
-    nlohmann_json::nlohmann_json
-)
-
-# ==============================================================================
 # Extraction Pipeline Library
 # ==============================================================================
 
 add_library(extraction_pipeline
     src/pipeline/extraction_pipeline.cpp
+    src/pipeline/graph_cleaner.cpp
 )
 
 target_include_directories(extraction_pipeline PUBLIC
@@ -314,27 +316,27 @@ if(BUILD_TESTS)
 
         add_test(NAME HypergraphTests COMMAND test_hypergraph)
 
-        # V2: Deduplication tests
-        add_executable(test_deduplication
-            tests/test_deduplication.cpp
-        )
+        # V2: Deduplication tests (disabled - file not present)
+        # add_executable(test_deduplication
+        #     tests/test_deduplication.cpp
+        # )
+        #
+        # target_link_libraries(test_deduplication PRIVATE
+        #     llm_provider
+        #     GTest::gtest
+        #     GTest::gtest_main
+        # )
+        #
+        # add_test(NAME DeduplicationTests COMMAND test_deduplication)
 
-        target_link_libraries(test_deduplication PRIVATE
-            llm_provider
-            GTest::gtest
-            GTest::gtest_main
-        )
-
-        add_test(NAME DeduplicationTests COMMAND test_deduplication)
-
-        # Phase 2: Causal extraction test (non-GTest demo)
-        add_executable(test_causal_extraction
-            tests/test_causal_extraction.cpp
-        )
-
-        target_link_libraries(test_causal_extraction PRIVATE
-            llm_provider
-        )
+        # Phase 2: Causal extraction test (disabled - file not present)
+        # add_executable(test_causal_extraction
+        #     tests/test_causal_extraction.cpp
+        # )
+        #
+        # target_link_libraries(test_causal_extraction PRIVATE
+        #     llm_provider
+        # )
 
     else()
         message(STATUS "Google Test not found, tests will not be built")

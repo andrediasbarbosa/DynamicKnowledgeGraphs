@@ -1,0 +1,11 @@
+name: kg-extractor
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - pdfplumber>=0.10.0
+      - openai>=1.0.0
+      - tqdm>=4.65.0

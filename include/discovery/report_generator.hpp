@@ -151,6 +151,14 @@ private:
     std::string generate_explanatory_chains_section(const std::vector<Insight>& chains, const ReportConfig& config);
     std::string generate_schema_violations_section(const std::vector<Insight>& violations, const ReportConfig& config);
     std::string generate_transitive_closure_section(const std::vector<Insight>& gaps, const ReportConfig& config);
+    std::string generate_evidence_debt_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_consensus_frontier_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_boundary_condition_map_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_failure_mode_topology_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_benchmark_dependence_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_concept_drift_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_premise_bottleneck_section(const std::vector<Insight>& insights, const ReportConfig& config);
+    std::string generate_translation_gap_section(const std::vector<Insight>& insights, const ReportConfig& config);
     std::string generate_conclusions(const InsightCollection& insights, const ReportConfig& config);
 
     // Helpers
@@ -228,6 +236,14 @@ private:
     std::string describe_schema_violation(const Insight& insight) const;
     std::string describe_transitive_closure(const Insight& insight) const;
     std::string describe_meta_path(const Insight& insight) const;
+    std::string describe_evidence_debt(const Insight& insight) const;
+    std::string describe_consensus_frontier(const Insight& insight) const;
+    std::string describe_boundary_condition_map(const Insight& insight) const;
+    std::string describe_failure_mode_topology(const Insight& insight) const;
+    std::string describe_benchmark_dependence(const Insight& insight) const;
+    std::string describe_concept_drift(const Insight& insight) const;
+    std::string describe_premise_bottleneck(const Insight& insight) const;
+    std::string describe_translation_gap(const Insight& insight) const;
 
     // Provenance helpers
     std::string format_source_documents_html(const Insight& insight) const;

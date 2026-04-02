@@ -6,6 +6,7 @@
 #include "render/augmentation_renderer.hpp"
 #include "discovery/operator_registry.hpp"
 #include "pipeline/extraction_pipeline.hpp"
+#include "pipeline/graph_cleaner.hpp"
 #include "llm/llm_provider.hpp"
 #include <iostream>
 #include <fstream>
@@ -775,6 +776,16 @@ int cmd_run(const Args& args) {
     std::string existing_run_dir = args.get("run-dir", "").value;
     bool preprocess = args.has("preprocess");
     bool use_causal = args.has("causal");  // Phase 2: Causal extraction mode
+    bool with_ontology = args.has("with-ontology");  // Enable class/instance classification
+
+    // Quality control configuration
+    bool enable_qc = !args.has("no-qc");  // Quality control enabled by default
+    int min_node_length = args.get("min-node-length", "2").as_int();
+    int min_degree = args.get("min-degree", "2").as_int();
+    bool llm_validate = args.has("llm-validate");
+    std::string validation_mode = args.get("validation-mode", "suspicious").value;
+    bool semantic_dedup = args.has("semantic-dedup");
+    double semantic_threshold = args.get("semantic-threshold", "0.85").as_double();
 
     // Validate stage range
     if (from_stage < 1 || from_stage > 5) {
@@ -885,7 +896,7 @@ int cmd_run(const Args& args) {
     // V2: Create step-based output folders for organized artifacts
     std::string step1_dir = run_dir + "/Step_1_Loading";
     std::string step2_dir = run_dir + "/Step_2_Extraction";
-    std::string step3_dir = run_dir + "/Step_3_Deduplication";
+    std::string step3_dir = run_dir + "/Step_3_QualityControl";
     std::string step4_dir = run_dir + "/Step_4_GraphBuilding";
     std::string step5_dir = run_dir + "/Step_5_Discovery";
 
@@ -945,9 +956,27 @@ int cmd_run(const Args& args) {
         pipeline_config.save_extractions = true;
 
         // Phase 2: Use causal extraction prompts if --causal flag is set
-        if (use_causal) {
+        if (use_causal && with_ontology) {
+            // Both flags: Use combined causal + ontology prompt
+            pipeline_config.custom_system_prompt = PromptTemplates::causal_ontology_extraction_system_prompt();
+            std::cout << "  Causal + Ontology mode: ENABLED (LLM-based classification with causal metadata)\n";
+        }
+        else if (use_causal) {
             pipeline_config.custom_system_prompt = PromptTemplates::causal_extraction_system_prompt();
             std::cout << "  Causal extraction mode: ENABLED\n";
+        }
+        // Ontology: Use ontology extraction prompts if --with-ontology flag is set
+        else if (with_ontology) {
+            pipeline_config.custom_system_prompt = PromptTemplates::relation_extraction_system_prompt_with_ontology();
+            std::cout << "  Ontology classification mode: ENABLED (LLM-based)\n";
+        }
+
+        // Warning: Gemini + ontology extraction known issue
+        if (with_ontology && !use_causal && pipeline_config.llm_provider == "gemini") {
+            std::cout << "\n  ⚠️  WARNING: Gemini models may struggle with ontology classification.\n";
+            std::cout << "  If you see many extraction failures, try:\n";
+            std::cout << "    1. Remove --with-ontology (heuristics will still be applied), OR\n";
+            std::cout << "    2. Use provider=openai in .llm_config.json for LLM-based classification\n\n";
         }
 
         // Validate config
@@ -960,6 +989,14 @@ int cmd_run(const Args& args) {
 
         std::cout << "  Provider: " << pipeline_config.llm_provider << "\n";
         std::cout << "  Model:    " << pipeline_config.llm_model << "\n";
+
+        // Warning: Gemini + causal extraction known issue
+        if (use_causal && pipeline_config.llm_provider == "gemini") {
+            std::cout << "\n  ⚠️  WARNING: Gemini models may struggle with complex causal extraction.\n";
+            std::cout << "  If you see many extraction failures, try:\n";
+            std::cout << "    1. Re-run without --causal flag, OR\n";
+            std::cout << "    2. Use provider=openai in .llm_config.json\n\n";
+        }
 
         // Run extraction pipeline
         ExtractionPipeline pipeline(pipeline_config);
@@ -1047,6 +1084,277 @@ int cmd_run(const Args& args) {
     }
 
     // =========================================================================
+    // Stage 1.75: Quality Control (3-Level Graph Cleaning)
+    // =========================================================================
+    CleaningReport qc_report;
+    if (enable_qc && from_stage <= 2) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.75: Quality Control\n";
+        std::cout << "----------------------------------------------------------------------\n";
+
+        auto qc_start = std::chrono::steady_clock::now();
+
+        // Helper lambda to trim whitespace
+        auto trim = [](const std::string& s) {
+            if (s.empty()) return s;
+            size_t start = 0;
+            while (start < s.length() && std::isspace(static_cast<unsigned char>(s[start]))) {
+                start++;
+            }
+            size_t end = s.length();
+            while (end > start && std::isspace(static_cast<unsigned char>(s[end - 1]))) {
+                end--;
+            }
+            return s.substr(start, end - start);
+        };
+
+        // Convert graph entities to CleanableEntity format
+        std::vector<CleanableEntity> cleanable_entities;
+        auto all_nodes = graph.get_all_nodes();
+        for (const auto& node : all_nodes) {
+            CleanableEntity ce;
+            ce.id = node.id;
+            ce.label = trim(node.label);  // Trim whitespace for accurate validation
+            // Try to get type from properties
+            auto type_it = node.properties.find("type");
+            if (type_it != node.properties.end()) {
+                ce.type = type_it->second;
+            }
+            // Try to get confidence from properties
+            auto conf_it = node.properties.find("confidence");
+            if (conf_it != node.properties.end()) {
+                try {
+                    ce.confidence = std::stod(conf_it->second);
+                } catch (...) {
+                    // Keep default confidence of 1.0
+                }
+            }
+            cleanable_entities.push_back(ce);
+        }
+
+        // Convert graph edges to CleanableRelation format
+        std::vector<CleanableRelation> cleanable_relations;
+        auto all_edges = graph.get_all_edges();
+        for (const auto& edge : all_edges) {
+            if (!edge.sources.empty() && !edge.targets.empty()) {
+                CleanableRelation cr;
+                cr.id = edge.id;
+                cr.source = edge.sources[0];
+                cr.relation = edge.relation;
+                cr.target = edge.targets[0];
+                cr.confidence = edge.confidence;
+                cleanable_relations.push_back(cr);
+            }
+        }
+
+        std::cout << "  Initial: " << cleanable_entities.size() << " entities, "
+                  << cleanable_relations.size() << " relations\n";
+
+        // Track original node IDs before cleaning
+        std::set<std::string> original_node_ids;
+        for (const auto& ce : cleanable_entities) {
+            original_node_ids.insert(ce.id);
+        }
+
+        // Configure cleaning
+        CleaningConfig qc_config;
+        qc_config.min_node_length = min_node_length;
+        qc_config.min_degree = min_degree;
+        qc_config.enable_semantic_dedup = semantic_dedup;
+        qc_config.semantic_threshold = semantic_threshold;
+        qc_config.enable_llm_validation = llm_validate;
+        qc_config.validation_mode = validation_mode;
+        qc_config.progress_callback = [](const std::string& msg, int current, int total) {
+            std::cout << "  [QC] " << msg << " " << current << "/" << total << "\r" << std::flush;
+        };
+
+        // Run cleaning
+        GraphCleaner cleaner;
+        std::shared_ptr<LLMProvider> qc_llm = nullptr;
+        if (llm_validate || semantic_dedup) {
+            qc_llm = std::shared_ptr<LLMProvider>(
+                LLMProviderFactory::create_from_config_file(config_path)
+            );
+            if (!qc_llm) {
+                std::cerr << "  Warning: LLM validation requested but LLM provider not available\n";
+                qc_config.enable_llm_validation = false;
+            }
+        }
+
+        qc_report = cleaner.clean(cleanable_entities, cleanable_relations, qc_config, qc_llm);
+
+        // Apply cleaning results to graph - remove invalid entities
+        // After cleaning, cleanable_entities only contains valid entities (invalid ones were removed from the list)
+        // So we need to find which nodes to remove by comparing original IDs vs remaining IDs
+        std::set<std::string> remaining_node_ids;
+        for (const auto& ce : cleanable_entities) {
+            remaining_node_ids.insert(ce.id);
+        }
+
+        // Remove nodes that were in the original but not in the remaining list
+        int nodes_removed = 0;
+        for (const auto& node_id : original_node_ids) {
+            if (remaining_node_ids.find(node_id) == remaining_node_ids.end()) {
+                graph.remove_node(node_id);
+                nodes_removed++;
+            }
+        }
+        std::cout << "  [DEBUG] Removed " << nodes_removed << " nodes from graph\n";
+
+        // Remove invalid relations and relations referencing removed nodes
+        // cleanable_relations now only contains valid relations
+        std::set<std::string> remaining_relation_ids;
+        for (const auto& cr : cleanable_relations) {
+            remaining_relation_ids.insert(cr.id);
+        }
+
+        // Remove relations that are no longer in the cleaned list OR reference removed nodes
+        auto edges_after_cleaning = graph.get_all_edges();
+        for (const auto& edge : edges_after_cleaning) {
+            bool should_remove = false;
+
+            // Check if this relation was removed by the cleaner
+            if (remaining_relation_ids.find(edge.id) == remaining_relation_ids.end()) {
+                should_remove = true;
+            } else {
+                // Check if any node in this edge was removed
+                auto edge_nodes = edge.get_all_nodes();
+                for (const auto& node_id : edge_nodes) {
+                    if (remaining_node_ids.find(node_id) == remaining_node_ids.end()) {
+                        should_remove = true;
+                        break;
+                    }
+                }
+            }
+
+            if (should_remove) {
+                graph.remove_hyperedge(edge.id);
+            }
+        }
+
+        // Update graph node labels to trimmed/simplified versions and deduplicate
+        // (cleanable_entities now only contains valid entities after cleaning)
+        // Write back simplified labels from cleaner to actual graph nodes
+        for (const auto& ce : cleanable_entities) {
+            HyperNode* node = graph.get_node(ce.id);
+            if (node && node->label != ce.label) {
+                node->label = ce.label;
+            }
+        }
+
+        // Build map: trimmed_label -> list of node_ids with that label
+        std::map<std::string, std::vector<std::string>> label_to_ids;
+        for (const auto& ce : cleanable_entities) {
+            label_to_ids[ce.label].push_back(ce.id);
+        }
+
+        // Merge duplicate nodes (nodes with identical trimmed labels)
+        int duplicates_merged = 0;
+        for (const auto& [label, ids] : label_to_ids) {
+            if (ids.size() > 1) {
+                // Keep first node, merge others into it
+                std::string keep_id = ids[0];
+                for (size_t i = 1; i < ids.size(); i++) {
+                    graph.merge_nodes(keep_id, ids[i]);
+                    duplicates_merged++;
+                }
+            }
+        }
+
+        if (duplicates_merged > 0) {
+            std::cout << "  Merged " << duplicates_merged << " duplicate nodes after trimming\n";
+        }
+
+        // Update graph statistics
+        graph_stats = graph.compute_statistics();
+
+        // Debug: Verify node count before save
+        auto current_nodes = graph.get_all_nodes();
+        std::cout << "  [DEBUG] Graph has " << current_nodes.size() << " nodes before save\n";
+
+        // Save cleaned graph
+        graph.export_to_json(graph_path, true);
+
+        // Save cleaning report (JSON)
+        std::string qc_report_path = step3_dir + "/cleaning_report.json";
+        std::ofstream qc_file(qc_report_path);
+        qc_file << qc_report.to_json().dump(2);
+        qc_file.close();
+
+        // Save cleaning report (HTML)
+        std::string qc_html_path = step3_dir + "/quality_control_report.html";
+        std::ofstream qc_html_file(qc_html_path);
+        qc_html_file << qc_report.generate_html_report();
+        qc_html_file.close();
+
+        auto qc_duration = std::chrono::steady_clock::now() - qc_start;
+        std::cout << "\n  Cleaned: " << qc_report.final_nodes << " entities ("
+                  << (qc_report.initial_nodes - qc_report.final_nodes) << " removed), "
+                  << qc_report.final_edges << " relations ("
+                  << (qc_report.initial_edges - qc_report.final_edges) << " removed)\n";
+        std::cout << "  Level 1 (rules):   removed " << qc_report.level1_removed << " entities\n";
+        if (semantic_dedup && qc_report.semantic_duplicates_merged > 0) {
+            std::cout << "  Level 1.5 (semantic): merged " << qc_report.semantic_duplicates_merged
+                      << " semantic duplicates (" << qc_report.semantic_duplicates_found << " groups)\n";
+        }
+        std::cout << "  Level 2 (stats):   removed " << qc_report.level2_removed << " entities\n";
+        if (llm_validate) {
+            std::cout << "  Level 3 (LLM):     removed " << qc_report.level3_removed << " entities\n";
+        }
+        std::cout << "  Saved: Step_3_QualityControl/cleaning_report.json\n";
+        std::cout << "  Saved: Step_3_QualityControl/quality_control_report.html\n";
+
+        // Save the cleaned graph to disk
+        std::string cleaned_graph_path = step4_dir + "/graph.json";
+        graph.export_to_json(cleaned_graph_path, true);
+        std::cout << "  Saved: Step_4_GraphBuilding/graph.json (cleaned)\n";
+
+        std::cout << "  QC time: " << format_duration(qc_duration) << "\n";
+    } else if (!enable_qc) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.75: Quality Control [DISABLED]\n";
+        std::cout << "----------------------------------------------------------------------\n";
+    }
+
+    // =========================================================================
+    // Stage 1.9: Ontology Classification (Class/Instance Detection)
+    // =========================================================================
+    if (with_ontology && from_stage <= 2) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.9: Ontology Classification\n";
+        std::cout << "----------------------------------------------------------------------\n";
+
+        auto ontology_start = std::chrono::steady_clock::now();
+
+        // Apply heuristic classification to entities without node_level
+        int classified = ExtractionPipeline::apply_heuristic_classification(graph);
+
+        auto ontology_duration = std::chrono::steady_clock::now() - ontology_start;
+
+        std::cout << "  Classified " << classified << " entities using heuristics\n";
+        std::cout << "  Node levels: class (general concept) vs instance (specific example)\n";
+
+        // Augment instance nodes with base class information
+        int augmented = ExtractionPipeline::augment_instance_base_classes(graph);
+        std::cout << "  Augmented " << augmented << " instance nodes with base class info\n";
+
+        // Save the graph with ontology classification and augmentation
+        std::string ontology_graph_path = step4_dir + "/graph.json";
+        graph.export_to_json(ontology_graph_path, true);
+        std::cout << "  Saved: Step_4_GraphBuilding/graph.json (with ontology)\n";
+        std::cout << "  Ontology time: " << format_duration(ontology_duration) << "\n";
+    } else if (!with_ontology) {
+        std::cout << "\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Stage 1.9: Ontology Classification [DISABLED]\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "  Use --with-ontology to enable class/instance detection\n";
+    }
+
+    // =========================================================================
     // Stage 2: Build Index
     // =========================================================================
     auto stage2_start = std::chrono::steady_clock::now();
@@ -1112,6 +1420,19 @@ int cmd_run(const Args& args) {
         insights = engine.run_operators(operators);
         insights.source_graph = graph_path;
 
+        // Deduplicate insights if semantic dedup is enabled
+        if (semantic_dedup) {
+            std::cout << "\n  Deduplicating insights (augmented nodes)...\n";
+            int before_count = static_cast<int>(insights.insights.size());
+            DiscoveryEngine::deduplicate_insights(insights, semantic_threshold);
+            int after_count = static_cast<int>(insights.insights.size());
+            int removed = before_count - after_count;
+            if (removed > 0) {
+                std::cout << "  Removed " << removed << " duplicate insights ("
+                          << (100.0 * removed / before_count) << "%)\n";
+            }
+        }
+
         insights.save_to_json(insights_path);
 
         // Count by type
@@ -1138,6 +1459,19 @@ int cmd_run(const Args& args) {
 
         std::cout << "  Loading: insights.json\n";
         insights = InsightCollection::load_from_json(insights_path);
+
+        // Deduplicate insights if semantic dedup is enabled
+        if (semantic_dedup) {
+            std::cout << "  Deduplicating loaded insights...\n";
+            int before_count = static_cast<int>(insights.insights.size());
+            DiscoveryEngine::deduplicate_insights(insights, semantic_threshold);
+            int after_count = static_cast<int>(insights.insights.size());
+            int removed = before_count - after_count;
+            if (removed > 0) {
+                std::cout << "  Removed " << removed << " duplicate insights ("
+                          << (100.0 * removed / before_count) << "%)\n";
+            }
+        }
 
         // Count by type
         for (const auto& ins : insights.insights) {
@@ -1239,6 +1573,19 @@ int cmd_run(const Args& args) {
         report_config.include_evidence = true;
         report_config.include_statistics = true;
         report_config.llm_examples_per_type = 1;
+
+        // Load QC stats if available
+        std::string qc_stats_path = run_dir + "/Step_3_QualityControl/cleaning_report.json";
+        if (fs::exists(qc_stats_path)) {
+            try {
+                std::ifstream qc_file(qc_stats_path);
+                nlohmann::json qc_json;
+                qc_file >> qc_json;
+                report_config.pipeline_stats["quality_control"] = qc_json;
+            } catch (const std::exception& e) {
+                std::cerr << "Warning: Could not load QC statistics: " << e.what() << "\n";
+            }
+        }
 
         ReportGenerator report_gen(graph);
         auto report_llm = LLMProviderFactory::create_from_config_file();
@@ -1515,7 +1862,16 @@ int main(int argc, char** argv) {
             {"from-stage", "f", "Start from stage (1=extract, 2=index, 3=discover, 4=render, 5=report)", "1", false, false},
             {"run-dir", "d", "Existing run directory to resume (required if from-stage > 1)", "", false, false},
             {"preprocess", "P", "Normalize relations and merge aliases before indexing", "", false, true},
-            {"causal", "C", "Use causal extraction prompts (Phase 2 feature)", "", false, true}
+            {"causal", "C", "Use causal extraction prompts (Phase 2 feature)", "", false, true},
+            {"with-ontology", "O", "Enable class/instance classification for entities", "", false, true},
+            // Quality Control flags
+            {"no-qc", "", "Disable quality control entirely", "", false, true},
+            {"min-node-length", "", "Minimum character length for entity labels", "2", false, false},
+            {"min-degree", "", "Minimum node degree (connectivity)", "1", false, false},
+            {"llm-validate", "", "Enable Level 3 LLM validation for quality control", "", false, true},
+            {"validation-mode", "", "LLM validation mode: all, suspicious, none", "suspicious", false, false},
+            {"semantic-dedup", "", "Enable semantic deduplication (requires LLM)", "", false, true},
+            {"semantic-threshold", "", "Similarity threshold for semantic deduplication", "0.85", false, false}
         },
         cmd_run
     });

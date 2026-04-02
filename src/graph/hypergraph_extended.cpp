@@ -544,63 +544,36 @@ void Hypergraph::export_to_html(const std::string& filename,
         }
     }
 
-    // Build JSON data for D3.js
+    // Build JSON data for ForceGraph3D.
+    // Entity nodes only in nodes_json; hyperedges serialised separately as hyperedges_json,
+    // consistent with the graph.json on-disk format (nodes + hyperedges with sources[]/targets[]).
+    // JS reifyHyperedges() converts them to relation nodes + binary links at load time.
     nlohmann::json nodes_json = nlohmann::json::array();
-    nlohmann::json edges_json = nlohmann::json::array();
-    nlohmann::json links_json = nlohmann::json::array();
+    nlohmann::json hyperedges_json = nlohmann::json::array();
 
-    // Add entity nodes
-    std::map<std::string, int> node_index;
-    int idx = 0;
     for (const auto& [id, node] : nodes_) {
         nlohmann::json n;
         n["id"] = id;
         n["label"] = node.label;
         n["type"] = "entity";
         n["degree"] = node.degree;
+        if (!node.properties.empty()) {
+            n["properties"] = node.properties;
+        }
         nodes_json.push_back(n);
-        node_index[id] = idx++;
     }
 
-    // Add hyperedge nodes (relation nodes) and links
-    int edge_idx = 0;
     for (const auto& [id, edge] : hyperedges_) {
-        std::string edge_node_id = "edge_" + std::to_string(edge_idx);
-
-        // Add edge as a node
-        nlohmann::json en;
-        en["id"] = edge_node_id;
-        en["label"] = edge.relation;
-        en["type"] = "relation";
-        en["confidence"] = edge.confidence;
-        en["sources"] = edge.sources;
-        en["targets"] = edge.targets;
-        nodes_json.push_back(en);
-        int edge_node_idx = idx++;
-
-        // Add links from sources to relation
-        for (const auto& src : edge.sources) {
-            if (node_index.find(src) != node_index.end()) {
-                nlohmann::json link;
-                link["source"] = node_index[src];
-                link["target"] = edge_node_idx;
-                link["type"] = "source";
-                links_json.push_back(link);
-            }
-        }
-
-        // Add links from relation to targets
-        for (const auto& tgt : edge.targets) {
-            if (node_index.find(tgt) != node_index.end()) {
-                nlohmann::json link;
-                link["source"] = edge_node_idx;
-                link["target"] = node_index[tgt];
-                link["type"] = "target";
-                links_json.push_back(link);
-            }
-        }
-
-        edge_idx++;
+        nlohmann::json he;
+        he["id"]         = edge.id;
+        he["relation"]   = edge.relation;
+        he["sources"]    = edge.sources;
+        he["targets"]    = edge.targets;
+        he["confidence"] = edge.confidence;
+        if (!edge.source_document.empty()) he["source_document"] = edge.source_document;
+        if (!edge.source_chunk_id.empty())  he["source_chunk_id"] = edge.source_chunk_id;
+        if (!edge.properties.empty())       he["properties"] = edge.properties;
+        hyperedges_json.push_back(he);
     }
 
     // Write HTML file with optimized Canvas renderer
@@ -852,54 +825,40 @@ void Hypergraph::export_to_html(const std::string& filename,
     <script>
         const data = {
             nodes: )" << nodes_json.dump() << R"(,
-            links: )" << links_json.dump() << R"(
+            hyperedges: )" << hyperedges_json.dump() << R"(
         };
 
-        // --- PATCH START: Hyperedge Flattening Logic ---
-        // The visualization library requires 1-to-1 links (source -> target).
-        // The raw data contains "hyperedges" (sources[...] -> targets[...]).
-        // We must expand these into individual links.
-
-        const processLinks = (rawLinks) => {
-            const expandedLinks = [];
-
-            rawLinks.forEach(link => {
-                // Check if this is a hyperedge with arrays for sources/targets
-                if (Array.isArray(link.sources) && Array.isArray(link.targets)) {
-                    link.sources.forEach(source => {
-                        link.targets.forEach(target => {
-                            expandedLinks.push({
-                                source: source,
-                                target: target,
-                                label: link.label,
-                                type: link.type || 'relation',
-                                confidence: link.confidence,
-                                // Copy any other necessary properties from the original link
-                                id: link.id ? `${link.id}_${source}_${target}` : undefined
-                            });
-                        });
-                    });
-                } else if (link.source && link.target) {
-                    // If it's already a simple link, keep it
-                    expandedLinks.push(link);
+        // Reify hyperedges: each entry in data.hyperedges becomes a relation node in data.nodes
+        // and two binary links in data.links (entity→relation, relation→entity).
+        // Mirrors the graph.json on-disk format (nodes + hyperedges with sources[]/targets[]).
+        function reifyHyperedges(d) {
+            const idToIdx = new Map();
+            d.nodes.forEach((n, i) => idToIdx.set(n.id, i));
+            d.links = [];
+            let idx = d.nodes.length;
+            for (const he of (d.hyperedges || [])) {
+                const relNode = {
+                    id: he.id, label: he.relation, type: 'relation',
+                    confidence: he.confidence,
+                    source_document: he.source_document || '',
+                    source_chunk_id: he.source_chunk_id || '',
+                    sources: he.sources, targets: he.targets
+                };
+                if (he.properties) relNode.properties = he.properties;
+                d.nodes.push(relNode);
+                const relIdx = idx++;
+                idToIdx.set(he.id, relIdx);
+                for (const src of (he.sources || [])) {
+                    const si = idToIdx.get(src);
+                    if (si !== undefined) d.links.push({ source: si, target: relIdx, type: 'source' });
                 }
-            });
-
-            return expandedLinks;
-        };
-
-        // Apply the processing to the data object
-        // Note: Adjust 'data.links' or 'data.edges' depending on the exact property name in the raw JSON.
-        // Based on standard graph JSON structures, it is likely 'data.links' or implied as the second array.
-        if (data.links) {
-            data.links = processLinks(data.links);
-        } else if (data.edges) {
-            // Some formats use 'edges' instead of 'links'
-            data.links = processLinks(data.edges);
+                for (const tgt of (he.targets || [])) {
+                    const ti = idToIdx.get(tgt);
+                    if (ti !== undefined) d.links.push({ source: relIdx, target: ti, type: 'target' });
+                }
+            }
         }
-
-        console.log(`Patch applied: Generated ${data.links.length} simple links from hyperedges.`);
-        // --- PATCH END ---
+        reifyHyperedges(data);
 
         // --- 3D Renderer (WebGL): ForceGraph3D + filtered subgraph + clustering ---
         // Interaction: left-drag rotates (built-in), right-drag pans, wheel zooms.
@@ -1006,8 +965,8 @@ void Hypergraph::export_to_html(const std::string& filename,
                   <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
                 </label>
                 <label id="kgSpatialMinRow" style="display:none;">
-                  Min cluster size: <span id="kgMinClusterVal">12</span>
-                  <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="12">
+                  Min cluster size: <span id="kgMinClusterVal">5</span>
+                  <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="5">
                 </label>
                 <label>
                   Palette:
@@ -1117,7 +1076,7 @@ void Hypergraph::export_to_html(const std::string& filename,
             clusterOn: true,
             clusterMode: 'topology',
             clusterRadius: 40,
-            minClusterSize: 12,
+            minClusterSize: 5,
             topoResolution: 1.0,
             palette: 'classic',
             autoCluster: true,
@@ -1463,6 +1422,19 @@ void Hypergraph::export_to_html(const std::string& filename,
               const w = 1;
               adj[a].set(b, (adj[a].get(b) || 0) + w);
               adj[b].set(a, (adj[b].get(a) || 0) + w);
+            }
+            // Project bipartite entity->relation->entity structure to entity co-occurrence
+            // so Louvain can find meaningful entity clusters (not just star micro-communities)
+            for (let ri = 0; ri < nodes.length; ri++) {
+              if (nodes[ri].type !== 'relation') continue;
+              const en = [...adj[ri].keys()].filter(j => nodes[j].type === 'entity');
+              for (let p = 0; p < en.length; p++) {
+                for (let q = p + 1; q < en.length; q++) {
+                  const a = en[p], b = en[q];
+                  adj[a].set(b, (adj[a].get(b) || 0) + 1);
+                  adj[b].set(a, (adj[b].get(a) || 0) + 1);
+                }
+              }
             }
 
             const resolution = state.topoResolution;
@@ -1988,11 +1960,10 @@ void Hypergraph::export_to_html_rag(  // NOLINT — intentionally large generato
         }
     }
 
-    // ----- Base graph JSON (base nodes + links only — aug merged lazily in JS) -----
+    // ----- Base graph JSON — entity nodes + hyperedges (consistent with graph.json on disk) -----
+    // JS reifyHyperedges() converts hyperedges to relation nodes + binary links at load time.
     nlohmann::json nodes_json = nlohmann::json::array();
-    nlohmann::json links_json = nlohmann::json::array();
-    std::map<std::string, int> node_index;
-    int idx = 0;
+    nlohmann::json hyperedges_json = nlohmann::json::array();
 
     // Build edge provenance index: node_id → {unique source_chunk_ids, unique source_documents}
     struct NodeProv { std::set<std::string> chunks; std::set<std::string> docs; };
@@ -2033,42 +2004,24 @@ void Hypergraph::export_to_html_rag(  // NOLINT — intentionally large generato
             if (!dj.empty()) n["docs"] = dj;
         }
         nodes_json.push_back(n);
-        node_index[node.id] = idx++;
     }
 
-    int edge_idx = 0;
     for (const auto& edge : get_all_edges()) {
-        std::string enid = "edge_" + std::to_string(edge_idx);
-        nlohmann::json en;
-        en["id"]         = enid;
-        en["label"]      = edge.relation;
-        en["type"]       = "relation";
-        en["confidence"] = edge.confidence;
-        en["sources"]    = edge.sources;
-        en["targets"]    = edge.targets;
-        if (!edge.source_document.empty())  en["source_document"]  = edge.source_document;
-        if (!edge.source_chunk_id.empty())  en["source_chunk_id"]  = edge.source_chunk_id;
-        if (edge.source_page >= 0)          en["source_page"]      = edge.source_page;
+        nlohmann::json he;
+        he["id"]         = edge.id;
+        he["relation"]   = edge.relation;
+        he["sources"]    = edge.sources;
+        he["targets"]    = edge.targets;
+        he["confidence"] = edge.confidence;
+        if (!edge.source_document.empty()) he["source_document"] = edge.source_document;
+        if (!edge.source_chunk_id.empty()) he["source_chunk_id"] = edge.source_chunk_id;
+        if (edge.source_page >= 0)         he["source_page"]     = edge.source_page;
         if (!edge.properties.empty()) {
             nlohmann::json eprops = nlohmann::json::object();
             for (const auto& [k, v] : edge.properties) eprops[k] = v;
-            en["properties"] = eprops;
+            he["properties"] = eprops;
         }
-        nodes_json.push_back(en);
-        int eni = idx++;
-        for (const auto& src : edge.sources)
-            if (node_index.count(src)) {
-                nlohmann::json l; l["source"]=node_index[src]; l["target"]=eni;
-                l["type"]="source"; l["relation"]=edge.relation;
-                links_json.push_back(l);
-            }
-        for (const auto& tgt : edge.targets)
-            if (node_index.count(tgt)) {
-                nlohmann::json l; l["source"]=eni; l["target"]=node_index[tgt];
-                l["type"]="target"; l["relation"]=edge.relation;
-                links_json.push_back(l);
-            }
-        ++edge_idx;
+        hyperedges_json.push_back(he);
     }
 
     // ----- Augmentation JSON (passed straight to JS as augData) -----
@@ -2174,6 +2127,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
 /* ── highlight glow overlay on canvas ── */
 #hlBadge{position:fixed;bottom:16px;right:400px;background:rgba(255,215,0,.18);border:1px solid rgba(255,215,0,.45);color:#ffd700;padding:6px 12px;border-radius:8px;font-size:.8em;z-index:155;display:none}
 #hlBadge.show{display:block}
+/* ── suggested query chips ── */
+#suggestedQueries{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+#suggestedQueries .sq-label{width:100%;font-size:.72em;color:rgba(255,255,255,.45);margin-bottom:2px}
+.sq-chip{padding:5px 10px;border-radius:14px;border:1px solid rgba(79,195,247,.3);background:rgba(79,195,247,.07);color:rgba(79,195,247,.9);font-size:.76em;cursor:pointer;line-height:1.3;transition:background .15s,border-color .15s;text-align:left}
+.sq-chip:hover{background:rgba(79,195,247,.18);border-color:rgba(79,195,247,.55)}
 /* scrollbar for controls */
 #controls::-webkit-scrollbar{width:4px}
 #controls::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
@@ -2260,7 +2218,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
   <!-- History -->
   <div id="chatHistory">
     <div class="chat-msg assistant">
-      <div class="bubble">Welcome to <strong>Graph-RAG Chat</strong>.<br>Ask any question about the knowledge graph. I will find relevant entities, extract connecting paths, and highlight them directly on the 3D graph.</div>
+      <div class="bubble">Welcome to <strong>Graph-RAG Chat</strong>.<br>Ask any question about the knowledge graph. I will find relevant entities, extract connecting paths, and highlight them directly on the 3D graph.
+        <div id="suggestedQueries">
+          <span class="sq-label">Suggested queries — click to ask:</span>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Input -->
@@ -2279,7 +2241,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
 <script>
     const data = {
         nodes: )HTML" << nodes_json.dump() << R"HTML(,
-        links: )HTML" << links_json.dump() << R"HTML(
+        hyperedges: )HTML" << hyperedges_json.dump() << R"HTML(
     };
 
     const augData = )HTML" << safe_aug.dump() << R"HTML(;
@@ -2291,22 +2253,37 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
         base_url: ")HTML" << llm_base_url << R"HTML("
     };
 
-    // --- PATCH: Expand any remaining raw hyperedge arrays into simple links ---
-    const processLinks = (rawLinks) => {
-        const out = [];
-        rawLinks.forEach(lk => {
-            if (Array.isArray(lk.sources) && Array.isArray(lk.targets)) {
-                lk.sources.forEach(s => lk.targets.forEach(t => {
-                    out.push({ source: s, target: t, type: lk.type||'relation',
-                                label: lk.label, confidence: lk.confidence });
-                }));
-            } else if (lk.source != null && lk.target != null) {
-                out.push(lk);
+    // Reify hyperedges: each entry in data.hyperedges becomes a relation node in data.nodes
+    // and two binary links in data.links (entity→relation, relation→entity).
+    // Mirrors the graph.json on-disk format (nodes + hyperedges with sources[]/targets[]).
+    function reifyHyperedges(d) {
+        const idToIdx = new Map();
+        d.nodes.forEach((n, i) => idToIdx.set(n.id, i));
+        d.links = [];
+        let idx = d.nodes.length;
+        for (const he of (d.hyperedges || [])) {
+            const relNode = {
+                id: he.id, label: he.relation, type: 'relation',
+                confidence: he.confidence,
+                source_document: he.source_document || '',
+                source_chunk_id: he.source_chunk_id || '',
+                sources: he.sources, targets: he.targets
+            };
+            if (he.properties) relNode.properties = he.properties;
+            d.nodes.push(relNode);
+            const relIdx = idx++;
+            idToIdx.set(he.id, relIdx);
+            for (const src of (he.sources || [])) {
+                const si = idToIdx.get(src);
+                if (si !== undefined) d.links.push({ source: si, target: relIdx, type: 'source' });
             }
-        });
-        return out;
-    };
-    data.links = processLinks(data.links);
+            for (const tgt of (he.targets || [])) {
+                const ti = idToIdx.get(tgt);
+                if (ti !== undefined) d.links.push({ source: relIdx, target: ti, type: 'target' });
+            }
+        }
+    }
+    reifyHyperedges(data);
 
     (() => {
         const graphDiv  = document.getElementById('graph');
@@ -2399,8 +2376,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
                     <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
                 </label>
                 <label id="kgSpatialMinRow" style="display:none;">
-                    Min cluster size: <span id="kgMinClusterVal">12</span>
-                    <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="12">
+                    Min cluster size: <span id="kgMinClusterVal">5</span>
+                    <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="5">
                 </label>
                 <label>
                     Palette:
@@ -2548,7 +2525,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
             graph: null,
             fps: { t0: performance.now(), frames:0, value:0 },
             clusterOn: true, clusterMode: 'topology',
-            clusterRadius: 40, minClusterSize: 12,
+            clusterRadius: 40, minClusterSize: 5,
             topoResolution: 1.0, palette: 'classic',
             autoCluster: true, clusters: [], clusterLabels: [],
             showAug: true, augOpacity: 1.0, augOnlyMode: true,
@@ -2799,6 +2776,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
             const idxByGid=new Map(); for(let i=0;i<nodes.length;i++) idxByGid.set(nodes[i].gid,i);
             const adj=Array.from({length:nodes.length},()=>new Map());
             for(const e of links){const a=idxByGid.get(e.s),b=idxByGid.get(e.t);if(a==null||b==null||a===b)continue;adj[a].set(b,(adj[a].get(b)||0)+1);adj[b].set(a,(adj[b].get(a)||0)+1);}
+            // Project bipartite entity->relation->entity to entity co-occurrence for Louvain
+            for(let ri=0;ri<nodes.length;ri++){if(nodes[ri].type!=='relation')continue;const en=[...adj[ri].keys()].filter(j=>nodes[j].type==='entity');for(let p=0;p<en.length;p++)for(let q=p+1;q<en.length;q++){const a=en[p],b=en[q];adj[a].set(b,(adj[a].get(b)||0)+1);adj[b].set(a,(adj[b].get(a)||0)+1);}}
             const res=state.topoResolution,nn=nodes.length;
             let community=Array.from({length:nn},(_,i)=>i);
             const k=new Array(nn).fill(0);let m2=0;
@@ -3314,6 +3293,45 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',Tahoma,G
         buildSubgraphFromVisible();
         hideOverlay();
         rebuildAndRender('Rendering initial 3D view...');
+
+        // ── Suggested query chips ──
+        (function buildSuggestedQueries(){
+            // Pick top hub entities by degree for dynamic suggestions
+            const entities=data.nodes.filter(n=>n.type==='entity'&&n.degree>0);
+            entities.sort((a,b)=>(b.degree||0)-(a.degree||0));
+            const hubs=entities.slice(0,5).map(n=>n.label||n.id);
+
+            // Query templates mixing hub-based and category-based questions
+            const queries=[];
+
+            // Hub-node questions (dynamic, based on actual graph content)
+            if(hubs[0]) queries.push(`What role does "${hubs[0]}" play in this research landscape?`);
+            if(hubs[1]) queries.push(`How is "${hubs[1]}" connected to other major concepts?`);
+            if(hubs[0]&&hubs[2]) queries.push(`What is the relationship between "${hubs[0]}" and "${hubs[2]}"?`);
+
+            // Category-based questions (generic but meaningful for KG research)
+            queries.push('What are the main methods used for knowledge graph construction?');
+            queries.push('Which concepts bridge symbolic reasoning and neural approaches?');
+            queries.push('What evidence supports using LLMs for knowledge graph tasks?');
+            queries.push('What are the key limitations or open challenges identified in the graph?');
+            queries.push('Which communities of research are most interconnected?');
+
+            const container=document.getElementById('suggestedQueries');
+            if(!container) return;
+            queries.slice(0,7).forEach(q=>{
+                const btn=document.createElement('button');
+                btn.className='sq-chip';
+                btn.textContent=q;
+                btn.addEventListener('click',()=>{
+                    queryInput.value=q;
+                    queryInput.focus();
+                    // open chat panel if closed
+                    const panel=document.getElementById('chatPanel');
+                    if(panel&&!panel.classList.contains('open')) panel.classList.add('open');
+                });
+                container.appendChild(btn);
+            });
+        })();
 
     })();
 </script>
