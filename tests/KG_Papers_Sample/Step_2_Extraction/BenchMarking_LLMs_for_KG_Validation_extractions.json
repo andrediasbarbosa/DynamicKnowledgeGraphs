@@ -1,0 +1,892 @@
+[
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "store",
+        "sources": [
+          "Knowledge Graphs",
+          "KGs"
+        ],
+        "targets": [
+          "factual knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "offer",
+        "sources": [
+          "Large Language Models",
+          "LLMs"
+        ],
+        "targets": [
+          "knowledge access"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "address",
+        "sources": [
+          "fact-checking systems",
+          "automated methods"
+        ],
+        "targets": [
+          "time limitations",
+          "cost limitations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generate",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "hallucinated responses"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "presents",
+        "sources": [
+          "fact validation"
+        ],
+        "targets": [
+          "significant challenge"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is_built_on",
+        "sources": [
+          "FactCheck",
+          "KG datasets"
+        ],
+        "targets": [
+          "FactBench",
+          "YAGO",
+          "DBpedia"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "FactCheck",
+          "LLMs"
+        ],
+        "targets": [
+          "fact validation"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "external evidence",
+          "LLMs"
+        ],
+        "targets": [
+          "KG fact-checking"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "leads_to",
+        "sources": [
+          "multiple LLMs",
+          "KG facts"
+        ],
+        "targets": [
+          "reliable validation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "FactCheck",
+          "validation pipeline"
+        ],
+        "targets": [
+          "structured triples"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "Internal KG-Based Fact Checking",
+          "External Evidence-Based Fact Checking"
+        ],
+        "targets": [
+          "fact-checking mechanisms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "FactCheck",
+          "CRAG"
+        ],
+        "targets": [
+          "fact verification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "KGValidator",
+          "FactBench"
+        ],
+        "targets": [
+          "KG completion models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "FactCheck",
+          "LLMs"
+        ],
+        "targets": [
+          "external evidence"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "PredPath",
+          "FactCheck"
+        ],
+        "targets": [
+          "evaluation goals"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "multi-model consensus",
+          "LLMs"
+        ],
+        "targets": [
+          "verification accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "KG triples",
+          "LLM"
+        ],
+        "targets": [
+          "natural language"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "broadens",
+        "sources": [
+          "question generation",
+          "LLM"
+        ],
+        "targets": [
+          "semantic coverage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "RAG",
+          "LLMs"
+        ],
+        "targets": [
+          "evidence retrieval"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reflects",
+        "sources": [
+          "document retrieval",
+          "cross-encoder model"
+        ],
+        "targets": [
+          "semantic proximity"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "FactCheck",
+          "KG datasets"
+        ],
+        "targets": [
+          "FactBench",
+          "YAGO",
+          "DBpedia"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "evaluates",
+        "sources": [
+          "LLMs",
+          "FactCheck"
+        ],
+        "targets": [
+          "fact validation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "DBpedia",
+          "Freebase"
+        ],
+        "targets": [
+          "correct facts"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "generates",
+        "sources": [
+          "negative sampling",
+          "incorrect facts"
+        ],
+        "targets": [
+          "false facts"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "reduces",
+        "sources": [
+          "model consensus",
+          "LLMs"
+        ],
+        "targets": [
+          "errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "RAG dataset",
+          "questions"
+        ],
+        "targets": [
+          "LLM performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "Google SERP",
+          "search results"
+        ],
+        "targets": [
+          "documents"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "quantifies",
+        "sources": [
+          "similarity score",
+          "questions"
+        ],
+        "targets": [
+          "semantic closeness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "open-source models",
+          "LLM configurations"
+        ],
+        "targets": [
+          "fact validation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "mock API",
+          "standardized endpoints"
+        ],
+        "targets": [
+          "reproducible benchmarking"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Qwen2.5",
+          "Alibaba Cloud"
+        ],
+        "targets": [
+          "instruction-following",
+          "reasoning",
+          "data handling"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "features",
+        "sources": [
+          "LLaMA3.1",
+          "Meta"
+        ],
+        "targets": [
+          "multilingual support",
+          "long-context tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "offers",
+        "sources": [
+          "GPT-4o mini",
+          "OpenAI"
+        ],
+        "targets": [
+          "reasoning capabilities",
+          "fact verification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "FactCheck"
+        ],
+        "targets": [
+          "LLM performance",
+          "KG validation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "executed",
+        "sources": [
+          "Open-source LLMs"
+        ],
+        "targets": [
+          "Ollama"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "RAG",
+          "GIV-F"
+        ],
+        "targets": [
+          "fact validation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "challenges",
+        "sources": [
+          "FactBench",
+          "YAGO"
+        ],
+        "targets": [
+          "model performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "few-shot prompting"
+        ],
+        "targets": [
+          "model performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "hinders",
+        "sources": [
+          "DBpedia"
+        ],
+        "targets": [
+          "fact detection"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "outperform",
+        "sources": [
+          "commercial models",
+          "open-source models"
+        ],
+        "targets": [
+          "smaller models"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.85,
+        "relation": "affects",
+        "sources": [
+          "multi-model consensus",
+          "arbitrator choice"
+        ],
+        "targets": [
+          "fact validation performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "external evidence",
+          "model agreement"
+        ],
+        "targets": [
+          "model alignment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "methodological complexity",
+          "verification strategy"
+        ],
+        "targets": [
+          "computational cost"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "RAG",
+          "DKA"
+        ],
+        "targets": [
+          "execution time"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "adds",
+        "sources": [
+          "tie-breaking",
+          "inference overhead"
+        ],
+        "targets": [
+          "latency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "clusters",
+        "sources": [
+          "RAG",
+          "GIV-F"
+        ],
+        "targets": [
+          "upper-right quadrant"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "pairs_with",
+        "sources": [
+          "GIV-F",
+          "Gemma2"
+        ],
+        "targets": [
+          "Mistral"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "dominates",
+        "sources": [
+          "DKA setups"
+        ],
+        "targets": [
+          "retrieval-based systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "indicates",
+        "sources": [
+          "Pareto frontier"
+        ],
+        "targets": [
+          "optimal efficiency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "exchanged_for",
+        "sources": [
+          "increased latency"
+        ],
+        "targets": [
+          "enhanced detection"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforming",
+        "sources": [
+          "RAG",
+          "internal knowledge methods"
+        ],
+        "targets": [
+          "false claims"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "reducing",
+        "sources": [
+          "GIV-F",
+          "RAG"
+        ],
+        "targets": [
+          "variance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "reducing",
+        "sources": [
+          "consensus-based aggregation",
+          "model-specific bias"
+        ],
+        "targets": [
+          "stability"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "leading to",
+        "sources": [
+          "GIV-F",
+          "zero-shot prompting"
+        ],
+        "targets": [
+          "heterogeneous reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "insufficient for",
+        "sources": [
+          "DBpedia dataset",
+          "internal parametric knowledge"
+        ],
+        "targets": [
+          "distinguishing false claims"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "open-source LLMs",
+          "Gemma2"
+        ],
+        "targets": [
+          "verification performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "RAG"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mitigates",
+        "sources": [
+          "multi-model consensus"
+        ],
+        "targets": [
+          "errors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "advances",
+        "sources": [
+          "FactCheck"
+        ],
+        "targets": [
+          "factual reasoning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "hybrid retrieval strategies"
+        ],
+        "targets": [
+          "retrieval quality"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graphs",
+          "enterprise AI"
+        ],
+        "targets": [
+          "technology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "acts_as",
+        "sources": [
+          "large language models",
+          "knowledge bases"
+        ],
+        "targets": [
+          "knowledge bases"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "fact-checking",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "validation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "SPARQL",
+          "semantic search"
+        ],
+        "targets": [
+          "querying"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graph",
+          "data engineering"
+        ],
+        "targets": [
+          "data management"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "fact checking"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contribute",
+        "sources": [
+          "fact checking",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "support",
+        "sources": [
+          "language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "fact validation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "knowledge graph accuracy",
+          "reinforcement learning"
+        ],
+        "targets": [
+          "self-correction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "open knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "influence",
+        "sources": [
+          "large language models",
+          "scientific knowledge"
+        ],
+        "targets": [
+          "factuality"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "synthesize",
+        "sources": [
+          "retrieval augmented fact verification",
+          "contrastive arguments"
+        ],
+        "targets": [
+          "fact verification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "low carbon power systems"
+        ],
+        "targets": [
+          "energy systems"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

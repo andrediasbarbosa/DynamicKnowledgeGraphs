@@ -1,0 +1,2891 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1724",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Research_from_KGs_chunk_7",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "a",
+        "b"
+      ],
+      "targets": [
+        "k"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1725",
+      "properties": {},
+      "relation": "applied_to",
+      "source_chunk_id": "Research_from_KGs_chunk_15",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ais-kg theory",
+        "knowledge graph"
+      ],
+      "targets": [
+        "completion"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1726",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Research_from_KGs_chunk_16",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ais-kg theory",
+        "knowledge graph"
+      ],
+      "targets": [
+        "knowledge engineering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1727",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Research_from_KGs_chunk_16",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ais-kg theory"
+      ],
+      "targets": [
+        "industrial field"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1728",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "Research_from_KGs_chunk_1",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute implication",
+        "ais-kg"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1729",
+      "properties": {},
+      "relation": "implements",
+      "source_chunk_id": "Research_from_KGs_chunk_9",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "algorithm",
+        "augment algorithm"
+      ],
+      "targets": [
+        "formal context"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1730",
+      "properties": {},
+      "relation": "implements",
+      "source_chunk_id": "Research_from_KGs_chunk_18",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "expert system",
+        "animal recognition"
+      ],
+      "targets": [
+        "prolog"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1731",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Research_from_KGs_chunk_13",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "can fly",
+        "lays egg"
+      ],
+      "targets": [
+        "bird"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1732",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Research_from_KGs_chunk_13",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "eats meat"
+      ],
+      "targets": [
+        "carnivore"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1733",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Research_from_KGs_chunk_12",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "feather"
+      ],
+      "targets": [
+        "bird"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1734",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Research_from_KGs_chunk_12",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "fly"
+      ],
+      "targets": [
+        "bird"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1735",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Research_from_KGs_chunk_13",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "gives milk"
+      ],
+      "targets": [
+        "mammal"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1736",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Research_from_KGs_chunk_13",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "hairy"
+      ],
+      "targets": [
+        "mammal"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1737",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Research_from_KGs_chunk_12",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "hair"
+      ],
+      "targets": [
+        "mammal"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1738",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Research_from_KGs_chunk_13",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "has feather"
+      ],
+      "targets": [
+        "bird"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1739",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Research_from_KGs_chunk_12",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "meat"
+      ],
+      "targets": [
+        "carnivore"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1740",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Research_from_KGs_chunk_12",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "animal",
+        "milk"
+      ],
+      "targets": [
+        "mammal"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1741",
+      "properties": {},
+      "relation": "satisfies",
+      "source_chunk_id": "Research_from_KGs_chunk_5",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "reflexivity",
+        "anti-symmetry",
+        "transitivity"
+      ],
+      "targets": [
+        "partial order relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1742",
+      "properties": {},
+      "relation": "completes",
+      "source_chunk_id": "Research_from_KGs_chunk_16",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "completion algorithm",
+        "attribute alignment",
+        "entity alignment"
+      ],
+      "targets": [
+        "dataset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1743",
+      "properties": {},
+      "relation": "studies",
+      "source_chunk_id": "Research_from_KGs_chunk_6",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute combination"
+      ],
+      "targets": [
+        "attribute logic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1744",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "Research_from_KGs_chunk_0",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute implication",
+        "formal context",
+        "concept lattice"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1745",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Research_from_KGs_chunk_8",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute implication",
+        "formal context"
+      ],
+      "targets": [
+        "concept lattice"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1746",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Research_from_KGs_chunk_14",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "attribute implication"
+      ],
+      "targets": [
+        "class"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1747",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Research_from_KGs_chunk_10",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute implication",
+        "concept lattice"
+      ],
+      "targets": [
+        "core class"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1748",
+      "properties": {},
+      "relation": "analyzes",
+      "source_chunk_id": "Research_from_KGs_chunk_10",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "node attribute",
+        "attribute implication"
+      ],
+      "targets": [
+        "relationship"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1749",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Research_from_KGs_chunk_6",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute",
+        "implication"
+      ],
+      "targets": [
+        "formal context"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1750",
+      "properties": {},
+      "relation": "describes",
+      "source_chunk_id": "Research_from_KGs_chunk_6",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "attribute",
+        "relation"
+      ],
+      "targets": [
+        "implication"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1751",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Research_from_KGs_chunk_15",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "class",
+        "attribute"
+      ],
+      "targets": [
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1752",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Research_from_KGs_chunk_7",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "augment algorithm",
+        "initial formal context"
+      ],
+      "targets": [
+        "implication formal context"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1753",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Research_from_KGs_chunk_18",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "automatic ontology construction",
+        "lexical database"
+      ],
+      "targets": [
+        "energy sector"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1754",
+      "properties": {},
+      "relation": "establishes",
+      "source_chunk_id": "Research_from_KGs_chunk_2",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "batch processing algorithm",
+        "concept lattice"
+      ],
+      "targets": [
+        "predecessor-successor relationship"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1755",
+      "properties": {},
+      "relation": "solves",
+      "source_chunk_id": "Research_from_KGs_chunk_1",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "bayesian method",
+        "knowledge verification method"
+      ],
+      "targets": [
+        "correct knowledge selection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1756",
+      "properties": {},
+      "relation": "proposes",
+      "source_chunk_id": "Research_from_KGs_chunk_3",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "cimiano method"
+      ],
+      "targets": [
+        "domain ontology construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1757",
+      "properties": {},
+      "relation": "used_in",
+      "source_chunk_id": "Research_from_KGs_chunk_15",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "dataset",
+        "cn-dbpedia"
+      ],
+      "targets": [
+        "evaluation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1758",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Research_from_KGs_chunk_18",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "cn-dbpedia",
+        "knowledge extraction"
+      ],
+      "targets": [
+        "chinese language"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1759",
+      "properties": {},
+      "relation": "focuses on",
+      "source_chunk_id": "Research_from_KGs_chunk_1",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge graph",
+        "commonsense knowledge graph"
+      ],
+      "targets": [
+        "reliability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1760",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "Research_from_KGs_chunk_6",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "construction algorithm"
+      ],
+      "targets": [
+        "formal context"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1761",
+      "properties": {},
+      "relation": "is constructed from",
+      "source_chunk_id": "Research_from_KGs_chunk_2",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "fca"
+      ],
+      "targets": [
+        "extent and intent"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1762",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "Research_from_KGs_chunk_14",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "formal context"
+      ],
+      "targets": [
+        "concept"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1763",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Research_from_KGs_chunk_10",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "implication set"
+      ],
+      "targets": [
+        "ontology"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1764",
+      "properties": {},
+      "relation": "updates",
+      "source_chunk_id": "Research_from_KGs_chunk_2",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "incremental algorithm",
+        "concept lattice"
+      ],
+      "targets": [
+        "existing concept"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1765",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "Research_from_KGs_chunk_8",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "node",
+        "concept lattice"
+      ],
+      "targets": [
+        "concept"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1766",
+      "properties": {},
+      "relation": "maps to",
+      "source_chunk_id": "Research_from_KGs_chunk_2",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "concept lattice"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1767",
+      "properties": {},
+      "relation": "realizes",
+      "source_chunk_id": "Research_from_KGs_chunk_0",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "concept lattice"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1768",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "Research_from_KGs_chunk_11",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "ontology"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1769",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Research_from_KGs_chunk_5",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice",
+        "partial order relation"
+      ],
+      "targets": [
+        "set"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1770",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Research_from_KGs_chunk_9",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "table-filling method",
+        "concept lattice"
+      ],
+      "targets": [
+        "formal context"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1771",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "Research_from_KGs_chunk_17",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "incremental algorithm",
+        "concept lattice"
+      ],
+      "targets": [
+        "addintent"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1772",
+      "properties": {},
+      "relation": "mines",
+      "source_chunk_id": "Research_from_KGs_chunk_8",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "concept lattice"
+      ],
+      "targets": [
+        "formal context"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1773",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Research_from_KGs_chunk_5",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "formal context",
+        "concept"
+      ],
+      "targets": [
+        "intent",
+        "extent"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1774",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Research_from_KGs_chunk_0",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge verification",
+        "credibility calculation"
+      ],
+      "targets": [
+        "commonsense knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1775",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "Research_from_KGs_chunk_4",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "data introduction phas"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1776",
+      "properties": {},
+      "relation": "solves",
+      "source_chunk_id": "Research_from_KGs_chunk_4",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "formal concept analysi",
+        "domain ontology construction"
+      ],
+      "targets": [
+        "key problem"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1777",
+      "properties": {},
+      "relation": "based_on",
+      "source_chunk_id": "Research_from_KGs_chunk_18",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge graph",
+        "domain ontology"
+      ],
+      "targets": [
+        "natural language processing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1778",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Research_from_KGs_chunk_16",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "fault information",
+        "equipment-fault"
+      ],
+      "targets": [
+        "fault information graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1779",
+      "properties": {},
+      "relation": "follows",
+      "source_chunk_id": "Research_from_KGs_chunk_11",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology construction",
+        "evaluation criteria"
+      ],
+      "targets": [
+        "ontology update"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1780",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Research_from_KGs_chunk_11",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "evaluation criteria"
+      ],
+      "targets": [
+        "ontology evaluation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1781",
+      "properties": {},
+      "relation": "contains",
+      "source_chunk_id": "Research_from_KGs_chunk_9",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "node",
+        "extent",
+        "intent"
+      ],
+      "targets": [
+        "children"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1782",
+      "properties": {},
+      "relation": "composes",
+      "source_chunk_id": "Research_from_KGs_chunk_8",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "extent",
+        "intent"
+      ],
+      "targets": [
+        "concept"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1783",
+      "properties": {},
+      "relation": "is proposed by",
+      "source_chunk_id": "Research_from_KGs_chunk_2",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "formal concept analysi",
+        "fca"
+      ],
+      "targets": [
+        "wille"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1784",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Research_from_KGs_chunk_1",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "formal concept analysi",
+        "fca"
+      ],
+      "targets": [
+        "knowledge source"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1785",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "Research_from_KGs_chunk_14",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "fca"
+      ],
+      "targets": [
+        "ontology"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1786",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "Research_from_KGs_chunk_17",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "formal concept analysi",
+        "ontology design"
+      ],
+      "targets": [
+        "knowledge structuring"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_1787",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Research_from_KGs_chunk_17",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "social media analytic",
+        "formal concept analysi"
+      ],
+      "targets": [
+        "domain ontology"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1788",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Research_from_KGs_chunk_7",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "implication set",
+        "formal context"
+      ],
+      "targets": [
+        "object base"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1789",
+      "properties": {},
+      "relation": "proposes",
+      "source_chunk_id": "Research_from_KGs_chunk_9",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "nextclosure",
+        "ganter"
+      ],
+      "targets": [
+        "implication"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1790",
+      "properties": {},
+      "relation": "develops",
+      "source_chunk_id": "Research_from_KGs_chunk_3",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "gutao method"
+      ],
+      "targets": [
+        "fcatab plug-in"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1791",
+      "properties": {},
+      "relation": "puts forward",
+      "source_chunk_id": "Research_from_KGs_chunk_3",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "haav method"
+      ],
+      "targets": [
+        "semi-automatic ontology construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1792",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Research_from_KGs_chunk_18",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology construction",
+        "inductive concept analysi"
+      ],
+      "targets": [
+        "domain-specific ontology"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1793",
+      "properties": {},
+      "relation": "solves",
+      "source_chunk_id": "Research_from_KGs_chunk_1",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge engineering",
+        "traditional knowledge engineering"
+      ],
+      "targets": [
+        "problem"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1794",
+      "properties": {},
+      "relation": "combines",
+      "source_chunk_id": "Research_from_KGs_chunk_16",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge graph",
+        "knowledge fusion algorithm"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1795",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Research_from_KGs_chunk_17",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge graph",
+        "knowledge reasoning"
+      ],
+      "targets": [
+        "knowledge sharing"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1796",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Research_from_KGs_chunk_4",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "knowledge graph"
+      ],
+      "targets": [
+        "formal concept analysi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1797",
+      "properties": {},
+      "relation": "describes",
+      "source_chunk_id": "Research_from_KGs_chunk_4",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "knowledge graph"
+      ],
+      "targets": [
+        "cognition framework"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1798",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Research_from_KGs_chunk_0",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "knowledge graph",
+        "traditional knowledge engineering"
+      ],
+      "targets": [
+        "ais-kg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1799",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "Research_from_KGs_chunk_11",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "mapping rule"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1800",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Research_from_KGs_chunk_3",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "marek obitko method"
+      ],
+      "targets": [
+        "formal concept analysi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1801",
+      "properties": {},
+      "relation": "verifies",
+      "source_chunk_id": "Research_from_KGs_chunk_0",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "mlns model"
+      ],
+      "targets": [
+        "new knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1802",
+      "properties": {},
+      "relation": "stores",
+      "source_chunk_id": "Research_from_KGs_chunk_11",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "neo4j",
+        "ontology model"
+      ],
+      "targets": [
+        "concept"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1803",
+      "properties": {},
+      "relation": "mapped_to",
+      "source_chunk_id": "Research_from_KGs_chunk_15",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "neo4j"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1804",
+      "properties": {},
+      "relation": "maps",
+      "source_chunk_id": "Research_from_KGs_chunk_14",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "neo4j"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1805",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Research_from_KGs_chunk_10",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology construction model",
+        "skeleton method"
+      ],
+      "targets": [
+        "traditional method"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1806",
+      "properties": {},
+      "relation": "constructed_by",
+      "source_chunk_id": "Research_from_KGs_chunk_15",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology",
+        "protégé"
+      ],
+      "targets": [
+        "owl"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1807",
+      "properties": {},
+      "relation": "bridges",
+      "source_chunk_id": "Research_from_KGs_chunk_6",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1808",
+      "properties": {},
+      "relation": "satisfies",
+      "source_chunk_id": "Research_from_KGs_chunk_14",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "ontology"
+      ],
+      "targets": [
+        "evaluation standard"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1809",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Research_from_KGs_chunk_5",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "subconcept",
+        "parent concept"
+      ],
+      "targets": [
+        "concept"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1810",
+      "properties": {},
+      "relation": "derived_from",
+      "source_chunk_id": "Research_from_KGs_chunk_17",
+      "source_document": "Research_from_KGs",
+      "sources": [
+        "taxonomy",
+        "text"
+      ],
+      "targets": [
+        "automatic acquisition"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 87,
+    "num_nodes": 133
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "a",
+      "incident_edges": [
+        "edge_1724"
+      ],
+      "label": "A",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "addintent",
+      "incident_edges": [
+        "edge_1771"
+      ],
+      "label": "AddIntent",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "ais-kg",
+      "incident_edges": [
+        "edge_1728",
+        "edge_1798"
+      ],
+      "label": "AIs-KG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "ais-kg theory",
+      "incident_edges": [
+        "edge_1725",
+        "edge_1726",
+        "edge_1727"
+      ],
+      "label": "AIs-KG theory",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "algorithm",
+      "incident_edges": [
+        "edge_1729"
+      ],
+      "label": "algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 10,
+      "id": "animal",
+      "incident_edges": [
+        "edge_1731",
+        "edge_1732",
+        "edge_1733",
+        "edge_1734",
+        "edge_1735",
+        "edge_1736",
+        "edge_1737",
+        "edge_1738",
+        "edge_1739",
+        "edge_1740"
+      ],
+      "label": "animal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "animal recognition",
+      "incident_edges": [
+        "edge_1730"
+      ],
+      "label": "animal recognition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "anti-symmetry",
+      "incident_edges": [
+        "edge_1741"
+      ],
+      "label": "anti-symmetry",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "attribute",
+      "incident_edges": [
+        "edge_1749",
+        "edge_1750",
+        "edge_1751"
+      ],
+      "label": "attribute",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "attribute alignment",
+      "incident_edges": [
+        "edge_1742"
+      ],
+      "label": "attribute alignment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "attribute combination",
+      "incident_edges": [
+        "edge_1743"
+      ],
+      "label": "attribute combinations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "attribute implication",
+      "incident_edges": [
+        "edge_1728",
+        "edge_1744",
+        "edge_1745",
+        "edge_1746",
+        "edge_1747",
+        "edge_1748"
+      ],
+      "label": "attribute implications",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "attribute logic",
+      "incident_edges": [
+        "edge_1743"
+      ],
+      "label": "attribute logic",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "augment algorithm",
+      "incident_edges": [
+        "edge_1729",
+        "edge_1752"
+      ],
+      "label": "augment algorithm",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic acquisition",
+      "incident_edges": [
+        "edge_1810"
+      ],
+      "label": "automatic acquisition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic ontology construction",
+      "incident_edges": [
+        "edge_1753"
+      ],
+      "label": "automatic ontology construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "b",
+      "incident_edges": [
+        "edge_1724"
+      ],
+      "label": "B",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "batch processing algorithm",
+      "incident_edges": [
+        "edge_1754"
+      ],
+      "label": "batch processing algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bayesian method",
+      "incident_edges": [
+        "edge_1755"
+      ],
+      "label": "Bayesian method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "bird",
+      "incident_edges": [
+        "edge_1731",
+        "edge_1733",
+        "edge_1734",
+        "edge_1738"
+      ],
+      "label": "bird",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "can fly",
+      "incident_edges": [
+        "edge_1731"
+      ],
+      "label": "can fly",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "carnivore",
+      "incident_edges": [
+        "edge_1732",
+        "edge_1739"
+      ],
+      "label": "carnivore",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "children",
+      "incident_edges": [
+        "edge_1781"
+      ],
+      "label": "children",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "chinese language",
+      "incident_edges": [
+        "edge_1758"
+      ],
+      "label": "Chinese language",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cimiano method",
+      "incident_edges": [
+        "edge_1756"
+      ],
+      "label": "Cimiano methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "class",
+      "incident_edges": [
+        "edge_1746",
+        "edge_1751"
+      ],
+      "label": "class",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "cn-dbpedia",
+      "incident_edges": [
+        "edge_1757",
+        "edge_1758"
+      ],
+      "label": "CN-DBpedia",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cognition framework",
+      "incident_edges": [
+        "edge_1797"
+      ],
+      "label": "cognition framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "commonsense knowledge graph",
+      "incident_edges": [
+        "edge_1759",
+        "edge_1774"
+      ],
+      "label": "commonsense knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "completion",
+      "incident_edges": [
+        "edge_1725"
+      ],
+      "label": "completion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "completion algorithm",
+      "incident_edges": [
+        "edge_1742"
+      ],
+      "label": "completion algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "concept",
+      "incident_edges": [
+        "edge_1762",
+        "edge_1765",
+        "edge_1773",
+        "edge_1782",
+        "edge_1802",
+        "edge_1809"
+      ],
+      "label": "concept",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 18,
+      "id": "concept lattice",
+      "incident_edges": [
+        "edge_1744",
+        "edge_1745",
+        "edge_1746",
+        "edge_1747",
+        "edge_1754",
+        "edge_1760",
+        "edge_1761",
+        "edge_1762",
+        "edge_1763",
+        "edge_1764",
+        "edge_1765",
+        "edge_1766",
+        "edge_1767",
+        "edge_1768",
+        "edge_1769",
+        "edge_1770",
+        "edge_1771",
+        "edge_1772"
+      ],
+      "label": "concept lattice",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "construction algorithm",
+      "incident_edges": [
+        "edge_1760"
+      ],
+      "label": "construction algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "core class",
+      "incident_edges": [
+        "edge_1747"
+      ],
+      "label": "core classes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct knowledge selection",
+      "incident_edges": [
+        "edge_1755"
+      ],
+      "label": "correct knowledge selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "credibility calculation",
+      "incident_edges": [
+        "edge_1774"
+      ],
+      "label": "credibility calculation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "data introduction pha",
+      "incident_edges": [],
+      "label": "data introduction phases",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "dataset",
+      "incident_edges": [
+        "edge_1742",
+        "edge_1757"
+      ],
+      "label": "dataset",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "domain ontology",
+      "incident_edges": [
+        "edge_1777",
+        "edge_1787"
+      ],
+      "label": "domain ontology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "domain ontology construction",
+      "incident_edges": [
+        "edge_1756",
+        "edge_1776"
+      ],
+      "label": "domain ontology construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "domain-specific ontology",
+      "incident_edges": [
+        "edge_1792"
+      ],
+      "label": "domain-specific ontologies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "eats meat",
+      "incident_edges": [
+        "edge_1732"
+      ],
+      "label": "eats meat",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "energy sector",
+      "incident_edges": [
+        "edge_1753"
+      ],
+      "label": "energy sector",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity alignment",
+      "incident_edges": [
+        "edge_1742"
+      ],
+      "label": "entity alignment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "equipment-fault",
+      "incident_edges": [
+        "edge_1778"
+      ],
+      "label": "equipment-fault",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evaluation",
+      "incident_edges": [
+        "edge_1757"
+      ],
+      "label": "evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "evaluation criteria",
+      "incident_edges": [
+        "edge_1779",
+        "edge_1780"
+      ],
+      "label": "evaluation criteria",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evaluation standard",
+      "incident_edges": [
+        "edge_1808"
+      ],
+      "label": "evaluation standards",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "existing concept",
+      "incident_edges": [
+        "edge_1764"
+      ],
+      "label": "existing concepts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "expert system",
+      "incident_edges": [
+        "edge_1730"
+      ],
+      "label": "expert system",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "extent",
+      "incident_edges": [
+        "edge_1773",
+        "edge_1781",
+        "edge_1782"
+      ],
+      "label": "extent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "extent and intent",
+      "incident_edges": [
+        "edge_1761"
+      ],
+      "label": "extent and intent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault information",
+      "incident_edges": [
+        "edge_1778"
+      ],
+      "label": "fault information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault information graph",
+      "incident_edges": [
+        "edge_1778"
+      ],
+      "label": "fault information graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "fca",
+      "incident_edges": [
+        "edge_1761",
+        "edge_1783",
+        "edge_1784",
+        "edge_1785"
+      ],
+      "label": "FCA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fcatab plug-in",
+      "incident_edges": [
+        "edge_1790"
+      ],
+      "label": "Fcatab plug-in",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "feather",
+      "incident_edges": [
+        "edge_1733"
+      ],
+      "label": "feather",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fly",
+      "incident_edges": [
+        "edge_1734"
+      ],
+      "label": "fly",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "formal concept analysi",
+      "incident_edges": [
+        "edge_1776",
+        "edge_1783",
+        "edge_1784",
+        "edge_1786",
+        "edge_1787",
+        "edge_1796",
+        "edge_1800"
+      ],
+      "label": "formal concept analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 10,
+      "id": "formal context",
+      "incident_edges": [
+        "edge_1729",
+        "edge_1744",
+        "edge_1745",
+        "edge_1749",
+        "edge_1760",
+        "edge_1762",
+        "edge_1770",
+        "edge_1772",
+        "edge_1773",
+        "edge_1788"
+      ],
+      "label": "formal context",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ganter",
+      "incident_edges": [
+        "edge_1789"
+      ],
+      "label": "Ganter",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gives milk",
+      "incident_edges": [
+        "edge_1735"
+      ],
+      "label": "gives milk",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gutao method",
+      "incident_edges": [
+        "edge_1790"
+      ],
+      "label": "GuTao methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "haav method",
+      "incident_edges": [
+        "edge_1791"
+      ],
+      "label": "Haav methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hair",
+      "incident_edges": [
+        "edge_1737"
+      ],
+      "label": "hair",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hairy",
+      "incident_edges": [
+        "edge_1736"
+      ],
+      "label": "hairy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "has feather",
+      "incident_edges": [
+        "edge_1738"
+      ],
+      "label": "has feathers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "implication",
+      "incident_edges": [
+        "edge_1749",
+        "edge_1750",
+        "edge_1789"
+      ],
+      "label": "implication",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "implication formal context",
+      "incident_edges": [
+        "edge_1752"
+      ],
+      "label": "implication formal context",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "implication set",
+      "incident_edges": [
+        "edge_1763",
+        "edge_1788"
+      ],
+      "label": "implication set",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "incremental algorithm",
+      "incident_edges": [
+        "edge_1764",
+        "edge_1771"
+      ],
+      "label": "incremental algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inductive concept analysi",
+      "incident_edges": [
+        "edge_1792"
+      ],
+      "label": "inductive concept analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "industrial field",
+      "incident_edges": [
+        "edge_1727"
+      ],
+      "label": "industrial field",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initial formal context",
+      "incident_edges": [
+        "edge_1752"
+      ],
+      "label": "initial formal context",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "intent",
+      "incident_edges": [
+        "edge_1773",
+        "edge_1781",
+        "edge_1782"
+      ],
+      "label": "intent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "k",
+      "incident_edges": [
+        "edge_1724"
+      ],
+      "label": "K",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "key problem",
+      "incident_edges": [
+        "edge_1776"
+      ],
+      "label": "key problems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "knowledge engineering",
+      "incident_edges": [
+        "edge_1726",
+        "edge_1793"
+      ],
+      "label": "knowledge engineering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge extraction",
+      "incident_edges": [
+        "edge_1758"
+      ],
+      "label": "knowledge extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge fusion algorithm",
+      "incident_edges": [
+        "edge_1794"
+      ],
+      "label": "knowledge fusion algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 19,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1725",
+        "edge_1726",
+        "edge_1728",
+        "edge_1744",
+        "edge_1759",
+        "edge_1766",
+        "edge_1767",
+        "edge_1768",
+        "edge_1775",
+        "edge_1777",
+        "edge_1794",
+        "edge_1795",
+        "edge_1796",
+        "edge_1797",
+        "edge_1798",
+        "edge_1799",
+        "edge_1803",
+        "edge_1804",
+        "edge_1807"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge reasoning",
+      "incident_edges": [
+        "edge_1795"
+      ],
+      "label": "knowledge reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge sharing",
+      "incident_edges": [
+        "edge_1795"
+      ],
+      "label": "knowledge sharing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge source",
+      "incident_edges": [
+        "edge_1784"
+      ],
+      "label": "knowledge source",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge structuring",
+      "incident_edges": [
+        "edge_1786"
+      ],
+      "label": "knowledge structuring",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge verification",
+      "incident_edges": [
+        "edge_1774"
+      ],
+      "label": "knowledge verification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge verification method",
+      "incident_edges": [
+        "edge_1755"
+      ],
+      "label": "knowledge verification method",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lays egg",
+      "incident_edges": [
+        "edge_1731"
+      ],
+      "label": "lays eggs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lexical database",
+      "incident_edges": [
+        "edge_1753"
+      ],
+      "label": "lexical database",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "mammal",
+      "incident_edges": [
+        "edge_1735",
+        "edge_1736",
+        "edge_1737",
+        "edge_1740"
+      ],
+      "label": "mammal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mapping rule",
+      "incident_edges": [
+        "edge_1799"
+      ],
+      "label": "mapping rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "marek obitko method",
+      "incident_edges": [
+        "edge_1800"
+      ],
+      "label": "Marek Obitko methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "meat",
+      "incident_edges": [
+        "edge_1739"
+      ],
+      "label": "meat",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "milk",
+      "incident_edges": [
+        "edge_1740"
+      ],
+      "label": "milk",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mlns model",
+      "incident_edges": [
+        "edge_1801"
+      ],
+      "label": "MLNS model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language processing",
+      "incident_edges": [
+        "edge_1777"
+      ],
+      "label": "natural language processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "neo4j",
+      "incident_edges": [
+        "edge_1802",
+        "edge_1803",
+        "edge_1804"
+      ],
+      "label": "Neo4j",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new knowledge",
+      "incident_edges": [
+        "edge_1801"
+      ],
+      "label": "new knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "nextclosure",
+      "incident_edges": [
+        "edge_1789"
+      ],
+      "label": "NextClosure",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "node",
+      "incident_edges": [
+        "edge_1765",
+        "edge_1781"
+      ],
+      "label": "node",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "node attribute",
+      "incident_edges": [
+        "edge_1748"
+      ],
+      "label": "node attributes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "object base",
+      "incident_edges": [
+        "edge_1788"
+      ],
+      "label": "object base",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 15,
+      "id": "ontology",
+      "incident_edges": [
+        "edge_1763",
+        "edge_1766",
+        "edge_1767",
+        "edge_1768",
+        "edge_1775",
+        "edge_1780",
+        "edge_1785",
+        "edge_1796",
+        "edge_1797",
+        "edge_1799",
+        "edge_1803",
+        "edge_1804",
+        "edge_1806",
+        "edge_1807",
+        "edge_1808"
+      ],
+      "label": "ontology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "ontology construction",
+      "incident_edges": [
+        "edge_1779",
+        "edge_1792"
+      ],
+      "label": "ontology construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology construction model",
+      "incident_edges": [
+        "edge_1805"
+      ],
+      "label": "ontology construction model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology design",
+      "incident_edges": [
+        "edge_1786"
+      ],
+      "label": "ontology design",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology evaluation",
+      "incident_edges": [
+        "edge_1780"
+      ],
+      "label": "ontology evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology model",
+      "incident_edges": [
+        "edge_1802"
+      ],
+      "label": "ontology model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology update",
+      "incident_edges": [
+        "edge_1779"
+      ],
+      "label": "ontology update",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "owl",
+      "incident_edges": [
+        "edge_1806"
+      ],
+      "label": "OWL",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "parent concept",
+      "incident_edges": [
+        "edge_1809"
+      ],
+      "label": "parent concept",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "partial order relation",
+      "incident_edges": [
+        "edge_1741",
+        "edge_1769"
+      ],
+      "label": "partial order relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predecessor-successor relationship",
+      "incident_edges": [
+        "edge_1754"
+      ],
+      "label": "predecessor-successor relationship",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "problem",
+      "incident_edges": [
+        "edge_1793"
+      ],
+      "label": "problem",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "prolog",
+      "incident_edges": [
+        "edge_1730"
+      ],
+      "label": "Prolog",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "protégé",
+      "incident_edges": [
+        "edge_1806"
+      ],
+      "label": "Protégé",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reflexivity",
+      "incident_edges": [
+        "edge_1741"
+      ],
+      "label": "reflexivity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relation",
+      "incident_edges": [
+        "edge_1750",
+        "edge_1751"
+      ],
+      "label": "relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relationship",
+      "incident_edges": [
+        "edge_1748"
+      ],
+      "label": "relationship",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reliability",
+      "incident_edges": [
+        "edge_1759"
+      ],
+      "label": "reliability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semi-automatic ontology construction",
+      "incident_edges": [
+        "edge_1791"
+      ],
+      "label": "semi-automatic ontology construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "set",
+      "incident_edges": [
+        "edge_1769"
+      ],
+      "label": "set",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "skeleton method",
+      "incident_edges": [
+        "edge_1805"
+      ],
+      "label": "skeleton method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "social media analytic",
+      "incident_edges": [
+        "edge_1787"
+      ],
+      "label": "social media analytics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subconcept",
+      "incident_edges": [
+        "edge_1809"
+      ],
+      "label": "subconcept",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "table-filling method",
+      "incident_edges": [
+        "edge_1770"
+      ],
+      "label": "table-filling method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "taxonomy",
+      "incident_edges": [
+        "edge_1810"
+      ],
+      "label": "taxonomy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text",
+      "incident_edges": [
+        "edge_1810"
+      ],
+      "label": "text",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "traditional knowledge engineering",
+      "incident_edges": [
+        "edge_1793",
+        "edge_1798"
+      ],
+      "label": "traditional knowledge engineering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "traditional method",
+      "incident_edges": [
+        "edge_1805"
+      ],
+      "label": "traditional methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "transitivity",
+      "incident_edges": [
+        "edge_1741"
+      ],
+      "label": "transitivity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "wille",
+      "incident_edges": [
+        "edge_1783"
+      ],
+      "label": "Wille",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

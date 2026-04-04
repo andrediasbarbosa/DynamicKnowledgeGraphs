@@ -1,0 +1,2773 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_0",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_6",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "qwen2.5",
+        "alibaba cloud"
+      ],
+      "targets": [
+        "instruction-following",
+        "reasoning",
+        "data handling"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_8",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "multi-model consensu",
+        "arbitrator choice"
+      ],
+      "targets": [
+        "fact validation performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_10",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_4",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "dbpedia",
+        "freebase"
+      ],
+      "targets": [
+        "correct fact"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_11",
+      "properties": {},
+      "relation": "hinders",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_7",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "dbpedia"
+      ],
+      "targets": [
+        "fact detection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_12",
+      "properties": {},
+      "relation": "dominates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_9",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "dka setup"
+      ],
+      "targets": [
+        "retrieval-based system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_13",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_8",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag",
+        "dka"
+      ],
+      "targets": [
+        "execution time"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_14",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_12",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "knowledge graph",
+        "enterprise ai"
+      ],
+      "targets": [
+        "technology"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_15",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_1",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "external evidence",
+        "llm"
+      ],
+      "targets": [
+        "kg fact-checking"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_16",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_8",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "external evidence",
+        "model agreement"
+      ],
+      "targets": [
+        "model alignment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_17",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_2",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "internal kg-based fact checking",
+        "external evidence-based fact checking"
+      ],
+      "targets": [
+        "fact-checking mechanism"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_18",
+      "properties": {},
+      "relation": "contribute",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_13",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "fact checking",
+        "knowledge graph"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_19",
+      "properties": {},
+      "relation": "presents",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_0",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "fact validation"
+      ],
+      "targets": [
+        "significant challenge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_2",
+      "properties": {},
+      "relation": "address",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_0",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "fact-checking system",
+        "automated method"
+      ],
+      "targets": [
+        "time limitation",
+        "cost limitation"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_20",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_12",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "fact-checking",
+        "knowledge graph"
+      ],
+      "targets": [
+        "validation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_21",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_2",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "kgvalidator",
+        "factbench"
+      ],
+      "targets": [
+        "kg completion model"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_22",
+      "properties": {},
+      "relation": "challenges",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_7",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factbench",
+        "yago"
+      ],
+      "targets": [
+        "model performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_23",
+      "properties": {},
+      "relation": "includes",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_4",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck",
+        "kg dataset"
+      ],
+      "targets": [
+        "factbench",
+        "yago",
+        "dbpedia"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_24",
+      "properties": {},
+      "relation": "is_built_on",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_1",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck",
+        "kg dataset"
+      ],
+      "targets": [
+        "factbench",
+        "yago",
+        "dbpedia"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_25",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_4",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "llm",
+        "factcheck"
+      ],
+      "targets": [
+        "fact validation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_26",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_1",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck",
+        "llm"
+      ],
+      "targets": [
+        "fact validation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_27",
+      "properties": {},
+      "relation": "utilizes",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_2",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck",
+        "llm"
+      ],
+      "targets": [
+        "external evidence"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_28",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_2",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "predpath",
+        "factcheck"
+      ],
+      "targets": [
+        "evaluation goal"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_29",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_1",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck",
+        "validation pipeline"
+      ],
+      "targets": [
+        "structured triple"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_3",
+      "properties": {},
+      "relation": "outperform",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_7",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "commercial model",
+        "open-source model"
+      ],
+      "targets": [
+        "smaller model"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_30",
+      "properties": {},
+      "relation": "advances",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_11",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck"
+      ],
+      "targets": [
+        "factual reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_31",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_6",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck"
+      ],
+      "targets": [
+        "llm performance",
+        "kg validation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_32",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_7",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "few-shot prompting"
+      ],
+      "targets": [
+        "model performance"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_33",
+      "properties": {},
+      "relation": "pairs_with",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_9",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "giv-f",
+        "gemma2"
+      ],
+      "targets": [
+        "mistral"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_34",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_11",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "open-source llm",
+        "gemma2"
+      ],
+      "targets": [
+        "verification performance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_35",
+      "properties": {},
+      "relation": "clusters",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_9",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag",
+        "giv-f"
+      ],
+      "targets": [
+        "upper-right quadrant"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_36",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_7",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag",
+        "giv-f"
+      ],
+      "targets": [
+        "fact validation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_37",
+      "properties": {},
+      "relation": "reducing",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_10",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "giv-f",
+        "rag"
+      ],
+      "targets": [
+        "variance"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_38",
+      "properties": {},
+      "relation": "leading to",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_10",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "giv-f",
+        "zero-shot prompting"
+      ],
+      "targets": [
+        "heterogeneous reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_39",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_5",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "google serp",
+        "search result"
+      ],
+      "targets": [
+        "document"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_4",
+      "properties": {},
+      "relation": "reducing",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_10",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "consensus-based aggregation",
+        "model-specific bia"
+      ],
+      "targets": [
+        "stability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_40",
+      "properties": {},
+      "relation": "offers",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_6",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "gpt-4o mini",
+        "openai"
+      ],
+      "targets": [
+        "reasoning capability",
+        "fact verification"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_41",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_11",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "hybrid retrieval strategy"
+      ],
+      "targets": [
+        "retrieval quality"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_42",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_4",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "negative sampling",
+        "incorrect fact"
+      ],
+      "targets": [
+        "false fact"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_43",
+      "properties": {},
+      "relation": "exchanged_for",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_9",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "increased latency"
+      ],
+      "targets": [
+        "enhanced detection"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_44",
+      "properties": {},
+      "relation": "adds",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_8",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "tie-breaking",
+        "inference overhead"
+      ],
+      "targets": [
+        "latency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_45",
+      "properties": {},
+      "relation": "outperforming",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_10",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag",
+        "internal knowledge method"
+      ],
+      "targets": [
+        "false claim"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_46",
+      "properties": {},
+      "relation": "leads_to",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_1",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "multiple llm",
+        "kg fact"
+      ],
+      "targets": [
+        "reliable validation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_47",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_3",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "kg triple",
+        "llm"
+      ],
+      "targets": [
+        "natural language"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_48",
+      "properties": {},
+      "relation": "store",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_0",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "knowledge graph",
+        "kgs"
+      ],
+      "targets": [
+        "factual knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_49",
+      "properties": {},
+      "relation": "acts_as",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_12",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "large language model",
+        "knowledge bas"
+      ],
+      "targets": [
+        "knowledge bas"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_5",
+      "properties": {},
+      "relation": "synthesize",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_14",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "retrieval augmented fact verification",
+        "contrastive argument"
+      ],
+      "targets": [
+        "fact verification"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_50",
+      "properties": {},
+      "relation": "improve",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_13",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "knowledge graph accuracy",
+        "reinforcement learning"
+      ],
+      "targets": [
+        "self-correction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_51",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_14",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "knowledge graph",
+        "low carbon power system"
+      ],
+      "targets": [
+        "energy system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_52",
+      "properties": {},
+      "relation": "are",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_14",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "open knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_53",
+      "properties": {},
+      "relation": "support",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_13",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "fact validation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_54",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_13",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "fact checking"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_55",
+      "properties": {},
+      "relation": "offer",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_0",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "large language model",
+        "llm"
+      ],
+      "targets": [
+        "knowledge access"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_56",
+      "properties": {},
+      "relation": "influence",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_14",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "large language model",
+        "scientific knowledge"
+      ],
+      "targets": [
+        "factuality"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_57",
+      "properties": {},
+      "relation": "features",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_6",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "llama3.1",
+        "meta"
+      ],
+      "targets": [
+        "multilingual support",
+        "long-context task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_58",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_5",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "open-source model",
+        "llm configuration"
+      ],
+      "targets": [
+        "fact validation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_59",
+      "properties": {},
+      "relation": "broadens",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_3",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "question generation",
+        "llm"
+      ],
+      "targets": [
+        "semantic coverage"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_6",
+      "properties": {},
+      "relation": "addresses",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_2",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "factcheck",
+        "crag"
+      ],
+      "targets": [
+        "fact verification"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_60",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_4",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "model consensu",
+        "llm"
+      ],
+      "targets": [
+        "error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_61",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_3",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "multi-model consensu",
+        "llm"
+      ],
+      "targets": [
+        "verification accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_62",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_3",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag",
+        "llm"
+      ],
+      "targets": [
+        "evidence retrieval"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_63",
+      "properties": {},
+      "relation": "generate",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_0",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "hallucinated respons"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_64",
+      "properties": {},
+      "relation": "increases",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_8",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "methodological complexity",
+        "verification strategy"
+      ],
+      "targets": [
+        "computational cost"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_65",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_5",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "mock api",
+        "standardized endpoint"
+      ],
+      "targets": [
+        "reproducible benchmarking"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_66",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_11",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "multi-model consensu"
+      ],
+      "targets": [
+        "error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_67",
+      "properties": {},
+      "relation": "executed",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_6",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "open-source llm"
+      ],
+      "targets": [
+        "ollama"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_68",
+      "properties": {},
+      "relation": "indicates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_9",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "pareto frontier"
+      ],
+      "targets": [
+        "optimal efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_69",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_5",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag dataset",
+        "question"
+      ],
+      "targets": [
+        "llm performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_7",
+      "properties": {},
+      "relation": "reflects",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_3",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "document retrieval",
+        "cross-encoder model"
+      ],
+      "targets": [
+        "semantic proximity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_70",
+      "properties": {},
+      "relation": "quantifies",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_5",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "similarity score",
+        "question"
+      ],
+      "targets": [
+        "semantic closeness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_71",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_11",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "rag"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_72",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_12",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "sparql",
+        "semantic search"
+      ],
+      "targets": [
+        "querying"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_8",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_12",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "knowledge graph",
+        "data engineering"
+      ],
+      "targets": [
+        "data management"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_9",
+      "properties": {},
+      "relation": "insufficient for",
+      "source_chunk_id": "BenchMarking_LLMs_for_KG_Validation_chunk_10",
+      "source_document": "BenchMarking_LLMs_for_KG_Validation",
+      "sources": [
+        "dbpedia dataset",
+        "internal parametric knowledge"
+      ],
+      "targets": [
+        "distinguishing false claim"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 73,
+    "num_nodes": 146
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_18"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "alibaba cloud",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "Alibaba Cloud",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "arbitrator choice",
+      "incident_edges": [
+        "edge_1"
+      ],
+      "label": "arbitrator choice",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automated method",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "automated methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "commercial model",
+      "incident_edges": [
+        "edge_3"
+      ],
+      "label": "commercial models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "computational cost",
+      "incident_edges": [
+        "edge_64"
+      ],
+      "label": "computational cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "consensus-based aggregation",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "consensus-based aggregation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "contrastive argument",
+      "incident_edges": [
+        "edge_5"
+      ],
+      "label": "contrastive arguments",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct fact",
+      "incident_edges": [
+        "edge_10"
+      ],
+      "label": "correct facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cost limitation",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "cost limitations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "crag",
+      "incident_edges": [
+        "edge_6"
+      ],
+      "label": "CRAG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cross-encoder model",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "cross-encoder model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data engineering",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "data engineering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data handling",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "data handling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data management",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "data management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "dbpedia",
+      "incident_edges": [
+        "edge_10",
+        "edge_11",
+        "edge_23",
+        "edge_24"
+      ],
+      "label": "DBpedia",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dbpedia dataset",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "DBpedia dataset",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "distinguishing false claim",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "distinguishing false claims",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dka",
+      "incident_edges": [
+        "edge_13"
+      ],
+      "label": "DKA",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dka setup",
+      "incident_edges": [
+        "edge_12"
+      ],
+      "label": "DKA setups",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "document",
+      "incident_edges": [
+        "edge_39"
+      ],
+      "label": "document",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "document retrieval",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "document retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "energy system",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "energy systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "enhanced detection",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "enhanced detection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "enterprise ai",
+      "incident_edges": [
+        "edge_14"
+      ],
+      "label": "enterprise AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "error",
+      "incident_edges": [
+        "edge_60",
+        "edge_66"
+      ],
+      "label": "error",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evaluation goal",
+      "incident_edges": [
+        "edge_28"
+      ],
+      "label": "evaluation goals",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evidence retrieval",
+      "incident_edges": [
+        "edge_62"
+      ],
+      "label": "evidence retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "execution time",
+      "incident_edges": [
+        "edge_13"
+      ],
+      "label": "execution time",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "external evidence",
+      "incident_edges": [
+        "edge_15",
+        "edge_16",
+        "edge_27"
+      ],
+      "label": "external evidence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "external evidence-based fact checking",
+      "incident_edges": [
+        "edge_17"
+      ],
+      "label": "External Evidence-Based Fact Checking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "fact checking",
+      "incident_edges": [
+        "edge_18",
+        "edge_54"
+      ],
+      "label": "fact checking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact detection",
+      "incident_edges": [
+        "edge_11"
+      ],
+      "label": "fact detection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "fact validation",
+      "incident_edges": [
+        "edge_19",
+        "edge_25",
+        "edge_26",
+        "edge_36",
+        "edge_53",
+        "edge_58"
+      ],
+      "label": "fact validation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact validation performance",
+      "incident_edges": [
+        "edge_1"
+      ],
+      "label": "fact validation performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "fact verification",
+      "incident_edges": [
+        "edge_5",
+        "edge_6",
+        "edge_40"
+      ],
+      "label": "fact verification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact-checking",
+      "incident_edges": [
+        "edge_20"
+      ],
+      "label": "fact-checking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact-checking mechanism",
+      "incident_edges": [
+        "edge_17"
+      ],
+      "label": "fact-checking mechanisms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact-checking system",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "fact-checking systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "factbench",
+      "incident_edges": [
+        "edge_21",
+        "edge_22",
+        "edge_23",
+        "edge_24"
+      ],
+      "label": "FactBench",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 10,
+      "id": "factcheck",
+      "incident_edges": [
+        "edge_6",
+        "edge_23",
+        "edge_24",
+        "edge_25",
+        "edge_26",
+        "edge_27",
+        "edge_28",
+        "edge_29",
+        "edge_30",
+        "edge_31"
+      ],
+      "label": "FactCheck",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual knowledge",
+      "incident_edges": [
+        "edge_48"
+      ],
+      "label": "factual knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual reasoning",
+      "incident_edges": [
+        "edge_30"
+      ],
+      "label": "factual reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factuality",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "factuality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "false claim",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "false claims",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "false fact",
+      "incident_edges": [
+        "edge_42"
+      ],
+      "label": "false facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "few-shot prompting",
+      "incident_edges": [
+        "edge_32"
+      ],
+      "label": "few-shot prompting",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "freebase",
+      "incident_edges": [
+        "edge_10"
+      ],
+      "label": "Freebase",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "gemma2",
+      "incident_edges": [
+        "edge_33",
+        "edge_34"
+      ],
+      "label": "Gemma2",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "giv-f",
+      "incident_edges": [
+        "edge_33",
+        "edge_35",
+        "edge_36",
+        "edge_37",
+        "edge_38"
+      ],
+      "label": "GIV-F",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "google serp",
+      "incident_edges": [
+        "edge_39"
+      ],
+      "label": "Google SERP",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gpt-4o mini",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "GPT-4o mini",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "hallucinated respon",
+      "incident_edges": [],
+      "label": "hallucinated responses",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "heterogeneous reasoning",
+      "incident_edges": [
+        "edge_38"
+      ],
+      "label": "heterogeneous reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hybrid retrieval strategy",
+      "incident_edges": [
+        "edge_41"
+      ],
+      "label": "hybrid retrieval strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "incorrect fact",
+      "incident_edges": [
+        "edge_42"
+      ],
+      "label": "incorrect facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "increased latency",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "increased latency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inference overhead",
+      "incident_edges": [
+        "edge_44"
+      ],
+      "label": "inference overhead",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "instruction-following",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "instruction-following",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "internal kg-based fact checking",
+      "incident_edges": [
+        "edge_17"
+      ],
+      "label": "Internal KG-Based Fact Checking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "internal knowledge method",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "internal knowledge methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "internal parametric knowledge",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "internal parametric knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg completion model",
+      "incident_edges": [
+        "edge_21"
+      ],
+      "label": "KG completion models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "kg dataset",
+      "incident_edges": [
+        "edge_23",
+        "edge_24"
+      ],
+      "label": "KG datasets",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg fact",
+      "incident_edges": [
+        "edge_46"
+      ],
+      "label": "KG facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg fact-checking",
+      "incident_edges": [
+        "edge_15"
+      ],
+      "label": "KG fact-checking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg triple",
+      "incident_edges": [
+        "edge_47"
+      ],
+      "label": "KG triples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg validation",
+      "incident_edges": [
+        "edge_31"
+      ],
+      "label": "KG validation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kgs",
+      "incident_edges": [
+        "edge_48"
+      ],
+      "label": "KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kgvalidator",
+      "incident_edges": [
+        "edge_21"
+      ],
+      "label": "KGValidator",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge access",
+      "incident_edges": [
+        "edge_55"
+      ],
+      "label": "knowledge access",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge bas",
+      "incident_edges": [
+        "edge_49"
+      ],
+      "label": "knowledge bases",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 9,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_8",
+        "edge_14",
+        "edge_18",
+        "edge_20",
+        "edge_48",
+        "edge_51",
+        "edge_52",
+        "edge_53",
+        "edge_54"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph accuracy",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "knowledge graph accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "language model",
+      "incident_edges": [
+        "edge_52",
+        "edge_53"
+      ],
+      "label": "language models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "large language model",
+      "incident_edges": [
+        "edge_49",
+        "edge_54",
+        "edge_55",
+        "edge_56"
+      ],
+      "label": "large language models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "latency",
+      "incident_edges": [
+        "edge_44"
+      ],
+      "label": "latency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llama3.1",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "LLaMA3.1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 11,
+      "id": "llm",
+      "incident_edges": [
+        "edge_15",
+        "edge_25",
+        "edge_26",
+        "edge_27",
+        "edge_47",
+        "edge_55",
+        "edge_59",
+        "edge_60",
+        "edge_61",
+        "edge_62",
+        "edge_63"
+      ],
+      "label": "LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm configuration",
+      "incident_edges": [
+        "edge_58"
+      ],
+      "label": "LLM configurations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "llm performance",
+      "incident_edges": [
+        "edge_31",
+        "edge_69"
+      ],
+      "label": "LLM performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "long-context task",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "long-context tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "low carbon power system",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "low carbon power systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "meta",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "Meta",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "methodological complexity",
+      "incident_edges": [
+        "edge_64"
+      ],
+      "label": "methodological complexity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mistral",
+      "incident_edges": [
+        "edge_33"
+      ],
+      "label": "Mistral",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mock api",
+      "incident_edges": [
+        "edge_65"
+      ],
+      "label": "mock API",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model agreement",
+      "incident_edges": [
+        "edge_16"
+      ],
+      "label": "model agreement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model alignment",
+      "incident_edges": [
+        "edge_16"
+      ],
+      "label": "model alignment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model consensu",
+      "incident_edges": [
+        "edge_60"
+      ],
+      "label": "model consensus",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "model performance",
+      "incident_edges": [
+        "edge_22",
+        "edge_32"
+      ],
+      "label": "model performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model-specific bia",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "model-specific bias",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "multi-model consensu",
+      "incident_edges": [
+        "edge_1",
+        "edge_61",
+        "edge_66"
+      ],
+      "label": "multi-model consensus",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multilingual support",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "multilingual support",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multiple llm",
+      "incident_edges": [
+        "edge_46"
+      ],
+      "label": "multiple LLMs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language",
+      "incident_edges": [
+        "edge_47"
+      ],
+      "label": "natural language",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "negative sampling",
+      "incident_edges": [
+        "edge_42"
+      ],
+      "label": "negative sampling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ollama",
+      "incident_edges": [
+        "edge_67"
+      ],
+      "label": "Ollama",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "open knowledge graph",
+      "incident_edges": [
+        "edge_52"
+      ],
+      "label": "open knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "open-source llm",
+      "incident_edges": [
+        "edge_34",
+        "edge_67"
+      ],
+      "label": "open-source LLMs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "open-source model",
+      "incident_edges": [
+        "edge_3",
+        "edge_58"
+      ],
+      "label": "open-source models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "openai",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "OpenAI",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optimal efficiency",
+      "incident_edges": [
+        "edge_68"
+      ],
+      "label": "optimal efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pareto frontier",
+      "incident_edges": [
+        "edge_68"
+      ],
+      "label": "Pareto frontier",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance",
+      "incident_edges": [
+        "edge_71"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predpath",
+      "incident_edges": [
+        "edge_28"
+      ],
+      "label": "PredPath",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "querying",
+      "incident_edges": [
+        "edge_72"
+      ],
+      "label": "querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "question",
+      "incident_edges": [
+        "edge_69",
+        "edge_70"
+      ],
+      "label": "question",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "question generation",
+      "incident_edges": [
+        "edge_59"
+      ],
+      "label": "question generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "qwen2.5",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "Qwen2.5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "rag",
+      "incident_edges": [
+        "edge_13",
+        "edge_35",
+        "edge_36",
+        "edge_37",
+        "edge_45",
+        "edge_62",
+        "edge_71"
+      ],
+      "label": "RAG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rag dataset",
+      "incident_edges": [
+        "edge_69"
+      ],
+      "label": "RAG dataset",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning capability",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "reasoning capabilities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reinforcement learning",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "reinforcement learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reliable validation",
+      "incident_edges": [
+        "edge_46"
+      ],
+      "label": "reliable validation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reproducible benchmarking",
+      "incident_edges": [
+        "edge_65"
+      ],
+      "label": "reproducible benchmarking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval augmented fact verification",
+      "incident_edges": [
+        "edge_5"
+      ],
+      "label": "retrieval augmented fact verification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval quality",
+      "incident_edges": [
+        "edge_41"
+      ],
+      "label": "retrieval quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval-based system",
+      "incident_edges": [
+        "edge_12"
+      ],
+      "label": "retrieval-based systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scientific knowledge",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "scientific knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search result",
+      "incident_edges": [
+        "edge_39"
+      ],
+      "label": "search results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "self-correction",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "self-correction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic closeness",
+      "incident_edges": [
+        "edge_70"
+      ],
+      "label": "semantic closeness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic coverage",
+      "incident_edges": [
+        "edge_59"
+      ],
+      "label": "semantic coverage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic proximity",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "semantic proximity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic search",
+      "incident_edges": [
+        "edge_72"
+      ],
+      "label": "semantic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "significant challenge",
+      "incident_edges": [
+        "edge_19"
+      ],
+      "label": "significant challenge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "similarity score",
+      "incident_edges": [
+        "edge_70"
+      ],
+      "label": "similarity score",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "smaller model",
+      "incident_edges": [
+        "edge_3"
+      ],
+      "label": "smaller models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sparql",
+      "incident_edges": [
+        "edge_72"
+      ],
+      "label": "SPARQL",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stability",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "stability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "standardized endpoint",
+      "incident_edges": [
+        "edge_65"
+      ],
+      "label": "standardized endpoints",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured triple",
+      "incident_edges": [
+        "edge_29"
+      ],
+      "label": "structured triples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "technology",
+      "incident_edges": [
+        "edge_14"
+      ],
+      "label": "technology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tie-breaking",
+      "incident_edges": [
+        "edge_44"
+      ],
+      "label": "tie-breaking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "time limitation",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "time limitations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "upper-right quadrant",
+      "incident_edges": [
+        "edge_35"
+      ],
+      "label": "upper-right quadrant",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "validation",
+      "incident_edges": [
+        "edge_20"
+      ],
+      "label": "validation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "validation pipeline",
+      "incident_edges": [
+        "edge_29"
+      ],
+      "label": "validation pipeline",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "variance",
+      "incident_edges": [
+        "edge_37"
+      ],
+      "label": "variance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "verification accuracy",
+      "incident_edges": [
+        "edge_61"
+      ],
+      "label": "verification accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "verification performance",
+      "incident_edges": [
+        "edge_34"
+      ],
+      "label": "verification performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "verification strategy",
+      "incident_edges": [
+        "edge_64"
+      ],
+      "label": "verification strategy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "yago",
+      "incident_edges": [
+        "edge_22",
+        "edge_23",
+        "edge_24"
+      ],
+      "label": "YAGO",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "zero-shot prompting",
+      "incident_edges": [
+        "edge_38"
+      ],
+      "label": "zero-shot prompting",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

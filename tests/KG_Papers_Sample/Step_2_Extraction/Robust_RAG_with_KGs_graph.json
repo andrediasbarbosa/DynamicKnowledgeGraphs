@@ -1,0 +1,1040 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1811",
+      "properties": {},
+      "relation": "creates",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_1",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "community summary",
+        "knowledge graph"
+      ],
+      "targets": [
+        "summary"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1812",
+      "properties": {},
+      "relation": "builds",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_1",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "document indexing",
+        "entity-based knowledge graph"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1813",
+      "properties": {},
+      "relation": "combines",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_3",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "encoded knowledge",
+        "external knowledge"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1814",
+      "properties": {},
+      "relation": "leads to",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_4",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "gpt-4o-mini",
+        "encoded knowledge"
+      ],
+      "targets": [
+        "better performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1815",
+      "properties": {},
+      "relation": "contain",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_2",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "external document"
+      ],
+      "targets": [
+        "noisy information",
+        "irrelevant information",
+        "factually incorrect information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1816",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_4",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "grcomb",
+        "external knowledge"
+      ],
+      "targets": [
+        "error correction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1817",
+      "properties": {},
+      "relation": "contribute",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_2",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "internal knowledge",
+        "external knowledge"
+      ],
+      "targets": [
+        "llm"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1818",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_5",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "external knowledge"
+      ],
+      "targets": [
+        "rejection rate"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1819",
+      "properties": {},
+      "relation": "is impacted by",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_3",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "gpt-3.5",
+        "factual error"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1820",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_4",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "graphrag",
+        "gpt-3.5"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1821",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_4",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "noise",
+        "gpt-3.5"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1822",
+      "properties": {},
+      "relation": "impacts",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_3",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "gpt-3.5",
+        "noise"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1823",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_3",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "gpt-4o-mini",
+        "noise"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1824",
+      "properties": {},
+      "relation": "demonstrates",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_5",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "graphrag framework"
+      ],
+      "targets": [
+        "model overconfidence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1825",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_3",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "graphrag",
+        "knowledge graph"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1826",
+      "properties": {},
+      "relation": "customizes",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_1",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "graphrag",
+        "rgb benchmark"
+      ],
+      "targets": [
+        "summary"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1827",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_0",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "graphrag",
+        "rgb"
+      ],
+      "targets": [
+        "rag baseline"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1828",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_5",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "grcomb",
+        "grext"
+      ],
+      "targets": [
+        "performance gain"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1829",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_4",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "rgb baseline",
+        "insufficient information"
+      ],
+      "targets": [
+        "answering question"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1830",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_1",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "knowledge graph",
+        "llm capability"
+      ],
+      "targets": [
+        "reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1831",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_0",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "knowledge graph",
+        "rag"
+      ],
+      "targets": [
+        "improved accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1832",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_5",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "knowledge graph",
+        "retrieval-augmented generation"
+      ],
+      "targets": [
+        "llm robustness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1833",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_0",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "rag",
+        "llm"
+      ],
+      "targets": [
+        "factual hallucination"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1834",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_0",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "rag",
+        "llm"
+      ],
+      "targets": [
+        "factual error"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1835",
+      "properties": {},
+      "relation": "hinders",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_0",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "retrieved document",
+        "llm"
+      ],
+      "targets": [
+        "correct answer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1836",
+      "properties": {},
+      "relation": "attempt",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_2",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "provide answer"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1837",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_1",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "retrieved information",
+        "noise"
+      ],
+      "targets": [
+        "inconsistency"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1838",
+      "properties": {},
+      "relation": "cause",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_2",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "noisy document"
+      ],
+      "targets": [
+        "rejection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1839",
+      "properties": {},
+      "relation": "face",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_5",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "rag system"
+      ],
+      "targets": [
+        "challenge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1840",
+      "properties": {},
+      "relation": "assess",
+      "source_chunk_id": "Robust_RAG_with_KGs_chunk_2",
+      "source_document": "Robust_RAG_with_KGs",
+      "sources": [
+        "rgb benchmark"
+      ],
+      "targets": [
+        "llm"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 30,
+    "num_nodes": 50
+  },
+  "nodes": [
+    {
+      "degree": 4,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_1820",
+        "edge_1821",
+        "edge_1822",
+        "edge_1823"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answering question",
+      "incident_edges": [
+        "edge_1829"
+      ],
+      "label": "answering questions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "better performance",
+      "incident_edges": [
+        "edge_1814"
+      ],
+      "label": "better performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "challenge",
+      "incident_edges": [
+        "edge_1839"
+      ],
+      "label": "challenge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "community summary",
+      "incident_edges": [
+        "edge_1811"
+      ],
+      "label": "community summaries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct answer",
+      "incident_edges": [
+        "edge_1835"
+      ],
+      "label": "correct answers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "document indexing",
+      "incident_edges": [
+        "edge_1812"
+      ],
+      "label": "document indexing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "encoded knowledge",
+      "incident_edges": [
+        "edge_1813",
+        "edge_1814"
+      ],
+      "label": "encoded knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity-based knowledge graph",
+      "incident_edges": [
+        "edge_1812"
+      ],
+      "label": "entity-based knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error correction",
+      "incident_edges": [
+        "edge_1816"
+      ],
+      "label": "error correction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "external document",
+      "incident_edges": [
+        "edge_1815"
+      ],
+      "label": "external documents",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "external knowledge",
+      "incident_edges": [
+        "edge_1813",
+        "edge_1816",
+        "edge_1817",
+        "edge_1818"
+      ],
+      "label": "external knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "factual error",
+      "incident_edges": [
+        "edge_1819",
+        "edge_1834"
+      ],
+      "label": "factual errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual hallucination",
+      "incident_edges": [
+        "edge_1833"
+      ],
+      "label": "factual hallucinations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factually incorrect information",
+      "incident_edges": [
+        "edge_1815"
+      ],
+      "label": "factually incorrect information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "gpt-3.5",
+      "incident_edges": [
+        "edge_1819",
+        "edge_1820",
+        "edge_1821",
+        "edge_1822"
+      ],
+      "label": "GPT-3.5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "gpt-4o-mini",
+      "incident_edges": [
+        "edge_1814",
+        "edge_1823"
+      ],
+      "label": "GPT-4o-mini",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "graphrag",
+      "incident_edges": [
+        "edge_1820",
+        "edge_1825",
+        "edge_1826",
+        "edge_1827"
+      ],
+      "label": "GraphRAG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graphrag framework",
+      "incident_edges": [
+        "edge_1824"
+      ],
+      "label": "GraphRAG framework",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "grcomb",
+      "incident_edges": [
+        "edge_1816",
+        "edge_1828"
+      ],
+      "label": "GRcomb",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "grext",
+      "incident_edges": [
+        "edge_1828"
+      ],
+      "label": "GRext",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "improved accuracy",
+      "incident_edges": [
+        "edge_1831"
+      ],
+      "label": "improved accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inconsistency",
+      "incident_edges": [
+        "edge_1837"
+      ],
+      "label": "inconsistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "insufficient information",
+      "incident_edges": [
+        "edge_1829"
+      ],
+      "label": "insufficient information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "internal knowledge",
+      "incident_edges": [
+        "edge_1817"
+      ],
+      "label": "internal knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "irrelevant information",
+      "incident_edges": [
+        "edge_1815"
+      ],
+      "label": "irrelevant information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1811",
+        "edge_1812",
+        "edge_1825",
+        "edge_1830",
+        "edge_1831",
+        "edge_1832"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "llm",
+      "incident_edges": [
+        "edge_1817",
+        "edge_1833",
+        "edge_1834",
+        "edge_1835",
+        "edge_1836",
+        "edge_1840"
+      ],
+      "label": "LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm capability",
+      "incident_edges": [
+        "edge_1830"
+      ],
+      "label": "LLM capabilities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm robustness",
+      "incident_edges": [
+        "edge_1832"
+      ],
+      "label": "LLM robustness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model overconfidence",
+      "incident_edges": [
+        "edge_1824"
+      ],
+      "label": "model overconfidence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "noise",
+      "incident_edges": [
+        "edge_1821",
+        "edge_1822",
+        "edge_1823",
+        "edge_1837"
+      ],
+      "label": "noise",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "noisy document",
+      "incident_edges": [
+        "edge_1838"
+      ],
+      "label": "noisy documents",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "noisy information",
+      "incident_edges": [
+        "edge_1815"
+      ],
+      "label": "noisy information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "performance",
+      "incident_edges": [
+        "edge_1813",
+        "edge_1819",
+        "edge_1825"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance gain",
+      "incident_edges": [
+        "edge_1828"
+      ],
+      "label": "performance gains",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "provide answer",
+      "incident_edges": [
+        "edge_1836"
+      ],
+      "label": "provide answers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "rag",
+      "incident_edges": [
+        "edge_1831",
+        "edge_1833",
+        "edge_1834"
+      ],
+      "label": "RAG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rag baseline",
+      "incident_edges": [
+        "edge_1827"
+      ],
+      "label": "RAG baseline",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rag system",
+      "incident_edges": [
+        "edge_1839"
+      ],
+      "label": "RAG systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning",
+      "incident_edges": [
+        "edge_1830"
+      ],
+      "label": "reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rejection",
+      "incident_edges": [
+        "edge_1838"
+      ],
+      "label": "rejection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rejection rate",
+      "incident_edges": [
+        "edge_1818"
+      ],
+      "label": "rejection rates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval-augmented generation",
+      "incident_edges": [
+        "edge_1832"
+      ],
+      "label": "Retrieval-Augmented Generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieved document",
+      "incident_edges": [
+        "edge_1835"
+      ],
+      "label": "retrieved documents",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieved information",
+      "incident_edges": [
+        "edge_1837"
+      ],
+      "label": "retrieved information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rgb",
+      "incident_edges": [
+        "edge_1827"
+      ],
+      "label": "RGB",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rgb baseline",
+      "incident_edges": [
+        "edge_1829"
+      ],
+      "label": "RGB baseline",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rgb benchmark",
+      "incident_edges": [
+        "edge_1826",
+        "edge_1840"
+      ],
+      "label": "RGB Benchmark",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "summary",
+      "incident_edges": [
+        "edge_1811",
+        "edge_1826"
+      ],
+      "label": "summary",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

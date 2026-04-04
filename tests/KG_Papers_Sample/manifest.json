@@ -1,0 +1,76 @@
+{
+  "artifacts": {
+    "augmentation": "Step_5_Discovery/augmentation.json",
+    "extraction_stats": "Step_2_Extraction/extraction_stats.json",
+    "graph": "graph.json",
+    "index": "Step_5_Discovery/index.json",
+    "insights": "Step_5_Discovery/insights.json",
+    "reports": {
+      "html": "Step_5_Discovery/report.html",
+      "markdown": "Step_5_Discovery/report.md"
+    },
+    "visualizations": {
+      "augmented": "Step_5_Discovery/graph_augmented.html",
+      "baseline": "Step_5_Discovery/graph.html",
+      "dot": "Step_5_Discovery/graph.dot",
+      "rag": "Step_5_Discovery/graph_rag.html"
+    }
+  },
+  "created_utc": "2026-03-28 02:32:40 UTC",
+  "last_updated_utc": "2026-03-28 02:32:40 UTC",
+  "pipeline": {
+    "completed_stages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "from_stage": 1
+  },
+  "run_id": "run_20260328_004433",
+  "sources": [
+    "tests/BenchMarking LLMs for KG Validation.pdf",
+    "tests/Construxtion of KGs.pdf",
+    "tests/Evolvable KGs.pdf",
+    "tests/Geranium Platform for Science KGs.pdf",
+    "tests/KG Constrution.pdf",
+    "tests/KG Curation.pdf",
+    "tests/KG NeuroSymbolic.pdf",
+    "tests/KG Querying.pdf",
+    "tests/KG Reasoning.pdf",
+    "tests/KGs a Practical Review.pdf",
+    "tests/KGs and LLMs in RAG.pdf",
+    "tests/KGs and LLMs.pdf",
+    "tests/MultiHop QA on KGs.pdf",
+    "tests/NeuroSym Reasoning.pdf",
+    "tests/Paths over KG.pdf",
+    "tests/Reasoning on KGs.pdf",
+    "tests/Relational Data on KGs.pdf",
+    "tests/Research from KGs.pdf",
+    "tests/Robust RAG with KGs.pdf"
+  ],
+  "statistics": {
+    "entities": 1590,
+    "insights": 114,
+    "insights_by_type": {
+      "centrality": 1,
+      "community_detection": 1,
+      "confounder": 15,
+      "core_periphery": 20,
+      "cross_community_bridge_map": 9,
+      "domain_bridge": 20,
+      "k_core": 1,
+      "k_truss": 1,
+      "logical_entailment": 20,
+      "meta_path": 15,
+      "meta_pattern": 1,
+      "multi_resolution_community": 3,
+      "taxonomy": 6,
+      "text_similarity": 1
+    },
+    "relationships": 596
+  },
+  "title": "BenchMarking LLMs for KG Validation Knowledge Discovery"
+}

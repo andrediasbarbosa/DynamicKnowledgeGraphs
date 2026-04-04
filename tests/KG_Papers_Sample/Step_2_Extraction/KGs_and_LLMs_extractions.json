@@ -1,0 +1,1539 @@
+[
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "Large Language Models",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "artificial intelligence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "LLM applications"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "support",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "create",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "trust issues"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "address",
+        "sources": [
+          "LLMs",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "explainability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "explainability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "automates",
+        "sources": [
+          "LLMs",
+          "entity extraction"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "output"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "LLMs",
+          "medical KGs"
+        ],
+        "targets": [
+          "decision-making"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "bridges",
+        "sources": [
+          "XAI",
+          "LLMs"
+        ],
+        "targets": [
+          "interpretability gap"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "AI systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "structured knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "XAI"
+        ],
+        "targets": [
+          "explainability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "entity extraction"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "domain-specific KGs"
+        ],
+        "targets": [
+          "LLM reliability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "integrate",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "generative AI"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "LLM outputs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "construct",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "use",
+        "sources": [
+          "LLM-based KG systems",
+          "KG-based LLMs"
+        ],
+        "targets": [
+          "AI methodologies"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "aligns with",
+        "sources": [
+          "papers",
+          "metadata"
+        ],
+        "targets": [
+          "research scope"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "automates",
+        "sources": [
+          "Python script",
+          "Selenium library"
+        ],
+        "targets": [
+          "data extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "Pandas"
+        ],
+        "targets": [
+          "data cleaning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "ensures",
+        "sources": [
+          "full-text reviews",
+          "collaborative review sessions"
+        ],
+        "targets": [
+          "consistency"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "reduce",
+        "sources": [
+          "exclusion criteria",
+          "inclusion criteria"
+        ],
+        "targets": [
+          "total papers"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "related_to",
+        "sources": [
+          "Large Language Model",
+          "Knowledge Graph"
+        ],
+        "targets": [
+          "research topic"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "define",
+        "sources": [
+          "inclusion criteria",
+          "exclusion criteria"
+        ],
+        "targets": [
+          "paper selection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads_to",
+        "sources": [
+          "initial screening"
+        ],
+        "targets": [
+          "shortlisted papers"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "provides",
+        "sources": [
+          "full-text review"
+        ],
+        "targets": [
+          "clarification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "guide",
+        "sources": [
+          "research questions"
+        ],
+        "targets": [
+          "paper evaluation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "LLM",
+          "KG"
+        ],
+        "targets": [
+          "knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "drives",
+        "sources": [
+          "LLM",
+          "KG"
+        ],
+        "targets": [
+          "innovation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "AI-driven solutions",
+          "businesses"
+        ],
+        "targets": [
+          "efficiency",
+          "customer experience",
+          "competitive advantage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "automates",
+        "sources": [
+          "Autoregressive Transformers",
+          "Bidirectional Transformers"
+        ],
+        "targets": [
+          "tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Hybrid Models",
+          "Retrieval-Augmented Models"
+        ],
+        "targets": [
+          "factual grounding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contributes",
+        "sources": [
+          "data extraction",
+          "data analysis"
+        ],
+        "targets": [
+          "structured insights"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Hybrid/Retrieval-Augmented Models",
+          "LLMs"
+        ],
+        "targets": [
+          "factuality",
+          "transparency",
+          "contextual grounding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used_for",
+        "sources": [
+          "Seq2Seq Models",
+          "Encoder-Decoder Transformers"
+        ],
+        "targets": [
+          "summarization",
+          "translation",
+          "KG-to-text generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applied_in",
+        "sources": [
+          "GPT-based models"
+        ],
+        "targets": [
+          "generative pipelines",
+          "open-ended question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used_for",
+        "sources": [
+          "BERT"
+        ],
+        "targets": [
+          "classification",
+          "entity extraction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "Encoder–Decoder Transformers",
+          "Seq2Seq Models"
+        ],
+        "targets": [
+          "structured outputs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "Autoregressive Transformers",
+          "Decoder-Only"
+        ],
+        "targets": [
+          "coherent text"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "understands",
+        "sources": [
+          "Bidirectional Transformers",
+          "Encoder-Only"
+        ],
+        "targets": [
+          "word context"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "integrates",
+        "sources": [
+          "Symbolic–Neural Hybrids",
+          "Others"
+        ],
+        "targets": [
+          "neural networks",
+          "rule-based components"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Retrieve-and-Discriminate Prompter"
+        ],
+        "targets": [
+          "performance",
+          "reliability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "transform",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "construct",
+        "sources": [
+          "GPT-4"
+        ],
+        "targets": [
+          "VieMedKG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generate",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "structured KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "zero-shot learning"
+        ],
+        "targets": [
+          "entity extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "build",
+        "sources": [
+          "RAG systems"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "output"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "hallucinations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "medical KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "reliability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "multi-hop reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "KGs",
+          "multimodal data"
+        ],
+        "targets": [
+          "LLM performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "KGs",
+          "visual inputs"
+        ],
+        "targets": [
+          "multimodal reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "link",
+        "sources": [
+          "KGs",
+          "ambiguous entities"
+        ],
+        "targets": [
+          "KG nodes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "complex reasoning tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduce",
+        "sources": [
+          "KGs",
+          "LLM outputs"
+        ],
+        "targets": [
+          "errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "symbolic AI",
+          "machine learning"
+        ],
+        "targets": [
+          "LLM methodologies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "neural network techniques",
+          "HybridGCN"
+        ],
+        "targets": [
+          "KG discovery"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "unstructured text",
+          "structured data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "prompt engineering"
+        ],
+        "targets": [
+          "LLM extraction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "optimizes",
+        "sources": [
+          "evolutionary computation"
+        ],
+        "targets": [
+          "graph structures"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "bridges",
+        "sources": [
+          "XAI",
+          "symbolic AI",
+          "ML",
+          "evolutionary computation"
+        ],
+        "targets": [
+          "transparency",
+          "trust"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "XAI",
+          "LLMs"
+        ],
+        "targets": [
+          "interpretability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "KGs",
+          "AI methodologies"
+        ],
+        "targets": [
+          "LLMs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "retrieves",
+        "sources": [
+          "RAG",
+          "KGs"
+        ],
+        "targets": [
+          "subgraphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "factual errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "KG",
+          "XAI"
+        ],
+        "targets": [
+          "transparency",
+          "trust"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "attention mechanisms",
+          "KG"
+        ],
+        "targets": [
+          "LLM decisions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KG embeddings",
+          "gradient-based attribution"
+        ],
+        "targets": [
+          "transparency",
+          "interpretability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "KG",
+          "LLM"
+        ],
+        "targets": [
+          "output accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG",
+          "LLM"
+        ],
+        "targets": [
+          "data governance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "KGs",
+          "sensitive information"
+        ],
+        "targets": [
+          "misuse"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "insights"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "LLMs",
+          "unstructured data"
+        ],
+        "targets": [
+          "structured knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "builds",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "domain-specific KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "LLMs",
+          "healthcare"
+        ],
+        "targets": [
+          "insights"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "interpretability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "pose",
+        "sources": [
+          "LLMs",
+          "XAI"
+        ],
+        "targets": [
+          "trust challenges"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensure",
+        "sources": [
+          "data governance",
+          "regulatory compliance"
+        ],
+        "targets": [
+          "data misuse"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "unlock",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "new possibilities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "dominate",
+        "sources": [
+          "hybrid models"
+        ],
+        "targets": [
+          "research"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "language modeling",
+          "recommendation systems"
+        ],
+        "targets": [
+          "study attention"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "underutilized in",
+        "sources": [
+          "ChatGPT"
+        ],
+        "targets": [
+          "real-world applications"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "LLM outputs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "addresses",
+        "sources": [
+          "automated schema generation"
+        ],
+        "targets": [
+          "automation deficits"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "employs in",
+        "sources": [
+          "domain-specific KGs"
+        ],
+        "targets": [
+          "healthcare"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "traceability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mitigates",
+        "sources": [
+          "ethical governance",
+          "bias mitigation"
+        ],
+        "targets": [
+          "ethical oversights"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "resolves",
+        "sources": [
+          "XAI frameworks",
+          "LLMs"
+        ],
+        "targets": [
+          "explainability deficits"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "develops",
+        "sources": [
+          "multimodal integration",
+          "KGs"
+        ],
+        "targets": [
+          "frameworks"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "advances",
+        "sources": [
+          "interdisciplinary research",
+          "LLM-KG systems"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "LLMs",
+          "KGs"
+        ],
+        "targets": [
+          "LLM performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "automate",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "support",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "multi-hop reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "XAI"
+        ],
+        "targets": [
+          "trust",
+          "transparency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "reduce",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "hallucinations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "Large Language Models",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "Industrial Recommendation Systems"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "integrates",
+        "sources": [
+          "Large Language Models",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "fusion inference method"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "supports",
+        "sources": [
+          "Large Language Models"
+        ],
+        "targets": [
+          "causal inference"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "synergizes",
+        "sources": [
+          "knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "explainable AI"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "large language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "semantic extraction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "data mining"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "large language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "recommendation systems"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "support",
+        "sources": [
+          "large language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "intelligent question-answering systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "cyber threat intelligence"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "assist",
+        "sources": [
+          "knowledge graph",
+          "large language models"
+        ],
+        "targets": [
+          "fact verification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "knowledge graph",
+          "large language models"
+        ],
+        "targets": [
+          "named entity disambiguation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitate",
+        "sources": [
+          "large language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "knowledge extraction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "aids",
+        "sources": [
+          "knowledge graph",
+          "LLM"
+        ],
+        "targets": [
+          "ESG question-answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "LLM",
+          "knowledge graph"
+        ],
+        "targets": [
+          "semantic mapping"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "LLM",
+          "knowledge graph"
+        ],
+        "targets": [
+          "automated model generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "knowledge graph",
+          "RAG"
+        ],
+        "targets": [
+          "conference knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "LLM",
+          "knowledge graph"
+        ],
+        "targets": [
+          "task-oriented dialogue systems"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_24",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "large language models"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "large language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "explanations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "GPT-4"
+        ],
+        "targets": [
+          "medical knowledge construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graphs",
+          "LLM-based explanations"
+        ],
+        "targets": [
+          "learning recommendations"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "connects",
+        "sources": [
+          "knowledge graph",
+          "AI"
+        ],
+        "targets": [
+          "human"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_chunk_25",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "graph neural networks"
+        ],
+        "targets": [
+          "recommender systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "large language models",
+          "knowledge graph"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "ChatGPT",
+          "medical knowledge graph"
+        ],
+        "targets": [
+          "Chinese medical knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "large language models"
+        ],
+        "targets": [
+          "adaptive knowledge construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "dynamic document-based knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "story comprehension"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

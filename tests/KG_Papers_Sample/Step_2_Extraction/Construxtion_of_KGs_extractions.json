@@ -1,0 +1,3673 @@
+[
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Knowledge Graphs",
+          "data integration"
+        ],
+        "targets": [
+          "data science applications"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "aims_at",
+        "sources": [
+          "KG construction pipelines",
+          "data quality"
+        ],
+        "targets": [
+          "high degree"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enriches",
+        "sources": [
+          "medical background knowledge",
+          "patient data"
+        ],
+        "targets": [
+          "clinical decision support"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "aligns_with",
+        "sources": [
+          "semantic labels",
+          "medical ontologies"
+        ],
+        "targets": [
+          "patient data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "organize",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "patient data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "benefit",
+        "sources": [
+          "machine learning",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "AI approaches"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "knowledge graphs",
+          "large language models"
+        ],
+        "targets": [
+          "factual correctness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "support",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identify",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "open challenges"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is_a",
+        "sources": [
+          "Knowledge Graph",
+          "KG"
+        ],
+        "targets": [
+          "graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "KG",
+          "ontology"
+        ],
+        "targets": [
+          "entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "infers",
+        "sources": [
+          "KG",
+          "reasoning engine"
+        ],
+        "targets": [
+          "implicit knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_a",
+        "sources": [
+          "City",
+          "Country"
+        ],
+        "targets": [
+          "Place"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_a",
+        "sources": [
+          "Artist",
+          "Person"
+        ],
+        "targets": [
+          "Artist"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "comprises",
+        "sources": [
+          "Knowledge Graph",
+          "Data",
+          "Relations",
+          "Semantic Structure"
+        ],
+        "targets": [
+          "Knowledge Graph"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "born_in",
+        "sources": [
+          "Aphex Twin",
+          "Ireland"
+        ],
+        "targets": [
+          "Limerick"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "belongs_to",
+        "sources": [
+          "Xtal",
+          "Techno"
+        ],
+        "targets": [
+          "genre"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "uses",
+        "sources": [
+          "domain-specific KGs",
+          "ontology terminology"
+        ],
+        "targets": [
+          "specialized ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "KG purpose",
+          "methods"
+        ],
+        "targets": [
+          "construction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "Knowledge Graph",
+          "application domain"
+        ],
+        "targets": [
+          "method selection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "graph data model",
+          "KG construction"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "helps",
+        "sources": [
+          "RDF",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "data representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maximizes",
+        "sources": [
+          "graph model",
+          "KG utility"
+        ],
+        "targets": [
+          "application effectiveness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "temporal analysis",
+          "KG evolution"
+        ],
+        "targets": [
+          "temporal metadata"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "extends",
+        "sources": [
+          "RDF",
+          "RDF-Star"
+        ],
+        "targets": [
+          "triple structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "RDF",
+          "RDFS"
+        ],
+        "targets": [
+          "semantic structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adds",
+        "sources": [
+          "OWL 2",
+          "RDF"
+        ],
+        "targets": [
+          "semantics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "reasoning engines",
+          "RDF KGs"
+        ],
+        "targets": [
+          "knowledge deduction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "validate",
+        "sources": [
+          "SHACL",
+          "ShEx"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "PGM",
+          "graph theory"
+        ],
+        "targets": [
+          "understandability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "RDF",
+          "Linked Open Data"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "competes with",
+        "sources": [
+          "PGM",
+          "RDF"
+        ],
+        "targets": [
+          "custom models"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "PGM",
+          "graph traversal"
+        ],
+        "targets": [
+          "network analysis"
+        ]
+      },
+      {
+        "confidence": 0.75,
+        "relation": "requires",
+        "sources": [
+          "RDF",
+          "PGM"
+        ],
+        "targets": [
+          "interoperability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "Amazon Neptune",
+          "PGM",
+          "RDF"
+        ],
+        "targets": [
+          "interchangeable operation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "lowers",
+        "sources": [
+          "transformation strategies",
+          "RDF",
+          "PGM"
+        ],
+        "targets": [
+          "usage boundaries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "GraphQL",
+          "RDF",
+          "PGM"
+        ],
+        "targets": [
+          "unified query approach"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "necessitates",
+        "sources": [
+          "new data sources",
+          "integration methods"
+        ],
+        "targets": [
+          "changes"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "requires",
+        "sources": [
+          "shifts in target domains",
+          "data sources",
+          "integration techniques"
+        ],
+        "targets": [
+          "updates"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "necessitates",
+        "sources": [
+          "data sources",
+          "data structures"
+        ],
+        "targets": [
+          "data representation",
+          "ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "integration steps",
+          "source data"
+        ],
+        "targets": [
+          "KG quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "machine learning",
+          "algorithms"
+        ],
+        "targets": [
+          "KG quality",
+          "efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "KG construction",
+          "human input"
+        ],
+        "targets": [
+          "relevant sources",
+          "KG ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "measured by",
+        "sources": [
+          "KG quality",
+          "data sources"
+        ],
+        "targets": [
+          "correctness",
+          "freshness",
+          "comprehensiveness",
+          "succinctness"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "data sources",
+          "input data"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "Knowledge Extraction methods"
+        ],
+        "targets": [
+          "structured entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "data integration",
+          "entity linking"
+        ],
+        "targets": [
+          "single representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "incremental KG updates"
+        ],
+        "targets": [
+          "data freshness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "batch approach"
+        ],
+        "targets": [
+          "redundant computation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "lowers",
+        "sources": [
+          "KG data model",
+          "serialization"
+        ],
+        "targets": [
+          "debugging complexity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aggravate",
+        "sources": [
+          "quality problems"
+        ],
+        "targets": [
+          "KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluate",
+        "sources": [
+          "methods"
+        ],
+        "targets": [
+          "quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "helps",
+        "sources": [
+          "metadata"
+        ],
+        "targets": [
+          "debugging"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "quality assurance"
+        ],
+        "targets": [
+          "data quality problems"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "metadata",
+          "data artifacts"
+        ],
+        "targets": [
+          "findability",
+          "accessibility",
+          "interoperability",
+          "usability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "KG construction",
+          "metadata management"
+        ],
+        "targets": [
+          "representation",
+          "management",
+          "usability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "LLMs",
+          "data integration"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "provenance",
+          "metadata"
+        ],
+        "targets": [
+          "fact-level changes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "stores",
+        "sources": [
+          "metadata repository"
+        ],
+        "targets": [
+          "metadata"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "data profiling"
+        ],
+        "targets": [
+          "statistical information"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "provides",
+        "sources": [
+          "machine learning"
+        ],
+        "targets": [
+          "type recognition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "Open Archives Protocol"
+        ],
+        "targets": [
+          "metadata acquisition"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "fact-level metadata"
+        ],
+        "targets": [
+          "value selection"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "aids",
+        "sources": [
+          "versioning",
+          "incremental update"
+        ],
+        "targets": [
+          "Knowledge Graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "snapshot",
+          "Knowledge Graph"
+        ],
+        "targets": [
+          "timestamp"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "saves",
+        "sources": [
+          "change-based versioning",
+          "deltas"
+        ],
+        "targets": [
+          "storage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "timestamp-based solutions",
+          "metadata"
+        ],
+        "targets": [
+          "Knowledge Graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "source selection",
+          "data sources"
+        ],
+        "targets": [
+          "relevant subsets"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "support",
+        "sources": [
+          "data catalogs",
+          "metadata"
+        ],
+        "targets": [
+          "data selection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "recommend",
+        "sources": [
+          "premium data sources",
+          "Wikipedia"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influence",
+        "sources": [
+          "integration order",
+          "data sources"
+        ],
+        "targets": [
+          "final quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "include",
+        "sources": [
+          "change detection",
+          "manual notifications"
+        ],
+        "targets": [
+          "data updates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increase",
+        "sources": [
+          "decentralization",
+          "data distribution"
+        ],
+        "targets": [
+          "data availability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "data cleaning",
+          "data quality"
+        ],
+        "targets": [
+          "data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "mapping languages",
+          "R2RML"
+        ],
+        "targets": [
+          "RDB",
+          "RDF"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "addresses",
+        "sources": [
+          "data transformations",
+          "semi-structured data"
+        ],
+        "targets": [
+          "input formats"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "data profiling",
+          "data errors"
+        ],
+        "targets": [
+          "quality issues"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "handles",
+        "sources": [
+          "rule-based methods",
+          "data cleaning"
+        ],
+        "targets": [
+          "errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "limited by",
+        "sources": [
+          "rule-based methods",
+          "predefined rules"
+        ],
+        "targets": [
+          "effectiveness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "simplifies",
+        "sources": [
+          "machine learning",
+          "data cleaning"
+        ],
+        "targets": [
+          "configuration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "verifies",
+        "sources": [
+          "KATARA",
+          "crowdsourcing"
+        ],
+        "targets": [
+          "data values"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "KGClean",
+          "Knowledge Graph embeddings"
+        ],
+        "targets": [
+          "cleaning framework"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "ontology",
+          "KG"
+        ],
+        "targets": [
+          "concepts"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "aids",
+        "sources": [
+          "ontology learning",
+          "unstructured text"
+        ],
+        "targets": [
+          "ontology construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Large Language Models",
+          "semi-automatic methods"
+        ],
+        "targets": [
+          "ontology learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "GPT 3.5",
+          "concept hierarchies"
+        ],
+        "targets": [
+          "ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "reverse engineering",
+          "relational databases"
+        ],
+        "targets": [
+          "ontologies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "infers",
+        "sources": [
+          "reasoners",
+          "ontologies"
+        ],
+        "targets": [
+          "knowledge"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ontology matching",
+          "schema matching"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "property matching"
+        ],
+        "targets": [
+          "entity resolution",
+          "entity fusion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aids",
+        "sources": [
+          "word embeddings"
+        ],
+        "targets": [
+          "ontology matching"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "matching process"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "KARMA"
+        ],
+        "targets": [
+          "semi-automatic linking"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "merges",
+        "sources": [
+          "ontology integration",
+          "schema data"
+        ],
+        "targets": [
+          "existing KG ontology"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "match mapping",
+          "alignments"
+        ],
+        "targets": [
+          "ontology merging"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "preserves",
+        "sources": [
+          "asymmetric merge",
+          "target ontology"
+        ],
+        "targets": [
+          "existing concepts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "knowledge extraction",
+          "unstructured data"
+        ],
+        "targets": [
+          "structured data"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "includes",
+        "sources": [
+          "multi-modal KGs",
+          "text"
+        ],
+        "targets": [
+          "images"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "named-entity recognition",
+          "entity linking"
+        ],
+        "targets": [
+          "relation extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "dictionary"
+        ],
+        "targets": [
+          "entity identifiers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "tackles",
+        "sources": [
+          "machine learning methods"
+        ],
+        "targets": [
+          "NER"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "LSTM networks"
+        ],
+        "targets": [
+          "NER tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "BERT"
+        ],
+        "targets": [
+          "NER"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "leverages",
+        "sources": [
+          "Encoder Representations",
+          "Transformers"
+        ],
+        "targets": [
+          "bidirectional Transformer"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adapts",
+        "sources": [
+          "BioBert"
+        ],
+        "targets": [
+          "biomedicine"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "SPIRES"
+        ],
+        "targets": [
+          "LLMs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aims",
+        "sources": [
+          "multi-modal NER"
+        ],
+        "targets": [
+          "named entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "links",
+        "sources": [
+          "entity linking"
+        ],
+        "targets": [
+          "knowledge base"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "focuses on",
+        "sources": [
+          "entity resolution",
+          "data sources"
+        ],
+        "targets": [
+          "1-1 correspondence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "relation extraction",
+          "identified entities"
+        ],
+        "targets": [
+          "relationship"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "neural relation-extraction methods",
+          "training data"
+        ],
+        "targets": [
+          "availability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "pushes",
+        "sources": [
+          "pre-trained language models",
+          "state of the art"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "aims to mitigate",
+        "sources": [
+          "Continual Relation Extraction",
+          "catastrophic forgetting"
+        ],
+        "targets": [
+          "loss of information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "Open Information Extraction",
+          "relation extraction"
+        ],
+        "targets": [
+          "variety of information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "performs",
+        "sources": [
+          "DBpedia Spotlight"
+        ],
+        "targets": [
+          "named entity extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "Entity Resolution"
+        ],
+        "targets": [
+          "entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enriches",
+        "sources": [
+          "entity fusion"
+        ],
+        "targets": [
+          "information about an entity"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "neural methods"
+        ],
+        "targets": [
+          "entity resolution"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_24",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "entity resolution",
+          "blocking"
+        ],
+        "targets": [
+          "linking/matching",
+          "clustering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "results_in",
+        "sources": [
+          "similarity graph",
+          "matching"
+        ],
+        "targets": [
+          "entity pairs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "clustering",
+          "similarity graph"
+        ],
+        "targets": [
+          "entity resolution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "matches",
+        "sources": [
+          "incremental ER",
+          "new entities"
+        ],
+        "targets": [
+          "current KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "limits",
+        "sources": [
+          "blocking",
+          "new entities"
+        ],
+        "targets": [
+          "matching candidates"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_25",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "schema-agnostic approaches",
+          "blocking schemes"
+        ],
+        "targets": [
+          "heterogeneous data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "introduces",
+        "sources": [
+          "DeepBlock",
+          "embeddings"
+        ],
+        "targets": [
+          "blocking"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "AutoBlock",
+          "labeled data"
+        ],
+        "targets": [
+          "record embeddings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "similarity graph",
+          "KG entities"
+        ],
+        "targets": [
+          "match candidates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "incremental approaches",
+          "duplicate-free data"
+        ],
+        "targets": [
+          "clustering decisions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_26",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "transformers",
+          "Large Language Models"
+        ],
+        "targets": [
+          "entity resolution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "contrastive learning"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "data fusion"
+        ],
+        "targets": [
+          "information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "handles",
+        "sources": [
+          "conflict resolution"
+        ],
+        "targets": [
+          "inconsistencies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adds",
+        "sources": [
+          "Knowledge Graph completion"
+        ],
+        "targets": [
+          "new entries"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_27",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "incorporate",
+        "sources": [
+          "internal approaches",
+          "external methods"
+        ],
+        "targets": [
+          "additional data",
+          "human knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "predict",
+        "sources": [
+          "node classification approaches"
+        ],
+        "targets": [
+          "classes",
+          "unlabeled nodes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "use",
+        "sources": [
+          "statistical approaches"
+        ],
+        "targets": [
+          "distribution of relations",
+          "missing type information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "infer",
+        "sources": [
+          "KG embeddings"
+        ],
+        "targets": [
+          "type information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "find",
+        "sources": [
+          "link prediction"
+        ],
+        "targets": [
+          "missing relations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_28",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "link prediction",
+          "embedding-based methods"
+        ],
+        "targets": [
+          "shallow embeddings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "NodePiece",
+          "inductive link prediction"
+        ],
+        "targets": [
+          "entity representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "discovers",
+        "sources": [
+          "rule mining",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "new information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "neuro-symbolic techniques",
+          "KG enrichment"
+        ],
+        "targets": [
+          "neural methods",
+          "logical rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "entity classification",
+          "ontologies"
+        ],
+        "targets": [
+          "specific classes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_29",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "classifies",
+        "sources": [
+          "KG-BERT",
+          "triples"
+        ],
+        "targets": [
+          "links",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "fills",
+        "sources": [
+          "LLMs",
+          "partially masked inputs"
+        ],
+        "targets": [
+          "missing information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maintains",
+        "sources": [
+          "Knowledge Graph",
+          "quality assurance"
+        ],
+        "targets": [
+          "KG quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "data cleaning",
+          "quality evaluation"
+        ],
+        "targets": [
+          "KG quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "demands",
+        "sources": [
+          "e-commerce KGs",
+          "quality criteria"
+        ],
+        "targets": [
+          "accuracy",
+          "timeliness"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_30",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "negatively affects",
+        "sources": [
+          "completeness",
+          "accuracy"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "depends on",
+        "sources": [
+          "trustworthiness",
+          "source selection"
+        ],
+        "targets": [
+          "trustworthiness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "crowdsourcing",
+          "expert knowledge"
+        ],
+        "targets": [
+          "data quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "statistical analysis",
+          "data structure"
+        ],
+        "targets": [
+          "outliers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "validates",
+        "sources": [
+          "semantic reasoning",
+          "ontology"
+        ],
+        "targets": [
+          "consistency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_31",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "data profiling",
+          "cleaning techniques"
+        ],
+        "targets": [
+          "erroneous values"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "investigates",
+        "sources": [
+          "fact checking",
+          "evidence search"
+        ],
+        "targets": [
+          "correctness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "eliminates",
+        "sources": [
+          "data cleaning",
+          "error-correction techniques"
+        ],
+        "targets": [
+          "incorrect information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "data fusion",
+          "multiple sources"
+        ],
+        "targets": [
+          "information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "manages",
+        "sources": [
+          "version control",
+          "rollback mechanisms"
+        ],
+        "targets": [
+          "errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_32",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "requires",
+        "sources": [
+          "human-in-the-loop",
+          "KG sampling"
+        ],
+        "targets": [
+          "KG evaluation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "TripleCheckMate"
+        ],
+        "targets": [
+          "error evaluation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "validates",
+        "sources": [
+          "RDFUnit"
+        ],
+        "targets": [
+          "RDF graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "Hobbit"
+        ],
+        "targets": [
+          "benchmarking"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "generate",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "synthetic datasets"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_33",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "used_in",
+        "sources": [
+          "closed KGs",
+          "company-specific enterprise KGs"
+        ],
+        "targets": [
+          "companies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are_in",
+        "sources": [
+          "open KG toolsets"
+        ],
+        "targets": [
+          "infancy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "gathered",
+        "sources": [
+          "keyword-based search",
+          "DBLP dataset"
+        ],
+        "targets": [
+          "papers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "created",
+        "sources": [
+          "manual selection process"
+        ],
+        "targets": [
+          "candidate systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "will_be_useful",
+        "sources": [
+          "comparison criteria",
+          "methodology"
+        ],
+        "targets": [
+          "evaluating approaches"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_34",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Wikidata",
+          "entity annotation"
+        ],
+        "targets": [
+          "metadata"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focuses_on",
+        "sources": [
+          "ORKG",
+          "publications"
+        ],
+        "targets": [
+          "metadata"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "can_miss",
+        "sources": [
+          "cross-domain KGs",
+          "smaller-sized KGs"
+        ],
+        "targets": [
+          "domain-specific details"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are_largest",
+        "sources": [
+          "closed KGs",
+          "DBpedia"
+        ],
+        "targets": [
+          "entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_not_common",
+        "sources": [
+          "KG projects",
+          "continuous maintenance"
+        ],
+        "targets": [
+          "KG updates"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_35",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is_separate_from",
+        "sources": [
+          "KG construction",
+          "entity resolution"
+        ],
+        "targets": [
+          "fusion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrate_from",
+        "sources": [
+          "DBpedia",
+          "YAGO",
+          "NELL"
+        ],
+        "targets": [
+          "Wikipedia"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "are_sources_for",
+        "sources": [
+          "WordNet",
+          "ImageNet",
+          "BabelNet"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "use_data_from",
+        "sources": [
+          "AI-KG",
+          "CovidGraph",
+          "DRKG",
+          "XI"
+        ],
+        "targets": [
+          "scientific publications"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "support",
+        "sources": [
+          "DBpedia Live",
+          "SAGA"
+        ],
+        "targets": [
+          "event streams"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_36",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "provenance data",
+          "metadata support"
+        ],
+        "targets": [
+          "common kind"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "stores",
+        "sources": [
+          "DBpedia",
+          "YAGO"
+        ],
+        "targets": [
+          "versions"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "assigns",
+        "sources": [
+          "SLOGERT",
+          "log timestamps"
+        ],
+        "targets": [
+          "constructed entity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contains",
+        "sources": [
+          "CovidGraph",
+          "provenance information"
+        ],
+        "targets": [
+          "originating paper"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "links",
+        "sources": [
+          "Artist-KG",
+          "data source"
+        ],
+        "targets": [
+          "Knowledge Graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_37",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "converts",
+        "sources": [
+          "custom mapping",
+          "semi-structured data"
+        ],
+        "targets": [
+          "KG representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "changes",
+        "sources": [
+          "DBpedia",
+          "KG ontology"
+        ],
+        "targets": [
+          "data mappings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "CovidGraph",
+          "biomedical ontology"
+        ],
+        "targets": [
+          "IDs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "rule-based methods",
+          "semi-structured sources"
+        ],
+        "targets": [
+          "entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "Image2Triplets",
+          "computer vision techniques"
+        ],
+        "targets": [
+          "visual relationships"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_38",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "entity resolution",
+          "blocking"
+        ],
+        "targets": [
+          "scalability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "entity fusion",
+          "DRKG"
+        ],
+        "targets": [
+          "entity normalization"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "bases",
+        "sources": [
+          "AI-KG",
+          "extraction tool"
+        ],
+        "targets": [
+          "triple validity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "performs",
+        "sources": [
+          "DBpedia",
+          "YAGO"
+        ],
+        "targets": [
+          "consistency check"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "dstlr",
+          "knowledge base"
+        ],
+        "targets": [
+          "fact validation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_39",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "DBpedia-Live",
+          "Wikipedia changes"
+        ],
+        "targets": [
+          "live graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "SAGA",
+          "quality assurance"
+        ],
+        "targets": [
+          "automatic and manual methods"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "human interaction",
+          "data quality"
+        ],
+        "targets": [
+          "quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "incremental updates",
+          "KG construction"
+        ],
+        "targets": [
+          "scalability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "require",
+        "sources": [
+          "changes in input data",
+          "KG updates"
+        ],
+        "targets": [
+          "manual interaction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_40",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "preventing",
+        "sources": [
+          "closed-source tools",
+          "KG construction toolsets"
+        ],
+        "targets": [
+          "KG development"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enabling",
+        "sources": [
+          "open-source tools",
+          "KG construction"
+        ],
+        "targets": [
+          "KG development"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contributing",
+        "sources": [
+          "data management",
+          "metadata management"
+        ],
+        "targets": [
+          "KG quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "providing",
+        "sources": [
+          "high-quality sources",
+          "data sources"
+        ],
+        "targets": [
+          "training data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enabling",
+        "sources": [
+          "temporal KGs",
+          "historical data"
+        ],
+        "targets": [
+          "temporal reasoning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_41",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "data cleaning",
+          "data quality measures"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "correlates with",
+        "sources": [
+          "data quality",
+          "reasoning capabilities"
+        ],
+        "targets": [
+          "KG performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "LLMs",
+          "natural language understanding"
+        ],
+        "targets": [
+          "KG construction tasks"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "entity linking",
+          "entity resolution"
+        ],
+        "targets": [
+          "Knowledge Extraction"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "reduces",
+        "sources": [
+          "data cleaning",
+          "KG construction"
+        ],
+        "targets": [
+          "manual involvement"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_42",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "hinders",
+        "sources": [
+          "LLMs",
+          "bias"
+        ],
+        "targets": [
+          "effectiveness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "LLMs",
+          "hallucination"
+        ],
+        "targets": [
+          "phenomena"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KGs",
+          "LLMs"
+        ],
+        "targets": [
+          "information"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "data quality",
+          "KG construction"
+        ],
+        "targets": [
+          "blind spot"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focuses on",
+        "sources": [
+          "KG construction",
+          "requirements"
+        ],
+        "targets": [
+          "maintenance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_43",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "KG construction",
+          "requirements"
+        ],
+        "targets": [
+          "tasks"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "KG construction",
+          "data mining"
+        ],
+        "targets": [
+          "information extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "categorizes",
+        "sources": [
+          "domain-specific KGs",
+          "methods"
+        ],
+        "targets": [
+          "approaches"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "KG construction",
+          "toolsets"
+        ],
+        "targets": [
+          "pipelines"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "KG construction",
+          "open challenges"
+        ],
+        "targets": [
+          "limitations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_44",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "requires",
+        "sources": [
+          "incremental KG construction",
+          "flexible software architecture"
+        ],
+        "targets": [
+          "effective solutions"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "integrates",
+        "sources": [
+          "new data sources",
+          "multimodal data"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "Large Language Models"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "promises",
+        "sources": [
+          "addressing challenges"
+        ],
+        "targets": [
+          "advances in KG construction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "reduces",
+        "sources": [
+          "high-quality KGs"
+        ],
+        "targets": [
+          "effort for maintenance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_45",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "applies to",
+        "sources": [
+          "knowledge graph",
+          "geosciences"
+        ],
+        "targets": [
+          "knowledge graph construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "COVID-19"
+        ],
+        "targets": [
+          "drug repurposing"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "customer engagement"
+        ],
+        "targets": [
+          "social advocacy"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graph",
+          "financial analysis"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph",
+          "question answering"
+        ],
+        "targets": [
+          "complex queries"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_46",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "specifies",
+        "sources": [
+          "RDF",
+          "Resource Description Framework"
+        ],
+        "targets": [
+          "model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "OWL",
+          "Web Ontology Language"
+        ],
+        "targets": [
+          "semantic web"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "SWRL",
+          "Semantic Web Rule Language"
+        ],
+        "targets": [
+          "OWL",
+          "RuleML"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Datalog",
+          "Datalog Reasoning"
+        ],
+        "targets": [
+          "RDF",
+          "knowledge bases"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "Graph databases",
+          "Neo4j"
+        ],
+        "targets": [
+          "data management"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_47",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "G-CORE",
+          "graph query languages"
+        ],
+        "targets": [
+          "future development"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "Gremlin",
+          "graph traversal"
+        ],
+        "targets": [
+          "efficient querying"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "Cypher",
+          "property graphs"
+        ],
+        "targets": [
+          "data manipulation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "PGQL",
+          "property graph query"
+        ],
+        "targets": [
+          "query efficiency"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "transforms",
+        "sources": [
+          "RDF-star",
+          "property graphs"
+        ],
+        "targets": [
+          "data representation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_48",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "language models",
+          "structured views"
+        ],
+        "targets": [
+          "data lakes"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "support",
+        "sources": [
+          "metadata principles",
+          "practicalities"
+        ],
+        "targets": [
+          "data management"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increase",
+        "sources": [
+          "knowledge extraction workflows",
+          "dbpedia release cycle"
+        ],
+        "targets": [
+          "agility",
+          "efficiency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "incremental clustering",
+          "linked data"
+        ],
+        "targets": [
+          "data organization"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitate",
+        "sources": [
+          "automated selection",
+          "multiple datasets"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_49",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "manages",
+        "sources": [
+          "MASTRO STUDIO",
+          "ontology-based data access"
+        ],
+        "targets": [
+          "applications"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Squerall",
+          "virtual ontology-based access"
+        ],
+        "targets": [
+          "data sources"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "SemVersion",
+          "RDF-based ontology versioning"
+        ],
+        "targets": [
+          "versioning system"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "functions_as",
+        "sources": [
+          "R&Wbase",
+          "Git for triples"
+        ],
+        "targets": [
+          "version control"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "X-RDF-3X",
+          "fast querying"
+        ],
+        "targets": [
+          "RDF databases"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_50",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "R2RML",
+          "RML"
+        ],
+        "targets": [
+          "RDF generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "SDM-RDFizer"
+        ],
+        "targets": [
+          "RDF knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "data cleaning"
+        ],
+        "targets": [
+          "data errors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "cleans",
+        "sources": [
+          "BigDansing"
+        ],
+        "targets": [
+          "big data"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "captures",
+        "sources": [
+          "conditional functional dependencies"
+        ],
+        "targets": [
+          "data inconsistencies"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_51",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "HoloDetect",
+          "error detection"
+        ],
+        "targets": [
+          "few-shot learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "HoloClean",
+          "data repairs"
+        ],
+        "targets": [
+          "probabilistic inference"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ActiveClean",
+          "data cleaning"
+        ],
+        "targets": [
+          "statistical modeling"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KGClean",
+          "knowledge graph cleaning"
+        ],
+        "targets": [
+          "embedding techniques"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ontology learning",
+          "text"
+        ],
+        "targets": [
+          "knowledge construction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_52",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "large language models",
+          "ontology matching"
+        ],
+        "targets": [
+          "Agent-OM"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ontology matching",
+          "large language models"
+        ],
+        "targets": [
+          "OLaLa"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "ontology integration",
+          "challenges"
+        ],
+        "targets": [
+          "issues"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "schema matching",
+          "automatic approaches"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "ontology matching",
+          "word embeddings"
+        ],
+        "targets": [
+          "matching techniques"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_53",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "Stanford CoreNLP",
+          "Natural Language Processing Toolkit"
+        ],
+        "targets": [
+          "NLP tools"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "BERT",
+          "Deep Bidirectional Transformers"
+        ],
+        "targets": [
+          "language understanding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "GAIA",
+          "Multimedia Knowledge Extraction System"
+        ],
+        "targets": [
+          "knowledge extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Deep Learning",
+          "Entity Matching"
+        ],
+        "targets": [
+          "data matching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Collective annotation",
+          "Wikipedia entities"
+        ],
+        "targets": [
+          "web text"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_54",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "relation extraction",
+          "tree kernel"
+        ],
+        "targets": [
+          "context-sensitive parse tree"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "convolutional neural networks",
+          "relation extraction"
+        ],
+        "targets": [
+          "relation classification"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "facilitates",
+        "sources": [
+          "distant supervision",
+          "relation extraction"
+        ],
+        "targets": [
+          "piecewise convolutional neural networks"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "knowledge-aware prompt-tuning",
+          "relation extraction"
+        ],
+        "targets": [
+          "synergistic optimization"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "multimodal relation extraction",
+          "graph alignment"
+        ],
+        "targets": [
+          "relation extraction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_55",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "entity resolution",
+          "blocking techniques"
+        ],
+        "targets": [
+          "entity clustering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "embedding-based methods",
+          "entity alignment"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "deep learning",
+          "blocking"
+        ],
+        "targets": [
+          "entity matching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "dynamic sorted neighborhood indexing",
+          "real-time entity resolution"
+        ],
+        "targets": [
+          "entity resolution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "incremental record linkage",
+          "entity resolution"
+        ],
+        "targets": [
+          "data quality"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_56",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "BERT",
+          "Dual-Objective Fine-Tuning"
+        ],
+        "targets": [
+          "Entity Matching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Multi-Modal Knowledge Graph Transformer",
+          "Multi-Modal Entity Alignment"
+        ],
+        "targets": [
+          "Entity Alignment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "AutoAlign",
+          "Large Language Models"
+        ],
+        "targets": [
+          "Knowledge Graph Alignment"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "Statistical Distributions",
+          "Linked Data Quality"
+        ],
+        "targets": [
+          "Linked Data"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "Distant Supervision",
+          "Relation Extraction"
+        ],
+        "targets": [
+          "Labeled Data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_57",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "knowledge graph",
+          "embedding models"
+        ],
+        "targets": [
+          "knowledge base completion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "BERT",
+          "KG-BERT"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "language models",
+          "knowledge integration"
+        ],
+        "targets": [
+          "automatic knowledge graph completion"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "applies",
+        "sources": [
+          "ontological knowledge bases",
+          "association rule mining"
+        ],
+        "targets": [
+          "AMIE"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "modular combination",
+          "OWL reasoners"
+        ],
+        "targets": [
+          "ontology classification"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_58",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "Knowledge Graphs",
+          "Anomaly Detection"
+        ],
+        "targets": [
+          "Unsupervised Learning"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "validates",
+        "sources": [
+          "Large Language Models",
+          "Semantic Artifacts"
+        ],
+        "targets": [
+          "Knowledge Quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Knowledge Graph",
+          "Text Classification"
+        ],
+        "targets": [
+          "Synthetic Data Generation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "Linked Data",
+          "Quality Assessment"
+        ],
+        "targets": [
+          "Data Validation"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "Knowledge Graph Matching",
+          "Multi Source Data"
+        ],
+        "targets": [
+          "Data Integration"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_59",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "Knowledge Graph",
+          "artificial intelligence"
+        ],
+        "targets": [
+          "Ai-kg"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "Knowledge Graph",
+          "vision and language"
+        ],
+        "targets": [
+          "VisualSem"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "Knowledge Graph",
+          "geographic data"
+        ],
+        "targets": [
+          "WorldKG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "migrates",
+        "sources": [
+          "Wikidata",
+          "freebase"
+        ],
+        "targets": [
+          "wikidata"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "Knowledge Graph",
+          "data cleaning"
+        ],
+        "targets": [
+          "automated workflows"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Construxtion_of_KGs_chunk_60",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "large language models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "opportunities",
+          "challenges"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "knowledge graph construction",
+          "LLMs"
+        ],
+        "targets": [
+          "self-configuring pipelines"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "knowledge graph lifecycle"
+        ],
+        "targets": [
+          "building",
+          "maintaining"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "knowledge graph development"
+        ],
+        "targets": [
+          "systematic review"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

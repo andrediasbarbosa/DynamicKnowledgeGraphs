@@ -1,0 +1,603 @@
+[
+  {
+    "chunk_id": "KG_Curation_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "support",
+        "sources": [
+          "research knowledge graphs",
+          "hybrid approaches"
+        ],
+        "targets": [
+          "knowledge curation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "dashboards",
+          "human oversight"
+        ],
+        "targets": [
+          "knowledge curation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "lack",
+        "sources": [
+          "automated methods",
+          "human expertise"
+        ],
+        "targets": [
+          "precision"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "depend",
+        "sources": [
+          "quality of RKGs",
+          "success of services"
+        ],
+        "targets": [
+          "quality assurance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "develop",
+        "sources": [
+          "C&CB team",
+          "dashboard"
+        ],
+        "targets": [
+          "SciKGDash"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge curation",
+          "RKGs"
+        ],
+        "targets": [
+          "data quality"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "facilitates",
+        "sources": [
+          "human curators",
+          "information visualizations"
+        ],
+        "targets": [
+          "data assessment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "dashboards",
+          "data consumers"
+        ],
+        "targets": [
+          "user interaction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "assists",
+        "sources": [
+          "KG-CURATE",
+          "human experts"
+        ],
+        "targets": [
+          "structured graph"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "CleanGraph",
+          "users"
+        ],
+        "targets": [
+          "data quality"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "depends on",
+        "sources": [
+          "RKG quality",
+          "C&CB team"
+        ],
+        "targets": [
+          "user needs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "action research",
+          "C&CB team"
+        ],
+        "targets": [
+          "solution design"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "guides",
+        "sources": [
+          "user stories",
+          "C&CB team"
+        ],
+        "targets": [
+          "prototype development"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "feedback",
+          "C&CB team"
+        ],
+        "targets": [
+          "dashboard usability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "provides",
+        "sources": [
+          "design science",
+          "MVP"
+        ],
+        "targets": [
+          "framework"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "SciKGDash",
+          "MVP"
+        ],
+        "targets": [
+          "curation",
+          "community building"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "complete",
+        "sources": [
+          "participants",
+          "tasks"
+        ],
+        "targets": [
+          "experiment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "define",
+        "sources": [
+          "effectiveness",
+          "efficiency"
+        ],
+        "targets": [
+          "usability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provide",
+        "sources": [
+          "participants",
+          "feedback"
+        ],
+        "targets": [
+          "future development"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "validate",
+        "sources": [
+          "C&CB team",
+          "MVP"
+        ],
+        "targets": [
+          "usability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "dashboard",
+          "user stories"
+        ],
+        "targets": [
+          "tracking visitor paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "dashboard",
+          "data analysis"
+        ],
+        "targets": [
+          "content quality assessment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "user stories",
+          "C&CB team"
+        ],
+        "targets": [
+          "MVP"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "comment functionality",
+          "C&CB team"
+        ],
+        "targets": [
+          "track resources"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "dashboard",
+          "user experience"
+        ],
+        "targets": [
+          "satisfaction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "participated in",
+        "sources": [
+          "evaluation sessions",
+          "C&CB team"
+        ],
+        "targets": [
+          "experiment"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "repeated participation",
+          "dashboard"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "rated as",
+        "sources": [
+          "task completion",
+          "participants"
+        ],
+        "targets": [
+          "successful"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "indicates",
+        "sources": [
+          "task complexity",
+          "Task 2.1"
+        ],
+        "targets": [
+          "variation in responses"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "completed more than",
+        "sources": [
+          "effectiveness",
+          "participants"
+        ],
+        "targets": [
+          "three tasks"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "indicate",
+        "sources": [
+          "tasks",
+          "Task 1",
+          "Task 2.2",
+          "Task 3",
+          "Task 4"
+        ],
+        "targets": [
+          "good efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "measure",
+        "sources": [
+          "satisfaction",
+          "UEQ"
+        ],
+        "targets": [
+          "user experience"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "meet",
+        "sources": [
+          "team needs",
+          "N1",
+          "N2",
+          "N3",
+          "N4"
+        ],
+        "targets": [
+          "participants"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reject",
+        "sources": [
+          "null hypothesis",
+          "H0, Efficiency"
+        ],
+        "targets": [
+          "good efficiency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "dashboard",
+          "MVP"
+        ],
+        "targets": [
+          "C&CB team"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "MVP",
+          "dashboard"
+        ],
+        "targets": [
+          "effective solution"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "agreed",
+        "sources": [
+          "participants",
+          "dashboard"
+        ],
+        "targets": [
+          "positive experience"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "may influence",
+        "sources": [
+          "technical issues",
+          "MVP"
+        ],
+        "targets": [
+          "task completion"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "may not capture",
+        "sources": [
+          "evaluation tasks",
+          "real-world scenarios"
+        ],
+        "targets": [
+          "complexity"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "domain expertise"
+        ],
+        "targets": [
+          "quality assessment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "tailored solutions"
+        ],
+        "targets": [
+          "quality assessment"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "user behavior"
+        ],
+        "targets": [
+          "UI improvements"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "action research"
+        ],
+        "targets": [
+          "dashboard development"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "limits",
+        "sources": [
+          "modular approach"
+        ],
+        "targets": [
+          "component reuse"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Curation_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "visual dashboard",
+          "curation workflows"
+        ],
+        "targets": [
+          "community-building activities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "marks",
+        "sources": [
+          "MVP",
+          "curation tool"
+        ],
+        "targets": [
+          "milestone"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "end users",
+          "development cycle"
+        ],
+        "targets": [
+          "relevance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "impacts",
+        "sources": [
+          "dashboard design",
+          "internal structures"
+        ],
+        "targets": [
+          "querying strategies"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "navigate",
+        "sources": [
+          "modular systems",
+          "RKGs"
+        ],
+        "targets": [
+          "interplay"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

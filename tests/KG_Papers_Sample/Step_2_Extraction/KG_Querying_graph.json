@@ -1,0 +1,2497 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_844",
+      "properties": {},
+      "relation": "retrieves",
+      "source_chunk_id": "KG_Querying_chunk_3",
+      "source_document": "KG_Querying",
+      "sources": [
+        "aggregate query",
+        "statistical result"
+      ],
+      "targets": [
+        "entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_845",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Querying_chunk_6",
+      "source_document": "KG_Querying",
+      "sources": [
+        "arangodb",
+        "graph db"
+      ],
+      "targets": [
+        "aql"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_846",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "KG_Querying_chunk_6",
+      "source_document": "KG_Querying",
+      "sources": [
+        "binet",
+        "encoder-decoder model"
+      ],
+      "targets": [
+        "relation path"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_847",
+      "properties": {},
+      "relation": "rely_on",
+      "source_chunk_id": "KG_Querying_chunk_5",
+      "source_document": "KG_Querying",
+      "sources": [
+        "fuzzy logic-based method",
+        "classification model"
+      ],
+      "targets": [
+        "entity relation prediction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_848",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Querying_chunk_9",
+      "source_document": "KG_Querying",
+      "sources": [
+        "commonsense knowledge graph",
+        "cskg"
+      ],
+      "targets": [
+        "query answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_849",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "KG_Querying_chunk_6",
+      "source_document": "KG_Querying",
+      "sources": [
+        "conversational qa",
+        "dialog manager"
+      ],
+      "targets": [
+        "response generator"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_850",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_4",
+      "source_document": "KG_Querying",
+      "sources": [
+        "conversational qa",
+        "multimodal qa"
+      ],
+      "targets": [
+        "user experience"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_851",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_10",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge base",
+        "convolutional neural network"
+      ],
+      "targets": [
+        "knowledge base completion"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_852",
+      "properties": {},
+      "relation": "store",
+      "source_chunk_id": "KG_Querying_chunk_0",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "dbpedia",
+        "freebase",
+        "yago",
+        "wikidata",
+        "nell"
+      ],
+      "targets": [
+        "real-world fact"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_853",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Querying_chunk_2",
+      "source_document": "KG_Querying",
+      "sources": [
+        "deep learning",
+        "kg query processing"
+      ],
+      "targets": [
+        "kg query accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_854",
+      "properties": {},
+      "relation": "contributes to",
+      "source_chunk_id": "KG_Querying_chunk_4",
+      "source_document": "KG_Querying",
+      "sources": [
+        "deep learning",
+        "neural network"
+      ],
+      "targets": [
+        "kg query processing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_855",
+      "properties": {},
+      "relation": "advances",
+      "source_chunk_id": "KG_Querying_chunk_0",
+      "source_document": "KG_Querying",
+      "sources": [
+        "deep learning"
+      ],
+      "targets": [
+        "kg querying",
+        "kg embedding",
+        "kg-qa"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_856",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_8",
+      "source_document": "KG_Querying",
+      "sources": [
+        "distributed graph pattern matching",
+        "massive graph"
+      ],
+      "targets": [
+        "query performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_857",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "KG_Querying_chunk_4",
+      "source_document": "KG_Querying",
+      "sources": [
+        "embedding learning",
+        "logic rule"
+      ],
+      "targets": [
+        "kg embedding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_858",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_9",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "embedding"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_859",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "KG_Querying_chunk_8",
+      "source_document": "KG_Querying",
+      "sources": [
+        "explainability",
+        "interoperability"
+      ],
+      "targets": [
+        "multi-lingual querying"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_860",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Querying_chunk_9",
+      "source_document": "KG_Querying",
+      "sources": [
+        "subgraph matching",
+        "fpga-based technique"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_861",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Querying_chunk_6",
+      "source_document": "KG_Querying",
+      "sources": [
+        "neo4j",
+        "graph database"
+      ],
+      "targets": [
+        "property graph model"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_862",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_7",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg embedding",
+        "graph databas"
+      ],
+      "targets": [
+        "multi-modal kg storage"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_863",
+      "properties": {},
+      "relation": "is limited by",
+      "source_chunk_id": "KG_Querying_chunk_7",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph databas",
+        "kg querying"
+      ],
+      "targets": [
+        "ml-based kg querying"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_864",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Querying_chunk_11",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "graph databas"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_865",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_7",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph dbm",
+        "kg data model"
+      ],
+      "targets": [
+        "query language"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_866",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Querying_chunk_10",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "graph embedding"
+      ],
+      "targets": [
+        "relation prediction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_867",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "KG_Querying_chunk_3",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph operation",
+        "query graph"
+      ],
+      "targets": [
+        "query"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_868",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_9",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph query",
+        "pattern query"
+      ],
+      "targets": [
+        "graph search"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_869",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_3",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph query language",
+        "sparql"
+      ],
+      "targets": [
+        "rdf querying"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_870",
+      "properties": {},
+      "relation": "studied by",
+      "source_chunk_id": "KG_Querying_chunk_1",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph query processing",
+        "rdf",
+        "kg querying"
+      ],
+      "targets": [
+        "data management",
+        "theory",
+        "systems community"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_871",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_10",
+      "source_document": "KG_Querying",
+      "sources": [
+        "graph traversal",
+        "semantic network"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_872",
+      "properties": {},
+      "relation": "works_with",
+      "source_chunk_id": "KG_Querying_chunk_5",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg embedding",
+        "image encoder"
+      ],
+      "targets": [
+        "multi-modal data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_873",
+      "properties": {},
+      "relation": "follow",
+      "source_chunk_id": "KG_Querying_chunk_1",
+      "source_document": "KG_Querying",
+      "sources": [
+        "incomplete kgs"
+      ],
+      "targets": [
+        "open-world assumption"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_874",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "KG_Querying_chunk_10",
+      "source_document": "KG_Querying",
+      "sources": [
+        "rdf data",
+        "join algorithm"
+      ],
+      "targets": [
+        "query processing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_875",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Querying_chunk_3",
+      "source_document": "KG_Querying",
+      "sources": [
+        "keyword search",
+        "query reformulation"
+      ],
+      "targets": [
+        "structured query"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_876",
+      "properties": {},
+      "relation": "preserve",
+      "source_chunk_id": "KG_Querying_chunk_7",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg embedding model",
+        "query property"
+      ],
+      "targets": [
+        "relation property"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_877",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Querying_chunk_4",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg embedding",
+        "kg processing"
+      ],
+      "targets": [
+        "query answering"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_878",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_2",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg embedding",
+        "query answering"
+      ],
+      "targets": [
+        "kg query processing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_879",
+      "properties": {},
+      "relation": "are different from",
+      "source_chunk_id": "KG_Querying_chunk_0",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg query"
+      ],
+      "targets": [
+        "classical relational query"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_880",
+      "properties": {},
+      "relation": "includes",
+      "source_chunk_id": "KG_Querying_chunk_7",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg querying method",
+        "sparql"
+      ],
+      "targets": [
+        "query language"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_881",
+      "properties": {},
+      "relation": "focus on",
+      "source_chunk_id": "KG_Querying_chunk_1",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg querying method"
+      ],
+      "targets": [
+        "structured information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_882",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "KG_Querying_chunk_4",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg querying technology",
+        "sparql"
+      ],
+      "targets": [
+        "user familiarity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_883",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_2",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg querying",
+        "web search"
+      ],
+      "targets": [
+        "kg querying"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_884",
+      "properties": {},
+      "relation": "combine_with",
+      "source_chunk_id": "KG_Querying_chunk_5",
+      "source_document": "KG_Querying",
+      "sources": [
+        "neural encoder",
+        "kg"
+      ],
+      "targets": [
+        "relational model"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_885",
+      "properties": {},
+      "relation": "use",
+      "source_chunk_id": "KG_Querying_chunk_5",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg-qa method",
+        "neural network-based ranking model"
+      ],
+      "targets": [
+        "query candidate"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_886",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Querying_chunk_8",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph embedding",
+        "kg-qa"
+      ],
+      "targets": [
+        "explanatory evidence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_887",
+      "properties": {},
+      "relation": "translates",
+      "source_chunk_id": "KG_Querying_chunk_2",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kg-qa",
+        "natural language question"
+      ],
+      "targets": [
+        "query language"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_888",
+      "properties": {},
+      "relation": "are",
+      "source_chunk_id": "KG_Querying_chunk_1",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kgs",
+        "multimodal kgs"
+      ],
+      "targets": [
+        "complex"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_889",
+      "properties": {},
+      "relation": "employs",
+      "source_chunk_id": "KG_Querying_chunk_6",
+      "source_document": "KG_Querying",
+      "sources": [
+        "kgt5",
+        "transformer model"
+      ],
+      "targets": [
+        "kg completion"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_890",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_11",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "machine learning"
+      ],
+      "targets": [
+        "data analysi"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_891",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Querying_chunk_11",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "natural language processing"
+      ],
+      "targets": [
+        "query understanding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_892",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_11",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "query language"
+      ],
+      "targets": [
+        "data retrieval"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_893",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Querying_chunk_11",
+      "source_document": "KG_Querying",
+      "sources": [
+        "knowledge graph",
+        "semantic search"
+      ],
+      "targets": [
+        "information retrieval"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_894",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Querying_chunk_10",
+      "source_document": "KG_Querying",
+      "sources": [
+        "multi-hop reasoning",
+        "knowledge graph"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_895",
+      "properties": {},
+      "relation": "is critical for",
+      "source_chunk_id": "KG_Querying_chunk_0",
+      "source_document": "KG_Querying",
+      "sources": [
+        "querying",
+        "knowledge graph"
+      ],
+      "targets": [
+        "web search",
+        "question answering",
+        "semantic search",
+        "fact checking",
+        "recommendation"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_896",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Querying_chunk_9",
+      "source_document": "KG_Querying",
+      "sources": [
+        "query optimization",
+        "materialized view"
+      ],
+      "targets": [
+        "sparql query"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_897",
+      "properties": {},
+      "relation": "critical_for",
+      "source_chunk_id": "KG_Querying_chunk_5",
+      "source_document": "KG_Querying",
+      "sources": [
+        "multi-modal kg embedding",
+        "querying multi-modal kgs"
+      ],
+      "targets": [
+        "nlq answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_898",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Querying_chunk_3",
+      "source_document": "KG_Querying",
+      "sources": [
+        "natural language interface",
+        "user input"
+      ],
+      "targets": [
+        "query construction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_899",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Querying_chunk_8",
+      "source_document": "KG_Querying",
+      "sources": [
+        "neural network",
+        "question answering"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_900",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "KG_Querying_chunk_2",
+      "source_document": "KG_Querying",
+      "sources": [
+        "rdf model",
+        "property graph model"
+      ],
+      "targets": [
+        "kg data model"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_901",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "KG_Querying_chunk_1",
+      "source_document": "KG_Querying",
+      "sources": [
+        "query intent"
+      ],
+      "targets": [
+        "correct answer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_902",
+      "properties": {},
+      "relation": "is challenging with",
+      "source_chunk_id": "KG_Querying_chunk_0",
+      "source_document": "KG_Querying",
+      "sources": [
+        "query optimization"
+      ],
+      "targets": [
+        "traditional binary join plan"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_903",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Querying_chunk_8",
+      "source_document": "KG_Querying",
+      "sources": [
+        "semantic parsing",
+        "question-answer pair"
+      ],
+      "targets": [
+        "knowledge extraction"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 60,
+    "num_nodes": 140
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "aggregate query",
+      "incident_edges": [
+        "edge_844"
+      ],
+      "label": "aggregate queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "aql",
+      "incident_edges": [
+        "edge_845"
+      ],
+      "label": "AQL",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "arangodb",
+      "incident_edges": [
+        "edge_845"
+      ],
+      "label": "ArangoDB",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "binet",
+      "incident_edges": [
+        "edge_846"
+      ],
+      "label": "BiNet",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "classical relational query",
+      "incident_edges": [
+        "edge_879"
+      ],
+      "label": "classical relational queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "classification model",
+      "incident_edges": [
+        "edge_847"
+      ],
+      "label": "classification models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "commonsense knowledge graph",
+      "incident_edges": [
+        "edge_848"
+      ],
+      "label": "commonsense knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex",
+      "incident_edges": [
+        "edge_888"
+      ],
+      "label": "complex",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "conversational qa",
+      "incident_edges": [
+        "edge_849",
+        "edge_850"
+      ],
+      "label": "Conversational QA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "convolutional neural network",
+      "incident_edges": [
+        "edge_851"
+      ],
+      "label": "convolutional neural network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct answer",
+      "incident_edges": [
+        "edge_901"
+      ],
+      "label": "correct answers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cskg",
+      "incident_edges": [
+        "edge_848"
+      ],
+      "label": "CSKG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data analysi",
+      "incident_edges": [
+        "edge_890"
+      ],
+      "label": "data analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data management",
+      "incident_edges": [
+        "edge_870"
+      ],
+      "label": "data management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data retrieval",
+      "incident_edges": [
+        "edge_892"
+      ],
+      "label": "data retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dbpedia",
+      "incident_edges": [
+        "edge_852"
+      ],
+      "label": "DBpedia",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "deep learning",
+      "incident_edges": [
+        "edge_853",
+        "edge_854",
+        "edge_855"
+      ],
+      "label": "deep learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dialog manager",
+      "incident_edges": [
+        "edge_849"
+      ],
+      "label": "dialog manager",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "distributed graph pattern matching",
+      "incident_edges": [
+        "edge_856"
+      ],
+      "label": "distributed graph pattern matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "embedding",
+      "incident_edges": [
+        "edge_858"
+      ],
+      "label": "embedding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "embedding learning",
+      "incident_edges": [
+        "edge_857"
+      ],
+      "label": "embedding learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "encoder-decoder model",
+      "incident_edges": [
+        "edge_846"
+      ],
+      "label": "encoder-decoder model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity",
+      "incident_edges": [
+        "edge_844"
+      ],
+      "label": "entity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity relation prediction",
+      "incident_edges": [
+        "edge_847"
+      ],
+      "label": "entity relation prediction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "explainability",
+      "incident_edges": [
+        "edge_859"
+      ],
+      "label": "explainability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "explanatory evidence",
+      "incident_edges": [
+        "edge_886"
+      ],
+      "label": "explanatory evidences",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact checking",
+      "incident_edges": [
+        "edge_895"
+      ],
+      "label": "fact checking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fpga-based technique",
+      "incident_edges": [
+        "edge_860"
+      ],
+      "label": "fpga-based techniques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "freebase",
+      "incident_edges": [
+        "edge_852"
+      ],
+      "label": "Freebase",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fuzzy logic-based method",
+      "incident_edges": [
+        "edge_847"
+      ],
+      "label": "fuzzy logic-based methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "graph databa",
+      "incident_edges": [],
+      "label": "graph databases",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "graph database",
+      "incident_edges": [
+        "edge_861"
+      ],
+      "label": "graph database",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph db",
+      "incident_edges": [
+        "edge_845"
+      ],
+      "label": "graph DB",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph dbm",
+      "incident_edges": [
+        "edge_865"
+      ],
+      "label": "graph DBMS",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph embedding",
+      "incident_edges": [
+        "edge_866"
+      ],
+      "label": "graph embeddings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph operation",
+      "incident_edges": [
+        "edge_867"
+      ],
+      "label": "graph operations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph query",
+      "incident_edges": [
+        "edge_868"
+      ],
+      "label": "graph queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph query language",
+      "incident_edges": [
+        "edge_869"
+      ],
+      "label": "graph query languages",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph query processing",
+      "incident_edges": [
+        "edge_870"
+      ],
+      "label": "graph query processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph search",
+      "incident_edges": [
+        "edge_868"
+      ],
+      "label": "graph search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph traversal",
+      "incident_edges": [
+        "edge_871"
+      ],
+      "label": "graph traversal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "image encoder",
+      "incident_edges": [
+        "edge_872"
+      ],
+      "label": "image encoder",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "incomplete kgs",
+      "incident_edges": [
+        "edge_873"
+      ],
+      "label": "incomplete KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "information retrieval",
+      "incident_edges": [
+        "edge_893"
+      ],
+      "label": "information retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interoperability",
+      "incident_edges": [
+        "edge_859"
+      ],
+      "label": "interoperability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "join algorithm",
+      "incident_edges": [
+        "edge_874"
+      ],
+      "label": "join algorithms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "keyword search",
+      "incident_edges": [
+        "edge_875"
+      ],
+      "label": "keyword search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg",
+      "incident_edges": [
+        "edge_884"
+      ],
+      "label": "KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg completion",
+      "incident_edges": [
+        "edge_889"
+      ],
+      "label": "KG completion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "kg data model",
+      "incident_edges": [
+        "edge_865",
+        "edge_900"
+      ],
+      "label": "KG data models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "kg embedding",
+      "incident_edges": [
+        "edge_855",
+        "edge_857",
+        "edge_862",
+        "edge_872",
+        "edge_877",
+        "edge_878"
+      ],
+      "label": "KG embedding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg embedding model",
+      "incident_edges": [
+        "edge_876"
+      ],
+      "label": "KG embedding models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg processing",
+      "incident_edges": [
+        "edge_877"
+      ],
+      "label": "KG processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg query",
+      "incident_edges": [
+        "edge_879"
+      ],
+      "label": "KG queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg query accuracy",
+      "incident_edges": [
+        "edge_853"
+      ],
+      "label": "KG query accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "kg query processing",
+      "incident_edges": [
+        "edge_853",
+        "edge_854",
+        "edge_878"
+      ],
+      "label": "KG query processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "kg querying",
+      "incident_edges": [
+        "edge_855",
+        "edge_863",
+        "edge_870",
+        "edge_883"
+      ],
+      "label": "KG querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "kg querying method",
+      "incident_edges": [
+        "edge_880",
+        "edge_881"
+      ],
+      "label": "KG querying methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg querying technology",
+      "incident_edges": [
+        "edge_882"
+      ],
+      "label": "KG querying technologies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "kg-qa",
+      "incident_edges": [
+        "edge_855",
+        "edge_886",
+        "edge_887"
+      ],
+      "label": "KG-QA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg-qa method",
+      "incident_edges": [
+        "edge_885"
+      ],
+      "label": "KG-QA methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kgs",
+      "incident_edges": [
+        "edge_888"
+      ],
+      "label": "KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kgt5",
+      "incident_edges": [
+        "edge_889"
+      ],
+      "label": "KGT5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge base",
+      "incident_edges": [
+        "edge_851"
+      ],
+      "label": "knowledge base",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge base completion",
+      "incident_edges": [
+        "edge_851"
+      ],
+      "label": "knowledge base completion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge extraction",
+      "incident_edges": [
+        "edge_903"
+      ],
+      "label": "knowledge extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 11,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_852",
+        "edge_858",
+        "edge_864",
+        "edge_866",
+        "edge_890",
+        "edge_891",
+        "edge_892",
+        "edge_893",
+        "edge_894",
+        "edge_895",
+        "edge_899"
+      ],
+      "label": "knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph embedding",
+      "incident_edges": [
+        "edge_886"
+      ],
+      "label": "knowledge graph embedding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "logic rule",
+      "incident_edges": [
+        "edge_857"
+      ],
+      "label": "logic rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "machine learning",
+      "incident_edges": [
+        "edge_890"
+      ],
+      "label": "machine learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "massive graph",
+      "incident_edges": [
+        "edge_856"
+      ],
+      "label": "massive graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "materialized view",
+      "incident_edges": [
+        "edge_896"
+      ],
+      "label": "materialized views",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ml-based kg querying",
+      "incident_edges": [
+        "edge_863"
+      ],
+      "label": "ML-based KG querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-hop reasoning",
+      "incident_edges": [
+        "edge_894"
+      ],
+      "label": "multi-hop reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-lingual querying",
+      "incident_edges": [
+        "edge_859"
+      ],
+      "label": "multi-lingual querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-modal data",
+      "incident_edges": [
+        "edge_872"
+      ],
+      "label": "multi-modal data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-modal kg embedding",
+      "incident_edges": [
+        "edge_897"
+      ],
+      "label": "multi-modal KG embeddings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-modal kg storage",
+      "incident_edges": [
+        "edge_862"
+      ],
+      "label": "multi-modal KG storage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal kgs",
+      "incident_edges": [
+        "edge_888"
+      ],
+      "label": "multimodal KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal qa",
+      "incident_edges": [
+        "edge_850"
+      ],
+      "label": "multimodal QA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language interface",
+      "incident_edges": [
+        "edge_898"
+      ],
+      "label": "natural language interfaces",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language processing",
+      "incident_edges": [
+        "edge_891"
+      ],
+      "label": "natural language processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language question",
+      "incident_edges": [
+        "edge_887"
+      ],
+      "label": "natural language questions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "nell",
+      "incident_edges": [
+        "edge_852"
+      ],
+      "label": "NELL",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neo4j",
+      "incident_edges": [
+        "edge_861"
+      ],
+      "label": "Neo4j",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural encoder",
+      "incident_edges": [
+        "edge_884"
+      ],
+      "label": "neural encoders",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "neural network",
+      "incident_edges": [
+        "edge_854",
+        "edge_899"
+      ],
+      "label": "neural network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural network-based ranking model",
+      "incident_edges": [
+        "edge_885"
+      ],
+      "label": "neural network-based ranking model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "nlq answering",
+      "incident_edges": [
+        "edge_897"
+      ],
+      "label": "NLQ answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "open-world assumption",
+      "incident_edges": [
+        "edge_873"
+      ],
+      "label": "open-world assumption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pattern query",
+      "incident_edges": [
+        "edge_868"
+      ],
+      "label": "pattern queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance",
+      "incident_edges": [
+        "edge_860"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "property graph model",
+      "incident_edges": [
+        "edge_861",
+        "edge_900"
+      ],
+      "label": "property graph model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query",
+      "incident_edges": [
+        "edge_867"
+      ],
+      "label": "query",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "query answering",
+      "incident_edges": [
+        "edge_848",
+        "edge_877",
+        "edge_878"
+      ],
+      "label": "query answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query candidate",
+      "incident_edges": [
+        "edge_885"
+      ],
+      "label": "query candidates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query construction",
+      "incident_edges": [
+        "edge_898"
+      ],
+      "label": "query construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query graph",
+      "incident_edges": [
+        "edge_867"
+      ],
+      "label": "query graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query intent",
+      "incident_edges": [
+        "edge_901"
+      ],
+      "label": "query intent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "query language",
+      "incident_edges": [
+        "edge_865",
+        "edge_880",
+        "edge_887",
+        "edge_892"
+      ],
+      "label": "query languages",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "query optimization",
+      "incident_edges": [
+        "edge_896",
+        "edge_902"
+      ],
+      "label": "query optimization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query performance",
+      "incident_edges": [
+        "edge_856"
+      ],
+      "label": "query performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query processing",
+      "incident_edges": [
+        "edge_874"
+      ],
+      "label": "query processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query property",
+      "incident_edges": [
+        "edge_876"
+      ],
+      "label": "query properties",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query reformulation",
+      "incident_edges": [
+        "edge_875"
+      ],
+      "label": "query reformulation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query understanding",
+      "incident_edges": [
+        "edge_891"
+      ],
+      "label": "query understanding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "querying",
+      "incident_edges": [
+        "edge_895"
+      ],
+      "label": "querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "querying multi-modal kgs",
+      "incident_edges": [
+        "edge_897"
+      ],
+      "label": "querying multi-modal KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "question answering",
+      "incident_edges": [
+        "edge_858",
+        "edge_864",
+        "edge_871",
+        "edge_894",
+        "edge_895",
+        "edge_899"
+      ],
+      "label": "question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "question-answer pair",
+      "incident_edges": [
+        "edge_903"
+      ],
+      "label": "question-answer pairs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf",
+      "incident_edges": [
+        "edge_870"
+      ],
+      "label": "RDF",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf data",
+      "incident_edges": [
+        "edge_874"
+      ],
+      "label": "RDF data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf model",
+      "incident_edges": [
+        "edge_900"
+      ],
+      "label": "RDF model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf querying",
+      "incident_edges": [
+        "edge_869"
+      ],
+      "label": "RDF querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "real-world fact",
+      "incident_edges": [
+        "edge_852"
+      ],
+      "label": "real-world facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation",
+      "incident_edges": [
+        "edge_895"
+      ],
+      "label": "recommendation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation path",
+      "incident_edges": [
+        "edge_846"
+      ],
+      "label": "relation paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation prediction",
+      "incident_edges": [
+        "edge_866"
+      ],
+      "label": "relation prediction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation property",
+      "incident_edges": [
+        "edge_876"
+      ],
+      "label": "relation properties",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational model",
+      "incident_edges": [
+        "edge_884"
+      ],
+      "label": "relational models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "response generator",
+      "incident_edges": [
+        "edge_849"
+      ],
+      "label": "response generator",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic network",
+      "incident_edges": [
+        "edge_871"
+      ],
+      "label": "semantic network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic parsing",
+      "incident_edges": [
+        "edge_903"
+      ],
+      "label": "semantic parsing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "semantic search",
+      "incident_edges": [
+        "edge_893",
+        "edge_895"
+      ],
+      "label": "semantic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "sparql",
+      "incident_edges": [
+        "edge_869",
+        "edge_880",
+        "edge_882"
+      ],
+      "label": "SPARQL",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sparql query",
+      "incident_edges": [
+        "edge_896"
+      ],
+      "label": "SPARQL queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "statistical result",
+      "incident_edges": [
+        "edge_844"
+      ],
+      "label": "statistical results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured information",
+      "incident_edges": [
+        "edge_881"
+      ],
+      "label": "structured information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured query",
+      "incident_edges": [
+        "edge_875"
+      ],
+      "label": "structured queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph matching",
+      "incident_edges": [
+        "edge_860"
+      ],
+      "label": "subgraph matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "systems community",
+      "incident_edges": [
+        "edge_870"
+      ],
+      "label": "systems communities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "theory",
+      "incident_edges": [
+        "edge_870"
+      ],
+      "label": "theory",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "traditional binary join plan",
+      "incident_edges": [
+        "edge_902"
+      ],
+      "label": "traditional binary join plans",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "transformer model",
+      "incident_edges": [
+        "edge_889"
+      ],
+      "label": "Transformer model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user experience",
+      "incident_edges": [
+        "edge_850"
+      ],
+      "label": "user experience",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user familiarity",
+      "incident_edges": [
+        "edge_882"
+      ],
+      "label": "user familiarity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user input",
+      "incident_edges": [
+        "edge_898"
+      ],
+      "label": "user input",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "web search",
+      "incident_edges": [
+        "edge_883",
+        "edge_895"
+      ],
+      "label": "web search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "wikidata",
+      "incident_edges": [
+        "edge_852"
+      ],
+      "label": "Wikidata",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "yago",
+      "incident_edges": [
+        "edge_852"
+      ],
+      "label": "YAGO",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}
