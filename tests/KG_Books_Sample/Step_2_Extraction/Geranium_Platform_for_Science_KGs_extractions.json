@@ -1,0 +1,1204 @@
+[
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "semantic properties"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "Polito Knowledge Graph"
+        ],
+        "targets": [
+          "publications",
+          "authors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leverages",
+        "sources": [
+          "Geranium"
+        ],
+        "targets": [
+          "Polito Knowledge Graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "suggests",
+        "sources": [
+          "Graph Neural Networks"
+        ],
+        "targets": [
+          "collaboration opportunities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "Scholarly Knowledge Graphs"
+        ],
+        "targets": [
+          "advanced features"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "Graph Neural Networks",
+          "GNN methods"
+        ],
+        "targets": [
+          "recommendations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "organize",
+        "sources": [
+          "Knowledge Graphs",
+          "KGs"
+        ],
+        "targets": [
+          "structured data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "embed",
+        "sources": [
+          "KG Embeddings",
+          "KGE techniques"
+        ],
+        "targets": [
+          "KG components"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhance",
+        "sources": [
+          "semantic search",
+          "NLP techniques"
+        ],
+        "targets": [
+          "recommendations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "link prediction",
+          "link prediction mechanism"
+        ],
+        "targets": [
+          "recommendation features"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "DistMult",
+          "scoring function"
+        ],
+        "targets": [
+          "statement score"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "Graph Neural Networks",
+          "neural architectures"
+        ],
+        "targets": [
+          "latent representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aggregates",
+        "sources": [
+          "Graph Convolutional Networks",
+          "self-learnt filters"
+        ],
+        "targets": [
+          "node features"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "Relational Graph Convolutional Network",
+          "multi-relational graphs"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "incorporates",
+        "sources": [
+          "GNN models",
+          "KGE techniques"
+        ],
+        "targets": [
+          "Graph Auto-Encoders"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "KGs",
+          "scholarly data"
+        ],
+        "targets": [
+          "advanced services"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "textual sources",
+          "structured knowledge"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mines",
+        "sources": [
+          "KGs",
+          "latent information"
+        ],
+        "targets": [
+          "statistical analysis",
+          "recommendation tools"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "deep neural networks",
+          "triple extraction"
+        ],
+        "targets": [
+          "text"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "empowers",
+        "sources": [
+          "KG embeddings",
+          "recommendation system"
+        ],
+        "targets": [
+          "recommendations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "DBpedia",
+          "RDF"
+        ],
+        "targets": [
+          "structured information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "developed_by",
+        "sources": [
+          "IRIS",
+          "CINECA Consortium"
+        ],
+        "targets": [
+          "69 Italian universities",
+          "23 research institutions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "IRIS",
+          "DublinCore ontology"
+        ],
+        "targets": [
+          "metadata standards"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "DBpedia",
+          "IRIS"
+        ],
+        "targets": [
+          "metadata availability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contains",
+        "sources": [
+          "IRIS",
+          "Polito"
+        ],
+        "targets": [
+          "publications"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "mapped to",
+        "sources": [
+          "Publication",
+          "Author",
+          "Journal"
+        ],
+        "targets": [
+          "PKG ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "AuthorKeyword"
+        ],
+        "targets": [
+          "keywords"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "TMFResource"
+        ],
+        "targets": [
+          "semantic topics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used to connect",
+        "sources": [
+          "RDFS",
+          "FOAF",
+          "DCMI"
+        ],
+        "targets": [
+          "instances"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enriches",
+        "sources": [
+          "TellMeFirst"
+        ],
+        "targets": [
+          "publications metadata"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "saved in",
+        "sources": [
+          "Polito Knowledge Graph",
+          "triplestore"
+        ],
+        "targets": [
+          "triplestore"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "holds",
+        "sources": [
+          "backend architecture",
+          "RDF representation"
+        ],
+        "targets": [
+          "Polito Knowledge Graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "Geranium platform",
+          "APIs"
+        ],
+        "targets": [
+          "developers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implemented as",
+        "sources": [
+          "Builder",
+          "Python module"
+        ],
+        "targets": [
+          "rdflib"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "takes as input",
+        "sources": [
+          "module",
+          "JSON dump"
+        ],
+        "targets": [
+          "RDF graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "Builder",
+          "ThreadPoolExecutor"
+        ],
+        "targets": [
+          "AsyncIO"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implemented_with",
+        "sources": [
+          "Model Trainer",
+          "Pytorch"
+        ],
+        "targets": [
+          "Deep Graph Library"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "Link Evaluator",
+          "Auto-Encoder"
+        ],
+        "targets": [
+          "trained model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "publishes",
+        "sources": [
+          "Geranium",
+          "SPARQL endpoint"
+        ],
+        "targets": [
+          "KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Data Ingestion",
+          "Builder Module"
+        ],
+        "targets": [
+          "metadata extraction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "metadata extraction",
+          "RDF"
+        ],
+        "targets": [
+          "ontology network"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "classifies",
+        "sources": [
+          "TMF"
+        ],
+        "targets": [
+          "abstracts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "trains",
+        "sources": [
+          "TMF",
+          "Wikipedia corpus"
+        ],
+        "targets": [
+          "model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enriches",
+        "sources": [
+          "metadata",
+          "semantic topics"
+        ],
+        "targets": [
+          "KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "publication abstract",
+          "DBpedia entities"
+        ],
+        "targets": [
+          "similarity scores"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Link Enrichment",
+          "Enhancement Module"
+        ],
+        "targets": [
+          "Polito Knowledge Graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "predicts",
+        "sources": [
+          "Graph Neural Network",
+          "Data Enhancement"
+        ],
+        "targets": [
+          "links"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "translates",
+        "sources": [
+          "Dataset Builder",
+          "PKG"
+        ],
+        "targets": [
+          "dataset"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assigns",
+        "sources": [
+          "Dataset Builder",
+          "RDF representation"
+        ],
+        "targets": [
+          "numerical representations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assigns",
+        "sources": [
+          "training process",
+          "numerical representation"
+        ],
+        "targets": [
+          "embeddings"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "edge list",
+          "training set"
+        ],
+        "targets": [
+          "training pipeline"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "Model Trainer",
+          "Graph Auto-Encoder"
+        ],
+        "targets": [
+          "Relational Graph Convolutional Network"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "comprises",
+        "sources": [
+          "training edges",
+          "validation edges"
+        ],
+        "targets": [
+          "dataset"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is similar to",
+        "sources": [
+          "neighborhood structure",
+          "training graph"
+        ],
+        "targets": [
+          "full graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "Model Trainer",
+          "hyperparameter values"
+        ],
+        "targets": [
+          "triples"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contrasts",
+        "sources": [
+          "closed-world assumption",
+          "open-world assumption"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "exploits",
+        "sources": [
+          "R-GCN"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reconstructs",
+        "sources": [
+          "DistMult"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "predicts",
+        "sources": [
+          "Link Evaluator"
+        ],
+        "targets": [
+          "new facts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "suggests",
+        "sources": [
+          "recommendation system"
+        ],
+        "targets": [
+          "research topics"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "queries",
+        "sources": [
+          "REST API",
+          "SPARQL endpoint"
+        ],
+        "targets": [
+          "data"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "Geranium platform",
+          "semantic tools"
+        ],
+        "targets": [
+          "topic-based search"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "triggers",
+        "sources": [
+          "user",
+          "search bar"
+        ],
+        "targets": [
+          "search"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "presents",
+        "sources": [
+          "search",
+          "Geranium Web Application"
+        ],
+        "targets": [
+          "publications"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "links",
+        "sources": [
+          "recommendation system",
+          "publications"
+        ],
+        "targets": [
+          "recommended publications"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "retrieves",
+        "sources": [
+          "Geranium platform",
+          "IRIS"
+        ],
+        "targets": [
+          "publications"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "Geranium platform"
+        ],
+        "targets": [
+          "expertise profiles"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "suggests",
+        "sources": [
+          "GNN model"
+        ],
+        "targets": [
+          "recommendations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "displays",
+        "sources": [
+          "Viewer Module"
+        ],
+        "targets": [
+          "insights"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "suggests",
+        "sources": [
+          "system"
+        ],
+        "targets": [
+          "new topics"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "link prediction",
+          "recommendation service"
+        ],
+        "targets": [
+          "model capability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is used in",
+        "sources": [
+          "entity-ranking approach",
+          "knowledge base completion"
+        ],
+        "targets": [
+          "validation process"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "DistMult method"
+        ],
+        "targets": [
+          "score values"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "are generated from",
+        "sources": [
+          "perturbed facts",
+          "source nodes"
+        ],
+        "targets": [
+          "initial PKG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluate",
+        "sources": [
+          "metrics"
+        ],
+        "targets": [
+          "model capability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "performed_on",
+        "sources": [
+          "training",
+          "evaluation"
+        ],
+        "targets": [
+          "workstation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "GPU",
+          "CPU"
+        ],
+        "targets": [
+          "training time"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "helps",
+        "sources": [
+          "higher regularization",
+          "learning rate"
+        ],
+        "targets": [
+          "model differentiation"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "implies",
+        "sources": [
+          "low number of relationships"
+        ],
+        "targets": [
+          "low convolutional filters"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "limits",
+        "sources": [
+          "dimensionality of evaluation graph"
+        ],
+        "targets": [
+          "model evaluation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "GNNs",
+          "link predictions"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "best model"
+        ],
+        "targets": [
+          "MRR value"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "FB15K dataset"
+        ],
+        "targets": [
+          "link prediction tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ranks",
+        "sources": [
+          "model"
+        ],
+        "targets": [
+          "true triple"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "number of topics",
+          "PKG"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "leads to",
+        "sources": [
+          "number of topics",
+          "PKG"
+        ],
+        "targets": [
+          "MRR values"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "causes",
+        "sources": [
+          "complex graph structure",
+          "number of topics"
+        ],
+        "targets": [
+          "inaccurate predictions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "low number of topics",
+          "PKG"
+        ],
+        "targets": [
+          "correct ranking"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "semantic technologies"
+        ],
+        "targets": [
+          "advanced services"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "Polito Knowledge Graph"
+        ],
+        "targets": [
+          "web user interface",
+          "APIs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "KGs",
+          "Graph Neural Networks"
+        ],
+        "targets": [
+          "recommendation task"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "semantic relations",
+          "DBpedia"
+        ],
+        "targets": [
+          "topic-based search"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "overcomes",
+        "sources": [
+          "Geranium architecture"
+        ],
+        "targets": [
+          "limitations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graphs",
+          "COVID-19"
+        ],
+        "targets": [
+          "information representation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "natural language processing",
+          "machine learning"
+        ],
+        "targets": [
+          "knowledge graph generation"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "graph neural networks"
+        ],
+        "targets": [
+          "knowledge graph inference"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "facilitates",
+        "sources": [
+          "semantic annotation"
+        ],
+        "targets": [
+          "text mining"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph-based systems"
+        ],
+        "targets": [
+          "recommendation algorithms"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geranium_Platform_for_Science_KGs_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "TF-IDF",
+          "text classification"
+        ],
+        "targets": [
+          "classification accuracy"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "affects",
+        "sources": [
+          "analytics",
+          "privacy"
+        ],
+        "targets": [
+          "data security"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

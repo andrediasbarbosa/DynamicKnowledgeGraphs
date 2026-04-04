@@ -1,0 +1,1113 @@
+[
+  {
+    "chunk_id": "Research_from_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "knowledge graphs",
+          "traditional knowledge engineering"
+        ],
+        "targets": [
+          "AIs-KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "attribute implication",
+          "formal context",
+          "concept lattice"
+        ],
+        "targets": [
+          "closed cycle"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "ontology",
+          "concept lattice"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge verification",
+          "credibility calculation"
+        ],
+        "targets": [
+          "commonsense knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "constructs",
+        "sources": [
+          "MLNS model",
+          "entity constraints"
+        ],
+        "targets": [
+          "logic rules"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "solves",
+        "sources": [
+          "knowledge engineering",
+          "traditional knowledge"
+        ],
+        "targets": [
+          "problems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "formal concept analysis",
+          "FCA"
+        ],
+        "targets": [
+          "knowledge source"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "attribute implications",
+          "AIs-KG"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "solves",
+        "sources": [
+          "Bayesian method",
+          "knowledge verification"
+        ],
+        "targets": [
+          "correct knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focuses on",
+        "sources": [
+          "commonsense knowledge graphs",
+          "research"
+        ],
+        "targets": [
+          "knowledge reliability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "formal concept analysis",
+          "FCA"
+        ],
+        "targets": [
+          "theory"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "links",
+        "sources": [
+          "concept lattice",
+          "ontology"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "batch processing algorithm",
+          "incremental algorithm"
+        ],
+        "targets": [
+          "concept lattice"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "Godin algorithm",
+          "AddIntent algorithm"
+        ],
+        "targets": [
+          "progressive algorithms"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "are based on",
+        "sources": [
+          "ontology construction methods",
+          "FCA"
+        ],
+        "targets": [
+          "formal expression"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "proposes",
+        "sources": [
+          "Cimiano",
+          "formal concept analysis"
+        ],
+        "targets": [
+          "domain ontology construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "develops",
+        "sources": [
+          "GuTao",
+          "Fcatab"
+        ],
+        "targets": [
+          "semi-automatic ontology construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "Haav",
+          "formal concept analysis"
+        ],
+        "targets": [
+          "rule-based language"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "Marek Obitko",
+          "formal concept analysis"
+        ],
+        "targets": [
+          "domain ontology construction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "solves",
+        "sources": [
+          "formal concept analysis",
+          "domain ontology construction"
+        ],
+        "targets": [
+          "key problems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "ontology",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "cognition framework"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "connects",
+        "sources": [
+          "ontology",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "formal concept analysis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "ontology",
+          "data introduction phases"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "formal context",
+          "concept"
+        ],
+        "targets": [
+          "intent",
+          "extent"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_a",
+        "sources": [
+          "subconcept",
+          "parent concept"
+        ],
+        "targets": [
+          "concept"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_a",
+        "sources": [
+          "concept lattice",
+          "partial order relation"
+        ],
+        "targets": [
+          "set"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "reflexivity",
+          "anti-symmetry",
+          "transitivity"
+        ],
+        "targets": [
+          "partial order relation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "attribute",
+          "implication"
+        ],
+        "targets": [
+          "formal context"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "concept lattice",
+          "construction algorithm"
+        ],
+        "targets": [
+          "formal context"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "ontology",
+          "concept lattice"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "attribute",
+          "relation"
+        ],
+        "targets": [
+          "implication"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "formal context",
+          "attribute implication"
+        ],
+        "targets": [
+          "attribute logic"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "implies",
+        "sources": [
+          "A",
+          "B"
+        ],
+        "targets": [
+          "K"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "implication set",
+          "formal context"
+        ],
+        "targets": [
+          "K"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "augment method",
+          "implication relations"
+        ],
+        "targets": [
+          "generation efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "composes",
+        "sources": [
+          "initial formal context",
+          "object base"
+        ],
+        "targets": [
+          "K"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "attribute implication",
+          "formal context"
+        ],
+        "targets": [
+          "concept lattice"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mines",
+        "sources": [
+          "concept lattice"
+        ],
+        "targets": [
+          "formal context"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "node",
+          "concept lattice"
+        ],
+        "targets": [
+          "concept"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "composes",
+        "sources": [
+          "extent",
+          "intent"
+        ],
+        "targets": [
+          "concept"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "proposes",
+        "sources": [
+          "NextClosure",
+          "Ganter"
+        ],
+        "targets": [
+          "implications"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "generates",
+        "sources": [
+          "table-filling method",
+          "concept lattice"
+        ],
+        "targets": [
+          "rules"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "adds",
+        "sources": [
+          "extent",
+          "intent"
+        ],
+        "targets": [
+          "formal context"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "concept lattice",
+          "implication set"
+        ],
+        "targets": [
+          "ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "attribute implications",
+          "node"
+        ],
+        "targets": [
+          "concept"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is based on",
+        "sources": [
+          "ontology construction model",
+          "constraints"
+        ],
+        "targets": [
+          "implication set"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "connects with",
+        "sources": [
+          "skeleton method",
+          "ontology construction model"
+        ],
+        "targets": [
+          "traditional method"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "ontology",
+          "evaluation criteria"
+        ],
+        "targets": [
+          "ontology evaluation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "ontology",
+          "mapping rules"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "transforms",
+        "sources": [
+          "concept lattice",
+          "ontology"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "guides",
+        "sources": [
+          "ontology construction",
+          "evaluation criteria"
+        ],
+        "targets": [
+          "ontology update"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "stores",
+        "sources": [
+          "Neo4j",
+          "ontology model"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "animal",
+          "hair"
+        ],
+        "targets": [
+          "mammal"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "animal",
+          "milk"
+        ],
+        "targets": [
+          "mammal"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "animal",
+          "feathers"
+        ],
+        "targets": [
+          "bird"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is",
+        "sources": [
+          "animal",
+          "flies"
+        ],
+        "targets": [
+          "bird"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "animal",
+          "meat"
+        ],
+        "targets": [
+          "carnivore"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "hairy"
+        ],
+        "targets": [
+          "mammal"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "gives milk"
+        ],
+        "targets": [
+          "mammal"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "has feathers"
+        ],
+        "targets": [
+          "bird"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "can fly",
+          "lays eggs"
+        ],
+        "targets": [
+          "bird"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "eats meat"
+        ],
+        "targets": [
+          "carnivore"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "has sharp teeth",
+          "has claws",
+          "has forward eyes"
+        ],
+        "targets": [
+          "mammal"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "mammal",
+          "has hoofs"
+        ],
+        "targets": [
+          "ungulate"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "animal",
+          "mammal",
+          "chews cud"
+        ],
+        "targets": [
+          "ungulate"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "concept lattice",
+          "formal context"
+        ],
+        "targets": [
+          "concepts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "concept lattice",
+          "attribute implications"
+        ],
+        "targets": [
+          "classes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "FCA",
+          "ontology editing tool"
+        ],
+        "targets": [
+          "ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "satisfies",
+        "sources": [
+          "constructed ontology",
+          "evaluation criteria"
+        ],
+        "targets": [
+          "standards"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "stores",
+        "sources": [
+          "mapped knowledge graph",
+          "Neo4j graph database"
+        ],
+        "targets": [
+          "data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "defines",
+        "sources": [
+          "classes",
+          "attributes"
+        ],
+        "targets": [
+          "relation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructed_by",
+        "sources": [
+          "ontology",
+          "Protégé"
+        ],
+        "targets": [
+          "OWL"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applied_to",
+        "sources": [
+          "AIs-KG theory",
+          "knowledge graph"
+        ],
+        "targets": [
+          "completion"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "used_in",
+        "sources": [
+          "datasets",
+          "CN-DBpedia"
+        ],
+        "targets": [
+          "evaluation"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "completes",
+        "sources": [
+          "completion algorithm",
+          "datasets"
+        ],
+        "targets": [
+          "attributes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "completes",
+        "sources": [
+          "completion algorithm",
+          "attribute alignment",
+          "entity alignment"
+        ],
+        "targets": [
+          "datasets"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "illustrates",
+        "sources": [
+          "theory"
+        ],
+        "targets": [
+          "effectiveness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adapts",
+        "sources": [
+          "algorithm",
+          "large-scale datasets"
+        ],
+        "targets": [
+          "completion effect"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "knowledge graph",
+          "AIs-KG theory"
+        ],
+        "targets": [
+          "knowledge engineering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "fault information",
+          "manufacturing industry"
+        ],
+        "targets": [
+          "fault knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "formal concept analysis",
+          "knowledge graph"
+        ],
+        "targets": [
+          "knowledge reasoning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "collective graph identification"
+        ],
+        "targets": [
+          "data discovery"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aids",
+        "sources": [
+          "formal concept analysis",
+          "ontology design"
+        ],
+        "targets": [
+          "ontology structuring"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "utilizes",
+        "sources": [
+          "academic social network",
+          "formal concept analysis"
+        ],
+        "targets": [
+          "domain ontology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "text",
+          "automatic acquisition"
+        ],
+        "targets": [
+          "taxonomies"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Research_from_KGs_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "applies",
+        "sources": [
+          "ontology construction",
+          "inductive concept analysis"
+        ],
+        "targets": [
+          "domain-specific ontologies"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "uses",
+        "sources": [
+          "automatic ontology construction",
+          "lexical database"
+        ],
+        "targets": [
+          "energy sector"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "based_on",
+        "sources": [
+          "knowledge graph",
+          "domain ontology"
+        ],
+        "targets": [
+          "natural language processing"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implements",
+        "sources": [
+          "expert system",
+          "animal recognition"
+        ],
+        "targets": [
+          "Prolog"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "surveys",
+        "sources": [
+          "knowledge graph refinement",
+          "evaluation methods"
+        ],
+        "targets": [
+          "approaches"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

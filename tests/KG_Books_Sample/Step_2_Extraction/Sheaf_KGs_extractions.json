@@ -1,0 +1,1328 @@
+[
+  {
+    "chunk_id": "Sheaf_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "knowledge graphs",
+          "relational data"
+        ],
+        "targets": [
+          "entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "link",
+        "sources": [
+          "categorical framework",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "topos-theoretic semantics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "define",
+        "sources": [
+          "Grothendieck topology",
+          "free category"
+        ],
+        "targets": [
+          "context-dependent meaning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "connect",
+        "sources": [
+          "graph-theoretic structure",
+          "categorical composition"
+        ],
+        "targets": [
+          "sheaf semantics"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "emphasize",
+        "sources": [
+          "relational data representations",
+          "digital humanities"
+        ],
+        "targets": [
+          "social practices",
+          "cultural production"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "investigates",
+        "sources": [
+          "knowledge graphs",
+          "cultural analytics"
+        ],
+        "targets": [
+          "visual objects",
+          "cultural objects"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "develops",
+        "sources": [
+          "categorical framework",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "structural result"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "free category",
+          "knowledge graph"
+        ],
+        "targets": [
+          "objects"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "induces",
+        "sources": [
+          "identity functor",
+          "free category"
+        ],
+        "targets": [
+          "geometric morphism"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "relates",
+        "sources": [
+          "interpretive logics",
+          "knowledge graph"
+        ],
+        "targets": [
+          "categorical constructions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "generalizes",
+        "sources": [
+          "knowledge graph",
+          "directed graphs"
+        ],
+        "targets": [
+          "edge-labelled digraphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "knowledge graphs",
+          "matrix-based methods"
+        ],
+        "targets": [
+          "relational data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "simplicial complexes",
+          "hypergraphs"
+        ],
+        "targets": [
+          "multi-way relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extends",
+        "sources": [
+          "categorical framework",
+          "higher-dimensional models"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "knowledge graph",
+          "triple"
+        ],
+        "targets": [
+          "directed edge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "incidence matrices",
+          "knowledge graph"
+        ],
+        "targets": [
+          "algebraic representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contains",
+        "sources": [
+          "head-incidence matrix",
+          "tail-incidence matrix"
+        ],
+        "targets": [
+          "non-zero entry"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "studied through",
+        "sources": [
+          "combinatorial properties",
+          "knowledge graph"
+        ],
+        "targets": [
+          "linear-algebraic operations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "encodes",
+        "sources": [
+          "H(h)",
+          "H(t)"
+        ],
+        "targets": [
+          "shared-head relations",
+          "shared-tail relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "Aout",
+          "Ain"
+        ],
+        "targets": [
+          "adjacency matrices"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "consists of",
+        "sources": [
+          "Aout"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "share",
+        "sources": [
+          "triples"
+        ],
+        "targets": [
+          "head entity"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "knowledge graph",
+          "triple"
+        ],
+        "targets": [
+          "knowledge digraph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "encodes",
+        "sources": [
+          "head incidence matrix",
+          "tail incidence matrix"
+        ],
+        "targets": [
+          "shared relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reflects",
+        "sources": [
+          "adjacency matrix",
+          "block diagonal"
+        ],
+        "targets": [
+          "spectrum"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "line digraphs",
+          "graph theory"
+        ],
+        "targets": [
+          "classical precedents"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "corresponds",
+        "sources": [
+          "Lout",
+          "K"
+        ],
+        "targets": [
+          "strongly connected components"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "induces",
+        "sources": [
+          "Te",
+          "K"
+        ],
+        "targets": [
+          "complete directed subgraph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "occurs in",
+        "sources": [
+          "head entity",
+          "τ"
+        ],
+        "targets": [
+          "m triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "share",
+        "sources": [
+          "triples",
+          "head entity"
+        ],
+        "targets": [
+          "complete directed subgraph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "knowledge graph",
+          "free category"
+        ],
+        "targets": [
+          "C(K)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "corresponds to",
+        "sources": [
+          "triples",
+          "morphisms"
+        ],
+        "targets": [
+          "generating morphisms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mirrors",
+        "sources": [
+          "line digraphs",
+          "categorical organisation"
+        ],
+        "targets": [
+          "morphisms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "appears as",
+        "sources": [
+          "entity",
+          "triple"
+        ],
+        "targets": [
+          "head"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "lies in",
+        "sources": [
+          "column space",
+          "H(h)"
+        ],
+        "targets": [
+          "Rn"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "maps to",
+        "sources": [
+          "C(K)",
+          "K"
+        ],
+        "targets": [
+          "D"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "triple",
+          "T"
+        ],
+        "targets": [
+          "morphism"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assigns",
+        "sources": [
+          "h",
+          "t"
+        ],
+        "targets": [
+          "E"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "decomposes into",
+        "sources": [
+          "morphism",
+          "C(K)"
+        ],
+        "targets": [
+          "fibres"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "records",
+        "sources": [
+          "out-line digraph",
+          "in-line digraph"
+        ],
+        "targets": [
+          "adjacencies"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "categorical representation"
+        ],
+        "targets": [
+          "study transformations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "knowledge graph",
+          "homomorphism"
+        ],
+        "targets": [
+          "category"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "schema mappings",
+          "functors"
+        ],
+        "targets": [
+          "categories"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "knowledge graph",
+          "free category"
+        ],
+        "targets": [
+          "C(K)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "topos",
+          "sheaves"
+        ],
+        "targets": [
+          "semantic extension"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "identity morphism",
+          "knowledge graph"
+        ],
+        "targets": [
+          "identity maps"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "consists_of",
+        "sources": [
+          "morphism",
+          "knowledge graph"
+        ],
+        "targets": [
+          "maps"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "equips",
+        "sources": [
+          "Grothendieck topology",
+          "knowledge graph"
+        ],
+        "targets": [
+          "semantic structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "propagates",
+        "sources": [
+          "relational information",
+          "knowledge graph"
+        ],
+        "targets": [
+          "composable paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "covering family",
+          "entity"
+        ],
+        "targets": [
+          "finite set of morphisms"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "encodes",
+        "sources": [
+          "path-covering topology",
+          "knowledge graph"
+        ],
+        "targets": [
+          "relational information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "satisfy",
+        "sources": [
+          "covering families",
+          "Grothendieck topology"
+        ],
+        "targets": [
+          "axioms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "correspond",
+        "sources": [
+          "morphisms",
+          "free category"
+        ],
+        "targets": [
+          "relational paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "gives",
+        "sources": [
+          "composing",
+          "morphisms"
+        ],
+        "targets": [
+          "composite path"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "path-covering condition",
+          "Grothendieck coverage"
+        ],
+        "targets": [
+          "topology J"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "leads_to",
+        "sources": [
+          "atomic topology",
+          "path-covering topology"
+        ],
+        "targets": [
+          "distinct site structures"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "preserves",
+        "sources": [
+          "knowledge graph homomorphism",
+          "C(f)"
+        ],
+        "targets": [
+          "covering families"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps_to",
+        "sources": [
+          "relational paths",
+          "C(f)"
+        ],
+        "targets": [
+          "relational paths in K'"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_included_in",
+        "sources": [
+          "covering family",
+          "Jatom"
+        ],
+        "targets": [
+          "covering family in J"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "strengthens",
+        "sources": [
+          "presheaf",
+          "sheaf"
+        ],
+        "targets": [
+          "presheaf structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "category",
+          "Grothendieck topos"
+        ],
+        "targets": [
+          "left-exact localisation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "sheafification functor",
+          "inclusion functor"
+        ],
+        "targets": [
+          "left adjoint"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "sites",
+          "path-covering topology",
+          "atomic topology"
+        ],
+        "targets": [
+          "categories"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "gives rise to",
+        "sources": [
+          "site",
+          "C(K)",
+          "J"
+        ],
+        "targets": [
+          "Grothendieck topos",
+          "Sh(C(K), J)",
+          "Sh(C(K), Jatom)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "induces",
+        "sources": [
+          "knowledge graph homomorphism",
+          "f",
+          "C(f)"
+        ],
+        "targets": [
+          "geometric morphism",
+          "Sh(C(K), J)",
+          "Sh(C(K ′), J ′)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "induces",
+        "sources": [
+          "identity functor",
+          "C(K)"
+        ],
+        "targets": [
+          "geometric morphism",
+          "Sh(C(K), J)",
+          "Sh(C(K), Jatom)"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "preserves",
+        "sources": [
+          "precomposition",
+          "finite limits"
+        ],
+        "targets": [
+          "inverse-image functor"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "geometric morphism",
+          "Theorem 6.4"
+        ],
+        "targets": [
+          "essential"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is part of",
+        "sources": [
+          "inverse-image functor",
+          "adjoint triple"
+        ],
+        "targets": [
+          "semantic operations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "equips",
+        "sources": [
+          "topos theory"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Grothendieck topos"
+        ],
+        "targets": [
+          "intuitionistic logic"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "topos theory",
+          "categorical structure"
+        ],
+        "targets": [
+          "logical reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assigns",
+        "sources": [
+          "subobject classifier",
+          "topos"
+        ],
+        "targets": [
+          "truth values"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assigned",
+        "sources": [
+          "semantic information",
+          "entities"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "propagates",
+        "sources": [
+          "sheaf structure",
+          "relational paths"
+        ],
+        "targets": [
+          "semantic information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "corresponds",
+        "sources": [
+          "Grothendieck topologies",
+          "appearance"
+        ],
+        "targets": [
+          "interpretations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "sheaf",
+          "contravariant functor"
+        ],
+        "targets": [
+          "C(K)",
+          "Set"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "induces",
+        "sources": [
+          "morphism",
+          "restriction map"
+        ],
+        "targets": [
+          "map"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "local sections",
+          "sheaf condition"
+        ],
+        "targets": [
+          "global section"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extends",
+        "sources": [
+          "semantic assignment",
+          "covering"
+        ],
+        "targets": [
+          "whole entity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "glue",
+        "sources": [
+          "local interpretations",
+          "global interpretation"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "shows",
+        "sources": [
+          "geometric morphism",
+          "Theorem 6.4"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "atomic topology",
+          "path-covering topology"
+        ],
+        "targets": [
+          "semantic information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "changes",
+        "sources": [
+          "Grothendieck topology"
+        ],
+        "targets": [
+          "interpretive environment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "governs",
+        "sources": [
+          "topoi"
+        ],
+        "targets": [
+          "regimes of appearance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "illustrates",
+        "sources": [
+          "incidence matrices",
+          "line digraphs"
+        ],
+        "targets": [
+          "structural decomposition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generate",
+        "sources": [
+          "triples",
+          "head entity"
+        ],
+        "targets": [
+          "strongly connected components"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "graph Lout",
+          "shared-head relations"
+        ],
+        "targets": [
+          "components"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adapts",
+        "sources": [
+          "knowledge-graph formulation",
+          "triples"
+        ],
+        "targets": [
+          "graph theory"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "graph Lout",
+          "strongly connected components"
+        ],
+        "targets": [
+          "complete directed graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "correspond",
+        "sources": [
+          "morphisms",
+          "objects"
+        ],
+        "targets": [
+          "arrows"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assigns",
+        "sources": [
+          "sheaf",
+          "covering family"
+        ],
+        "targets": [
+          "sets"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "B",
+          "A",
+          "D"
+        ],
+        "targets": [
+          "local interpretations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "combinatorial structure",
+          "categorical composition",
+          "topos-theoretic semantics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reveals",
+        "sources": [
+          "line knowledge digraphs"
+        ],
+        "targets": [
+          "structural relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "equips",
+        "sources": [
+          "categorical structure"
+        ],
+        "targets": [
+          "Grothendieck topology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "results_in",
+        "sources": [
+          "path-covering topology",
+          "knowledge graph"
+        ],
+        "targets": [
+          "Grothendieck topos"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "topos",
+          "context-dependent reasoning"
+        ],
+        "targets": [
+          "formal setting"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "suggests",
+        "sources": [
+          "framework"
+        ],
+        "targets": [
+          "connections"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "provide",
+        "sources": [
+          "description logics",
+          "formal concept analysis"
+        ],
+        "targets": [
+          "bridges"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "evaluate",
+        "sources": [
+          "algorithms"
+        ],
+        "targets": [
+          "sheaf conditions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reviewed in",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "relational machine learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Sheaf_KGs_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "characterizes",
+        "sources": [
+          "graph theory",
+          "derived graphs"
+        ],
+        "targets": [
+          "characterizations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "category theory",
+          "data migration"
+        ],
+        "targets": [
+          "functorial data migration"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "extends",
+        "sources": [
+          "networks",
+          "pairwise interactions"
+        ],
+        "targets": [
+          "network dynamics"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "informs",
+        "sources": [
+          "topos theory",
+          "category theory"
+        ],
+        "targets": [
+          "mathematical structures"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "analyzes",
+        "sources": [
+          "spectra",
+          "graphs"
+        ],
+        "targets": [
+          "graph properties"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

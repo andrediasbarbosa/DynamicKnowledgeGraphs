@@ -1,0 +1,3761 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.7,
+      "id": "edge_448",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_20",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "analytic",
+        "privacy"
+      ],
+      "targets": [
+        "data security"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_449",
+      "properties": {},
+      "relation": "allows",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_6",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium platform",
+        "api"
+      ],
+      "targets": [
+        "developer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_450",
+      "properties": {},
+      "relation": "mapped to",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_5",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "publication",
+        "author",
+        "journal"
+      ],
+      "targets": [
+        "pkg ontology"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_451",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_5",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "authorkeyword"
+      ],
+      "targets": [
+        "keyword"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_452",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_7",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "link evaluator",
+        "auto-encoder"
+      ],
+      "targets": [
+        "trained model"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_453",
+      "properties": {},
+      "relation": "holds",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_6",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "backend architecture",
+        "rdf representation"
+      ],
+      "targets": [
+        "polito knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_454",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_16",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "best model"
+      ],
+      "targets": [
+        "mrr value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_455",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_7",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "data ingestion",
+        "builder module"
+      ],
+      "targets": [
+        "metadata extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_456",
+      "properties": {},
+      "relation": "implemented as",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_6",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "builder",
+        "python module"
+      ],
+      "targets": [
+        "rdflib"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_457",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_7",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "builder",
+        "threadpoolexecutor"
+      ],
+      "targets": [
+        "asyncio"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_458",
+      "properties": {},
+      "relation": "developed_by",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_4",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "iri",
+        "cineca consortium"
+      ],
+      "targets": [
+        "69 italian university",
+        "23 research institution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_459",
+      "properties": {},
+      "relation": "contrasts",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_11",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "closed-world assumption",
+        "open-world assumption"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_460",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_17",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "complex graph structure",
+        "number of topic"
+      ],
+      "targets": [
+        "inaccurate prediction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_461",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_19",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "knowledge graph",
+        "covid-19"
+      ],
+      "targets": [
+        "information representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_462",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_15",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "gpu",
+        "cpu"
+      ],
+      "targets": [
+        "training time"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_463",
+      "properties": {},
+      "relation": "predicts",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_9",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "graph neural network",
+        "data enhancement"
+      ],
+      "targets": [
+        "link"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_464",
+      "properties": {},
+      "relation": "translates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_9",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "dataset builder",
+        "pkg"
+      ],
+      "targets": [
+        "dataset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_465",
+      "properties": {},
+      "relation": "assigns",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_9",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "dataset builder",
+        "rdf representation"
+      ],
+      "targets": [
+        "numerical representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_466",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_8",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "publication abstract",
+        "dbpedia entity"
+      ],
+      "targets": [
+        "similarity score"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_467",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_4",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "dbpedia",
+        "iri"
+      ],
+      "targets": [
+        "metadata availability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_468",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_4",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "dbpedia",
+        "rdf"
+      ],
+      "targets": [
+        "structured information"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_469",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_18",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "semantic relation",
+        "dbpedia"
+      ],
+      "targets": [
+        "topic-based search"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_470",
+      "properties": {},
+      "relation": "used to connect",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_5",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "rdf",
+        "foaf",
+        "dcmi"
+      ],
+      "targets": [
+        "instance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_471",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_3",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "deep neural network",
+        "triple extraction"
+      ],
+      "targets": [
+        "text"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_472",
+      "properties": {},
+      "relation": "limits",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_15",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "dimensionality of evaluation graph"
+      ],
+      "targets": [
+        "model evaluation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_473",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_14",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "distmult method"
+      ],
+      "targets": [
+        "score value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_474",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_2",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "distmult",
+        "scoring function"
+      ],
+      "targets": [
+        "statement score"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_475",
+      "properties": {},
+      "relation": "reconstructs",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_11",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "distmult"
+      ],
+      "targets": [
+        "graph structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_476",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_4",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "iri",
+        "dublincore ontology"
+      ],
+      "targets": [
+        "metadata standard"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_477",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_10",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "edge list",
+        "training set"
+      ],
+      "targets": [
+        "training pipeline"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_478",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_9",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "link enrichment",
+        "enhancement module"
+      ],
+      "targets": [
+        "polito knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_479",
+      "properties": {},
+      "relation": "is used in",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_14",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "entity-ranking approach",
+        "knowledge base completion"
+      ],
+      "targets": [
+        "validation process"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_480",
+      "properties": {},
+      "relation": "performed_on",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_15",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "training",
+        "evaluation"
+      ],
+      "targets": [
+        "workstation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_481",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_16",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "fb15k dataset"
+      ],
+      "targets": [
+        "link prediction task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_482",
+      "properties": {},
+      "relation": "overcomes",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_18",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium architecture"
+      ],
+      "targets": [
+        "limitation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_483",
+      "properties": {},
+      "relation": "retrieves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_13",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium platform",
+        "iri"
+      ],
+      "targets": [
+        "publication"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_484",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_12",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium platform",
+        "semantic tool"
+      ],
+      "targets": [
+        "topic-based search"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_485",
+      "properties": {},
+      "relation": "allows",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_13",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium platform"
+      ],
+      "targets": [
+        "expertise profile"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_486",
+      "properties": {},
+      "relation": "presents",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_12",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "search",
+        "geranium web application"
+      ],
+      "targets": [
+        "publication"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_487",
+      "properties": {},
+      "relation": "publishes",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_7",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium",
+        "sparql endpoint"
+      ],
+      "targets": [
+        "kg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_488",
+      "properties": {},
+      "relation": "leverages",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_0",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "geranium"
+      ],
+      "targets": [
+        "polito knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_489",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_1",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "graph neural network",
+        "gnn method"
+      ],
+      "targets": [
+        "recommendation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_490",
+      "properties": {},
+      "relation": "incorporates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_2",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "gnn model",
+        "kge technique"
+      ],
+      "targets": [
+        "graph auto-encoders"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_491",
+      "properties": {},
+      "relation": "suggests",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_13",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "gnn model"
+      ],
+      "targets": [
+        "recommendation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_492",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_16",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "gnn",
+        "link prediction"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_493",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_10",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "model trainer",
+        "graph auto-encoder"
+      ],
+      "targets": [
+        "relational graph convolutional network"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_494",
+      "properties": {},
+      "relation": "aggregates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_2",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "graph convolutional network",
+        "self-learnt filter"
+      ],
+      "targets": [
+        "node feature"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_495",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_18",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "kgs",
+        "graph neural network"
+      ],
+      "targets": [
+        "recommendation task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_496",
+      "properties": {},
+      "relation": "learns",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_2",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "graph neural network",
+        "neural architecture"
+      ],
+      "targets": [
+        "latent representation"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_497",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_19",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "graph neural network"
+      ],
+      "targets": [
+        "knowledge graph inference"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_498",
+      "properties": {},
+      "relation": "suggests",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_0",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "graph neural network"
+      ],
+      "targets": [
+        "collaboration opportunity"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_499",
+      "properties": {},
+      "relation": "helps",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_15",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "higher regularization",
+        "learning rate"
+      ],
+      "targets": [
+        "model differentiation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_500",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_10",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "model trainer",
+        "hyperparameter value"
+      ],
+      "targets": [
+        "triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_501",
+      "properties": {},
+      "relation": "contains",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_4",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "iri",
+        "polito"
+      ],
+      "targets": [
+        "publication"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_502",
+      "properties": {},
+      "relation": "takes as input",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_6",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "module",
+        "json dump"
+      ],
+      "targets": [
+        "rdf graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_503",
+      "properties": {},
+      "relation": "embed",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_1",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "kg embedding",
+        "kge technique"
+      ],
+      "targets": [
+        "kg component"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_504",
+      "properties": {},
+      "relation": "empowers",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_3",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "kg embedding",
+        "recommendation system"
+      ],
+      "targets": [
+        "recommendation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_505",
+      "properties": {},
+      "relation": "organize",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_1",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "knowledge graph",
+        "kgs"
+      ],
+      "targets": [
+        "structured data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_506",
+      "properties": {},
+      "relation": "mines",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_3",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "kgs",
+        "latent information"
+      ],
+      "targets": [
+        "statistical analysi",
+        "recommendation tool"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_507",
+      "properties": {},
+      "relation": "models",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_3",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "kgs",
+        "scholarly data"
+      ],
+      "targets": [
+        "advanced service"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_508",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_19",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "knowledge graph-based system"
+      ],
+      "targets": [
+        "recommendation algorithm"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_509",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_0",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "semantic property"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_510",
+      "properties": {},
+      "relation": "predicts",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_11",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "link evaluator"
+      ],
+      "targets": [
+        "new fact"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_511",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_1",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "link prediction",
+        "link prediction mechanism"
+      ],
+      "targets": [
+        "recommendation feature"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_512",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_14",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "link prediction",
+        "recommendation service"
+      ],
+      "targets": [
+        "model capability"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_513",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_15",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "low number of relationship"
+      ],
+      "targets": [
+        "low convolutional filter"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_514",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_17",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "low number of topic",
+        "pkg"
+      ],
+      "targets": [
+        "correct ranking"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_515",
+      "properties": {},
+      "relation": "contributes to",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_19",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "natural language processing",
+        "machine learning"
+      ],
+      "targets": [
+        "knowledge graph generation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_516",
+      "properties": {},
+      "relation": "maps",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_8",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "metadata extraction",
+        "rdf"
+      ],
+      "targets": [
+        "ontology network"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_517",
+      "properties": {},
+      "relation": "enriches",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_8",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "metadata",
+        "semantic topic"
+      ],
+      "targets": [
+        "kg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_518",
+      "properties": {},
+      "relation": "evaluate",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_14",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "metric"
+      ],
+      "targets": [
+        "model capability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_519",
+      "properties": {},
+      "relation": "implemented_with",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_7",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "model trainer",
+        "pytorch"
+      ],
+      "targets": [
+        "deep graph library"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_520",
+      "properties": {},
+      "relation": "ranks",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_16",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "model"
+      ],
+      "targets": [
+        "true triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_521",
+      "properties": {},
+      "relation": "models",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_2",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "relational graph convolutional network",
+        "multi-relational graph"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_522",
+      "properties": {},
+      "relation": "is similar to",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_10",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "neighborhood structure",
+        "training graph"
+      ],
+      "targets": [
+        "full graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_523",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_1",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "semantic search",
+        "nlp technique"
+      ],
+      "targets": [
+        "recommendation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_524",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_17",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "number of topic",
+        "pkg"
+      ],
+      "targets": [
+        "link prediction"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_525",
+      "properties": {},
+      "relation": "leads to",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_17",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "number of topic",
+        "pkg"
+      ],
+      "targets": [
+        "mrr value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_526",
+      "properties": {},
+      "relation": "assigns",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_9",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "training process",
+        "numerical representation"
+      ],
+      "targets": [
+        "embedding"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_527",
+      "properties": {},
+      "relation": "are generated from",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_14",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "perturbed fact",
+        "source node"
+      ],
+      "targets": [
+        "initial pkg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_528",
+      "properties": {},
+      "relation": "saved in",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_6",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "polito knowledge graph",
+        "triplestore"
+      ],
+      "targets": [
+        "triplestore"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_529",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_0",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "polito knowledge graph"
+      ],
+      "targets": [
+        "publication",
+        "author"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_530",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_18",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "polito knowledge graph"
+      ],
+      "targets": [
+        "web user interface",
+        "api"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_531",
+      "properties": {},
+      "relation": "links",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_12",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "recommendation system",
+        "publication"
+      ],
+      "targets": [
+        "recommended publication"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_532",
+      "properties": {},
+      "relation": "exploits",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_11",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "r-gcn"
+      ],
+      "targets": [
+        "graph structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_533",
+      "properties": {},
+      "relation": "suggests",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_11",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "recommendation system"
+      ],
+      "targets": [
+        "research topic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_534",
+      "properties": {},
+      "relation": "queries",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_12",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "rest api",
+        "sparql endpoint"
+      ],
+      "targets": [
+        "data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_535",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_0",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "scholarly knowledge graph"
+      ],
+      "targets": [
+        "advanced feature"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_536",
+      "properties": {},
+      "relation": "triggers",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_12",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "user",
+        "search bar"
+      ],
+      "targets": [
+        "search"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_537",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_19",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "semantic annotation"
+      ],
+      "targets": [
+        "text mining"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_538",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_18",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "semantic technology"
+      ],
+      "targets": [
+        "advanced service"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_539",
+      "properties": {},
+      "relation": "extracts",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_3",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "textual source",
+        "structured knowledge"
+      ],
+      "targets": [
+        "kgs"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_540",
+      "properties": {},
+      "relation": "suggests",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_13",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "system"
+      ],
+      "targets": [
+        "new topic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_541",
+      "properties": {},
+      "relation": "enriches",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_5",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "tellmefirst"
+      ],
+      "targets": [
+        "publications metadata"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_542",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_20",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "tf-idf",
+        "text classification"
+      ],
+      "targets": [
+        "classification accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_543",
+      "properties": {},
+      "relation": "trains",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_8",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "tmf",
+        "wikipedia corpu"
+      ],
+      "targets": [
+        "model"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_544",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_5",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "tmfresource"
+      ],
+      "targets": [
+        "semantic topic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_545",
+      "properties": {},
+      "relation": "classifies",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_8",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "tmf"
+      ],
+      "targets": [
+        "abstract"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_546",
+      "properties": {},
+      "relation": "comprises",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_10",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "training edge",
+        "validation edge"
+      ],
+      "targets": [
+        "dataset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_547",
+      "properties": {},
+      "relation": "displays",
+      "source_chunk_id": "Geranium_Platform_for_Science_KGs_chunk_13",
+      "source_document": "Geranium_Platform_for_Science_KGs",
+      "sources": [
+        "viewer module"
+      ],
+      "targets": [
+        "insight"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 100,
+    "num_nodes": 200
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "23 research institution",
+      "incident_edges": [
+        "edge_458"
+      ],
+      "label": "23 research institutions",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "69 italian university",
+      "incident_edges": [
+        "edge_458"
+      ],
+      "label": "69 Italian universities",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "abstract",
+      "incident_edges": [
+        "edge_545"
+      ],
+      "label": "abstract",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_492"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "advanced feature",
+      "incident_edges": [
+        "edge_535"
+      ],
+      "label": "advanced features",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "advanced service",
+      "incident_edges": [
+        "edge_507",
+        "edge_538"
+      ],
+      "label": "advanced services",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "analytic",
+      "incident_edges": [
+        "edge_448"
+      ],
+      "label": "analytic",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "api",
+      "incident_edges": [
+        "edge_449",
+        "edge_530"
+      ],
+      "label": "API",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "asyncio",
+      "incident_edges": [
+        "edge_457"
+      ],
+      "label": "AsyncIO",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "author",
+      "incident_edges": [
+        "edge_450",
+        "edge_529"
+      ],
+      "label": "Author",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "authorkeyword",
+      "incident_edges": [
+        "edge_451"
+      ],
+      "label": "AuthorKeyword",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "auto-encoder",
+      "incident_edges": [
+        "edge_452"
+      ],
+      "label": "Auto-Encoder",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "backend architecture",
+      "incident_edges": [
+        "edge_453"
+      ],
+      "label": "backend architecture",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "best model",
+      "incident_edges": [
+        "edge_454"
+      ],
+      "label": "best model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "builder",
+      "incident_edges": [
+        "edge_456",
+        "edge_457"
+      ],
+      "label": "Builder",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "builder module",
+      "incident_edges": [
+        "edge_455"
+      ],
+      "label": "Builder Module",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cineca consortium",
+      "incident_edges": [
+        "edge_458"
+      ],
+      "label": "CINECA Consortium",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "classification accuracy",
+      "incident_edges": [
+        "edge_542"
+      ],
+      "label": "classification accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "closed-world assumption",
+      "incident_edges": [
+        "edge_459"
+      ],
+      "label": "closed-world assumption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "collaboration opportunity",
+      "incident_edges": [
+        "edge_498"
+      ],
+      "label": "collaboration opportunities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex graph structure",
+      "incident_edges": [
+        "edge_460"
+      ],
+      "label": "complex graph structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct ranking",
+      "incident_edges": [
+        "edge_514"
+      ],
+      "label": "correct ranking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "covid-19",
+      "incident_edges": [
+        "edge_461"
+      ],
+      "label": "COVID-19",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cpu",
+      "incident_edges": [
+        "edge_462"
+      ],
+      "label": "CPU",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data",
+      "incident_edges": [
+        "edge_534"
+      ],
+      "label": "data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data enhancement",
+      "incident_edges": [
+        "edge_463"
+      ],
+      "label": "Data Enhancement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data ingestion",
+      "incident_edges": [
+        "edge_455"
+      ],
+      "label": "Data Ingestion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data security",
+      "incident_edges": [
+        "edge_448"
+      ],
+      "label": "data security",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "dataset",
+      "incident_edges": [
+        "edge_464",
+        "edge_546"
+      ],
+      "label": "dataset",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "dataset builder",
+      "incident_edges": [
+        "edge_464",
+        "edge_465"
+      ],
+      "label": "Dataset Builder",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "dbpedia",
+      "incident_edges": [
+        "edge_467",
+        "edge_468",
+        "edge_469"
+      ],
+      "label": "DBpedia",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dbpedia entity",
+      "incident_edges": [
+        "edge_466"
+      ],
+      "label": "DBpedia entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dcmi",
+      "incident_edges": [
+        "edge_470"
+      ],
+      "label": "DCMI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deep graph library",
+      "incident_edges": [
+        "edge_519"
+      ],
+      "label": "Deep Graph Library",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deep neural network",
+      "incident_edges": [
+        "edge_471"
+      ],
+      "label": "deep neural networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "developer",
+      "incident_edges": [
+        "edge_449"
+      ],
+      "label": "developer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dimensionality of evaluation graph",
+      "incident_edges": [
+        "edge_472"
+      ],
+      "label": "dimensionality of evaluation graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "distmult",
+      "incident_edges": [
+        "edge_474",
+        "edge_475"
+      ],
+      "label": "DistMult",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "distmult method",
+      "incident_edges": [
+        "edge_473"
+      ],
+      "label": "DistMult method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dublincore ontology",
+      "incident_edges": [
+        "edge_476"
+      ],
+      "label": "DublinCore ontology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "edge list",
+      "incident_edges": [
+        "edge_477"
+      ],
+      "label": "edge list",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "embedding",
+      "incident_edges": [
+        "edge_526"
+      ],
+      "label": "embedding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "enhancement module",
+      "incident_edges": [
+        "edge_478"
+      ],
+      "label": "Enhancement Module",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity-ranking approach",
+      "incident_edges": [
+        "edge_479"
+      ],
+      "label": "entity-ranking approach",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evaluation",
+      "incident_edges": [
+        "edge_480"
+      ],
+      "label": "evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "expertise profile",
+      "incident_edges": [
+        "edge_485"
+      ],
+      "label": "expertise profiles",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fb15k dataset",
+      "incident_edges": [
+        "edge_481"
+      ],
+      "label": "FB15K dataset",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "foaf",
+      "incident_edges": [
+        "edge_470"
+      ],
+      "label": "FOAF",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "full graph",
+      "incident_edges": [
+        "edge_522"
+      ],
+      "label": "full graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "geranium",
+      "incident_edges": [
+        "edge_487",
+        "edge_488"
+      ],
+      "label": "Geranium",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "geranium architecture",
+      "incident_edges": [
+        "edge_482"
+      ],
+      "label": "Geranium architecture",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "geranium platform",
+      "incident_edges": [
+        "edge_449",
+        "edge_483",
+        "edge_484",
+        "edge_485"
+      ],
+      "label": "Geranium platform",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "geranium web application",
+      "incident_edges": [
+        "edge_486"
+      ],
+      "label": "Geranium Web Application",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gnn",
+      "incident_edges": [
+        "edge_492"
+      ],
+      "label": "GNN",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gnn method",
+      "incident_edges": [
+        "edge_489"
+      ],
+      "label": "GNN methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "gnn model",
+      "incident_edges": [
+        "edge_490",
+        "edge_491"
+      ],
+      "label": "GNN models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gpu",
+      "incident_edges": [
+        "edge_462"
+      ],
+      "label": "GPU",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph auto-encoder",
+      "incident_edges": [
+        "edge_493"
+      ],
+      "label": "Graph Auto-Encoder",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph auto-encoders",
+      "incident_edges": [
+        "edge_490"
+      ],
+      "label": "Graph Auto-Encoders",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph convolutional network",
+      "incident_edges": [
+        "edge_494"
+      ],
+      "label": "Graph Convolutional Networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "graph neural network",
+      "incident_edges": [
+        "edge_463",
+        "edge_489",
+        "edge_495",
+        "edge_496",
+        "edge_497",
+        "edge_498"
+      ],
+      "label": "Graph Neural Network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph structure",
+      "incident_edges": [
+        "edge_475",
+        "edge_532"
+      ],
+      "label": "graph structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "higher regularization",
+      "incident_edges": [
+        "edge_499"
+      ],
+      "label": "higher regularization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hyperparameter value",
+      "incident_edges": [
+        "edge_500"
+      ],
+      "label": "hyperparameter values",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inaccurate prediction",
+      "incident_edges": [
+        "edge_460"
+      ],
+      "label": "inaccurate predictions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "information representation",
+      "incident_edges": [
+        "edge_461"
+      ],
+      "label": "information representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initial pkg",
+      "incident_edges": [
+        "edge_527"
+      ],
+      "label": "initial PKG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "insight",
+      "incident_edges": [
+        "edge_547"
+      ],
+      "label": "insight",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "instance",
+      "incident_edges": [
+        "edge_470"
+      ],
+      "label": "instance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "iri",
+      "incident_edges": [
+        "edge_458",
+        "edge_467",
+        "edge_476",
+        "edge_483",
+        "edge_501"
+      ],
+      "label": "IRIS",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "journal",
+      "incident_edges": [
+        "edge_450"
+      ],
+      "label": "Journal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "json dump",
+      "incident_edges": [
+        "edge_502"
+      ],
+      "label": "JSON dump",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "keyword",
+      "incident_edges": [
+        "edge_451"
+      ],
+      "label": "keyword",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "kg",
+      "incident_edges": [
+        "edge_487",
+        "edge_517"
+      ],
+      "label": "KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg component",
+      "incident_edges": [
+        "edge_503"
+      ],
+      "label": "KG components",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "kg embedding",
+      "incident_edges": [
+        "edge_503",
+        "edge_504"
+      ],
+      "label": "KG Embeddings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "kge technique",
+      "incident_edges": [
+        "edge_490",
+        "edge_503"
+      ],
+      "label": "KGE techniques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "kgs",
+      "incident_edges": [
+        "edge_495",
+        "edge_505",
+        "edge_506",
+        "edge_507",
+        "edge_539"
+      ],
+      "label": "KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge base completion",
+      "incident_edges": [
+        "edge_479"
+      ],
+      "label": "knowledge base completion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_459",
+        "edge_461",
+        "edge_505",
+        "edge_509",
+        "edge_521"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph generation",
+      "incident_edges": [
+        "edge_515"
+      ],
+      "label": "knowledge graph generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph inference",
+      "incident_edges": [
+        "edge_497"
+      ],
+      "label": "knowledge graph inference",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph-based system",
+      "incident_edges": [
+        "edge_508"
+      ],
+      "label": "knowledge graph-based systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "latent information",
+      "incident_edges": [
+        "edge_506"
+      ],
+      "label": "latent information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "latent representation",
+      "incident_edges": [
+        "edge_496"
+      ],
+      "label": "latent representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "learning rate",
+      "incident_edges": [
+        "edge_499"
+      ],
+      "label": "learning rate",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "limitation",
+      "incident_edges": [
+        "edge_482"
+      ],
+      "label": "limitation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "link",
+      "incident_edges": [
+        "edge_463"
+      ],
+      "label": "link",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "link enrichment",
+      "incident_edges": [
+        "edge_478"
+      ],
+      "label": "Link Enrichment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "link evaluator",
+      "incident_edges": [
+        "edge_452",
+        "edge_510"
+      ],
+      "label": "Link Evaluator",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "link prediction",
+      "incident_edges": [
+        "edge_492",
+        "edge_511",
+        "edge_512",
+        "edge_524"
+      ],
+      "label": "link predictions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "link prediction mechanism",
+      "incident_edges": [
+        "edge_511"
+      ],
+      "label": "link prediction mechanism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "link prediction task",
+      "incident_edges": [
+        "edge_481"
+      ],
+      "label": "link prediction tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "low convolutional filter",
+      "incident_edges": [
+        "edge_513"
+      ],
+      "label": "low convolutional filters",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "low number of relationship",
+      "incident_edges": [
+        "edge_513"
+      ],
+      "label": "low number of relationships",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "low number of topic",
+      "incident_edges": [
+        "edge_514"
+      ],
+      "label": "low number of topics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "machine learning",
+      "incident_edges": [
+        "edge_515"
+      ],
+      "label": "machine learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metadata",
+      "incident_edges": [
+        "edge_517"
+      ],
+      "label": "metadata",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metadata availability",
+      "incident_edges": [
+        "edge_467"
+      ],
+      "label": "metadata availability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "metadata extraction",
+      "incident_edges": [
+        "edge_455",
+        "edge_516"
+      ],
+      "label": "metadata extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metadata standard",
+      "incident_edges": [
+        "edge_476"
+      ],
+      "label": "metadata standards",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metric",
+      "incident_edges": [
+        "edge_518"
+      ],
+      "label": "metric",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "model",
+      "incident_edges": [
+        "edge_520",
+        "edge_543"
+      ],
+      "label": "model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "model capability",
+      "incident_edges": [
+        "edge_512",
+        "edge_518"
+      ],
+      "label": "model capability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model differentiation",
+      "incident_edges": [
+        "edge_499"
+      ],
+      "label": "model differentiation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model evaluation",
+      "incident_edges": [
+        "edge_472"
+      ],
+      "label": "model evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "model trainer",
+      "incident_edges": [
+        "edge_493",
+        "edge_500",
+        "edge_519"
+      ],
+      "label": "Model Trainer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "module",
+      "incident_edges": [
+        "edge_502"
+      ],
+      "label": "module",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "mrr value",
+      "incident_edges": [
+        "edge_454",
+        "edge_525"
+      ],
+      "label": "MRR value",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-relational graph",
+      "incident_edges": [
+        "edge_521"
+      ],
+      "label": "multi-relational graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language processing",
+      "incident_edges": [
+        "edge_515"
+      ],
+      "label": "natural language processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neighborhood structure",
+      "incident_edges": [
+        "edge_522"
+      ],
+      "label": "neighborhood structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural architecture",
+      "incident_edges": [
+        "edge_496"
+      ],
+      "label": "neural architectures",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new fact",
+      "incident_edges": [
+        "edge_510"
+      ],
+      "label": "new facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new topic",
+      "incident_edges": [
+        "edge_540"
+      ],
+      "label": "new topics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "nlp technique",
+      "incident_edges": [
+        "edge_523"
+      ],
+      "label": "NLP techniques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "node feature",
+      "incident_edges": [
+        "edge_494"
+      ],
+      "label": "node features",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "number of topic",
+      "incident_edges": [
+        "edge_460",
+        "edge_524",
+        "edge_525"
+      ],
+      "label": "number of topics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "numerical representation",
+      "incident_edges": [
+        "edge_465",
+        "edge_526"
+      ],
+      "label": "numerical representations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology network",
+      "incident_edges": [
+        "edge_516"
+      ],
+      "label": "ontology network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "open-world assumption",
+      "incident_edges": [
+        "edge_459"
+      ],
+      "label": "open-world assumption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "perturbed fact",
+      "incident_edges": [
+        "edge_527"
+      ],
+      "label": "perturbed facts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "pkg",
+      "incident_edges": [
+        "edge_464",
+        "edge_514",
+        "edge_524",
+        "edge_525"
+      ],
+      "label": "PKG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pkg ontology",
+      "incident_edges": [
+        "edge_450"
+      ],
+      "label": "PKG ontology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "polito",
+      "incident_edges": [
+        "edge_501"
+      ],
+      "label": "Polito",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "polito knowledge graph",
+      "incident_edges": [
+        "edge_453",
+        "edge_478",
+        "edge_488",
+        "edge_528",
+        "edge_529",
+        "edge_530"
+      ],
+      "label": "Polito Knowledge Graph",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "privacy",
+      "incident_edges": [
+        "edge_448"
+      ],
+      "label": "privacy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "publication",
+      "incident_edges": [
+        "edge_450",
+        "edge_483",
+        "edge_486",
+        "edge_501",
+        "edge_529",
+        "edge_531"
+      ],
+      "label": "Publication",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "publication abstract",
+      "incident_edges": [
+        "edge_466"
+      ],
+      "label": "publication abstract",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "publications metadata",
+      "incident_edges": [
+        "edge_541"
+      ],
+      "label": "publications metadata",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "python module",
+      "incident_edges": [
+        "edge_456"
+      ],
+      "label": "Python module",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pytorch",
+      "incident_edges": [
+        "edge_519"
+      ],
+      "label": "Pytorch",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "r-gcn",
+      "incident_edges": [
+        "edge_532"
+      ],
+      "label": "R-GCN",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "rdf",
+      "incident_edges": [
+        "edge_468",
+        "edge_470",
+        "edge_516"
+      ],
+      "label": "RDF",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf graph",
+      "incident_edges": [
+        "edge_502"
+      ],
+      "label": "RDF graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rdf representation",
+      "incident_edges": [
+        "edge_453",
+        "edge_465"
+      ],
+      "label": "RDF representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdflib",
+      "incident_edges": [
+        "edge_456"
+      ],
+      "label": "rdflib",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "recommendation",
+      "incident_edges": [
+        "edge_489",
+        "edge_491",
+        "edge_504",
+        "edge_523"
+      ],
+      "label": "recommendation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation algorithm",
+      "incident_edges": [
+        "edge_508"
+      ],
+      "label": "recommendation algorithms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation feature",
+      "incident_edges": [
+        "edge_511"
+      ],
+      "label": "recommendation features",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation service",
+      "incident_edges": [
+        "edge_512"
+      ],
+      "label": "recommendation service",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "recommendation system",
+      "incident_edges": [
+        "edge_504",
+        "edge_531",
+        "edge_533"
+      ],
+      "label": "recommendation system",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation task",
+      "incident_edges": [
+        "edge_495"
+      ],
+      "label": "recommendation task",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation tool",
+      "incident_edges": [
+        "edge_506"
+      ],
+      "label": "recommendation tools",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommended publication",
+      "incident_edges": [
+        "edge_531"
+      ],
+      "label": "recommended publications",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relational graph convolutional network",
+      "incident_edges": [
+        "edge_493",
+        "edge_521"
+      ],
+      "label": "Relational Graph Convolutional Network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research topic",
+      "incident_edges": [
+        "edge_533"
+      ],
+      "label": "research topics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rest api",
+      "incident_edges": [
+        "edge_534"
+      ],
+      "label": "REST API",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scholarly data",
+      "incident_edges": [
+        "edge_507"
+      ],
+      "label": "scholarly data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scholarly knowledge graph",
+      "incident_edges": [
+        "edge_535"
+      ],
+      "label": "Scholarly Knowledge Graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "score value",
+      "incident_edges": [
+        "edge_473"
+      ],
+      "label": "score values",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scoring function",
+      "incident_edges": [
+        "edge_474"
+      ],
+      "label": "scoring function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "search",
+      "incident_edges": [
+        "edge_486",
+        "edge_536"
+      ],
+      "label": "search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search bar",
+      "incident_edges": [
+        "edge_536"
+      ],
+      "label": "search bar",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "self-learnt filter",
+      "incident_edges": [
+        "edge_494"
+      ],
+      "label": "self-learnt filters",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic annotation",
+      "incident_edges": [
+        "edge_537"
+      ],
+      "label": "semantic annotation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic property",
+      "incident_edges": [
+        "edge_509"
+      ],
+      "label": "semantic properties",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic relation",
+      "incident_edges": [
+        "edge_469"
+      ],
+      "label": "semantic relations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic search",
+      "incident_edges": [
+        "edge_523"
+      ],
+      "label": "semantic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic technology",
+      "incident_edges": [
+        "edge_538"
+      ],
+      "label": "semantic technologies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic tool",
+      "incident_edges": [
+        "edge_484"
+      ],
+      "label": "semantic tools",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "semantic topic",
+      "incident_edges": [
+        "edge_517",
+        "edge_544"
+      ],
+      "label": "semantic topics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "similarity score",
+      "incident_edges": [
+        "edge_466"
+      ],
+      "label": "similarity scores",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "source node",
+      "incident_edges": [
+        "edge_527"
+      ],
+      "label": "source nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "sparql endpoint",
+      "incident_edges": [
+        "edge_487",
+        "edge_534"
+      ],
+      "label": "SPARQL endpoint",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "statement score",
+      "incident_edges": [
+        "edge_474"
+      ],
+      "label": "statement score",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "statistical analysi",
+      "incident_edges": [
+        "edge_506"
+      ],
+      "label": "statistical analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured data",
+      "incident_edges": [
+        "edge_505"
+      ],
+      "label": "structured data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured information",
+      "incident_edges": [
+        "edge_468"
+      ],
+      "label": "structured information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured knowledge",
+      "incident_edges": [
+        "edge_539"
+      ],
+      "label": "structured knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "system",
+      "incident_edges": [
+        "edge_540"
+      ],
+      "label": "system",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tellmefirst",
+      "incident_edges": [
+        "edge_541"
+      ],
+      "label": "TellMeFirst",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text",
+      "incident_edges": [
+        "edge_471"
+      ],
+      "label": "text",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text classification",
+      "incident_edges": [
+        "edge_542"
+      ],
+      "label": "text classification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text mining",
+      "incident_edges": [
+        "edge_537"
+      ],
+      "label": "text mining",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "textual source",
+      "incident_edges": [
+        "edge_539"
+      ],
+      "label": "textual sources",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tf-idf",
+      "incident_edges": [
+        "edge_542"
+      ],
+      "label": "TF-IDF",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "threadpoolexecutor",
+      "incident_edges": [
+        "edge_457"
+      ],
+      "label": "ThreadPoolExecutor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "tmf",
+      "incident_edges": [
+        "edge_543",
+        "edge_545"
+      ],
+      "label": "TMF",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tmfresource",
+      "incident_edges": [
+        "edge_544"
+      ],
+      "label": "TMFResource",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "topic-based search",
+      "incident_edges": [
+        "edge_469",
+        "edge_484"
+      ],
+      "label": "topic-based search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "trained model",
+      "incident_edges": [
+        "edge_452"
+      ],
+      "label": "trained model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training",
+      "incident_edges": [
+        "edge_480"
+      ],
+      "label": "training",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training edge",
+      "incident_edges": [
+        "edge_546"
+      ],
+      "label": "training edges",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training graph",
+      "incident_edges": [
+        "edge_522"
+      ],
+      "label": "training graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training pipeline",
+      "incident_edges": [
+        "edge_477"
+      ],
+      "label": "training pipeline",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training process",
+      "incident_edges": [
+        "edge_526"
+      ],
+      "label": "training process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training set",
+      "incident_edges": [
+        "edge_477"
+      ],
+      "label": "training set",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training time",
+      "incident_edges": [
+        "edge_462"
+      ],
+      "label": "training time",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "triple",
+      "incident_edges": [
+        "edge_500"
+      ],
+      "label": "triple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "triple extraction",
+      "incident_edges": [
+        "edge_471"
+      ],
+      "label": "triple extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "triplestore",
+      "incident_edges": [
+        "edge_528"
+      ],
+      "label": "triplestore",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "true triple",
+      "incident_edges": [
+        "edge_520"
+      ],
+      "label": "true triple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user",
+      "incident_edges": [
+        "edge_536"
+      ],
+      "label": "user",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "validation edge",
+      "incident_edges": [
+        "edge_546"
+      ],
+      "label": "validation edges",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "validation process",
+      "incident_edges": [
+        "edge_479"
+      ],
+      "label": "validation process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "viewer module",
+      "incident_edges": [
+        "edge_547"
+      ],
+      "label": "Viewer Module",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "web user interface",
+      "incident_edges": [
+        "edge_530"
+      ],
+      "label": "web user interface",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "wikipedia corpu",
+      "incident_edges": [
+        "edge_543"
+      ],
+      "label": "Wikipedia corpus",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "workstation",
+      "incident_edges": [
+        "edge_480"
+      ],
+      "label": "workstation",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

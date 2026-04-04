@@ -1,0 +1,566 @@
+[
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "EpisTwin",
+          "Personal Knowledge Graph"
+        ],
+        "targets": [
+          "complex reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "neural models",
+          "symbolic methods"
+        ],
+        "targets": [
+          "inference time"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "user data fragmentation",
+          "isolated applications"
+        ],
+        "targets": [
+          "effective reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mitigates",
+        "sources": [
+          "EpisTwin",
+          "RAG"
+        ],
+        "targets": [
+          "data silos"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "PKG Constructor",
+          "unstructured data"
+        ],
+        "targets": [
+          "semantic triples"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "judges",
+        "sources": [
+          "EpisTwin Core Agent",
+          "user query"
+        ],
+        "targets": [
+          "response quality"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "limits",
+        "sources": [
+          "Human-in-the-Loop strategies"
+        ],
+        "targets": [
+          "scalability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "exploits",
+        "sources": [
+          "Online Deep Visual Refinement tool",
+          "Fallback Agent"
+        ],
+        "targets": [
+          "neural retrieval models"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "aims",
+        "sources": [
+          "Graph Retrieval-Augmented Generation"
+        ],
+        "targets": [
+          "overcome local myopia"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "EpisTwin"
+        ],
+        "targets": [
+          "data sovereignty"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "governs",
+        "sources": [
+          "Knowledge Graph",
+          "metadata"
+        ],
+        "targets": [
+          "provenance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "LLMs",
+          "Knowledge Graph Construction"
+        ],
+        "targets": [
+          "transformation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "Personal Knowledge",
+          "Information Objects"
+        ],
+        "targets": [
+          "user data"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "defines",
+        "sources": [
+          "Community Structure",
+          "Personal Knowledge Graph"
+        ],
+        "targets": [
+          "clusters"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "Leiden Algorithm",
+          "community detection"
+        ],
+        "targets": [
+          "Modularity"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Graph Retrieval-Augmented Generation",
+          "GraphRAG"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "metadata extraction",
+          "ΦM"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "unstructured content",
+          "ΦC"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implements",
+        "sources": [
+          "PKG Population Task",
+          "Epistemic Twin Constructor"
+        ],
+        "targets": [
+          "PKG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "orchestrates",
+        "sources": [
+          "LLM",
+          "Large Language Models"
+        ],
+        "targets": [
+          "adaptive reasoning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "hinders",
+        "sources": [
+          "PKG",
+          "high-density triples"
+        ],
+        "targets": [
+          "global sensemaking"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "Leiden algorithm"
+        ],
+        "targets": [
+          "Community Structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "denotes",
+        "sources": [
+          "Community Node",
+          "cluster P"
+        ],
+        "targets": [
+          "subgraph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "Generative Summarization Operator"
+        ],
+        "targets": [
+          "summary SP"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "EpisTwin Reasoning Engine"
+        ],
+        "targets": [
+          "sensemaking"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "sets",
+        "sources": [
+          "User_1"
+        ],
+        "targets": [
+          "Alarm_001"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "triggers",
+        "sources": [
+          "Alarm_001"
+        ],
+        "targets": [
+          "Event_001"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "Football Match"
+        ],
+        "targets": [
+          "Event_001"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "participates_in",
+        "sources": [
+          "User_1"
+        ],
+        "targets": [
+          "Football Match"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "EpisTwin",
+          "neuro-symbolic architecture"
+        ],
+        "targets": [
+          "high performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "EpisTwin",
+          "Personal Knowledge Graph"
+        ],
+        "targets": [
+          "retrieval problem"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "investigates",
+        "sources": [
+          "EpisTwin",
+          "visual evidence"
+        ],
+        "targets": [
+          "complex queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "EpisTwin",
+          "user-controlled PKG"
+        ],
+        "targets": [
+          "right to be forgotten"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "EpisTwin",
+          "structural benefits"
+        ],
+        "targets": [
+          "active sensemaking"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is essential for",
+        "sources": [
+          "multimodal perception",
+          "dynamic interplay"
+        ],
+        "targets": [
+          "handling complexity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prioritizes",
+        "sources": [
+          "EpisTwin",
+          "user agency"
+        ],
+        "targets": [
+          "architectural imperative"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "operationalizes",
+        "sources": [
+          "deterministic unlearning",
+          "GDPR Article 17"
+        ],
+        "targets": [
+          "Right to be Forgotten"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "treats as",
+        "sources": [
+          "frozen Large Language Models",
+          "user data"
+        ],
+        "targets": [
+          "ephemeral context"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "local LMs",
+          "EpisTwin"
+        ],
+        "targets": [
+          "physical sovereignty"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "personal knowledge graph",
+          "health knowledge graph"
+        ],
+        "targets": [
+          "secure health data management"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "large language model",
+          "gpt-4"
+        ],
+        "targets": [
+          "knowledge graph question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "mitigates",
+        "sources": [
+          "machine unlearning",
+          "context fragmentation"
+        ],
+        "targets": [
+          "long-document RAG"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "fuzzy dates",
+          "personal knowledge graphs"
+        ],
+        "targets": [
+          "dialogue understanding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_NeuroSymbolic_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "knowledge graph",
+          "automatic construction"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph"
+        ],
+        "targets": [
+          "AI applications"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "data sources"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "AI techniques"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

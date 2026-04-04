@@ -1,0 +1,2834 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1403",
+      "properties": {},
+      "relation": "retrieves",
+      "source_chunk_id": "Paths_over_KG_chunk_15",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "sparql query",
+        "1-hop neighbor"
+      ],
+      "targets": [
+        "connected entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1404",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_10",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "beam search strategy",
+        "accuracy"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1405",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "Paths_over_KG_chunk_10",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog-e",
+        "accuracy"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1406",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_12",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "accuracy"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1407",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_12",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "answer generation error"
+      ],
+      "targets": [
+        "error"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1408",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_3",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "exploration phas",
+        "beam search"
+      ],
+      "targets": [
+        "path pruning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1409",
+      "properties": {},
+      "relation": "serves",
+      "source_chunk_id": "Paths_over_KG_chunk_1",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "belgium",
+        "nijmegen"
+      ],
+      "targets": [
+        "brussels airport"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1410",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Paths_over_KG_chunk_3",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm",
+        "bert-based matching"
+      ],
+      "targets": [
+        "entity alignment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1411",
+      "properties": {},
+      "relation": "is obtained from",
+      "source_chunk_id": "Paths_over_KG_chunk_16",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "final answer",
+        "candidate path"
+      ],
+      "targets": [
+        "retrieved reasoning path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1412",
+      "properties": {},
+      "relation": "belongs to",
+      "source_chunk_id": "Paths_over_KG_chunk_14",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "falkland island",
+        "central time zone"
+      ],
+      "targets": [
+        "america"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1413",
+      "properties": {},
+      "relation": "contained by",
+      "source_chunk_id": "Paths_over_KG_chunk_14",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "lejre municipality",
+        "denmark"
+      ],
+      "targets": [
+        "germany"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1414",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Paths_over_KG_chunk_6",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "depth",
+        "dmax"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1415",
+      "properties": {},
+      "relation": "converts",
+      "source_chunk_id": "Paths_over_KG_chunk_15",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "short textual description",
+        "entity ids"
+      ],
+      "targets": [
+        "natural language description"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1416",
+      "properties": {},
+      "relation": "substitutes",
+      "source_chunk_id": "Paths_over_KG_chunk_15",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "entity id"
+      ],
+      "targets": [
+        "query entity id"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1417",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Paths_over_KG_chunk_9",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "entity path find",
+        "fuzzy select"
+      ],
+      "targets": [
+        "path exploration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1418",
+      "properties": {},
+      "relation": "outperforms",
+      "source_chunk_id": "Paths_over_KG_chunk_7",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "existing baseline"
+      ],
+      "targets": [
+        "reasoning capability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1419",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Paths_over_KG_chunk_9",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "path pruning",
+        "exploration"
+      ],
+      "targets": [
+        "candidate path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1420",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_6",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "external knowledge",
+        "knowledge graph"
+      ],
+      "targets": [
+        "reasoning task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1421",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_5",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "external knowledge"
+      ],
+      "targets": [
+        "llm reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1422",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Paths_over_KG_chunk_8",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph",
+        "fact retrieval"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1423",
+      "properties": {},
+      "relation": "increases",
+      "source_chunk_id": "Paths_over_KG_chunk_12",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "format error"
+      ],
+      "targets": [
+        "error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1424",
+      "properties": {},
+      "relation": "borders",
+      "source_chunk_id": "Paths_over_KG_chunk_1",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "netherland",
+        "france"
+      ],
+      "targets": [
+        "germany"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1425",
+      "properties": {},
+      "relation": "interacts_with",
+      "source_chunk_id": "Paths_over_KG_chunk_15",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "freebase knowledge graph",
+        "sparql query"
+      ],
+      "targets": [
+        "entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1426",
+      "properties": {},
+      "relation": "serves as",
+      "source_chunk_id": "Paths_over_KG_chunk_13",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "freebase"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1427",
+      "properties": {},
+      "relation": "filters",
+      "source_chunk_id": "Paths_over_KG_chunk_5",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "fuzzy selection",
+        "pre-trained model"
+      ],
+      "targets": [
+        "irrelevant path"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1428",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Paths_over_KG_chunk_9",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "fuzzy selection",
+        "precise path selection"
+      ],
+      "targets": [
+        "final reasoning path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1429",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_10",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "fuzzy selection",
+        "token usage"
+      ],
+      "targets": [
+        "token usage"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1430",
+      "properties": {},
+      "relation": "contains",
+      "source_chunk_id": "Paths_over_KG_chunk_1",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "germany",
+        "nijmegen"
+      ],
+      "targets": [
+        "airport"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1431",
+      "properties": {},
+      "relation": "utilizes",
+      "source_chunk_id": "Paths_over_KG_chunk_13",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "gpt-3.5",
+        "gpt-4"
+      ],
+      "targets": [
+        "openai api"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1432",
+      "properties": {},
+      "relation": "outperforms",
+      "source_chunk_id": "Paths_over_KG_chunk_6",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "gpt-3.5-turbo"
+      ],
+      "targets": [
+        "sota"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1433",
+      "properties": {},
+      "relation": "surpasses",
+      "source_chunk_id": "Paths_over_KG_chunk_6",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "gpt-4"
+      ],
+      "targets": [
+        "fine-tuned sota"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1434",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_12",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "grailqa"
+      ],
+      "targets": [
+        "llm call cost"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1435",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_4",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "graph pruning",
+        "node clustering"
+      ],
+      "targets": [
+        "computational cost"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1436",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_13",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "graph pruning",
+        "path pruning"
+      ],
+      "targets": [
+        "graph structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1437",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_7",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "graph pruning"
+      ],
+      "targets": [
+        "efficiency"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1438",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_8",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "graph structure",
+        "large language model"
+      ],
+      "targets": [
+        "data reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1439",
+      "properties": {},
+      "relation": "supplements",
+      "source_chunk_id": "Paths_over_KG_chunk_11",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "kg",
+        "llm"
+      ],
+      "targets": [
+        "answer generation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1440",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Paths_over_KG_chunk_7",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "kg"
+      ],
+      "targets": [
+        "interpretable reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1441",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Paths_over_KG_chunk_5",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "kg-based llm",
+        "path exploration"
+      ],
+      "targets": [
+        "efficient knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1442",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Paths_over_KG_chunk_3",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "kgqa",
+        "question answering"
+      ],
+      "targets": [
+        "reasoning path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1443",
+      "properties": {},
+      "relation": "offer",
+      "source_chunk_id": "Paths_over_KG_chunk_0",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph",
+        "kgs"
+      ],
+      "targets": [
+        "source of knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1444",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Paths_over_KG_chunk_2",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "kgs",
+        "knowledge"
+      ],
+      "targets": [
+        "structured knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1445",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_2",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "kgs"
+      ],
+      "targets": [
+        "computational cost"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1446",
+      "properties": {},
+      "relation": "verifies",
+      "source_chunk_id": "Paths_over_KG_chunk_11",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "kg"
+      ],
+      "targets": [
+        "answer correctness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1447",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_8",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "large language model",
+        "knowledge augmentation"
+      ],
+      "targets": [
+        "reasoning"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1448",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Paths_over_KG_chunk_17",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph path",
+        "retrieved knowledge path"
+      ],
+      "targets": [
+        "final answer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1449",
+      "properties": {},
+      "relation": "answers",
+      "source_chunk_id": "Paths_over_KG_chunk_17",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph path",
+        "split question"
+      ],
+      "targets": [
+        "main question"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1450",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "Paths_over_KG_chunk_8",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph",
+        "language model prompting"
+      ],
+      "targets": [
+        "zero-shot answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1451",
+      "properties": {},
+      "relation": "empowers",
+      "source_chunk_id": "Paths_over_KG_chunk_8",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1452",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_1",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "knowledge graph",
+        "llm"
+      ],
+      "targets": [
+        "reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1453",
+      "properties": {},
+      "relation": "leads to",
+      "source_chunk_id": "Paths_over_KG_chunk_16",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm-generated thinking",
+        "knowledge path"
+      ],
+      "targets": [
+        "predicted result"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1454",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_2",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm",
+        "knowledge path"
+      ],
+      "targets": [
+        "interpretability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1455",
+      "properties": {},
+      "relation": "summarizes",
+      "source_chunk_id": "Paths_over_KG_chunk_17",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm-generated thinking",
+        "knowledge triple"
+      ],
+      "targets": [
+        "main topic entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1456",
+      "properties": {},
+      "relation": "struggle with",
+      "source_chunk_id": "Paths_over_KG_chunk_0",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "large language model",
+        "llm"
+      ],
+      "targets": [
+        "hallucination problem",
+        "lack of relevant knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1457",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_10",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "summary prompt",
+        "llm hallucination"
+      ],
+      "targets": [
+        "llm hallucination"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1458",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_4",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm indicator",
+        "question analysi"
+      ],
+      "targets": [
+        "answer accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1459",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_10",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "path summarization",
+        "llm understanding"
+      ],
+      "targets": [
+        "llm understanding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1460",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_5",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm",
+        "path pruning"
+      ],
+      "targets": [
+        "llm overhead"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1461",
+      "properties": {},
+      "relation": "combines",
+      "source_chunk_id": "Paths_over_KG_chunk_6",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "llm"
+      ],
+      "targets": [
+        "structured information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1462",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "Paths_over_KG_chunk_12",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "llm"
+      ],
+      "targets": [
+        "llm call cost"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1463",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Paths_over_KG_chunk_5",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog prompt",
+        "llm"
+      ],
+      "targets": [
+        "path understanding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1464",
+      "properties": {},
+      "relation": "avoids",
+      "source_chunk_id": "Paths_over_KG_chunk_2",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "llm"
+      ],
+      "targets": [
+        "slow update"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1465",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_2",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "llm"
+      ],
+      "targets": [
+        "reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1466",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Paths_over_KG_chunk_11",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1467",
+      "properties": {},
+      "relation": "mascot for",
+      "source_chunk_id": "Paths_over_KG_chunk_14",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "lou seal",
+        "san francisco giant"
+      ],
+      "targets": [
+        "2014 world sery"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1468",
+      "properties": {},
+      "relation": "breaks into",
+      "source_chunk_id": "Paths_over_KG_chunk_16",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "multi-hop question",
+        "topic entity"
+      ],
+      "targets": [
+        "simpler part"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1469",
+      "properties": {},
+      "relation": "handles",
+      "source_chunk_id": "Paths_over_KG_chunk_7",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "multi-hop reasoning"
+      ],
+      "targets": [
+        "complex task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1470",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Paths_over_KG_chunk_9",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "question answering",
+        "path pruning"
+      ],
+      "targets": [
+        "answer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1471",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Paths_over_KG_chunk_0",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "paths-over-graph"
+      ],
+      "targets": [
+        "llm reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1472",
+      "properties": {},
+      "relation": "decomposes",
+      "source_chunk_id": "Paths_over_KG_chunk_0",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "plan-retrieval-answering method"
+      ],
+      "targets": [
+        "complex reasoning task"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1473",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Paths_over_KG_chunk_11",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "pog-e"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1474",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "Paths_over_KG_chunk_7",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog",
+        "webqsp dataset"
+      ],
+      "targets": [
+        "high accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1475",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "Paths_over_KG_chunk_11",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1476",
+      "properties": {},
+      "relation": "handles",
+      "source_chunk_id": "Paths_over_KG_chunk_13",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog"
+      ],
+      "targets": [
+        "multi-hop task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1477",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Paths_over_KG_chunk_0",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "pog"
+      ],
+      "targets": [
+        "interpretability",
+        "faithfulness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1478",
+      "properties": {},
+      "relation": "informs",
+      "source_chunk_id": "Paths_over_KG_chunk_4",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "predicted depth",
+        "topic entity"
+      ],
+      "targets": [
+        "subgraph exploration"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1479",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Paths_over_KG_chunk_3",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "subgraph detection",
+        "question analysi"
+      ],
+      "targets": [
+        "answer formulation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1480",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Paths_over_KG_chunk_3",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "question",
+        "topic entity"
+      ],
+      "targets": [
+        "subgraph detection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1481",
+      "properties": {},
+      "relation": "guides",
+      "source_chunk_id": "Paths_over_KG_chunk_4",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "question",
+        "topic entity"
+      ],
+      "targets": [
+        "llm"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1482",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "Paths_over_KG_chunk_15",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "sparql function",
+        "subgraph detection"
+      ],
+      "targets": [
+        "1-hop subgraph search"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1483",
+      "properties": {},
+      "relation": "explore",
+      "source_chunk_id": "Paths_over_KG_chunk_16",
+      "source_document": "Paths_over_KG",
+      "sources": [
+        "split question",
+        "topic entity"
+      ],
+      "targets": [
+        "connection"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 81,
+    "num_nodes": 139
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "1-hop neighbor",
+      "incident_edges": [
+        "edge_1403"
+      ],
+      "label": "1-hop neighbors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "1-hop subgraph search",
+      "incident_edges": [
+        "edge_1482"
+      ],
+      "label": "1-hop subgraph search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "2014 world sery",
+      "incident_edges": [
+        "edge_1467"
+      ],
+      "label": "2014 World Series",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_1404",
+        "edge_1405",
+        "edge_1406",
+        "edge_1473",
+        "edge_1475"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "airport",
+      "incident_edges": [
+        "edge_1430"
+      ],
+      "label": "airport",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "america",
+      "incident_edges": [
+        "edge_1412"
+      ],
+      "label": "America",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer",
+      "incident_edges": [
+        "edge_1470"
+      ],
+      "label": "answer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer accuracy",
+      "incident_edges": [
+        "edge_1458"
+      ],
+      "label": "answer accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer correctness",
+      "incident_edges": [
+        "edge_1446"
+      ],
+      "label": "answer correctness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer formulation",
+      "incident_edges": [
+        "edge_1479"
+      ],
+      "label": "answer formulation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer generation",
+      "incident_edges": [
+        "edge_1439"
+      ],
+      "label": "answer generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer generation error",
+      "incident_edges": [
+        "edge_1407"
+      ],
+      "label": "answer generation errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "beam search",
+      "incident_edges": [
+        "edge_1408"
+      ],
+      "label": "beam search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "beam search strategy",
+      "incident_edges": [
+        "edge_1404"
+      ],
+      "label": "beam search strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "belgium",
+      "incident_edges": [
+        "edge_1409"
+      ],
+      "label": "Belgium",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bert-based matching",
+      "incident_edges": [
+        "edge_1410"
+      ],
+      "label": "BERT-based matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "brussels airport",
+      "incident_edges": [
+        "edge_1409"
+      ],
+      "label": "Brussels Airport",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "candidate path",
+      "incident_edges": [
+        "edge_1411",
+        "edge_1419"
+      ],
+      "label": "candidate paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "central time zone",
+      "incident_edges": [
+        "edge_1412"
+      ],
+      "label": "Central Time Zone",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex reasoning task",
+      "incident_edges": [
+        "edge_1472"
+      ],
+      "label": "complex reasoning tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex task",
+      "incident_edges": [
+        "edge_1469"
+      ],
+      "label": "complex tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "computational cost",
+      "incident_edges": [
+        "edge_1435",
+        "edge_1445"
+      ],
+      "label": "computational cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "connected entity",
+      "incident_edges": [
+        "edge_1403"
+      ],
+      "label": "connected entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "connection",
+      "incident_edges": [
+        "edge_1483"
+      ],
+      "label": "connection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data reasoning",
+      "incident_edges": [
+        "edge_1438"
+      ],
+      "label": "data reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "denmark",
+      "incident_edges": [
+        "edge_1413"
+      ],
+      "label": "Denmark",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "depth",
+      "incident_edges": [
+        "edge_1414"
+      ],
+      "label": "depth",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dmax",
+      "incident_edges": [
+        "edge_1414"
+      ],
+      "label": "Dmax",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "efficiency",
+      "incident_edges": [
+        "edge_1437"
+      ],
+      "label": "efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "efficient knowledge",
+      "incident_edges": [
+        "edge_1441"
+      ],
+      "label": "efficient knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity",
+      "incident_edges": [
+        "edge_1425"
+      ],
+      "label": "entity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity alignment",
+      "incident_edges": [
+        "edge_1410"
+      ],
+      "label": "entity alignment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity id",
+      "incident_edges": [
+        "edge_1416"
+      ],
+      "label": "entity ID",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity ids",
+      "incident_edges": [
+        "edge_1415"
+      ],
+      "label": "entity IDs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity path find",
+      "incident_edges": [
+        "edge_1417"
+      ],
+      "label": "Entity Path Find",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "error",
+      "incident_edges": [
+        "edge_1407",
+        "edge_1423"
+      ],
+      "label": "error",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "existing baseline",
+      "incident_edges": [
+        "edge_1418"
+      ],
+      "label": "existing baselines",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "exploration",
+      "incident_edges": [
+        "edge_1419"
+      ],
+      "label": "Exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "exploration pha",
+      "incident_edges": [],
+      "label": "exploration phases",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "external knowledge",
+      "incident_edges": [
+        "edge_1420",
+        "edge_1421"
+      ],
+      "label": "external knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact retrieval",
+      "incident_edges": [
+        "edge_1422"
+      ],
+      "label": "fact retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "faithfulness",
+      "incident_edges": [
+        "edge_1477"
+      ],
+      "label": "faithfulness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "falkland island",
+      "incident_edges": [
+        "edge_1412"
+      ],
+      "label": "Falkland Islands",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "final answer",
+      "incident_edges": [
+        "edge_1411",
+        "edge_1448"
+      ],
+      "label": "final answer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "final reasoning path",
+      "incident_edges": [
+        "edge_1428"
+      ],
+      "label": "final reasoning path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fine-tuned sota",
+      "incident_edges": [
+        "edge_1433"
+      ],
+      "label": "fine-tuned SOTA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "format error",
+      "incident_edges": [
+        "edge_1423"
+      ],
+      "label": "format errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "france",
+      "incident_edges": [
+        "edge_1424"
+      ],
+      "label": "France",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "freebase",
+      "incident_edges": [
+        "edge_1426"
+      ],
+      "label": "Freebase",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "freebase knowledge graph",
+      "incident_edges": [
+        "edge_1425"
+      ],
+      "label": "Freebase Knowledge Graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fuzzy select",
+      "incident_edges": [
+        "edge_1417"
+      ],
+      "label": "Fuzzy Select",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "fuzzy selection",
+      "incident_edges": [
+        "edge_1427",
+        "edge_1428",
+        "edge_1429"
+      ],
+      "label": "fuzzy selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "germany",
+      "incident_edges": [
+        "edge_1413",
+        "edge_1424",
+        "edge_1430"
+      ],
+      "label": "Germany",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gpt-3.5",
+      "incident_edges": [
+        "edge_1431"
+      ],
+      "label": "GPT-3.5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gpt-3.5-turbo",
+      "incident_edges": [
+        "edge_1432"
+      ],
+      "label": "GPT-3.5-Turbo",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "gpt-4",
+      "incident_edges": [
+        "edge_1431",
+        "edge_1433"
+      ],
+      "label": "GPT-4",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "grailqa",
+      "incident_edges": [
+        "edge_1434"
+      ],
+      "label": "GrailQA",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "graph pruning",
+      "incident_edges": [
+        "edge_1435",
+        "edge_1436",
+        "edge_1437"
+      ],
+      "label": "graph pruning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph structure",
+      "incident_edges": [
+        "edge_1436",
+        "edge_1438"
+      ],
+      "label": "graph structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hallucination problem",
+      "incident_edges": [
+        "edge_1456"
+      ],
+      "label": "hallucination problems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "high accuracy",
+      "incident_edges": [
+        "edge_1474"
+      ],
+      "label": "high accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "interpretability",
+      "incident_edges": [
+        "edge_1454",
+        "edge_1477"
+      ],
+      "label": "interpretability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interpretable reasoning",
+      "incident_edges": [
+        "edge_1440"
+      ],
+      "label": "interpretable reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "irrelevant path",
+      "incident_edges": [
+        "edge_1427"
+      ],
+      "label": "irrelevant paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "kg",
+      "incident_edges": [
+        "edge_1439",
+        "edge_1440",
+        "edge_1446"
+      ],
+      "label": "KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg-based llm",
+      "incident_edges": [
+        "edge_1441"
+      ],
+      "label": "KG-based LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kgqa",
+      "incident_edges": [
+        "edge_1442"
+      ],
+      "label": "KGQA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "kgs",
+      "incident_edges": [
+        "edge_1443",
+        "edge_1444",
+        "edge_1445"
+      ],
+      "label": "KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "knowledge",
+      "incident_edges": [
+        "edge_1444",
+        "edge_1466"
+      ],
+      "label": "knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge augmentation",
+      "incident_edges": [
+        "edge_1447"
+      ],
+      "label": "knowledge augmentation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1420",
+        "edge_1422",
+        "edge_1426",
+        "edge_1443",
+        "edge_1450",
+        "edge_1451",
+        "edge_1452"
+      ],
+      "label": "knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "knowledge graph path",
+      "incident_edges": [
+        "edge_1448",
+        "edge_1449"
+      ],
+      "label": "knowledge graph path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "knowledge path",
+      "incident_edges": [
+        "edge_1453",
+        "edge_1454"
+      ],
+      "label": "knowledge paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge triple",
+      "incident_edges": [
+        "edge_1455"
+      ],
+      "label": "knowledge triple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lack of relevant knowledge",
+      "incident_edges": [
+        "edge_1456"
+      ],
+      "label": "lack of relevant knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "language model prompting",
+      "incident_edges": [
+        "edge_1450"
+      ],
+      "label": "language model prompting",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "large language model",
+      "incident_edges": [
+        "edge_1438",
+        "edge_1447",
+        "edge_1451",
+        "edge_1456"
+      ],
+      "label": "large language model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lejre municipality",
+      "incident_edges": [
+        "edge_1413"
+      ],
+      "label": "Lejre Municipality",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 13,
+      "id": "llm",
+      "incident_edges": [
+        "edge_1410",
+        "edge_1439",
+        "edge_1452",
+        "edge_1454",
+        "edge_1456",
+        "edge_1460",
+        "edge_1461",
+        "edge_1462",
+        "edge_1463",
+        "edge_1464",
+        "edge_1465",
+        "edge_1466",
+        "edge_1481"
+      ],
+      "label": "LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "llm call cost",
+      "incident_edges": [
+        "edge_1434",
+        "edge_1462"
+      ],
+      "label": "LLM call costs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm hallucination",
+      "incident_edges": [
+        "edge_1457"
+      ],
+      "label": "LLM hallucinations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm indicator",
+      "incident_edges": [
+        "edge_1458"
+      ],
+      "label": "LLM indicator",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm overhead",
+      "incident_edges": [
+        "edge_1460"
+      ],
+      "label": "LLM overhead",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "llm reasoning",
+      "incident_edges": [
+        "edge_1421",
+        "edge_1471"
+      ],
+      "label": "LLM reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm understanding",
+      "incident_edges": [
+        "edge_1459"
+      ],
+      "label": "LLM understanding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "llm-generated thinking",
+      "incident_edges": [
+        "edge_1453",
+        "edge_1455"
+      ],
+      "label": "LLM-generated thinking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lou seal",
+      "incident_edges": [
+        "edge_1467"
+      ],
+      "label": "Lou Seal",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "main question",
+      "incident_edges": [
+        "edge_1449"
+      ],
+      "label": "main question",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "main topic entity",
+      "incident_edges": [
+        "edge_1455"
+      ],
+      "label": "main topic entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-hop question",
+      "incident_edges": [
+        "edge_1468"
+      ],
+      "label": "multi-hop question",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-hop reasoning",
+      "incident_edges": [
+        "edge_1469"
+      ],
+      "label": "multi-hop reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-hop task",
+      "incident_edges": [
+        "edge_1476"
+      ],
+      "label": "multi-hop tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language description",
+      "incident_edges": [
+        "edge_1415"
+      ],
+      "label": "natural language descriptions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "netherland",
+      "incident_edges": [
+        "edge_1424"
+      ],
+      "label": "Netherland",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "nijmegen",
+      "incident_edges": [
+        "edge_1409",
+        "edge_1430"
+      ],
+      "label": "Nijmegen",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "node clustering",
+      "incident_edges": [
+        "edge_1435"
+      ],
+      "label": "node clustering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "openai api",
+      "incident_edges": [
+        "edge_1431"
+      ],
+      "label": "OpenAI API",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "path exploration",
+      "incident_edges": [
+        "edge_1417",
+        "edge_1441"
+      ],
+      "label": "path exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "path pruning",
+      "incident_edges": [
+        "edge_1408",
+        "edge_1419",
+        "edge_1436",
+        "edge_1460",
+        "edge_1470"
+      ],
+      "label": "path pruning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "path summarization",
+      "incident_edges": [
+        "edge_1459"
+      ],
+      "label": "path summarization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "path understanding",
+      "incident_edges": [
+        "edge_1463"
+      ],
+      "label": "path understanding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "paths-over-graph",
+      "incident_edges": [
+        "edge_1471"
+      ],
+      "label": "Paths-over-Graph",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance",
+      "incident_edges": [
+        "edge_1414"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "plan-retrieval-answering method",
+      "incident_edges": [
+        "edge_1472"
+      ],
+      "label": "plan-retrieval-answering method",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 21,
+      "id": "pog",
+      "incident_edges": [
+        "edge_1406",
+        "edge_1407",
+        "edge_1418",
+        "edge_1421",
+        "edge_1423",
+        "edge_1432",
+        "edge_1433",
+        "edge_1434",
+        "edge_1437",
+        "edge_1440",
+        "edge_1445",
+        "edge_1461",
+        "edge_1462",
+        "edge_1464",
+        "edge_1465",
+        "edge_1469",
+        "edge_1473",
+        "edge_1474",
+        "edge_1475",
+        "edge_1476",
+        "edge_1477"
+      ],
+      "label": "PoG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pog prompt",
+      "incident_edges": [
+        "edge_1463"
+      ],
+      "label": "PoG prompts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "pog-e",
+      "incident_edges": [
+        "edge_1405",
+        "edge_1473"
+      ],
+      "label": "PoG-E",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pre-trained model",
+      "incident_edges": [
+        "edge_1427"
+      ],
+      "label": "pre-trained model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "precise path selection",
+      "incident_edges": [
+        "edge_1428"
+      ],
+      "label": "Precise Path Selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predicted depth",
+      "incident_edges": [
+        "edge_1478"
+      ],
+      "label": "predicted depth",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predicted result",
+      "incident_edges": [
+        "edge_1453"
+      ],
+      "label": "predicted results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query entity id",
+      "incident_edges": [
+        "edge_1416"
+      ],
+      "label": "query entity ID",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "question",
+      "incident_edges": [
+        "edge_1480",
+        "edge_1481"
+      ],
+      "label": "question",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "question analysi",
+      "incident_edges": [
+        "edge_1458",
+        "edge_1479"
+      ],
+      "label": "question analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "question answering",
+      "incident_edges": [
+        "edge_1422",
+        "edge_1442",
+        "edge_1470"
+      ],
+      "label": "question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "reasoning",
+      "incident_edges": [
+        "edge_1447",
+        "edge_1451",
+        "edge_1452",
+        "edge_1465"
+      ],
+      "label": "reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning capability",
+      "incident_edges": [
+        "edge_1418"
+      ],
+      "label": "reasoning capabilities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning path",
+      "incident_edges": [
+        "edge_1442"
+      ],
+      "label": "reasoning paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning task",
+      "incident_edges": [
+        "edge_1420"
+      ],
+      "label": "reasoning tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieved knowledge path",
+      "incident_edges": [
+        "edge_1448"
+      ],
+      "label": "retrieved knowledge paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieved reasoning path",
+      "incident_edges": [
+        "edge_1411"
+      ],
+      "label": "retrieved reasoning paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "san francisco giant",
+      "incident_edges": [
+        "edge_1467"
+      ],
+      "label": "San Francisco Giants",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "short textual description",
+      "incident_edges": [
+        "edge_1415"
+      ],
+      "label": "short textual description",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "simpler part",
+      "incident_edges": [
+        "edge_1468"
+      ],
+      "label": "simpler parts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "slow update",
+      "incident_edges": [
+        "edge_1464"
+      ],
+      "label": "slow updates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sota",
+      "incident_edges": [
+        "edge_1432"
+      ],
+      "label": "SOTA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "source of knowledge",
+      "incident_edges": [
+        "edge_1443"
+      ],
+      "label": "source of knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sparql function",
+      "incident_edges": [
+        "edge_1482"
+      ],
+      "label": "SPARQL functions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "sparql query",
+      "incident_edges": [
+        "edge_1403",
+        "edge_1425"
+      ],
+      "label": "SPARQL query",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "split question",
+      "incident_edges": [
+        "edge_1449",
+        "edge_1483"
+      ],
+      "label": "split question",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured information",
+      "incident_edges": [
+        "edge_1461"
+      ],
+      "label": "structured information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured knowledge",
+      "incident_edges": [
+        "edge_1444"
+      ],
+      "label": "structured knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "subgraph detection",
+      "incident_edges": [
+        "edge_1479",
+        "edge_1480",
+        "edge_1482"
+      ],
+      "label": "subgraph detection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph exploration",
+      "incident_edges": [
+        "edge_1478"
+      ],
+      "label": "subgraph exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "summary prompt",
+      "incident_edges": [
+        "edge_1457"
+      ],
+      "label": "summary prompts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "token usage",
+      "incident_edges": [
+        "edge_1429"
+      ],
+      "label": "token usage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "topic entity",
+      "incident_edges": [
+        "edge_1468",
+        "edge_1478",
+        "edge_1480",
+        "edge_1481",
+        "edge_1483"
+      ],
+      "label": "topic entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "webqsp dataset",
+      "incident_edges": [
+        "edge_1474"
+      ],
+      "label": "WebQSP dataset",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "zero-shot answering",
+      "incident_edges": [
+        "edge_1450"
+      ],
+      "label": "zero-shot answering",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

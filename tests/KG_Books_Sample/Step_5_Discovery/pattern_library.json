@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "generated_at": "2026-03-31 20:38:42 UTC",
+    "run_id": "run_20260331_163637",
+    "total_patterns": 0
+  },
+  "patterns": [
+    {
+      "id": "run_20260331_163637:k_truss:000868",
+      "type": "k-Truss",
+      "size": 2,
+      "confidence": 1.000,
+      "nodes": ["knowledge graph", "llm"],
+      "node_ids": ["knowledge graph", "llm"],
+      "metadata": {
+        "support": 19.000
+      },
+      "description": "Dense edge in k-truss (k=3): knowledge graph - llm",
+      "sources": ["Paths_over_KG", "KGs_and_LLMs"]
+    },
+    {
+      "id": "run_20260331_163637:meta_pattern:004050",
+      "type": "Meta-Pattern",
+      "size": 10,
+      "confidence": 1.000,
+      "nodes": ["rdf mapping language", "rml", "random projection", "task-relevant information", "exclusion criteria", "inclusion criteria", "digital assistant", "maintenance engineer", "deep learning", "entity matching"],
+      "node_ids": ["rdf mapping language", "rml", "random projection", "task-relevant information", "exclusion criteria", "inclusion criteria", "digital assistant", "maintenance engineer", "deep learning", "entity matching"],
+      "metadata": {
+        "occurrences": 56.000,
+        "pattern_size": 2.000
+      },
+      "description": "Meta-pattern: 56 similar 2-node structures detected",
+      "sources": []
+    }
+  ],
+  "statistics": {
+    "total_patterns": 2,
+    "by_type": {
+      "Meta-Pattern": 1,
+      "k-Truss": 1
+    },
+    "by_size": {
+      "10-node": 1,
+      "2-node": 1
+    }
+  },
+  "usage": {
+    "description": "Pattern library for reuse and querying",
+    "query_by_id": "Use 'id' field to retrieve specific patterns",
+    "query_by_size": "Use 'size' field to find patterns of specific dimensions",
+    "query_by_nodes": "Use 'node_ids' to find patterns containing specific entities",
+    "similarity_search": "Compare 'nodes' arrays to find structurally similar patterns"
+  }
+}

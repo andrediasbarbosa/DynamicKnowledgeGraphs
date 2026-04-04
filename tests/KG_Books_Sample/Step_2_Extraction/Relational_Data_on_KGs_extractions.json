@@ -1,0 +1,1606 @@
+[
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "integrate",
+        "sources": [
+          "enterprise knowledge graphs",
+          "heterogeneous data sources"
+        ],
+        "targets": [
+          "dataspace"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "create",
+        "sources": [
+          "RDF view",
+          "relational data"
+        ],
+        "targets": [
+          "RDB2RDF view"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "materialized RDB2RDF view"
+        ],
+        "targets": [
+          "query performance",
+          "data availability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maintain",
+        "sources": [
+          "materialized RDB2RDF view"
+        ],
+        "targets": [
+          "relational database"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "integrate",
+        "sources": [
+          "enterprise knowledge graphs",
+          "data sources"
+        ],
+        "targets": [
+          "comprehensive dataspace"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "ontology",
+          "knowledge graph"
+        ],
+        "targets": [
+          "information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "translate",
+        "sources": [
+          "RDB2RDF view",
+          "mappings"
+        ],
+        "targets": [
+          "source data",
+          "ontology vocabulary"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperform",
+        "sources": [
+          "incremental maintenance",
+          "rematerialization"
+        ],
+        "targets": [
+          "view maintenance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maintain",
+        "sources": [
+          "changesets",
+          "Linked Open Data"
+        ],
+        "targets": [
+          "materialized RDF views"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "update",
+          "database states"
+        ],
+        "targets": [
+          "changeset"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "changeset",
+          "view mappings"
+        ],
+        "targets": [
+          "new view state"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "preserves",
+        "sources": [
+          "RDB2RDF views"
+        ],
+        "targets": [
+          "base entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "relevant tuples",
+          "data source update"
+        ],
+        "targets": [
+          "RDF instances"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "formalism"
+        ],
+        "targets": [
+          "automatic construction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "synchronizes",
+        "sources": [
+          "RDB2RDF view",
+          "relational database"
+        ],
+        "targets": [
+          "RDB2RDF view"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "triggers",
+          "updates"
+        ],
+        "targets": [
+          "changesets"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "source update",
+          "source state"
+        ],
+        "targets": [
+          "changeset"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "prevents",
+        "sources": [
+          "materialized view",
+          "remote data source"
+        ],
+        "targets": [
+          "access"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "triggers",
+          "incremental maintenance"
+        ],
+        "targets": [
+          "view maintenance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "causes",
+        "sources": [
+          "duplicates",
+          "relational views"
+        ],
+        "targets": [
+          "complexity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implements",
+        "sources": [
+          "incremental refresh",
+          "Oracle"
+        ],
+        "targets": [
+          "no duplicates"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "results_in",
+        "sources": [
+          "RDF graph",
+          "relational database"
+        ],
+        "targets": [
+          "exporting contents"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "introduces",
+        "sources": [
+          "interest-based RDF update",
+          "Endris et al."
+        ],
+        "targets": [
+          "update propagation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "requires",
+        "sources": [
+          "changeset computation",
+          "source dataset"
+        ],
+        "targets": [
+          "real-time tool"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "relates",
+        "sources": [
+          "foreign key",
+          "relation schemes"
+        ],
+        "targets": [
+          "R",
+          "S"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "matches",
+        "sources": [
+          "foreign key",
+          "attributes"
+        ],
+        "targets": [
+          "R",
+          "S"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "tuple",
+          "foreign key"
+        ],
+        "targets": [
+          "R",
+          "S"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "relational schema",
+          "constraints"
+        ],
+        "targets": [
+          "primary key",
+          "foreign key"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "foreign key",
+          "relation schemes"
+        ],
+        "targets": [
+          "relation schemes"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "traverses",
+        "sources": [
+          "path",
+          "foreign key"
+        ],
+        "targets": [
+          "tuples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is related to",
+        "sources": [
+          "tuple",
+          "path"
+        ],
+        "targets": [
+          "tuples"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contains",
+        "sources": [
+          "database state",
+          "tuple"
+        ],
+        "targets": [
+          "relation schemes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "satisfies",
+        "sources": [
+          "RDB2RDF view",
+          "object-preserving property"
+        ],
+        "targets": [
+          "base entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adopts",
+        "sources": [
+          "transformation rule",
+          "DATALOG"
+        ],
+        "targets": [
+          "queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "pivot relation",
+          "RDF triples"
+        ],
+        "targets": [
+          "subject URI"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "class transformation rule",
+          "tuples"
+        ],
+        "targets": [
+          "instances"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "nonNull",
+          "value"
+        ],
+        "targets": [
+          "not null"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "holds",
+        "sources": [
+          "RDFLiteral",
+          "value"
+        ],
+        "targets": [
+          "literal representation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "relates",
+        "sources": [
+          "F",
+          "tuple r"
+        ],
+        "targets": [
+          "tuple s"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "matches",
+        "sources": [
+          "DTR",
+          "pivot relation R"
+        ],
+        "targets": [
+          "class D"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "defines",
+        "sources": [
+          "H",
+          "tuple r"
+        ],
+        "targets": [
+          "data values y"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "OTR",
+          "pivot relation"
+        ],
+        "targets": [
+          "object property"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "TR Patterns",
+          "R2RML mappings"
+        ],
+        "targets": [
+          "data restructuring"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "relational views",
+          "R2RML generation"
+        ],
+        "targets": [
+          "mapping consistency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "built_on",
+        "sources": [
+          "MusicBrainz",
+          "PostgreSQL"
+        ],
+        "targets": [
+          "relational database"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "collects",
+        "sources": [
+          "MusicBrainz",
+          "music metadata"
+        ],
+        "targets": [
+          "artists",
+          "releases"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "transformation rule",
+          "relation name"
+        ],
+        "targets": [
+          "tuple variable"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is a type of",
+        "sources": [
+          "object property",
+          "datatype property"
+        ],
+        "targets": [
+          "property"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is part of",
+        "sources": [
+          "attributes",
+          "primary key"
+        ],
+        "targets": [
+          "relation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "path",
+          "relation"
+        ],
+        "targets": [
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "optional function",
+          "attributes"
+        ],
+        "targets": [
+          "values"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "Artist"
+        ],
+        "targets": [
+          "MusicBrainz RDF"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "Artist"
+        ],
+        "targets": [
+          "URI"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps_to",
+        "sources": [
+          "Artist"
+        ],
+        "targets": [
+          "MusicArtist"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps_to",
+        "sources": [
+          "Artist"
+        ],
+        "targets": [
+          "SoloMusicArtist"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generated_by",
+        "sources": [
+          "RDF resources"
+        ],
+        "targets": [
+          "hasURI"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "Artist"
+        ],
+        "targets": [
+          "MusicArtist"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "Artist"
+        ],
+        "targets": [
+          "Track"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contains",
+        "sources": [
+          "Release"
+        ],
+        "targets": [
+          "Track"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_type_of",
+        "sources": [
+          "Recording"
+        ],
+        "targets": [
+          "Signal"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "Tag"
+        ],
+        "targets": [
+          "Genre"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "tuple r",
+          "triples"
+        ],
+        "targets": [
+          "mbz:r.ga1",
+          "mbz:r.ga2",
+          "mbz:r.ga3"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "matches",
+        "sources": [
+          "rule ψ10",
+          "attribute name"
+        ],
+        "targets": [
+          "datatype property foaf:name"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is related to",
+        "sources": [
+          "tuple r",
+          "tuple r3"
+        ],
+        "targets": [
+          "object property foaf:made"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "translates to",
+        "sources": [
+          "RDB2RDF view",
+          "source data"
+        ],
+        "targets": [
+          "data graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "produces",
+        "sources": [
+          "triples",
+          "pivot relations"
+        ],
+        "targets": [
+          "duplicates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "stores",
+        "sources": [
+          "named graphs",
+          "RDF dataset"
+        ],
+        "targets": [
+          "triples"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "pivot tuples",
+          "updates"
+        ],
+        "targets": [
+          "triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "transformation rules",
+          "database state"
+        ],
+        "targets": [
+          "triples"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "transformation rule",
+          "pivot tuple"
+        ],
+        "targets": [
+          "RDF quads"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "computed by",
+        "sources": [
+          "RDF state",
+          "pivot relation"
+        ],
+        "targets": [
+          "transformation rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defined by",
+        "sources": [
+          "RDB2RDF view",
+          "set of transformation rules"
+        ],
+        "targets": [
+          "pivot relations"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contains",
+        "sources": [
+          "tuple",
+          "RDB2RDF view"
+        ],
+        "targets": [
+          "RDF states"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "update",
+          "deletion",
+          "insertion"
+        ],
+        "targets": [
+          "database state"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "identified_by",
+        "sources": [
+          "relevant relations",
+          "update"
+        ],
+        "targets": [
+          "relevant tuples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computed_from",
+        "sources": [
+          "changeset",
+          "update"
+        ],
+        "targets": [
+          "relevant tuples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "results_in",
+        "sources": [
+          "database state",
+          "update"
+        ],
+        "targets": [
+          "new database state"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "relevant_to",
+        "sources": [
+          "transformation rules",
+          "relation R"
+        ],
+        "targets": [
+          "relation R*"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "impact",
+        "sources": [
+          "updates",
+          "relation R"
+        ],
+        "targets": [
+          "transformation rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "relevant_to",
+        "sources": [
+          "update u",
+          "database state σ0"
+        ],
+        "targets": [
+          "relevant tuples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "impacted_by",
+        "sources": [
+          "transformation rules",
+          "relation R*"
+        ],
+        "targets": [
+          "relation R"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "update",
+          "relation"
+        ],
+        "targets": [
+          "database state"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "transformation rules",
+          "update"
+        ],
+        "targets": [
+          "relevant tuples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "changeset",
+          "update"
+        ],
+        "targets": [
+          "RDF state"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "connects",
+        "sources": [
+          "relevant path",
+          "pivot relation"
+        ],
+        "targets": [
+          "relations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "relevant to",
+        "sources": [
+          "transformation rules",
+          "relation R"
+        ],
+        "targets": [
+          "updates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "corresponds to",
+        "sources": [
+          "deletion component",
+          "pivot tuples"
+        ],
+        "targets": [
+          "tuples in D"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "obtained by",
+        "sources": [
+          "relevant tuples before",
+          "relation R"
+        ],
+        "targets": [
+          "evaluating relational path"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "obtained by",
+        "sources": [
+          "relevant tuples after",
+          "relation R"
+        ],
+        "targets": [
+          "evaluating relational path"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is_relevant_to",
+        "sources": [
+          "Track",
+          "Artist",
+          "Medium"
+        ],
+        "targets": [
+          "update"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_related_to",
+        "sources": [
+          "rnew",
+          "rold"
+        ],
+        "targets": [
+          "Artist"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_related_to",
+        "sources": [
+          "rnew",
+          "rold"
+        ],
+        "targets": [
+          "Medium"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "update",
+          "database"
+        ],
+        "targets": [
+          "RDF state"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "AFTER trigger",
+          "update operation"
+        ],
+        "targets": [
+          "RDF quads"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is related to",
+        "sources": [
+          "relevant relation",
+          "RDB2RDF view"
+        ],
+        "targets": [
+          "updates"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "deleted tuples",
+          "updated tuples"
+        ],
+        "targets": [
+          "old versions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "executes",
+        "sources": [
+          "trigger",
+          "update"
+        ],
+        "targets": [
+          "compute changeset"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "combines",
+        "sources": [
+          "inserted tuples",
+          "deleted tuples"
+        ],
+        "targets": [
+          "current database state"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "relation R"
+        ],
+        "targets": [
+          "state σ1"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "returns",
+        "sources": [
+          "function trg_compute_delta_R_stmt"
+        ],
+        "targets": [
+          "trigger"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "Cookin’s on 3 B.",
+          "MusicArtist"
+        ],
+        "targets": [
+          "This Girl"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "Kylie Auldist",
+          "MusicArtist"
+        ],
+        "targets": [
+          "This Girl"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "made",
+        "sources": [
+          "Kungs",
+          "MusicArtist"
+        ],
+        "targets": [
+          "This Girl"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "This Girl",
+          "track"
+        ],
+        "targets": [
+          "Record"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_24",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "RDB2RDF views",
+          "object-preserving views"
+        ],
+        "targets": [
+          "tuple identification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "formal framework",
+          "rule language"
+        ],
+        "targets": [
+          "view mappings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maintains",
+        "sources": [
+          "changesets",
+          "formal framework"
+        ],
+        "targets": [
+          "RDB2RDF views"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "generates",
+        "sources": [
+          "tool"
+        ],
+        "targets": [
+          "triggers"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_25",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "incremental maintenance",
+          "xpath view"
+        ],
+        "targets": [
+          "algorithm"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "relational databases",
+          "rdf graphs"
+        ],
+        "targets": [
+          "export"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "data integration"
+        ],
+        "targets": [
+          "theoretical perspective"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "view maintenance",
+          "hierarchical data"
+        ],
+        "targets": [
+          "semistructured data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "RDF datasets",
+          "n-quads"
+        ],
+        "targets": [
+          "syntax"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_26",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "maintains",
+        "sources": [
+          "sql/xml view",
+          "mapping-driven approach"
+        ],
+        "targets": [
+          "view maintenance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "relational data",
+          "enterprise knowledge graphs"
+        ],
+        "targets": [
+          "publication"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maintains",
+        "sources": [
+          "ontologies",
+          "logic databases"
+        ],
+        "targets": [
+          "materializations"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "computes",
+        "sources": [
+          "rdf/s knowledge bases"
+        ],
+        "targets": [
+          "deltas"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "array data"
+        ],
+        "targets": [
+          "incremental view maintenance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_27",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "references",
+        "sources": [
+          "Track",
+          "Medium"
+        ],
+        "targets": [
+          "mid"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "references",
+        "sources": [
+          "Recording",
+          "Credit"
+        ],
+        "targets": [
+          "c id"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "references",
+        "sources": [
+          "RecordingTag",
+          "Recording"
+        ],
+        "targets": [
+          "s id"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "references",
+        "sources": [
+          "RecordingTag",
+          "Tag"
+        ],
+        "targets": [
+          "q id"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "references",
+        "sources": [
+          "ReleaseGroup",
+          "Credit"
+        ],
+        "targets": [
+          "c id"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_28",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "makes",
+        "sources": [
+          "Music Artist"
+        ],
+        "targets": [
+          "Thing"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "tracks",
+        "sources": [
+          "Record"
+        ],
+        "targets": [
+          "Track"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "records",
+        "sources": [
+          "Release"
+        ],
+        "targets": [
+          "Record"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "Music Artist"
+        ],
+        "targets": [
+          "Genre"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Relational_Data_on_KGs_chunk_29",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "is_a",
+        "sources": [
+          "foaf:name"
+        ],
+        "targets": [
+          "owl:DatatypeProperty"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "is_a",
+        "sources": [
+          "dc:title"
+        ],
+        "targets": [
+          "owl:DatatypeProperty"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "is_a",
+        "sources": [
+          "mo:duration"
+        ],
+        "targets": [
+          "owl:DatatypeProperty"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "is_a",
+        "sources": [
+          "mo:track_count"
+        ],
+        "targets": [
+          "owl:DatatypeProperty"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

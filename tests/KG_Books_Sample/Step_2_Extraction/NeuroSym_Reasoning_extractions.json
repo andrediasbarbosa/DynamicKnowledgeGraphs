@@ -1,0 +1,1513 @@
+[
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "advance",
+        "sources": [
+          "large pretrained language models",
+          "neural reasoning systems"
+        ],
+        "targets": [
+          "natural language tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provide",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "factual grounding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "NeuroSymActive"
+        ],
+        "targets": [
+          "neural-symbolic reasoning",
+          "active exploration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "NeuroSymActive"
+        ],
+        "targets": [
+          "graph lookups",
+          "model calls"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "neural models",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "multi-hop reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "differentiable modules",
+          "soft logical operators"
+        ],
+        "targets": [
+          "gradient-based refinement"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prioritizes",
+        "sources": [
+          "active exploration controller",
+          "neural path evaluator"
+        ],
+        "targets": [
+          "retrieval effort"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "differentiable neural-symbolic module",
+          "soft-unification"
+        ],
+        "targets": [
+          "KG reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "human involvement",
+          "active learning"
+        ],
+        "targets": [
+          "sample efficiency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "reduce",
+        "sources": [
+          "active selection strategies",
+          "interactive protocols"
+        ],
+        "targets": [
+          "label cost"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improve",
+        "sources": [
+          "uncertainty estimates"
+        ],
+        "targets": [
+          "query selection",
+          "adaptive exploration strategies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduce",
+        "sources": [
+          "retrieval components",
+          "generative models"
+        ],
+        "targets": [
+          "model hallucinations",
+          "up-to-date facts"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "structured exploration",
+          "neural guidance"
+        ],
+        "targets": [
+          "path discovery"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enable",
+        "sources": [
+          "compact prompt tuning"
+        ],
+        "targets": [
+          "LLMs",
+          "external knowledge"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "NeuroSymActive",
+          "knowledge graph"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "uncertainty modeling",
+          "active retrieval"
+        ],
+        "targets": [
+          "information gain"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "merges",
+        "sources": [
+          "Differentiable Neural-Symbolic Fusion",
+          "Knowledge Adapter"
+        ],
+        "targets": [
+          "path embeddings",
+          "symbolic scores"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implements",
+        "sources": [
+          "Monte Carlo Tree Search",
+          "active exploration"
+        ],
+        "targets": [
+          "search strategy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "human intervention",
+          "search"
+        ],
+        "targets": [
+          "value estimation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "NeuroSymActive",
+          "knowledge graph"
+        ],
+        "targets": [
+          "query",
+          "budgets",
+          "human buffer"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "triggers",
+        "sources": [
+          "uncertainty",
+          "QueryHuman"
+        ],
+        "targets": [
+          "update rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "selects",
+        "sources": [
+          "agent",
+          "human-query action"
+        ],
+        "targets": [
+          "QUERY_HUMAN"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "emits",
+        "sources": [
+          "agent",
+          "final answer"
+        ],
+        "targets": [
+          "ground-truth answer"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is taken over",
+        "sources": [
+          "expectation",
+          "agent's policy"
+        ],
+        "targets": [
+          "environment randomness"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "implements",
+        "sources": [
+          "NeuroSymActive",
+          "coupled dual-loop optimization"
+        ],
+        "targets": [
+          "inner loop",
+          "outer loop"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "drives",
+        "sources": [
+          "inner loop",
+          "neural policy"
+        ],
+        "targets": [
+          "neural-symbolic exploration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "monitors",
+        "sources": [
+          "uncertainty quantifier",
+          "entropy"
+        ],
+        "targets": [
+          "information gain"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "human feedback",
+          "expert feedback"
+        ],
+        "targets": [
+          "critical decisions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "Bayesian head",
+          "probabilistic neural head"
+        ],
+        "targets": [
+          "hop budgets"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Gumbel-Softmax",
+          "relation selection"
+        ],
+        "targets": [
+          "end-to-end optimization"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "knowledge adapter",
+          "inductive logic layer"
+        ],
+        "targets": [
+          "neural-symbolic integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "neural encodings",
+          "path-level representations"
+        ],
+        "targets": [
+          "fused representations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "rule body",
+          "neural predicate grounding"
+        ],
+        "targets": [
+          "truth degrees"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aggregates",
+        "sources": [
+          "symbolic plausibility",
+          "applicable rules"
+        ],
+        "targets": [
+          "symbolic score"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "mediates",
+        "sources": [
+          "gating function",
+          "gradient distribution"
+        ],
+        "targets": [
+          "neural components",
+          "symbolic components"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "updates",
+        "sources": [
+          "human labels",
+          "active supervision"
+        ],
+        "targets": [
+          "rule parameters"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "updates",
+        "sources": [
+          "logic loss",
+          "gradient"
+        ],
+        "targets": [
+          "rule confidence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adapts",
+        "sources": [
+          "exploration module",
+          "predictive uncertainty"
+        ],
+        "targets": [
+          "branching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "embeds",
+        "sources": [
+          "human queries",
+          "search tree"
+        ],
+        "targets": [
+          "human oracle nodes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "exploration regularization",
+          "breadth"
+        ],
+        "targets": [
+          "premature collapse"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "fosters",
+        "sources": [
+          "maximizing entropy",
+          "diverse exploration"
+        ],
+        "targets": [
+          "exploration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "trains",
+        "sources": [
+          "active learning efficacy",
+          "query policy"
+        ],
+        "targets": [
+          "information gain"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adjusts",
+        "sources": [
+          "multi-objective weights",
+          "gradient normalization"
+        ],
+        "targets": [
+          "objectives"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assesses",
+        "sources": [
+          "NeuroSymActive",
+          "multi-hop knowledge graph QA"
+        ],
+        "targets": [
+          "performance gains"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "performs",
+        "sources": [
+          "NeuroSymActive",
+          "LLaMa3-8B"
+        ],
+        "targets": [
+          "87.1",
+          "62.5"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "performs",
+        "sources": [
+          "LightPROF",
+          "LLaMa2-7B"
+        ],
+        "targets": [
+          "71.2",
+          "48.5"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "KV-Mem",
+          "EmbedKGQA"
+        ],
+        "targets": [
+          "46.7",
+          "66.6"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "affects",
+        "sources": [
+          "Neural-symbolic integration",
+          "DILL rule learning"
+        ],
+        "targets": [
+          "83.9",
+          "59.1"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "NeuroSymActive",
+          "Gumbel temperature"
+        ],
+        "targets": [
+          "WebQSP performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "NeuroSymActive",
+          "active retrieval",
+          "differentiable neural-symbolic adapter",
+          "differentiable exploration"
+        ],
+        "targets": [
+          "multi-hop KGQA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "NeuroSymActive",
+          "LightPROF"
+        ],
+        "targets": [
+          "answer accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "symbolic layer",
+          "differentiable search"
+        ],
+        "targets": [
+          "multi-hop queries"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "annotation budget"
+        ],
+        "targets": [
+          "error rates"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "composes",
+        "sources": [
+          "active supervision"
+        ],
+        "targets": [
+          "residual errors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "structure-encoding strategies"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "NeuroSymActive",
+          "LLM backbones"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "triggers",
+        "sources": [
+          "hop prediction"
+        ],
+        "targets": [
+          "human query"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "NeuroSymActive",
+          "StructGPT"
+        ],
+        "targets": [
+          "inference time",
+          "token consumption"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "converts",
+        "sources": [
+          "human annotations",
+          "NeuroSymActive"
+        ],
+        "targets": [
+          "focused resource"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "triggers",
+        "sources": [
+          "uncertainty threshold",
+          "human queries"
+        ],
+        "targets": [
+          "accuracy frontier"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "delivers",
+        "sources": [
+          "early-stage queries"
+        ],
+        "targets": [
+          "entropy reduction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "preserves",
+        "sources": [
+          "high-yield decisions",
+          "tight annotation budgets"
+        ],
+        "targets": [
+          "achievable accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "training dynamics",
+          "multi-objective training"
+        ],
+        "targets": [
+          "optimization progress"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "emerges",
+        "sources": [
+          "symbolic structure",
+          "differentiable inductive logic layer"
+        ],
+        "targets": [
+          "training"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "gradient normalization",
+          "symbolic term"
+        ],
+        "targets": [
+          "instability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "shapes",
+        "sources": [
+          "progressive widening",
+          "parameters"
+        ],
+        "targets": [
+          "MCTS search"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "concentrates",
+        "sources": [
+          "human-query nodes",
+          "epistemic uncertainty"
+        ],
+        "targets": [
+          "intermediate depths"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "adaptive strategy"
+        ],
+        "targets": [
+          "quality"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "raises",
+        "sources": [
+          "multiplicative uncertainty factor"
+        ],
+        "targets": [
+          "effective branching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "progressive widening"
+        ],
+        "targets": [
+          "per-rollout cost"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "batched evaluation"
+        ],
+        "targets": [
+          "per-rollout latency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "mitigates",
+        "sources": [
+          "active supervision",
+          "error types"
+        ],
+        "targets": [
+          "specific errors"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "originates from",
+        "sources": [
+          "retrieval errors",
+          "subgraph expansion"
+        ],
+        "targets": [
+          "omitted entities"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "favors",
+        "sources": [
+          "reasoning errors",
+          "search policy"
+        ],
+        "targets": [
+          "incorrect path"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "reflects failures of",
+        "sources": [
+          "generation errors",
+          "language model"
+        ],
+        "targets": [
+          "correct output"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "prevent",
+        "sources": [
+          "active queries",
+          "oracle annotations"
+        ],
+        "targets": [
+          "omission"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "validate",
+        "sources": [
+          "human checks"
+        ],
+        "targets": [
+          "relation relevance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "arise",
+        "sources": [
+          "knowledge-graph incompleteness"
+        ],
+        "targets": [
+          "residual error mass"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "lead to",
+        "sources": [
+          "systematic biases"
+        ],
+        "targets": [
+          "missed oracle invocations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affect",
+        "sources": [
+          "hyperparameters"
+        ],
+        "targets": [
+          "reasoning accuracy",
+          "computation",
+          "human annotation cost"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "changes",
+        "sources": [
+          "human-cost penalty",
+          "β"
+        ],
+        "targets": [
+          "system propensity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "controls",
+        "sources": [
+          "temperature",
+          "τ"
+        ],
+        "targets": [
+          "selection distributions"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "impedes",
+        "sources": [
+          "large temperatures"
+        ],
+        "targets": [
+          "learning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "harms",
+        "sources": [
+          "exploration terms"
+        ],
+        "targets": [
+          "policy diversity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "symbolic consistency"
+        ],
+        "targets": [
+          "high-performing solutions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "active querying",
+          "differentiable symbolic layer",
+          "differentiable graph exploration"
+        ],
+        "targets": [
+          "gains"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "active exploration mechanism"
+        ],
+        "targets": [
+          "graph retrievals",
+          "model invocations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "differentiable symbolic layer"
+        ],
+        "targets": [
+          "robustness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "NeuroSymActive"
+        ],
+        "targets": [
+          "reasoning traces"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "will investigate",
+        "sources": [
+          "future work"
+        ],
+        "targets": [
+          "uncertainty-aware stopping criteria",
+          "symbolic layer extension"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "Deeplogic",
+          "neural perception",
+          "logical reasoning"
+        ],
+        "targets": [
+          "joint learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "embeds",
+        "sources": [
+          "Logicenn",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "logical rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "Neupsl",
+          "probabilistic soft logic"
+        ],
+        "targets": [
+          "neural networks"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "differentiable logic programming",
+          "structured examples"
+        ],
+        "targets": [
+          "inductive reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "human-in-the-loop",
+          "machine learning"
+        ],
+        "targets": [
+          "data labeling"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "bayesian neural networks",
+          "heteroscedastic regression"
+        ],
+        "targets": [
+          "effective prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph",
+          "multi-document question answering"
+        ],
+        "targets": [
+          "question answering accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "retrieval-augmented generation",
+          "knowledge graph"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "active learning",
+          "bayesian neural networks"
+        ],
+        "targets": [
+          "data analysis"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "graph neural networks",
+          "information acquisition"
+        ],
+        "targets": [
+          "multi-robot systems"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "multi-hop question answering",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "subgraph retrieval",
+          "multi-hop knowledge base"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge bases",
+          "text"
+        ],
+        "targets": [
+          "open domain question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge-grounded dialogue generation",
+          "prefix-tuning"
+        ],
+        "targets": [
+          "dialogue systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "benefits",
+        "sources": [
+          "semantic parse labeling",
+          "knowledge base"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "NeuroSymActive",
+          "knowledge base embeddings"
+        ],
+        "targets": [
+          "multi-hop question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "intermediate supervision signals",
+          "multi-hop knowledge base question answering"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "sequence-to-sequence model",
+          "knowledge graph completion"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "large language models",
+          "knowledge graph"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "active human queries",
+          "predictive entropy"
+        ],
+        "targets": [
+          "expected predictive entropy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "inner loop",
+          "stochastic gradient descent"
+        ],
+        "targets": [
+          "convergence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Ltotal",
+          "L-Lipschitz gradients"
+        ],
+        "targets": [
+          "stationary points"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "Bayesian head",
+          "sub-Gaussian noise"
+        ],
+        "targets": [
+          "coverage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "covers",
+        "sources": [
+          "predictive interval",
+          "true hop count"
+        ],
+        "targets": [
+          "probability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_24",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "implies",
+        "sources": [
+          "sub-Gaussianity"
+        ],
+        "targets": [
+          "Hoeffding-type concentration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "variance estimator",
+          "posterior mode estimator"
+        ],
+        "targets": [
+          "asymptotic coverage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "human queries"
+        ],
+        "targets": [
+          "predictive entropy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "formalizes",
+        "sources": [
+          "soft tree policy"
+        ],
+        "targets": [
+          "hard argmax policy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "satisfies",
+        "sources": [
+          "action utilities"
+        ],
+        "targets": [
+          "probability mass"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "NeuroSym_Reasoning_chunk_25",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "approximates",
+        "sources": [
+          "symbolic module",
+          "plausibility vector"
+        ],
+        "targets": [
+          "true plausibility vector"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "gating network"
+        ],
+        "targets": [
+          "Lipschitz"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "links",
+        "sources": [
+          "fusion error bound"
+        ],
+        "targets": [
+          "symbolic approximation error",
+          "fused representation accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "establishes",
+        "sources": [
+          "inner optimization"
+        ],
+        "targets": [
+          "stationary convergence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "Bayesian head"
+        ],
+        "targets": [
+          "finite-sample concentration"
+        ]
+      }
+    ],
+    "success": true
+  }
+]
