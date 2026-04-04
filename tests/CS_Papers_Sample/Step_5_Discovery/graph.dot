@@ -1,0 +1,1548 @@
+digraph Hypergraph {
+  rankdir=LR;
+  node [shape=ellipse, style=filled, color=lightblue];
+
+  "13 vertice" [label="13 vertice"];
+  "14 vertice" [label="14 vertice"];
+  "2d view" [label="2d view"];
+  "3d object recognition" [label="3d object recognition"];
+  "a* algorithm" [label="a* algorithm"];
+  "abductive reasoning" [label="abductive reasoning"];
+  "accuracy match" [label="accuracy match"];
+  "accuracy of match" [label="accuracy of match"];
+  "active graph-editing technique" [label="active graph-editing"];
+  "active matching" [label="active matching"];
+  "adjacency graph" [label="adjacency graph"];
+  "adjacency matrix" [label="adjacency matrix"];
+  "adjacency structure" [label="adjacency structure"];
+  "aerial image" [label="aerial image"];
+  "affine invariant" [label="affine invariant"];
+  "affinity" [label="affinity"];
+  "algorithmic application" [label="algorithmic application"];
+  "alternative embedding" [label="alternative embedding"];
+  "alternative method" [label="alternative method"];
+  "ambiguity" [label="ambiguity"];
+  "amplitude" [label="amplitude"];
+  "ancestor" [label="ancestor"];
+  "andrew cross" [label="andrew cross"];
+  "application" [label="application"];
+  "approximate distance" [label="approximate distance"];
+  "aspect graph" [label="aspect graph"];
+  "assignment" [label="assignment"];
+  "assignment kernel" [label="assignment kernel"];
+  "assignment problem" [label="assignment problem"];
+  "attribute" [label="attribute"];
+  "attributed molecular graph" [label="attributed molecular graph"];
+  "attributed tree" [label="attributed tree"];
+  "base kernel" [label="base kernel"];
+  "bayesian consistency measure" [label="bayesian consistency measure"];
+  "bayesian framework" [label="bayesian framework"];
+  "bayesian model" [label="bayesian model"];
+  "be embedded" [label="be embedded"];
+  "best classification" [label="best classification"];
+  "best cluster" [label="best cluster"];
+  "better result" [label="better result"];
+  "binary adjacency graph" [label="binary adjacency graph"];
+  "bitangent circle radiu" [label="bitangent circle radiu"];
+  "block structure" [label="block structure"];
+  "boundary length" [label="boundary length"];
+  "central moment" [label="central moment"];
+  "centred co-ordinates y c" [label="centred co-ordinates y c"];
+  "change" [label="change"];
+  "characteristic polynomial" [label="characteristic polynomial"];
+  "cheeger constant" [label="cheeger constant"];
+  "class structure" [label="class structure"];
+  "classification accuracy" [label="classification accuracy"];
+  "clear cluster-structure" [label="cluster structure"];
+  "cluster" [label="cluster"];
+  "clustering" [label="clustering"];
+  "clutter" [label="clutter"];
+  "clutter node" [label="clutter node"];
+  "co-ordinate covariance" [label="co-ordinate covariance"];
+  "coefficient" [label="coefficient"];
+  "color indexing" [label="color indexing"];
+  "compact cluster" [label="compact cluster"];
+  "compatibility coefficient" [label="compatibility coefficient"];
+  "complete mapping" [label="complete mapping"];
+  "complex number" [label="complex number"];
+  "computational complexity" [label="computational complexity"];
+  "computer programme" [label="computer programme"];
+  "computer vision" [label="computer vision"];
+  "condition" [label="condition"];
+  "conditional probability" [label="conditional probability"];
+  "confusion probability" [label="confusion probability"];
+  "conjecture" [label="conjecture"];
+  "consistency measure" [label="consistency measure"];
+  "consistent match" [label="consistent match"];
+  "constant curvature embedding" [label="constant curvature embedding"];
+  "constant sectional curvature" [label="constant sectional curvature"];
+  "constant-curvature space" [label="constant-curvature space"];
+  "constraint filtering" [label="constraint filtering"];
+  "context-dependent probability" [label="context-dependent probability"];
+  "continuous edit process" [label="continuous edit"];
+  "control variable" [label="control variable"];
+  "convergence" [label="convergence"];
+  "convergence rate" [label="convergence rate"];
+  "convolution filter" [label="convolution filter"];
+  "copyrighted item" [label="copyrighted item"];
+  "corner adjacency graph" [label="corner adjacency graph"];
+  "correct match" [label="correct match"];
+  "correction" [label="correction"];
+  "corruption" [label="corruption"];
+  "cospectral" [label="cospectral"];
+  "covariance matrix" [label="covariance matrix"];
+  "cross, wilson and hancock" [label="cross, wilson and hancock"];
+  "cross-validation error" [label="cross-validation error"];
+  "crossover" [label="crossover"];
+  "curved manifold" [label="curved manifold"];
+  "d.phil. degree" [label="d.phil. degree"];
+  "data" [label="data"];
+  "data graph matching" [label="data graph matching"];
+  "data pattern" [label="data pattern"];
+  "data point" [label="data point"];
+  "data structure" [label="data structure"];
+  "data variance" [label="data variance"];
+  "data visualization" [label="data visualization"];
+  "degree" [label="degree"];
+  "degree of noise" [label="degree of noise"];
+  "delaunay graph" [label="delaunay graph"];
+  "delaunay triangulation" [label="delaunay triangulation"];
+  "deletion hypothesi" [label="deletion hypothesi"];
+  "department of computer science" [label="department of computer science"];
+  "deterministic search" [label="deterministic search"];
+  "dimension of u(g)" [label="dimension of u(g)"];
+  "direct embedding" [label="direct embedding"];
+  "discrete approximation" [label="discrete approximation"];
+  "dissimilarity" [label="dissimilarity"];
+  "distinct cluster" [label="distinct cluster"];
+  "distribution" [label="distribution"];
+  "domain-specific knowledge" [label="domain-specific knowledge"];
+  "dphil degree" [label="dphil degree"];
+  "dr edwin hancock" [label="dr edwin hancock"];
+  "dr richard wilson" [label="dr richard wilson"];
+  "dummy node" [label="dummy node"];
+  "e nzyme" [label="e nzyme"];
+  "e(g)" [label="e(g)"];
+  "edge" [label="edge"];
+  "edge-set modification" [label="edge-set modification"];
+  "edge-set restoration" [label="edge-set restoration"];
+  "edit cost" [label="edit cost"];
+  "edit distance" [label="edit distance"];
+  "effectiveness" [label="effectiveness"];
+  "efficacy" [label="efficacy"];
+  "efficiently" [label="efficiently"];
+  "eigendecomposition" [label="eigendecomposition"];
+  "eigenimage" [label="eigenimage"];
+  "eigenmode" [label="eigenmode"];
+  "eigenspace" [label="eigenspace"];
+  "eigenvalue" [label="eigenvalue"];
+  "eigenvalue equation" [label="eigenvalue equation"];
+  "eigenvalue matrix e" [label="eigenvalue matrix e"];
+  "eigenvalue vector" [label="eigenvalue vector"];
+  "eigenvector" [label="eigenvector"];
+  "eikonal equation" [label="eikonal equation"];
+  "element-wise product" [label="element-wise product"];
+  "embedded point-sets" [label="embedded point-sets"];
+  "embedding" [label="embedding"];
+  "empirical complexity" [label="empirical complexity"];
+  "energy minimisation method" [label="energy minimisation"];
+  "equivalent minimisation problem" [label="equivalent minimisation problem"];
+  "erroneous match" [label="erroneous match"];
+  "error modeling" [label="error modeling"];
+  "error probability" [label="error probability"];
+  "estimation of position" [label="estimation of position"];
+  "euclidean chord" [label="euclidean chord"];
+  "euclidean distance" [label="euclidean distance"];
+  "euclidean space" [label="euclidean space"];
+  "evaluation" [label="evaluation"];
+  "existing region" [label="existing region"];
+  "exponential function" [label="exponential function"];
+  "exponential map" [label="exponential map"];
+  "extraneous node" [label="extraneous node"];
+  "false consistency" [label="false consistency"];
+  "feature" [label="feature"];
+  "feature detection" [label="feature detection"];
+  "feature extraction" [label="feature extraction"];
+  "feature map" [label="feature map"];
+  "feature matrix" [label="feature matrix"];
+  "feature vector" [label="feature vector"];
+  "first term" [label="first term"];
+  "fisher discriminant" [label="fisher discriminant"];
+  "fitness distribution" [label="fitness distribution"];
+  "fitness measure" [label="fitness measure"];
+  "fitness value" [label="fitness value"];
+  "flow of information" [label="flow of information"];
+  "form" [label="form"];
+  "four moment" [label="four moment"];
+  "frobenius distance" [label="frobenius distance"];
+  "frobenius norm" [label="frobenius norm"];
+  "function" [label="function"];
+  "gaussian model" [label="gaussian model"];
+  "general graph" [label="general graph"];
+  "generative model" [label="generative model"];
+  "genetic algorithm" [label="genetic algorithm"];
+  "genetic search" [label="genetic search"];
+  "geodesic distance" [label="geodesic distance"];
+  "geometric computation" [label="geometric computation"];
+  "geometric technique" [label="geometric technique"];
+  "geometry" [label="geometry"];
+  "global configurational probability" [label="global configurational probability"];
+  "global consistency" [label="global consistency"];
+  "global gradient" [label="global gradient"];
+  "global maximum" [label="global maximum"];
+  "global quality" [label="global quality"];
+  "global solution" [label="global solution"];
+  "good cluster" [label="good cluster"];
+  "gradient" [label="gradient"];
+  "graph" [label="graph"];
+  "graph cluster" [label="graph cluster"];
+  "graph clustering" [label="graph clustering"];
+  "graph correspondence" [label="graph correspondence"];
+  "graph edit distance" [label="graph edit"];
+  "graph embedding" [label="graph embedding"];
+  "graph feature" [label="graph feature"];
+  "graph g" [label="graph g"];
+  "graph isomorphism" [label="graph isomorphism"];
+  "graph kernel" [label="graph kernel"];
+  "graph matching" [label="graph matching"];
+  "graph pattern" [label="graph pattern"];
+  "graph property" [label="graph property"];
+  "graph recovery" [label="graph recovery"];
+  "graph representation" [label="graph representation"];
+  "graph similarity" [label="graph similarity"];
+  "graph size" [label="graph size"];
+  "graph spectral feature" [label="graph spectral feature"];
+  "graph spectral property" [label="graph spectral property"];
+  "graph structure" [label="graph structure"];
+  "graph theory" [label="graph theory"];
+  "graph topology" [label="graph topology"];
+  "graph-spectral approach" [label="graph-spectral"];
+  "graph-spectral attribute" [label="graph-spectral attribute"];
+  "graph-spectral decomposition" [label="graph-spectral decomposition"];
+  "graph-theoretic problem" [label="graph-theoretic problem"];
+  "ground truth map" [label="ground truth map"];
+  "hamilton-jacobi equation" [label="hamilton-jacobi equation"];
+  "hamiltonian" [label="hamiltonian"];
+  "hamming distance" [label="hamming distance"];
+  "hard limit" [label="hard limit"];
+  "heat equation" [label="heat equation"];
+  "heat kernel" [label="heat kernel"];
+  "hedge structure" [label="hedge structure"];
+  "hermitian matrice" [label="hermitian matrix"];
+  "hill climbing" [label="hill climbing"];
+  "histogram" [label="histogram"];
+  "histogram intersection" [label="histogram intersection"];
+  "histogram intersection kernel" [label="histogram intersection kernel"];
+  "hou" [label="hou"];
+  "hyperbolic angle" [label="hyperbolic angle"];
+  "hyperbolic embedding" [label="hyperbolic embedding"];
+  "hyperbolic space" [label="hyperbolic space"];
+  "hypersphere" [label="hypersphere"];
+  "ica" [label="independent component analysis"];
+  "identification" [label="identification"];
+  "ieee transaction" [label="ieee transaction"];
+  "image classification" [label="image classification"];
+  "image databa" [label="image databas"];
+  "image plane" [label="image plane"];
+  "image processing" [label="image processing"];
+  "image registration" [label="image registration"];
+  "image representation" [label="image representation"];
+  "image retrieval" [label="image retrieval"];
+  "image structure" [label="image structure"];
+  "importance" [label="importance"];
+  "indefinite space" [label="indefinite space"];
+  "independent component analysi" [label="independent component analysi"];
+  "indirect embedding" [label="indirect embedding"];
+  "information flow" [label="information flow"];
+  "infrared line scan" [label="infrared line scan"];
+  "infrared line-scan device" [label="infrared line-scan device"];
+  "initial convergence" [label="initial convergence"];
+  "initial match" [label="initial match"];
+  "initial match probability" [label="initial match probability"];
+  "initial population" [label="initial population"];
+  "initialisation error" [label="initialization error"];
+  "inner product" [label="inner product"];
+  "intensity ridge" [label="intensity ridge"];
+  "inter-mode adjacency matrix" [label="inter-mode adjacency matrix"];
+  "interest" [label="interest"];
+  "intermediate solution" [label="intermediate solution"];
+  "interpretation of measurement" [label="interpretation of measurement"];
+  "invariant" [label="invariant"];
+  "islands of consistency" [label="islands of consistency"];
+  "isomorphic" [label="isomorphic"];
+  "isomorphism class" [label="isomorphism class"];
+  "iteration" [label="iteration"];
+  "iterative relaxation process" [label="iterative relaxation"];
+  "iterative update process" [label="iterative update"];
+  "jade" [label="jade"];
+  "jigsaw puzzle" [label="jigsaw puzzle"];
+  "joint conditional density" [label="joint conditional density"];
+  "k > 4" [label="k > 4"];
+  "k-regular graph" [label="k-regular graph"];
+  "k2 s + (r − s) m(g)j,l − k > 0" [label="k2 s + (r − s) m(g)j,l − k > 0"];
+  "kernel" [label="kernel"];
+  "kernel embedding" [label="kernel embedding"];
+  "kernel method" [label="kernel method"];
+  "kernel-based classification" [label="kernel-based classification"];
+  "label configuration" [label="label configuration"];
+  "label update" [label="label update"];
+  "labeling consistency" [label="labeling consistency"];
+  "laplacian" [label="laplacian"];
+  "lca" [label="lca"];
+  "lda" [label="lda"];
+  "learning" [label="learning"];
+  "least-squares problem" [label="least-squares problem"];
+  "length 6" [label="length"];
+  "libsvm" [label="libsvm"];
+  "line digraph" [label="line digraph"];
+  "line finder" [label="line finder"];
+  "linear consistency measure" [label="linear consistency measure"];
+  "linear space" [label="linear space"];
+  "local gradient" [label="local gradient"];
+  "local minima" [label="local minima"];
+  "local structure" [label="local structure"];
+  "locality preserving projection" [label="locality preserving projection"];
+  "locally linear embedding" [label="locally linear embedding"];
+  "log-map" [label="log-map"];
+  "loopless" [label="loopless"];
+  "low distortion" [label="low distortion"];
+  "low-dimensional embedding" [label="low-dimensional embedding"];
+  "low-dimensional space" [label="low-dimensional space"];
+  "low-distortion embedding" [label="low-distortion embedding"];
+  "lower dimensionality" [label="lower dimensionality"];
+  "lowest rms error" [label="lowest rms error"];
+  "m(g)" [label="m(g)"];
+  "mahalanobis distance" [label="mahalanobis distance"];
+  "mapping" [label="mapping"];
+  "match probability" [label="match probability"];
+  "match quality" [label="match quality"];
+  "match solving" [label="match solving"];
+  "matched filter" [label="matched filter"];
+  "matched node" [label="matched node"];
+  "matching" [label="matching"];
+  "matching accuracy" [label="matching accuracy"];
+  "matching error" [label="matching error"];
+  "matching graph" [label="matching graph"];
+  "matching performance" [label="matching performance"];
+  "matching probability" [label="matching probability"];
+  "matching problem" [label="matching problem"];
+  "matching process" [label="matching process"];
+  "matching result" [label="matching result"];
+  "mathematic" [label="mathematic"];
+  "matrix t" [label="matrix t"];
+  "matrix u(g)" [label="matrix u(g)"];
+  "maximum fitness" [label="maximum fitness"];
+  "maximum gradient direction" [label="maximum gradient direction"];
+  "maximum slope" [label="maximum slope"];
+  "mds" [label="mds"];
+  "mean-field network" [label="mean-field network"];
+  "memoryless probability" [label="memoryless probability"];
+  "method" [label="method"];
+  "metric" [label="metric"];
+  "minimisation tool" [label="minimisation tool"];
+  "minimum degree" [label="minimum degree"];
+  "modal distance" [label="modal distance"];
+  "modal matrix" [label="modal matrix"];
+  "moment vector" [label="moment vector"];
+  "moments characterization" [label="moments characterization"];
+  "monte-carlo study" [label="monte-carlo study"];
+  "multi-dimensional scaling" [label="multi-dimensional scaling"];
+  "multidimensional scaling" [label="multidimensional scaling"];
+  "mutation" [label="mutation"];
+  "mutation operation" [label="mutation operation"];
+  "mutation probability" [label="mutation probability"];
+  "n-ary relation" [label="n-ary relation"];
+  "national copyright law" [label="national copyright law"];
+  "natural setting" [label="natural setting"];
+  "negative eigenfraction" [label="negative eigenfraction"];
+  "negative eigenvalue" [label="negative eigenvalue"];
+  "neighborhood order" [label="neighborhood order"];
+  "new solution" [label="new solution"];
+  "node" [label="node"];
+  "node deletion" [label="node deletion"];
+  "node distribution" [label="node distribution"];
+  "node reinsertion" [label="node reinsertion"];
+  "noise" [label="noise"];
+  "non-euclidean data" [label="non-euclidean space"];
+  "non-isomorphic graph" [label="non-isomorphic graph"];
+  "non-metricity" [label="non-metricity"];
+  "nonlinear dimensionality reduction" [label="nonlinear dimensionality reduction"];
+  "normalized cut" [label="normalized cut"];
+  "normalized image" [label="normalized image"];
+  "novel function" [label="novel function"];
+  "null label" [label="null label"];
+  "null-labels" [label="null-labels"];
+  "null-match probability" [label="null-match probability"];
+  "number of path" [label="number of path"];
+  "optical camera" [label="optical image"];
+  "optimal assignment" [label="optimal assignment"];
+  "optimal step size" [label="optimal step size"];
+  "optimal value" [label="optimal value"];
+  "optimisation" [label="optimization"];
+  "optimization process" [label="optimization process"];
+  "optimization scheme" [label="optimization scheme"];
+  "organizing image databa" [label="organizing image databas"];
+  "orientational line-detectors" [label="orientational line-detectors"];
+  "orthogonal matrix" [label="orthogonal matrix"];
+  "outlier" [label="outlier"];
+  "overall distortion" [label="overall distortion"];
+  "p m(h)p" [label="p m(h)p"];
+  "padding" [label="padding"];
+  "pairwise distance" [label="pairwise distance"];
+  "parameter pe" [label="parameter pe"];
+  "parameter update" [label="parameter update"];
+  "parametric distance embedding" [label="parametric distance embedding"];
+  "path" [label="path"];
+  "pattern analysi" [label="pattern analysis"];
+  "pca" [label="PCA"];
+  "performance" [label="performance"];
+  "point" [label="point"];
+  "polynomial time" [label="polynomial time"];
+  "poorer result" [label="poorer result"];
+  "population" [label="population"];
+  "population diversity" [label="population diversity"];
+  "population entry" [label="population entry"];
+  "population selection" [label="population selection"];
+  "population size" [label="population size"];
+  "position-vectors" [label="position-vectors"];
+  "positive dimension" [label="positive dimension"];
+  "positive semidefinite" [label="positive semidefinite"];
+  "power symmetric polynomial" [label="power symmetric polynomial"];
+  "principal component analysi" [label="principal component analysi"];
+  "principal components analysi" [label="principal components analysi"];
+  "private study" [label="private study"];
+  "probabilistic crossover" [label="probabilistic crossover"];
+  "professor hancock" [label="professor hancock"];
+  "protein function prediction" [label="protein function prediction"];
+  "pruned dictionary" [label="pruned dictionary"];
+  "pruning strategy" [label="pruning strategy"];
+  "pseudo-euclidean embedding" [label="pseudo-euclidean embedding"];
+  "psychometric" [label="psychometric"];
+  "publisher" [label="publisher"];
+  "quadratic kernel matrix" [label="quadratic kernel matrix"];
+  "quadratic minimisation" [label="quadratic minimisation"];
+  "quantum algorithm" [label="quantum algorithm"];
+  "quantum random walk" [label="quantum random walk"];
+  "quantum walk" [label="quantum walk"];
+  "radiu" [label="radiu"];
+  "radius of curvature" [label="radius of curvature"];
+  "random clutter" [label="random clutter"];
+  "random corruption" [label="random corruption"];
+  "random graph" [label="random graph"];
+  "random match" [label="random match"];
+  "ranking of match" [label="ranking of match"];
+  "rate of change" [label="rate of change"];
+  "rate of flow" [label="rate of flow"];
+  "real-world example" [label="real-world example"];
+  "region" [label="region"];
+  "region adjacency graph" [label="region adjacency graph"];
+  "region of true consistency" [label="region of true consistency"];
+  "relational affinity" [label="relational affinity"];
+  "relational consistency" [label="relational consistency"];
+  "relational consistency measure" [label="relational consistency measure"];
+  "relational distance" [label="relational distance"];
+  "relational distance measure" [label="relational distance measure"];
+  "relational distance metric" [label="relational distance metric"];
+  "relational graph matching" [label="relational graph matching"];
+  "relational matching" [label="relational matching"];
+  "relational structure" [label="relational structure"];
+  "relationship" [label="relationship"];
+  "relaxation labelling" [label="relaxation labelling"];
+  "remarkable improvement" [label="remarkable improvement"];
+  "representation" [label="representation"];
+  "reproduction" [label="reproduction"];
+  "research group" [label="research group"];
+  "research paper" [label="research paper"];
+  "researcher" [label="researcher"];
+  "residual negative eigenvalue" [label="residual negative eigenvalue"];
+  "resource" [label="resource"];
+  "result" [label="result"];
+  "ridge-structures" [label="ridge-structures"];
+  "riemannian geometry" [label="riemannian geometry"];
+  "riemannian manifold" [label="riemannian manifold"];
+  "rms error" [label="rms error"];
+  "road network" [label="road network"];
+  "robust recognition" [label="robust recognition"];
+  "rooftop respon" [label="rooftop respons"];
+  "roulette-wheel algorithm" [label="roulette-wheel algorithm"];
+  "roulette-wheel selection" [label="roulette-wheel selection"];
+  "s + (u(g))" [label="s + (u(g))"];
+  "s + (u(g)3(i,j),(l,m))" [label="s + (u(g)3(i,j),(l,m))"];
+  "s + (u(g)3)" [label="s + (u(g)3)"];
+  "s+(u(g))" [label="s+(u(g))"];
+  "s+(u(g)2)" [label="s+(u(g)2)"];
+  "sar data" [label="sar data"];
+  "scalar curvature" [label="scalar curvature"];
+  "scalar curvature histogram" [label="scalar curvature histogram"];
+  "scene understanding" [label="scene understanding"];
+  "search efficiency" [label="search efficiency"];
+  "search method" [label="search method"];
+  "search path" [label="search path"];
+  "search procedure" [label="search procedure"];
+  "sectional curvature" [label="sectional curvature"];
+  "segmentation quality" [label="segmentation quality"];
+  "selection process" [label="selection process"];
+  "separation" [label="separation"];
+  "shape" [label="shape"];
+  "shortest curve" [label="shortest path"];
+  "similar result" [label="similar result"];
+  "similarity function" [label="similarity function"];
+  "similarity matrice" [label="similarity matrix"];
+  "simulated annealing" [label="simulated annealing"];
+  "simulation data" [label="simulation data"];
+  "simulation study" [label="simulation study"];
+  "single negative dimension" [label="single negative dimension"];
+  "size difference" [label="size difference"];
+  "skeleton" [label="skeleton"];
+  "small t" [label="small t"];
+  "smooth trajectory" [label="smooth trajectory"];
+  "solution" [label="solution"];
+  "solution merging" [label="solution merging"];
+  "solution quality" [label="solution quality"];
+  "sp(m(g))" [label="sp(m(g))"];
+  "sp(s + (u(g)3 ))" [label="sp(s + (u(g)3 ))"];
+  "sp(t(g))" [label="sp(t(g))"];
+  "sp(u(g))" [label="sp(u(g))"];
+  "spatial moment" [label="spatial moment"];
+  "specific cas" [label="specific cas"];
+  "spectra" [label="spectra"];
+  "spectral attribute" [label="spectral attribute"];
+  "spectral decomposition" [label="spectral decomposition"];
+  "spectral feature" [label="spectral feature"];
+  "spectral feature vector" [label="spectral feature vector"];
+  "spectral form" [label="spectral form"];
+  "spectral matrix" [label="spectral matrix"];
+  "spectral method" [label="spectral method"];
+  "spectral pattern vector" [label="spectral pattern vector"];
+  "spectral property" [label="spectral property"];
+  "spectrum" [label="spectrum"];
+  "spherical embedding" [label="spherical embedding"];
+  "spherical geometry" [label="spherical geometry"];
+  "spherical manifold" [label="spherical manifold"];
+  "spherical space" [label="spherical space"];
+  "spurious consistency" [label="spurious consistency"];
+  "spurious node" [label="spurious node"];
+  "srg(n, k, r, s)" [label="srg(n, k, r, s)"];
+  "stability" [label="stability"];
+  "statistical algorithm" [label="statistical algorithm"];
+  "statistical pattern recognizer" [label="statistical pattern recognizer"];
+  "statistical physic" [label="statistical physic"];
+  "steepest gradient" [label="steepest gradient"];
+  "step" [label="step"];
+  "stress measure" [label="stress measure"];
+  "strongly regular graph" [label="strongly regular graph"];
+  "structural compatibility" [label="structural property"];
+  "super-clique" [label="super-clique"];
+  "support of u(g)p" [label="support of u(g)p"];
+  "support vector machine" [label="support vector machine"];
+  "surface" [label="surface"];
+  "symbolic graph" [label="symbolic graph"];
+  "symbolic interpretation" [label="symbolic interpretation"];
+  "symbolic relation" [label="symbolic relation"];
+  "symmetric polynomial" [label="symmetric polynomial"];
+  "symmetry" [label="symmetry"];
+  "symmetry of u(g)" [label="symmetry of u(g)"];
+  "tabu search" [label="tabu search"];
+  "tabu-search strategy" [label="tabu-search strategy"];
+  "third eigenvector" [label="third eigenvector"];
+  "third order moment" [label="third order moment"];
+  "threshold" [label="threshold"];
+  "thresholded leading eigenvector" [label="thresholded leading eigenvector"];
+  "thresholding error" [label="thresholding error"];
+  "thresholding technique" [label="thresholding"];
+  "time parameter" [label="time parameter"];
+  "time-warping function" [label="time-warping function"];
+  "topological information" [label="topological information"];
+  "tracking algorithm" [label="tracking algorithm"];
+  "transition" [label="transition"];
+  "tree representation" [label="tree representation"];
+  "two matrice" [label="two matrice"];
+  "u(g)" [label="u(g)"];
+  "ultrametric" [label="ultrametric"];
+  "unary measurement" [label="unary measurement"];
+  "uniform probability" [label="uniform probability"];
+  "uniform probability distribution" [label="uniform probability distribution"];
+  "unique path" [label="unique path"];
+  "university of york" [label="university of york"];
+  "valid" [label="valid"];
+  "valid assignment kernel" [label="valid assignment kernel"];
+  "valid kernel" [label="valid kernel"];
+  "valid similarity" [label="valid similarity"];
+  "value" [label="value"];
+  "value of t" [label="value of t"];
+  "various structure" [label="various structure"];
+  "vector" [label="vector"];
+  "vector space embedding" [label="vector space embedding"];
+  "vertex neighbourhood" [label="vertex neighbourhood"];
+  "vertice" [label="vertice"];
+  "view indexing" [label="view indexing"];
+  "view number" [label="view number"];
+  "view occurrence" [label="view occurrence"];
+  "view structure" [label="view structure"];
+  "view-based object recognition" [label="view-based object recognition"];
+  "view-spaces" [label="view-spaces"];
+  "visible image" [label="visible image"];
+  "visualizing graph" [label="visualizing graph"];
+  "volume" [label="volume"];
+  "voronoi tessellation" [label="voronoi tessellation"];
+  "website" [label="website"];
+  "weight" [label="weight"];
+  "weisfeiler-lehman kernel" [label="weisfeiler-lehman kernel"];
+  "white rose research online" [label="white rose research online"];
+  "wiener-filtering technique" [label="wiener-filtering"];
+
+  rel_0 [shape=diamond, style=filled, color=orange, label="solves"];
+  "statistical physic" -> rel_0;
+  "assignment problem" -> rel_0;
+  rel_0 -> "global maximum";
+
+  rel_1 [shape=diamond, style=filled, color=orange, label="affects"];
+  "corruption" -> rel_1;
+  rel_1 -> "matched node";
+
+  rel_2 [shape=diamond, style=filled, color=orange, label="estimates"];
+  "euclidean distance" -> rel_2;
+  "geodesic distance" -> rel_2;
+  rel_2 -> "scalar curvature";
+
+  rel_3 [shape=diamond, style=filled, color=orange, label="computes"];
+  "heat kernel" -> rel_3;
+  "euclidean distance" -> rel_3;
+  rel_3 -> "approximate distance";
+
+  rel_4 [shape=diamond, style=filled, color=orange, label="aid"];
+  "scalar curvature" -> rel_4;
+  "euclidean distance" -> rel_4;
+  rel_4 -> "visualizing graph";
+
+  rel_5 [shape=diamond, style=filled, color=orange, label="characterizes"];
+  "geodesic distance" -> rel_5;
+  "multidimensional scaling" -> rel_5;
+  rel_5 -> "graph structure";
+
+  rel_6 [shape=diamond, style=filled, color=orange, label="is related to"];
+  "scalar curvature" -> rel_6;
+  "geodesic distance" -> rel_6;
+  rel_6 -> "geometry";
+
+  rel_7 [shape=diamond, style=filled, color=orange, label="characterizes"];
+  "graph embedding" -> rel_7;
+  "scalar curvature" -> rel_7;
+  rel_7 -> "graph";
+
+  rel_8 [shape=diamond, style=filled, color=orange, label="encapsulates"];
+  "heat kernel" -> rel_8;
+  "graph" -> rel_8;
+  rel_8 -> "information flow";
+
+  rel_9 [shape=diamond, style=filled, color=orange, label="determines"];
+  "laplacian" -> rel_9;
+  "graph" -> rel_9;
+  rel_9 -> "rate of flow";
+
+  rel_10 [shape=diamond, style=filled, color=orange, label="forms"];
+  "delaunay triangulation" -> rel_10;
+  "voronoi tessellation" -> rel_10;
+  rel_10 -> "adjacency graph";
+
+  rel_11 [shape=diamond, style=filled, color=orange, label="describes"];
+  "heat kernel" -> rel_11;
+  "laplacian" -> rel_11;
+  rel_11 -> "flow of information";
+
+  rel_12 [shape=diamond, style=filled, color=orange, label="used for"];
+  "heat kernel" -> rel_12;
+  rel_12 -> "embedding";
+
+  rel_13 [shape=diamond, style=filled, color=orange, label="affects"];
+  "view number" -> rel_13;
+  "histogram" -> rel_13;
+  rel_13 -> "stability";
+
+  rel_14 [shape=diamond, style=filled, color=orange, label="gives"];
+  "indirect embedding" -> rel_14;
+  rel_14 -> "poorer result";
+
+  rel_15 [shape=diamond, style=filled, color=orange, label="works_in"];
+  "dr edwin hancock" -> rel_15;
+  "department of computer science" -> rel_15;
+  rel_15 -> "university of york";
+
+  rel_16 [shape=diamond, style=filled, color=orange, label="show"];
+  "moment vector" -> rel_16;
+  rel_16 -> "pairwise distance";
+
+  rel_17 [shape=diamond, style=filled, color=orange, label="used for"];
+  "pca" -> rel_17;
+  rel_17 -> "graph clustering";
+
+  rel_18 [shape=diamond, style=filled, color=orange, label="characterize"];
+  "scalar curvature histogram" -> rel_18;
+  rel_18 -> "cluster";
+
+  rel_19 [shape=diamond, style=filled, color=orange, label="shows"];
+  "scalar curvature" -> rel_19;
+  rel_19 -> "histogram";
+
+  rel_20 [shape=diamond, style=filled, color=orange, label="works_in"];
+  "dr richard wilson" -> rel_20;
+  "department of computer science" -> rel_20;
+  rel_20 -> "university of york";
+
+  rel_21 [shape=diamond, style=filled, color=orange, label="relate to"];
+  "third order moment" -> rel_21;
+  rel_21 -> "symmetry";
+
+  rel_22 [shape=diamond, style=filled, color=orange, label="affects"];
+  "time parameter" -> rel_22;
+  rel_22 -> "four moment";
+
+  rel_23 [shape=diamond, style=filled, color=orange, label="competes"];
+  "topological information" -> rel_23;
+  rel_23 -> "vector space embedding";
+
+  rel_24 [shape=diamond, style=filled, color=orange, label="influences"];
+  "value of t" -> rel_24;
+  rel_24 -> "cluster";
+
+  rel_25 [shape=diamond, style=filled, color=orange, label="hinders"];
+  "clutter node" -> rel_25;
+  rel_25 -> "data graph matching";
+
+  rel_26 [shape=diamond, style=filled, color=orange, label="neutralizes"];
+  "clutter node" -> rel_26;
+  rel_26 -> "clutter";
+
+  rel_27 [shape=diamond, style=filled, color=orange, label="underpins"];
+  "hamming distance" -> rel_27;
+  "consistency measure" -> rel_27;
+  rel_27 -> "genetic search";
+
+  rel_28 [shape=diamond, style=filled, color=orange, label="enables"];
+  "deterministic search" -> rel_28;
+  "graph matching" -> rel_28;
+  rel_28 -> "symbolic interpretation";
+
+  rel_29 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "crossover" -> rel_29;
+  "mutation" -> rel_29;
+  rel_29 -> "global solution";
+
+  rel_30 [shape=diamond, style=filled, color=orange, label="optimizes"];
+  "crossover" -> rel_30;
+  "mutation" -> rel_30;
+  rel_30 -> "global configurational probability";
+
+  rel_31 [shape=diamond, style=filled, color=orange, label="computes"];
+  "discrete approximation" -> rel_31;
+  rel_31 -> "maximum gradient direction";
+
+  rel_32 [shape=diamond, style=filled, color=orange, label="awards"];
+  "d.phil. degree" -> rel_32;
+  "university of york" -> rel_32;
+  rel_32 -> "andrew cross";
+
+  rel_33 [shape=diamond, style=filled, color=orange, label="enables"];
+  "hamming distance" -> rel_33;
+  "fitness measure" -> rel_33;
+  rel_33 -> "selection process";
+
+  rel_34 [shape=diamond, style=filled, color=orange, label="enables"];
+  "roulette-wheel selection" -> rel_34;
+  "fitness measure" -> rel_34;
+  rel_34 -> "population entry";
+
+  rel_35 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "fitness measure" -> rel_35;
+  rel_35 -> "matching result";
+
+  rel_36 [shape=diamond, style=filled, color=orange, label="locates"];
+  "graph isomorphism" -> rel_36;
+  "genetic search" -> rel_36;
+  rel_36 -> "solution";
+
+  rel_37 [shape=diamond, style=filled, color=orange, label="moves"];
+  "hamming distance" -> rel_37;
+  "genetic search" -> rel_37;
+  rel_37 -> "modal distance";
+
+  rel_38 [shape=diamond, style=filled, color=orange, label="optimizes"];
+  "genetic search" -> rel_38;
+  "hamming distance" -> rel_38;
+  rel_38 -> "relational distance";
+
+  rel_39 [shape=diamond, style=filled, color=orange, label="studied"];
+  "dr richard wilson" -> rel_39;
+  "relational graph matching" -> rel_39;
+  rel_39 -> "dphil degree";
+
+  rel_40 [shape=diamond, style=filled, color=orange, label="improves"];
+  "genetic search" -> rel_40;
+  "iteration" -> rel_40;
+  rel_40 -> "solution quality";
+
+  rel_41 [shape=diamond, style=filled, color=orange, label="achieves"];
+  "genetic search" -> rel_41;
+  "maximum fitness" -> rel_41;
+  rel_41 -> "better result";
+
+  rel_42 [shape=diamond, style=filled, color=orange, label="affects"];
+  "mutation probability" -> rel_42;
+  "genetic search" -> rel_42;
+  rel_42 -> "convergence";
+
+  rel_43 [shape=diamond, style=filled, color=orange, label="maintains"];
+  "genetic search" -> rel_43;
+  "population diversity" -> rel_43;
+  rel_43 -> "maximum fitness";
+
+  rel_44 [shape=diamond, style=filled, color=orange, label="compares"];
+  "genetic search" -> rel_44;
+  "simulated annealing" -> rel_44;
+  rel_44 -> "convergence rate";
+
+  rel_45 [shape=diamond, style=filled, color=orange, label="supports"];
+  "simulation study" -> rel_45;
+  "genetic search" -> rel_45;
+  rel_45 -> "effectiveness";
+
+  rel_46 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "genetic search" -> rel_46;
+  rel_46 -> "population selection";
+
+  rel_47 [shape=diamond, style=filled, color=orange, label="affects"];
+  "label configuration" -> rel_47;
+  "hamming distance" -> rel_47;
+  rel_47 -> "matching error";
+
+  rel_48 [shape=diamond, style=filled, color=orange, label="causes"];
+  "matching probability" -> rel_48;
+  "error probability" -> rel_48;
+  rel_48 -> "null-match probability";
+
+  rel_49 [shape=diamond, style=filled, color=orange, label="accelerates"];
+  "mutation operation" -> rel_49;
+  rel_49 -> "convergence";
+
+  rel_50 [shape=diamond, style=filled, color=orange, label="controls"];
+  "population size" -> rel_50;
+  "mutation probability" -> rel_50;
+  rel_50 -> "genetic search";
+
+  rel_51 [shape=diamond, style=filled, color=orange, label="affects"];
+  "mutation probability" -> rel_51;
+  rel_51 -> "convergence rate";
+
+  rel_52 [shape=diamond, style=filled, color=orange, label="affects"];
+  "node deletion" -> rel_52;
+  rel_52 -> "consistency measure";
+
+  rel_53 [shape=diamond, style=filled, color=orange, label="hinders"];
+  "false consistency" -> rel_53;
+  rel_53 -> "match solving";
+
+  rel_54 [shape=diamond, style=filled, color=orange, label="requires"];
+  "population size" -> rel_54;
+  "node" -> rel_54;
+  rel_54 -> "solution";
+
+  rel_55 [shape=diamond, style=filled, color=orange, label="affects"];
+  "population size" -> rel_55;
+  rel_55 -> "convergence rate";
+
+  rel_56 [shape=diamond, style=filled, color=orange, label="facilitates"];
+  "random match" -> rel_56;
+  "probabilistic crossover" -> rel_56;
+  rel_56 -> "solution merging";
+
+  rel_57 [shape=diamond, style=filled, color=orange, label="define"];
+  "hamiltonian" -> rel_57;
+  "adjacency matrix" -> rel_57;
+  rel_57 -> "graph g";
+
+  rel_58 [shape=diamond, style=filled, color=orange, label="determines"];
+  "spectrum" -> rel_58;
+  "adjacency matrix" -> rel_58;
+  rel_58 -> "spectrum";
+
+  rel_59 [shape=diamond, style=filled, color=orange, label="has"];
+  "strongly regular graph" -> rel_59;
+  "adjacency matrix" -> rel_59;
+  rel_59 -> "eigenvalue";
+
+  rel_60 [shape=diamond, style=filled, color=orange, label="determines"];
+  "path" -> rel_60;
+  "amplitude" -> rel_60;
+  rel_60 -> "transition";
+
+  rel_61 [shape=diamond, style=filled, color=orange, label="is_valid_for"];
+  "conjecture" -> rel_61;
+  "strongly regular graph" -> rel_61;
+  rel_61 -> "general graph";
+
+  rel_62 [shape=diamond, style=filled, color=orange, label="inspired_by"];
+  "tabu search" -> rel_62;
+  "genetic search" -> rel_62;
+  rel_62 -> "jigsaw puzzle";
+
+  rel_63 [shape=diamond, style=filled, color=orange, label="determine"];
+  "e(g)" -> rel_63;
+  "path" -> rel_63;
+  rel_63 -> "number of path";
+
+  rel_64 [shape=diamond, style=filled, color=orange, label="exists"];
+  "unique path" -> rel_64;
+  "e(g)" -> rel_64;
+  rel_64 -> "amplitude";
+
+  rel_65 [shape=diamond, style=filled, color=orange, label="influence"];
+  "edge" -> rel_65;
+  "vertice" -> rel_65;
+  rel_65 -> "path";
+
+  rel_66 [shape=diamond, style=filled, color=orange, label="takes"];
+  "s+(u(g))" -> rel_66;
+  "eigenvalue" -> rel_66;
+  rel_66 -> "value";
+
+  rel_67 [shape=diamond, style=filled, color=orange, label="account for"];
+  "eigenvalue" -> rel_67;
+  "s+(u(g)2)" -> rel_67;
+  rel_67 -> "eigenvalue";
+
+  rel_68 [shape=diamond, style=filled, color=orange, label="has"];
+  "eigenvector" -> rel_68;
+  "m(g)" -> rel_68;
+  rel_68 -> "eigenvalue";
+
+  rel_69 [shape=diamond, style=filled, color=orange, label="has"];
+  "s+(u(g)2)" -> rel_69;
+  "eigenvector" -> rel_69;
+  rel_69 -> "eigenvalue";
+
+  rel_70 [shape=diamond, style=filled, color=orange, label="affects"];
+  "minimum degree" -> rel_70;
+  "graph g" -> rel_70;
+  rel_70 -> "symmetry of u(g)";
+
+  rel_71 [shape=diamond, style=filled, color=orange, label="ensures"];
+  "k > 4" -> rel_71;
+  rel_71 -> "k2 s + (r − s) m(g)j,l − k > 0";
+
+  rel_72 [shape=diamond, style=filled, color=orange, label="associates"];
+  "line digraph" -> rel_72;
+  "orthogonal matrix" -> rel_72;
+  rel_72 -> "graph";
+
+  rel_73 [shape=diamond, style=filled, color=orange, label="computed from"];
+  "s + (u(g))" -> rel_73;
+  "m(g)" -> rel_73;
+  rel_73 -> "eigenvalue";
+
+  rel_74 [shape=diamond, style=filled, color=orange, label="induces"];
+  "matrix u(g)" -> rel_74;
+  rel_74 -> "quantum walk";
+
+  rel_75 [shape=diamond, style=filled, color=orange, label="is_successful_for"];
+  "method" -> rel_75;
+  "strongly regular graph" -> rel_75;
+  rel_75 -> "strongly regular graph";
+
+  rel_76 [shape=diamond, style=filled, color=orange, label="derives"];
+  "orthogonal matrix" -> rel_76;
+  rel_76 -> "two matrice";
+
+  rel_77 [shape=diamond, style=filled, color=orange, label="have"];
+  "path" -> rel_77;
+  "vertice" -> rel_77;
+  rel_77 -> "amplitude";
+
+  rel_78 [shape=diamond, style=filled, color=orange, label="involve"];
+  "path" -> rel_78;
+  "vertice" -> rel_78;
+  rel_78 -> "amplitude";
+
+  rel_79 [shape=diamond, style=filled, color=orange, label="obtained from"];
+  "sp(u(g))" -> rel_79;
+  rel_79 -> "sp(t(g))";
+
+  rel_80 [shape=diamond, style=filled, color=orange, label="characterizes"];
+  "spectrum" -> rel_80;
+  "strongly regular graph" -> rel_80;
+  rel_80 -> "isomorphism class";
+
+  rel_81 [shape=diamond, style=filled, color=orange, label="compares"];
+  "global gradient" -> rel_81;
+  "tabu search" -> rel_81;
+  rel_81 -> "correct match";
+
+  rel_82 [shape=diamond, style=filled, color=orange, label="constructs"];
+  "strongly regular graph" -> rel_82;
+  rel_82 -> "s + (u(g)3)";
+
+  rel_83 [shape=diamond, style=filled, color=orange, label="has"];
+  "unique path" -> rel_83;
+  "vertice" -> rel_83;
+  rel_83 -> "amplitude";
+
+  rel_84 [shape=diamond, style=filled, color=orange, label="characterize"];
+  "eigenvector" -> rel_84;
+  "adjacency matrix" -> rel_84;
+  rel_84 -> "graph structure";
+
+  rel_85 [shape=diamond, style=filled, color=orange, label="causes"];
+  "attributed tree" -> rel_85;
+  "spectral feature" -> rel_85;
+  rel_85 -> "ambiguity";
+
+  rel_86 [shape=diamond, style=filled, color=orange, label="related_to"];
+  "bitangent circle radiu" -> rel_86;
+  "skeleton" -> rel_86;
+  rel_86 -> "rate of change";
+
+  rel_87 [shape=diamond, style=filled, color=orange, label="compares"];
+  "tabu search" -> rel_87;
+  "global gradient" -> rel_87;
+  rel_87 -> "performance";
+
+  rel_88 [shape=diamond, style=filled, color=orange, label="used in"];
+  "eigenvector" -> rel_88;
+  "covariance matrix" -> rel_88;
+  rel_88 -> "spectral matrix";
+
+  rel_89 [shape=diamond, style=filled, color=orange, label="deletes"];
+  "edge" -> rel_89;
+  "graph" -> rel_89;
+  rel_89 -> "edge";
+
+  rel_90 [shape=diamond, style=filled, color=orange, label="increases"];
+  "edit distance" -> rel_90;
+  "eigenvector" -> rel_90;
+  rel_90 -> "importance";
+
+  rel_91 [shape=diamond, style=filled, color=orange, label="reflects"];
+  "feature vector" -> rel_91;
+  "graph structure" -> rel_91;
+  rel_91 -> "change";
+
+  rel_92 [shape=diamond, style=filled, color=orange, label="represented by"];
+  "graph" -> rel_92;
+  "feature vector" -> rel_92;
+  rel_92 -> "eigenspace";
+
+  rel_93 [shape=diamond, style=filled, color=orange, label="represent"];
+  "feature vector" -> rel_93;
+  rel_93 -> "data structure";
+
+  rel_94 [shape=diamond, style=filled, color=orange, label="enables"];
+  "image databa" -> rel_94;
+  "graph matching" -> rel_94;
+  rel_94 -> "image retrieval";
+
+  rel_95 [shape=diamond, style=filled, color=orange, label="visualizes"];
+  "mds" -> rel_95;
+  "graph" -> rel_95;
+  rel_95 -> "distribution";
+
+  rel_96 [shape=diamond, style=filled, color=orange, label="solves"];
+  "hamilton-jacobi equation" -> rel_96;
+  rel_96 -> "eikonal equation";
+
+  rel_97 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "locality preserving projection" -> rel_97;
+  rel_97 -> "outlier";
+
+  rel_98 [shape=diamond, style=filled, color=orange, label="allows"];
+  "mds" -> rel_98;
+  "pairwise distance" -> rel_98;
+  rel_98 -> "euclidean space";
+
+  rel_99 [shape=diamond, style=filled, color=orange, label="supports"];
+  "principal components analysi" -> rel_99;
+  "multidimensional scaling" -> rel_99;
+  rel_99 -> "graph clustering";
+
+  rel_100 [shape=diamond, style=filled, color=orange, label="used_as"];
+  "shape" -> rel_100;
+  "skeleton" -> rel_100;
+  rel_100 -> "attribute";
+
+  rel_101 [shape=diamond, style=filled, color=orange, label="forms"];
+  "symmetric polynomial" -> rel_101;
+  rel_101 -> "generative model";
+
+  rel_102 [shape=diamond, style=filled, color=orange, label="produces"];
+  "eigenmode" -> rel_102;
+  "adjacency matrix" -> rel_102;
+  rel_102 -> "spectral feature";
+
+  rel_103 [shape=diamond, style=filled, color=orange, label="reflects"];
+  "eigenvalue" -> rel_103;
+  "adjacency matrix" -> rel_103;
+  rel_103 -> "data variance";
+
+  rel_104 [shape=diamond, style=filled, color=orange, label="projects"];
+  "adjacency matrix" -> rel_104;
+  "eigenvector" -> rel_104;
+  rel_104 -> "inter-mode adjacency matrix";
+
+  rel_105 [shape=diamond, style=filled, color=orange, label="describes"];
+  "adjacency matrix" -> rel_105;
+  "graph" -> rel_105;
+  rel_105 -> "eigenvalue";
+
+  rel_106 [shape=diamond, style=filled, color=orange, label="controls"];
+  "threshold" -> rel_106;
+  "graph size" -> rel_106;
+  rel_106 -> "accuracy match";
+
+  rel_107 [shape=diamond, style=filled, color=orange, label="supports"];
+  "aspect graph" -> rel_107;
+  rel_107 -> "3d object recognition";
+
+  rel_108 [shape=diamond, style=filled, color=orange, label="provides"];
+  "binary adjacency graph" -> rel_108;
+  rel_108 -> "spectral feature";
+
+  rel_109 [shape=diamond, style=filled, color=orange, label="does not produce"];
+  "cheeger constant" -> rel_109;
+  rel_109 -> "block structure";
+
+  rel_110 [shape=diamond, style=filled, color=orange, label="devoted_to"];
+  "energy minimisation method" -> rel_110;
+  "computer vision" -> rel_110;
+  rel_110 -> "ieee transaction";
+
+  rel_111 [shape=diamond, style=filled, color=orange, label="solves"];
+  "eigenvalue equation" -> rel_111;
+  "covariance matrix" -> rel_111;
+  rel_111 -> "eigenvalue";
+
+  rel_112 [shape=diamond, style=filled, color=orange, label="enables"];
+  "eigenimage" -> rel_112;
+  rel_112 -> "robust recognition";
+
+  rel_113 [shape=diamond, style=filled, color=orange, label="computes"];
+  "eigenmode" -> rel_113;
+  "spectral property" -> rel_113;
+  rel_113 -> "vector";
+
+  rel_114 [shape=diamond, style=filled, color=orange, label="correlates_with"];
+  "eigenvalue" -> rel_114;
+  "eigenvector" -> rel_114;
+  rel_114 -> "modal matrix";
+
+  rel_115 [shape=diamond, style=filled, color=orange, label="produces"];
+  "ica" -> rel_115;
+  "eigenvalue" -> rel_115;
+  rel_115 -> "clustering";
+
+  rel_116 [shape=diamond, style=filled, color=orange, label="provides"];
+  "inter-mode adjacency matrix" -> rel_116;
+  "eigenvalue" -> rel_116;
+  rel_116 -> "feature";
+
+  rel_117 [shape=diamond, style=filled, color=orange, label="results_in"];
+  "eigenvalue" -> rel_117;
+  "inter-mode adjacency matrix" -> rel_117;
+  rel_117 -> "best cluster";
+
+  rel_118 [shape=diamond, style=filled, color=orange, label="produces"];
+  "pca" -> rel_118;
+  "eigenvalue" -> rel_118;
+  rel_118 -> "clustering";
+
+  rel_119 [shape=diamond, style=filled, color=orange, label="defines"];
+  "graph-spectral approach" -> rel_119;
+  "eigenvector" -> rel_119;
+  rel_119 -> "eigenmode";
+
+  rel_120 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "graph spectral feature" -> rel_120;
+  rel_120 -> "classification accuracy";
+
+  rel_121 [shape=diamond, style=filled, color=orange, label="is used for"];
+  "view-based object recognition" -> rel_121;
+  "graph" -> rel_121;
+  rel_121 -> "image representation";
+
+  rel_122 [shape=diamond, style=filled, color=orange, label="uses"];
+  "pca" -> rel_122;
+  "ica" -> rel_122;
+  "mds" -> rel_122;
+  rel_122 -> "spectral feature";
+
+  rel_123 [shape=diamond, style=filled, color=orange, label="embeds"];
+  "principal component analysi" -> rel_123;
+  "independent component analysi" -> rel_123;
+  rel_123 -> "spectral pattern vector";
+
+  rel_124 [shape=diamond, style=filled, color=orange, label="applies"];
+  "independent component analysi" -> rel_124;
+  rel_124 -> "graph";
+
+  rel_125 [shape=diamond, style=filled, color=orange, label="influences"];
+  "inter-mode adjacency matrix" -> rel_125;
+  rel_125 -> "spectral feature";
+
+  rel_126 [shape=diamond, style=filled, color=orange, label="applies"];
+  "mds" -> rel_126;
+  "pairwise distance" -> rel_126;
+  rel_126 -> "graph";
+
+  rel_127 [shape=diamond, style=filled, color=orange, label="compares"];
+  "pca" -> rel_127;
+  "mds" -> rel_127;
+  rel_127 -> "view-spaces";
+
+  rel_128 [shape=diamond, style=filled, color=orange, label="collects"];
+  "infrared line-scan device" -> rel_128;
+  rel_128 -> "aerial image";
+
+  rel_129 [shape=diamond, style=filled, color=orange, label="improves"];
+  "pca" -> rel_129;
+  "mds" -> rel_129;
+  rel_129 -> "cluster";
+
+  rel_130 [shape=diamond, style=filled, color=orange, label="produces"];
+  "mds" -> rel_130;
+  "pca" -> rel_130;
+  rel_130 -> "good cluster";
+
+  rel_131 [shape=diamond, style=filled, color=orange, label="gives"];
+  "mds" -> rel_131;
+  rel_131 -> "lower dimensionality";
+
+  rel_132 [shape=diamond, style=filled, color=orange, label="provides"];
+  "mds" -> rel_132;
+  rel_132 -> "smooth trajectory";
+
+  rel_133 [shape=diamond, style=filled, color=orange, label="organizes"];
+  "principal components analysi" -> rel_133;
+  "multidimensional scaling" -> rel_133;
+  rel_133 -> "graph pattern";
+
+  rel_134 [shape=diamond, style=filled, color=orange, label="does_not_give"];
+  "pca" -> rel_134;
+  rel_134 -> "clear cluster-structure";
+
+  rel_135 [shape=diamond, style=filled, color=orange, label="produces"];
+  "pca" -> rel_135;
+  rel_135 -> "compact cluster";
+
+  rel_136 [shape=diamond, style=filled, color=orange, label="causes"];
+  "initialisation error" -> rel_136;
+  "matching error" -> rel_136;
+  rel_136 -> "erroneous match";
+
+  rel_137 [shape=diamond, style=filled, color=orange, label="worked_at"];
+  "professor hancock" -> rel_137;
+  "university of york" -> rel_137;
+  rel_137 -> "department of computer science";
+
+  rel_138 [shape=diamond, style=filled, color=orange, label="leads"];
+  "professor hancock" -> rel_138;
+  rel_138 -> "research group";
+
+  rel_139 [shape=diamond, style=filled, color=orange, label="cluster"];
+  "spectral attribute" -> rel_139;
+  rel_139 -> "symbolic graph";
+
+  rel_140 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "islands of consistency" -> rel_140;
+  "search procedure" -> rel_140;
+  rel_140 -> "global solution";
+
+  rel_141 [shape=diamond, style=filled, color=orange, label="offer"];
+  "constant-curvature space" -> rel_141;
+  rel_141 -> "alternative embedding";
+
+  rel_142 [shape=diamond, style=filled, color=orange, label="improves"];
+  "iteration" -> rel_142;
+  rel_142 -> "matching probability";
+
+  rel_143 [shape=diamond, style=filled, color=orange, label="can be embedded"];
+  "dissimilarity" -> rel_143;
+  "non-euclidean data" -> rel_143;
+  rel_143 -> "curved manifold";
+
+  rel_144 [shape=diamond, style=filled, color=orange, label="requires"];
+  "non-euclidean data" -> rel_144;
+  "dissimilarity" -> rel_144;
+  rel_144 -> "embedding";
+
+  rel_145 [shape=diamond, style=filled, color=orange, label="measures"];
+  "negative eigenfraction" -> rel_145;
+  "eigenvalue" -> rel_145;
+  rel_145 -> "non-metricity";
+
+  rel_146 [shape=diamond, style=filled, color=orange, label="provides"];
+  "riemannian geometry" -> rel_146;
+  "exponential map" -> rel_146;
+  rel_146 -> "minimisation tool";
+
+  rel_147 [shape=diamond, style=filled, color=orange, label="is"];
+  "spherical manifold" -> rel_147;
+  "exponential map" -> rel_147;
+  rel_147 -> "mapping";
+
+  rel_148 [shape=diamond, style=filled, color=orange, label="can apply"];
+  "geometric technique" -> rel_148;
+  rel_148 -> "spherical embedding";
+
+  rel_149 [shape=diamond, style=filled, color=orange, label="require"];
+  "local gradient" -> rel_149;
+  "tabu search" -> rel_149;
+  rel_149 -> "resource";
+
+  rel_150 [shape=diamond, style=filled, color=orange, label="affects"];
+  "hyperbolic embedding" -> rel_150;
+  "noise" -> rel_150;
+  rel_150 -> "performance";
+
+  rel_151 [shape=diamond, style=filled, color=orange, label="performs"];
+  "spherical embedding" -> rel_151;
+  "hyperbolic embedding" -> rel_151;
+  rel_151 -> "low-distortion embedding";
+
+  rel_152 [shape=diamond, style=filled, color=orange, label="gives"];
+  "hyperbolic embedding" -> rel_152;
+  rel_152 -> "low distortion";
+
+  rel_153 [shape=diamond, style=filled, color=orange, label="requires"];
+  "hyperbolic space" -> rel_153;
+  "negative eigenvalue" -> rel_153;
+  rel_153 -> "single negative dimension";
+
+  rel_154 [shape=diamond, style=filled, color=orange, label="extracted from"];
+  "matching graph" -> rel_154;
+  rel_154 -> "aerial image";
+
+  rel_155 [shape=diamond, style=filled, color=orange, label="is_similar_to"];
+  "hyperbolic space" -> rel_155;
+  "spherical space" -> rel_155;
+  rel_155 -> "mathematic";
+
+  rel_156 [shape=diamond, style=filled, color=orange, label="is"];
+  "spherical space" -> rel_156;
+  "hyperbolic space" -> rel_156;
+  rel_156 -> "natural setting";
+
+  rel_157 [shape=diamond, style=filled, color=orange, label="can embed"];
+  "hyperbolic space" -> rel_157;
+  rel_157 -> "non-euclidean data";
+
+  rel_158 [shape=diamond, style=filled, color=orange, label="requires"];
+  "point" -> rel_158;
+  "hypersphere" -> rel_158;
+  rel_158 -> "correction";
+
+  rel_159 [shape=diamond, style=filled, color=orange, label="produces"];
+  "spherical embedding" -> rel_159;
+  "kernel embedding" -> rel_159;
+  rel_159 -> "low-dimensional embedding";
+
+  rel_160 [shape=diamond, style=filled, color=orange, label="produces"];
+  "spherical embedding" -> rel_160;
+  "kernel embedding" -> rel_160;
+  rel_160 -> "similar result";
+
+  rel_161 [shape=diamond, style=filled, color=orange, label="facilitates"];
+  "nonlinear dimensionality reduction" -> rel_161;
+  "locally linear embedding" -> rel_161;
+  rel_161 -> "data visualization";
+
+  rel_162 [shape=diamond, style=filled, color=orange, label="is_based_on"];
+  "multidimensional scaling" -> rel_162;
+  "mds" -> rel_162;
+  rel_162 -> "psychometric";
+
+  rel_163 [shape=diamond, style=filled, color=orange, label="preserves"];
+  "spherical embedding" -> rel_163;
+  "noise" -> rel_163;
+  rel_163 -> "neighborhood order";
+
+  rel_164 [shape=diamond, style=filled, color=orange, label="offers"];
+  "riemannian manifold" -> rel_164;
+  rel_164 -> "alternative method";
+
+  rel_165 [shape=diamond, style=filled, color=orange, label="exists_on"];
+  "time-warping function" -> rel_165;
+  "spherical manifold" -> rel_165;
+  rel_165 -> "data";
+
+  rel_166 [shape=diamond, style=filled, color=orange, label="recovers"];
+  "relational distance measure" -> rel_166;
+  "bayesian consistency measure" -> rel_166;
+  rel_166 -> "specific cas";
+
+  rel_167 [shape=diamond, style=filled, color=orange, label="regulates"];
+  "error probability" -> rel_167;
+  "control variable" -> rel_167;
+  rel_167 -> "edit cost";
+
+  rel_168 [shape=diamond, style=filled, color=orange, label="represents"];
+  "delaunay graph" -> rel_168;
+  "voronoi tessellation" -> rel_168;
+  rel_168 -> "image plane";
+
+  rel_169 [shape=diamond, style=filled, color=orange, label="affects"];
+  "matching error" -> rel_169;
+  "dummy node" -> rel_169;
+  rel_169 -> "conditional probability";
+
+  rel_170 [shape=diamond, style=filled, color=orange, label="influences"];
+  "null label" -> rel_170;
+  "dummy node" -> rel_170;
+  rel_170 -> "weight";
+
+  rel_171 [shape=diamond, style=filled, color=orange, label="determines"];
+  "exponential function" -> rel_171;
+  "hamming distance" -> rel_171;
+  rel_171 -> "relational affinity";
+
+  rel_172 [shape=diamond, style=filled, color=orange, label="collects"];
+  "optical camera" -> rel_172;
+  rel_172 -> "visible image";
+
+  rel_173 [shape=diamond, style=filled, color=orange, label="affects"];
+  "ground truth map" -> rel_173;
+  "hedge structure" -> rel_173;
+  rel_173 -> "matching accuracy";
+
+  rel_174 [shape=diamond, style=filled, color=orange, label="affects"];
+  "random corruption" -> rel_174;
+  rel_174 -> "result";
+
+  rel_175 [shape=diamond, style=filled, color=orange, label="represents"];
+  "n-ary relation" -> rel_175;
+  "super-clique" -> rel_175;
+  rel_175 -> "symbolic relation";
+
+  rel_176 [shape=diamond, style=filled, color=orange, label="demonstrate"];
+  "real-world example" -> rel_176;
+  rel_176 -> "application";
+
+  rel_177 [shape=diamond, style=filled, color=orange, label="permits"];
+  "national copyright law" -> rel_177;
+  rel_177 -> "private study";
+  rel_177 -> "reproduction";
+
+  rel_178 [shape=diamond, style=filled, color=orange, label="associates"];
+  "uniform probability" -> rel_178;
+  "node" -> rel_178;
+  rel_178 -> "deletion hypothesi";
+
+  rel_179 [shape=diamond, style=filled, color=orange, label="segmented by"];
+  "ridge-structures" -> rel_179;
+  rel_179 -> "line finder";
+
+  rel_180 [shape=diamond, style=filled, color=orange, label="hosts"];
+  "white rose research online" -> rel_180;
+  rel_180 -> "copyrighted item";
+
+  rel_181 [shape=diamond, style=filled, color=orange, label="gives rise to"];
+  "base kernel" -> rel_181;
+  "valid assignment kernel" -> rel_181;
+  rel_181 -> "valid assignment kernel";
+
+  rel_182 [shape=diamond, style=filled, color=orange, label="applies"];
+  "color indexing" -> rel_182;
+  rel_182 -> "image classification";
+
+  rel_183 [shape=diamond, style=filled, color=orange, label="has been used for"];
+  "simulation data" -> rel_183;
+  rel_183 -> "evaluation";
+
+  rel_184 [shape=diamond, style=filled, color=orange, label="improves"];
+  "similarity function" -> rel_184;
+  "graph matching" -> rel_184;
+  rel_184 -> "learning";
+
+  rel_185 [shape=diamond, style=filled, color=orange, label="is"];
+  "histogram intersection kernel" -> rel_185;
+  "valid kernel" -> rel_185;
+  rel_185 -> "kernel";
+
+  rel_186 [shape=diamond, style=filled, color=orange, label="composed of"];
+  "solution" -> rel_186;
+  rel_186 -> "region";
+
+  rel_187 [shape=diamond, style=filled, color=orange, label="allows to compute"];
+  "histogram intersection" -> rel_187;
+  "optimal assignment" -> rel_187;
+  rel_187 -> "kernel";
+
+  rel_188 [shape=diamond, style=filled, color=orange, label="provides"];
+  "libsvm" -> rel_188;
+  rel_188 -> "support vector machine";
+
+  rel_189 [shape=diamond, style=filled, color=orange, label="allows"];
+  "tabu search" -> rel_189;
+  rel_189 -> "matching result";
+
+  rel_190 [shape=diamond, style=filled, color=orange, label="performs"];
+  "tabu search" -> rel_190;
+  rel_190 -> "graph size";
+
+  rel_191 [shape=diamond, style=filled, color=orange, label="identifies"];
+  "tracking algorithm" -> rel_191;
+  rel_191 -> "region of true consistency";
+
+  rel_192 [shape=diamond, style=filled, color=orange, label="is related to"];
+  "covariance matrix" -> rel_192;
+  "laplacian" -> rel_192;
+  rel_192 -> "eigenvalue";
+
+  rel_193 [shape=diamond, style=filled, color=orange, label="used to obtain"];
+  "matrix t" -> rel_193;
+  "covariance matrix" -> rel_193;
+  rel_193 -> "feature matrix";
+
+  rel_194 [shape=diamond, style=filled, color=orange, label="represents"];
+  "eigenvector" -> rel_194;
+  "data" -> rel_194;
+  rel_194 -> "feature";
+
+  rel_195 [shape=diamond, style=filled, color=orange, label="is"];
+  "direct embedding" -> rel_195;
+  rel_195 -> "alternative method";
+
+  rel_196 [shape=diamond, style=filled, color=orange, label="has"];
+  "eigenvalue vector" -> rel_196;
+  rel_196 -> "length 6";
+
+  rel_197 [shape=diamond, style=filled, color=orange, label="reveals"];
+  "eigenvalue" -> rel_197;
+  "heat kernel" -> rel_197;
+  rel_197 -> "relationship";
+
+  rel_198 [shape=diamond, style=filled, color=orange, label="characterize"];
+  "eigenvalue" -> rel_198;
+  rel_198 -> "heat kernel";
+
+  rel_199 [shape=diamond, style=filled, color=orange, label="characterizes"];
+  "eigenvector" -> rel_199;
+  rel_199 -> "embedding";
+
+  rel_200 [shape=diamond, style=filled, color=orange, label="characterize"];
+  "graph spectral property" -> rel_200;
+  "embedded point-sets" -> rel_200;
+  rel_200 -> "node distribution";
+
+  rel_201 [shape=diamond, style=filled, color=orange, label="varies"];
+  "moments characterization" -> rel_201;
+  "embedding" -> rel_201;
+  rel_201 -> "result";
+
+  rel_202 [shape=diamond, style=filled, color=orange, label="approximates"];
+  "geodesic distance" -> rel_202;
+  "euclidean distance" -> rel_202;
+  rel_202 -> "radius of curvature";
+
+  rel_203 [shape=diamond, style=filled, color=orange, label="computed for"];
+  "euclidean distance" -> rel_203;
+  "geodesic distance" -> rel_203;
+  rel_203 -> "embedding";
+
+}

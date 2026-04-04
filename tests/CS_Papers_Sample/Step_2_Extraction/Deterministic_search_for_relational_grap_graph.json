@@ -1,0 +1,2628 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_0",
+      "properties": {},
+      "relation": "applied in",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_1",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "a* algorithm",
+        "planning"
+      ],
+      "targets": [
+        "feature extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1",
+      "properties": {},
+      "relation": "solves",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_15",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "statistical physic",
+        "assignment problem"
+      ],
+      "targets": [
+        "global maximum"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_10",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_8",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "corruption"
+      ],
+      "targets": [
+        "matched node"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_11",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_3",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "dummy node",
+        "data-graph"
+      ],
+      "targets": [
+        "padding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_12",
+      "properties": {},
+      "relation": "forms",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_5",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "delaunay triangulation",
+        "voronoi tessellation"
+      ],
+      "targets": [
+        "adjacency graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_13",
+      "properties": {},
+      "relation": "works_in",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_16",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "dr edwin hancock",
+        "department of computer science"
+      ],
+      "targets": [
+        "university of york"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_14",
+      "properties": {},
+      "relation": "works_in",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_16",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "dr richard wilson",
+        "department of computer science"
+      ],
+      "targets": [
+        "university of york"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_15",
+      "properties": {},
+      "relation": "compare",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_14",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "deterministic search method"
+      ],
+      "targets": [
+        "graph matching"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_16",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_0",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "deterministic search",
+        "graph matching"
+      ],
+      "targets": [
+        "symbolic interpretation"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_17",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_14",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "discrete approximation"
+      ],
+      "targets": [
+        "maximum gradient direction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_18",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_1",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "domain-specific knowledge",
+        "heuristic optimization"
+      ],
+      "targets": [
+        "solution quality"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_19",
+      "properties": {},
+      "relation": "studied",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_16",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "dr richard wilson",
+        "relational graph matching"
+      ],
+      "targets": [
+        "dphil degree"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_2",
+      "properties": {},
+      "relation": "utilizes",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_3",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "global consistency measure",
+        "bayesian consistency measure"
+      ],
+      "targets": [
+        "search strategy"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_20",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_15",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "graph matching",
+        "energy function"
+      ],
+      "targets": [
+        "continuous edit process"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_21",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_3",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "matching probability",
+        "error probability"
+      ],
+      "targets": [
+        "null-match probability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_22",
+      "properties": {},
+      "relation": "hinders",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_8",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "false consistency"
+      ],
+      "targets": [
+        "match solving"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_23",
+      "properties": {},
+      "relation": "used",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_1",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "genetic search",
+        "graph-matching"
+      ],
+      "targets": [
+        "cross, wilson and hancock"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_24",
+      "properties": {},
+      "relation": "inspired_by",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_15",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search",
+        "genetic search"
+      ],
+      "targets": [
+        "jigsaw puzzle"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_25",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_14",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search",
+        "global gradient ascent"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_26",
+      "properties": {},
+      "relation": "applies to",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_10",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search",
+        "global gradient matching"
+      ],
+      "targets": [
+        "matching probability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_27",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_0",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "global gradient method",
+        "tabu search"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_28",
+      "properties": {},
+      "relation": "outperforms",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_6",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "global gradient",
+        "local gradient"
+      ],
+      "targets": [
+        "accuracy of match",
+        "computational overhead"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_29",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_7",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "global gradient",
+        "tabu search"
+      ],
+      "targets": [
+        "correct match"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_3",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_2",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "bayesian consistency measure",
+        "relational mapping"
+      ],
+      "targets": [
+        "match quality"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_30",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_6",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search",
+        "global gradient"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_31",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_4",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "global maximum",
+        "true gradient ascent"
+      ],
+      "targets": [
+        "complete mapping"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_32",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_12",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "global steepest gradient method",
+        "tabu search"
+      ],
+      "targets": [
+        "result"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_33",
+      "properties": {},
+      "relation": "leads to",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_8",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "good island"
+      ],
+      "targets": [
+        "final result"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_34",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_3",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "parameter update",
+        "gradient ascent"
+      ],
+      "targets": [
+        "maximum slope"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_35",
+      "properties": {},
+      "relation": "are based on",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_9",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "graph matching method"
+      ],
+      "targets": [
+        "growing island"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_36",
+      "properties": {},
+      "relation": "controls",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_6",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "threshold",
+        "graph size"
+      ],
+      "targets": [
+        "accuracy match"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_37",
+      "properties": {},
+      "relation": "attracts",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_0",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "graph-theoretic problem",
+        "optimisation task"
+      ],
+      "targets": [
+        "interest"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_38",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_0",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "mean-field network",
+        "graph-theoretic topic"
+      ],
+      "targets": [
+        "graph matching"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_39",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_1",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search",
+        "heuristic search"
+      ],
+      "targets": [
+        "search efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_4",
+      "properties": {},
+      "relation": "limits",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_4",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "computational bottleneck",
+        "super-clique matching"
+      ],
+      "targets": [
+        "search efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_40",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_11",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "optical image",
+        "infrared image"
+      ],
+      "targets": [
+        "extracted graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_41",
+      "properties": {},
+      "relation": "collects",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_10",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "infrared line-scan device"
+      ],
+      "targets": [
+        "aerial image"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_42",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_2",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "initialisation error",
+        "matching error"
+      ],
+      "targets": [
+        "erroneous match"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_43",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_5",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "islands of consistency",
+        "search procedure"
+      ],
+      "targets": [
+        "global solution"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_44",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_8",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "iteration"
+      ],
+      "targets": [
+        "matching probability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_45",
+      "properties": {},
+      "relation": "modifies",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_4",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "label update",
+        "super-cliques"
+      ],
+      "targets": [
+        "consistency measure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_46",
+      "properties": {},
+      "relation": "require",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_6",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "local gradient",
+        "tabu search"
+      ],
+      "targets": [
+        "resource"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_47",
+      "properties": {},
+      "relation": "extracted from",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_10",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "matching graph"
+      ],
+      "targets": [
+        "aerial image"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_48",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_15",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "relational matching",
+        "mean-field annealing"
+      ],
+      "targets": [
+        "pattern recognition"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_49",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_5",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu-search strategy",
+        "memory"
+      ],
+      "targets": [
+        "ranking of match"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_5",
+      "properties": {},
+      "relation": "researches",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_16",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "dr edwin hancock",
+        "computer vision"
+      ],
+      "targets": [
+        "pattern recognition"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_50",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_2",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "memoryless probability",
+        "uniform distribution"
+      ],
+      "targets": [
+        "error modeling"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_51",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_5",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "monte-carlo study",
+        "synthetic graph"
+      ],
+      "targets": [
+        "search method"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_52",
+      "properties": {},
+      "relation": "adds to",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_7",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "node",
+        "neighbour"
+      ],
+      "targets": [
+        "existing region"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_53",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_2",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "structural disturbance",
+        "noise"
+      ],
+      "targets": [
+        "matching error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_54",
+      "properties": {},
+      "relation": "collects",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_10",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "optical camera"
+      ],
+      "targets": [
+        "visible image"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_55",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_12",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "random corruption"
+      ],
+      "targets": [
+        "result"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_56",
+      "properties": {},
+      "relation": "demonstrate",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_9",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "real-world example"
+      ],
+      "targets": [
+        "application"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_57",
+      "properties": {},
+      "relation": "segmented by",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_10",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "ridge-structures"
+      ],
+      "targets": [
+        "line finder"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_58",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_4",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "steepest gradient",
+        "sequential order"
+      ],
+      "targets": [
+        "consistent match"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_59",
+      "properties": {},
+      "relation": "has been used for",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_9",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "simulation data"
+      ],
+      "targets": [
+        "evaluation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_6",
+      "properties": {},
+      "relation": "applied_in",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_16",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "energy minimisation method",
+        "computer vision"
+      ],
+      "targets": [
+        "pattern recognition"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_60",
+      "properties": {},
+      "relation": "composed of",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_7",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "solution"
+      ],
+      "targets": [
+        "region"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_61",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_11",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "structural corruption"
+      ],
+      "targets": [
+        "resulting graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_62",
+      "properties": {},
+      "relation": "impacts",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_12",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "structural corruption"
+      ],
+      "targets": [
+        "correspondence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_63",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_1",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "structural-hashing",
+        "subgraph isomorphism"
+      ],
+      "targets": [
+        "polynomial-time location"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_64",
+      "properties": {},
+      "relation": "allows",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_14",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search"
+      ],
+      "targets": [
+        "matching result"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_65",
+      "properties": {},
+      "relation": "performs",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_7",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tabu search"
+      ],
+      "targets": [
+        "graph size"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_66",
+      "properties": {},
+      "relation": "identifies",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_8",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "tracking algorithm"
+      ],
+      "targets": [
+        "region of true consistency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_7",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_5",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "confidence measure",
+        "random match"
+      ],
+      "targets": [
+        "order of search"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_8",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_4",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "context-dependent probability",
+        "dictionary item"
+      ],
+      "targets": [
+        "search path"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_9",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Deterministic_search_for_relational_grap_chunk_11",
+      "source_document": "Deterministic_search_for_relational_grap",
+      "sources": [
+        "delaunay triangulation",
+        "controlled fraction"
+      ],
+      "targets": [
+        "point-set"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 67,
+    "num_nodes": 145
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "a* algorithm",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "A* algorithm",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "accuracy match",
+      "incident_edges": [
+        "edge_36"
+      ],
+      "label": "accuracy match",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "accuracy of match",
+      "incident_edges": [
+        "edge_28"
+      ],
+      "label": "accuracy of match",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adjacency graph",
+      "incident_edges": [
+        "edge_12"
+      ],
+      "label": "adjacency graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "aerial image",
+      "incident_edges": [
+        "edge_41",
+        "edge_47"
+      ],
+      "label": "aerial images",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "application",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "application",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "assignment problem",
+      "incident_edges": [
+        "edge_1"
+      ],
+      "label": "assignment problem",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "bayesian consistency measure",
+      "incident_edges": [
+        "edge_2",
+        "edge_3"
+      ],
+      "label": "Bayesian consistency measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complete mapping",
+      "incident_edges": [
+        "edge_31"
+      ],
+      "label": "complete mappings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "computational bottleneck",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "computational bottleneck",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "computational overhead",
+      "incident_edges": [
+        "edge_28"
+      ],
+      "label": "computational overheads",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "computer vision",
+      "incident_edges": [
+        "edge_5",
+        "edge_6"
+      ],
+      "label": "computer vision",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "confidence measure",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "confidence measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "consistency measure",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "consistency measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "consistent match",
+      "incident_edges": [
+        "edge_58"
+      ],
+      "label": "consistent matches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "context-dependent probability",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "context-dependent probabilities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "continuous edit process",
+      "incident_edges": [
+        "edge_20"
+      ],
+      "label": "continuous edit process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "controlled fraction",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "controlled fraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct match",
+      "incident_edges": [
+        "edge_29"
+      ],
+      "label": "correct matches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correspondence",
+      "incident_edges": [
+        "edge_62"
+      ],
+      "label": "correspondence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "corruption",
+      "incident_edges": [
+        "edge_10"
+      ],
+      "label": "corruption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cross, wilson and hancock",
+      "incident_edges": [
+        "edge_23"
+      ],
+      "label": "Cross, Wilson and Hancock",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data-graph",
+      "incident_edges": [
+        "edge_11"
+      ],
+      "label": "data-graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "delaunay triangulation",
+      "incident_edges": [
+        "edge_9",
+        "edge_12"
+      ],
+      "label": "Delaunay triangulation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "department of computer science",
+      "incident_edges": [
+        "edge_13",
+        "edge_14"
+      ],
+      "label": "Department of Computer Science",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deterministic search",
+      "incident_edges": [
+        "edge_16"
+      ],
+      "label": "deterministic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deterministic search method",
+      "incident_edges": [
+        "edge_15"
+      ],
+      "label": "deterministic search methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dictionary item",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "dictionary items",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "discrete approximation",
+      "incident_edges": [
+        "edge_17"
+      ],
+      "label": "discrete approximation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "domain-specific knowledge",
+      "incident_edges": [
+        "edge_18"
+      ],
+      "label": "domain-specific knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dphil degree",
+      "incident_edges": [
+        "edge_19"
+      ],
+      "label": "DPhil degree",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "dr edwin hancock",
+      "incident_edges": [
+        "edge_5",
+        "edge_13"
+      ],
+      "label": "Dr Edwin Hancock",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "dr richard wilson",
+      "incident_edges": [
+        "edge_14",
+        "edge_19"
+      ],
+      "label": "Dr Richard Wilson",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dummy node",
+      "incident_edges": [
+        "edge_11"
+      ],
+      "label": "dummy nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "energy function",
+      "incident_edges": [
+        "edge_20"
+      ],
+      "label": "energy function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "energy minimisation method",
+      "incident_edges": [
+        "edge_6"
+      ],
+      "label": "energy minimisation methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "erroneous match",
+      "incident_edges": [
+        "edge_42"
+      ],
+      "label": "erroneous matches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error modeling",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "error modeling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error probability",
+      "incident_edges": [
+        "edge_21"
+      ],
+      "label": "error probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evaluation",
+      "incident_edges": [
+        "edge_59"
+      ],
+      "label": "evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "existing region",
+      "incident_edges": [
+        "edge_52"
+      ],
+      "label": "existing region",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "extracted graph",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "extracted graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "false consistency",
+      "incident_edges": [
+        "edge_22"
+      ],
+      "label": "false consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "feature extraction",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "feature extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "final result",
+      "incident_edges": [
+        "edge_33"
+      ],
+      "label": "final result",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "genetic search",
+      "incident_edges": [
+        "edge_23",
+        "edge_24"
+      ],
+      "label": "genetic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global consistency measure",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "global consistency measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "global gradient",
+      "incident_edges": [
+        "edge_28",
+        "edge_29",
+        "edge_30"
+      ],
+      "label": "global gradient",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global gradient ascent",
+      "incident_edges": [
+        "edge_25"
+      ],
+      "label": "global gradient ascent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global gradient matching",
+      "incident_edges": [
+        "edge_26"
+      ],
+      "label": "global gradient matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global gradient method",
+      "incident_edges": [
+        "edge_27"
+      ],
+      "label": "global gradient method",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "global maximum",
+      "incident_edges": [
+        "edge_1",
+        "edge_31"
+      ],
+      "label": "global maximum",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global solution",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "global solution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global steepest gradient method",
+      "incident_edges": [
+        "edge_32"
+      ],
+      "label": "global steepest gradient method",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "good island",
+      "incident_edges": [
+        "edge_33"
+      ],
+      "label": "good island",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient ascent",
+      "incident_edges": [
+        "edge_34"
+      ],
+      "label": "gradient ascent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "graph matching",
+      "incident_edges": [
+        "edge_15",
+        "edge_16",
+        "edge_20",
+        "edge_38"
+      ],
+      "label": "graph matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph matching method",
+      "incident_edges": [
+        "edge_35"
+      ],
+      "label": "graph matching methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph size",
+      "incident_edges": [
+        "edge_36",
+        "edge_65"
+      ],
+      "label": "graph size",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph-matching",
+      "incident_edges": [
+        "edge_23"
+      ],
+      "label": "graph-matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph-theoretic problem",
+      "incident_edges": [
+        "edge_37"
+      ],
+      "label": "graph-theoretic problems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph-theoretic topic",
+      "incident_edges": [
+        "edge_38"
+      ],
+      "label": "graph-theoretic topics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "growing island",
+      "incident_edges": [
+        "edge_35"
+      ],
+      "label": "growing islands",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "heuristic optimization",
+      "incident_edges": [
+        "edge_18"
+      ],
+      "label": "heuristic optimization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "heuristic search",
+      "incident_edges": [
+        "edge_39"
+      ],
+      "label": "heuristic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "infrared image",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "infrared images",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "infrared line-scan device",
+      "incident_edges": [
+        "edge_41"
+      ],
+      "label": "infrared line-scan device",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initialisation error",
+      "incident_edges": [
+        "edge_42"
+      ],
+      "label": "initialisation error",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interest",
+      "incident_edges": [
+        "edge_37"
+      ],
+      "label": "interest",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "islands of consistency",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "islands of consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "iteration",
+      "incident_edges": [
+        "edge_44"
+      ],
+      "label": "iteration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "jigsaw puzzle",
+      "incident_edges": [
+        "edge_24"
+      ],
+      "label": "jigsaw puzzles",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "label update",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "label update",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "line finder",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "line finder",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "local gradient",
+      "incident_edges": [
+        "edge_28",
+        "edge_46"
+      ],
+      "label": "local gradient",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "match quality",
+      "incident_edges": [
+        "edge_3"
+      ],
+      "label": "match quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "match solving",
+      "incident_edges": [
+        "edge_22"
+      ],
+      "label": "match solving",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matched node",
+      "incident_edges": [
+        "edge_10"
+      ],
+      "label": "matched nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "matching error",
+      "incident_edges": [
+        "edge_42",
+        "edge_53"
+      ],
+      "label": "matching errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matching graph",
+      "incident_edges": [
+        "edge_47"
+      ],
+      "label": "matching graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "matching probability",
+      "incident_edges": [
+        "edge_21",
+        "edge_26",
+        "edge_44"
+      ],
+      "label": "matching probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matching result",
+      "incident_edges": [
+        "edge_64"
+      ],
+      "label": "matching results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "maximum gradient direction",
+      "incident_edges": [
+        "edge_17"
+      ],
+      "label": "maximum gradient direction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "maximum slope",
+      "incident_edges": [
+        "edge_34"
+      ],
+      "label": "maximum slope",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mean-field annealing",
+      "incident_edges": [
+        "edge_48"
+      ],
+      "label": "mean-field annealing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mean-field network",
+      "incident_edges": [
+        "edge_38"
+      ],
+      "label": "mean-field networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "memory",
+      "incident_edges": [
+        "edge_49"
+      ],
+      "label": "memory",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "memoryless probability",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "memoryless probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "monte-carlo study",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "Monte-Carlo study",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neighbour",
+      "incident_edges": [
+        "edge_52"
+      ],
+      "label": "neighbour",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "node",
+      "incident_edges": [
+        "edge_52"
+      ],
+      "label": "node",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "noise",
+      "incident_edges": [
+        "edge_53"
+      ],
+      "label": "noise",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "null-match probability",
+      "incident_edges": [
+        "edge_21"
+      ],
+      "label": "null-match probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optical camera",
+      "incident_edges": [
+        "edge_54"
+      ],
+      "label": "optical camera",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optical image",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "optical images",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optimisation task",
+      "incident_edges": [
+        "edge_37"
+      ],
+      "label": "optimisation tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "order of search",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "order of search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "padding",
+      "incident_edges": [
+        "edge_11"
+      ],
+      "label": "padding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "parameter update",
+      "incident_edges": [
+        "edge_34"
+      ],
+      "label": "parameter updates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "pattern recognition",
+      "incident_edges": [
+        "edge_5",
+        "edge_6",
+        "edge_48"
+      ],
+      "label": "pattern recognition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "performance",
+      "incident_edges": [
+        "edge_25",
+        "edge_27",
+        "edge_30"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "planning",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "planning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "point-set",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "point-set",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "polynomial-time location",
+      "incident_edges": [
+        "edge_63"
+      ],
+      "label": "polynomial-time location",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "random corruption",
+      "incident_edges": [
+        "edge_55"
+      ],
+      "label": "random corruption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "random match",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "random matches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ranking of match",
+      "incident_edges": [
+        "edge_49"
+      ],
+      "label": "ranking of matches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "real-world example",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "real-world examples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "region",
+      "incident_edges": [
+        "edge_60"
+      ],
+      "label": "region",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "region of true consistency",
+      "incident_edges": [
+        "edge_66"
+      ],
+      "label": "region of true consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational graph matching",
+      "incident_edges": [
+        "edge_19"
+      ],
+      "label": "relational graph matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational mapping",
+      "incident_edges": [
+        "edge_3"
+      ],
+      "label": "relational mappings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational matching",
+      "incident_edges": [
+        "edge_48"
+      ],
+      "label": "relational matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "resource",
+      "incident_edges": [
+        "edge_46"
+      ],
+      "label": "resource",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "result",
+      "incident_edges": [
+        "edge_32",
+        "edge_55"
+      ],
+      "label": "result",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "resulting graph",
+      "incident_edges": [
+        "edge_61"
+      ],
+      "label": "resulting graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ridge-structures",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "ridge-structures",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "search efficiency",
+      "incident_edges": [
+        "edge_4",
+        "edge_39"
+      ],
+      "label": "search efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search method",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "search methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search path",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "search paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search procedure",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "search procedure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search strategy",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "search strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sequential order",
+      "incident_edges": [
+        "edge_58"
+      ],
+      "label": "sequential order",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "simulation data",
+      "incident_edges": [
+        "edge_59"
+      ],
+      "label": "simulation data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "solution",
+      "incident_edges": [
+        "edge_60"
+      ],
+      "label": "solution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "solution quality",
+      "incident_edges": [
+        "edge_18"
+      ],
+      "label": "solution quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "statistical physic",
+      "incident_edges": [
+        "edge_1"
+      ],
+      "label": "statistical physics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "steepest gradient",
+      "incident_edges": [
+        "edge_58"
+      ],
+      "label": "steepest gradient",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "structural corruption",
+      "incident_edges": [
+        "edge_61",
+        "edge_62"
+      ],
+      "label": "structural corruption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural disturbance",
+      "incident_edges": [
+        "edge_53"
+      ],
+      "label": "structural disturbance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural-hashing",
+      "incident_edges": [
+        "edge_63"
+      ],
+      "label": "structural-hashing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph isomorphism",
+      "incident_edges": [
+        "edge_63"
+      ],
+      "label": "subgraph isomorphisms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "super-clique matching",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "super-clique matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "super-cliques",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "super-cliques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic interpretation",
+      "incident_edges": [
+        "edge_16"
+      ],
+      "label": "symbolic interpretation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "synthetic graph",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "synthetic graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 11,
+      "id": "tabu search",
+      "incident_edges": [
+        "edge_24",
+        "edge_25",
+        "edge_26",
+        "edge_27",
+        "edge_29",
+        "edge_30",
+        "edge_32",
+        "edge_39",
+        "edge_46",
+        "edge_64",
+        "edge_65"
+      ],
+      "label": "tabu search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tabu-search strategy",
+      "incident_edges": [
+        "edge_49"
+      ],
+      "label": "tabu-search strategy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "threshold",
+      "incident_edges": [
+        "edge_36"
+      ],
+      "label": "threshold",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tracking algorithm",
+      "incident_edges": [
+        "edge_66"
+      ],
+      "label": "tracking algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "true gradient ascent",
+      "incident_edges": [
+        "edge_31"
+      ],
+      "label": "true gradient ascent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "uniform distribution",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "uniform distribution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "university of york",
+      "incident_edges": [
+        "edge_13",
+        "edge_14"
+      ],
+      "label": "University of York",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "visible image",
+      "incident_edges": [
+        "edge_54"
+      ],
+      "label": "visible images",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "voronoi tessellation",
+      "incident_edges": [
+        "edge_12"
+      ],
+      "label": "Voronoi tessellation",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

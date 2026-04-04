@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Wilson's 10 most recent papers Knowledge Discovery</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.75.0/dist/3d-force-graph.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            overflow: hidden;
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #header h1 {
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+        #stats {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        #graph {
+            width: 100vw;
+            height: 100vh;
+        }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        #controls label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+        #controls input[type="range"] {
+            width: 150px;
+        }
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 16px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            font-size: 0.9em;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #tooltip h3 {
+            margin-bottom: 6px;
+            color: #4fc3f7;
+        }
+        #tooltip .detail {
+            color: #aaa;
+            margin: 3px 0;
+        }
+        #legend {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.85em;
+        }
+        #legend h3 {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        /* --- Performance UI additions (Canvas optimization) --- */
+        #graph canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .kg-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .kg-input {
+            width: 220px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #eee;
+            outline: none;
+        }
+        .kg-input::placeholder { color: rgba(255,255,255,0.55); }
+        .kg-btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #eee;
+            cursor: pointer;
+            user-select: none;
+        }
+        .kg-btn:hover { background: rgba(255,255,255,0.12); }
+        .kg-btn:active { transform: translateY(1px); }
+        #kgHud {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            z-index: 120;
+            pointer-events: none;
+        }
+        #kgOverlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        #kgOverlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #kgOverlay .panel {
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 18px;
+            width: min(520px, 92vw);
+            color: #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        #kgOverlay .title {
+            font-size: 14px;
+            color: #4fc3f7;
+            margin-bottom: 8px;
+        }
+        #kgOverlay .sub { font-size: 12px; color: rgba(255,255,255,0.75); }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Professor Wilson's 10 most recent papers 3D Knowledge Graph Rendering and Clustering (pan, zoom, rotate)</h1>
+        <div id="stats">
+            Entities: 588 |
+            Relations: 204 |
+            Avg Degree: 0.92
+        </div>
+    </div>
+
+    <div id="graph"></div>
+
+    <div id="controls">
+        <label>
+            Min Entity Degree: <span id="degreeValue">1</span>
+            <input type="range" id="minDegree" min="1" max="20" step="1" value="1">
+        </label>
+        <label>
+            Link Strength:
+            <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="0.5">
+        </label>
+        <label>
+            Node Repulsion:
+            <input type="range" id="repulsion" min="100" max="1000" step="50" value="400">
+        </label>
+        <label>
+            <input type="checkbox" id="showLabels" checked> Show Labels
+        </label>
+        <div id="filterStats" style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            Showing: <span id="visibleNodes">0</span> nodes, <span id="visibleLinks">0</span> links
+        </div>
+    </div>
+
+    <div id="legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7;"></div>
+            <span>Entity Node</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800;"></div>
+            <span>Relation (Hyperedge)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7; width: 30px; height: 3px;"></div>
+            <span>Source Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800; width: 30px; height: 3px;"></div>
+            <span>Target Link</span>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script>
+        const data = {
+            nodes: [{"degree":0,"id":"13 vertice","label":"13 vertice","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"14 vertice","label":"14 vertice","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"2d view","label":"2d view","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"3d object recognition","label":"3d object recognition","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"a* algorithm","label":"a* algorithm","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"abductive reasoning","label":"abductive reasoning","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"accuracy match","label":"accuracy match","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"accuracy of match","label":"accuracy of match","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"active graph-editing technique","label":"active graph-editing","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"active matching","label":"active matching","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"adjacency graph","label":"adjacency graph","properties":{"node_level":"class"},"type":"entity"},{"degree":8,"id":"adjacency matrix","label":"adjacency matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"adjacency structure","label":"adjacency structure","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"aerial image","label":"aerial image","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"affine invariant","label":"affine invariant","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"affinity","label":"affinity","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"algorithmic application","label":"algorithmic application","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"alternative embedding","label":"alternative embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"alternative method","label":"alternative method","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ambiguity","label":"ambiguity","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"amplitude","label":"amplitude","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"ancestor","label":"ancestor","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"andrew cross","label":"andrew cross","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"application","label":"application","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"approximate distance","label":"approximate distance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"aspect graph","label":"aspect graph","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"assignment","label":"assignment","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"assignment kernel","label":"assignment kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"assignment problem","label":"assignment problem","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"attribute","label":"attribute","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"attributed molecular graph","label":"attributed molecular graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"attributed tree","label":"attributed tree","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"base kernel","label":"base kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"bayesian consistency measure","label":"bayesian consistency measure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"bayesian framework","label":"bayesian framework","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"bayesian model","label":"bayesian model","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"be embedded","label":"be embedded","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"best classification","label":"best classification","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"best cluster","label":"best cluster","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"better result","label":"better result","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"binary adjacency graph","label":"binary adjacency graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"bitangent circle radiu","label":"bitangent circle radiu","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"block structure","label":"block structure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"boundary length","label":"boundary length","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"central moment","label":"central moment","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"centred co-ordinates y c","label":"centred co-ordinates y c","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"change","label":"change","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"characteristic polynomial","label":"characteristic polynomial","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"cheeger constant","label":"cheeger constant","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"class structure","label":"class structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"classification accuracy","label":"classification accuracy","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"clear cluster-structure","label":"cluster structure","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"cluster","label":"cluster","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"clustering","label":"clustering","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"clutter","label":"clutter","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"clutter node","label":"clutter node","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"co-ordinate covariance","label":"co-ordinate covariance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"coefficient","label":"coefficient","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"color indexing","label":"color indexing","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"compact cluster","label":"compact cluster","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"compatibility coefficient","label":"compatibility coefficient","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"complete mapping","label":"complete mapping","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"complex number","label":"complex number","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"computational complexity","label":"computational complexity","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"computer programme","label":"computer programme","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"computer vision","label":"computer vision","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"condition","label":"condition","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"conditional probability","label":"conditional probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"confusion probability","label":"confusion probability","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"conjecture","label":"conjecture","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"consistency measure","label":"consistency measure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"consistent match","label":"consistent match","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"constant curvature embedding","label":"constant curvature embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"constant sectional curvature","label":"constant sectional curvature","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"constant-curvature space","label":"constant-curvature space","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"constraint filtering","label":"constraint filtering","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"context-dependent probability","label":"context-dependent probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"continuous edit process","label":"continuous edit","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"control variable","label":"control variable","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"convergence","label":"convergence","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"convergence rate","label":"convergence rate","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"convolution filter","label":"convolution filter","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"copyrighted item","label":"copyrighted item","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"corner adjacency graph","label":"corner adjacency graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"correct match","label":"correct match","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"correction","label":"correction","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"corruption","label":"corruption","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"cospectral","label":"cospectral","properties":{"node_level":"class"},"type":"entity"},{"degree":4,"id":"covariance matrix","label":"covariance matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"cross, wilson and hancock","label":"cross, wilson and hancock","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"cross-validation error","label":"cross-validation error","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"crossover","label":"crossover","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"curved manifold","label":"curved manifold","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"d.phil. degree","label":"d.phil. degree","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"data","label":"data","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"data graph matching","label":"data graph matching","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"data pattern","label":"data pattern","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"data point","label":"data point","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"data structure","label":"data structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"data variance","label":"data variance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"data visualization","label":"data visualization","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"degree","label":"degree","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"degree of noise","label":"degree of noise","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"delaunay graph","label":"delaunay graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"delaunay triangulation","label":"delaunay triangulation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"deletion hypothesi","label":"deletion hypothesi","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"department of computer science","label":"department of computer science","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"deterministic search","label":"deterministic search","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"dimension of u(g)","label":"dimension of u(g)","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"direct embedding","label":"direct embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"discrete approximation","label":"discrete approximation","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"dissimilarity","label":"dissimilarity","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"distinct cluster","label":"distinct cluster","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"distribution","label":"distribution","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"domain-specific knowledge","label":"domain-specific knowledge","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"dphil degree","label":"dphil degree","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"dr edwin hancock","label":"dr edwin hancock","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"dr richard wilson","label":"dr richard wilson","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"dummy node","label":"dummy node","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"e nzyme","label":"e nzyme","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"e(g)","label":"e(g)","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"edge","label":"edge","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"edge-set modification","label":"edge-set modification","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"edge-set restoration","label":"edge-set restoration","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"edit cost","label":"edit cost","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"edit distance","label":"edit distance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"effectiveness","label":"effectiveness","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"efficacy","label":"efficacy","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"efficiently","label":"efficiently","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"eigendecomposition","label":"eigendecomposition","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"eigenimage","label":"eigenimage","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"eigenmode","label":"eigenmode","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"eigenspace","label":"eigenspace","properties":{"node_level":"class"},"type":"entity"},{"degree":18,"id":"eigenvalue","label":"eigenvalue","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"eigenvalue equation","label":"eigenvalue equation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"eigenvalue matrix e","label":"eigenvalue matrix e","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"eigenvalue vector","label":"eigenvalue vector","properties":{"node_level":"class"},"type":"entity"},{"degree":10,"id":"eigenvector","label":"eigenvector","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"eikonal equation","label":"eikonal equation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"element-wise product","label":"element-wise product","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"embedded point-sets","label":"embedded point-sets","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"embedding","label":"embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"empirical complexity","label":"empirical complexity","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"energy minimisation method","label":"energy minimisation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"equivalent minimisation problem","label":"equivalent minimisation problem","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"erroneous match","label":"erroneous match","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"error modeling","label":"error modeling","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"error probability","label":"error probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"estimation of position","label":"estimation of position","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"euclidean chord","label":"euclidean chord","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"euclidean distance","label":"euclidean distance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"euclidean space","label":"euclidean space","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"evaluation","label":"evaluation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"existing region","label":"existing region","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"exponential function","label":"exponential function","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"exponential map","label":"exponential map","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"extraneous node","label":"extraneous node","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"false consistency","label":"false consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"feature","label":"feature","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"feature detection","label":"feature detection","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"feature extraction","label":"feature extraction","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"feature map","label":"feature map","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"feature matrix","label":"feature matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"feature vector","label":"feature vector","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"first term","label":"first term","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fisher discriminant","label":"fisher discriminant","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fitness distribution","label":"fitness distribution","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"fitness measure","label":"fitness measure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fitness value","label":"fitness value","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"flow of information","label":"flow of information","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"form","label":"form","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"four moment","label":"four moment","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"frobenius distance","label":"frobenius distance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"frobenius norm","label":"frobenius norm","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"function","label":"function","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"gaussian model","label":"gaussian model","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"general graph","label":"general graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"generative model","label":"generative model","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"genetic algorithm","label":"genetic algorithm","properties":{"node_level":"class"},"type":"entity"},{"degree":13,"id":"genetic search","label":"genetic search","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"geodesic distance","label":"geodesic distance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"geometric computation","label":"geometric computation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"geometric technique","label":"geometric technique","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"geometry","label":"geometry","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"global configurational probability","label":"global configurational probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"global consistency","label":"global consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"global gradient","label":"global gradient","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"global maximum","label":"global maximum","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"global quality","label":"global quality","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"global solution","label":"global solution","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"good cluster","label":"good cluster","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"gradient","label":"gradient","properties":{"node_level":"class"},"type":"entity"},{"degree":11,"id":"graph","label":"graph","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph cluster","label":"graph cluster","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"graph clustering","label":"graph clustering","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph correspondence","label":"graph correspondence","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph edit distance","label":"graph edit","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"graph embedding","label":"graph embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph feature","label":"graph feature","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"graph g","label":"graph g","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"graph isomorphism","label":"graph isomorphism","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph kernel","label":"graph kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"graph matching","label":"graph matching","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"graph pattern","label":"graph pattern","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph property","label":"graph property","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph recovery","label":"graph recovery","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph representation","label":"graph representation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph similarity","label":"graph similarity","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"graph size","label":"graph size","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"graph spectral feature","label":"graph spectral feature","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"graph spectral property","label":"graph spectral property","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"graph structure","label":"graph structure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph theory","label":"graph theory","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph topology","label":"graph topology","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"graph-spectral approach","label":"graph-spectral","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph-spectral attribute","label":"graph-spectral attribute","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph-spectral decomposition","label":"graph-spectral decomposition","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"graph-theoretic problem","label":"graph-theoretic problem","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ground truth map","label":"ground truth map","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"hamilton-jacobi equation","label":"hamilton-jacobi equation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"hamiltonian","label":"hamiltonian","properties":{"node_level":"class"},"type":"entity"},{"degree":6,"id":"hamming distance","label":"hamming distance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"hard limit","label":"hard limit","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"heat equation","label":"heat equation","properties":{"node_level":"class"},"type":"entity"},{"degree":6,"id":"heat kernel","label":"heat kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"hedge structure","label":"hedge structure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"hermitian matrice","label":"hermitian matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"hill climbing","label":"hill climbing","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"histogram","label":"histogram","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"histogram intersection","label":"histogram intersection","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"histogram intersection kernel","label":"histogram intersection kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"hou","label":"hou","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"hyperbolic angle","label":"hyperbolic angle","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"hyperbolic embedding","label":"hyperbolic embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":4,"id":"hyperbolic space","label":"hyperbolic space","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"hypersphere","label":"hypersphere","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"ica","label":"independent component analysis","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"identification","label":"identification","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ieee transaction","label":"ieee transaction","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"image classification","label":"image classification","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"image databa","label":"image databas","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"image plane","label":"image plane","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"image processing","label":"image processing","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"image registration","label":"image registration","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"image representation","label":"image representation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"image retrieval","label":"image retrieval","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"image structure","label":"image structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"importance","label":"importance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"indefinite space","label":"indefinite space","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"independent component analysi","label":"independent component analysi","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"indirect embedding","label":"indirect embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"information flow","label":"information flow","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"infrared line scan","label":"infrared line scan","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"infrared line-scan device","label":"infrared line-scan device","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"initial convergence","label":"initial convergence","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"initial match","label":"initial match","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"initial match probability","label":"initial match probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"initial population","label":"initial population","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"initialisation error","label":"initialization error","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"inner product","label":"inner product","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"intensity ridge","label":"intensity ridge","properties":{"node_level":"class"},"type":"entity"},{"degree":4,"id":"inter-mode adjacency matrix","label":"inter-mode adjacency matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"interest","label":"interest","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"intermediate solution","label":"intermediate solution","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"interpretation of measurement","label":"interpretation of measurement","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"invariant","label":"invariant","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"islands of consistency","label":"islands of consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"isomorphic","label":"isomorphic","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"isomorphism class","label":"isomorphism class","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"iteration","label":"iteration","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"iterative relaxation process","label":"iterative relaxation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"iterative update process","label":"iterative update","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"jade","label":"jade","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"jigsaw puzzle","label":"jigsaw puzzle","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"joint conditional density","label":"joint conditional density","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"k > 4","label":"k > 4","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"k-regular graph","label":"k-regular graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"k2 s + (r − s) m(g)j,l − k > 0","label":"k2 s + (r − s) m(g)j,l − k > 0","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"kernel","label":"kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"kernel embedding","label":"kernel embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"kernel method","label":"kernel method","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"kernel-based classification","label":"kernel-based classification","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"label configuration","label":"label configuration","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"label update","label":"label update","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"labeling consistency","label":"labeling consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"laplacian","label":"laplacian","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"lca","label":"lca","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"lda","label":"lda","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"learning","label":"learning","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"least-squares problem","label":"least-squares problem","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"length 6","label":"length","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"libsvm","label":"libsvm","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"line digraph","label":"line digraph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"line finder","label":"line finder","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"linear consistency measure","label":"linear consistency measure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"linear space","label":"linear space","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"local gradient","label":"local gradient","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"local minima","label":"local minima","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"local structure","label":"local structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"locality preserving projection","label":"locality preserving projection","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"locally linear embedding","label":"locally linear embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"log-map","label":"log-map","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"loopless","label":"loopless","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"low distortion","label":"low distortion","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"low-dimensional embedding","label":"low-dimensional embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"low-dimensional space","label":"low-dimensional space","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"low-distortion embedding","label":"low-distortion embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"lower dimensionality","label":"lower dimensionality","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"lowest rms error","label":"lowest rms error","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"m(g)","label":"m(g)","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"mahalanobis distance","label":"mahalanobis distance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"mapping","label":"mapping","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"match probability","label":"match probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"match quality","label":"match quality","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"match solving","label":"match solving","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"matched filter","label":"matched filter","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"matched node","label":"matched node","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"matching","label":"matching","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"matching accuracy","label":"matching accuracy","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"matching error","label":"matching error","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"matching graph","label":"matching graph","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"matching performance","label":"matching performance","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"matching probability","label":"matching probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"matching problem","label":"matching problem","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"matching process","label":"matching process","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"matching result","label":"matching result","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"mathematic","label":"mathematic","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"matrix t","label":"matrix t","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"matrix u(g)","label":"matrix u(g)","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"maximum fitness","label":"maximum fitness","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"maximum gradient direction","label":"maximum gradient direction","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"maximum slope","label":"maximum slope","properties":{"node_level":"class"},"type":"entity"},{"degree":10,"id":"mds","label":"mds","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"mean-field network","label":"mean-field network","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"memoryless probability","label":"memoryless probability","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"method","label":"method","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"metric","label":"metric","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"minimisation tool","label":"minimisation tool","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"minimum degree","label":"minimum degree","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"modal distance","label":"modal distance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"modal matrix","label":"modal matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"moment vector","label":"moment vector","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"moments characterization","label":"moments characterization","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"monte-carlo study","label":"monte-carlo study","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"multi-dimensional scaling","label":"multi-dimensional scaling","properties":{"node_level":"class"},"type":"entity"},{"degree":4,"id":"multidimensional scaling","label":"multidimensional scaling","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"mutation","label":"mutation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"mutation operation","label":"mutation operation","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"mutation probability","label":"mutation probability","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"n-ary relation","label":"n-ary relation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"national copyright law","label":"national copyright law","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"natural setting","label":"natural setting","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"negative eigenfraction","label":"negative eigenfraction","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"negative eigenvalue","label":"negative eigenvalue","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"neighborhood order","label":"neighborhood order","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"new solution","label":"new solution","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"node","label":"node","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"node deletion","label":"node deletion","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"node distribution","label":"node distribution","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"node reinsertion","label":"node reinsertion","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"noise","label":"noise","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"non-euclidean data","label":"non-euclidean space","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"non-isomorphic graph","label":"non-isomorphic graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"non-metricity","label":"non-metricity","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"nonlinear dimensionality reduction","label":"nonlinear dimensionality reduction","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"normalized cut","label":"normalized cut","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"normalized image","label":"normalized image","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"novel function","label":"novel function","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"null label","label":"null label","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"null-labels","label":"null-labels","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"null-match probability","label":"null-match probability","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"number of path","label":"number of path","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"optical camera","label":"optical image","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"optimal assignment","label":"optimal assignment","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"optimal step size","label":"optimal step size","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"optimal value","label":"optimal value","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"optimisation","label":"optimization","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"optimization process","label":"optimization process","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"optimization scheme","label":"optimization scheme","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"organizing image databa","label":"organizing image databas","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"orientational line-detectors","label":"orientational line-detectors","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"orthogonal matrix","label":"orthogonal matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"outlier","label":"outlier","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"overall distortion","label":"overall distortion","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"p m(h)p","label":"p m(h)p","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"padding","label":"padding","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"pairwise distance","label":"pairwise distance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"parameter pe","label":"parameter pe","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"parameter update","label":"parameter update","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"parametric distance embedding","label":"parametric distance embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"path","label":"path","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pattern analysi","label":"pattern analysis","properties":{"node_level":"class"},"type":"entity"},{"degree":8,"id":"pca","label":"PCA","properties":{"node_level":"instance"},"type":"entity"},{"degree":2,"id":"performance","label":"performance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"point","label":"point","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"polynomial time","label":"polynomial time","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"poorer result","label":"poorer result","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"population","label":"population","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"population diversity","label":"population diversity","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"population entry","label":"population entry","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"population selection","label":"population selection","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"population size","label":"population size","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"position-vectors","label":"position-vectors","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"positive dimension","label":"positive dimension","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"positive semidefinite","label":"positive semidefinite","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"power symmetric polynomial","label":"power symmetric polynomial","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"principal component analysi","label":"principal component analysi","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"principal components analysi","label":"principal components analysi","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"private study","label":"private study","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"probabilistic crossover","label":"probabilistic crossover","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"professor hancock","label":"professor hancock","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"protein function prediction","label":"protein function prediction","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pruned dictionary","label":"pruned dictionary","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pruning strategy","label":"pruning strategy","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pseudo-euclidean embedding","label":"pseudo-euclidean embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"psychometric","label":"psychometric","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"publisher","label":"publisher","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"quadratic kernel matrix","label":"quadratic kernel matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"quadratic minimisation","label":"quadratic minimisation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"quantum algorithm","label":"quantum algorithm","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"quantum random walk","label":"quantum random walk","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"quantum walk","label":"quantum walk","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"radiu","label":"radiu","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"radius of curvature","label":"radius of curvature","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"random clutter","label":"random clutter","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"random corruption","label":"random corruption","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"random graph","label":"random graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"random match","label":"random match","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"ranking of match","label":"ranking of match","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"rate of change","label":"rate of change","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"rate of flow","label":"rate of flow","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"real-world example","label":"real-world example","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"region","label":"region","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"region adjacency graph","label":"region adjacency graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"region of true consistency","label":"region of true consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"relational affinity","label":"relational affinity","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"relational consistency","label":"relational consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"relational consistency measure","label":"relational consistency measure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"relational distance","label":"relational distance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"relational distance measure","label":"relational distance measure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"relational distance metric","label":"relational distance metric","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"relational graph matching","label":"relational graph matching","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"relational matching","label":"relational matching","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"relational structure","label":"relational structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"relationship","label":"relationship","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"relaxation labelling","label":"relaxation labelling","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"remarkable improvement","label":"remarkable improvement","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"representation","label":"representation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"reproduction","label":"reproduction","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"research group","label":"research group","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"research paper","label":"research paper","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"researcher","label":"researcher","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"residual negative eigenvalue","label":"residual negative eigenvalue","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"resource","label":"resource","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"result","label":"result","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ridge-structures","label":"ridge-structures","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"riemannian geometry","label":"riemannian geometry","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"riemannian manifold","label":"riemannian manifold","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"rms error","label":"rms error","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"road network","label":"road network","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"robust recognition","label":"robust recognition","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"rooftop respon","label":"rooftop respons","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"roulette-wheel algorithm","label":"roulette-wheel algorithm","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"roulette-wheel selection","label":"roulette-wheel selection","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"s + (u(g))","label":"s + (u(g))","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"s + (u(g)3(i,j),(l,m))","label":"s + (u(g)3(i,j),(l,m))","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"s + (u(g)3)","label":"s + (u(g)3)","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"s+(u(g))","label":"s+(u(g))","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"s+(u(g)2)","label":"s+(u(g)2)","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"sar data","label":"sar data","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"scalar curvature","label":"scalar curvature","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"scalar curvature histogram","label":"scalar curvature histogram","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"scene understanding","label":"scene understanding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"search efficiency","label":"search efficiency","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"search method","label":"search method","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"search path","label":"search path","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"search procedure","label":"search procedure","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"sectional curvature","label":"sectional curvature","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"segmentation quality","label":"segmentation quality","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"selection process","label":"selection process","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"separation","label":"separation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"shape","label":"shape","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"shortest curve","label":"shortest path","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"similar result","label":"similar result","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"similarity function","label":"similarity function","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"similarity matrice","label":"similarity matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"simulated annealing","label":"simulated annealing","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"simulation data","label":"simulation data","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"simulation study","label":"simulation study","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"single negative dimension","label":"single negative dimension","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"size difference","label":"size difference","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"skeleton","label":"skeleton","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"small t","label":"small t","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"smooth trajectory","label":"smooth trajectory","properties":{"node_level":"class"},"type":"entity"},{"degree":3,"id":"solution","label":"solution","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"solution merging","label":"solution merging","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"solution quality","label":"solution quality","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"sp(m(g))","label":"sp(m(g))","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"sp(s + (u(g)3 ))","label":"sp(s + (u(g)3 ))","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"sp(t(g))","label":"sp(t(g))","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"sp(u(g))","label":"sp(u(g))","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spatial moment","label":"spatial moment","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"specific cas","label":"specific cas","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spectra","label":"spectra","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"spectral attribute","label":"spectral attribute","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spectral decomposition","label":"spectral decomposition","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"spectral feature","label":"spectral feature","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spectral feature vector","label":"spectral feature vector","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spectral form","label":"spectral form","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"spectral matrix","label":"spectral matrix","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spectral method","label":"spectral method","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"spectral pattern vector","label":"spectral pattern vector","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"spectral property","label":"spectral property","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"spectrum","label":"spectrum","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"spherical embedding","label":"spherical embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spherical geometry","label":"spherical geometry","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"spherical manifold","label":"spherical manifold","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"spherical space","label":"spherical space","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spurious consistency","label":"spurious consistency","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spurious node","label":"spurious node","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"srg(n, k, r, s)","label":"srg(n, k, r, s)","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"stability","label":"stability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"statistical algorithm","label":"statistical algorithm","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"statistical pattern recognizer","label":"statistical pattern recognizer","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"statistical physic","label":"statistical physic","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"steepest gradient","label":"steepest gradient","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"step","label":"step","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"stress measure","label":"stress measure","properties":{"node_level":"class"},"type":"entity"},{"degree":5,"id":"strongly regular graph","label":"strongly regular graph","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"structural compatibility","label":"structural property","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"super-clique","label":"super-clique","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"support of u(g)p","label":"support of u(g)p","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"support vector machine","label":"support vector machine","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"surface","label":"surface","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"symbolic graph","label":"symbolic graph","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"symbolic interpretation","label":"symbolic interpretation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"symbolic relation","label":"symbolic relation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"symmetric polynomial","label":"symmetric polynomial","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"symmetry","label":"symmetry","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"symmetry of u(g)","label":"symmetry of u(g)","properties":{"node_level":"class"},"type":"entity"},{"degree":6,"id":"tabu search","label":"tabu search","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"tabu-search strategy","label":"tabu-search strategy","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"third eigenvector","label":"third eigenvector","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"third order moment","label":"third order moment","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"threshold","label":"threshold","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"thresholded leading eigenvector","label":"thresholded leading eigenvector","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"thresholding error","label":"thresholding error","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"thresholding technique","label":"thresholding","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"time parameter","label":"time parameter","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"time-warping function","label":"time-warping function","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"topological information","label":"topological information","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"tracking algorithm","label":"tracking algorithm","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"transition","label":"transition","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"tree representation","label":"tree representation","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"two matrice","label":"two matrice","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"u(g)","label":"u(g)","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"ultrametric","label":"ultrametric","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"unary measurement","label":"unary measurement","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"uniform probability","label":"uniform probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"uniform probability distribution","label":"uniform probability distribution","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"unique path","label":"unique path","properties":{"node_level":"class"},"type":"entity"},{"degree":4,"id":"university of york","label":"university of york","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"valid","label":"valid","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"valid assignment kernel","label":"valid assignment kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"valid kernel","label":"valid kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"valid similarity","label":"valid similarity","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"value","label":"value","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"value of t","label":"value of t","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"various structure","label":"various structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"vector","label":"vector","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"vector space embedding","label":"vector space embedding","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"vertex neighbourhood","label":"vertex neighbourhood","properties":{"node_level":"class"},"type":"entity"},{"degree":4,"id":"vertice","label":"vertice","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"view indexing","label":"view indexing","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"view number","label":"view number","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"view occurrence","label":"view occurrence","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"view structure","label":"view structure","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"view-based object recognition","label":"view-based object recognition","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"view-spaces","label":"view-spaces","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"visible image","label":"visible image","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"visualizing graph","label":"visualizing graph","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"volume","label":"volume","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"voronoi tessellation","label":"voronoi tessellation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"website","label":"website","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"weight","label":"weight","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"weisfeiler-lehman kernel","label":"weisfeiler-lehman kernel","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"white rose research online","label":"white rose research online","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"wiener-filtering technique","label":"wiener-filtering","properties":{"node_level":"class"},"type":"entity"}],
+            hyperedges: [{"confidence":0.9,"id":"edge_1","relation":"solves","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_15","source_document":"Deterministic_search_for_relational_grap","sources":["statistical physic","assignment problem"],"targets":["global maximum"]},{"confidence":0.8,"id":"edge_10","relation":"affects","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_8","source_document":"Deterministic_search_for_relational_grap","sources":["corruption"],"targets":["matched node"]},{"confidence":0.85,"id":"edge_100","relation":"estimates","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_10","source_document":"Geometric_characterization_and_clusterin","sources":["euclidean distance","geodesic distance"],"targets":["scalar curvature"]},{"confidence":0.9,"id":"edge_102","relation":"computes","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_3","source_document":"Geometric_characterization_and_clusterin","sources":["heat kernel","euclidean distance"],"targets":["approximate distance"]},{"confidence":0.8,"id":"edge_103","relation":"aid","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_17","source_document":"Geometric_characterization_and_clusterin","sources":["scalar curvature","euclidean distance"],"targets":["visualizing graph"]},{"confidence":0.8,"id":"edge_108","relation":"characterizes","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_0","source_document":"Geometric_characterization_and_clusterin","sources":["geodesic distance","multidimensional scaling"],"targets":["graph structure"]},{"confidence":0.85,"id":"edge_109","relation":"is related to","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_1","source_document":"Geometric_characterization_and_clusterin","sources":["scalar curvature","geodesic distance"],"targets":["geometry"]},{"confidence":0.9,"id":"edge_112","relation":"characterizes","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_11","source_document":"Geometric_characterization_and_clusterin","sources":["graph embedding","scalar curvature"],"targets":["graph"]},{"confidence":0.9,"id":"edge_114","relation":"encapsulates","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_1","source_document":"Geometric_characterization_and_clusterin","sources":["heat kernel","graph"],"targets":["information flow"]},{"confidence":0.9,"id":"edge_115","relation":"determines","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_2","source_document":"Geometric_characterization_and_clusterin","sources":["laplacian","graph"],"targets":["rate of flow"]},{"confidence":0.9,"id":"edge_12","relation":"forms","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_5","source_document":"Deterministic_search_for_relational_grap","sources":["delaunay triangulation","voronoi tessellation"],"targets":["adjacency graph"]},{"confidence":0.9,"id":"edge_122","relation":"describes","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_2","source_document":"Geometric_characterization_and_clusterin","sources":["heat kernel","laplacian"],"targets":["flow of information"]},{"confidence":0.9,"id":"edge_124","relation":"used for","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_16","source_document":"Geometric_characterization_and_clusterin","sources":["heat kernel"],"targets":["embedding"]},{"confidence":0.8,"id":"edge_125","relation":"affects","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_15","source_document":"Geometric_characterization_and_clusterin","sources":["view number","histogram"],"targets":["stability"]},{"confidence":0.85,"id":"edge_128","relation":"gives","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_16","source_document":"Geometric_characterization_and_clusterin","sources":["indirect embedding"],"targets":["poorer result"]},{"confidence":0.9,"id":"edge_13","relation":"works_in","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_16","source_document":"Deterministic_search_for_relational_grap","sources":["dr edwin hancock","department of computer science"],"targets":["university of york"]},{"confidence":0.9,"id":"edge_133","relation":"show","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_13","source_document":"Geometric_characterization_and_clusterin","sources":["moment vector"],"targets":["pairwise distance"]},{"confidence":0.9,"id":"edge_136","relation":"used for","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_13","source_document":"Geometric_characterization_and_clusterin","sources":["pca"],"targets":["graph clustering"]},{"confidence":0.85,"id":"edge_137","relation":"characterize","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_14","source_document":"Geometric_characterization_and_clusterin","sources":["scalar curvature histogram"],"targets":["cluster"]},{"confidence":0.8,"id":"edge_139","relation":"shows","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_16","source_document":"Geometric_characterization_and_clusterin","sources":["scalar curvature"],"targets":["histogram"]},{"confidence":0.9,"id":"edge_14","relation":"works_in","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_16","source_document":"Deterministic_search_for_relational_grap","sources":["dr richard wilson","department of computer science"],"targets":["university of york"]},{"confidence":0.8,"id":"edge_143","relation":"relate to","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_9","source_document":"Geometric_characterization_and_clusterin","sources":["third order moment"],"targets":["symmetry"]},{"confidence":0.9,"id":"edge_144","relation":"affects","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_13","source_document":"Geometric_characterization_and_clusterin","sources":["time parameter"],"targets":["four moment"]},{"confidence":0.7,"id":"edge_145","relation":"competes","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_0","source_document":"Geometric_characterization_and_clusterin","sources":["topological information"],"targets":["vector space embedding"]},{"confidence":0.9,"id":"edge_146","relation":"influences","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_13","source_document":"Geometric_characterization_and_clusterin","sources":["value of t"],"targets":["cluster"]},{"confidence":0.8,"id":"edge_156","relation":"hinders","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_11","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["clutter node"],"targets":["data graph matching"]},{"confidence":0.85,"id":"edge_157","relation":"neutralizes","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_5","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["clutter node"],"targets":["clutter"]},{"confidence":0.9,"id":"edge_159","relation":"underpins","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_15","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["hamming distance","consistency measure"],"targets":["genetic search"]},{"confidence":0.9,"id":"edge_16","relation":"enables","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_0","source_document":"Deterministic_search_for_relational_grap","sources":["deterministic search","graph matching"],"targets":["symbolic interpretation"]},{"confidence":0.8,"id":"edge_167","relation":"contributes","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_1","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["crossover","mutation"],"targets":["global solution"]},{"confidence":0.9,"id":"edge_168","relation":"optimizes","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_5","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["crossover","mutation"],"targets":["global configurational probability"]},{"confidence":0.85,"id":"edge_17","relation":"computes","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_14","source_document":"Deterministic_search_for_relational_grap","sources":["discrete approximation"],"targets":["maximum gradient direction"]},{"confidence":0.9,"id":"edge_170","relation":"awards","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_17","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["d.phil. degree","university of york"],"targets":["andrew cross"]},{"confidence":0.9,"id":"edge_178","relation":"enables","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_3","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["hamming distance","fitness measure"],"targets":["selection process"]},{"confidence":0.9,"id":"edge_179","relation":"enables","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_1","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["roulette-wheel selection","fitness measure"],"targets":["population entry"]},{"confidence":0.9,"id":"edge_180","relation":"enhances","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_11","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["fitness measure"],"targets":["matching result"]},{"confidence":0.9,"id":"edge_186","relation":"locates","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_9","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["graph isomorphism","genetic search"],"targets":["solution"]},{"confidence":0.85,"id":"edge_188","relation":"moves","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_7","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["hamming distance","genetic search"],"targets":["modal distance"]},{"confidence":0.9,"id":"edge_189","relation":"optimizes","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_0","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["genetic search","hamming distance"],"targets":["relational distance"]},{"confidence":0.9,"id":"edge_19","relation":"studied","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_16","source_document":"Deterministic_search_for_relational_grap","sources":["dr richard wilson","relational graph matching"],"targets":["dphil degree"]},{"confidence":0.9,"id":"edge_191","relation":"improves","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_8","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["genetic search","iteration"],"targets":["solution quality"]},{"confidence":0.9,"id":"edge_192","relation":"achieves","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_8","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["genetic search","maximum fitness"],"targets":["better result"]},{"confidence":0.7,"id":"edge_193","relation":"affects","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_15","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["mutation probability","genetic search"],"targets":["convergence"]},{"confidence":0.9,"id":"edge_194","relation":"maintains","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_7","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["genetic search","population diversity"],"targets":["maximum fitness"]},{"confidence":0.865,"id":"edge_198","relation":"compares","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_0","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["genetic search","simulated annealing"],"targets":["convergence rate"]},{"confidence":0.8,"id":"edge_199","relation":"supports","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_15","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["simulation study","genetic search"],"targets":["effectiveness"]},{"confidence":0.8,"id":"edge_201","relation":"contributes","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_6","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["genetic search"],"targets":["population selection"]},{"confidence":0.8,"id":"edge_205","relation":"affects","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_2","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["label configuration","hamming distance"],"targets":["matching error"]},{"confidence":0.8,"id":"edge_21","relation":"causes","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_3","source_document":"Deterministic_search_for_relational_grap","sources":["matching probability","error probability"],"targets":["null-match probability"]},{"confidence":0.9,"id":"edge_215","relation":"accelerates","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_5","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["mutation operation"],"targets":["convergence"]},{"confidence":0.9,"id":"edge_216","relation":"controls","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_10","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["population size","mutation probability"],"targets":["genetic search"]},{"confidence":0.8,"id":"edge_217","relation":"affects","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_10","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["mutation probability"],"targets":["convergence rate"]},{"confidence":0.85,"id":"edge_219","relation":"affects","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_6","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["node deletion"],"targets":["consistency measure"]},{"confidence":0.8,"id":"edge_22","relation":"hinders","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_8","source_document":"Deterministic_search_for_relational_grap","sources":["false consistency"],"targets":["match solving"]},{"confidence":0.9,"id":"edge_221","relation":"requires","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_15","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["population size","node"],"targets":["solution"]},{"confidence":0.9,"id":"edge_227","relation":"affects","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_10","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["population size"],"targets":["convergence rate"]},{"confidence":0.8,"id":"edge_228","relation":"facilitates","source_chunk_id":"Inexact_graph_matching_using_genetic_sea_chunk_4","source_document":"Inexact_graph_matching_using_genetic_sea","sources":["random match","probabilistic crossover"],"targets":["solution merging"]},{"confidence":0.9,"id":"edge_230","relation":"define","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_1","source_document":"MAtrixRepresentationOfGraphs","sources":["hamiltonian","adjacency matrix"],"targets":["graph g"]},{"confidence":0.9,"id":"edge_231","relation":"determines","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_0","source_document":"MAtrixRepresentationOfGraphs","sources":["spectrum","adjacency matrix"],"targets":["spectrum"]},{"confidence":0.9,"id":"edge_232","relation":"has","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_6","source_document":"MAtrixRepresentationOfGraphs","sources":["strongly regular graph","adjacency matrix"],"targets":["eigenvalue"]},{"confidence":0.8,"id":"edge_234","relation":"determines","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_9","source_document":"MAtrixRepresentationOfGraphs","sources":["path","amplitude"],"targets":["transition"]},{"confidence":0.8,"id":"edge_239","relation":"is_valid_for","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_0","source_document":"MAtrixRepresentationOfGraphs","sources":["conjecture","strongly regular graph"],"targets":["general graph"]},{"confidence":0.8,"id":"edge_24","relation":"inspired_by","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_15","source_document":"Deterministic_search_for_relational_grap","sources":["tabu search","genetic search"],"targets":["jigsaw puzzle"]},{"confidence":0.9,"id":"edge_248","relation":"determine","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_10","source_document":"MAtrixRepresentationOfGraphs","sources":["e(g)","path"],"targets":["number of path"]},{"confidence":0.9,"id":"edge_249","relation":"exists","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_10","source_document":"MAtrixRepresentationOfGraphs","sources":["unique path","e(g)"],"targets":["amplitude"]},{"confidence":0.8,"id":"edge_250","relation":"influence","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_9","source_document":"MAtrixRepresentationOfGraphs","sources":["edge","vertice"],"targets":["path"]},{"confidence":0.9,"id":"edge_251","relation":"takes","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_7","source_document":"MAtrixRepresentationOfGraphs","sources":["s+(u(g))","eigenvalue"],"targets":["value"]},{"confidence":0.9,"id":"edge_253","relation":"account for","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_7","source_document":"MAtrixRepresentationOfGraphs","sources":["eigenvalue","s+(u(g)2)"],"targets":["eigenvalue"]},{"confidence":0.9,"id":"edge_254","relation":"has","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_7","source_document":"MAtrixRepresentationOfGraphs","sources":["eigenvector","m(g)"],"targets":["eigenvalue"]},{"confidence":0.9,"id":"edge_255","relation":"has","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_7","source_document":"MAtrixRepresentationOfGraphs","sources":["s+(u(g)2)","eigenvector"],"targets":["eigenvalue"]},{"confidence":0.8,"id":"edge_263","relation":"affects","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_2","source_document":"MAtrixRepresentationOfGraphs","sources":["minimum degree","graph g"],"targets":["symmetry of u(g)"]},{"confidence":0.9,"id":"edge_266","relation":"ensures","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_8","source_document":"MAtrixRepresentationOfGraphs","sources":["k > 4"],"targets":["k2 s + (r − s) m(g)j,l − k > 0"]},{"confidence":0.9,"id":"edge_269","relation":"associates","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_0","source_document":"MAtrixRepresentationOfGraphs","sources":["line digraph","orthogonal matrix"],"targets":["graph"]},{"confidence":0.9,"id":"edge_273","relation":"computed from","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_6","source_document":"MAtrixRepresentationOfGraphs","sources":["s + (u(g))","m(g)"],"targets":["eigenvalue"]},{"confidence":0.9,"id":"edge_276","relation":"induces","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_2","source_document":"MAtrixRepresentationOfGraphs","sources":["matrix u(g)"],"targets":["quantum walk"]},{"confidence":0.9,"id":"edge_277","relation":"is_successful_for","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_12","source_document":"MAtrixRepresentationOfGraphs","sources":["method","strongly regular graph"],"targets":["strongly regular graph"]},{"confidence":0.9,"id":"edge_279","relation":"derives","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_0","source_document":"MAtrixRepresentationOfGraphs","sources":["orthogonal matrix"],"targets":["two matrice"]},{"confidence":0.9,"id":"edge_282","relation":"have","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_10","source_document":"MAtrixRepresentationOfGraphs","sources":["path","vertice"],"targets":["amplitude"]},{"confidence":0.9,"id":"edge_283","relation":"involve","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_10","source_document":"MAtrixRepresentationOfGraphs","sources":["path","vertice"],"targets":["amplitude"]},{"confidence":0.9,"id":"edge_288","relation":"obtained from","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_3","source_document":"MAtrixRepresentationOfGraphs","sources":["sp(u(g))"],"targets":["sp(t(g))"]},{"confidence":0.85,"id":"edge_289","relation":"characterizes","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_0","source_document":"MAtrixRepresentationOfGraphs","sources":["spectrum","strongly regular graph"],"targets":["isomorphism class"]},{"confidence":0.8,"id":"edge_29","relation":"compares","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_7","source_document":"Deterministic_search_for_relational_grap","sources":["global gradient","tabu search"],"targets":["correct match"]},{"confidence":0.9,"id":"edge_290","relation":"constructs","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_8","source_document":"MAtrixRepresentationOfGraphs","sources":["strongly regular graph"],"targets":["s + (u(g)3)"]},{"confidence":0.9,"id":"edge_292","relation":"has","source_chunk_id":"MAtrixRepresentationOfGraphs_chunk_9","source_document":"MAtrixRepresentationOfGraphs","sources":["unique path","vertice"],"targets":["amplitude"]},{"confidence":0.9,"id":"edge_294","relation":"characterize","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_1","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["eigenvector","adjacency matrix"],"targets":["graph structure"]},{"confidence":0.8,"id":"edge_297","relation":"causes","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_10","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["attributed tree","spectral feature"],"targets":["ambiguity"]},{"confidence":0.8,"id":"edge_298","relation":"related_to","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_9","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["bitangent circle radiu","skeleton"],"targets":["rate of change"]},{"confidence":0.8,"id":"edge_30","relation":"compares","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_6","source_document":"Deterministic_search_for_relational_grap","sources":["tabu search","global gradient"],"targets":["performance"]},{"confidence":0.9,"id":"edge_303","relation":"used in","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_5","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["eigenvector","covariance matrix"],"targets":["spectral matrix"]},{"confidence":0.9,"id":"edge_305","relation":"deletes","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_7","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["edge","graph"],"targets":["edge"]},{"confidence":0.9,"id":"edge_307","relation":"increases","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_7","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["edit distance","eigenvector"],"targets":["importance"]},{"confidence":0.9,"id":"edge_313","relation":"reflects","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_7","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["feature vector","graph structure"],"targets":["change"]},{"confidence":0.9,"id":"edge_314","relation":"represented by","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_5","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["graph","feature vector"],"targets":["eigenspace"]},{"confidence":0.9,"id":"edge_315","relation":"represent","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_6","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["feature vector"],"targets":["data structure"]},{"confidence":0.9,"id":"edge_318","relation":"enables","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_12","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["image databa","graph matching"],"targets":["image retrieval"]},{"confidence":0.9,"id":"edge_324","relation":"visualizes","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_7","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["mds","graph"],"targets":["distribution"]},{"confidence":0.9,"id":"edge_326","relation":"solves","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_8","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["hamilton-jacobi equation"],"targets":["eikonal equation"]},{"confidence":0.8,"id":"edge_335","relation":"reduces","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_6","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["locality preserving projection"],"targets":["outlier"]},{"confidence":0.9,"id":"edge_338","relation":"allows","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_5","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["mds","pairwise distance"],"targets":["euclidean space"]},{"confidence":0.9,"id":"edge_342","relation":"supports","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_0","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["principal components analysi","multidimensional scaling"],"targets":["graph clustering"]},{"confidence":0.9,"id":"edge_351","relation":"used_as","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_9","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["shape","skeleton"],"targets":["attribute"]},{"confidence":0.8,"id":"edge_354","relation":"forms","source_chunk_id":"PatternVectorsFromAlgebraicGraphTheory_chunk_11","source_document":"PatternVectorsFromAlgebraicGraphTheory","sources":["symmetric polynomial"],"targets":["generative model"]},{"confidence":0.9,"id":"edge_356","relation":"produces","source_chunk_id":"Spectral_embedding_of_graphs_chunk_2","source_document":"Spectral_embedding_of_graphs","sources":["eigenmode","adjacency matrix"],"targets":["spectral feature"]},{"confidence":0.9,"id":"edge_357","relation":"reflects","source_chunk_id":"Spectral_embedding_of_graphs_chunk_11","source_document":"Spectral_embedding_of_graphs","sources":["eigenvalue","adjacency matrix"],"targets":["data variance"]},{"confidence":0.9,"id":"edge_358","relation":"projects","source_chunk_id":"Spectral_embedding_of_graphs_chunk_3","source_document":"Spectral_embedding_of_graphs","sources":["adjacency matrix","eigenvector"],"targets":["inter-mode adjacency matrix"]},{"confidence":0.9,"id":"edge_359","relation":"describes","source_chunk_id":"Spectral_embedding_of_graphs_chunk_2","source_document":"Spectral_embedding_of_graphs","sources":["adjacency matrix","graph"],"targets":["eigenvalue"]},{"confidence":0.85,"id":"edge_36","relation":"controls","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_6","source_document":"Deterministic_search_for_relational_grap","sources":["threshold","graph size"],"targets":["accuracy match"]},{"confidence":0.85,"id":"edge_360","relation":"supports","source_chunk_id":"Spectral_embedding_of_graphs_chunk_16","source_document":"Spectral_embedding_of_graphs","sources":["aspect graph"],"targets":["3d object recognition"]},{"confidence":0.9,"id":"edge_363","relation":"provides","source_chunk_id":"Spectral_embedding_of_graphs_chunk_8","source_document":"Spectral_embedding_of_graphs","sources":["binary adjacency graph"],"targets":["spectral feature"]},{"confidence":0.8,"id":"edge_367","relation":"does not produce","source_chunk_id":"Spectral_embedding_of_graphs_chunk_10","source_document":"Spectral_embedding_of_graphs","sources":["cheeger constant"],"targets":["block structure"]},{"confidence":0.9,"id":"edge_369","relation":"devoted_to","source_chunk_id":"Spectral_embedding_of_graphs_chunk_17","source_document":"Spectral_embedding_of_graphs","sources":["energy minimisation method","computer vision"],"targets":["ieee transaction"]},{"confidence":0.9,"id":"edge_372","relation":"solves","source_chunk_id":"Spectral_embedding_of_graphs_chunk_3","source_document":"Spectral_embedding_of_graphs","sources":["eigenvalue equation","covariance matrix"],"targets":["eigenvalue"]},{"confidence":0.9,"id":"edge_376","relation":"enables","source_chunk_id":"Spectral_embedding_of_graphs_chunk_16","source_document":"Spectral_embedding_of_graphs","sources":["eigenimage"],"targets":["robust recognition"]},{"confidence":0.9,"id":"edge_377","relation":"computes","source_chunk_id":"Spectral_embedding_of_graphs_chunk_0","source_document":"Spectral_embedding_of_graphs","sources":["eigenmode","spectral property"],"targets":["vector"]},{"confidence":0.85,"id":"edge_380","relation":"correlates_with","source_chunk_id":"Spectral_embedding_of_graphs_chunk_2","source_document":"Spectral_embedding_of_graphs","sources":["eigenvalue","eigenvector"],"targets":["modal matrix"]},{"confidence":0.9,"id":"edge_381","relation":"produces","source_chunk_id":"Spectral_embedding_of_graphs_chunk_9","source_document":"Spectral_embedding_of_graphs","sources":["ica","eigenvalue"],"targets":["clustering"]},{"confidence":0.9,"id":"edge_382","relation":"provides","source_chunk_id":"Spectral_embedding_of_graphs_chunk_7","source_document":"Spectral_embedding_of_graphs","sources":["inter-mode adjacency matrix","eigenvalue"],"targets":["feature"]},{"confidence":0.9,"id":"edge_383","relation":"results_in","source_chunk_id":"Spectral_embedding_of_graphs_chunk_5","source_document":"Spectral_embedding_of_graphs","sources":["eigenvalue","inter-mode adjacency matrix"],"targets":["best cluster"]},{"confidence":0.9,"id":"edge_384","relation":"produces","source_chunk_id":"Spectral_embedding_of_graphs_chunk_9","source_document":"Spectral_embedding_of_graphs","sources":["pca","eigenvalue"],"targets":["clustering"]},{"confidence":0.9,"id":"edge_386","relation":"defines","source_chunk_id":"Spectral_embedding_of_graphs_chunk_0","source_document":"Spectral_embedding_of_graphs","sources":["graph-spectral approach","eigenvector"],"targets":["eigenmode"]},{"confidence":0.9,"id":"edge_391","relation":"enhances","source_chunk_id":"Spectral_embedding_of_graphs_chunk_7","source_document":"Spectral_embedding_of_graphs","sources":["graph spectral feature"],"targets":["classification accuracy"]},{"confidence":0.9,"id":"edge_396","relation":"is used for","source_chunk_id":"Spectral_embedding_of_graphs_chunk_4","source_document":"Spectral_embedding_of_graphs","sources":["view-based object recognition","graph"],"targets":["image representation"]},{"confidence":0.9,"id":"edge_399","relation":"uses","source_chunk_id":"Spectral_embedding_of_graphs_chunk_8","source_document":"Spectral_embedding_of_graphs","sources":["pca","ica","mds"],"targets":["spectral feature"]},{"confidence":0.9,"id":"edge_401","relation":"embeds","source_chunk_id":"Spectral_embedding_of_graphs_chunk_0","source_document":"Spectral_embedding_of_graphs","sources":["principal component analysi","independent component analysi"],"targets":["spectral pattern vector"]},{"confidence":0.9,"id":"edge_402","relation":"applies","source_chunk_id":"Spectral_embedding_of_graphs_chunk_3","source_document":"Spectral_embedding_of_graphs","sources":["independent component analysi"],"targets":["graph"]},{"confidence":0.8,"id":"edge_404","relation":"influences","source_chunk_id":"Spectral_embedding_of_graphs_chunk_8","source_document":"Spectral_embedding_of_graphs","sources":["inter-mode adjacency matrix"],"targets":["spectral feature"]},{"confidence":0.8,"id":"edge_408","relation":"applies","source_chunk_id":"Spectral_embedding_of_graphs_chunk_3","source_document":"Spectral_embedding_of_graphs","sources":["mds","pairwise distance"],"targets":["graph"]},{"confidence":0.9,"id":"edge_409","relation":"compares","source_chunk_id":"Spectral_embedding_of_graphs_chunk_10","source_document":"Spectral_embedding_of_graphs","sources":["pca","mds"],"targets":["view-spaces"]},{"confidence":0.9,"id":"edge_41","relation":"collects","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_10","source_document":"Deterministic_search_for_relational_grap","sources":["infrared line-scan device"],"targets":["aerial image"]},{"confidence":0.9,"id":"edge_410","relation":"improves","source_chunk_id":"Spectral_embedding_of_graphs_chunk_7","source_document":"Spectral_embedding_of_graphs","sources":["pca","mds"],"targets":["cluster"]},{"confidence":0.8,"id":"edge_411","relation":"produces","source_chunk_id":"Spectral_embedding_of_graphs_chunk_11","source_document":"Spectral_embedding_of_graphs","sources":["mds","pca"],"targets":["good cluster"]},{"confidence":0.9,"id":"edge_412","relation":"gives","source_chunk_id":"Spectral_embedding_of_graphs_chunk_15","source_document":"Spectral_embedding_of_graphs","sources":["mds"],"targets":["lower dimensionality"]},{"confidence":0.9,"id":"edge_413","relation":"provides","source_chunk_id":"Spectral_embedding_of_graphs_chunk_10","source_document":"Spectral_embedding_of_graphs","sources":["mds"],"targets":["smooth trajectory"]},{"confidence":0.9,"id":"edge_414","relation":"organizes","source_chunk_id":"Spectral_embedding_of_graphs_chunk_1","source_document":"Spectral_embedding_of_graphs","sources":["principal components analysi","multidimensional scaling"],"targets":["graph pattern"]},{"confidence":0.9,"id":"edge_416","relation":"does_not_give","source_chunk_id":"Spectral_embedding_of_graphs_chunk_5","source_document":"Spectral_embedding_of_graphs","sources":["pca"],"targets":["clear cluster-structure"]},{"confidence":0.9,"id":"edge_418","relation":"produces","source_chunk_id":"Spectral_embedding_of_graphs_chunk_7","source_document":"Spectral_embedding_of_graphs","sources":["pca"],"targets":["compact cluster"]},{"confidence":0.9,"id":"edge_42","relation":"causes","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_2","source_document":"Deterministic_search_for_relational_grap","sources":["initialisation error","matching error"],"targets":["erroneous match"]},{"confidence":0.9,"id":"edge_421","relation":"worked_at","source_chunk_id":"Spectral_embedding_of_graphs_chunk_17","source_document":"Spectral_embedding_of_graphs","sources":["professor hancock","university of york"],"targets":["department of computer science"]},{"confidence":0.9,"id":"edge_422","relation":"leads","source_chunk_id":"Spectral_embedding_of_graphs_chunk_17","source_document":"Spectral_embedding_of_graphs","sources":["professor hancock"],"targets":["research group"]},{"confidence":0.9,"id":"edge_424","relation":"cluster","source_chunk_id":"Spectral_embedding_of_graphs_chunk_15","source_document":"Spectral_embedding_of_graphs","sources":["spectral attribute"],"targets":["symbolic graph"]},{"confidence":0.9,"id":"edge_43","relation":"contributes","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_5","source_document":"Deterministic_search_for_relational_grap","sources":["islands of consistency","search procedure"],"targets":["global solution"]},{"confidence":0.85,"id":"edge_434","relation":"offer","source_chunk_id":"SphericalFinal_chunk_12","source_document":"SphericalFinal","sources":["constant-curvature space"],"targets":["alternative embedding"]},{"confidence":0.85,"id":"edge_44","relation":"improves","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_8","source_document":"Deterministic_search_for_relational_grap","sources":["iteration"],"targets":["matching probability"]},{"confidence":0.9,"id":"edge_441","relation":"can be embedded","source_chunk_id":"SphericalFinal_chunk_0","source_document":"SphericalFinal","sources":["dissimilarity","non-euclidean data"],"targets":["curved manifold"]},{"confidence":0.9,"id":"edge_442","relation":"requires","source_chunk_id":"SphericalFinal_chunk_2","source_document":"SphericalFinal","sources":["non-euclidean data","dissimilarity"],"targets":["embedding"]},{"confidence":0.9,"id":"edge_448","relation":"measures","source_chunk_id":"SphericalFinal_chunk_2","source_document":"SphericalFinal","sources":["negative eigenfraction","eigenvalue"],"targets":["non-metricity"]},{"confidence":0.9,"id":"edge_452","relation":"provides","source_chunk_id":"SphericalFinal_chunk_5","source_document":"SphericalFinal","sources":["riemannian geometry","exponential map"],"targets":["minimisation tool"]},{"confidence":0.9,"id":"edge_453","relation":"is","source_chunk_id":"SphericalFinal_chunk_6","source_document":"SphericalFinal","sources":["spherical manifold","exponential map"],"targets":["mapping"]},{"confidence":0.8,"id":"edge_458","relation":"can apply","source_chunk_id":"SphericalFinal_chunk_12","source_document":"SphericalFinal","sources":["geometric technique"],"targets":["spherical embedding"]},{"confidence":0.9,"id":"edge_46","relation":"require","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_6","source_document":"Deterministic_search_for_relational_grap","sources":["local gradient","tabu search"],"targets":["resource"]},{"confidence":0.8,"id":"edge_463","relation":"affects","source_chunk_id":"SphericalFinal_chunk_9","source_document":"SphericalFinal","sources":["hyperbolic embedding","noise"],"targets":["performance"]},{"confidence":0.9,"id":"edge_465","relation":"performs","source_chunk_id":"SphericalFinal_chunk_12","source_document":"SphericalFinal","sources":["spherical embedding","hyperbolic embedding"],"targets":["low-distortion embedding"]},{"confidence":0.9,"id":"edge_467","relation":"gives","source_chunk_id":"SphericalFinal_chunk_12","source_document":"SphericalFinal","sources":["hyperbolic embedding"],"targets":["low distortion"]},{"confidence":0.9,"id":"edge_469","relation":"requires","source_chunk_id":"SphericalFinal_chunk_5","source_document":"SphericalFinal","sources":["hyperbolic space","negative eigenvalue"],"targets":["single negative dimension"]},{"confidence":0.85,"id":"edge_47","relation":"extracted from","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_10","source_document":"Deterministic_search_for_relational_grap","sources":["matching graph"],"targets":["aerial image"]},{"confidence":0.8,"id":"edge_470","relation":"is_similar_to","source_chunk_id":"SphericalFinal_chunk_1","source_document":"SphericalFinal","sources":["hyperbolic space","spherical space"],"targets":["mathematic"]},{"confidence":0.8,"id":"edge_471","relation":"is","source_chunk_id":"SphericalFinal_chunk_11","source_document":"SphericalFinal","sources":["spherical space","hyperbolic space"],"targets":["natural setting"]},{"confidence":0.8,"id":"edge_472","relation":"can embed","source_chunk_id":"SphericalFinal_chunk_12","source_document":"SphericalFinal","sources":["hyperbolic space"],"targets":["non-euclidean data"]},{"confidence":0.9,"id":"edge_473","relation":"requires","source_chunk_id":"SphericalFinal_chunk_4","source_document":"SphericalFinal","sources":["point","hypersphere"],"targets":["correction"]},{"confidence":0.9,"id":"edge_477","relation":"produces","source_chunk_id":"SphericalFinal_chunk_8","source_document":"SphericalFinal","sources":["spherical embedding","kernel embedding"],"targets":["low-dimensional embedding"]},{"confidence":0.9,"id":"edge_478","relation":"produces","source_chunk_id":"SphericalFinal_chunk_9","source_document":"SphericalFinal","sources":["spherical embedding","kernel embedding"],"targets":["similar result"]},{"confidence":0.9,"id":"edge_483","relation":"facilitates","source_chunk_id":"SphericalFinal_chunk_13","source_document":"SphericalFinal","sources":["nonlinear dimensionality reduction","locally linear embedding"],"targets":["data visualization"]},{"confidence":0.9,"id":"edge_484","relation":"is_based_on","source_chunk_id":"SphericalFinal_chunk_1","source_document":"SphericalFinal","sources":["multidimensional scaling","mds"],"targets":["psychometric"]},{"confidence":0.9,"id":"edge_487","relation":"preserves","source_chunk_id":"SphericalFinal_chunk_9","source_document":"SphericalFinal","sources":["spherical embedding","noise"],"targets":["neighborhood order"]},{"confidence":0.9,"id":"edge_492","relation":"offers","source_chunk_id":"SphericalFinal_chunk_0","source_document":"SphericalFinal","sources":["riemannian manifold"],"targets":["alternative method"]},{"confidence":0.9,"id":"edge_495","relation":"exists_on","source_chunk_id":"SphericalFinal_chunk_8","source_document":"SphericalFinal","sources":["time-warping function","spherical manifold"],"targets":["data"]},{"confidence":0.8,"id":"edge_501","relation":"recovers","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_1","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["relational distance measure","bayesian consistency measure"],"targets":["specific cas"]},{"confidence":0.9,"id":"edge_515","relation":"regulates","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_9","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["error probability","control variable"],"targets":["edit cost"]},{"confidence":0.9,"id":"edge_519","relation":"represents","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_9","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["delaunay graph","voronoi tessellation"],"targets":["image plane"]},{"confidence":0.9,"id":"edge_524","relation":"affects","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_5","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["matching error","dummy node"],"targets":["conditional probability"]},{"confidence":0.8,"id":"edge_526","relation":"influences","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_6","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["null label","dummy node"],"targets":["weight"]},{"confidence":0.85,"id":"edge_534","relation":"determines","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_6","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["exponential function","hamming distance"],"targets":["relational affinity"]},{"confidence":0.9,"id":"edge_54","relation":"collects","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_10","source_document":"Deterministic_search_for_relational_grap","sources":["optical camera"],"targets":["visible image"]},{"confidence":0.8,"id":"edge_540","relation":"affects","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_12","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["ground truth map","hedge structure"],"targets":["matching accuracy"]},{"confidence":0.9,"id":"edge_55","relation":"affects","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_12","source_document":"Deterministic_search_for_relational_grap","sources":["random corruption"],"targets":["result"]},{"confidence":0.9,"id":"edge_559","relation":"represents","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_3","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["n-ary relation","super-clique"],"targets":["symbolic relation"]},{"confidence":0.9,"id":"edge_56","relation":"demonstrate","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_9","source_document":"Deterministic_search_for_relational_grap","sources":["real-world example"],"targets":["application"]},{"confidence":0.9,"id":"edge_560","relation":"permits","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_0","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["national copyright law"],"targets":["private study","reproduction"]},{"confidence":0.85,"id":"edge_562","relation":"associates","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_5","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["uniform probability","node"],"targets":["deletion hypothesi"]},{"confidence":0.8,"id":"edge_57","relation":"segmented by","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_10","source_document":"Deterministic_search_for_relational_grap","sources":["ridge-structures"],"targets":["line finder"]},{"confidence":0.9,"id":"edge_571","relation":"hosts","source_chunk_id":"StructuralMatchingByDiscreteRelaxation_chunk_0","source_document":"StructuralMatchingByDiscreteRelaxation","sources":["white rose research online"],"targets":["copyrighted item"]},{"confidence":0.9,"id":"edge_582","relation":"gives rise to","source_chunk_id":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper_chunk_1","source_document":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper","sources":["base kernel","valid assignment kernel"],"targets":["valid assignment kernel"]},{"confidence":0.8,"id":"edge_584","relation":"applies","source_chunk_id":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper_chunk_8","source_document":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper","sources":["color indexing"],"targets":["image classification"]},{"confidence":0.9,"id":"edge_59","relation":"has been used for","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_9","source_document":"Deterministic_search_for_relational_grap","sources":["simulation data"],"targets":["evaluation"]},{"confidence":0.7,"id":"edge_593","relation":"improves","source_chunk_id":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper_chunk_8","source_document":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper","sources":["similarity function","graph matching"],"targets":["learning"]},{"confidence":0.9,"id":"edge_599","relation":"is","source_chunk_id":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper_chunk_4","source_document":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper","sources":["histogram intersection kernel","valid kernel"],"targets":["kernel"]},{"confidence":0.9,"id":"edge_60","relation":"composed of","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_7","source_document":"Deterministic_search_for_relational_grap","sources":["solution"],"targets":["region"]},{"confidence":0.9,"id":"edge_600","relation":"allows to compute","source_chunk_id":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper_chunk_5","source_document":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper","sources":["histogram intersection","optimal assignment"],"targets":["kernel"]},{"confidence":0.9,"id":"edge_605","relation":"provides","source_chunk_id":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper_chunk_8","source_document":"Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper","sources":["libsvm"],"targets":["support vector machine"]},{"confidence":0.9,"id":"edge_64","relation":"allows","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_14","source_document":"Deterministic_search_for_relational_grap","sources":["tabu search"],"targets":["matching result"]},{"confidence":0.8,"id":"edge_65","relation":"performs","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_7","source_document":"Deterministic_search_for_relational_grap","sources":["tabu search"],"targets":["graph size"]},{"confidence":0.9,"id":"edge_66","relation":"identifies","source_chunk_id":"Deterministic_search_for_relational_grap_chunk_8","source_document":"Deterministic_search_for_relational_grap","sources":["tracking algorithm"],"targets":["region of true consistency"]},{"confidence":0.8,"id":"edge_72","relation":"is related to","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_1","source_document":"Geometric_characterization_and_clusterin","sources":["covariance matrix","laplacian"],"targets":["eigenvalue"]},{"confidence":0.9,"id":"edge_74","relation":"used to obtain","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_6","source_document":"Geometric_characterization_and_clusterin","sources":["matrix t","covariance matrix"],"targets":["feature matrix"]},{"confidence":0.9,"id":"edge_75","relation":"represents","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_5","source_document":"Geometric_characterization_and_clusterin","sources":["eigenvector","data"],"targets":["feature"]},{"confidence":0.9,"id":"edge_79","relation":"is","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_16","source_document":"Geometric_characterization_and_clusterin","sources":["direct embedding"],"targets":["alternative method"]},{"confidence":0.9,"id":"edge_87","relation":"has","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_14","source_document":"Geometric_characterization_and_clusterin","sources":["eigenvalue vector"],"targets":["length 6"]},{"confidence":0.9,"id":"edge_89","relation":"reveals","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_2","source_document":"Geometric_characterization_and_clusterin","sources":["eigenvalue","heat kernel"],"targets":["relationship"]},{"confidence":0.9,"id":"edge_90","relation":"characterize","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_13","source_document":"Geometric_characterization_and_clusterin","sources":["eigenvalue"],"targets":["heat kernel"]},{"confidence":0.8,"id":"edge_91","relation":"characterizes","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_12","source_document":"Geometric_characterization_and_clusterin","sources":["eigenvector"],"targets":["embedding"]},{"confidence":0.8,"id":"edge_93","relation":"characterize","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_6","source_document":"Geometric_characterization_and_clusterin","sources":["graph spectral property","embedded point-sets"],"targets":["node distribution"]},{"confidence":0.8,"id":"edge_97","relation":"varies","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_5","source_document":"Geometric_characterization_and_clusterin","sources":["moments characterization","embedding"],"targets":["result"]},{"confidence":0.9,"id":"edge_98","relation":"approximates","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_11","source_document":"Geometric_characterization_and_clusterin","sources":["geodesic distance","euclidean distance"],"targets":["radius of curvature"]},{"confidence":0.9,"id":"edge_99","relation":"computed for","source_chunk_id":"Geometric_characterization_and_clusterin_chunk_9","source_document":"Geometric_characterization_and_clusterin","sources":["euclidean distance","geodesic distance"],"targets":["embedding"]}]
+        };
+
+        // Reify hyperedges: each entry in data.hyperedges becomes a relation node in data.nodes
+        // and two binary links in data.links (entity→relation, relation→entity).
+        // Mirrors the graph.json on-disk format (nodes + hyperedges with sources[]/targets[]).
+        function reifyHyperedges(d) {
+            const idToIdx = new Map();
+            d.nodes.forEach((n, i) => idToIdx.set(n.id, i));
+            d.links = [];
+            let idx = d.nodes.length;
+            for (const he of (d.hyperedges || [])) {
+                const relNode = {
+                    id: he.id, label: he.relation, type: 'relation',
+                    confidence: he.confidence,
+                    source_document: he.source_document || '',
+                    source_chunk_id: he.source_chunk_id || '',
+                    sources: he.sources, targets: he.targets
+                };
+                if (he.properties) relNode.properties = he.properties;
+                d.nodes.push(relNode);
+                const relIdx = idx++;
+                idToIdx.set(he.id, relIdx);
+                for (const src of (he.sources || [])) {
+                    const si = idToIdx.get(src);
+                    if (si !== undefined) d.links.push({ source: si, target: relIdx, type: 'source' });
+                }
+                for (const tgt of (he.targets || [])) {
+                    const ti = idToIdx.get(tgt);
+                    if (ti !== undefined) d.links.push({ source: relIdx, target: ti, type: 'target' });
+                }
+            }
+        }
+        reifyHyperedges(data);
+
+        // --- 3D Renderer (WebGL): ForceGraph3D + filtered subgraph + clustering ---
+        // Interaction: left-drag rotates (built-in), right-drag pans, wheel zooms.
+
+        (() => {
+          const graphDiv = document.getElementById('graph');
+          const controls = document.getElementById('controls');
+
+          // Safety: ensure libs loaded
+          if (typeof ForceGraph3D !== 'function' || typeof THREE === 'undefined') {
+            const msg = 'Missing WebGL libs. Serve this file via http://localhost and ensure CDN access.';
+            console.error(msg);
+            alert(msg);
+            return;
+          }
+
+          // --- small helpers ---
+          const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+          const rafThrottle = (fn) => {
+            let scheduled = false;
+            return (...args) => {
+              if (scheduled) return;
+              scheduled = true;
+              requestAnimationFrame(() => {
+                scheduled = false;
+                fn(...args);
+              });
+            };
+          };
+          const ric = window.requestIdleCallback || ((cb) => setTimeout(() => cb({ timeRemaining: () => 0, didTimeout: true }), 16));
+
+          // --- Overlay + HUD (create if missing) ---
+          let overlay = document.getElementById('kgOverlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'kgOverlay';
+            overlay.innerHTML = '<div class="panel"><div class="title" id="kgOverlayTitle">Working...</div><div class="sub" id="kgOverlaySub">Building subgraph</div></div>';
+            document.body.appendChild(overlay);
+          }
+          const overlayTitle = overlay.querySelector('#kgOverlayTitle') || overlay.querySelector('.title');
+          const overlaySub = overlay.querySelector('#kgOverlaySub') || overlay.querySelector('.sub');
+
+          function showOverlay(title, sub) {
+            if (overlayTitle) overlayTitle.textContent = title || 'Working...';
+            if (overlaySub) overlaySub.textContent = sub || '';
+            overlay.classList.add('show');
+          }
+          function hideOverlay() { overlay.classList.remove('show'); }
+
+          let hud = document.getElementById('kgHud');
+          if (!hud) {
+            hud = document.createElement('div');
+            hud.id = 'kgHud';
+            hud.textContent = '3D: initializing...';
+            document.body.appendChild(hud);
+          }
+
+          // --- Inject extra controls ---
+          if (!document.getElementById('kgSearch')) {
+            controls.insertAdjacentHTML('beforeend', `
+              <div class="kg-row">
+                <input class="kg-input" id="kgSearch" placeholder="Search node (press /)..." />
+                <button class="kg-btn" id="kgGo">Go</button>
+              </div>
+              <div class="kg-row">
+                <button class="kg-btn" id="kgExpand1">+ 1 hop</button>
+                <button class="kg-btn" id="kgExpand2">+ 2 hops</button>
+                <button class="kg-btn" id="kgReset">Reset</button>
+                <button class="kg-btn" id="kgCamReset">Reset camera</button>
+              </div>
+              <label style="margin-top:10px;">
+                <input type="checkbox" id="kgAutoFreeze" checked> Auto-freeze physics
+              </label>
+              <label>
+                <input type="checkbox" id="kgArrows"> Directional arrows
+              </label>
+              <label>
+                Max nodes: <span id="kgMaxNodesVal">2500</span>
+                <input type="range" id="kgMaxNodes" min="200" max="8000" step="100" value="2500">
+              </label>
+              <label>
+                Depth spread: <span id="kgDepthVal">120</span>
+                <input type="range" id="kgDepth" min="0" max="600" step="10" value="120">
+              </label>
+
+              <div style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                <label style="font-weight:600; color:#4fc3f7;">Clustering</label>
+                <label style="margin-top:6px;">
+                  <input type="checkbox" id="kgClusterOn" checked> Cluster coloring
+                </label>
+                <label>
+                  Clustering mode:
+                  <select id="kgClusterMode" class="kg-input" style="width: 180px;">
+                    <option value="topology" selected>Topology (Louvain)</option>
+                    <option value="spatial">Spatial (DBSCAN)</option>
+                  </select>
+                </label>
+                <label id="kgTopoResRow">
+                  Resolution: <span id="kgTopoResVal">1.00</span>
+                  <input type="range" id="kgTopoRes" min="0.20" max="3.00" step="0.05" value="1.00">
+                </label>
+                <label id="kgSpatialRadiusRow" style="display:none;">
+                  Cluster radius: <span id="kgClusterRadiusVal">40</span>
+                  <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
+                </label>
+                <label id="kgSpatialMinRow" style="display:none;">
+                  Min cluster size: <span id="kgMinClusterVal">5</span>
+                  <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="5">
+                </label>
+                <label>
+                  Palette:
+                  <select id="kgPalette" class="kg-input" style="width: 180px;">
+                    <option value="classic" selected>Classic</option>
+                    <option value="pastel">Pastel</option>
+                    <option value="neon">Neon</option>
+                    <option value="mono">Mono + accent</option>
+                  </select>
+                </label>
+                <div class="kg-row">
+                  <button class="kg-btn" id="kgRecluster">Cluster now</button>
+                  <label style="margin:0;">
+                    <input type="checkbox" id="kgAutoCluster" checked> Auto (on freeze)
+                  </label>
+                </div>
+              </div>
+
+              <div id="kgDetails" style="margin-top:10px; font-size:0.82em; color:#cfcfcf; line-height:1.35;"></div>
+            `);
+          }
+
+          const minDegreeEl = document.getElementById('minDegree');
+          const degreeValueEl = document.getElementById('degreeValue');
+          const linkStrengthEl = document.getElementById('linkStrength');
+          const repulsionEl = document.getElementById('repulsion');
+          const showLabelsEl = document.getElementById('showLabels');
+
+          const searchEl = document.getElementById('kgSearch');
+          const goBtn = document.getElementById('kgGo');
+          const exp1Btn = document.getElementById('kgExpand1');
+          const exp2Btn = document.getElementById('kgExpand2');
+          const resetBtn = document.getElementById('kgReset');
+          const camResetBtn = document.getElementById('kgCamReset');
+          const autoFreezeEl = document.getElementById('kgAutoFreeze');
+          const arrowsEl = document.getElementById('kgArrows');
+          const maxNodesEl = document.getElementById('kgMaxNodes');
+          const maxNodesValEl = document.getElementById('kgMaxNodesVal');
+          const depthEl = document.getElementById('kgDepth');
+          const depthValEl = document.getElementById('kgDepthVal');
+          const detailsEl = document.getElementById('kgDetails');
+          console.log('detailsEl found:', detailsEl);
+
+          // Clustering controls
+          const clusterOnEl = document.getElementById('kgClusterOn');
+          const clusterModeEl = document.getElementById('kgClusterMode');
+          const clusterRadiusEl = document.getElementById('kgClusterRadius');
+          const clusterRadiusValEl = document.getElementById('kgClusterRadiusVal');
+          const minClusterEl = document.getElementById('kgMinCluster');
+          const minClusterValEl = document.getElementById('kgMinClusterVal');
+          const topoResEl = document.getElementById('kgTopoRes');
+          const topoResValEl = document.getElementById('kgTopoResVal');
+          const paletteEl = document.getElementById('kgPalette');
+          const reclusterBtn = document.getElementById('kgRecluster');
+          const autoClusterEl = document.getElementById('kgAutoCluster');
+          const topoResRow = document.getElementById('kgTopoResRow');
+          const spatialRadiusRow = document.getElementById('kgSpatialRadiusRow');
+          const spatialMinRow = document.getElementById('kgSpatialMinRow');
+
+          // ---- Index nodes/edges ----
+          showOverlay('Indexing nodes & edges...', 'Preparing 3D graph');
+
+          const N = data.nodes.length;
+          for (let i = 0; i < N; i++) {
+            const n = data.nodes[i];
+            n.gid = i;
+            if (typeof n.x !== 'number') n.x = (window.innerWidth / 2) + (Math.random() - 0.5) * 40;
+            if (typeof n.y !== 'number') n.y = (window.innerHeight / 2) + (Math.random() - 0.5) * 40;
+          }
+
+          const edges = new Array(data.links.length);
+          const incident = Array.from({ length: N }, () => []);
+          for (let i = 0; i < data.links.length; i++) {
+            const l = data.links[i];
+            const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+            const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+            const e = { s, t, type: l.type };
+            edges[i] = e;
+            incident[s].push(i);
+            incident[t].push(i);
+          }
+
+          const entityByDegree = [];
+          for (let i = 0; i < N; i++) if (data.nodes[i].type === 'entity') entityByDegree.push(i);
+          entityByDegree.sort((a, b) => ((data.nodes[b].degree || 0) - (data.nodes[a].degree || 0)));
+
+          const labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+
+          // ---- State ----
+          const state = {
+            minDegree: +minDegreeEl.value,
+            linkStrength: +linkStrengthEl.value,
+            repulsion: +repulsionEl.value,
+            showLabels: !!showLabelsEl.checked,
+            autoFreeze: true,
+            showArrows: false,
+            maxNodes: +maxNodesEl.value,
+            depthSpread: +depthEl.value,
+            selectedGid: null,
+            visible: new Set(),
+            subNodes: [],
+            subLinks: [],
+            subNodesByGid: new Map(),
+            graph: null,
+            fps: { t0: performance.now(), frames: 0, value: 0 },
+            // Clustering state
+            clusterOn: true,
+            clusterMode: 'topology',
+            clusterRadius: 40,
+            minClusterSize: 5,
+            topoResolution: 1.0,
+            palette: 'classic',
+            autoCluster: true,
+            clusters: [],
+            clusterLabels: []
+          };
+
+          // Apply depth spread (z assignment)
+          function applyDepth() {
+            const spread = state.depthSpread;
+            for (let i = 0; i < N; i++) {
+              const n = data.nodes[i];
+              const base = (n.type === 'relation') ? 0.45 : 1.0;
+              n.z = (Math.random() - 0.5) * spread * base;
+            }
+          }
+
+          // ---- Visible subgraph ----
+          function seedVisibleByDegree(minDegree, maxNodes) {
+            const vis = new Set();
+
+            for (let k = 0; k < entityByDegree.length && vis.size < maxNodes; k++) {
+              const idx = entityByDegree[k];
+              const n = data.nodes[idx];
+              if ((n.degree || 0) >= minDegree) vis.add(idx);
+              else break;
+            }
+
+            if (vis.size < 50) {
+              for (let k = 0; k < Math.min(200, entityByDegree.length) && vis.size < Math.min(maxNodes, 200); k++) {
+                vis.add(entityByDegree[k]);
+              }
+            }
+
+            const relQueue = [];
+            for (const idx of vis) {
+              for (const ei of incident[idx]) {
+                const e = edges[ei];
+                const other = (e.s === idx) ? e.t : e.s;
+                if (data.nodes[other].type === 'relation' && !vis.has(other)) relQueue.push(other);
+              }
+            }
+            for (let i = 0; i < relQueue.length && vis.size < maxNodes; i++) vis.add(relQueue[i]);
+
+            if (state.selectedGid != null) vis.add(state.selectedGid);
+            return vis;
+          }
+
+          function buildSubgraphFromVisible() {
+            const subNodes = [];
+            state.visible.forEach(i => subNodes.push(data.nodes[i]));
+
+            const edgeIds = new Set();
+            for (const i of state.visible) for (const ei of incident[i]) edgeIds.add(ei);
+
+            const subLinks = [];
+            edgeIds.forEach(ei => {
+              const e = edges[ei];
+              if (state.visible.has(e.s) && state.visible.has(e.t)) subLinks.push(e);
+            });
+
+            state.subNodes = subNodes;
+            state.subLinks = subLinks;
+
+            const vn = document.getElementById('visibleNodes');
+            const vl = document.getElementById('visibleLinks');
+            if (vn) vn.textContent = String(subNodes.length);
+            if (vl) vl.textContent = String(subLinks.length);
+          }
+
+          function rebuildSubgraphIndex() {
+            state.subNodesByGid = new Map();
+            for (const n of state.subNodes) state.subNodesByGid.set(n.gid, n);
+          }
+
+          function updateDetails(node) {
+            if (!detailsEl) return;
+            if (!node) {
+              detailsEl.innerHTML = '<span style="opacity:0.8;">Click a node to see details.</span>';
+              return;
+            }
+            const lines = [];
+            lines.push(`<div><b>${escapeHtml(node.label || node.id || 'Node')}</b></div>`);
+            lines.push(`<div style="opacity:0.85;">type: <code>${escapeHtml(node.type || '')}</code></div>`);
+            if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+            if (node.type === 'relation') {
+              if (node.label) lines.push(`<div style="opacity:0.85;">relation: <code>${escapeHtml(node.label)}</code></div>`);
+              if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+              if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+              if (typeof node.confidence === 'number') lines.push(`<div style="opacity:0.85;">confidence: <code>${node.confidence}</code></div>`);
+            }
+            detailsEl.innerHTML = lines.join('');
+          }
+
+          function escapeHtml(s) {
+            return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+          }
+
+          // ---- Expand hops ----
+          function expandSelected(hops) {
+            if (state.selectedGid == null) return;
+
+            const maxNodes = state.maxNodes;
+            const q = [state.selectedGid];
+            const dist = new Map([[state.selectedGid, 0]]);
+
+            while (q.length) {
+              const u = q.shift();
+              const d = dist.get(u) || 0;
+              if (d >= hops) continue;
+
+              for (const ei of incident[u]) {
+                const e = edges[ei];
+                const v = (e.s === u) ? e.t : e.s;
+                if (!dist.has(v)) {
+                  dist.set(v, d + 1);
+                  q.push(v);
+                }
+                if (state.visible.size < maxNodes) state.visible.add(v);
+              }
+              if (state.visible.size >= maxNodes) break;
+            }
+
+            const addRel = [];
+            for (const idx of state.visible) {
+              if (data.nodes[idx].type !== 'entity') continue;
+              for (const ei of incident[idx]) {
+                const e = edges[ei];
+                const other = (e.s === idx) ? e.t : e.s;
+                if (data.nodes[other].type === 'relation' && !state.visible.has(other) && state.visible.size < maxNodes) {
+                  addRel.push(other);
+                }
+              }
+            }
+            for (let i = 0; i < addRel.length && state.visible.size < maxNodes; i++) state.visible.add(addRel[i]);
+
+            rebuildAndRender('Expanding neighborhood...');
+          }
+
+          // ---- Graph init ----
+          graphDiv.innerHTML = '';
+
+          const Graph = ForceGraph3D()(graphDiv)
+            .nodeId('gid')
+            .nodeLabel(n => (n.label || n.id || ''))
+            .backgroundColor('rgba(0,0,0,0)')
+            .showNavInfo(false)
+            .enableNodeDrag(true)
+            .linkSource('source')
+            .linkTarget('target')
+            .cooldownTime(2000)  // Prevent runaway physics simulation
+            .warmupTicks(0);     // Don't pre-calculate - let rebuildAndRender handle it
+
+          // -------------------- CLUSTERING --------------------
+
+          const PALETTES = {
+            classic: ['#4fc3f7','#ff9800','#ab47bc','#66bb6a','#ef5350','#ffa726','#26c6da','#8d6e63','#78909c','#d4e157'],
+            pastel:  ['#a3d5ff','#ffd6a5','#bdb2ff','#caffbf','#ffadad','#fdffb6','#9bf6ff','#ffc6ff','#b8f2e6','#f1c0e8'],
+            neon:    ['#00e5ff','#ffea00','#ff1744','#76ff03','#e040fb','#ff9100','#1de9b6','#f500ff','#00c853','#2979ff'],
+            mono:    ['#4fc3f7','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc']
+          };
+
+          function getClusterColor(cid) {
+            if (cid == null || cid < 0) return '#4fc3f7';
+            const pal = PALETTES[state.palette] || PALETTES.classic;
+            return pal[cid % pal.length];
+          }
+
+          function applyClusterStyling() {
+            const clusteringEnabled = !!state.clusterOn;
+
+            Graph
+              .nodeColor(n => {
+                if (!clusteringEnabled) return (n.type === 'relation' ? '#ff9800' : '#4fc3f7');
+                const cid = n.__cluster ?? -1;
+                return getClusterColor(cid);
+              })
+              .linkColor(l => {
+                if (!clusteringEnabled) return (l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)');
+                const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                const ca = a ? (a.__cluster ?? -1) : -1;
+                const cb = b ? (b.__cluster ?? -1) : -1;
+
+                if (ca >= 0 && ca === cb) return getClusterColor(ca);
+                return 'rgba(255,255,255,0.10)';
+              })
+              .linkWidth(l => {
+                if (!clusteringEnabled) return 0.6;
+                const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                const ca = a ? (a.__cluster ?? -1) : -1;
+                const cb = b ? (b.__cluster ?? -1) : -1;
+                return (ca >= 0 && ca === cb) ? 0.9 : 0.35;
+              });
+
+            Graph.refresh();
+          }
+
+          function clearClusterLabels() {
+            if (!state.clusterLabels?.length) return;
+            const scene = Graph.scene();
+            for (const s of state.clusterLabels) scene.remove(s);
+            state.clusterLabels = [];
+          }
+
+          function drawClusterLabels() {
+            clearClusterLabels();
+            if (!state.clusterOn || typeof SpriteText === 'undefined') return;
+
+            const scene = Graph.scene();
+            for (const cl of state.clusters) {
+              const rep = state.subNodesByGid.get(cl.repGid);
+              if (!rep) continue;
+
+              const labelTxt = (rep.label || rep.id || `Cluster ${cl.id}`);
+              const sprite = new SpriteText(labelTxt);
+              sprite.fontFace = 'Arial Black';
+              sprite.textHeight = 10;
+              sprite.color = 'rgba(255,255,255,0.95)';
+              sprite.backgroundColor = 'rgba(0,0,0,0.50)';
+              sprite.padding = 6;
+              sprite.borderRadius = 10;
+              sprite.material.depthWrite = false;
+
+              sprite.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+              scene.add(sprite);
+              state.clusterLabels.push(sprite);
+            }
+          }
+
+          function chooseRepresentative(clusterNodeGids) {
+            let cx = 0, cy = 0, cz = 0, cnt = 0;
+            for (const gid of clusterNodeGids) {
+              const n = state.subNodesByGid.get(gid);
+              if (!n) continue;
+              cx += (n.x || 0); cy += (n.y || 0); cz += (n.z || 0);
+              cnt++;
+            }
+            if (!cnt) return clusterNodeGids[0] ?? null;
+            cx /= cnt; cy /= cnt; cz /= cnt;
+
+            let bestGid = null;
+            let bestD = Infinity;
+            for (const gid of clusterNodeGids) {
+              const n = state.subNodesByGid.get(gid);
+              if (!n || n.type !== 'entity') continue;
+              const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+              const d2 = dx*dx + dy*dy + dz*dz;
+              if (d2 < bestD) { bestD = d2; bestGid = gid; }
+            }
+            if (bestGid != null) return bestGid;
+
+            for (const gid of clusterNodeGids) {
+              const n = state.subNodesByGid.get(gid);
+              if (!n) continue;
+              const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+              const d2 = dx*dx + dy*dy + dz*dz;
+              if (d2 < bestD) { bestD = d2; bestGid = gid; }
+            }
+            return bestGid;
+          }
+
+          // DBSCAN spatial clustering
+          function clusterSpatialDBSCAN() {
+            const eps = state.clusterRadius;
+            const minPts = state.minClusterSize;
+
+            const nodes = state.subNodes;
+            const n = nodes.length;
+            const labels = new Array(n).fill(0);
+            let cid = 0;
+
+            const eps2 = eps * eps;
+            function regionQuery(i) {
+              const ni = nodes[i];
+              const xi = ni.x || 0, yi = ni.y || 0, zi = ni.z || 0;
+              const res = [];
+              for (let j = 0; j < n; j++) {
+                const nj = nodes[j];
+                const dx = (nj.x || 0) - xi, dy = (nj.y || 0) - yi, dz = (nj.z || 0) - zi;
+                if ((dx*dx + dy*dy + dz*dz) <= eps2) res.push(j);
+              }
+              return res;
+            }
+
+            function expandCluster(i, neighbors, cid) {
+              labels[i] = cid;
+              for (let k = 0; k < neighbors.length; k++) {
+                const j = neighbors[k];
+                if (labels[j] === -1) labels[j] = cid;
+                if (labels[j] !== 0) continue;
+                labels[j] = cid;
+                const n2 = regionQuery(j);
+                if (n2.length >= minPts) {
+                  for (const x of n2) neighbors.push(x);
+                }
+              }
+            }
+
+            for (let i = 0; i < n; i++) {
+              if (labels[i] !== 0) continue;
+              const neighbors = regionQuery(i);
+              if (neighbors.length < minPts) {
+                labels[i] = -1;
+              } else {
+                cid++;
+                expandCluster(i, neighbors, cid);
+              }
+            }
+
+            for (let i = 0; i < n; i++) {
+              nodes[i].__cluster = labels[i] > 0 ? (labels[i] - 1) : -1;
+            }
+
+            const groups = new Map();
+            for (const node of nodes) {
+              const c = node.__cluster ?? -1;
+              if (c < 0) continue;
+              if (!groups.has(c)) groups.set(c, []);
+              groups.get(c).push(node.gid);
+            }
+
+            state.clusters = [];
+            for (const [id, gids] of groups.entries()) {
+              const rep = chooseRepresentative(gids);
+              state.clusters.push({ id, nodes: gids, repGid: rep });
+            }
+          }
+
+          // Louvain-style topology clustering
+          function clusterTopologyLouvain() {
+            const nodes = state.subNodes;
+            const links = state.subLinks;
+            const idxByGid = new Map();
+            for (let i = 0; i < nodes.length; i++) idxByGid.set(nodes[i].gid, i);
+
+            const adj = Array.from({ length: nodes.length }, () => new Map());
+            for (const e of links) {
+              const a = idxByGid.get(e.s);
+              const b = idxByGid.get(e.t);
+              if (a == null || b == null || a === b) continue;
+              const w = 1;
+              adj[a].set(b, (adj[a].get(b) || 0) + w);
+              adj[b].set(a, (adj[b].get(a) || 0) + w);
+            }
+            // Project bipartite entity->relation->entity structure to entity co-occurrence
+            // so Louvain can find meaningful entity clusters (not just star micro-communities)
+            for (let ri = 0; ri < nodes.length; ri++) {
+              if (nodes[ri].type !== 'relation') continue;
+              const en = [...adj[ri].keys()].filter(j => nodes[j].type === 'entity');
+              for (let p = 0; p < en.length; p++) {
+                for (let q = p + 1; q < en.length; q++) {
+                  const a = en[p], b = en[q];
+                  adj[a].set(b, (adj[a].get(b) || 0) + 1);
+                  adj[b].set(a, (adj[b].get(a) || 0) + 1);
+                }
+              }
+            }
+
+            const resolution = state.topoResolution;
+            const n = nodes.length;
+            let community = new Array(n);
+            for (let i = 0; i < n; i++) community[i] = i;
+
+            let k = new Array(n).fill(0);
+            let m2 = 0;
+            for (let i = 0; i < n; i++) {
+              let sum = 0;
+              for (const w of adj[i].values()) sum += w;
+              k[i] = sum;
+              m2 += sum;
+            }
+            if (m2 === 0) {
+              for (const node of nodes) node.__cluster = -1;
+              state.clusters = [];
+              return;
+            }
+
+            let tot = new Array(n).fill(0);
+            for (let i = 0; i < n; i++) tot[community[i]] += k[i];
+
+            function neighCommWeights(i) {
+              const map = new Map();
+              for (const [j, w] of adj[i].entries()) {
+                const cj = community[j];
+                map.set(cj, (map.get(cj) || 0) + w);
+              }
+              return map;
+            }
+
+            function modularityGain(i, c, ki_in, totc) {
+              return (resolution * (ki_in / m2)) - ((k[i] * totc) / (m2 * m2));
+            }
+
+            let improved = true;
+            let passes = 0;
+            while (improved && passes < 15) {
+              improved = false;
+              passes++;
+
+              for (let i = 0; i < n; i++) {
+                const ci = community[i];
+                const neigh = neighCommWeights(i);
+                tot[ci] -= k[i];
+
+                let bestC = ci;
+                let bestGain = 0;
+
+                for (const [c, ki_in] of neigh.entries()) {
+                  const gain = modularityGain(i, c, ki_in, tot[c]);
+                  if (gain > bestGain) {
+                    bestGain = gain;
+                    bestC = c;
+                  }
+                }
+
+                if (bestC !== ci) {
+                  community[i] = bestC;
+                  improved = true;
+                }
+
+                tot[community[i]] += k[i];
+              }
+            }
+
+            const remap = new Map();
+            let nextId = 0;
+            for (let i = 0; i < n; i++) {
+              const c = community[i];
+              if (!remap.has(c)) remap.set(c, nextId++);
+              community[i] = remap.get(c);
+            }
+
+            const groups = new Map();
+            for (let i = 0; i < n; i++) {
+              const cid = community[i];
+              if (!groups.has(cid)) groups.set(cid, []);
+              groups.get(cid).push(nodes[i].gid);
+            }
+
+            for (const node of nodes) node.__cluster = -1;
+            state.clusters = [];
+            let keptId = 0;
+            for (const [cid, gids] of groups.entries()) {
+              if (gids.length < state.minClusterSize) continue;
+              for (const gid of gids) {
+                const nd = state.subNodesByGid.get(gid);
+                if (nd) nd.__cluster = keptId;
+              }
+              const rep = chooseRepresentative(gids);
+              state.clusters.push({ id: keptId, nodes: gids, repGid: rep });
+              keptId++;
+            }
+          }
+
+          function recomputeClustering() {
+            rebuildSubgraphIndex();
+
+            for (const n of state.subNodes) n.__cluster = -1;
+            state.clusters = [];
+
+            if (!state.clusterOn) {
+              clearClusterLabels();
+              applyClusterStyling();
+              return;
+            }
+
+            if (state.clusterMode === 'spatial') clusterSpatialDBSCAN();
+            else clusterTopologyLouvain();
+
+            applyClusterStyling();
+            drawClusterLabels();
+          }
+
+          function updateClusterLabelPositions() {
+            if (!state.clusterLabels?.length) return;
+            for (let i = 0; i < state.clusters.length; i++) {
+              const cl = state.clusters[i];
+              const rep = state.subNodesByGid.get(cl.repGid);
+              const lab = state.clusterLabels[i];
+              if (!rep || !lab) continue;
+              lab.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+            }
+          }
+
+          // -------------------- END CLUSTERING --------------------
+
+          // Styling
+          Graph
+            .nodeRelSize(3)
+            .nodeVal(n => (n.type === 'relation' ? 1.5 : clamp(1 + (n.degree || 0) * 0.06, 1.2, 6)))
+            .nodeColor(n => (n.type === 'relation' ? '#ff9800' : '#4fc3f7'))
+            .linkColor(l => (l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)'))
+            .linkWidth(l => (l.type === 'source' ? 0.6 : 0.6));
+
+          function applyArrows() {
+            const on = !!state.showArrows;
+            Graph
+              .linkDirectionalArrowLength(on ? 3.5 : 0)
+              .linkDirectionalArrowRelPos(1)
+              .linkDirectionalArrowColor(() => 'rgba(255,255,255,0.55)');
+          }
+
+          function applyLabels() {
+            state.showLabels = !!showLabelsEl.checked;
+            if (typeof SpriteText === 'undefined') return;
+
+            Graph.nodeThreeObject(node => {
+              if (!state.showLabels) return null;
+
+              const isSelected = (state.selectedGid != null && node.gid === state.selectedGid);
+              const important = (node.type === 'entity' && (node.degree || 0) >= Math.max(40, state.minDegree));
+              if (!isSelected && !important) return null;
+
+              const sprite = new SpriteText(node.label || node.id || '');
+              sprite.textHeight = isSelected ? 6 : 4;
+              sprite.color = 'rgba(255,255,255,0.9)';
+              sprite.backgroundColor = 'rgba(0,0,0,0.35)';
+              sprite.padding = 2;
+              sprite.borderRadius = 6;
+              sprite.material.depthWrite = false;
+              sprite.position.y = 8;
+              return sprite;
+            }).nodeThreeObjectExtend(true);
+
+            Graph.refresh();
+          }
+
+          function applyForces() {
+            // ForceGraph3D has built-in center force, only set charge and link
+            if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+            if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength);
+          }
+
+          function applyFreeze() {
+            state.autoFreeze = !!autoFreezeEl.checked;
+            if (state.autoFreeze) {
+              Graph.cooldownTime(1500);
+            } else {
+              Graph.cooldownTime(3.6e9);
+            }
+          }
+
+          function resetCamera() {
+            Graph.cameraPosition(
+              { x: 0, y: 0, z: 420 },
+              { x: 0, y: 0, z: 0 },
+              700
+            );
+          }
+
+          function focusNode(node) {
+            if (!node) return;
+            const dist = 180;
+            const ratio = 1 + dist / Math.hypot(node.x || 0, node.y || 0, node.z || 0);
+            Graph.cameraPosition(
+              { x: (node.x || 0) * ratio, y: (node.y || 0) * ratio, z: (node.z || 0) * ratio },
+              { x: node.x || 0, y: node.y || 0, z: node.z || 0 },
+              700
+            );
+          }
+
+          // ---- Render / rebuild orchestration ----
+          function rebuildAndRender(message) {
+            showOverlay(message || 'Updating...', 'Filtering & rebuilding visible subgraph');
+
+            ric(() => {
+              buildSubgraphFromVisible();
+
+              const gData = {
+                nodes: state.subNodes,
+                links: state.subLinks.map(e => ({ source: e.s, target: e.t, type: e.type }))
+              };
+
+              Graph.graphData(gData);
+              applyForces();
+              applyFreeze();
+              applyArrows();
+              applyLabels();
+
+              Graph.d3ReheatSimulation();
+
+              // Cluster after a short delay for layout to settle
+              if (state.autoCluster) {
+                setTimeout(() => recomputeClustering(), 1400);
+              } else {
+                recomputeClustering();
+              }
+
+              hideOverlay();
+              updateHud();
+            });
+          }
+
+          function rebuildFromDegree() {
+            showOverlay('Seeding visible subgraph...', 'Using degree threshold + caps');
+            ric(() => {
+              state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+              if (state.selectedGid != null) state.visible.add(state.selectedGid);
+              rebuildAndRender('Rendering subgraph...');
+            });
+          }
+
+          // ---- Events ----
+          Graph.onNodeClick((node) => {
+            console.log('Node clicked:', node);
+            if (!node) return;
+            state.selectedGid = node.gid;
+            state.visible.add(node.gid);
+            console.log('Calling updateDetails with node:', node.label, node.type, node.degree);
+            updateDetails(node);
+            applyLabels();
+            focusNode(node);
+          });
+
+          Graph.onNodeHover(rafThrottle((node) => {
+            const tt = document.getElementById('tooltip');
+            if (!tt) return;
+            if (!node) {
+              tt.style.opacity = 0;
+              return;
+            }
+            tt.style.opacity = 1;
+            tt.innerHTML = `<strong>${escapeHtml(node.label || node.id || '')}</strong><br/><span style="opacity:0.85;">${escapeHtml(node.type || '')}${typeof node.degree==='number' ? ` deg ${node.degree}` : ''}</span>`;
+          }));
+
+          // Controls wiring
+          let degTimer = null;
+          minDegreeEl.addEventListener('input', () => {
+            state.minDegree = +minDegreeEl.value;
+            if (degreeValueEl) degreeValueEl.textContent = String(state.minDegree);
+            if (degTimer) clearTimeout(degTimer);
+            degTimer = setTimeout(rebuildFromDegree, 150);
+          });
+
+          linkStrengthEl.addEventListener('input', () => {
+            state.linkStrength = +linkStrengthEl.value;
+            applyForces();
+            Graph.d3ReheatSimulation();
+          });
+
+          repulsionEl.addEventListener('input', () => {
+            state.repulsion = +repulsionEl.value;
+            applyForces();
+            Graph.d3ReheatSimulation();
+          });
+
+          showLabelsEl.addEventListener('change', () => {
+            state.showLabels = !!showLabelsEl.checked;
+            applyLabels();
+          });
+
+          autoFreezeEl.addEventListener('change', () => {
+            applyFreeze();
+            Graph.d3ReheatSimulation();
+          });
+
+          arrowsEl.addEventListener('change', () => {
+            state.showArrows = !!arrowsEl.checked;
+            applyArrows();
+            Graph.refresh();
+          });
+
+          maxNodesEl.addEventListener('input', () => {
+            state.maxNodes = +maxNodesEl.value;
+            if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+          });
+          maxNodesEl.addEventListener('change', () => {
+            rebuildFromDegree();
+          });
+
+          depthEl.addEventListener('input', () => {
+            state.depthSpread = +depthEl.value;
+            if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+          });
+          depthEl.addEventListener('change', () => {
+            applyDepth();
+            rebuildFromDegree();
+          });
+
+          exp1Btn.addEventListener('click', () => expandSelected(1));
+          exp2Btn.addEventListener('click', () => expandSelected(2));
+
+          resetBtn.addEventListener('click', () => {
+            state.selectedGid = null;
+            updateDetails(null);
+            rebuildFromDegree();
+            resetCamera();
+          });
+
+          camResetBtn.addEventListener('click', () => resetCamera());
+
+          function findNodeByQuery(q) {
+            q = (q || '').trim().toLowerCase();
+            if (!q) return null;
+            let idx = labelsLower.indexOf(q);
+            if (idx !== -1) return data.nodes[idx];
+            for (let i = 0; i < labelsLower.length; i++) {
+              if (labelsLower[i] && labelsLower[i].includes(q)) return data.nodes[i];
+            }
+            return null;
+          }
+
+          function goSearch() {
+            const node = findNodeByQuery(searchEl.value);
+            if (!node) return;
+            state.selectedGid = node.gid;
+            state.visible.add(node.gid);
+            updateDetails(node);
+            rebuildAndRender('Jumping to node...');
+            setTimeout(() => focusNode(node), 50);
+          }
+
+          goBtn.addEventListener('click', goSearch);
+          searchEl.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter') goSearch();
+          });
+
+          // Clustering controls
+          function updateClusterModeUI() {
+            const mode = clusterModeEl.value;
+            state.clusterMode = mode;
+            if (mode === 'spatial') {
+              spatialRadiusRow.style.display = '';
+              spatialMinRow.style.display = '';
+              topoResRow.style.display = 'none';
+            } else {
+              spatialRadiusRow.style.display = 'none';
+              spatialMinRow.style.display = 'none';
+              topoResRow.style.display = '';
+            }
+            recomputeClustering();
+          }
+
+          clusterOnEl.addEventListener('change', () => {
+            state.clusterOn = !!clusterOnEl.checked;
+            recomputeClustering();
+          });
+
+          clusterModeEl.addEventListener('change', updateClusterModeUI);
+
+          clusterRadiusEl.addEventListener('input', () => {
+            state.clusterRadius = +clusterRadiusEl.value;
+            clusterRadiusValEl.textContent = String(state.clusterRadius);
+          });
+          clusterRadiusEl.addEventListener('change', recomputeClustering);
+
+          minClusterEl.addEventListener('input', () => {
+            state.minClusterSize = +minClusterEl.value;
+            minClusterValEl.textContent = String(state.minClusterSize);
+          });
+          minClusterEl.addEventListener('change', recomputeClustering);
+
+          topoResEl.addEventListener('input', () => {
+            state.topoResolution = +topoResEl.value;
+            topoResValEl.textContent = state.topoResolution.toFixed(2);
+          });
+          topoResEl.addEventListener('change', recomputeClustering);
+
+          paletteEl.addEventListener('change', () => {
+            state.palette = paletteEl.value;
+            applyClusterStyling();
+            drawClusterLabels();
+          });
+
+          autoClusterEl.addEventListener('change', () => {
+            state.autoCluster = !!autoClusterEl.checked;
+          });
+
+          reclusterBtn.addEventListener('click', recomputeClustering);
+
+          // Keyboard shortcuts
+          window.addEventListener('keydown', (ev) => {
+            if (ev.key === '/') {
+              ev.preventDefault();
+              searchEl.focus();
+            }
+          });
+
+          // HUD (FPS + counts)
+          function updateHud() {
+            const now = performance.now();
+            state.fps.frames += 1;
+            const dt = now - state.fps.t0;
+            if (dt >= 800) {
+              state.fps.value = Math.round((state.fps.frames * 1000) / dt);
+              state.fps.frames = 0;
+              state.fps.t0 = now;
+            }
+            hud.textContent = `3D | ${state.subNodes.length} nodes | ${state.subLinks.length} links | ${state.fps.value} fps`;
+          }
+          if (Graph.onRenderFramePost) {
+            Graph.onRenderFramePost(() => {
+              updateHud();
+              updateClusterLabelPositions();
+            });
+          } else {
+            setInterval(() => {
+              updateHud();
+              updateClusterLabelPositions();
+            }, 250);
+          }
+
+          window.addEventListener('resize', () => {
+            Graph.width(window.innerWidth);
+            Graph.height(window.innerHeight);
+          });
+
+          // ---- Boot sequence ----
+          updateDetails(null);
+          if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+          if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+          clusterRadiusValEl.textContent = String(state.clusterRadius);
+          minClusterValEl.textContent = String(state.minClusterSize);
+          topoResValEl.textContent = state.topoResolution.toFixed(2);
+          updateClusterModeUI();
+
+          applyDepth();
+          resetCamera();
+          state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+          buildSubgraphFromVisible();
+
+          hideOverlay();
+          rebuildAndRender('Rendering initial 3D view...');
+        })();
+    </script>
+</body>
+</html>

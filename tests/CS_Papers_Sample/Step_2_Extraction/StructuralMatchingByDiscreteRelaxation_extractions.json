@@ -1,0 +1,933 @@
+[
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "structural matching",
+          "discrete relaxation"
+        ],
+        "targets": [
+          "IEEE Transactions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "hosts",
+        "sources": [
+          "White Rose Research Online"
+        ],
+        "targets": [
+          "copyrighted items"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "permits",
+        "sources": [
+          "national copyright laws"
+        ],
+        "targets": [
+          "private study",
+          "reproduction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "allows",
+        "sources": [
+          "publisher"
+        ],
+        "targets": [
+          "reproduction",
+          "re-use"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Bayesian framework",
+          "discrete relaxation"
+        ],
+        "targets": [
+          "relational graph matching"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "recovers",
+        "sources": [
+          "relational distance measures",
+          "Bayesian consistency measure"
+        ],
+        "targets": [
+          "specific cases"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "controls",
+        "sources": [
+          "graph-editing process",
+          "contaminating clutter"
+        ],
+        "targets": [
+          "structural errors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "limits",
+        "sources": [
+          "initialization errors",
+          "structural disturbance"
+        ],
+        "targets": [
+          "relational matching"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "gauges",
+        "sources": [
+          "distance metric",
+          "structural differences"
+        ],
+        "targets": [
+          "structural errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "minimizes",
+        "sources": [
+          "structural matching",
+          "graph edit idea"
+        ],
+        "targets": [
+          "global cost"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "develops",
+        "sources": [
+          "Bayesian framework",
+          "error tolerant technique"
+        ],
+        "targets": [
+          "subgraph isomorphisms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "approximates",
+        "sources": [
+          "relational distance metric",
+          "exponential Bayesian consistency measure"
+        ],
+        "targets": [
+          "matching problem"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "Gaussian model",
+          "Bayesian relaxation scheme"
+        ],
+        "targets": [
+          "compatibility coefficients"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "relational consistency measure",
+          "structural matching technique"
+        ],
+        "targets": [
+          "matching process"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "matching process",
+          "model graph"
+        ],
+        "targets": [
+          "global consistency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "preserves",
+        "sources": [
+          "super-clique",
+          "data graph"
+        ],
+        "targets": [
+          "adjacency structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "dummy nodes",
+          "model graph"
+        ],
+        "targets": [
+          "matching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "structural constraints",
+          "model graph"
+        ],
+        "targets": [
+          "node matching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "N-ary relations",
+          "super-clique"
+        ],
+        "targets": [
+          "symbolic relation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "unary measurements",
+          "conditional independence"
+        ],
+        "targets": [
+          "joint conditional density"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "Bayesian model",
+          "relational corruption"
+        ],
+        "targets": [
+          "relational consistency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "leads to",
+        "sources": [
+          "matching errors",
+          "memoryless assumption"
+        ],
+        "targets": [
+          "uniform probability distribution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aims to rectify",
+        "sources": [
+          "initialization error",
+          "iterative label updates"
+        ],
+        "targets": [
+          "relational consistency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "structural disturbance",
+          "noise"
+        ],
+        "targets": [
+          "matching errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "concerns",
+        "sources": [
+          "structural errors",
+          "Hamming distance"
+        ],
+        "targets": [
+          "relational consistency"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "associates",
+        "sources": [
+          "uniform probability",
+          "node"
+        ],
+        "targets": [
+          "deletion hypothesis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "matching errors",
+          "dummy nodes"
+        ],
+        "targets": [
+          "conditional probability"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "measures",
+        "sources": [
+          "structural compatibility",
+          "super-cliques"
+        ],
+        "targets": [
+          "size difference"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "indicates",
+        "sources": [
+          "null-labels",
+          "data super-clique"
+        ],
+        "targets": [
+          "degree of noise"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.85,
+        "relation": "contributes",
+        "sources": [
+          "Hamming distance",
+          "exponential consistency measure"
+        ],
+        "targets": [
+          "match probability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "super-cliques",
+          "relational mappings"
+        ],
+        "targets": [
+          "match consistency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "influences",
+        "sources": [
+          "null labels",
+          "dummy nodes"
+        ],
+        "targets": [
+          "weight"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "determines",
+        "sources": [
+          "exponential function",
+          "Hamming distance"
+        ],
+        "targets": [
+          "relational affinity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "resolves",
+        "sources": [
+          "stochastic optimization",
+          "deadlocks"
+        ],
+        "targets": [
+          "update process"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "Hamming distance",
+          "super-cliques"
+        ],
+        "targets": [
+          "matching process"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "noise",
+          "clutter"
+        ],
+        "targets": [
+          "structural errors"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is related to",
+        "sources": [
+          "optimization process",
+          "MAP update scheme"
+        ],
+        "targets": [
+          "Hamming distance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "prevents",
+        "sources": [
+          "initialization errors",
+          "label updates"
+        ],
+        "targets": [
+          "effective matching"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "pruned dictionary",
+          "salient structure"
+        ],
+        "targets": [
+          "matching process"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.85,
+        "relation": "causes",
+        "sources": [
+          "initialization errors",
+          "optimization process"
+        ],
+        "targets": [
+          "residual inconsistencies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "constraint filtering",
+          "association graph"
+        ],
+        "targets": [
+          "consistent subgraphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is similar to",
+        "sources": [
+          "parameter Pe",
+          "temperature"
+        ],
+        "targets": [
+          "control variable"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "corrects",
+        "sources": [
+          "optimization scheme",
+          "initialization errors"
+        ],
+        "targets": [
+          "extraneous nodes"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "generates",
+        "sources": [
+          "spurious consistency",
+          "local matches"
+        ],
+        "targets": [
+          "erroneous matches"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "structural errors",
+          "graph editing"
+        ],
+        "targets": [
+          "matching methods"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "node deletion",
+          "node insertion"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "Delaunay graph",
+          "Voronoi tessellation"
+        ],
+        "targets": [
+          "image plane"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "active matching",
+          "graph editing"
+        ],
+        "targets": [
+          "labeling consistency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "regulates",
+        "sources": [
+          "error probability",
+          "control variable"
+        ],
+        "targets": [
+          "edit costs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "hard limit",
+          "exponential consistency measure"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "initialization errors",
+          "hard limit"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computed_from",
+        "sources": [
+          "initial match probabilities",
+          "unary attribute"
+        ],
+        "targets": [
+          "Mahalanobis distance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "introduces",
+        "sources": [
+          "random dot insertions",
+          "random deletions"
+        ],
+        "targets": [
+          "structural errors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "exponential criterion",
+          "hard-limit measure"
+        ],
+        "targets": [
+          "initialization errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "graph size",
+          "initialization error"
+        ],
+        "targets": [
+          "matching performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "pruning strategy",
+          "exponential consistency measure"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "linear consistency measure",
+          "exponential consistency measure"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "active matching method",
+          "null-labeling"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "clutter",
+          "segmentation process"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "constraint filtering",
+          "null-labeling"
+        ],
+        "targets": [
+          "matching performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "ground truth map",
+          "hedge structures"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "infrared line scan",
+          "image data"
+        ],
+        "targets": [
+          "road networks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "iterative update process",
+          "discrete relaxation scheme"
+        ],
+        "targets": [
+          "matching results"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "appear_as",
+        "sources": [
+          "hedge structures",
+          "radar reflections"
+        ],
+        "targets": [
+          "intensity ridges"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies_to",
+        "sources": [
+          "feature detection",
+          "relaxation operator"
+        ],
+        "targets": [
+          "orientational line-detectors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph edit operations",
+          "iterative process"
+        ],
+        "targets": [
+          "matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compared_with",
+        "sources": [
+          "SAR data",
+          "digital map"
+        ],
+        "targets": [
+          "matching process"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "established_on",
+        "sources": [
+          "initial matches",
+          "linear segments"
+        ],
+        "targets": [
+          "affinity"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "constraint filtering",
+          "graph-editing technique"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph-editing technique",
+          "compound exponential consistency measure"
+        ],
+        "targets": [
+          "matching algorithm"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "yields",
+        "sources": [
+          "null-labeling approach",
+          "constraint filtering method"
+        ],
+        "targets": [
+          "results"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "active graph-editing technique",
+          "hybrid matching algorithm"
+        ],
+        "targets": [
+          "performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "StructuralMatchingByDiscreteRelaxation_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "relational graph matching",
+          "high-level vision"
+        ],
+        "targets": [
+          "scene understanding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "computer vision",
+          "pattern recognition"
+        ],
+        "targets": [
+          "image processing"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "energy minimization methods",
+          "graph matching"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "Bayesian compatibility model",
+          "graph matching"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

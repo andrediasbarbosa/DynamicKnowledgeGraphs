@@ -1,0 +1,755 @@
+[
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "graph structures",
+          "pattern analysis"
+        ],
+        "targets": [
+          "computational issues"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "spectral decomposition",
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "graph features"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "embedding graphs",
+          "pattern space"
+        ],
+        "targets": [
+          "graph clustering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "principal components analysis",
+          "multidimensional scaling"
+        ],
+        "targets": [
+          "graph clustering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "random graphs",
+          "probability distribution"
+        ],
+        "targets": [
+          "class structure"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "spectral methods",
+          "graph-spectral methods"
+        ],
+        "targets": [
+          "graph matching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "characterize",
+        "sources": [
+          "eigenvectors",
+          "adjacency matrix"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "develop",
+        "sources": [
+          "pattern vectors",
+          "spectral graph theory"
+        ],
+        "targets": [
+          "efficient methods"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "group",
+        "sources": [
+          "thresholded leading eigenvector",
+          "weighted adjacency matrix"
+        ],
+        "targets": [
+          "points"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "characterize",
+        "sources": [
+          "structural properties",
+          "graphs"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "spectral matrix",
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "indicates",
+        "sources": [
+          "eigenvalues",
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "graph properties"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "principal components analysis",
+          "multidimensional scaling"
+        ],
+        "targets": [
+          "pattern vectors"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "gauges",
+        "sources": [
+          "Frobenius distance",
+          "permutation matrix"
+        ],
+        "targets": [
+          "graph similarity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extends",
+        "sources": [
+          "complex numbers",
+          "attributed graphs"
+        ],
+        "targets": [
+          "representation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is invariant under",
+        "sources": [
+          "graph topology",
+          "node labels"
+        ],
+        "targets": [
+          "adjacency matrix",
+          "Laplacian matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "modifies",
+        "sources": [
+          "permutation matrix",
+          "node order"
+        ],
+        "targets": [
+          "Laplacian matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is associated with",
+        "sources": [
+          "eigenvector",
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "eigenvalue"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "can be computed using",
+        "sources": [
+          "symmetric polynomials",
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "power symmetric polynomials"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is invariant under",
+        "sources": [
+          "spectral matrix",
+          "node permutations"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "used for",
+        "sources": [
+          "symmetric polynomials",
+          "graph feature vectors"
+        ],
+        "targets": [
+          "pattern analysis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "analogous to",
+        "sources": [
+          "Hermitian matrices",
+          "symmetric matrices"
+        ],
+        "targets": [
+          "complex numbers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "governs",
+        "sources": [
+          "eigendecomposition",
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "computational complexity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "pattern vectors",
+          "graph matching"
+        ],
+        "targets": [
+          "comparison"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "extends",
+        "sources": [
+          "PCA",
+          "multiclass problem"
+        ],
+        "targets": [
+          "LDA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "MDS",
+          "pairwise distances"
+        ],
+        "targets": [
+          "Euclidean space"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used in",
+        "sources": [
+          "eigenvectors",
+          "covariance matrix"
+        ],
+        "targets": [
+          "spectral matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represented by",
+        "sources": [
+          "graphs",
+          "feature vectors"
+        ],
+        "targets": [
+          "eigenspace"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluated with",
+        "sources": [
+          "symmetric polynomials",
+          "complex arithmetic"
+        ],
+        "targets": [
+          "complex numbers"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "distinguish",
+        "sources": [
+          "spectral features",
+          "distance measure"
+        ],
+        "targets": [
+          "graphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "reduces",
+        "sources": [
+          "Locality Preserving Projections"
+        ],
+        "targets": [
+          "outliers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generate",
+        "sources": [
+          "random edge edits"
+        ],
+        "targets": [
+          "structurally related graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "feature vectors"
+        ],
+        "targets": [
+          "data structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "data structure"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "deletes",
+        "sources": [
+          "edge",
+          "graph"
+        ],
+        "targets": [
+          "edge"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "affects",
+        "sources": [
+          "noise",
+          "edge-weight"
+        ],
+        "targets": [
+          "confusion probability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "edit distance",
+          "eigenvectors"
+        ],
+        "targets": [
+          "importance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reflects",
+        "sources": [
+          "feature vectors",
+          "graph structure"
+        ],
+        "targets": [
+          "changes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "visualizes",
+        "sources": [
+          "MDS",
+          "graphs"
+        ],
+        "targets": [
+          "distribution"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "embedding methods",
+          "Laplacian polynomials"
+        ],
+        "targets": [
+          "clustering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "MDS",
+          "LPP"
+        ],
+        "targets": [
+          "distinct clusters"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "Laplacian spectral matrix"
+        ],
+        "targets": [
+          "symmetric polynomials"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "solves",
+        "sources": [
+          "Hamilton-Jacobi equations"
+        ],
+        "targets": [
+          "eikonal equation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "represents",
+        "sources": [
+          "shock trees"
+        ],
+        "targets": [
+          "curved boundary shape"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "used_as",
+        "sources": [
+          "shapes",
+          "skeleton"
+        ],
+        "targets": [
+          "attributes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "converted_to",
+        "sources": [
+          "skeleton",
+          "tree"
+        ],
+        "targets": [
+          "tree representation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "determines",
+        "sources": [
+          "boundary length",
+          "skeleton length"
+        ],
+        "targets": [
+          "importance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "related_to",
+        "sources": [
+          "bitangent circle radius",
+          "skeleton"
+        ],
+        "targets": [
+          "rate of change"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "attributed_with",
+        "sources": [
+          "tree",
+          "properties"
+        ],
+        "targets": [
+          "shock labels"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "causes",
+        "sources": [
+          "attributed trees",
+          "spectral features"
+        ],
+        "targets": [
+          "ambiguities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "Laplacian matrix",
+          "Hermitian property matrix"
+        ],
+        "targets": [
+          "class separation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "MDS",
+          "PCA"
+        ],
+        "targets": [
+          "shape distributions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "measures",
+        "sources": [
+          "Fisher discriminant",
+          "class centers"
+        ],
+        "targets": [
+          "separation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "shape categories",
+          "shock graphs"
+        ],
+        "targets": [
+          "clustering"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "yields",
+        "sources": [
+          "symmetric polynomials",
+          "Laplacian spectral decomposition"
+        ],
+        "targets": [
+          "good clusters"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "forms",
+        "sources": [
+          "symmetric polynomials"
+        ],
+        "targets": [
+          "generative model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used",
+        "sources": [
+          "MDS",
+          "LPP"
+        ],
+        "targets": [
+          "feature vectors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "PatternVectorsFromAlgebraicGraphTheory_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "optimization methods",
+          "probabilistic methods"
+        ],
+        "targets": [
+          "high-level vision"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contributes to",
+        "sources": [
+          "graph methods",
+          "statistical methods"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "image databases",
+          "graph matching"
+        ],
+        "targets": [
+          "image retrieval"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "overlaps with",
+        "sources": [
+          "pattern recognition",
+          "computer vision"
+        ],
+        "targets": [
+          "high-level vision"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "hosts",
+        "sources": [
+          "University of York",
+          "Anhui University of China"
+        ],
+        "targets": [
+          "researchers"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

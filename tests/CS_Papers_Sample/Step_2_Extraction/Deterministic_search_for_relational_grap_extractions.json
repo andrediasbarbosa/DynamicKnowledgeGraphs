@@ -1,0 +1,821 @@
+[
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "deterministic search",
+          "graph matching"
+        ],
+        "targets": [
+          "symbolic interpretation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "global gradient method",
+          "tabu search"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "attracts",
+        "sources": [
+          "graph-theoretic problems",
+          "optimisation tasks"
+        ],
+        "targets": [
+          "interest"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "mean-field networks",
+          "graph-theoretic topics"
+        ],
+        "targets": [
+          "graph matching"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "used",
+        "sources": [
+          "genetic search",
+          "graph-matching"
+        ],
+        "targets": [
+          "Cross, Wilson and Hancock"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "tabu search",
+          "heuristic search"
+        ],
+        "targets": [
+          "search efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "structural-hashing",
+          "subgraph isomorphisms"
+        ],
+        "targets": [
+          "polynomial-time location"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "domain-specific knowledge",
+          "heuristic optimization"
+        ],
+        "targets": [
+          "solution quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applied in",
+        "sources": [
+          "A* algorithm",
+          "planning"
+        ],
+        "targets": [
+          "feature extraction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "initialisation error",
+          "matching errors"
+        ],
+        "targets": [
+          "erroneous matches"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "structural disturbance",
+          "noise"
+        ],
+        "targets": [
+          "matching errors"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "memoryless probability",
+          "uniform distribution"
+        ],
+        "targets": [
+          "error modeling"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "Bayesian consistency measure",
+          "relational mappings"
+        ],
+        "targets": [
+          "match quality"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "causes",
+        "sources": [
+          "matching probability",
+          "error probability"
+        ],
+        "targets": [
+          "null-match probability"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "dummy nodes",
+          "data-graph"
+        ],
+        "targets": [
+          "padding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "global consistency measure",
+          "Bayesian consistency measure"
+        ],
+        "targets": [
+          "search strategies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "parameter updates",
+          "gradient ascent"
+        ],
+        "targets": [
+          "maximum slope"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "modifies",
+        "sources": [
+          "label update",
+          "super-cliques"
+        ],
+        "targets": [
+          "consistency measure"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "applies",
+        "sources": [
+          "steepest gradient",
+          "sequential order"
+        ],
+        "targets": [
+          "consistent matches"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "limits",
+        "sources": [
+          "computational bottleneck",
+          "super-clique matching"
+        ],
+        "targets": [
+          "search efficiency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "context-dependent probabilities",
+          "dictionary items"
+        ],
+        "targets": [
+          "search paths"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "requires",
+        "sources": [
+          "global maximum",
+          "true gradient ascent"
+        ],
+        "targets": [
+          "complete mappings"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "tabu-search strategy",
+          "memory"
+        ],
+        "targets": [
+          "ranking of matches"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contributes",
+        "sources": [
+          "islands of consistency",
+          "search procedure"
+        ],
+        "targets": [
+          "global solution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "confidence measure",
+          "random matches"
+        ],
+        "targets": [
+          "order of search"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "Monte-Carlo study",
+          "synthetic graphs"
+        ],
+        "targets": [
+          "search methods"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "Delaunay triangulation",
+          "Voronoi tessellation"
+        ],
+        "targets": [
+          "adjacency graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "global gradient",
+          "local gradient"
+        ],
+        "targets": [
+          "accuracy of match",
+          "computational overheads"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "tabu search",
+          "global gradient"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "controls",
+        "sources": [
+          "threshold",
+          "graph size"
+        ],
+        "targets": [
+          "accuracy match"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "require",
+        "sources": [
+          "local gradient",
+          "tabu search"
+        ],
+        "targets": [
+          "resources"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "global gradient",
+          "tabu search"
+        ],
+        "targets": [
+          "correct matches"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "performs",
+        "sources": [
+          "tabu search"
+        ],
+        "targets": [
+          "graph size"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "adds to",
+        "sources": [
+          "node",
+          "neighbour"
+        ],
+        "targets": [
+          "existing region"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "composed of",
+        "sources": [
+          "solution"
+        ],
+        "targets": [
+          "regions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "tracking algorithm"
+        ],
+        "targets": [
+          "region of true consistency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "corruption"
+        ],
+        "targets": [
+          "matched nodes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "good island"
+        ],
+        "targets": [
+          "final result"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "hinders",
+        "sources": [
+          "false consistency"
+        ],
+        "targets": [
+          "match solving"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "iterations"
+        ],
+        "targets": [
+          "matching probabilities"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "are based on",
+        "sources": [
+          "graph matching methods"
+        ],
+        "targets": [
+          "growing islands"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has been used for",
+        "sources": [
+          "simulation data"
+        ],
+        "targets": [
+          "evaluation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "demonstrate",
+        "sources": [
+          "real-world examples"
+        ],
+        "targets": [
+          "application"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "applies to",
+        "sources": [
+          "tabu search",
+          "global gradient matching"
+        ],
+        "targets": [
+          "matching probabilities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "collects",
+        "sources": [
+          "infrared line-scan device"
+        ],
+        "targets": [
+          "aerial images"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "collects",
+        "sources": [
+          "optical camera"
+        ],
+        "targets": [
+          "visible images"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "segmented by",
+        "sources": [
+          "ridge-structures"
+        ],
+        "targets": [
+          "line finder"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "extracted from",
+        "sources": [
+          "matching graphs"
+        ],
+        "targets": [
+          "aerial images"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "Delaunay triangulation",
+          "controlled fraction"
+        ],
+        "targets": [
+          "point-set"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "affects",
+        "sources": [
+          "structural corruption"
+        ],
+        "targets": [
+          "resulting graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "optical images",
+          "infrared images"
+        ],
+        "targets": [
+          "extracted graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "global steepest gradient method",
+          "tabu search"
+        ],
+        "targets": [
+          "results"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "random corruption"
+        ],
+        "targets": [
+          "results"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "impacts",
+        "sources": [
+          "structural corruption"
+        ],
+        "targets": [
+          "correspondence"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_13",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "tabu search",
+          "global gradient ascent"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "allows",
+        "sources": [
+          "tabu search"
+        ],
+        "targets": [
+          "matching results"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compare",
+        "sources": [
+          "deterministic search methods"
+        ],
+        "targets": [
+          "graph matching"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "computes",
+        "sources": [
+          "discrete approximation"
+        ],
+        "targets": [
+          "maximum gradient direction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "inspired_by",
+        "sources": [
+          "tabu search",
+          "genetic search"
+        ],
+        "targets": [
+          "jigsaw puzzles"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "solves",
+        "sources": [
+          "statistical physics",
+          "assignment problem"
+        ],
+        "targets": [
+          "global maximum"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "uses",
+        "sources": [
+          "graph matching",
+          "energy function"
+        ],
+        "targets": [
+          "continuous edit process"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "relational matching",
+          "mean-field annealing"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Deterministic_search_for_relational_grap_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "works_in",
+        "sources": [
+          "Dr Richard Wilson",
+          "Department of Computer Science"
+        ],
+        "targets": [
+          "University of York"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "works_in",
+        "sources": [
+          "Dr Edwin Hancock",
+          "Department of Computer Science"
+        ],
+        "targets": [
+          "University of York"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "researches",
+        "sources": [
+          "Dr Edwin Hancock",
+          "computer vision"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "studied",
+        "sources": [
+          "Dr Richard Wilson",
+          "relational graph matching"
+        ],
+        "targets": [
+          "DPhil degree"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "applied_in",
+        "sources": [
+          "energy minimisation methods",
+          "computer vision"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

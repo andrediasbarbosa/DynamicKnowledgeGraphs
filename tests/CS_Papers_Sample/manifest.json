@@ -1,0 +1,67 @@
+{
+  "artifacts": {
+    "augmentation": "Step_5_Discovery/augmentation.json",
+    "extraction_stats": "Step_2_Extraction/extraction_stats.json",
+    "graph": "graph.json",
+    "index": "Step_5_Discovery/index.json",
+    "insights": "Step_5_Discovery/insights.json",
+    "reports": {
+      "html": "Step_5_Discovery/report.html",
+      "markdown": "Step_5_Discovery/report.md"
+    },
+    "visualizations": {
+      "augmented": "Step_5_Discovery/graph_augmented.html",
+      "baseline": "Step_5_Discovery/graph.html",
+      "dot": "Step_5_Discovery/graph.dot",
+      "rag": "Step_5_Discovery/graph_rag.html"
+    }
+  },
+  "created_utc": "2026-03-31 22:03:51 UTC",
+  "last_updated_utc": "2026-03-31 22:03:51 UTC",
+  "pipeline": {
+    "completed_stages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "from_stage": 1
+  },
+  "run_id": "run_20260331_212255",
+  "sources": [
+    "tests/A_Bayesian_compatibility_model_for_graph.pdf",
+    "tests/Deterministic_search_for_relational_grap.pdf",
+    "tests/Geometric_characterization_and_clusterin.pdf",
+    "tests/Inexact_graph_matching_using_genetic_sea.pdf",
+    "tests/MAtrixRepresentationOfGraphs.pdf",
+    "tests/PatternVectorsFromAlgebraicGraphTheory.pdf",
+    "tests/Spectral_embedding_of_graphs.pdf",
+    "tests/SphericalFinal.pdf",
+    "tests/StructuralMatchingByDiscreteRelaxation.pdf",
+    "tests/Valid-optimal-assignment-kernels-and-applications-to-graph-classification-Paper.pdf"
+  ],
+  "statistics": {
+    "entities": 588,
+    "insights": 106,
+    "insights_by_type": {
+      "centrality": 1,
+      "community_detection": 1,
+      "concept_drift": 3,
+      "confounder": 15,
+      "core_periphery": 21,
+      "cross_community_bridge_map": 8,
+      "domain_bridge": 18,
+      "k_core": 14,
+      "k_truss": 1,
+      "logical_entailment": 14,
+      "meta_path": 3,
+      "meta_pattern": 1,
+      "multi_resolution_community": 1,
+      "text_similarity": 5
+    },
+    "relationships": 204
+  },
+  "title": "A_Bayesian_compatibility_model_for_graph Knowledge Discovery"
+}

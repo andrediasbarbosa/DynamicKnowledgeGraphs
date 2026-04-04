@@ -1,0 +1,2946 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_147",
+      "properties": {},
+      "relation": "traps",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_12",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "corruption level",
+        "20%"
+      ],
+      "targets": [
+        "gradient ascent"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_148",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_11",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "algorithm"
+      ],
+      "targets": [
+        "matching accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_149",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_2",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "bayesian consistency measure",
+        "fitness function"
+      ],
+      "targets": [
+        "relational matching"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_150",
+      "properties": {},
+      "relation": "simplifies",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_1",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "bayesian consistency measure",
+        "selection operation"
+      ],
+      "targets": [
+        "search procedure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_151",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_0",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "bayesian framework"
+      ],
+      "targets": [
+        "global consistency measure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_152",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_2",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "bayesian inference"
+      ],
+      "targets": [
+        "relational graph matching"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_153",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_17",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic algorithm",
+        "bayesian interpretation"
+      ],
+      "targets": [
+        "structural matching"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_154",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_16",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic algorithm",
+        "bayesian network"
+      ],
+      "targets": [
+        "abductive reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_155",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_14",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "thresholding error",
+        "centroid location process"
+      ],
+      "targets": [
+        "spurious node"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_156",
+      "properties": {},
+      "relation": "hinders",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_11",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "clutter node"
+      ],
+      "targets": [
+        "data graph matching"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_157",
+      "properties": {},
+      "relation": "neutralizes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_5",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "clutter node"
+      ],
+      "targets": [
+        "clutter"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_158",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_17",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "computer vision",
+        "pattern recognition"
+      ],
+      "targets": [
+        "scene understanding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_159",
+      "properties": {},
+      "relation": "underpins",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_15",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hamming distance",
+        "consistency measure"
+      ],
+      "targets": [
+        "genetic search"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_160",
+      "properties": {},
+      "relation": "applied to",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_14",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "convolution filter",
+        "training data"
+      ],
+      "targets": [
+        "intermediate solution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_161",
+      "properties": {},
+      "relation": "localizes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_13",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "thresholding technique",
+        "convolution output"
+      ],
+      "targets": [
+        "rooftop respons"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_162",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_4",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "crossover process"
+      ],
+      "targets": [
+        "new solution"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_163",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_2",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "population diversity",
+        "crossover process"
+      ],
+      "targets": [
+        "genetic search"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_164",
+      "properties": {},
+      "relation": "operates_on",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_0",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "crossover process",
+        "subgraph"
+      ],
+      "targets": [
+        "solution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_165",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_3",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "crossover",
+        "mutation",
+        "selection"
+      ],
+      "targets": [
+        "global optimum"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_166",
+      "properties": {},
+      "relation": "offers",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_7",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "mutation",
+        "crossover",
+        "selection"
+      ],
+      "targets": [
+        "global quality"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_167",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_1",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "crossover",
+        "mutation"
+      ],
+      "targets": [
+        "global solution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_168",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_5",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "crossover",
+        "mutation"
+      ],
+      "targets": [
+        "global configurational probability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_169",
+      "properties": {},
+      "relation": "results in",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_4",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "crossover",
+        "selection process"
+      ],
+      "targets": [
+        "hamming distance change"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_170",
+      "properties": {},
+      "relation": "awards",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_17",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "d.phil. degree",
+        "university of york"
+      ],
+      "targets": [
+        "andrew cross"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_171",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_13",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "delaunay triangulation",
+        "voronoi region"
+      ],
+      "targets": [
+        "relational structure"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_172",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_9",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "deterministic hill climbing"
+      ],
+      "targets": [
+        "convergence"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_173",
+      "properties": {},
+      "relation": "accelerates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_3",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "deterministic hill-climbing",
+        "fitness measure"
+      ],
+      "targets": [
+        "convergence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_174",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_12",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "deterministic method"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_175",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_16",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "relaxation labelling",
+        "discrete relaxation"
+      ],
+      "targets": [
+        "graph matching"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_176",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_7",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "roulette-wheel algorithm",
+        "disjoint subgraph"
+      ],
+      "targets": [
+        "population selection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_177",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_4",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "population size",
+        "fitness landscape"
+      ],
+      "targets": [
+        "convergence rate"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_178",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_3",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hamming distance",
+        "fitness measure"
+      ],
+      "targets": [
+        "selection process"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_179",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_1",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "roulette-wheel selection",
+        "fitness measure"
+      ],
+      "targets": [
+        "population entry"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_180",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_11",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "fitness measure"
+      ],
+      "targets": [
+        "matching result"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_181",
+      "properties": {},
+      "relation": "exploits",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_13",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "wiener-filtering technique",
+        "fourier duality"
+      ],
+      "targets": [
+        "image registration"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_182",
+      "properties": {},
+      "relation": "complicates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_11",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "random clutter",
+        "gaussian position error"
+      ],
+      "targets": [
+        "data graph matching"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_183",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_16",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "image processing",
+        "genetic algorithm"
+      ],
+      "targets": [
+        "pattern recognition"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_184",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_16",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic algorithm",
+        "simulated annealing"
+      ],
+      "targets": [
+        "optimization method"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_185",
+      "properties": {},
+      "relation": "partitions",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_11",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic matching technique"
+      ],
+      "targets": [
+        "data graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_186",
+      "properties": {},
+      "relation": "locates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_9",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "graph isomorphism",
+        "genetic search"
+      ],
+      "targets": [
+        "solution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_187",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_9",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hamming distance",
+        "genetic search"
+      ],
+      "targets": [
+        "computational cost"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_188",
+      "properties": {},
+      "relation": "moves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_7",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hamming distance",
+        "genetic search"
+      ],
+      "targets": [
+        "modal distance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_189",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_0",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "hamming distance"
+      ],
+      "targets": [
+        "relational distance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_190",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_8",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "initial condition"
+      ],
+      "targets": [
+        "fitness distribution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_191",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_8",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "iteration"
+      ],
+      "targets": [
+        "solution quality"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_192",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_8",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "maximum fitness"
+      ],
+      "targets": [
+        "better result"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_193",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_15",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "mutation probability",
+        "genetic search"
+      ],
+      "targets": [
+        "convergence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_194",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_7",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "population diversity"
+      ],
+      "targets": [
+        "maximum fitness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_195",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_0",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "population of solution"
+      ],
+      "targets": [
+        "global solution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_196",
+      "properties": {},
+      "relation": "recovers",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_12",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "probabilistic cost function"
+      ],
+      "targets": [
+        "result"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_197",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_8",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "random start"
+      ],
+      "targets": [
+        "hill climbing",
+        "simulated annealing"
+      ]
+    },
+    {
+      "confidence": 0.865,
+      "id": "edge_198",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_0",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "simulated annealing"
+      ],
+      "targets": [
+        "convergence rate"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_199",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_15",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "simulation study",
+        "genetic search"
+      ],
+      "targets": [
+        "effectiveness"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_200",
+      "properties": {},
+      "relation": "overcomes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_15",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search",
+        "stochastic optimisation"
+      ],
+      "targets": [
+        "ambiguity"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_201",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_6",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "genetic search"
+      ],
+      "targets": [
+        "population selection"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_202",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_7",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "probabilistic crossover",
+        "geometric crossover"
+      ],
+      "targets": [
+        "initial convergence"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_203",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_10",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "graph isomorphism",
+        "subgraph isomorphism"
+      ],
+      "targets": [
+        "empirical complexity"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_204",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_4",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hamming distance variance",
+        "population diversity"
+      ],
+      "targets": [
+        "solution quality"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_205",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_2",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "label configuration",
+        "hamming distance"
+      ],
+      "targets": [
+        "matching error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_206",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_1",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "mutation",
+        "heuristic cost"
+      ],
+      "targets": [
+        "population"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_207",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_17",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "relational graph matching",
+        "high-level vision"
+      ],
+      "targets": [
+        "scene understanding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_208",
+      "properties": {},
+      "relation": "restores",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_5",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hill climbing"
+      ],
+      "targets": [
+        "consistency"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_209",
+      "properties": {},
+      "relation": "accelerates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_1",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hill-climbing process",
+        "population"
+      ],
+      "targets": [
+        "convergence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_210",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_6",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "hill-climbing process"
+      ],
+      "targets": [
+        "local improvement"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_211",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_3",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "initial population",
+        "trial solution"
+      ],
+      "targets": [
+        "fitness value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_212",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_2",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "iterative relaxation process",
+        "joint probability"
+      ],
+      "targets": [
+        "label configuration"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_213",
+      "properties": {},
+      "relation": "applied to",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_14",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "matched filter",
+        "stereo image"
+      ],
+      "targets": [
+        "hou"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_214",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_13",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "matched filter",
+        "training example"
+      ],
+      "targets": [
+        "coefficient"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_215",
+      "properties": {},
+      "relation": "accelerates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_5",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "mutation operation"
+      ],
+      "targets": [
+        "convergence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_216",
+      "properties": {},
+      "relation": "controls",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_10",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "population size",
+        "mutation probability"
+      ],
+      "targets": [
+        "genetic search"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_217",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_10",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "mutation probability"
+      ],
+      "targets": [
+        "convergence rate"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_218",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_6",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "node deletion",
+        "node u"
+      ],
+      "targets": [
+        "edge-set modification"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_219",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_6",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "node deletion"
+      ],
+      "targets": [
+        "consistency measure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_220",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_6",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "node reinsertion",
+        "node u"
+      ],
+      "targets": [
+        "edge-set restoration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_221",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_15",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "population size",
+        "node"
+      ],
+      "targets": [
+        "solution"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_222",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_12",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "noise",
+        "spurious noise"
+      ],
+      "targets": [
+        "graph recovery"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_223",
+      "properties": {},
+      "relation": "susceptible to",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_5",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "null-labelling technique"
+      ],
+      "targets": [
+        "noise"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_224",
+      "properties": {},
+      "relation": "solves",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_16",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "simulated annealing",
+        "optimization problem"
+      ],
+      "targets": [
+        "local minima"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_225",
+      "properties": {},
+      "relation": "combine to form",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_14",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "subgraph crossover",
+        "partially consistent solution"
+      ],
+      "targets": [
+        "globally consistent solution"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_226",
+      "properties": {},
+      "relation": "informs",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_17",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "research paper",
+        "pattern recognition"
+      ],
+      "targets": [
+        "computer vision"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_227",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_10",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "population size"
+      ],
+      "targets": [
+        "convergence rate"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_228",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "Inexact_graph_matching_using_genetic_sea_chunk_4",
+      "source_document": "Inexact_graph_matching_using_genetic_sea",
+      "sources": [
+        "random match",
+        "probabilistic crossover"
+      ],
+      "targets": [
+        "solution merging"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 82,
+    "num_nodes": 148
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "20%",
+      "incident_edges": [
+        "edge_147"
+      ],
+      "label": "20%",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "abductive reasoning",
+      "incident_edges": [
+        "edge_154"
+      ],
+      "label": "abductive reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "algorithm",
+      "incident_edges": [
+        "edge_148"
+      ],
+      "label": "algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ambiguity",
+      "incident_edges": [
+        "edge_200"
+      ],
+      "label": "ambiguity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "andrew cross",
+      "incident_edges": [
+        "edge_170"
+      ],
+      "label": "Andrew Cross",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "bayesian consistency measure",
+      "incident_edges": [
+        "edge_149",
+        "edge_150"
+      ],
+      "label": "Bayesian consistency measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bayesian framework",
+      "incident_edges": [
+        "edge_151"
+      ],
+      "label": "Bayesian framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bayesian inference",
+      "incident_edges": [
+        "edge_152"
+      ],
+      "label": "Bayesian inference",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bayesian interpretation",
+      "incident_edges": [
+        "edge_153"
+      ],
+      "label": "Bayesian interpretation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bayesian network",
+      "incident_edges": [
+        "edge_154"
+      ],
+      "label": "Bayesian networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "better result",
+      "incident_edges": [
+        "edge_192"
+      ],
+      "label": "better results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "centroid location process",
+      "incident_edges": [
+        "edge_155"
+      ],
+      "label": "centroid location process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "clutter",
+      "incident_edges": [
+        "edge_157"
+      ],
+      "label": "clutter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "clutter node",
+      "incident_edges": [
+        "edge_156",
+        "edge_157"
+      ],
+      "label": "clutter nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "coefficient",
+      "incident_edges": [
+        "edge_214"
+      ],
+      "label": "coefficient",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "computational cost",
+      "incident_edges": [
+        "edge_187"
+      ],
+      "label": "computational cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "computer vision",
+      "incident_edges": [
+        "edge_158",
+        "edge_226"
+      ],
+      "label": "computer vision",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "consistency",
+      "incident_edges": [
+        "edge_208"
+      ],
+      "label": "consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "consistency measure",
+      "incident_edges": [
+        "edge_159",
+        "edge_219"
+      ],
+      "label": "consistency measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "convergence",
+      "incident_edges": [
+        "edge_172",
+        "edge_173",
+        "edge_193",
+        "edge_209",
+        "edge_215"
+      ],
+      "label": "convergence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "convergence rate",
+      "incident_edges": [
+        "edge_177",
+        "edge_198",
+        "edge_217",
+        "edge_227"
+      ],
+      "label": "convergence rate",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "convolution filter",
+      "incident_edges": [
+        "edge_160"
+      ],
+      "label": "convolution filters",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "convolution output",
+      "incident_edges": [
+        "edge_161"
+      ],
+      "label": "convolution output",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "corruption level",
+      "incident_edges": [
+        "edge_147"
+      ],
+      "label": "corruption level",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "crossover",
+      "incident_edges": [
+        "edge_165",
+        "edge_166",
+        "edge_167",
+        "edge_168",
+        "edge_169"
+      ],
+      "label": "crossover",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "crossover process",
+      "incident_edges": [
+        "edge_162",
+        "edge_163",
+        "edge_164"
+      ],
+      "label": "crossover process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "d.phil. degree",
+      "incident_edges": [
+        "edge_170"
+      ],
+      "label": "D.Phil. degree",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data graph",
+      "incident_edges": [
+        "edge_185"
+      ],
+      "label": "data graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "data graph matching",
+      "incident_edges": [
+        "edge_156",
+        "edge_182"
+      ],
+      "label": "data graph matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "delaunay triangulation",
+      "incident_edges": [
+        "edge_171"
+      ],
+      "label": "Delaunay triangulation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deterministic hill climbing",
+      "incident_edges": [
+        "edge_172"
+      ],
+      "label": "deterministic hill climbing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deterministic hill-climbing",
+      "incident_edges": [
+        "edge_173"
+      ],
+      "label": "deterministic hill-climbing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deterministic method",
+      "incident_edges": [
+        "edge_174"
+      ],
+      "label": "deterministic method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "discrete relaxation",
+      "incident_edges": [
+        "edge_175"
+      ],
+      "label": "discrete relaxation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "disjoint subgraph",
+      "incident_edges": [
+        "edge_176"
+      ],
+      "label": "disjoint subgraphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "edge-set modification",
+      "incident_edges": [
+        "edge_218"
+      ],
+      "label": "edge-set modification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "edge-set restoration",
+      "incident_edges": [
+        "edge_220"
+      ],
+      "label": "edge-set restoration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "effectiveness",
+      "incident_edges": [
+        "edge_199"
+      ],
+      "label": "effectiveness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "empirical complexity",
+      "incident_edges": [
+        "edge_203"
+      ],
+      "label": "empirical complexity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fitness distribution",
+      "incident_edges": [
+        "edge_190"
+      ],
+      "label": "fitness distribution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fitness function",
+      "incident_edges": [
+        "edge_149"
+      ],
+      "label": "fitness function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fitness landscape",
+      "incident_edges": [
+        "edge_177"
+      ],
+      "label": "fitness landscape",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "fitness measure",
+      "incident_edges": [
+        "edge_173",
+        "edge_178",
+        "edge_179",
+        "edge_180"
+      ],
+      "label": "fitness measure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fitness value",
+      "incident_edges": [
+        "edge_211"
+      ],
+      "label": "fitness value",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fourier duality",
+      "incident_edges": [
+        "edge_181"
+      ],
+      "label": "Fourier duality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gaussian position error",
+      "incident_edges": [
+        "edge_182"
+      ],
+      "label": "Gaussian position errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "genetic algorithm",
+      "incident_edges": [
+        "edge_153",
+        "edge_154",
+        "edge_183",
+        "edge_184"
+      ],
+      "label": "genetic algorithms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "genetic matching technique",
+      "incident_edges": [
+        "edge_185"
+      ],
+      "label": "genetic matching technique",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 26,
+      "id": "genetic search",
+      "incident_edges": [
+        "edge_148",
+        "edge_151",
+        "edge_152",
+        "edge_159",
+        "edge_162",
+        "edge_163",
+        "edge_165",
+        "edge_172",
+        "edge_174",
+        "edge_186",
+        "edge_187",
+        "edge_188",
+        "edge_189",
+        "edge_190",
+        "edge_191",
+        "edge_192",
+        "edge_193",
+        "edge_194",
+        "edge_195",
+        "edge_196",
+        "edge_197",
+        "edge_198",
+        "edge_199",
+        "edge_200",
+        "edge_201",
+        "edge_216"
+      ],
+      "label": "genetic search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "geometric crossover",
+      "incident_edges": [
+        "edge_202"
+      ],
+      "label": "geometric crossover",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global configurational probability",
+      "incident_edges": [
+        "edge_168"
+      ],
+      "label": "global configurational probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global consistency measure",
+      "incident_edges": [
+        "edge_151"
+      ],
+      "label": "global consistency measure",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global optimum",
+      "incident_edges": [
+        "edge_165"
+      ],
+      "label": "global optimum",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global quality",
+      "incident_edges": [
+        "edge_166"
+      ],
+      "label": "global quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "global solution",
+      "incident_edges": [
+        "edge_167",
+        "edge_195"
+      ],
+      "label": "global solution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "globally consistent solution",
+      "incident_edges": [
+        "edge_225"
+      ],
+      "label": "globally consistent solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient ascent",
+      "incident_edges": [
+        "edge_147"
+      ],
+      "label": "gradient ascent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph isomorphism",
+      "incident_edges": [
+        "edge_186",
+        "edge_203"
+      ],
+      "label": "graph isomorphisms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph matching",
+      "incident_edges": [
+        "edge_175"
+      ],
+      "label": "graph matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph recovery",
+      "incident_edges": [
+        "edge_222"
+      ],
+      "label": "graph recovery",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "hamming distance",
+      "incident_edges": [
+        "edge_159",
+        "edge_178",
+        "edge_187",
+        "edge_188",
+        "edge_189",
+        "edge_205"
+      ],
+      "label": "Hamming distance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hamming distance change",
+      "incident_edges": [
+        "edge_169"
+      ],
+      "label": "Hamming distance change",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hamming distance variance",
+      "incident_edges": [
+        "edge_204"
+      ],
+      "label": "Hamming distance variance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "heuristic cost",
+      "incident_edges": [
+        "edge_206"
+      ],
+      "label": "heuristic costs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "high-level vision",
+      "incident_edges": [
+        "edge_207"
+      ],
+      "label": "high-level vision",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "hill climbing",
+      "incident_edges": [
+        "edge_197",
+        "edge_208"
+      ],
+      "label": "hill climbing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "hill-climbing process",
+      "incident_edges": [
+        "edge_209",
+        "edge_210"
+      ],
+      "label": "hill-climbing process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hou",
+      "incident_edges": [
+        "edge_213"
+      ],
+      "label": "hous",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "image processing",
+      "incident_edges": [
+        "edge_183"
+      ],
+      "label": "image processing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "image registration",
+      "incident_edges": [
+        "edge_181"
+      ],
+      "label": "image registration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initial condition",
+      "incident_edges": [
+        "edge_190"
+      ],
+      "label": "initial conditions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initial convergence",
+      "incident_edges": [
+        "edge_202"
+      ],
+      "label": "initial convergence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initial population",
+      "incident_edges": [
+        "edge_211"
+      ],
+      "label": "initial population",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intermediate solution",
+      "incident_edges": [
+        "edge_160"
+      ],
+      "label": "intermediate solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "iteration",
+      "incident_edges": [
+        "edge_191"
+      ],
+      "label": "iteration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "iterative relaxation process",
+      "incident_edges": [
+        "edge_212"
+      ],
+      "label": "iterative relaxation process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "joint probability",
+      "incident_edges": [
+        "edge_212"
+      ],
+      "label": "joint probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "label configuration",
+      "incident_edges": [
+        "edge_205",
+        "edge_212"
+      ],
+      "label": "label configuration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "local improvement",
+      "incident_edges": [
+        "edge_210"
+      ],
+      "label": "local improvements",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "local minima",
+      "incident_edges": [
+        "edge_224"
+      ],
+      "label": "local minima",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "matched filter",
+      "incident_edges": [
+        "edge_213",
+        "edge_214"
+      ],
+      "label": "matched filter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matching accuracy",
+      "incident_edges": [
+        "edge_148"
+      ],
+      "label": "matching accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matching error",
+      "incident_edges": [
+        "edge_205"
+      ],
+      "label": "matching errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matching result",
+      "incident_edges": [
+        "edge_180"
+      ],
+      "label": "matching results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "maximum fitness",
+      "incident_edges": [
+        "edge_192",
+        "edge_194"
+      ],
+      "label": "maximum fitness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "modal distance",
+      "incident_edges": [
+        "edge_188"
+      ],
+      "label": "modal distance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "mutation",
+      "incident_edges": [
+        "edge_165",
+        "edge_166",
+        "edge_167",
+        "edge_168",
+        "edge_206"
+      ],
+      "label": "mutation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mutation operation",
+      "incident_edges": [
+        "edge_215"
+      ],
+      "label": "mutation operations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "mutation probability",
+      "incident_edges": [
+        "edge_193",
+        "edge_216",
+        "edge_217"
+      ],
+      "label": "mutation probability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new solution",
+      "incident_edges": [
+        "edge_162"
+      ],
+      "label": "new solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "node",
+      "incident_edges": [
+        "edge_221"
+      ],
+      "label": "node",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "node deletion",
+      "incident_edges": [
+        "edge_218",
+        "edge_219"
+      ],
+      "label": "node deletion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "node reinsertion",
+      "incident_edges": [
+        "edge_220"
+      ],
+      "label": "node reinsertion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "node u",
+      "incident_edges": [
+        "edge_218",
+        "edge_220"
+      ],
+      "label": "node u",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "noise",
+      "incident_edges": [
+        "edge_222",
+        "edge_223"
+      ],
+      "label": "noise",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "null-labelling technique",
+      "incident_edges": [
+        "edge_223"
+      ],
+      "label": "null-labelling technique",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optimization method",
+      "incident_edges": [
+        "edge_184"
+      ],
+      "label": "optimization methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optimization problem",
+      "incident_edges": [
+        "edge_224"
+      ],
+      "label": "optimization problems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "partially consistent solution",
+      "incident_edges": [
+        "edge_225"
+      ],
+      "label": "partially consistent solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "pattern recognition",
+      "incident_edges": [
+        "edge_158",
+        "edge_183",
+        "edge_226"
+      ],
+      "label": "pattern recognition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance",
+      "incident_edges": [
+        "edge_174"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "population",
+      "incident_edges": [
+        "edge_206",
+        "edge_209"
+      ],
+      "label": "population",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "population diversity",
+      "incident_edges": [
+        "edge_163",
+        "edge_194",
+        "edge_204"
+      ],
+      "label": "population diversity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "population entry",
+      "incident_edges": [
+        "edge_179"
+      ],
+      "label": "population entry",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "population of solution",
+      "incident_edges": [
+        "edge_195"
+      ],
+      "label": "population of solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "population selection",
+      "incident_edges": [
+        "edge_176",
+        "edge_201"
+      ],
+      "label": "population selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "population size",
+      "incident_edges": [
+        "edge_177",
+        "edge_216",
+        "edge_221",
+        "edge_227"
+      ],
+      "label": "population size",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "probabilistic cost function",
+      "incident_edges": [
+        "edge_196"
+      ],
+      "label": "probabilistic cost function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "probabilistic crossover",
+      "incident_edges": [
+        "edge_202",
+        "edge_228"
+      ],
+      "label": "probabilistic crossover",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "random clutter",
+      "incident_edges": [
+        "edge_182"
+      ],
+      "label": "random clutter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "random match",
+      "incident_edges": [
+        "edge_228"
+      ],
+      "label": "random matches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "random start",
+      "incident_edges": [
+        "edge_197"
+      ],
+      "label": "random starts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational distance",
+      "incident_edges": [
+        "edge_189"
+      ],
+      "label": "relational distance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relational graph matching",
+      "incident_edges": [
+        "edge_152",
+        "edge_207"
+      ],
+      "label": "relational graph matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational matching",
+      "incident_edges": [
+        "edge_149"
+      ],
+      "label": "relational matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational structure",
+      "incident_edges": [
+        "edge_171"
+      ],
+      "label": "relational structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relaxation labelling",
+      "incident_edges": [
+        "edge_175"
+      ],
+      "label": "relaxation labelling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research paper",
+      "incident_edges": [
+        "edge_226"
+      ],
+      "label": "research papers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "result",
+      "incident_edges": [
+        "edge_196"
+      ],
+      "label": "result",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "rooftop respon",
+      "incident_edges": [],
+      "label": "rooftop responses",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "roulette-wheel algorithm",
+      "incident_edges": [
+        "edge_176"
+      ],
+      "label": "roulette-wheel algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "roulette-wheel selection",
+      "incident_edges": [
+        "edge_179"
+      ],
+      "label": "roulette-wheel selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "scene understanding",
+      "incident_edges": [
+        "edge_158",
+        "edge_207"
+      ],
+      "label": "scene understanding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search procedure",
+      "incident_edges": [
+        "edge_150"
+      ],
+      "label": "search procedure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "selection",
+      "incident_edges": [
+        "edge_165",
+        "edge_166"
+      ],
+      "label": "selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "selection operation",
+      "incident_edges": [
+        "edge_150"
+      ],
+      "label": "selection operations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "selection process",
+      "incident_edges": [
+        "edge_169",
+        "edge_178"
+      ],
+      "label": "selection process",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "simulated annealing",
+      "incident_edges": [
+        "edge_184",
+        "edge_197",
+        "edge_198",
+        "edge_224"
+      ],
+      "label": "simulated annealing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "simulation study",
+      "incident_edges": [
+        "edge_199"
+      ],
+      "label": "simulation study",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "solution",
+      "incident_edges": [
+        "edge_164",
+        "edge_186",
+        "edge_221"
+      ],
+      "label": "solution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "solution merging",
+      "incident_edges": [
+        "edge_228"
+      ],
+      "label": "solution merging",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "solution quality",
+      "incident_edges": [
+        "edge_191",
+        "edge_204"
+      ],
+      "label": "solution quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "spurious node",
+      "incident_edges": [
+        "edge_155"
+      ],
+      "label": "spurious node",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "spurious noise",
+      "incident_edges": [
+        "edge_222"
+      ],
+      "label": "spurious noise",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stereo image",
+      "incident_edges": [
+        "edge_213"
+      ],
+      "label": "stereo image",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stochastic optimisation",
+      "incident_edges": [
+        "edge_200"
+      ],
+      "label": "stochastic optimisation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural matching",
+      "incident_edges": [
+        "edge_153"
+      ],
+      "label": "structural matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph",
+      "incident_edges": [
+        "edge_164"
+      ],
+      "label": "subgraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph crossover",
+      "incident_edges": [
+        "edge_225"
+      ],
+      "label": "subgraph crossover",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph isomorphism",
+      "incident_edges": [
+        "edge_203"
+      ],
+      "label": "subgraph isomorphism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "thresholding error",
+      "incident_edges": [
+        "edge_155"
+      ],
+      "label": "thresholding errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "thresholding technique",
+      "incident_edges": [
+        "edge_161"
+      ],
+      "label": "thresholding technique",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training data",
+      "incident_edges": [
+        "edge_160"
+      ],
+      "label": "training data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training example",
+      "incident_edges": [
+        "edge_214"
+      ],
+      "label": "training examples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "trial solution",
+      "incident_edges": [
+        "edge_211"
+      ],
+      "label": "trial solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "university of york",
+      "incident_edges": [
+        "edge_170"
+      ],
+      "label": "University of York",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "voronoi region",
+      "incident_edges": [
+        "edge_171"
+      ],
+      "label": "Voronoi regions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "wiener-filtering technique",
+      "incident_edges": [
+        "edge_181"
+      ],
+      "label": "Wiener-filtering technique",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

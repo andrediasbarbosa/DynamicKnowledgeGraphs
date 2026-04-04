@@ -1,0 +1,804 @@
+[
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "associates",
+        "sources": [
+          "line digraph",
+          "orthogonal matrix"
+        ],
+        "targets": [
+          "graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "derives",
+        "sources": [
+          "orthogonal matrix"
+        ],
+        "targets": [
+          "two matrices"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "spectrum",
+          "adjacency matrix"
+        ],
+        "targets": [
+          "spectrum"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "characterizes",
+        "sources": [
+          "spectrum",
+          "strongly regular graphs"
+        ],
+        "targets": [
+          "isomorphism classes"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is_valid_for",
+        "sources": [
+          "conjecture",
+          "strongly regular graphs"
+        ],
+        "targets": [
+          "general graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "graphs",
+          "matrices"
+        ],
+        "targets": [
+          "adjacency matrix",
+          "Laplacian matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "encode",
+        "sources": [
+          "eigenvalues",
+          "matrix representation"
+        ],
+        "targets": [
+          "graph properties"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "give rise to",
+        "sources": [
+          "strongly regular graphs",
+          "cospectral graphs"
+        ],
+        "targets": [
+          "non-isomorphic graphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "consider",
+        "sources": [
+          "quantum walks",
+          "dynamical processes"
+        ],
+        "targets": [
+          "graph isomorphism problem"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "define",
+        "sources": [
+          "Hamiltonian",
+          "adjacency matrix"
+        ],
+        "targets": [
+          "graph G"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "graph",
+          "simple undirected graph"
+        ],
+        "targets": [
+          "loopless",
+          "without multiple edges"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "degree",
+          "vertex"
+        ],
+        "targets": [
+          "k-regular graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "induces",
+        "sources": [
+          "matrix U(G)"
+        ],
+        "targets": [
+          "quantum walk"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "minimum degree",
+          "graph G"
+        ],
+        "targets": [
+          "symmetry of U(G)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "do not contribute to",
+        "sources": [
+          "vertices",
+          "degree zero"
+        ],
+        "targets": [
+          "dimension of U(G)"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "isomorphic",
+        "sources": [
+          "D",
+          "F"
+        ],
+        "targets": [
+          "L D",
+          "L F"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "isomorphic",
+        "sources": [
+          "G",
+          "H"
+        ],
+        "targets": [
+          "U(G)",
+          "QU(H)Q"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "equal",
+        "sources": [
+          "M(G)",
+          "M(H)"
+        ],
+        "targets": [
+          "P M(H)P"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "U(G)"
+        ],
+        "targets": [
+          "G"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "obtained from",
+        "sources": [
+          "Sp(U(G))"
+        ],
+        "targets": [
+          "Sp(T(G))"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "eigenvector",
+          "T"
+        ],
+        "targets": [
+          "eigenvalue"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "graphs",
+          "G",
+          "H"
+        ],
+        "targets": [
+          "cospectral"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "equals",
+        "sources": [
+          "Sp(U(G))",
+          "Sp(U(H))"
+        ],
+        "targets": [
+          "Sp(T(G))",
+          "Sp(T(H))"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "G",
+          "H"
+        ],
+        "targets": [
+          "k-regular graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "equals",
+        "sources": [
+          "M(G)",
+          "M(H)"
+        ],
+        "targets": [
+          "Sp(M(G))",
+          "Sp(M(H))"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "not distinguished by",
+        "sources": [
+          "G",
+          "H"
+        ],
+        "targets": [
+          "Sp(U(G))",
+          "Sp(U(H))"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "implies",
+        "sources": [
+          "G",
+          "H"
+        ],
+        "targets": [
+          "Sp(M(G)p)",
+          "Sp(M(H)p)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has diameter",
+        "sources": [
+          "G",
+          "H"
+        ],
+        "targets": [
+          "p"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is different from",
+        "sources": [
+          "U(G)",
+          "M(LDG)"
+        ],
+        "targets": [
+          "support of U(G)p",
+          "support of M(LDG)p"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "strongly regular graph",
+          "parameters"
+        ],
+        "targets": [
+          "spectra"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "strongly regular graph",
+          "adjacency matrix"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computed from",
+        "sources": [
+          "S + (U(G))",
+          "M(G)"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "distinguishes",
+        "sources": [
+          "strongly regular graph",
+          "cospectral mates"
+        ],
+        "targets": [
+          "S + (U(G)3)"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "eigenvector",
+          "M(G)"
+        ],
+        "targets": [
+          "eigenvalue"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "takes",
+        "sources": [
+          "S+(U(G))",
+          "eigenvalue"
+        ],
+        "targets": [
+          "values"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "S+(U(G)2)",
+          "eigenvector"
+        ],
+        "targets": [
+          "eigenvalue"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "k-regular graph",
+          "n vertices"
+        ],
+        "targets": [
+          "G"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "account for",
+        "sources": [
+          "eigenvalues",
+          "S+(U(G)2)"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "strongly regular graph"
+        ],
+        "targets": [
+          "S + (U(G)3)"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "holds",
+        "sources": [
+          "condition",
+          "i = m, j ≠ l"
+        ],
+        "targets": [
+          "S + (U(G)3(i,j),(l,m))"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "k > 4"
+        ],
+        "targets": [
+          "k2 s + (r − s) M(G)j,l − k > 0"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "equals",
+        "sources": [
+          "Ma,b"
+        ],
+        "targets": [
+          "0"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "u"
+        ],
+        "targets": [
+          "eigenvector"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "determines",
+        "sources": [
+          "path",
+          "amplitude"
+        ],
+        "targets": [
+          "transition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "restricts",
+        "sources": [
+          "vertices",
+          "simple graph"
+        ],
+        "targets": [
+          "identification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "must be",
+        "sources": [
+          "paths",
+          "length three"
+        ],
+        "targets": [
+          "form"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "influence",
+        "sources": [
+          "edges",
+          "vertices"
+        ],
+        "targets": [
+          "paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "unique path",
+          "vertices"
+        ],
+        "targets": [
+          "amplitude"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "have",
+        "sources": [
+          "paths",
+          "vertices"
+        ],
+        "targets": [
+          "amplitude"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determine",
+        "sources": [
+          "E(G)",
+          "paths"
+        ],
+        "targets": [
+          "number of paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "exists",
+        "sources": [
+          "unique path",
+          "E(G)"
+        ],
+        "targets": [
+          "amplitude"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involve",
+        "sources": [
+          "paths",
+          "vertices"
+        ],
+        "targets": [
+          "amplitude"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "strongly regular graphs",
+          "parameters"
+        ],
+        "targets": [
+          "isomorphic"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implies",
+        "sources": [
+          "conjecture",
+          "U(G)",
+          "U(H)"
+        ],
+        "targets": [
+          "polynomial time"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "results in",
+        "sources": [
+          "conjecture",
+          "validity"
+        ],
+        "targets": [
+          "valid"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "denotes",
+        "sources": [
+          "srg(n, k, r, s)",
+          "N(n, k, r, s)"
+        ],
+        "targets": [
+          "non-isomorphic graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is_successful_for",
+        "sources": [
+          "method",
+          "strongly regular graphs"
+        ],
+        "targets": [
+          "strongly regular graphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "fails_for",
+        "sources": [
+          "method",
+          "4-regular graphs"
+        ],
+        "targets": [
+          "14 vertices"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "distinguishes",
+        "sources": [
+          "Sp(S + (U(G)3 ))",
+          "regular graphs"
+        ],
+        "targets": [
+          "13 vertices"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "can_be_downloaded_from",
+        "sources": [
+          "computer programmes",
+          "calculations"
+        ],
+        "targets": [
+          "website"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MAtrixRepresentationOfGraphs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "graph theory",
+          "algebraic graph theory"
+        ],
+        "targets": [
+          "graphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "informs",
+        "sources": [
+          "line digraphs",
+          "properties"
+        ],
+        "targets": [
+          "graph isomorphism"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "relates to",
+        "sources": [
+          "characteristic polynomials",
+          "directed graphs"
+        ],
+        "targets": [
+          "spectrum"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "quantum random walk",
+          "underlying digraph"
+        ],
+        "targets": [
+          "quantum algorithms"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "spectral properties",
+          "arc-graph"
+        ],
+        "targets": [
+          "graph theory"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

@@ -1,0 +1,979 @@
+[
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "heat kernel",
+          "Laplacian eigensystem"
+        ],
+        "targets": [
+          "graph embedding"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "characterizes",
+        "sources": [
+          "geodesic distances",
+          "multidimensional scaling"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Laplacian matrix"
+        ],
+        "targets": [
+          "routing",
+          "clustering",
+          "graph matching"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "locates",
+        "sources": [
+          "embedding algorithms"
+        ],
+        "targets": [
+          "manifolds"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "competes",
+        "sources": [
+          "topological information"
+        ],
+        "targets": [
+          "vector space embedding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is related to",
+        "sources": [
+          "heat equation",
+          "Laplacian spectrum"
+        ],
+        "targets": [
+          "heat kernel"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "encapsulates",
+        "sources": [
+          "heat kernel",
+          "graph"
+        ],
+        "targets": [
+          "information flow"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is related to",
+        "sources": [
+          "covariance matrix",
+          "Laplacian"
+        ],
+        "targets": [
+          "eigenvalues"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "is related to",
+        "sources": [
+          "scalar curvature",
+          "geodesic distances"
+        ],
+        "targets": [
+          "geometry"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "can compute",
+        "sources": [
+          "Laplacian spectrum",
+          "geodesic invariants"
+        ],
+        "targets": [
+          "geometric information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "heat kernel",
+          "Laplacian"
+        ],
+        "targets": [
+          "flow of information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "Laplacian",
+          "graph"
+        ],
+        "targets": [
+          "rate of flow"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "geodesic distance",
+          "matrix Ak"
+        ],
+        "targets": [
+          "number of paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "heat kernel",
+          "embedding methods"
+        ],
+        "targets": [
+          "covariance matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reveals",
+        "sources": [
+          "eigenvalues",
+          "heat kernel"
+        ],
+        "targets": [
+          "relationship"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "heat kernel",
+          "Euclidean distance"
+        ],
+        "targets": [
+          "approximate distance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "Euclidean distance",
+          "graph"
+        ],
+        "targets": [
+          "distance matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "equates",
+        "sources": [
+          "spectral form",
+          "Gaussian form"
+        ],
+        "targets": [
+          "heat kernel"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "multi-dimensional scaling",
+          "distance matrix"
+        ],
+        "targets": [
+          "graph embedding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "maps",
+        "sources": [
+          "multidimensional scaling",
+          "MDS"
+        ],
+        "targets": [
+          "data points",
+          "low-dimensional coordinates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "calculates",
+        "sources": [
+          "Euclidean distance",
+          "dE"
+        ],
+        "targets": [
+          "dissimilarity matrix",
+          "SM"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "reduces",
+        "sources": [
+          "heat kernel",
+          "normalized Laplacian"
+        ],
+        "targets": [
+          "Euclidean distance"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "dominates",
+        "sources": [
+          "small t",
+          "t"
+        ],
+        "targets": [
+          "first term"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "calculates",
+        "sources": [
+          "Euclidean distance",
+          "average"
+        ],
+        "targets": [
+          "distance matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "eigenvector",
+          "data"
+        ],
+        "targets": [
+          "features"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "varies",
+        "sources": [
+          "moments characterization",
+          "embedding"
+        ],
+        "targets": [
+          "results"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "used to obtain",
+        "sources": [
+          "matrix T",
+          "covariance matrix"
+        ],
+        "targets": [
+          "feature matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "form",
+        "sources": [
+          "eigenvalues",
+          "eigenvector matrix U"
+        ],
+        "targets": [
+          "eigenvalue matrix E"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "characterize",
+        "sources": [
+          "embedded node co-ordinates",
+          "graph structure"
+        ],
+        "targets": [
+          "point distribution"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "compute",
+        "sources": [
+          "centred co-ordinates Y C",
+          "node covariance matrix SY"
+        ],
+        "targets": [
+          "co-ordinate covariance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "characterize",
+        "sources": [
+          "graph spectral property",
+          "embedded point-sets"
+        ],
+        "targets": [
+          "node distribution"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "characterizes",
+        "sources": [
+          "leading eigenvalues",
+          "covariance matrix"
+        ],
+        "targets": [
+          "embedded point-sets"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "characterizes",
+        "sources": [
+          "spatial moments",
+          "leading two embedded coordinates"
+        ],
+        "targets": [
+          "embedded point-sets"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "define",
+        "sources": [
+          "invariants",
+          "point-sets"
+        ],
+        "targets": [
+          "shape"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compute",
+        "sources": [
+          "central moment",
+          "raw moment"
+        ],
+        "targets": [
+          "affine invariants"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "vary",
+        "sources": [
+          "distance matrices",
+          "spectral characterization"
+        ],
+        "targets": [
+          "t"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "computed from",
+        "sources": [
+          "invariants",
+          "central graph"
+        ],
+        "targets": [
+          "co-ordinate-matrix"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "express",
+        "sources": [
+          "second order moments"
+        ],
+        "targets": [
+          "point distribution"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "relate to",
+        "sources": [
+          "third order moments"
+        ],
+        "targets": [
+          "symmetry"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computed for",
+        "sources": [
+          "Euclidean distance",
+          "geodesic distance"
+        ],
+        "targets": [
+          "embeddings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "associated with",
+        "sources": [
+          "scalar curvature"
+        ],
+        "targets": [
+          "curvature matrices"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "determines",
+        "sources": [
+          "scalar curvature",
+          "geodesic"
+        ],
+        "targets": [
+          "Euclidean chord"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "estimates",
+        "sources": [
+          "Euclidean distance",
+          "geodesic distance"
+        ],
+        "targets": [
+          "scalar curvature"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "characterizes",
+        "sources": [
+          "third eigenvector",
+          "second eigenvector"
+        ],
+        "targets": [
+          "sectional curvature"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "approximates",
+        "sources": [
+          "geodesic distance",
+          "Euclidean distance"
+        ],
+        "targets": [
+          "radius of curvature"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "characterizes",
+        "sources": [
+          "graph embedding",
+          "scalar curvature"
+        ],
+        "targets": [
+          "graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "analyzes",
+        "sources": [
+          "principal components analysis",
+          "graph feature vectors"
+        ],
+        "targets": [
+          "graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "computes",
+        "sources": [
+          "Voronoi tessellations",
+          "feature points"
+        ],
+        "targets": [
+          "region adjacency graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "Delaunay triangulation",
+          "Voronoi regions"
+        ],
+        "targets": [
+          "Delaunay graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies to",
+        "sources": [
+          "direct heat kernel embedding"
+        ],
+        "targets": [
+          "clustering results"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "characterizes",
+        "sources": [
+          "eigenvector"
+        ],
+        "targets": [
+          "embedding"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "varies with",
+        "sources": [
+          "distance embedding"
+        ],
+        "targets": [
+          "t"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "time parameter"
+        ],
+        "targets": [
+          "four moments"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used for",
+        "sources": [
+          "PCA"
+        ],
+        "targets": [
+          "graph clustering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "show",
+        "sources": [
+          "moment vectors"
+        ],
+        "targets": [
+          "pairwise distances"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "value of t"
+        ],
+        "targets": [
+          "clusters"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "characterize",
+        "sources": [
+          "eigenvalues"
+        ],
+        "targets": [
+          "heat kernel"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "use",
+        "sources": [
+          "PCA projections",
+          "heat kernel eigenvalues"
+        ],
+        "targets": [
+          "scalar curvature histograms"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "characterize",
+        "sources": [
+          "scalar curvature histograms"
+        ],
+        "targets": [
+          "clusters"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "has",
+        "sources": [
+          "eigenvalue vector"
+        ],
+        "targets": [
+          "length 6"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "vary",
+        "sources": [
+          "distance embedding"
+        ],
+        "targets": [
+          "t"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "heat kernel eigenvalues",
+          "PCA"
+        ],
+        "targets": [
+          "Rand index"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "view number",
+          "histograms"
+        ],
+        "targets": [
+          "stability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "Laplacian eigenvalues",
+          "heat kernel embedding"
+        ],
+        "targets": [
+          "Rand index"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "indirect distance-based embedding",
+          "spectral characterization"
+        ],
+        "targets": [
+          "distance matrices"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "gives",
+        "sources": [
+          "PCA projection",
+          "distance matrix"
+        ],
+        "targets": [
+          "better performance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "gives",
+        "sources": [
+          "indirect embedding"
+        ],
+        "targets": [
+          "poorer results"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used for",
+        "sources": [
+          "heat kernel"
+        ],
+        "targets": [
+          "embedding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "direct embedding"
+        ],
+        "targets": [
+          "alternative method"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "shows",
+        "sources": [
+          "scalar curvature"
+        ],
+        "targets": [
+          "histograms"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "gives",
+        "sources": [
+          "embedding method",
+          "Young–Householder decomposition"
+        ],
+        "targets": [
+          "best results"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "estimate",
+        "sources": [
+          "spectral forms",
+          "Gaussian forms"
+        ],
+        "targets": [
+          "Euclidean distance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "perform",
+        "sources": [
+          "multidimensional scaling",
+          "node distances"
+        ],
+        "targets": [
+          "embedding"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "aid",
+        "sources": [
+          "scalar curvature",
+          "Euclidean distances"
+        ],
+        "targets": [
+          "visualizing graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "project",
+        "sources": [
+          "PCA",
+          "characterizations"
+        ],
+        "targets": [
+          "low-dimensional space"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Geometric_characterization_and_clusterin_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "Parametric Distance Embedding",
+          "Spectral Characterisation"
+        ],
+        "targets": [
+          "algorithmic application"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Laplacian eigenmaps",
+          "dimensionality reduction"
+        ],
+        "targets": [
+          "data representation"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "Normalized cuts",
+          "image segmentation"
+        ],
+        "targets": [
+          "segmentation quality"
+        ]
+      },
+      {
+        "confidence": 0.75,
+        "relation": "solves",
+        "sources": [
+          "eigendecomposition",
+          "weighted graph matching"
+        ],
+        "targets": [
+          "matching problems"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "spectral embedding",
+          "graphs"
+        ],
+        "targets": [
+          "pattern recognition"
+        ]
+      }
+    ],
+    "success": true
+  }
+]
