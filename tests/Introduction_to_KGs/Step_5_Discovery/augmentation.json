@@ -1,0 +1,2664 @@
+{
+  "links": [
+    {
+      "is_new": true,
+      "source": "false syntactic tokens in property iri",
+      "target": "aug:n:000001",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "graph not directed",
+      "target": "aug:n:000002",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "compute in-degree and out-degree",
+      "target": "aug:n:000002",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000003",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "gnns are valuable for real-world problem",
+      "target": "aug:n:000004",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "syntactic errors in property identifier",
+      "target": "aug:n:000005",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "islets of langerhan",
+      "target": "aug:n:000006",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "ability of gnns to capture complex relationship",
+      "target": "aug:n:000007",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "diabetes type 1",
+      "target": "aug:n:000008",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "result interpretation",
+      "target": "aug:n:000009",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "llm integration",
+      "target": "aug:n:000010",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000011",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "richer data use",
+      "target": "aug:n:000011",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "additional metadata",
+      "target": "aug:n:000012",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "entity",
+      "target": "aug:n:000012",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "algorithm execution",
+      "target": "aug:n:000013",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "shortest path printing",
+      "target": "aug:n:000013",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "an instance of a class not having any value for property p",
+      "target": "aug:n:000014",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "inconsistency",
+      "target": "aug:n:000014",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "data preparation",
+      "target": "aug:n:000015",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "data to meet required quality characteristic",
+      "target": "aug:n:000015",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000016",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "significant business value",
+      "target": "aug:n:000016",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "data offer",
+      "target": "aug:n:000017",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "data sharing",
+      "target": "aug:n:000017",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000018",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000019",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "application",
+      "target": "aug:n:000019",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "natural language command",
+      "target": "aug:n:000020",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "cypher code",
+      "target": "aug:n:000021",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "type having multiple immediate supertype",
+      "target": "aug:n:000022",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "hierarchy not being a tree",
+      "target": "aug:n:000022",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "self-referential calculation",
+      "target": "aug:n:000023",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "iterative solution",
+      "target": "aug:n:000023",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "running python code",
+      "target": "aug:n:000024",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "list of entity",
+      "target": "aug:n:000024",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "hpo ontology conversion to neo4j graph",
+      "target": "aug:n:000025",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "processing using cypher",
+      "target": "aug:n:000025",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "information from first-level node",
+      "target": "aug:n:000026",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "categorization of deeper node",
+      "target": "aug:n:000026",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "semantic knowledge graph",
+      "target": "aug:n:000027",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "cold-start problem",
+      "target": "aug:n:000027",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "graphdb reasoner",
+      "target": "aug:n:000028",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "new fact",
+      "target": "aug:n:000028",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "world wide web",
+      "target": "aug:n:000029",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "access to web page",
+      "target": "aug:n:000029",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000030",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "application",
+      "target": "aug:n:000030",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "cypher code",
+      "target": "aug:n:000030",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "linked data",
+      "target": "aug:n:000031",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000031",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "natural language command",
+      "target": "aug:n:000032",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "virtual assistants carry task",
+      "target": "aug:n:000032",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "transferring knowledge",
+      "target": "aug:n:000033",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "inferring knowledge for unseen topic",
+      "target": "aug:n:000033",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "orthomatcher",
+      "target": "aug:n:000034",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "coreference resolution",
+      "target": "aug:n:000034",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "assessing kg quality statu",
+      "target": "aug:n:000035",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "improving kg quality",
+      "target": "aug:n:000035",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "snomed_is_a relationship",
+      "target": "aug:n:000036",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "semantic type",
+      "target": "aug:n:000036",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "gate gazetteer",
+      "target": "aug:n:000037",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "entity recognition",
+      "target": "aug:n:000037",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "search engine",
+      "target": "aug:n:000038",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "graphdb reasoner",
+      "target": "aug:n:000039",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "leacock-chodorow formula",
+      "target": "aug:n:000040",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "kg principles application",
+      "target": "aug:n:000041",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge transfers via sentence alignment",
+      "target": "aug:n:000042",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "query",
+      "target": "aug:n:000043",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "additional metadata",
+      "target": "aug:n:000044",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000045",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "beta parameter",
+      "target": "aug:n:000046",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "linked data",
+      "target": "aug:n:000047",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "author grew up in birmingham",
+      "target": "aug:n:000048",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "applications using data",
+      "target": "aug:n:000049",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "needs not met by client-server paradigm",
+      "target": "aug:n:000050",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "extracting features from distant neighborhood",
+      "target": "aug:n:000051",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "query in example 5-4",
+      "target": "aug:n:000052",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "semantic knowledge graph",
+      "target": "aug:n:000053",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "kg choice",
+      "target": "aug:n:000054",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "explicit entities collection",
+      "target": "aug:n:000055",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "graph neural network",
+      "target": "aug:n:000056",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000057",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "challenging question",
+      "target": "aug:n:000058",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "snomed_is_a relationship",
+      "target": "aug:n:000059",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "cypher code",
+      "target": "aug:n:000060",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "significant business value",
+      "target": "aug:n:000060",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000060",
+      "target": "richer data use",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000060",
+      "target": "knowledge graph",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "algorithm execution",
+      "target": "aug:n:000061",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "model learns to favor output",
+      "target": "aug:n:000062",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "kg approach",
+      "target": "aug:n:000063",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "dependency model correctness validation",
+      "target": "aug:n:000064",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "complex impact propagation calculation",
+      "target": "aug:n:000065",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000066",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "result interpretation",
+      "target": "aug:n:000067",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000068",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "model prioritization of preferred response",
+      "target": "aug:n:000069",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "linked data",
+      "target": "aug:n:000070",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "building knowledge graph",
+      "target": "aug:n:000070",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "similar result",
+      "target": "aug:n:000071",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "organizing principle",
+      "target": "aug:n:000072",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000072",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "building knowledge graph",
+      "target": "aug:n:000073",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000073",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "few publisher constraint",
+      "target": "aug:n:000074",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000074",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "forum accessibility",
+      "target": "aug:n:000075",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000075",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "extensive data publishing",
+      "target": "aug:n:000076",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000076",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "book in print",
+      "target": "aug:n:000077",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000077",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "organizing principle",
+      "target": "aug:n:000078",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000078",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "few publisher constraint",
+      "target": "aug:n:000079",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000079",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "building knowledge graph",
+      "target": "aug:n:000080",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000080",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "extensive data publishing",
+      "target": "aug:n:000081",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000081",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000082",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000082",
+      "target": "linked data",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000082",
+      "target": "richer data use",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000082",
+      "target": "significant business value",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "cypher code",
+      "target": "aug:n:000083",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "richer data use",
+      "target": "aug:n:000083",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000083",
+      "target": "application",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000083",
+      "target": "linked data",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "linked data",
+      "target": "aug:n:000084",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "significant business value",
+      "target": "aug:n:000084",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000084",
+      "target": "application",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "aug:n:000084",
+      "target": "cypher code",
+      "type": "target"
+    },
+    {
+      "is_new": true,
+      "source": "linked data",
+      "target": "aug:n:000085",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "searching linked data",
+      "target": "aug:n:000085",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge graph",
+      "target": "aug:n:000086",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "semantic knowledge graph",
+      "target": "aug:n:000086",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "natural language command",
+      "target": "aug:n:000087",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "kg principles application",
+      "target": "aug:n:000088",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "linked data",
+      "target": "aug:n:000089",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "local path not found",
+      "target": "aug:n:000090",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "node passing values to neighbor",
+      "target": "aug:n:000091",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "knowledge transfers via sentence alignment",
+      "target": "aug:n:000092",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "leacock-chodorow formula",
+      "target": "aug:n:000093",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "orthomatcher",
+      "target": "aug:n:000094",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "no function symbol",
+      "target": "aug:n:000095",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "neo4j fabric",
+      "target": "aug:n:000096",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "organizing principle",
+      "target": "aug:n:000097",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "needs not met by client-server paradigm",
+      "target": "aug:n:000098",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "query in example 5-3",
+      "target": "aug:n:000099",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "query in example 5-4",
+      "target": "aug:n:000099",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "few publisher constraint",
+      "target": "aug:n:000100",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000100",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "extensive data publishing",
+      "target": "aug:n:000101",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000101",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "extensive data publishing",
+      "target": "aug:n:000102",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000102",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "building knowledge graph",
+      "target": "aug:n:000103",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000103",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "organizing principle",
+      "target": "aug:n:000104",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000104",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "organizing principle",
+      "target": "aug:n:000105",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000105",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "few publisher constraint",
+      "target": "aug:n:000106",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000106",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "building knowledge graph",
+      "target": "aug:n:000107",
+      "type": "source"
+    },
+    {
+      "is_new": true,
+      "source": "advanced graph dependency modeling",
+      "target": "aug:n:000107",
+      "type": "source"
+    }
+  ],
+  "meta": {
+    "created_utc": "2026-03-26T03:34:31Z",
+    "notes": "Overlay candidates only; not ground truth.",
+    "run_id": "run_20260325_215039",
+    "source": "kg render"
+  },
+  "nodes": [
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000001",
+      "insight_id": "run_20260325_215039:core_periphery:000100",
+      "is_new": true,
+      "label": "Periphery: false syntactic tokens in property iri",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_295"
+      ],
+      "id": "aug:n:000002",
+      "insight_id": "run_20260325_215039:claim_stance:000309",
+      "is_new": true,
+      "label": "Claim (Supports): graph not directed → compute in-degree and out-degree",
+      "type": "relation",
+      "witness_edges": [
+        "edge_63"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000003",
+      "insight_id": "run_20260325_215039:centrality:000120",
+      "is_new": true,
+      "label": "Centrality: knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000004",
+      "insight_id": "run_20260325_215039:core_periphery:000107",
+      "is_new": true,
+      "label": "Periphery: gnns are valuable for real-world problem",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000005",
+      "insight_id": "run_20260325_215039:core_periphery:000106",
+      "is_new": true,
+      "label": "Periphery: syntactic errors in property identifier",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000006",
+      "insight_id": "run_20260325_215039:core_periphery:000105",
+      "is_new": true,
+      "label": "Periphery: islets of langerhan",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000007",
+      "insight_id": "run_20260325_215039:core_periphery:000104",
+      "is_new": true,
+      "label": "Periphery: ability of gnns to capture complex relationship",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000008",
+      "insight_id": "run_20260325_215039:core_periphery:000103",
+      "is_new": true,
+      "label": "Periphery: diabetes type 1",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000009",
+      "insight_id": "run_20260325_215039:core_periphery:000102",
+      "is_new": true,
+      "label": "Periphery: result interpretation",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000010",
+      "insight_id": "run_20260325_215039:core_periphery:000101",
+      "is_new": true,
+      "label": "Periphery: llm integration",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "id": "aug:n:000011",
+      "insight_id": "run_20260325_215039:claim_stance:000294",
+      "is_new": true,
+      "label": "Claim (Supports): knowledge graph → richer data use",
+      "type": "relation",
+      "witness_edges": [
+        "edge_47"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"
+      ],
+      "id": "aug:n:000012",
+      "insight_id": "run_20260325_215039:claim_stance:000282",
+      "is_new": true,
+      "label": "Claim (Supports): additional metadata → entity",
+      "type": "relation",
+      "witness_edges": [
+        "edge_36"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"
+      ],
+      "id": "aug:n:000013",
+      "insight_id": "run_20260325_215039:claim_stance:000285",
+      "is_new": true,
+      "label": "Claim (Supports): algorithm execution → shortest path printing",
+      "type": "relation",
+      "witness_edges": [
+        "edge_39"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_172"
+      ],
+      "id": "aug:n:000014",
+      "insight_id": "run_20260325_215039:claim_stance:000252",
+      "is_new": true,
+      "label": "Claim (Opposes): an instance of a class not having any value for property p → inconsistency",
+      "type": "relation",
+      "witness_edges": [
+        "edge_0"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_150"
+      ],
+      "id": "aug:n:000015",
+      "insight_id": "run_20260325_215039:claim_stance:000291",
+      "is_new": true,
+      "label": "Claim (Supports): data preparation → data to meet required quality characteristic",
+      "type": "relation",
+      "witness_edges": [
+        "edge_44"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "id": "aug:n:000016",
+      "insight_id": "run_20260325_215039:claim_stance:000293",
+      "is_new": true,
+      "label": "Claim (Supports): knowledge graph → significant business value",
+      "type": "relation",
+      "witness_edges": [
+        "edge_46"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_434"
+      ],
+      "id": "aug:n:000017",
+      "insight_id": "run_20260325_215039:claim_stance:000275",
+      "is_new": true,
+      "label": "Claim (Supports): data offer → data sharing",
+      "type": "relation",
+      "witness_edges": [
+        "edge_3"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000018",
+      "insight_id": "run_20260325_215039:core_periphery:000080",
+      "is_new": true,
+      "label": "Core: knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000019",
+      "insight_id": "run_20260325_215039:claim_stance:000255",
+      "is_new": true,
+      "label": "Claim (Supports): knowledge graph → application",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000020",
+      "insight_id": "run_20260325_215039:relation_induction:000346",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_13"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "id": "aug:n:000021",
+      "insight_id": "run_20260325_215039:relation_induction:000329",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_42",
+        "edge_43",
+        "edge_54"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_274"
+      ],
+      "id": "aug:n:000022",
+      "insight_id": "run_20260325_215039:claim_stance:000273",
+      "is_new": true,
+      "label": "Claim (Supports): type having multiple immediate supertype → hierarchy not being a tree",
+      "type": "relation",
+      "witness_edges": [
+        "edge_28"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_52"
+      ],
+      "id": "aug:n:000023",
+      "insight_id": "run_20260325_215039:claim_stance:000270",
+      "is_new": true,
+      "label": "Claim (Supports): self-referential calculation → iterative solution",
+      "type": "relation",
+      "witness_edges": [
+        "edge_25"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"
+      ],
+      "id": "aug:n:000024",
+      "insight_id": "run_20260325_215039:claim_stance:000301",
+      "is_new": true,
+      "label": "Claim (Supports): running python code → list of entity",
+      "type": "relation",
+      "witness_edges": [
+        "edge_54"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_184"
+      ],
+      "id": "aug:n:000025",
+      "insight_id": "run_20260325_215039:claim_stance:000311",
+      "is_new": true,
+      "label": "Claim (Supports): hpo ontology conversion to neo4j graph → processing using cypher",
+      "type": "relation",
+      "witness_edges": [
+        "edge_65"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_212"
+      ],
+      "id": "aug:n:000026",
+      "insight_id": "run_20260325_215039:claim_stance:000312",
+      "is_new": true,
+      "label": "Claim (Supports): information from first-level node → categorization of deeper node",
+      "type": "relation",
+      "witness_edges": [
+        "edge_66"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_19"
+      ],
+      "id": "aug:n:000027",
+      "insight_id": "run_20260325_215039:claim_stance:000321",
+      "is_new": true,
+      "label": "Claim (Supports): semantic knowledge graph → cold-start problem",
+      "type": "relation",
+      "witness_edges": [
+        "edge_75"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_332"
+      ],
+      "id": "aug:n:000028",
+      "insight_id": "run_20260325_215039:claim_stance:000326",
+      "is_new": true,
+      "label": "Claim (Supports): graphdb reasoner → new fact",
+      "type": "relation",
+      "witness_edges": [
+        "edge_9"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_159"
+      ],
+      "id": "aug:n:000029",
+      "insight_id": "run_20260325_215039:claim_stance:000324",
+      "is_new": true,
+      "label": "Claim (Supports): world wide web → access to web page",
+      "type": "relation",
+      "witness_edges": [
+        "edge_78"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "id": "aug:n:000030",
+      "insight_id": "run_20260325_215039:community_detection:000150",
+      "is_new": true,
+      "label": "Community: knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_46",
+        "edge_47",
+        "edge_42",
+        "edge_12",
+        "edge_11"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "id": "aug:n:000031",
+      "insight_id": "run_20260325_215039:claim_stance:000256",
+      "is_new": true,
+      "label": "Claim (Supports): linked data → knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_12"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000032",
+      "insight_id": "run_20260325_215039:claim_stance:000257",
+      "is_new": true,
+      "label": "Claim (Supports): natural language command → virtual assistants carry task",
+      "type": "relation",
+      "witness_edges": [
+        "edge_13"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_7"
+      ],
+      "id": "aug:n:000033",
+      "insight_id": "run_20260325_215039:claim_stance:000322",
+      "is_new": true,
+      "label": "Claim (Supports): transferring knowledge → inferring knowledge for unseen topic",
+      "type": "relation",
+      "witness_edges": [
+        "edge_76"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_76"
+      ],
+      "id": "aug:n:000034",
+      "insight_id": "run_20260325_215039:claim_stance:000259",
+      "is_new": true,
+      "label": "Claim (Opposes): orthomatcher → coreference resolution",
+      "type": "relation",
+      "witness_edges": [
+        "edge_15"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_346"
+      ],
+      "id": "aug:n:000035",
+      "insight_id": "run_20260325_215039:claim_stance:000264",
+      "is_new": true,
+      "label": "Claim (Supports): assessing kg quality statu → improving kg quality",
+      "type": "relation",
+      "witness_edges": [
+        "edge_2"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_184"
+      ],
+      "id": "aug:n:000036",
+      "insight_id": "run_20260325_215039:claim_stance:000318",
+      "is_new": true,
+      "label": "Claim (Supports): snomed_is_a relationship → semantic type",
+      "type": "relation",
+      "witness_edges": [
+        "edge_72"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_76"
+      ],
+      "id": "aug:n:000037",
+      "insight_id": "run_20260325_215039:claim_stance:000315",
+      "is_new": true,
+      "label": "Claim (Opposes): gate gazetteer → entity recognition",
+      "type": "relation",
+      "witness_edges": [
+        "edge_7"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_353",
+        "An_Introduction_to_Knowledge_Graphs_chunk_96"
+      ],
+      "id": "aug:n:000038",
+      "insight_id": "run_20260325_215039:relation_induction:000332",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_24",
+        "edge_27"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_332"
+      ],
+      "id": "aug:n:000039",
+      "insight_id": "run_20260325_215039:relation_induction:000348",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_9"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"
+      ],
+      "id": "aug:n:000040",
+      "insight_id": "run_20260325_215039:relation_induction:000333",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_48"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_67"
+      ],
+      "id": "aug:n:000041",
+      "insight_id": "run_20260325_215039:relation_induction:000344",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_67"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_144"
+      ],
+      "id": "aug:n:000042",
+      "insight_id": "run_20260325_215039:relation_induction:000351",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_74"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180",
+        "An_Introduction_to_Knowledge_Graphs_chunk_411"
+      ],
+      "id": "aug:n:000043",
+      "insight_id": "run_20260325_215039:relation_induction:000330",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_20",
+        "edge_32"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"
+      ],
+      "id": "aug:n:000044",
+      "insight_id": "run_20260325_215039:relation_induction:000334",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_36"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "id": "aug:n:000045",
+      "insight_id": "run_20260325_215039:relation_induction:000337",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_46"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "id": "aug:n:000046",
+      "insight_id": "run_20260325_215039:relation_induction:000347",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_31"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203",
+        "Building_Applications_with_AI_Agents_chunk_180",
+        "An_Introduction_to_Knowledge_Graphs_chunk_434",
+        "An_Introduction_to_Knowledge_Graphs_chunk_400",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "id": "aug:n:000047",
+      "insight_id": "run_20260325_215039:relation_induction:000327",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_12",
+        "edge_26",
+        "edge_3",
+        "edge_33",
+        "edge_37"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"
+      ],
+      "id": "aug:n:000048",
+      "insight_id": "run_20260325_215039:relation_induction:000335",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_40"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_434"
+      ],
+      "id": "aug:n:000049",
+      "insight_id": "run_20260325_215039:relation_induction:000340",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_1"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "id": "aug:n:000050",
+      "insight_id": "run_20260325_215039:relation_induction:000341",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_49"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_296"
+      ],
+      "id": "aug:n:000051",
+      "insight_id": "run_20260325_215039:relation_induction:000342",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_61"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "id": "aug:n:000052",
+      "insight_id": "run_20260325_215039:relation_induction:000338",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_53"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_19"
+      ],
+      "id": "aug:n:000053",
+      "insight_id": "run_20260325_215039:relation_induction:000339",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_75"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_346",
+        "An_Introduction_to_Knowledge_Graphs_chunk_76",
+        "An_Introduction_to_Knowledge_Graphs_chunk_223",
+        "An_Introduction_to_Knowledge_Graphs_chunk_6"
+      ],
+      "id": "aug:n:000054",
+      "insight_id": "run_20260325_215039:relation_induction:000328",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_10",
+        "edge_14",
+        "edge_15",
+        "edge_16",
+        "edge_17"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "id": "aug:n:000055",
+      "insight_id": "run_20260325_215039:relation_induction:000336",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_45"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_363"
+      ],
+      "id": "aug:n:000056",
+      "insight_id": "run_20260325_215039:relation_induction:000343",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_62"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000057",
+      "insight_id": "run_20260325_215039:relation_induction:000350",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_25"
+      ],
+      "id": "aug:n:000058",
+      "insight_id": "run_20260325_215039:relation_induction:000349",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_59"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_184"
+      ],
+      "id": "aug:n:000059",
+      "insight_id": "run_20260325_215039:relation_induction:000345",
+      "is_new": true,
+      "label": "Relation Induction",
+      "type": "relation",
+      "witness_edges": [
+        "edge_72"
+      ]
+    },
+    {
+      "confidence": 0.8495458333333332,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "id": "aug:n:000060",
+      "insight_id": "run_20260325_215039:mechanism_consolidation:000811",
+      "is_new": true,
+      "label": "Hypothesis: cypher code <-> significant business value",
+      "type": "relation",
+      "witness_edges": [
+        "edge_42",
+        "edge_47",
+        "edge_12",
+        "edge_11",
+        "edge_46"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"
+      ],
+      "id": "aug:n:000061",
+      "insight_id": "run_20260325_215039:method_outcome:000244",
+      "is_new": true,
+      "label": "Method: algorithm execution",
+      "type": "relation",
+      "witness_edges": [
+        "edge_39"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "id": "aug:n:000062",
+      "insight_id": "run_20260325_215039:method_outcome:000248",
+      "is_new": true,
+      "label": "Outcome: model learns to favor output",
+      "type": "relation",
+      "witness_edges": [
+        "edge_33"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_174"
+      ],
+      "id": "aug:n:000063",
+      "insight_id": "run_20260325_215039:method_outcome:000247",
+      "is_new": true,
+      "label": "Method: kg approach",
+      "type": "relation",
+      "witness_edges": [
+        "edge_73"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000064",
+      "insight_id": "run_20260325_215039:method_outcome:000246",
+      "is_new": true,
+      "label": "Method: dependency model correctness validation",
+      "type": "relation",
+      "witness_edges": [
+        "edge_38"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000065",
+      "insight_id": "run_20260325_215039:method_outcome:000245",
+      "is_new": true,
+      "label": "Method: complex impact propagation calculation",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000066",
+      "insight_id": "run_20260325_215039:method_outcome:000243",
+      "is_new": true,
+      "label": "Method: advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000067",
+      "insight_id": "run_20260325_215039:method_outcome:000251",
+      "is_new": true,
+      "label": "Method: result interpretation",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [],
+      "id": "aug:n:000068",
+      "insight_id": "run_20260325_215039:domain_bridge:000201",
+      "is_new": true,
+      "label": "Domain bridge: 'knowledge graph' connects 4 different dom...",
+      "type": "relation",
+      "witness_edges": []
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "id": "aug:n:000069",
+      "insight_id": "run_20260325_215039:method_outcome:000249",
+      "is_new": true,
+      "label": "Method: model prioritization of preferred response",
+      "type": "relation",
+      "witness_edges": [
+        "edge_31"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "id": "aug:n:000070",
+      "insight_id": "run_20260325_215039:analogical_transfer:000352",
+      "is_new": true,
+      "label": "Analogy: linked data → building knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_12",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"
+      ],
+      "id": "aug:n:000071",
+      "insight_id": "run_20260325_215039:method_outcome:000250",
+      "is_new": true,
+      "label": "Outcome: similar result",
+      "type": "relation",
+      "witness_edges": [
+        "edge_43"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000072",
+      "insight_id": "run_20260325_215039:community_link:000441",
+      "is_new": true,
+      "label": "Community: organizing principle <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000073",
+      "insight_id": "run_20260325_215039:community_link:000439",
+      "is_new": true,
+      "label": "Community: building knowledge graph <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000074",
+      "insight_id": "run_20260325_215039:community_link:000517",
+      "is_new": true,
+      "label": "Community: few publisher constraint <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_25",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000075",
+      "insight_id": "run_20260325_215039:community_link:000587",
+      "is_new": true,
+      "label": "Community: forum accessibility <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_58"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000076",
+      "insight_id": "run_20260325_215039:community_link:000515",
+      "is_new": true,
+      "label": "Community: extensive data publishing <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_25",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000077",
+      "insight_id": "run_20260325_215039:community_link:000589",
+      "is_new": true,
+      "label": "Community: book in print <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_58"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000078",
+      "insight_id": "run_20260325_215039:community_link:000484",
+      "is_new": true,
+      "label": "Community: organizing principle <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000079",
+      "insight_id": "run_20260325_215039:community_link:000560",
+      "is_new": true,
+      "label": "Community: few publisher constraint <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000080",
+      "insight_id": "run_20260325_215039:community_link:000482",
+      "is_new": true,
+      "label": "Community: building knowledge graph <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.792804162054804,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000081",
+      "insight_id": "run_20260325_215039:community_link:000558",
+      "is_new": true,
+      "label": "Community: extensive data publishing <-> knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.7621233891324553,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "id": "aug:n:000082",
+      "insight_id": "run_20260325_215039:intervention_bottleneck:000812",
+      "is_new": true,
+      "label": "Intervention: knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_12",
+        "edge_46",
+        "edge_47",
+        "edge_42"
+      ]
+    },
+    {
+      "confidence": 0.7558611111111111,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "id": "aug:n:000083",
+      "insight_id": "run_20260325_215039:hypotheses_2:000353",
+      "is_new": true,
+      "label": "Hypothesis: cypher code <-> richer data use",
+      "type": "relation",
+      "witness_edges": [
+        "edge_46",
+        "edge_11",
+        "edge_12",
+        "edge_47",
+        "edge_42"
+      ]
+    },
+    {
+      "confidence": 0.7544444444444445,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000084",
+      "insight_id": "run_20260325_215039:hypotheses_2:000354",
+      "is_new": true,
+      "label": "Hypothesis: linked data <-> significant business value",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_42",
+        "edge_47",
+        "edge_46",
+        "edge_12"
+      ]
+    },
+    {
+      "confidence": 0.7538463212766184,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_96",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "id": "aug:n:000085",
+      "insight_id": "run_20260325_215039:text_similarity:000230",
+      "is_new": true,
+      "label": "Text Similar: linked data ~ searching linked data",
+      "type": "relation",
+      "witness_edges": [
+        "edge_12",
+        "edge_24"
+      ]
+    },
+    {
+      "confidence": 0.7508215908411017,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_19",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000086",
+      "insight_id": "run_20260325_215039:text_similarity:000231",
+      "is_new": true,
+      "label": "Text Similar: knowledge graph ~ semantic knowledge graph",
+      "type": "relation",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_75"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "id": "aug:n:000087",
+      "insight_id": "run_20260325_215039:core_periphery:000111",
+      "is_new": true,
+      "label": "Periphery: natural language command",
+      "type": "relation",
+      "witness_edges": [
+        "edge_13"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_67"
+      ],
+      "id": "aug:n:000088",
+      "insight_id": "run_20260325_215039:core_periphery:000109",
+      "is_new": true,
+      "label": "Periphery: kg principles application",
+      "type": "relation",
+      "witness_edges": [
+        "edge_67"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "id": "aug:n:000089",
+      "insight_id": "run_20260325_215039:core_periphery:000117",
+      "is_new": true,
+      "label": "Periphery: linked data",
+      "type": "relation",
+      "witness_edges": [
+        "edge_12"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "id": "aug:n:000090",
+      "insight_id": "run_20260325_215039:core_periphery:000113",
+      "is_new": true,
+      "label": "Periphery: local path not found",
+      "type": "relation",
+      "witness_edges": [
+        "edge_32"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_296"
+      ],
+      "id": "aug:n:000091",
+      "insight_id": "run_20260325_215039:core_periphery:000114",
+      "is_new": true,
+      "label": "Periphery: node passing values to neighbor",
+      "type": "relation",
+      "witness_edges": [
+        "edge_69"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_144"
+      ],
+      "id": "aug:n:000092",
+      "insight_id": "run_20260325_215039:core_periphery:000119",
+      "is_new": true,
+      "label": "Periphery: knowledge transfers via sentence alignment",
+      "type": "relation",
+      "witness_edges": [
+        "edge_74"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"
+      ],
+      "id": "aug:n:000093",
+      "insight_id": "run_20260325_215039:core_periphery:000118",
+      "is_new": true,
+      "label": "Periphery: leacock-chodorow formula",
+      "type": "relation",
+      "witness_edges": [
+        "edge_48"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_76"
+      ],
+      "id": "aug:n:000094",
+      "insight_id": "run_20260325_215039:core_periphery:000116",
+      "is_new": true,
+      "label": "Periphery: orthomatcher",
+      "type": "relation",
+      "witness_edges": [
+        "edge_15"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_223"
+      ],
+      "id": "aug:n:000095",
+      "insight_id": "run_20260325_215039:core_periphery:000112",
+      "is_new": true,
+      "label": "Periphery: no function symbol",
+      "type": "relation",
+      "witness_edges": [
+        "edge_14"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "id": "aug:n:000096",
+      "insight_id": "run_20260325_215039:core_periphery:000108",
+      "is_new": true,
+      "label": "Periphery: neo4j fabric",
+      "type": "relation",
+      "witness_edges": [
+        "edge_50"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "id": "aug:n:000097",
+      "insight_id": "run_20260325_215039:core_periphery:000115",
+      "is_new": true,
+      "label": "Periphery: organizing principle",
+      "type": "relation",
+      "witness_edges": [
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.7466666666666667,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "id": "aug:n:000098",
+      "insight_id": "run_20260325_215039:core_periphery:000110",
+      "is_new": true,
+      "label": "Periphery: needs not met by client-server paradigm",
+      "type": "relation",
+      "witness_edges": [
+        "edge_49"
+      ]
+    },
+    {
+      "confidence": 0.7383388007888071,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "id": "aug:n:000099",
+      "insight_id": "run_20260325_215039:text_similarity:000232",
+      "is_new": true,
+      "label": "Text Similar: query in example 5-3 ~ query in example 5-4",
+      "type": "relation",
+      "witness_edges": [
+        "edge_52",
+        "edge_53"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000100",
+      "insight_id": "run_20260325_215039:community_link:000569",
+      "is_new": true,
+      "label": "Community: few publisher constraint <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000101",
+      "insight_id": "run_20260325_215039:community_link:000571",
+      "is_new": true,
+      "label": "Community: extensive data publishing <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000102",
+      "insight_id": "run_20260325_215039:community_link:000567",
+      "is_new": true,
+      "label": "Community: extensive data publishing <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000103",
+      "insight_id": "run_20260325_215039:community_link:000491",
+      "is_new": true,
+      "label": "Community: building knowledge graph <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000104",
+      "insight_id": "run_20260325_215039:community_link:000497",
+      "is_new": true,
+      "label": "Community: organizing principle <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000105",
+      "insight_id": "run_20260325_215039:community_link:000493",
+      "is_new": true,
+      "label": "Community: organizing principle <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000106",
+      "insight_id": "run_20260325_215039:community_link:000573",
+      "is_new": true,
+      "label": "Community: few publisher constraint <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ]
+    },
+    {
+      "confidence": 0.7212843676229435,
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "id": "aug:n:000107",
+      "insight_id": "run_20260325_215039:community_link:000495",
+      "is_new": true,
+      "label": "Community: building knowledge graph <-> advanced graph dependency modeling",
+      "type": "relation",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ]
+    }
+  ]
+}

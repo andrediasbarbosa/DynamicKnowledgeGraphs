@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "generated_at": "2026-03-26 03:37:32 UTC",
+    "run_id": "run_20260325_215039",
+    "total_patterns": 0
+  },
+  "patterns": [
+
+  ],
+  "statistics": {
+    "total_patterns": 0,
+    "by_type": {
+
+    },
+    "by_size": {
+
+    }
+  },
+  "usage": {
+    "description": "Pattern library for reuse and querying",
+    "query_by_id": "Use 'id' field to retrieve specific patterns",
+    "query_by_size": "Use 'size' field to find patterns of specific dimensions",
+    "query_by_nodes": "Use 'node_ids' to find patterns containing specific entities",
+    "similarity_search": "Compare 'nodes' arrays to find structurally similar patterns"
+  }
+}

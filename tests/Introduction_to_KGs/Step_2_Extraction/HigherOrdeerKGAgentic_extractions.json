@@ -1,0 +1,172 @@
+[
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_0",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_1",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_2",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_3",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 38, column 118: syntax error while parsing value - invalid string: missing closing quote; last read: '\"dist]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_4",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_5",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 7, column 23: syntax error while parsing value - invalid number; expected digit after '.'; last read: '0.]'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_6",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_7",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_8",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_9",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_10",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_11",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_12",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_13",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_14",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_15",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_16",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_17",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_18",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_19",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_20",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_21",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_22",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_23",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_24",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 13: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"ca]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_25",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 18: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"type]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_26",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_27",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_28",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_29",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_30",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_31",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_32",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "HigherOrdeerKGAgentic_chunk_33",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  }
+]

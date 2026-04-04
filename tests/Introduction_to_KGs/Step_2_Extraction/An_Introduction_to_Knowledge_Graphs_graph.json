@@ -1,0 +1,988 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_0",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_172",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "an instance of a class not having any value for property p"
+      ],
+      "targets": [
+        "inconsistency"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_1",
+      "properties": {},
+      "relation": "provide",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_434",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "applications using data"
+      ],
+      "targets": [
+        "services like analytic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_10",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_6",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "kg choice"
+      ],
+      "targets": [
+        "kg success and adoption"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_11",
+      "properties": {},
+      "relation": "powers",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_422",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "application"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_12",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_98",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "linked data"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_13",
+      "properties": {},
+      "relation": "trigger",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_422",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "natural language command"
+      ],
+      "targets": [
+        "virtual assistants carry task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_14",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_223",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "no function symbol"
+      ],
+      "targets": [
+        "dl decidability"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_15",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_76",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "orthomatcher"
+      ],
+      "targets": [
+        "coreference resolution"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_16",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_346",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "poor quality kgs"
+      ],
+      "targets": [
+        "significant organizational cost"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_17",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_76",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "pronominal coreference resolution module"
+      ],
+      "targets": [
+        "coreference resolution"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_18",
+      "properties": {},
+      "relation": "results in",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_158",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "query execution"
+      ],
+      "targets": [
+        "no query violation"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_19",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_426",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "query to chatgpt"
+      ],
+      "targets": [
+        "answer with book titles, authors, link"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_2",
+      "properties": {},
+      "relation": "is necessary for",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_346",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "assessing kg quality statu"
+      ],
+      "targets": [
+        "improving kg quality"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_20",
+      "properties": {},
+      "relation": "triggers",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_411",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "query"
+      ],
+      "targets": [
+        "karl answering process"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_21",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_283",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "schema identifier uniqueness"
+      ],
+      "targets": [
+        "functional property"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_22",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_148",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "schema:location value invalid literal"
+      ],
+      "targets": [
+        "sparql query returns false"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_23",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_148",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "schema:location value is iri"
+      ],
+      "targets": [
+        "sparql query returns true"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_24",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_96",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "search engine"
+      ],
+      "targets": [
+        "searching linked data"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_25",
+      "properties": {},
+      "relation": "necessitates",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_52",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "self-referential calculation"
+      ],
+      "targets": [
+        "iterative solution"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_26",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_400",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "semantify page"
+      ],
+      "targets": [
+        "deployment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_27",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_353",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "string similarity measure"
+      ],
+      "targets": [
+        "distinguishing typo from undefined property"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_28",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_274",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "type having multiple immediate supertype"
+      ],
+      "targets": [
+        "hierarchy not being a tree"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_29",
+      "properties": {},
+      "relation": "cause",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_332",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "user"
+      ],
+      "targets": [
+        "node expansion"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_3",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_434",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "data offer"
+      ],
+      "targets": [
+        "data sharing"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_30",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_152",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "value 3 being within range [1,5]"
+      ],
+      "targets": [
+        "sparql query returns true"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_4",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_52",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "each iteration"
+      ],
+      "targets": [
+        "pagerank values update"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_5",
+      "properties": {},
+      "relation": "cause",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_353",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "false syntactic tokens in property iri",
+        "missing syntactic tokens in property iri"
+      ],
+      "targets": [
+        "syntactic errors in property identifier"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_6",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_283",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "few publisher constraint"
+      ],
+      "targets": [
+        "extensive data publishing"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_7",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_76",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "gate gazetteer"
+      ],
+      "targets": [
+        "entity recognition"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_8",
+      "properties": {},
+      "relation": "enables demonstration of",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_369",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "german tourism kg excerpt"
+      ],
+      "targets": [
+        "knowledge enrichment"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_9",
+      "properties": {},
+      "relation": "infers",
+      "source_chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_332",
+      "source_document": "An_Introduction_to_Knowledge_Graphs",
+      "sources": [
+        "graphdb reasoner"
+      ],
+      "targets": [
+        "new fact"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 31,
+    "num_nodes": 60
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "an instance of a class not having any value for property p",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "an instance of a class not having any value for property P",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "answer with book titles, authors, link",
+      "incident_edges": [
+        "edge_19"
+      ],
+      "label": "answer with book titles, authors, links",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "application",
+      "incident_edges": [
+        "edge_11"
+      ],
+      "label": "application",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "applications using data",
+      "incident_edges": [
+        "edge_1"
+      ],
+      "label": "Applications using data",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "assessing kg quality statu",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "Assessing KG quality status",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "coreference resolution",
+      "incident_edges": [
+        "edge_15",
+        "edge_17"
+      ],
+      "label": "coreference resolution",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "data offer",
+      "incident_edges": [
+        "edge_3"
+      ],
+      "label": "Data offer",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "data sharing",
+      "incident_edges": [
+        "edge_3"
+      ],
+      "label": "Data sharing",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "deployment",
+      "incident_edges": [
+        "edge_26"
+      ],
+      "label": "Deployment",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "distinguishing typo from undefined property",
+      "incident_edges": [
+        "edge_27"
+      ],
+      "label": "distinguishing typo from undefined property",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "dl decidability",
+      "incident_edges": [
+        "edge_14"
+      ],
+      "label": "DL decidability",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "each iteration",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "each iteration",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "entity recognition",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "entity recognition",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "extensive data publishing",
+      "incident_edges": [
+        "edge_6"
+      ],
+      "label": "Extensive data publishing",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "false syntactic tokens in property iri",
+      "incident_edges": [
+        "edge_5"
+      ],
+      "label": "false syntactic tokens in property IRI",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "few publisher constraint",
+      "incident_edges": [
+        "edge_6"
+      ],
+      "label": "Few publisher constraints",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "functional property",
+      "incident_edges": [
+        "edge_21"
+      ],
+      "label": "Functional properties",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "gate gazetteer",
+      "incident_edges": [
+        "edge_7"
+      ],
+      "label": "GATE gazetteer",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "german tourism kg excerpt",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "German Tourism KG excerpt",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "graphdb reasoner",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "GraphDB reasoner",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "hierarchy not being a tree",
+      "incident_edges": [
+        "edge_28"
+      ],
+      "label": "hierarchy not being a tree",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "improving kg quality",
+      "incident_edges": [
+        "edge_2"
+      ],
+      "label": "Improving KG quality",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "inconsistency",
+      "incident_edges": [
+        "edge_0"
+      ],
+      "label": "inconsistency",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "iterative solution",
+      "incident_edges": [
+        "edge_25"
+      ],
+      "label": "iterative solution",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "karl answering process",
+      "incident_edges": [
+        "edge_20"
+      ],
+      "label": "KARL answering process",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "kg choice",
+      "incident_edges": [
+        "edge_10"
+      ],
+      "label": "KG choices",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "kg success and adoption",
+      "incident_edges": [
+        "edge_10"
+      ],
+      "label": "KG success and adoption",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "knowledge enrichment",
+      "incident_edges": [
+        "edge_8"
+      ],
+      "label": "knowledge enrichment",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_11",
+        "edge_12"
+      ],
+      "label": "knowledge graph",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "linked data",
+      "incident_edges": [
+        "edge_12"
+      ],
+      "label": "Linked Data",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "missing syntactic tokens in property iri",
+      "incident_edges": [
+        "edge_5"
+      ],
+      "label": "missing syntactic tokens in property IRI",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "natural language command",
+      "incident_edges": [
+        "edge_13"
+      ],
+      "label": "natural language commands",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "new fact",
+      "incident_edges": [
+        "edge_9"
+      ],
+      "label": "New facts",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "no function symbol",
+      "incident_edges": [
+        "edge_14"
+      ],
+      "label": "No function symbols",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "no query violation",
+      "incident_edges": [
+        "edge_18"
+      ],
+      "label": "no query violation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "node expansion",
+      "incident_edges": [
+        "edge_29"
+      ],
+      "label": "Node expansion",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "orthomatcher",
+      "incident_edges": [
+        "edge_15"
+      ],
+      "label": "OrthoMatcher",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "pagerank values update",
+      "incident_edges": [
+        "edge_4"
+      ],
+      "label": "PageRank values update",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "poor quality kgs",
+      "incident_edges": [
+        "edge_16"
+      ],
+      "label": "Poor quality KGs",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "pronominal coreference resolution module",
+      "incident_edges": [
+        "edge_17"
+      ],
+      "label": "Pronominal Coreference Resolution module",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "query",
+      "incident_edges": [
+        "edge_20"
+      ],
+      "label": "Query",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "query execution",
+      "incident_edges": [
+        "edge_18"
+      ],
+      "label": "query execution",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "query to chatgpt",
+      "incident_edges": [
+        "edge_19"
+      ],
+      "label": "query to ChatGPT",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "schema identifier uniqueness",
+      "incident_edges": [
+        "edge_21"
+      ],
+      "label": "Schema identifier uniqueness",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "schema:location value invalid literal",
+      "incident_edges": [
+        "edge_22"
+      ],
+      "label": "schema:location value invalid literal",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "schema:location value is iri",
+      "incident_edges": [
+        "edge_23"
+      ],
+      "label": "schema:location value is IRI",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "search engine",
+      "incident_edges": [
+        "edge_24"
+      ],
+      "label": "Search engines",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "searching linked data",
+      "incident_edges": [
+        "edge_24"
+      ],
+      "label": "searching Linked Data",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "self-referential calculation",
+      "incident_edges": [
+        "edge_25"
+      ],
+      "label": "self-referential calculation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "semantify page",
+      "incident_edges": [
+        "edge_26"
+      ],
+      "label": "Semantify pages",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "services like analytic",
+      "incident_edges": [
+        "edge_1"
+      ],
+      "label": "Services like analytics",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "significant organizational cost",
+      "incident_edges": [
+        "edge_16"
+      ],
+      "label": "Significant organizational costs",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "sparql query returns false",
+      "incident_edges": [
+        "edge_22"
+      ],
+      "label": "SPARQL query returns false",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "sparql query returns true",
+      "incident_edges": [
+        "edge_23",
+        "edge_30"
+      ],
+      "label": "SPARQL query returns true",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "string similarity measure",
+      "incident_edges": [
+        "edge_27"
+      ],
+      "label": "string similarity measures",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "syntactic errors in property identifier",
+      "incident_edges": [
+        "edge_5"
+      ],
+      "label": "syntactic errors in property identifiers",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "type having multiple immediate supertype",
+      "incident_edges": [
+        "edge_28"
+      ],
+      "label": "type having multiple immediate supertypes",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "user",
+      "incident_edges": [
+        "edge_29"
+      ],
+      "label": "User",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "value 3 being within range [1,5]",
+      "incident_edges": [
+        "edge_30"
+      ],
+      "label": "Value 3 being within range [1,5]",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "virtual assistants carry task",
+      "incident_edges": [
+        "edge_13"
+      ],
+      "label": "virtual assistants carry tasks",
+      "properties": {}
+    }
+  ]
+}

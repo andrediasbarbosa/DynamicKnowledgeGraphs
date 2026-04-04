@@ -1,0 +1,584 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.95,
+      "id": "edge_56",
+      "properties": {},
+      "relation": "leads to",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_363",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "ability of gnns to capture complex relationship"
+      ],
+      "targets": [
+        "gnns are valuable for real-world problem",
+        "gnns are versatile across diverse domain"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_57",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_334",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "assigning incremental id to node"
+      ],
+      "targets": [
+        "updated edge data"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_58",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_25",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "book in print"
+      ],
+      "targets": [
+        "forum accessibility"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_59",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_25",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "challenging question"
+      ],
+      "targets": [
+        "author interest"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_60",
+      "properties": {},
+      "relation": "cause damage to",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_192",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "diabetes type 1",
+        "hyperglycaemia"
+      ],
+      "targets": [
+        "islets of langerhan"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_61",
+      "properties": {},
+      "relation": "creates",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_296",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "extracting features from distant neighborhood"
+      ],
+      "targets": [
+        "comprehensive view of node's structural context"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_62",
+      "properties": {},
+      "relation": "address",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_363",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "graph neural network"
+      ],
+      "targets": [
+        "fundamental challenges in graph-based ml task"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_63",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_295",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "graph not directed"
+      ],
+      "targets": [
+        "compute in-degree and out-degree"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_64",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_184",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "hierarchical structure"
+      ],
+      "targets": [
+        "information propagation"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_65",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_184",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "hpo ontology conversion to neo4j graph"
+      ],
+      "targets": [
+        "processing using cypher"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_66",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_212",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "information from first-level node"
+      ],
+      "targets": [
+        "categorization of deeper node"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_67",
+      "properties": {},
+      "relation": "solves",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_67",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "kg principles application"
+      ],
+      "targets": [
+        "real-world problem"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_68",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_67",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "llm integration"
+      ],
+      "targets": [
+        "result interpretation",
+        "decision support"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_69",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_296",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "node passing values to neighbor"
+      ],
+      "targets": [
+        "neighbors aggregating value"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_70",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_334",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "preprocessing csv file"
+      ],
+      "targets": [
+        "compact numerical representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_71",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_334",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "preprocessing phase"
+      ],
+      "targets": [
+        "financial transaction graph suitable for gnn"
+      ]
+    },
+    {
+      "confidence": 0.98,
+      "id": "edge_72",
+      "properties": {},
+      "relation": "propagates",
+      "source_chunk_id": "Knowledge_Graphs_and_LLMs_in_Action_chunk_184",
+      "source_document": "Knowledge_Graphs_and_LLMs_in_Action",
+      "sources": [
+        "snomed_is_a relationship"
+      ],
+      "targets": [
+        "semantic type"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 17,
+    "num_nodes": 37
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "ability of gnns to capture complex relationship",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "Ability of GNNs to capture complex relationships",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "assigning incremental id to node",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "assigning incremental ID to nodes",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "author interest",
+      "incident_edges": [
+        "edge_59"
+      ],
+      "label": "Author interest",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "book in print",
+      "incident_edges": [
+        "edge_58"
+      ],
+      "label": "Book in print",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "categorization of deeper node",
+      "incident_edges": [
+        "edge_66"
+      ],
+      "label": "Categorization of deeper nodes",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "challenging question",
+      "incident_edges": [
+        "edge_59"
+      ],
+      "label": "Challenging questions",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "compact numerical representation",
+      "incident_edges": [
+        "edge_70"
+      ],
+      "label": "compact numerical representation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "comprehensive view of node's structural context",
+      "incident_edges": [
+        "edge_61"
+      ],
+      "label": "comprehensive view of node's structural context",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "compute in-degree and out-degree",
+      "incident_edges": [
+        "edge_63"
+      ],
+      "label": "Compute in-degree and out-degree",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "decision support",
+      "incident_edges": [
+        "edge_68"
+      ],
+      "label": "Decision support",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "diabetes type 1",
+      "incident_edges": [
+        "edge_60"
+      ],
+      "label": "diabetes type 1",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "extracting features from distant neighborhood",
+      "incident_edges": [
+        "edge_61"
+      ],
+      "label": "extracting features from distant neighborhoods",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "financial transaction graph suitable for gnn",
+      "incident_edges": [
+        "edge_71"
+      ],
+      "label": "financial transaction graph suitable for GNN",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "forum accessibility",
+      "incident_edges": [
+        "edge_58"
+      ],
+      "label": "Forum accessibility",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "fundamental challenges in graph-based ml task",
+      "incident_edges": [
+        "edge_62"
+      ],
+      "label": "fundamental challenges in graph-based ML tasks",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "gnns are valuable for real-world problem",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "GNNs are valuable for real-world problems",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "gnns are versatile across diverse domain",
+      "incident_edges": [
+        "edge_56"
+      ],
+      "label": "GNNs are versatile across diverse domains",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "graph neural network",
+      "incident_edges": [
+        "edge_62"
+      ],
+      "label": "Graph neural networks",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "graph not directed",
+      "incident_edges": [
+        "edge_63"
+      ],
+      "label": "Graph not directed",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "hierarchical structure",
+      "incident_edges": [
+        "edge_64"
+      ],
+      "label": "hierarchical structure",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "hpo ontology conversion to neo4j graph",
+      "incident_edges": [
+        "edge_65"
+      ],
+      "label": "HPO ontology conversion to Neo4j graph",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "hyperglycaemia",
+      "incident_edges": [
+        "edge_60"
+      ],
+      "label": "hyperglycaemia",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "information from first-level node",
+      "incident_edges": [
+        "edge_66"
+      ],
+      "label": "Information from first-level nodes",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "information propagation",
+      "incident_edges": [
+        "edge_64"
+      ],
+      "label": "information propagation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "islets of langerhan",
+      "incident_edges": [
+        "edge_60"
+      ],
+      "label": "islets of Langerhans",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "kg principles application",
+      "incident_edges": [
+        "edge_67"
+      ],
+      "label": "KG principles application",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "llm integration",
+      "incident_edges": [
+        "edge_68"
+      ],
+      "label": "LLM integration",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "neighbors aggregating value",
+      "incident_edges": [
+        "edge_69"
+      ],
+      "label": "neighbors aggregating values",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "node passing values to neighbor",
+      "incident_edges": [
+        "edge_69"
+      ],
+      "label": "node passing values to neighbors",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "preprocessing csv file",
+      "incident_edges": [
+        "edge_70"
+      ],
+      "label": "preprocessing CSV files",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "preprocessing phase",
+      "incident_edges": [
+        "edge_71"
+      ],
+      "label": "preprocessing phase",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "processing using cypher",
+      "incident_edges": [
+        "edge_65"
+      ],
+      "label": "processing using Cypher",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "real-world problem",
+      "incident_edges": [
+        "edge_67"
+      ],
+      "label": "Real-world problems",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "result interpretation",
+      "incident_edges": [
+        "edge_68"
+      ],
+      "label": "Result interpretation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "semantic type",
+      "incident_edges": [
+        "edge_72"
+      ],
+      "label": "semantic types",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "snomed_is_a relationship",
+      "incident_edges": [
+        "edge_72"
+      ],
+      "label": "SNOMED_IS_A relationship",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "updated edge data",
+      "incident_edges": [
+        "edge_57"
+      ],
+      "label": "updated edge data",
+      "properties": {}
+    }
+  ]
+}

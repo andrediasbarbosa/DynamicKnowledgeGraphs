@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Introduction to Knowledge Graphs Knowledge Discovery (Augmented)</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.75.0/dist/3d-force-graph.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            overflow: hidden;
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #header h1 { font-size: 1.5em; font-weight: 500; }
+        #stats { font-size: 0.9em; opacity: 0.8; }
+        #graph { width: 100vw; height: 100vh; }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        #controls label { display: block; margin-bottom: 8px; font-size: 0.85em; }
+        #controls input[type="range"] { width: 150px; }
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 16px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            font-size: 0.9em;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #tooltip h3 { margin-bottom: 6px; color: #4fc3f7; }
+        #tooltip .detail { color: #aaa; margin: 3px 0; }
+        #legend {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.85em;
+        }
+        #legend h3 { margin-bottom: 10px; font-size: 1em; }
+        .legend-item { display: flex; align-items: center; margin: 6px 0; }
+        .legend-color { width: 16px; height: 16px; border-radius: 3px; margin-right: 10px; }
+        .kg-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+        .kg-input {
+            width: 220px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #eee;
+            outline: none;
+        }
+        .kg-input::placeholder { color: rgba(255,255,255,0.55); }
+        .kg-btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #eee;
+            cursor: pointer;
+            user-select: none;
+        }
+        .kg-btn:hover { background: rgba(255,255,255,0.12); }
+        .kg-btn:active { transform: translateY(1px); }
+        #kgHud {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            z-index: 120;
+            pointer-events: none;
+        }
+        #kgOverlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        #kgOverlay.show { opacity: 1; pointer-events: all; }
+        #kgOverlay .panel {
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 18px;
+            width: min(520px, 92vw);
+            color: #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        #kgOverlay .title { font-size: 14px; color: #4fc3f7; margin-bottom: 8px; }
+        #kgOverlay .sub { font-size: 12px; color: rgba(255,255,255,0.75); }
+        .aug-section {
+            border-top: 1px solid #e040fb;
+            margin-top: 12px;
+            padding-top: 10px;
+        }
+        .aug-section > label:first-child { color: #e040fb; font-weight: 600; }
+        #augDetails {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(224, 64, 251, 0.1);
+            border-radius: 8px;
+            font-size: 0.8em;
+            display: none;
+        }
+        #augDetails.show { display: block; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>An Introduction to Knowledge Graphs Knowledge Discovery (Augmented)</h1>
+        <div id="stats">
+            Entities: 151 |
+            Relations: 75 |
+            Augmentations: 107
+        </div>
+    </div>
+
+    <div id="graph"></div>
+
+    <div id="controls">
+        <label>
+            Min Entity Degree: <span id="degreeValue">5</span>
+            <input type="range" id="minDegree" min="1" max="20" step="1" value="5">
+        </label>
+        <label>
+            Link Strength:
+            <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="0.5">
+        </label>
+        <label>
+            Node Repulsion:
+            <input type="range" id="repulsion" min="100" max="1000" step="50" value="400">
+        </label>
+        <label>
+            <input type="checkbox" id="showLabels"> Show Labels (high-degree only)
+        </label>
+        <div id="filterStats" style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            Showing: <span id="visibleNodes">0</span> nodes, <span id="visibleLinks">0</span> links
+        </div>
+    </div>
+
+    <div id="legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7;"></div>
+            <span>Entity Node</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800;"></div>
+            <span>Relation (Hyperedge)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb;"></div>
+            <span>Augmentation (Insight)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7; width: 30px; height: 3px;"></div>
+            <span>Source Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800; width: 30px; height: 3px;"></div>
+            <span>Target Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb; width: 30px; height: 3px; border-style: dashed;"></div>
+            <span>Augmentation Link</span>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script>
+        const data = {
+            nodes: [{"degree":0,"id":"ability of gnns to capture complex relationship","label":"ability of gnns to capture complex relationship","type":"entity"},{"degree":1,"id":"access to web page","label":"access to web page","type":"entity"},{"degree":1,"id":"adding code to neo4j.conf","label":"adding code to neo4j.conf","type":"entity"},{"degree":1,"id":"adding predicate to query","label":"adding predicate to query","type":"entity"},{"degree":1,"id":"additional metadata","label":"additional metadata","type":"entity"},{"degree":2,"id":"advanced graph dependency modeling","label":"advanced graph dependency modeling","type":"entity"},{"degree":1,"id":"aggregated view","label":"aggregated view","type":"entity"},{"degree":1,"id":"algorithm execution","label":"algorithm execution","type":"entity"},{"degree":1,"id":"an instance of a class not having any value for property p","label":"an instance of a class not having any value for property p","type":"entity"},{"degree":1,"id":"answer with book titles, authors, link","label":"answer with book titles, authors, link","type":"entity"},{"degree":1,"id":"application","label":"application","type":"entity"},{"degree":1,"id":"applications using data","label":"applications using data","type":"entity"},{"degree":1,"id":"assessing kg quality statu","label":"assessing kg quality statu","type":"entity"},{"degree":1,"id":"assigning incremental id to node","label":"assigning incremental id to node","type":"entity"},{"degree":1,"id":"author grew up in birmingham","label":"author grew up in birmingham","type":"entity"},{"degree":1,"id":"author interest","label":"author interest","type":"entity"},{"degree":1,"id":"beta parameter","label":"beta parameter","type":"entity"},{"degree":1,"id":"birmingham new street choice","label":"birmingham new street choice","type":"entity"},{"degree":1,"id":"book in print","label":"book in print","type":"entity"},{"degree":1,"id":"building knowledge graph","label":"building knowledge graph","type":"entity"},{"degree":1,"id":"categorization of deeper node","label":"categorization of deeper node","type":"entity"},{"degree":1,"id":"challenging question","label":"challenging question","type":"entity"},{"degree":1,"id":"cold-start problem","label":"cold-start problem","type":"entity"},{"degree":1,"id":"compact numerical representation","label":"compact numerical representation","type":"entity"},{"degree":1,"id":"complex impact propagation calculation","label":"complex impact propagation calculation","type":"entity"},{"degree":1,"id":"composing hierarchy","label":"composing hierarchy","type":"entity"},{"degree":1,"id":"composite database creation","label":"composite database creation","type":"entity"},{"degree":1,"id":"comprehensive view of node's structural context","label":"comprehensive view of node's structural context","type":"entity"},{"degree":1,"id":"compute in-degree and out-degree","label":"compute in-degree and out-degree","type":"entity"},{"degree":2,"id":"coreference resolution","label":"coreference resolution","type":"entity"},{"degree":1,"id":"cypher code","label":"cypher code","type":"entity"},{"degree":1,"id":"cypher implementation","label":"cypher implementation","type":"entity"},{"degree":1,"id":"data offer","label":"data offer","type":"entity"},{"degree":1,"id":"data preparation","label":"data preparation","type":"entity"},{"degree":1,"id":"data sharing","label":"data sharing","type":"entity"},{"degree":1,"id":"data to meet required quality characteristic","label":"data to meet required quality characteristic","type":"entity"},{"degree":1,"id":"dependency model correctness validation","label":"dependency model correctness validation","type":"entity"},{"degree":1,"id":"deployment","label":"deployment","type":"entity"},{"degree":0,"id":"diabetes type 1","label":"diabetes type 1","type":"entity"},{"degree":1,"id":"distinguishing typo from undefined property","label":"distinguishing typo from undefined property","type":"entity"},{"degree":1,"id":"dl decidability","label":"dl decidability","type":"entity"},{"degree":1,"id":"download attempt","label":"download attempt","type":"entity"},{"degree":1,"id":"each iteration","label":"each iteration","type":"entity"},{"degree":1,"id":"entity","label":"entity","type":"entity"},{"degree":1,"id":"entity recognition","label":"entity recognition","type":"entity"},{"degree":1,"id":"evaluate entities’ semantic relatedness","label":"evaluate entities’ semantic relatedness","type":"entity"},{"degree":1,"id":"explicit entities collection","label":"explicit entities collection","type":"entity"},{"degree":1,"id":"extensive data publishing","label":"extensive data publishing","type":"entity"},{"degree":1,"id":"extracting features from distant neighborhood","label":"extracting features from distant neighborhood","type":"entity"},{"degree":0,"id":"false syntactic tokens in property iri","label":"false syntactic tokens in property iri","type":"entity"},{"degree":1,"id":"few publisher constraint","label":"few publisher constraint","type":"entity"},{"degree":1,"id":"financial transaction graph suitable for gnn","label":"financial transaction graph suitable for gnn","type":"entity"},{"degree":1,"id":"finding specific friend of a friend","label":"finding specific friend of a friend","type":"entity"},{"degree":1,"id":"forum accessibility","label":"forum accessibility","type":"entity"},{"degree":1,"id":"functional property","label":"functional property","type":"entity"},{"degree":1,"id":"fundamental challenges in graph-based ml task","label":"fundamental challenges in graph-based ml task","type":"entity"},{"degree":1,"id":"gate gazetteer","label":"gate gazetteer","type":"entity"},{"degree":1,"id":"german tourism kg excerpt","label":"german tourism kg excerpt","type":"entity"},{"degree":0,"id":"gnns are valuable for real-world problem","label":"gnns are valuable for real-world problem","type":"entity"},{"degree":1,"id":"graph neural network","label":"graph neural network","type":"entity"},{"degree":1,"id":"graph not directed","label":"graph not directed","type":"entity"},{"degree":1,"id":"graphdb reasoner","label":"graphdb reasoner","type":"entity"},{"degree":1,"id":"hierarchical structure","label":"hierarchical structure","type":"entity"},{"degree":1,"id":"hierarchy not being a tree","label":"hierarchy not being a tree","type":"entity"},{"degree":1,"id":"hpo ontology conversion to neo4j graph","label":"hpo ontology conversion to neo4j graph","type":"entity"},{"degree":1,"id":"improving kg quality","label":"improving kg quality","type":"entity"},{"degree":1,"id":"inconsistency","label":"inconsistency","type":"entity"},{"degree":1,"id":"inferring knowledge for unseen topic","label":"inferring knowledge for unseen topic","type":"entity"},{"degree":1,"id":"information from first-level node","label":"information from first-level node","type":"entity"},{"degree":1,"id":"information propagation","label":"information propagation","type":"entity"},{"degree":1,"id":"infrastructure moves down stack","label":"infrastructure moves down stack","type":"entity"},{"degree":0,"id":"islets of langerhan","label":"islets of langerhan","type":"entity"},{"degree":1,"id":"iterative solution","label":"iterative solution","type":"entity"},{"degree":1,"id":"karl answering process","label":"karl answering process","type":"entity"},{"degree":1,"id":"kg approach","label":"kg approach","type":"entity"},{"degree":1,"id":"kg choice","label":"kg choice","type":"entity"},{"degree":1,"id":"kg principles application","label":"kg principles application","type":"entity"},{"degree":1,"id":"kg success and adoption","label":"kg success and adoption","type":"entity"},{"degree":1,"id":"knowledge enrichment","label":"knowledge enrichment","type":"entity"},{"degree":5,"id":"knowledge graph","label":"knowledge graph","type":"entity"},{"degree":1,"id":"knowledge transfers via sentence alignment","label":"knowledge transfers via sentence alignment","type":"entity"},{"degree":1,"id":"leacock-chodorow formula","label":"leacock-chodorow formula","type":"entity"},{"degree":1,"id":"linked data","label":"linked data","type":"entity"},{"degree":1,"id":"list of entity","label":"list of entity","type":"entity"},{"degree":1,"id":"list of global customer","label":"list of global customer","type":"entity"},{"degree":0,"id":"llm integration","label":"llm integration","type":"entity"},{"degree":1,"id":"local path not found","label":"local path not found","type":"entity"},{"degree":1,"id":"model learns to favor output","label":"model learns to favor output","type":"entity"},{"degree":1,"id":"model prioritization of preferred response","label":"model prioritization of preferred response","type":"entity"},{"degree":1,"id":"more insight","label":"more insight","type":"entity"},{"degree":1,"id":"natural language command","label":"natural language command","type":"entity"},{"degree":1,"id":"need for server-side logic","label":"need for server-side logic","type":"entity"},{"degree":1,"id":"needs not met by client-server paradigm","label":"needs not met by client-server paradigm","type":"entity"},{"degree":1,"id":"neighbors aggregating value","label":"neighbors aggregating value","type":"entity"},{"degree":1,"id":"neo4j fabric","label":"neo4j fabric","type":"entity"},{"degree":1,"id":"neural machine translation","label":"neural machine translation","type":"entity"},{"degree":1,"id":"new fact","label":"new fact","type":"entity"},{"degree":1,"id":"no function symbol","label":"no function symbol","type":"entity"},{"degree":1,"id":"no query violation","label":"no query violation","type":"entity"},{"degree":1,"id":"node expansion","label":"node expansion","type":"entity"},{"degree":1,"id":"node passing values to neighbor","label":"node passing values to neighbor","type":"entity"},{"degree":1,"id":"organizing principle","label":"organizing principle","type":"entity"},{"degree":1,"id":"orthomatcher","label":"orthomatcher","type":"entity"},{"degree":1,"id":"pagerank values update","label":"pagerank values update","type":"entity"},{"degree":1,"id":"poor quality kgs","label":"poor quality kgs","type":"entity"},{"degree":1,"id":"preprocessing csv file","label":"preprocessing csv file","type":"entity"},{"degree":1,"id":"preprocessing phase","label":"preprocessing phase","type":"entity"},{"degree":1,"id":"processing using cypher","label":"processing using cypher","type":"entity"},{"degree":1,"id":"pronominal coreference resolution module","label":"pronominal coreference resolution module","type":"entity"},{"degree":1,"id":"query","label":"query","type":"entity"},{"degree":1,"id":"query execution","label":"query execution","type":"entity"},{"degree":1,"id":"query in example 5-3","label":"query in example 5-3","type":"entity"},{"degree":1,"id":"query in example 5-4","label":"query in example 5-4","type":"entity"},{"degree":1,"id":"query to chatgpt","label":"query to chatgpt","type":"entity"},{"degree":1,"id":"ranked pairs structure","label":"ranked pairs structure","type":"entity"},{"degree":1,"id":"real-world problem","label":"real-world problem","type":"entity"},{"degree":0,"id":"result interpretation","label":"result interpretation","type":"entity"},{"degree":1,"id":"richer data use","label":"richer data use","type":"entity"},{"degree":1,"id":"running python code","label":"running python code","type":"entity"},{"degree":1,"id":"schema identifier uniqueness","label":"schema identifier uniqueness","type":"entity"},{"degree":1,"id":"schema:location value invalid literal","label":"schema:location value invalid literal","type":"entity"},{"degree":1,"id":"schema:location value is iri","label":"schema:location value is iri","type":"entity"},{"degree":1,"id":"scope of knowledge graph grow","label":"scope of knowledge graph grow","type":"entity"},{"degree":1,"id":"search engine","label":"search engine","type":"entity"},{"degree":1,"id":"search option","label":"search option","type":"entity"},{"degree":1,"id":"searching linked data","label":"searching linked data","type":"entity"},{"degree":1,"id":"self-referential calculation","label":"self-referential calculation","type":"entity"},{"degree":1,"id":"semantic knowledge graph","label":"semantic knowledge graph","type":"entity"},{"degree":1,"id":"semantic type","label":"semantic type","type":"entity"},{"degree":1,"id":"semantify page","label":"semantify page","type":"entity"},{"degree":1,"id":"services like analytic","label":"services like analytic","type":"entity"},{"degree":1,"id":"shortest path printing","label":"shortest path printing","type":"entity"},{"degree":1,"id":"significant business value","label":"significant business value","type":"entity"},{"degree":1,"id":"significant organizational cost","label":"significant organizational cost","type":"entity"},{"degree":1,"id":"similar result","label":"similar result","type":"entity"},{"degree":1,"id":"similarity","label":"similarity","type":"entity"},{"degree":1,"id":"snomed_is_a relationship","label":"snomed_is_a relationship","type":"entity"},{"degree":1,"id":"sparql query returns false","label":"sparql query returns false","type":"entity"},{"degree":2,"id":"sparql query returns true","label":"sparql query returns true","type":"entity"},{"degree":1,"id":"string similarity measure","label":"string similarity measure","type":"entity"},{"degree":0,"id":"syntactic errors in property identifier","label":"syntactic errors in property identifier","type":"entity"},{"degree":1,"id":"training process","label":"training process","type":"entity"},{"degree":1,"id":"transferring knowledge","label":"transferring knowledge","type":"entity"},{"degree":1,"id":"triplet concept","label":"triplet concept","type":"entity"},{"degree":1,"id":"type having multiple immediate supertype","label":"type having multiple immediate supertype","type":"entity"},{"degree":1,"id":"updated edge data","label":"updated edge data","type":"entity"},{"degree":1,"id":"user","label":"user","type":"entity"},{"degree":1,"id":"user to focus on domain","label":"user to focus on domain","type":"entity"},{"degree":1,"id":"value 3 being within range [1,5]","label":"value 3 being within range [1,5]","type":"entity"},{"degree":1,"id":"virtual assistants carry task","label":"virtual assistants carry task","type":"entity"},{"degree":1,"id":"world wide web","label":"world wide web","type":"entity"},{"confidence":0.9,"id":"edge_0","label":"prevents","sources":["an instance of a class not having any value for property p"],"targets":["inconsistency"],"type":"relation"},{"confidence":0.95,"id":"edge_1","label":"provide","sources":["applications using data"],"targets":["services like analytic"],"type":"relation"},{"confidence":0.9,"id":"edge_2","label":"causes","sources":["kg choice"],"targets":["kg success and adoption"],"type":"relation"},{"confidence":0.9,"id":"edge_3","label":"powers","sources":["knowledge graph"],"targets":["application"],"type":"relation"},{"confidence":0.9,"id":"edge_4","label":"enables","sources":["linked data"],"targets":["knowledge graph"],"type":"relation"},{"confidence":0.95,"id":"edge_5","label":"trigger","sources":["natural language command"],"targets":["virtual assistants carry task"],"type":"relation"},{"confidence":0.9,"id":"edge_6","label":"causes","sources":["no function symbol"],"targets":["dl decidability"],"type":"relation"},{"confidence":0.95,"id":"edge_7","label":"causes","sources":["orthomatcher"],"targets":["coreference resolution"],"type":"relation"},{"confidence":0.95,"id":"edge_8","label":"causes","sources":["poor quality kgs"],"targets":["significant organizational cost"],"type":"relation"},{"confidence":0.9,"id":"edge_9","label":"causes","sources":["pronominal coreference resolution module"],"targets":["coreference resolution"],"type":"relation"},{"confidence":1.0,"id":"edge_10","label":"results in","sources":["query execution"],"targets":["no query violation"],"type":"relation"},{"confidence":0.95,"id":"edge_11","label":"causes","sources":["query to chatgpt"],"targets":["answer with book titles, authors, link"],"type":"relation"},{"confidence":0.9,"id":"edge_12","label":"is necessary for","sources":["assessing kg quality statu"],"targets":["improving kg quality"],"type":"relation"},{"confidence":0.7,"id":"edge_13","label":"triggers","sources":["query"],"targets":["karl answering process"],"type":"relation"},{"confidence":0.9,"id":"edge_14","label":"requires","sources":["schema identifier uniqueness"],"targets":["functional property"],"type":"relation"},{"confidence":0.9,"id":"edge_15","label":"causes","sources":["schema:location value invalid literal"],"targets":["sparql query returns false"],"type":"relation"},{"confidence":0.9,"id":"edge_16","label":"causes","sources":["schema:location value is iri"],"targets":["sparql query returns true"],"type":"relation"},{"confidence":0.8,"id":"edge_17","label":"enable","sources":["search engine"],"targets":["searching linked data"],"type":"relation"},{"confidence":0.95,"id":"edge_18","label":"necessitates","sources":["self-referential calculation"],"targets":["iterative solution"],"type":"relation"},{"confidence":0.7,"id":"edge_19","label":"enables","sources":["semantify page"],"targets":["deployment"],"type":"relation"},{"confidence":0.9,"id":"edge_20","label":"enable","sources":["string similarity measure"],"targets":["distinguishing typo from undefined property"],"type":"relation"},{"confidence":1.0,"id":"edge_21","label":"causes","sources":["type having multiple immediate supertype"],"targets":["hierarchy not being a tree"],"type":"relation"},{"confidence":0.9,"id":"edge_22","label":"cause","sources":["user"],"targets":["node expansion"],"type":"relation"},{"confidence":0.95,"id":"edge_23","label":"enables","sources":["data offer"],"targets":["data sharing"],"type":"relation"},{"confidence":1.0,"id":"edge_24","label":"causes","sources":["value 3 being within range [1,5]"],"targets":["sparql query returns true"],"type":"relation"},{"confidence":0.95,"id":"edge_25","label":"adjusts","sources":["beta parameter"],"targets":["model prioritization of preferred response"],"type":"relation"},{"confidence":0.95,"id":"edge_26","label":"triggers","sources":["local path not found"],"targets":["download attempt"],"type":"relation"},{"confidence":0.9,"id":"edge_27","label":"enables","sources":["ranked pairs structure"],"targets":["model learns to favor output"],"type":"relation"},{"confidence":0.9,"id":"edge_28","label":"causes","sources":["adding code to neo4j.conf"],"targets":["composite database creation"],"type":"relation"},{"confidence":0.95,"id":"edge_29","label":"causes","sources":["adding predicate to query"],"targets":["finding specific friend of a friend"],"type":"relation"},{"confidence":0.9,"id":"edge_30","label":"disambiguates","sources":["additional metadata"],"targets":["entity"],"type":"relation"},{"confidence":0.9,"id":"edge_31","label":"enables","sources":["advanced graph dependency modeling"],"targets":["complex impact propagation calculation"],"type":"relation"},{"confidence":0.9,"id":"edge_32","label":"enables","sources":["advanced graph dependency modeling"],"targets":["dependency model correctness validation"],"type":"relation"},{"confidence":1.0,"id":"edge_33","label":"causes","sources":["algorithm execution"],"targets":["shortest path printing"],"type":"relation"},{"confidence":0.95,"id":"edge_34","label":"causes","sources":["each iteration"],"targets":["pagerank values update"],"type":"relation"},{"confidence":0.9,"id":"edge_35","label":"contributed to","sources":["author grew up in birmingham"],"targets":["birmingham new street choice"],"type":"relation"},{"confidence":0.9,"id":"edge_36","label":"enables","sources":["composing hierarchy"],"targets":["more insight"],"type":"relation"},{"confidence":0.95,"id":"edge_37","label":"produces","sources":["cypher code"],"targets":["knowledge graph"],"type":"relation"},{"confidence":0.9,"id":"edge_38","label":"produces","sources":["cypher implementation"],"targets":["similar result"],"type":"relation"},{"confidence":0.95,"id":"edge_39","label":"enables","sources":["data preparation"],"targets":["data to meet required quality characteristic"],"type":"relation"},{"confidence":0.9,"id":"edge_40","label":"enriches","sources":["explicit entities collection"],"targets":["search option"],"type":"relation"},{"confidence":0.9,"id":"edge_41","label":"drives","sources":["knowledge graph"],"targets":["significant business value"],"type":"relation"},{"confidence":0.9,"id":"edge_42","label":"enables","sources":["knowledge graph"],"targets":["richer data use"],"type":"relation"},{"confidence":0.9,"id":"edge_43","label":"boosts","sources":["leacock-chodorow formula"],"targets":["similarity"],"type":"relation"},{"confidence":0.85,"id":"edge_44","label":"leads to","sources":["needs not met by client-server paradigm"],"targets":["need for server-side logic"],"type":"relation"},{"confidence":0.9,"id":"edge_45","label":"enables","sources":["neo4j fabric"],"targets":["user to focus on domain"],"type":"relation"},{"confidence":0.95,"id":"edge_46","label":"enables","sources":["organizing principle"],"targets":["building knowledge graph"],"type":"relation"},{"confidence":0.95,"id":"edge_47","label":"provides","sources":["query in example 5-3"],"targets":["aggregated view"],"type":"relation"},{"confidence":0.95,"id":"edge_48","label":"returns","sources":["query in example 5-4"],"targets":["list of global customer"],"type":"relation"},{"confidence":0.9,"id":"edge_49","label":"produces","sources":["running python code"],"targets":["list of entity"],"type":"relation"},{"confidence":0.95,"id":"edge_50","label":"causes","sources":["scope of knowledge graph grow"],"targets":["infrastructure moves down stack"],"type":"relation"},{"confidence":0.95,"id":"edge_51","label":"causes","sources":["assigning incremental id to node"],"targets":["updated edge data"],"type":"relation"},{"confidence":1.0,"id":"edge_52","label":"enables","sources":["book in print"],"targets":["forum accessibility"],"type":"relation"},{"confidence":0.8,"id":"edge_53","label":"maintains","sources":["challenging question"],"targets":["author interest"],"type":"relation"},{"confidence":0.9,"id":"edge_54","label":"enables","sources":["few publisher constraint"],"targets":["extensive data publishing"],"type":"relation"},{"confidence":0.9,"id":"edge_55","label":"creates","sources":["extracting features from distant neighborhood"],"targets":["comprehensive view of node's structural context"],"type":"relation"},{"confidence":0.9,"id":"edge_56","label":"address","sources":["graph neural network"],"targets":["fundamental challenges in graph-based ml task"],"type":"relation"},{"confidence":1.0,"id":"edge_57","label":"prevents","sources":["graph not directed"],"targets":["compute in-degree and out-degree"],"type":"relation"},{"confidence":0.95,"id":"edge_58","label":"enables","sources":["hierarchical structure"],"targets":["information propagation"],"type":"relation"},{"confidence":0.95,"id":"edge_59","label":"enables","sources":["hpo ontology conversion to neo4j graph"],"targets":["processing using cypher"],"type":"relation"},{"confidence":0.8,"id":"edge_60","label":"enables","sources":["information from first-level node"],"targets":["categorization of deeper node"],"type":"relation"},{"confidence":0.8,"id":"edge_61","label":"solves","sources":["kg principles application"],"targets":["real-world problem"],"type":"relation"},{"confidence":0.95,"id":"edge_62","label":"causes","sources":["node passing values to neighbor"],"targets":["neighbors aggregating value"],"type":"relation"},{"confidence":0.95,"id":"edge_63","label":"causes","sources":["gate gazetteer"],"targets":["entity recognition"],"type":"relation"},{"confidence":0.95,"id":"edge_64","label":"causes","sources":["preprocessing csv file"],"targets":["compact numerical representation"],"type":"relation"},{"confidence":0.9,"id":"edge_65","label":"enables","sources":["preprocessing phase"],"targets":["financial transaction graph suitable for gnn"],"type":"relation"},{"confidence":0.98,"id":"edge_66","label":"propagates","sources":["snomed_is_a relationship"],"targets":["semantic type"],"type":"relation"},{"confidence":0.9,"id":"edge_67","label":"enables","sources":["kg approach"],"targets":["evaluate entities’ semantic relatedness"],"type":"relation"},{"confidence":0.9,"id":"edge_68","label":"improves","sources":["knowledge transfers via sentence alignment"],"targets":["neural machine translation"],"type":"relation"},{"confidence":0.9,"id":"edge_69","label":"enables addressing","sources":["semantic knowledge graph"],"targets":["cold-start problem"],"type":"relation"},{"confidence":0.8,"id":"edge_70","label":"enables","sources":["transferring knowledge"],"targets":["inferring knowledge for unseen topic"],"type":"relation"},{"confidence":0.9,"id":"edge_71","label":"enables","sources":["triplet concept"],"targets":["training process"],"type":"relation"},{"confidence":0.9,"id":"edge_72","label":"enables","sources":["world wide web"],"targets":["access to web page"],"type":"relation"},{"confidence":0.9,"id":"edge_73","label":"enables demonstration of","sources":["german tourism kg excerpt"],"targets":["knowledge enrichment"],"type":"relation"},{"confidence":0.95,"id":"edge_74","label":"infers","sources":["graphdb reasoner"],"targets":["new fact"],"type":"relation"}],
+            links: [{"source":8,"target":151,"type":"source"},{"source":151,"target":66,"type":"target"},{"source":11,"target":152,"type":"source"},{"source":152,"target":130,"type":"target"},{"source":75,"target":153,"type":"source"},{"source":153,"target":77,"type":"target"},{"source":79,"target":154,"type":"source"},{"source":154,"target":10,"type":"target"},{"source":82,"target":155,"type":"source"},{"source":155,"target":79,"type":"target"},{"source":90,"target":156,"type":"source"},{"source":156,"target":149,"type":"target"},{"source":97,"target":157,"type":"source"},{"source":157,"target":40,"type":"target"},{"source":102,"target":158,"type":"source"},{"source":158,"target":29,"type":"target"},{"source":104,"target":159,"type":"source"},{"source":159,"target":133,"type":"target"},{"source":108,"target":160,"type":"source"},{"source":160,"target":29,"type":"target"},{"source":110,"target":161,"type":"source"},{"source":161,"target":98,"type":"target"},{"source":113,"target":162,"type":"source"},{"source":162,"target":9,"type":"target"},{"source":12,"target":163,"type":"source"},{"source":163,"target":65,"type":"target"},{"source":109,"target":164,"type":"source"},{"source":164,"target":73,"type":"target"},{"source":119,"target":165,"type":"source"},{"source":165,"target":54,"type":"target"},{"source":120,"target":166,"type":"source"},{"source":166,"target":137,"type":"target"},{"source":121,"target":167,"type":"source"},{"source":167,"target":138,"type":"target"},{"source":123,"target":168,"type":"source"},{"source":168,"target":125,"type":"target"},{"source":126,"target":169,"type":"source"},{"source":169,"target":72,"type":"target"},{"source":129,"target":170,"type":"source"},{"source":170,"target":37,"type":"target"},{"source":139,"target":171,"type":"source"},{"source":171,"target":39,"type":"target"},{"source":144,"target":172,"type":"source"},{"source":172,"target":63,"type":"target"},{"source":146,"target":173,"type":"source"},{"source":173,"target":99,"type":"target"},{"source":32,"target":174,"type":"source"},{"source":174,"target":34,"type":"target"},{"source":148,"target":175,"type":"source"},{"source":175,"target":138,"type":"target"},{"source":16,"target":176,"type":"source"},{"source":176,"target":88,"type":"target"},{"source":86,"target":177,"type":"source"},{"source":177,"target":41,"type":"target"},{"source":114,"target":178,"type":"source"},{"source":178,"target":87,"type":"target"},{"source":2,"target":179,"type":"source"},{"source":179,"target":26,"type":"target"},{"source":3,"target":180,"type":"source"},{"source":180,"target":52,"type":"target"},{"source":4,"target":181,"type":"source"},{"source":181,"target":43,"type":"target"},{"source":5,"target":182,"type":"source"},{"source":182,"target":24,"type":"target"},{"source":5,"target":183,"type":"source"},{"source":183,"target":36,"type":"target"},{"source":7,"target":184,"type":"source"},{"source":184,"target":131,"type":"target"},{"source":42,"target":185,"type":"source"},{"source":185,"target":103,"type":"target"},{"source":14,"target":186,"type":"source"},{"source":186,"target":17,"type":"target"},{"source":25,"target":187,"type":"source"},{"source":187,"target":89,"type":"target"},{"source":30,"target":188,"type":"source"},{"source":188,"target":79,"type":"target"},{"source":31,"target":189,"type":"source"},{"source":189,"target":134,"type":"target"},{"source":33,"target":190,"type":"source"},{"source":190,"target":35,"type":"target"},{"source":46,"target":191,"type":"source"},{"source":191,"target":124,"type":"target"},{"source":79,"target":192,"type":"source"},{"source":192,"target":132,"type":"target"},{"source":79,"target":193,"type":"source"},{"source":193,"target":117,"type":"target"},{"source":81,"target":194,"type":"source"},{"source":194,"target":135,"type":"target"},{"source":92,"target":195,"type":"source"},{"source":195,"target":91,"type":"target"},{"source":94,"target":196,"type":"source"},{"source":196,"target":147,"type":"target"},{"source":101,"target":197,"type":"source"},{"source":197,"target":19,"type":"target"},{"source":111,"target":198,"type":"source"},{"source":198,"target":6,"type":"target"},{"source":112,"target":199,"type":"source"},{"source":199,"target":84,"type":"target"},{"source":118,"target":200,"type":"source"},{"source":200,"target":83,"type":"target"},{"source":122,"target":201,"type":"source"},{"source":201,"target":70,"type":"target"},{"source":13,"target":202,"type":"source"},{"source":202,"target":145,"type":"target"},{"source":18,"target":203,"type":"source"},{"source":203,"target":53,"type":"target"},{"source":21,"target":204,"type":"source"},{"source":204,"target":15,"type":"target"},{"source":50,"target":205,"type":"source"},{"source":205,"target":47,"type":"target"},{"source":48,"target":206,"type":"source"},{"source":206,"target":27,"type":"target"},{"source":59,"target":207,"type":"source"},{"source":207,"target":55,"type":"target"},{"source":60,"target":208,"type":"source"},{"source":208,"target":28,"type":"target"},{"source":62,"target":209,"type":"source"},{"source":209,"target":69,"type":"target"},{"source":64,"target":210,"type":"source"},{"source":210,"target":107,"type":"target"},{"source":68,"target":211,"type":"source"},{"source":211,"target":20,"type":"target"},{"source":76,"target":212,"type":"source"},{"source":212,"target":115,"type":"target"},{"source":100,"target":213,"type":"source"},{"source":213,"target":93,"type":"target"},{"source":56,"target":214,"type":"source"},{"source":214,"target":44,"type":"target"},{"source":105,"target":215,"type":"source"},{"source":215,"target":23,"type":"target"},{"source":106,"target":216,"type":"source"},{"source":216,"target":51,"type":"target"},{"source":136,"target":217,"type":"source"},{"source":217,"target":128,"type":"target"},{"source":74,"target":218,"type":"source"},{"source":218,"target":45,"type":"target"},{"source":80,"target":219,"type":"source"},{"source":219,"target":95,"type":"target"},{"source":127,"target":220,"type":"source"},{"source":220,"target":22,"type":"target"},{"source":142,"target":221,"type":"source"},{"source":221,"target":67,"type":"target"},{"source":143,"target":222,"type":"source"},{"source":222,"target":141,"type":"target"},{"source":150,"target":223,"type":"source"},{"source":223,"target":1,"type":"target"},{"source":57,"target":224,"type":"source"},{"source":224,"target":78,"type":"target"},{"source":61,"target":225,"type":"source"},{"source":225,"target":96,"type":"target"}]
+        };
+
+        const augData = {"links":[{"is_new":true,"source":"false syntactic tokens in property iri","target":"aug:n:000001","type":"source"},{"is_new":true,"source":"graph not directed","target":"aug:n:000002","type":"source"},{"is_new":true,"source":"compute in-degree and out-degree","target":"aug:n:000002","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000003","type":"source"},{"is_new":true,"source":"gnns are valuable for real-world problem","target":"aug:n:000004","type":"source"},{"is_new":true,"source":"syntactic errors in property identifier","target":"aug:n:000005","type":"source"},{"is_new":true,"source":"islets of langerhan","target":"aug:n:000006","type":"source"},{"is_new":true,"source":"ability of gnns to capture complex relationship","target":"aug:n:000007","type":"source"},{"is_new":true,"source":"diabetes type 1","target":"aug:n:000008","type":"source"},{"is_new":true,"source":"result interpretation","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"llm integration","target":"aug:n:000010","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"richer data use","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"additional metadata","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"entity","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"algorithm execution","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"shortest path printing","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"an instance of a class not having any value for property p","target":"aug:n:000014","type":"source"},{"is_new":true,"source":"inconsistency","target":"aug:n:000014","type":"source"},{"is_new":true,"source":"data preparation","target":"aug:n:000015","type":"source"},{"is_new":true,"source":"data to meet required quality characteristic","target":"aug:n:000015","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000016","type":"source"},{"is_new":true,"source":"significant business value","target":"aug:n:000016","type":"source"},{"is_new":true,"source":"data offer","target":"aug:n:000017","type":"source"},{"is_new":true,"source":"data sharing","target":"aug:n:000017","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000018","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000019","type":"source"},{"is_new":true,"source":"application","target":"aug:n:000019","type":"source"},{"is_new":true,"source":"natural language command","target":"aug:n:000020","type":"source"},{"is_new":true,"source":"cypher code","target":"aug:n:000021","type":"source"},{"is_new":true,"source":"type having multiple immediate supertype","target":"aug:n:000022","type":"source"},{"is_new":true,"source":"hierarchy not being a tree","target":"aug:n:000022","type":"source"},{"is_new":true,"source":"self-referential calculation","target":"aug:n:000023","type":"source"},{"is_new":true,"source":"iterative solution","target":"aug:n:000023","type":"source"},{"is_new":true,"source":"running python code","target":"aug:n:000024","type":"source"},{"is_new":true,"source":"list of entity","target":"aug:n:000024","type":"source"},{"is_new":true,"source":"hpo ontology conversion to neo4j graph","target":"aug:n:000025","type":"source"},{"is_new":true,"source":"processing using cypher","target":"aug:n:000025","type":"source"},{"is_new":true,"source":"information from first-level node","target":"aug:n:000026","type":"source"},{"is_new":true,"source":"categorization of deeper node","target":"aug:n:000026","type":"source"},{"is_new":true,"source":"semantic knowledge graph","target":"aug:n:000027","type":"source"},{"is_new":true,"source":"cold-start problem","target":"aug:n:000027","type":"source"},{"is_new":true,"source":"graphdb reasoner","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"new fact","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"world wide web","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"access to web page","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"application","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"cypher code","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"linked data","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"natural language command","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"virtual assistants carry task","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"transferring knowledge","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"inferring knowledge for unseen topic","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"orthomatcher","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"coreference resolution","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"assessing kg quality statu","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"improving kg quality","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"snomed_is_a relationship","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"semantic type","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"gate gazetteer","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"entity recognition","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"search engine","target":"aug:n:000038","type":"source"},{"is_new":true,"source":"graphdb reasoner","target":"aug:n:000039","type":"source"},{"is_new":true,"source":"leacock-chodorow formula","target":"aug:n:000040","type":"source"},{"is_new":true,"source":"kg principles application","target":"aug:n:000041","type":"source"},{"is_new":true,"source":"knowledge transfers via sentence alignment","target":"aug:n:000042","type":"source"},{"is_new":true,"source":"query","target":"aug:n:000043","type":"source"},{"is_new":true,"source":"additional metadata","target":"aug:n:000044","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000045","type":"source"},{"is_new":true,"source":"beta parameter","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"linked data","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"author grew up in birmingham","target":"aug:n:000048","type":"source"},{"is_new":true,"source":"applications using data","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"needs not met by client-server paradigm","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"extracting features from distant neighborhood","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"query in example 5-4","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"semantic knowledge graph","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"kg choice","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"explicit entities collection","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"graph neural network","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"challenging question","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"snomed_is_a relationship","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"cypher code","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"significant business value","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"aug:n:000060","target":"richer data use","type":"target"},{"is_new":true,"source":"aug:n:000060","target":"knowledge graph","type":"target"},{"is_new":true,"source":"algorithm execution","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"model learns to favor output","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"kg approach","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"dependency model correctness validation","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"complex impact propagation calculation","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"result interpretation","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"model prioritization of preferred response","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"linked data","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"building knowledge graph","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"similar result","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"organizing principle","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"building knowledge graph","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"few publisher constraint","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"forum accessibility","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"extensive data publishing","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"book in print","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"organizing principle","target":"aug:n:000078","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000078","type":"source"},{"is_new":true,"source":"few publisher constraint","target":"aug:n:000079","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000079","type":"source"},{"is_new":true,"source":"building knowledge graph","target":"aug:n:000080","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000080","type":"source"},{"is_new":true,"source":"extensive data publishing","target":"aug:n:000081","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000081","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000082","type":"source"},{"is_new":true,"source":"aug:n:000082","target":"linked data","type":"target"},{"is_new":true,"source":"aug:n:000082","target":"richer data use","type":"target"},{"is_new":true,"source":"aug:n:000082","target":"significant business value","type":"target"},{"is_new":true,"source":"cypher code","target":"aug:n:000083","type":"source"},{"is_new":true,"source":"richer data use","target":"aug:n:000083","type":"source"},{"is_new":true,"source":"aug:n:000083","target":"application","type":"target"},{"is_new":true,"source":"aug:n:000083","target":"linked data","type":"target"},{"is_new":true,"source":"linked data","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"significant business value","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"aug:n:000084","target":"application","type":"target"},{"is_new":true,"source":"aug:n:000084","target":"cypher code","type":"target"},{"is_new":true,"source":"linked data","target":"aug:n:000085","type":"source"},{"is_new":true,"source":"searching linked data","target":"aug:n:000085","type":"source"},{"is_new":true,"source":"knowledge graph","target":"aug:n:000086","type":"source"},{"is_new":true,"source":"semantic knowledge graph","target":"aug:n:000086","type":"source"},{"is_new":true,"source":"natural language command","target":"aug:n:000087","type":"source"},{"is_new":true,"source":"kg principles application","target":"aug:n:000088","type":"source"},{"is_new":true,"source":"linked data","target":"aug:n:000089","type":"source"},{"is_new":true,"source":"local path not found","target":"aug:n:000090","type":"source"},{"is_new":true,"source":"node passing values to neighbor","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"knowledge transfers via sentence alignment","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"leacock-chodorow formula","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"orthomatcher","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"no function symbol","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"neo4j fabric","target":"aug:n:000096","type":"source"},{"is_new":true,"source":"organizing principle","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"needs not met by client-server paradigm","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"query in example 5-3","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"query in example 5-4","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"few publisher constraint","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"extensive data publishing","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"extensive data publishing","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"building knowledge graph","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"organizing principle","target":"aug:n:000104","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000104","type":"source"},{"is_new":true,"source":"organizing principle","target":"aug:n:000105","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000105","type":"source"},{"is_new":true,"source":"few publisher constraint","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000106","type":"source"},{"is_new":true,"source":"building knowledge graph","target":"aug:n:000107","type":"source"},{"is_new":true,"source":"advanced graph dependency modeling","target":"aug:n:000107","type":"source"}],"meta":{"created_utc":"2026-03-26T03:34:31Z","notes":"Overlay candidates only; not ground truth.","run_id":"run_20260325_215039","source":"kg render"},"nodes":[{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000001","insight_id":"run_20260325_215039:core_periphery:000100","is_new":true,"label":"Periphery: false syntactic tokens in property iri","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_295"],"id":"aug:n:000002","insight_id":"run_20260325_215039:claim_stance:000309","is_new":true,"label":"Claim (Supports): graph not directed → compute in-degree and out-degree","type":"relation","witness_edges":["edge_63"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000003","insight_id":"run_20260325_215039:centrality:000120","is_new":true,"label":"Centrality: knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000004","insight_id":"run_20260325_215039:core_periphery:000107","is_new":true,"label":"Periphery: gnns are valuable for real-world problem","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000005","insight_id":"run_20260325_215039:core_periphery:000106","is_new":true,"label":"Periphery: syntactic errors in property identifier","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000006","insight_id":"run_20260325_215039:core_periphery:000105","is_new":true,"label":"Periphery: islets of langerhan","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000007","insight_id":"run_20260325_215039:core_periphery:000104","is_new":true,"label":"Periphery: ability of gnns to capture complex relationship","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000008","insight_id":"run_20260325_215039:core_periphery:000103","is_new":true,"label":"Periphery: diabetes type 1","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000009","insight_id":"run_20260325_215039:core_periphery:000102","is_new":true,"label":"Periphery: result interpretation","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000010","insight_id":"run_20260325_215039:core_periphery:000101","is_new":true,"label":"Periphery: llm integration","type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"],"id":"aug:n:000011","insight_id":"run_20260325_215039:claim_stance:000294","is_new":true,"label":"Claim (Supports): knowledge graph → richer data use","type":"relation","witness_edges":["edge_47"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"],"id":"aug:n:000012","insight_id":"run_20260325_215039:claim_stance:000282","is_new":true,"label":"Claim (Supports): additional metadata → entity","type":"relation","witness_edges":["edge_36"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"],"id":"aug:n:000013","insight_id":"run_20260325_215039:claim_stance:000285","is_new":true,"label":"Claim (Supports): algorithm execution → shortest path printing","type":"relation","witness_edges":["edge_39"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_172"],"id":"aug:n:000014","insight_id":"run_20260325_215039:claim_stance:000252","is_new":true,"label":"Claim (Opposes): an instance of a class not having any value for property p → inconsistency","type":"relation","witness_edges":["edge_0"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_150"],"id":"aug:n:000015","insight_id":"run_20260325_215039:claim_stance:000291","is_new":true,"label":"Claim (Supports): data preparation → data to meet required quality characteristic","type":"relation","witness_edges":["edge_44"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"],"id":"aug:n:000016","insight_id":"run_20260325_215039:claim_stance:000293","is_new":true,"label":"Claim (Supports): knowledge graph → significant business value","type":"relation","witness_edges":["edge_46"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_434"],"id":"aug:n:000017","insight_id":"run_20260325_215039:claim_stance:000275","is_new":true,"label":"Claim (Supports): data offer → data sharing","type":"relation","witness_edges":["edge_3"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000018","insight_id":"run_20260325_215039:core_periphery:000080","is_new":true,"label":"Core: knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000019","insight_id":"run_20260325_215039:claim_stance:000255","is_new":true,"label":"Claim (Supports): knowledge graph → application","type":"relation","witness_edges":["edge_11"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000020","insight_id":"run_20260325_215039:relation_induction:000346","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_13"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"],"id":"aug:n:000021","insight_id":"run_20260325_215039:relation_induction:000329","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_42","edge_43","edge_54"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_274"],"id":"aug:n:000022","insight_id":"run_20260325_215039:claim_stance:000273","is_new":true,"label":"Claim (Supports): type having multiple immediate supertype → hierarchy not being a tree","type":"relation","witness_edges":["edge_28"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_52"],"id":"aug:n:000023","insight_id":"run_20260325_215039:claim_stance:000270","is_new":true,"label":"Claim (Supports): self-referential calculation → iterative solution","type":"relation","witness_edges":["edge_25"]},{"confidence":1.0,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"],"id":"aug:n:000024","insight_id":"run_20260325_215039:claim_stance:000301","is_new":true,"label":"Claim (Supports): running python code → list of entity","type":"relation","witness_edges":["edge_54"]},{"confidence":1.0,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_184"],"id":"aug:n:000025","insight_id":"run_20260325_215039:claim_stance:000311","is_new":true,"label":"Claim (Supports): hpo ontology conversion to neo4j graph → processing using cypher","type":"relation","witness_edges":["edge_65"]},{"confidence":1.0,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_212"],"id":"aug:n:000026","insight_id":"run_20260325_215039:claim_stance:000312","is_new":true,"label":"Claim (Supports): information from first-level node → categorization of deeper node","type":"relation","witness_edges":["edge_66"]},{"confidence":1.0,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_19"],"id":"aug:n:000027","insight_id":"run_20260325_215039:claim_stance:000321","is_new":true,"label":"Claim (Supports): semantic knowledge graph → cold-start problem","type":"relation","witness_edges":["edge_75"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_332"],"id":"aug:n:000028","insight_id":"run_20260325_215039:claim_stance:000326","is_new":true,"label":"Claim (Supports): graphdb reasoner → new fact","type":"relation","witness_edges":["edge_9"]},{"confidence":1.0,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_159"],"id":"aug:n:000029","insight_id":"run_20260325_215039:claim_stance:000324","is_new":true,"label":"Claim (Supports): world wide web → access to web page","type":"relation","witness_edges":["edge_78"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_422","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"],"id":"aug:n:000030","insight_id":"run_20260325_215039:community_detection:000150","is_new":true,"label":"Community: knowledge graph","type":"relation","witness_edges":["edge_46","edge_47","edge_42","edge_12","edge_11"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_98"],"id":"aug:n:000031","insight_id":"run_20260325_215039:claim_stance:000256","is_new":true,"label":"Claim (Supports): linked data → knowledge graph","type":"relation","witness_edges":["edge_12"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000032","insight_id":"run_20260325_215039:claim_stance:000257","is_new":true,"label":"Claim (Supports): natural language command → virtual assistants carry task","type":"relation","witness_edges":["edge_13"]},{"confidence":1.0,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_7"],"id":"aug:n:000033","insight_id":"run_20260325_215039:claim_stance:000322","is_new":true,"label":"Claim (Supports): transferring knowledge → inferring knowledge for unseen topic","type":"relation","witness_edges":["edge_76"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_76"],"id":"aug:n:000034","insight_id":"run_20260325_215039:claim_stance:000259","is_new":true,"label":"Claim (Opposes): orthomatcher → coreference resolution","type":"relation","witness_edges":["edge_15"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_346"],"id":"aug:n:000035","insight_id":"run_20260325_215039:claim_stance:000264","is_new":true,"label":"Claim (Supports): assessing kg quality statu → improving kg quality","type":"relation","witness_edges":["edge_2"]},{"confidence":1.0,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_184"],"id":"aug:n:000036","insight_id":"run_20260325_215039:claim_stance:000318","is_new":true,"label":"Claim (Supports): snomed_is_a relationship → semantic type","type":"relation","witness_edges":["edge_72"]},{"confidence":1.0,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_76"],"id":"aug:n:000037","insight_id":"run_20260325_215039:claim_stance:000315","is_new":true,"label":"Claim (Opposes): gate gazetteer → entity recognition","type":"relation","witness_edges":["edge_7"]},{"confidence":0.98,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_353","An_Introduction_to_Knowledge_Graphs_chunk_96"],"id":"aug:n:000038","insight_id":"run_20260325_215039:relation_induction:000332","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_24","edge_27"]},{"confidence":0.98,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_332"],"id":"aug:n:000039","insight_id":"run_20260325_215039:relation_induction:000348","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_9"]},{"confidence":0.98,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"],"id":"aug:n:000040","insight_id":"run_20260325_215039:relation_induction:000333","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_48"]},{"confidence":0.95,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_67"],"id":"aug:n:000041","insight_id":"run_20260325_215039:relation_induction:000344","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_67"]},{"confidence":0.95,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_144"],"id":"aug:n:000042","insight_id":"run_20260325_215039:relation_induction:000351","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_74"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Applications_with_AI_Agents_chunk_180","An_Introduction_to_Knowledge_Graphs_chunk_411"],"id":"aug:n:000043","insight_id":"run_20260325_215039:relation_induction:000330","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_20","edge_32"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"],"id":"aug:n:000044","insight_id":"run_20260325_215039:relation_induction:000334","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_36"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"],"id":"aug:n:000045","insight_id":"run_20260325_215039:relation_induction:000337","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_46"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Applications_with_AI_Agents_chunk_180"],"id":"aug:n:000046","insight_id":"run_20260325_215039:relation_induction:000347","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_31"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203","Building_Applications_with_AI_Agents_chunk_180","An_Introduction_to_Knowledge_Graphs_chunk_434","An_Introduction_to_Knowledge_Graphs_chunk_400","An_Introduction_to_Knowledge_Graphs_chunk_98"],"id":"aug:n:000047","insight_id":"run_20260325_215039:relation_induction:000327","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_12","edge_26","edge_3","edge_33","edge_37"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"],"id":"aug:n:000048","insight_id":"run_20260325_215039:relation_induction:000335","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_40"]},{"confidence":0.95,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_434"],"id":"aug:n:000049","insight_id":"run_20260325_215039:relation_induction:000340","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_1"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"],"id":"aug:n:000050","insight_id":"run_20260325_215039:relation_induction:000341","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_49"]},{"confidence":0.95,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_296"],"id":"aug:n:000051","insight_id":"run_20260325_215039:relation_induction:000342","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_61"]},{"confidence":0.95,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"],"id":"aug:n:000052","insight_id":"run_20260325_215039:relation_induction:000338","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_53"]},{"confidence":0.9,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_19"],"id":"aug:n:000053","insight_id":"run_20260325_215039:relation_induction:000339","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_75"]},{"confidence":0.9,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_346","An_Introduction_to_Knowledge_Graphs_chunk_76","An_Introduction_to_Knowledge_Graphs_chunk_223","An_Introduction_to_Knowledge_Graphs_chunk_6"],"id":"aug:n:000054","insight_id":"run_20260325_215039:relation_induction:000328","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_10","edge_14","edge_15","edge_16","edge_17"]},{"confidence":0.9,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"],"id":"aug:n:000055","insight_id":"run_20260325_215039:relation_induction:000336","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_45"]},{"confidence":0.9,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_363"],"id":"aug:n:000056","insight_id":"run_20260325_215039:relation_induction:000343","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_62"]},{"confidence":0.9,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000057","insight_id":"run_20260325_215039:relation_induction:000350","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_11"]},{"confidence":0.9,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_25"],"id":"aug:n:000058","insight_id":"run_20260325_215039:relation_induction:000349","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_59"]},{"confidence":0.9,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_184"],"id":"aug:n:000059","insight_id":"run_20260325_215039:relation_induction:000345","is_new":true,"label":"Relation Induction","type":"relation","witness_edges":["edge_72"]},{"confidence":0.8495458333333332,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"],"id":"aug:n:000060","insight_id":"run_20260325_215039:mechanism_consolidation:000811","is_new":true,"label":"Hypothesis: cypher code <-> significant business value","type":"relation","witness_edges":["edge_42","edge_47","edge_12","edge_11","edge_46"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"],"id":"aug:n:000061","insight_id":"run_20260325_215039:method_outcome:000244","is_new":true,"label":"Method: algorithm execution","type":"relation","witness_edges":["edge_39"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Applications_with_AI_Agents_chunk_180"],"id":"aug:n:000062","insight_id":"run_20260325_215039:method_outcome:000248","is_new":true,"label":"Outcome: model learns to favor output","type":"relation","witness_edges":["edge_33"]},{"confidence":0.8,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_174"],"id":"aug:n:000063","insight_id":"run_20260325_215039:method_outcome:000247","is_new":true,"label":"Method: kg approach","type":"relation","witness_edges":["edge_73"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000064","insight_id":"run_20260325_215039:method_outcome:000246","is_new":true,"label":"Method: dependency model correctness validation","type":"relation","witness_edges":["edge_38"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000065","insight_id":"run_20260325_215039:method_outcome:000245","is_new":true,"label":"Method: complex impact propagation calculation","type":"relation","witness_edges":["edge_37"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000066","insight_id":"run_20260325_215039:method_outcome:000243","is_new":true,"label":"Method: advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38"]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000067","insight_id":"run_20260325_215039:method_outcome:000251","is_new":true,"label":"Method: result interpretation","type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000068","insight_id":"run_20260325_215039:domain_bridge:000201","is_new":true,"label":"Domain bridge: 'knowledge graph' connects 4 different dom...","type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":["Building_Applications_with_AI_Agents_chunk_180"],"id":"aug:n:000069","insight_id":"run_20260325_215039:method_outcome:000249","is_new":true,"label":"Method: model prioritization of preferred response","type":"relation","witness_edges":["edge_31"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_98"],"id":"aug:n:000070","insight_id":"run_20260325_215039:analogical_transfer:000352","is_new":true,"label":"Analogy: linked data → building knowledge graph","type":"relation","witness_edges":["edge_12","edge_51"]},{"confidence":0.8,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"],"id":"aug:n:000071","insight_id":"run_20260325_215039:method_outcome:000250","is_new":true,"label":"Outcome: similar result","type":"relation","witness_edges":["edge_43"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000072","insight_id":"run_20260325_215039:community_link:000441","is_new":true,"label":"Community: organizing principle <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_51"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000073","insight_id":"run_20260325_215039:community_link:000439","is_new":true,"label":"Community: building knowledge graph <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_51"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000074","insight_id":"run_20260325_215039:community_link:000517","is_new":true,"label":"Community: few publisher constraint <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_6"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_25","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000075","insight_id":"run_20260325_215039:community_link:000587","is_new":true,"label":"Community: forum accessibility <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_58"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000076","insight_id":"run_20260325_215039:community_link:000515","is_new":true,"label":"Community: extensive data publishing <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_6"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_25","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000077","insight_id":"run_20260325_215039:community_link:000589","is_new":true,"label":"Community: book in print <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_58"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000078","insight_id":"run_20260325_215039:community_link:000484","is_new":true,"label":"Community: organizing principle <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_51"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000079","insight_id":"run_20260325_215039:community_link:000560","is_new":true,"label":"Community: few publisher constraint <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_6"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000080","insight_id":"run_20260325_215039:community_link:000482","is_new":true,"label":"Community: building knowledge graph <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_51"]},{"confidence":0.792804162054804,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000081","insight_id":"run_20260325_215039:community_link:000558","is_new":true,"label":"Community: extensive data publishing <-> knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_46","edge_47","edge_6"]},{"confidence":0.7621233891324553,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_98"],"id":"aug:n:000082","insight_id":"run_20260325_215039:intervention_bottleneck:000812","is_new":true,"label":"Intervention: knowledge graph","type":"relation","witness_edges":["edge_12","edge_46","edge_47","edge_42"]},{"confidence":0.7558611111111111,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","An_Introduction_to_Knowledge_Graphs_chunk_422","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"],"id":"aug:n:000083","insight_id":"run_20260325_215039:hypotheses_2:000353","is_new":true,"label":"Hypothesis: cypher code <-> richer data use","type":"relation","witness_edges":["edge_46","edge_11","edge_12","edge_47","edge_42"]},{"confidence":0.7544444444444445,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_98","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000084","insight_id":"run_20260325_215039:hypotheses_2:000354","is_new":true,"label":"Hypothesis: linked data <-> significant business value","type":"relation","witness_edges":["edge_11","edge_42","edge_47","edge_46","edge_12"]},{"confidence":0.7538463212766184,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_96","An_Introduction_to_Knowledge_Graphs_chunk_98"],"id":"aug:n:000085","insight_id":"run_20260325_215039:text_similarity:000230","is_new":true,"label":"Text Similar: linked data ~ searching linked data","type":"relation","witness_edges":["edge_12","edge_24"]},{"confidence":0.7508215908411017,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_19","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228","An_Introduction_to_Knowledge_Graphs_chunk_98","An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000086","insight_id":"run_20260325_215039:text_similarity:000231","is_new":true,"label":"Text Similar: knowledge graph ~ semantic knowledge graph","type":"relation","witness_edges":["edge_11","edge_12","edge_42","edge_75"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_422"],"id":"aug:n:000087","insight_id":"run_20260325_215039:core_periphery:000111","is_new":true,"label":"Periphery: natural language command","type":"relation","witness_edges":["edge_13"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_67"],"id":"aug:n:000088","insight_id":"run_20260325_215039:core_periphery:000109","is_new":true,"label":"Periphery: kg principles application","type":"relation","witness_edges":["edge_67"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_98"],"id":"aug:n:000089","insight_id":"run_20260325_215039:core_periphery:000117","is_new":true,"label":"Periphery: linked data","type":"relation","witness_edges":["edge_12"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Building_Applications_with_AI_Agents_chunk_180"],"id":"aug:n:000090","insight_id":"run_20260325_215039:core_periphery:000113","is_new":true,"label":"Periphery: local path not found","type":"relation","witness_edges":["edge_32"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Knowledge_Graphs_and_LLMs_in_Action_chunk_296"],"id":"aug:n:000091","insight_id":"run_20260325_215039:core_periphery:000114","is_new":true,"label":"Periphery: node passing values to neighbor","type":"relation","witness_edges":["edge_69"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Semantic_AI_in_Knowledge_Graphs_chunk_144"],"id":"aug:n:000092","insight_id":"run_20260325_215039:core_periphery:000119","is_new":true,"label":"Periphery: knowledge transfers via sentence alignment","type":"relation","witness_edges":["edge_74"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"],"id":"aug:n:000093","insight_id":"run_20260325_215039:core_periphery:000118","is_new":true,"label":"Periphery: leacock-chodorow formula","type":"relation","witness_edges":["edge_48"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_76"],"id":"aug:n:000094","insight_id":"run_20260325_215039:core_periphery:000116","is_new":true,"label":"Periphery: orthomatcher","type":"relation","witness_edges":["edge_15"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_223"],"id":"aug:n:000095","insight_id":"run_20260325_215039:core_periphery:000112","is_new":true,"label":"Periphery: no function symbol","type":"relation","witness_edges":["edge_14"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"],"id":"aug:n:000096","insight_id":"run_20260325_215039:core_periphery:000108","is_new":true,"label":"Periphery: neo4j fabric","type":"relation","witness_edges":["edge_50"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"],"id":"aug:n:000097","insight_id":"run_20260325_215039:core_periphery:000115","is_new":true,"label":"Periphery: organizing principle","type":"relation","witness_edges":["edge_51"]},{"confidence":0.7466666666666667,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"],"id":"aug:n:000098","insight_id":"run_20260325_215039:core_periphery:000110","is_new":true,"label":"Periphery: needs not met by client-server paradigm","type":"relation","witness_edges":["edge_49"]},{"confidence":0.7383388007888071,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"],"id":"aug:n:000099","insight_id":"run_20260325_215039:text_similarity:000232","is_new":true,"label":"Text Similar: query in example 5-3 ~ query in example 5-4","type":"relation","witness_edges":["edge_52","edge_53"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000100","insight_id":"run_20260325_215039:community_link:000569","is_new":true,"label":"Community: few publisher constraint <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_6"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000101","insight_id":"run_20260325_215039:community_link:000571","is_new":true,"label":"Community: extensive data publishing <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_6"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000102","insight_id":"run_20260325_215039:community_link:000567","is_new":true,"label":"Community: extensive data publishing <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_6"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000103","insight_id":"run_20260325_215039:community_link:000491","is_new":true,"label":"Community: building knowledge graph <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_51"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000104","insight_id":"run_20260325_215039:community_link:000497","is_new":true,"label":"Community: organizing principle <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_51"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000105","insight_id":"run_20260325_215039:community_link:000493","is_new":true,"label":"Community: organizing principle <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_51"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["An_Introduction_to_Knowledge_Graphs_chunk_283","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000106","insight_id":"run_20260325_215039:community_link:000573","is_new":true,"label":"Community: few publisher constraint <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_6"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279","Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"],"id":"aug:n:000107","insight_id":"run_20260325_215039:community_link:000495","is_new":true,"label":"Community: building knowledge graph <-> advanced graph dependency modeling","type":"relation","witness_edges":["edge_37","edge_38","edge_51"]}]};
+
+        // --- PATCH START: Hyperedge Flattening Logic ---
+        // The visualization library requires 1-to-1 links (source -> target).
+        // The raw data contains "hyperedges" (sources[...] -> targets[...]).
+        // We must expand these into individual links.
+
+        const processLinks = (rawLinks) => {
+            const expandedLinks = [];
+
+            rawLinks.forEach(link => {
+                // Check if this is a hyperedge with arrays for sources/targets
+                if (Array.isArray(link.sources) && Array.isArray(link.targets)) {
+                    link.sources.forEach(source => {
+                        link.targets.forEach(target => {
+                            expandedLinks.push({
+                                source: source,
+                                target: target,
+                                label: link.label,
+                                type: link.type || 'relation',
+                                confidence: link.confidence,
+                                // Copy any other necessary properties from the original link
+                                id: link.id ? `${link.id}_${source}_${target}` : undefined
+                            });
+                        });
+                    });
+                } else if (link.source && link.target) {
+                    // If it's already a simple link, keep it
+                    expandedLinks.push(link);
+                }
+            });
+
+            return expandedLinks;
+        };
+
+        // Apply the processing to the data object
+        // Note: Adjust 'data.links' or 'data.edges' depending on the exact property name in the raw JSON.
+        // Based on standard graph JSON structures, it is likely 'data.links' or implied as the second array.
+        if (data.links) {
+            data.links = processLinks(data.links);
+        } else if (data.edges) {
+            // Some formats use 'edges' instead of 'links'
+            data.links = processLinks(data.edges);
+        }
+
+        console.log(`Patch applied: Generated ${data.links.length} simple links from hyperedges.`);
+        // --- PATCH END ---
+
+        (() => {
+            const graphDiv = document.getElementById('graph');
+            const controls = document.getElementById('controls');
+
+            if (typeof ForceGraph3D !== 'function' || typeof THREE === 'undefined') {
+                alert('Missing WebGL libs. Serve via http://localhost.');
+                return;
+            }
+
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const ric = window.requestIdleCallback || ((cb) => setTimeout(() => cb({ timeRemaining: () => 0 }), 0));
+            const rafThrottle = (fn) => {
+                let scheduled = false;
+                return (...args) => {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(() => { scheduled = false; fn(...args); });
+                };
+            };
+
+            // Overlay
+            let overlay = document.getElementById('kgOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'kgOverlay';
+                overlay.innerHTML = '<div class="panel"><div class="title">Working...</div><div class="sub">Building subgraph</div></div>';
+                document.body.appendChild(overlay);
+            }
+            const overlayTitle = overlay.querySelector('.title');
+            const overlaySub = overlay.querySelector('.sub');
+
+            function showOverlay(title, sub) {
+                if (overlayTitle) overlayTitle.textContent = title || 'Working...';
+                if (overlaySub) overlaySub.textContent = sub || '';
+                overlay.classList.add('show');
+            }
+            function hideOverlay() { overlay.classList.remove('show'); }
+
+            let hud = document.getElementById('kgHud');
+            if (!hud) {
+                hud = document.createElement('div');
+                hud.id = 'kgHud';
+                hud.textContent = '3D: initializing...';
+                document.body.appendChild(hud);
+            }
+
+            // Add extra controls - matching graph.html with augmentation additions
+            controls.insertAdjacentHTML('beforeend', `
+                <div class="kg-row">
+                    <input class="kg-input" id="kgSearch" placeholder="Search node (press /)..." />
+                    <button class="kg-btn" id="kgGo">Go</button>
+                </div>
+                <div class="kg-row">
+                    <button class="kg-btn" id="kgExpand1">+ 1 hop</button>
+                    <button class="kg-btn" id="kgExpand2">+ 2 hops</button>
+                    <button class="kg-btn" id="kgReset">Reset</button>
+                    <button class="kg-btn" id="kgCamReset">Reset camera</button>
+                </div>
+                <label style="margin-top:10px;">
+                    <input type="checkbox" id="kgAutoFreeze" checked> Auto-freeze physics
+                </label>
+                <label>
+                    <input type="checkbox" id="kgArrows"> Directional arrows
+                </label>
+                <label>
+                    Max nodes: <span id="kgMaxNodesVal">2500</span>
+                    <input type="range" id="kgMaxNodes" min="200" max="8000" step="100" value="2500">
+                </label>
+                <label>
+                    Depth spread: <span id="kgDepthVal">120</span>
+                    <input type="range" id="kgDepth" min="0" max="600" step="10" value="120">
+                </label>
+
+                <div style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                    <label style="font-weight:600; color:#4fc3f7;">Clustering</label>
+                    <label style="margin-top:6px;">
+                        <input type="checkbox" id="kgClusterOn" checked> Cluster coloring
+                    </label>
+                    <label>
+                        Clustering mode:
+                        <select id="kgClusterMode" class="kg-input" style="width: 180px;">
+                            <option value="topology" selected>Topology (Louvain)</option>
+                            <option value="spatial">Spatial (DBSCAN)</option>
+                        </select>
+                    </label>
+                    <label id="kgTopoResRow">
+                        Resolution: <span id="kgTopoResVal">1.00</span>
+                        <input type="range" id="kgTopoRes" min="0.20" max="3.00" step="0.05" value="1.00">
+                    </label>
+                    <label id="kgSpatialRadiusRow" style="display:none;">
+                        Cluster radius: <span id="kgClusterRadiusVal">40</span>
+                        <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
+                    </label>
+                    <label id="kgSpatialMinRow" style="display:none;">
+                        Min cluster size: <span id="kgMinClusterVal">12</span>
+                        <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="12">
+                    </label>
+                    <label>
+                        Palette:
+                        <select id="kgPalette" class="kg-input" style="width: 180px;">
+                            <option value="classic" selected>Classic</option>
+                            <option value="pastel">Pastel</option>
+                            <option value="neon">Neon</option>
+                            <option value="mono">Mono + accent</option>
+                        </select>
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="kgRecluster">Cluster now</button>
+                        <label style="margin:0;">
+                            <input type="checkbox" id="kgAutoCluster" checked> Auto (on freeze)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="aug-section" style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                    <label style="font-weight:600; color:#e040fb;">Augmentation Layer</label>
+                    <label style="margin-top:8px;">
+                        <input type="checkbox" id="showAug"> Show Augmentations
+                    </label>
+                    <label>
+                        Aug Opacity: <span id="augOpacityVal">1.0</span>
+                        <input type="range" id="augOpacity" min="0.1" max="1" step="0.1" value="1.0">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="augOnlyMode"> Augmentation-only mode
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="focusAug">Focus Aug</button>
+                    </div>
+                    <div id="augDetails">
+                        <strong>Insight Details</strong>
+                        <div id="augInfo">Click an augmentation node.</div>
+                    </div>
+                </div>
+
+                <div id="kgDetails" style="margin-top:10px; font-size:0.82em; color:#cfcfcf; line-height:1.35;"></div>
+            `);
+
+            const minDegreeEl = document.getElementById('minDegree');
+            const degreeValueEl = document.getElementById('degreeValue');
+            const linkStrengthEl = document.getElementById('linkStrength');
+            const repulsionEl = document.getElementById('repulsion');
+            const showLabelsEl = document.getElementById('showLabels');
+            const searchEl = document.getElementById('kgSearch');
+            const goBtn = document.getElementById('kgGo');
+            const exp1Btn = document.getElementById('kgExpand1');
+            const exp2Btn = document.getElementById('kgExpand2');
+            const resetBtn = document.getElementById('kgReset');
+            const camResetBtn = document.getElementById('kgCamReset');
+            const autoFreezeEl = document.getElementById('kgAutoFreeze');
+            const arrowsEl = document.getElementById('kgArrows');
+            const maxNodesEl = document.getElementById('kgMaxNodes');
+            const maxNodesValEl = document.getElementById('kgMaxNodesVal');
+            const depthEl = document.getElementById('kgDepth');
+            const depthValEl = document.getElementById('kgDepthVal');
+            const detailsEl = document.getElementById('kgDetails');
+            console.log('detailsEl found:', detailsEl);
+
+            // Clustering controls
+            const clusterOnEl = document.getElementById('kgClusterOn');
+            const clusterModeEl = document.getElementById('kgClusterMode');
+            const clusterRadiusEl = document.getElementById('kgClusterRadius');
+            const clusterRadiusValEl = document.getElementById('kgClusterRadiusVal');
+            const minClusterEl = document.getElementById('kgMinCluster');
+            const minClusterValEl = document.getElementById('kgMinClusterVal');
+            const topoResEl = document.getElementById('kgTopoRes');
+            const topoResValEl = document.getElementById('kgTopoResVal');
+            const paletteEl = document.getElementById('kgPalette');
+            const reclusterBtn = document.getElementById('kgRecluster');
+            const autoClusterEl = document.getElementById('kgAutoCluster');
+            const topoResRow = document.getElementById('kgTopoResRow');
+            const spatialRadiusRow = document.getElementById('kgSpatialRadiusRow');
+            const spatialMinRow = document.getElementById('kgSpatialMinRow');
+
+            // Augmentation controls
+            const showAugEl = document.getElementById('showAug');
+            const augOpacityEl = document.getElementById('augOpacity');
+            const augOpacityValEl = document.getElementById('augOpacityVal');
+            const augOnlyEl = document.getElementById('augOnlyMode');
+            const focusAugBtn = document.getElementById('focusAug');
+            const augDetailsEl = document.getElementById('augDetails');
+            const augInfoEl = document.getElementById('augInfo');
+
+            // ---- PHASE 1: Index base graph only (fast) ----
+            const N = data.nodes.length;
+            for (let i = 0; i < N; i++) {
+                const n = data.nodes[i];
+                n.gid = i;
+                n.isAug = false;
+            }
+
+            // Build base edges index
+            let edges = new Array(data.links.length);
+            let incident = Array.from({ length: N }, () => []);
+            for (let i = 0; i < data.links.length; i++) {
+                const l = data.links[i];
+                const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                edges[i] = { s, t, type: l.type, isAug: false };
+                incident[s].push(i);
+                incident[t].push(i);
+            }
+
+            // Build entity degree list for filtering
+            const entityByDegree = [];
+            for (let i = 0; i < N; i++) {
+                if (data.nodes[i].type === 'entity') entityByDegree.push(i);
+            }
+            entityByDegree.sort((a, b) => ((data.nodes[b].degree || 0) - (data.nodes[a].degree || 0)));
+
+            let labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+
+            // Store augmentation data for later merge
+            let augmentationMerged = false;
+            const nodeIdToIdx = new Map();
+            for (let i = 0; i < N; i++) nodeIdToIdx.set(data.nodes[i].id, i);
+
+            // Function to merge augmentation data (called on demand)
+            function mergeAugmentation() {
+                if (augmentationMerged) return;
+                augmentationMerged = true;
+                console.log('Merging augmentation data...');
+
+                const augNodeIdToIdx = new Map();
+                for (const augNode of augData.nodes) {
+                    const newIdx = data.nodes.length;
+                    data.nodes.push({
+                        gid: newIdx,
+                        id: augNode.id,
+                        label: augNode.label,
+                        type: 'augmentation',
+                        isAug: true,
+                        insightId: augNode.insight_id,
+                        confidence: augNode.confidence,
+                        evidenceChunks: augNode.evidence_chunk_ids || [],
+                        witnessEdges: augNode.witness_edges || []
+                    });
+                    augNodeIdToIdx.set(augNode.id, newIdx);
+                }
+
+                for (const augLink of augData.links) {
+                    let srcIdx = nodeIdToIdx.get(augLink.source);
+                    if (srcIdx === undefined) srcIdx = augNodeIdToIdx.get(augLink.source);
+                    let tgtIdx = nodeIdToIdx.get(augLink.target);
+                    if (tgtIdx === undefined) tgtIdx = augNodeIdToIdx.get(augLink.target);
+
+                    if (srcIdx !== undefined && tgtIdx !== undefined) {
+                        data.links.push({ source: srcIdx, target: tgtIdx, type: augLink.type, isAug: true });
+                    }
+                }
+
+                // Rebuild edges and incident arrays
+                edges = new Array(data.links.length);
+                incident = Array.from({ length: data.nodes.length }, () => []);
+                for (let i = 0; i < data.links.length; i++) {
+                    const l = data.links[i];
+                    const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                    const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                    edges[i] = { s, t, type: l.type, isAug: !!l.isAug };
+                    incident[s].push(i);
+                    incident[t].push(i);
+                }
+
+                labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+                console.log(`After merge: ${data.nodes.length} nodes, ${data.links.length} links`);
+            }
+
+            // State - matching graph.html with augmentation additions
+            const state = {
+                minDegree: +minDegreeEl.value,
+                linkStrength: +linkStrengthEl.value,
+                repulsion: +repulsionEl.value,
+                showLabels: !!showLabelsEl.checked,
+                autoFreeze: true,
+                showArrows: false,
+                maxNodes: +maxNodesEl.value,
+                depthSpread: +depthEl.value,
+                selectedGid: null,
+                visible: new Set(),
+                subNodes: [],
+                subLinks: [],
+                subNodesByGid: new Map(),
+                graph: null,
+                fps: { t0: performance.now(), frames: 0, value: 0 },
+                // Clustering state
+                clusterOn: true,
+                clusterMode: 'topology',
+                clusterRadius: 40,
+                minClusterSize: 12,
+                topoResolution: 1.0,
+                palette: 'classic',
+                autoCluster: true,
+                clusters: [],
+                clusterLabels: [],
+                // Augmentation state
+                showAug: true,  // Start in augmentation-only mode
+                augOpacity: 1.0,
+                augOnlyMode: true,
+                degreeDebounce: null
+            };
+
+            function applyDepth() {
+                const spread = state.depthSpread;
+                for (let i = 0; i < data.nodes.length; i++) {
+                    const n = data.nodes[i];
+                    const base = n.isAug ? 0.6 : (n.type === 'relation' ? 0.45 : 1.0);
+                    n.z = (Math.random() - 0.5) * spread * base;
+                    if (n.isAug) n.z += spread * 0.3; // Float augmentation slightly above
+                }
+            }
+
+            function seedVisibleByDegree(minDegree, maxNodes) {
+                const vis = new Set();
+
+                // Always include augmentation nodes if enabled or in aug-only mode
+                if (state.showAug || state.augOnlyMode) {
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug) vis.add(i);
+                    }
+                }
+
+                if (state.augOnlyMode) {
+                    // Only show augmentation and connected nodes
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug && incident[i]) {
+                            vis.add(i);  // Ensure the aug node itself is added
+                            for (const ei of incident[i]) {
+                                const e = edges[ei];
+                                if (!e) continue;
+                                const other = (e.s === i) ? e.t : e.s;
+                                vis.add(other);
+                            }
+                        }
+                    }
+                    return vis;
+                }
+
+                if (!state.augOnlyMode) {
+                    for (let k = 0; k < entityByDegree.length && vis.size < maxNodes; k++) {
+                        const idx = entityByDegree[k];
+                        const n = data.nodes[idx];
+                        if ((n.degree || 0) >= minDegree) vis.add(idx);
+                        else break;
+                    }
+                }
+
+                if (!state.augOnlyMode && vis.size < 50) {
+                    for (let k = 0; k < Math.min(200, entityByDegree.length) && vis.size < Math.min(maxNodes, 200); k++) {
+                        vis.add(entityByDegree[k]);
+                    }
+                }
+
+                const relQueue = [];
+                for (const idx of vis) {
+                    if (!incident[idx]) continue;
+                    for (const ei of incident[idx]) {
+                        const e = edges[ei];
+                        if (!e) continue;
+                        const other = (e.s === idx) ? e.t : e.s;
+                        if (data.nodes[other] && (data.nodes[other].type === 'relation' || data.nodes[other].isAug) && !vis.has(other)) {
+                            relQueue.push(other);
+                        }
+                    }
+                }
+                for (let i = 0; i < relQueue.length && vis.size < maxNodes; i++) vis.add(relQueue[i]);
+
+                if (state.selectedGid != null) vis.add(state.selectedGid);
+                return vis;
+            }
+
+            function buildSubgraphFromVisible() {
+                const subNodes = [];
+                state.visible.forEach(i => {
+                    if (data.nodes[i]) subNodes.push(data.nodes[i]);
+                });
+
+                const edgeIds = new Set();
+                for (const i of state.visible) {
+                    if (incident[i]) {
+                        for (const ei of incident[i]) edgeIds.add(ei);
+                    }
+                }
+
+                const subLinks = [];
+                edgeIds.forEach(ei => {
+                    const e = edges[ei];
+                    if (!e) return;
+                    if (state.visible.has(e.s) && state.visible.has(e.t)) {
+                        // Filter augmentation links if showAug is off
+                        if (e.isAug && !state.showAug) return;
+                        subLinks.push(e);
+                    }
+                });
+
+                state.subNodes = subNodes;
+                state.subLinks = subLinks;
+
+                const vn = document.getElementById('visibleNodes');
+                const vl = document.getElementById('visibleLinks');
+                if (vn) vn.textContent = String(subNodes.length);
+                if (vl) vl.textContent = String(subLinks.length);
+            }
+
+            function rebuildSubgraphIndex() {
+                state.subNodesByGid = new Map();
+                for (const n of state.subNodes) state.subNodesByGid.set(n.gid, n);
+            }
+
+            function updateDetails(node) {
+                if (!detailsEl) return;
+                if (!node) {
+                    detailsEl.innerHTML = '<span style="opacity:0.8;">Click a node to see details.</span>';
+                    augDetailsEl.classList.remove('show');
+                    return;
+                }
+
+                const lines = [];
+                lines.push(`<div><b>${escapeHtml(node.label || node.id || 'Node')}</b></div>`);
+                lines.push(`<div style="opacity:0.85;">type: <code>${escapeHtml(node.type || '')}</code></div>`);
+
+                if (node.isAug) {
+                    augDetailsEl.classList.add('show');
+                    let augHtml = `<strong>${escapeHtml(node.label)}</strong><br>`;
+                    if (node.insightId) augHtml += `Insight: ${escapeHtml(node.insightId)}<br>`;
+                    if (typeof node.confidence === 'number') augHtml += `Confidence: ${node.confidence.toFixed(3)}<br>`;
+                    if (node.evidenceChunks && node.evidenceChunks.length) {
+                        augHtml += `Evidence: ${escapeHtml(node.evidenceChunks.slice(0, 3).join(', '))}`;
+                        if (node.evidenceChunks.length > 3) augHtml += '...';
+                    }
+                    augInfoEl.innerHTML = augHtml;
+                    // Also show degree and relation info for augmented nodes
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                    }
+                } else {
+                    augDetailsEl.classList.remove('show');
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                        if (typeof node.confidence === 'number') lines.push(`<div style="opacity:0.85;">confidence: <code>${node.confidence}</code></div>`);
+                    }
+                }
+                detailsEl.innerHTML = lines.join('');
+            }
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            }
+
+            function expandSelected(hops) {
+                if (state.selectedGid == null) return;
+
+                const maxNodes = state.maxNodes;
+                const q = [state.selectedGid];
+                const dist = new Map([[state.selectedGid, 0]]);
+
+                while (q.length) {
+                    const u = q.shift();
+                    const d = dist.get(u) || 0;
+                    if (d >= hops) continue;
+
+                    for (const ei of incident[u]) {
+                        const e = edges[ei];
+                        const v = (e.s === u) ? e.t : e.s;
+                        if (!dist.has(v)) {
+                            dist.set(v, d + 1);
+                            q.push(v);
+                        }
+                        if (state.visible.size < maxNodes) state.visible.add(v);
+                    }
+                    if (state.visible.size >= maxNodes) break;
+                }
+
+                rebuildAndRender('Expanding neighborhood...');
+            }
+
+            // Graph init
+            graphDiv.innerHTML = '';
+
+            const Graph = ForceGraph3D()(graphDiv)
+                .nodeId('gid')
+                .nodeLabel(n => (n.label || n.id || ''))
+                .backgroundColor('rgba(0,0,0,0)')
+                .showNavInfo(false)
+                .enableNodeDrag(true)
+                .linkSource('source')
+                .linkTarget('target')
+                .cooldownTime(2000)  // Prevent runaway physics simulation
+                .warmupTicks(0);     // Don't pre-calculate - let rebuildAndRender handle it
+
+            state.graph = Graph;
+
+            // -------------------- CLUSTERING (from graph.html) --------------------
+            const PALETTES = {
+                classic: ['#4fc3f7','#ff9800','#ab47bc','#66bb6a','#ef5350','#ffa726','#26c6da','#8d6e63','#78909c','#d4e157'],
+                pastel:  ['#a3d5ff','#ffd6a5','#bdb2ff','#caffbf','#ffadad','#fdffb6','#9bf6ff','#ffc6ff','#b8f2e6','#f1c0e8'],
+                neon:    ['#00e5ff','#ffea00','#ff1744','#76ff03','#e040fb','#ff9100','#1de9b6','#f500ff','#00c853','#2979ff'],
+                mono:    ['#4fc3f7','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc']
+            };
+
+            function getClusterColor(cid) {
+                if (cid == null || cid < 0) return '#4fc3f7';
+                const pal = PALETTES[state.palette] || PALETTES.classic;
+                return pal[cid % pal.length];
+            }
+
+            function clearClusterLabels() {
+                if (!state.clusterLabels?.length) return;
+                const scene = Graph.scene();
+                for (const s of state.clusterLabels) scene.remove(s);
+                state.clusterLabels = [];
+            }
+
+            function drawClusterLabels() {
+                clearClusterLabels();
+                if (!state.clusterOn || typeof SpriteText === 'undefined') return;
+
+                const scene = Graph.scene();
+                for (const cl of state.clusters) {
+                    const rep = state.subNodesByGid.get(cl.repGid);
+                    if (!rep) continue;
+
+                    const labelTxt = (rep.label || rep.id || `Cluster ${cl.id}`);
+                    const sprite = new SpriteText(labelTxt);
+                    sprite.fontFace = 'Arial Black';
+                    sprite.textHeight = 10;
+                    sprite.color = 'rgba(255,255,255,0.95)';
+                    sprite.backgroundColor = 'rgba(0,0,0,0.50)';
+                    sprite.padding = 6;
+                    sprite.borderRadius = 10;
+                    sprite.material.depthWrite = false;
+
+                    sprite.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+                    scene.add(sprite);
+                    state.clusterLabels.push(sprite);
+                }
+            }
+
+            function chooseRepresentative(clusterNodeGids) {
+                let cx = 0, cy = 0, cz = 0, cnt = 0;
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n) continue;
+                    cx += (n.x || 0); cy += (n.y || 0); cz += (n.z || 0);
+                    cnt++;
+                }
+                if (!cnt) return clusterNodeGids[0] ?? null;
+                cx /= cnt; cy /= cnt; cz /= cnt;
+
+                let bestGid = null;
+                let bestD = Infinity;
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n || n.type !== 'entity') continue;
+                    const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+                    const d2 = dx*dx + dy*dy + dz*dz;
+                    if (d2 < bestD) { bestD = d2; bestGid = gid; }
+                }
+                if (bestGid != null) return bestGid;
+
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n) continue;
+                    const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+                    const d2 = dx*dx + dy*dy + dz*dz;
+                    if (d2 < bestD) { bestD = d2; bestGid = gid; }
+                }
+                return bestGid;
+            }
+
+            // DBSCAN spatial clustering
+            function clusterSpatialDBSCAN() {
+                const eps = state.clusterRadius;
+                const minPts = state.minClusterSize;
+
+                const nodes = state.subNodes.filter(n => !n.isAug); // Exclude aug nodes
+                const n = nodes.length;
+                const labels = new Array(n).fill(0);
+                let cid = 0;
+
+                const eps2 = eps * eps;
+                function regionQuery(i) {
+                    const ni = nodes[i];
+                    const xi = ni.x || 0, yi = ni.y || 0, zi = ni.z || 0;
+                    const res = [];
+                    for (let j = 0; j < n; j++) {
+                        const nj = nodes[j];
+                        const dx = (nj.x || 0) - xi, dy = (nj.y || 0) - yi, dz = (nj.z || 0) - zi;
+                        if ((dx*dx + dy*dy + dz*dz) <= eps2) res.push(j);
+                    }
+                    return res;
+                }
+
+                function expandCluster(i, neighbors, cid) {
+                    labels[i] = cid;
+                    for (let k = 0; k < neighbors.length; k++) {
+                        const j = neighbors[k];
+                        if (labels[j] === -1) labels[j] = cid;
+                        if (labels[j] !== 0) continue;
+                        labels[j] = cid;
+                        const n2 = regionQuery(j);
+                        if (n2.length >= minPts) {
+                            for (const x of n2) neighbors.push(x);
+                        }
+                    }
+                }
+
+                for (let i = 0; i < n; i++) {
+                    if (labels[i] !== 0) continue;
+                    const neighbors = regionQuery(i);
+                    if (neighbors.length < minPts) {
+                        labels[i] = -1;
+                    } else {
+                        cid++;
+                        expandCluster(i, neighbors, cid);
+                    }
+                }
+
+                for (let i = 0; i < n; i++) {
+                    nodes[i].__cluster = labels[i] > 0 ? (labels[i] - 1) : -1;
+                }
+                // Set aug nodes to no cluster
+                for (const node of state.subNodes) {
+                    if (node.isAug) node.__cluster = -1;
+                }
+
+                const groups = new Map();
+                for (const node of nodes) {
+                    const c = node.__cluster ?? -1;
+                    if (c < 0) continue;
+                    if (!groups.has(c)) groups.set(c, []);
+                    groups.get(c).push(node.gid);
+                }
+
+                state.clusters = [];
+                for (const [id, gids] of groups.entries()) {
+                    const rep = chooseRepresentative(gids);
+                    state.clusters.push({ id, nodes: gids, repGid: rep });
+                }
+            }
+
+            // Louvain-style topology clustering
+            function clusterTopologyLouvain() {
+                const nodes = state.subNodes.filter(n => !n.isAug); // Exclude aug nodes from clustering
+                const links = state.subLinks.filter(l => !l.isAug); // Exclude aug links
+                const idxByGid = new Map();
+                for (let i = 0; i < nodes.length; i++) idxByGid.set(nodes[i].gid, i);
+
+                const adj = Array.from({ length: nodes.length }, () => new Map());
+                for (const e of links) {
+                    const a = idxByGid.get(e.s);
+                    const b = idxByGid.get(e.t);
+                    if (a == null || b == null || a === b) continue;
+                    const w = 1;
+                    adj[a].set(b, (adj[a].get(b) || 0) + w);
+                    adj[b].set(a, (adj[b].get(a) || 0) + w);
+                }
+
+                const resolution = state.topoResolution;
+                const n = nodes.length;
+                let community = new Array(n);
+                for (let i = 0; i < n; i++) community[i] = i;
+
+                let k = new Array(n).fill(0);
+                let m2 = 0;
+                for (let i = 0; i < n; i++) {
+                    let sum = 0;
+                    for (const w of adj[i].values()) sum += w;
+                    k[i] = sum;
+                    m2 += sum;
+                }
+                if (m2 === 0) {
+                    for (const node of state.subNodes) node.__cluster = -1;
+                    state.clusters = [];
+                    return;
+                }
+
+                let tot = new Array(n).fill(0);
+                for (let i = 0; i < n; i++) tot[community[i]] += k[i];
+
+                function neighCommWeights(i) {
+                    const map = new Map();
+                    for (const [j, w] of adj[i].entries()) {
+                        const cj = community[j];
+                        map.set(cj, (map.get(cj) || 0) + w);
+                    }
+                    return map;
+                }
+
+                let changed = true;
+                let iter = 0;
+                while (changed && iter < 30) {
+                    changed = false;
+                    iter++;
+                    for (let i = 0; i < n; i++) {
+                        const ci = community[i];
+                        const ki = k[i];
+                        tot[ci] -= ki;
+                        const ncw = neighCommWeights(i);
+                        let bestC = ci;
+                        let bestGain = 0;
+                        for (const [c, wic] of ncw.entries()) {
+                            const totC = tot[c];
+                            const gain = wic - resolution * ki * totC / m2;
+                            if (gain > bestGain) { bestGain = gain; bestC = c; }
+                        }
+                        community[i] = bestC;
+                        tot[bestC] += ki;
+                        if (bestC !== ci) changed = true;
+                    }
+                }
+
+                const remap = new Map();
+                let nextId = 0;
+                for (let i = 0; i < n; i++) {
+                    const c = community[i];
+                    if (!remap.has(c)) remap.set(c, nextId++);
+                    nodes[i].__cluster = remap.get(c);
+                }
+                // Set aug nodes to no cluster
+                for (const node of state.subNodes) {
+                    if (node.isAug) node.__cluster = -1;
+                }
+
+                const groups = new Map();
+                for (const node of nodes) {
+                    const c = node.__cluster ?? -1;
+                    if (c < 0) continue;
+                    if (!groups.has(c)) groups.set(c, []);
+                    groups.get(c).push(node.gid);
+                }
+
+                state.clusters = [];
+                for (const [id, gids] of groups.entries()) {
+                    const rep = chooseRepresentative(gids);
+                    state.clusters.push({ id, nodes: gids, repGid: rep });
+                }
+            }
+
+            function runClustering() {
+                if (state.clusterMode === 'spatial') {
+                    clusterSpatialDBSCAN();
+                } else {
+                    clusterTopologyLouvain();
+                }
+                applyStyles();
+                drawClusterLabels();
+            }
+
+            function applyStyles() {
+                const showAug = state.showAug;
+                const opacity = state.augOpacity;
+                const clusteringEnabled = !!state.clusterOn;
+
+                Graph
+                    .nodeColor(n => {
+                        // Augmentation nodes always purple
+                        if (n.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity})` : 'rgba(224, 64, 251, 0.1)';
+                        }
+                        // If clustering enabled, use cluster color
+                        if (clusteringEnabled) {
+                            const cid = n.__cluster ?? -1;
+                            return getClusterColor(cid);
+                        }
+                        // Default coloring
+                        return n.type === 'relation' ? '#ff9800' : '#4fc3f7';
+                    })
+                    .nodeVal(n => {
+                        if (n.isAug) return showAug ? 4 : 1;
+                        return n.type === 'relation' ? 1.5 : Math.max(1.2, 1 + (n.degree || 0) * 0.06);
+                    })
+                    .linkColor(l => {
+                        // Augmentation links always purple
+                        if (l.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity * 0.7})` : 'rgba(224, 64, 251, 0.05)';
+                        }
+                        // If clustering enabled, color by cluster
+                        if (clusteringEnabled) {
+                            const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                            const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                            const ca = a ? (a.__cluster ?? -1) : -1;
+                            const cb = b ? (b.__cluster ?? -1) : -1;
+
+                            if (ca >= 0 && ca === cb) return getClusterColor(ca);
+                            return 'rgba(255,255,255,0.10)';
+                        }
+                        return l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)';
+                    })
+                    .linkWidth(l => {
+                        if (l.isAug) return 1.5;
+                        if (clusteringEnabled) {
+                            const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                            const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                            const ca = a ? (a.__cluster ?? -1) : -1;
+                            const cb = b ? (b.__cluster ?? -1) : -1;
+                            return (ca >= 0 && ca === cb) ? 0.9 : 0.35;
+                        }
+                        return 0.6;
+                    })
+                    .linkDirectionalArrowLength(state.showArrows ? 3 : 0)
+                    .linkDirectionalArrowRelPos(0.5);
+
+                if (Graph.linkLineDash) {
+                    Graph.linkLineDash(l => l.isAug ? [2, 2] : null);
+                }
+
+                Graph.refresh();
+            }
+
+            // Apply 3D text labels only to important/selected nodes (prevents performance freeze)
+            function applyLabels() {
+                state.showLabels = !!showLabelsEl.checked;
+                if (typeof SpriteText === 'undefined') return;
+
+                Graph.nodeThreeObject(node => {
+                    if (!state.showLabels) return null;
+
+                    const isSelected = (state.selectedGid != null && node.gid === state.selectedGid);
+                    // Only show labels for high-degree entities or augmentation nodes
+                    const important = (node.type === 'entity' && (node.degree || 0) >= Math.max(40, state.minDegree));
+                    const isAugNode = node.isAug;
+                    if (!isSelected && !important && !isAugNode) return null;
+
+                    const sprite = new SpriteText(node.label || node.id || '');
+                    sprite.textHeight = isSelected ? 6 : (isAugNode ? 5 : 4);
+                    sprite.color = isAugNode ? 'rgba(224, 64, 251, 0.95)' : 'rgba(255,255,255,0.9)';
+                    sprite.backgroundColor = 'rgba(0,0,0,0.35)';
+                    sprite.padding = 2;
+                    sprite.borderRadius = 6;
+                    sprite.material.depthWrite = false;
+                    sprite.position.y = 8;
+                    return sprite;
+                }).nodeThreeObjectExtend(true);
+
+                Graph.refresh();
+            }
+
+            // Apply physics forces (matching graph.html)
+            function applyForces() {
+                if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+                if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength);
+            }
+
+            // Apply freeze settings
+            function applyFreeze() {
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+            }
+
+            function rebuildAndRender(msg) {
+                showOverlay(msg || 'Updating...', 'Filtering & rebuilding visible subgraph');
+
+                ric(() => {
+                    buildSubgraphFromVisible();
+                    rebuildSubgraphIndex();
+
+                    const gdata = {
+                        nodes: state.subNodes,
+                        links: state.subLinks.map(e => ({ source: e.s, target: e.t, type: e.type, isAug: e.isAug }))
+                    };
+
+                    Graph.graphData(gdata);
+                    applyForces();
+                    applyFreeze();
+                    applyStyles();
+                    applyLabels();
+
+                    Graph.d3ReheatSimulation();
+
+                    // Cluster after a short delay for layout to settle
+                    if (state.autoCluster && state.clusterOn) {
+                        setTimeout(() => runClustering(), 1400);
+                    }
+
+                    hideOverlay();
+                    updateHud();
+                });
+            }
+
+            function rebuildFromDegree() {
+                showOverlay('Seeding visible subgraph...', 'Using degree threshold + caps');
+                ric(() => {
+                    state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+                    if (state.selectedGid != null) state.visible.add(state.selectedGid);
+                    rebuildAndRender('Rendering subgraph...');
+                });
+            }
+
+            function updateHud() {
+                const now = performance.now();
+                state.fps.frames++;
+                const dt = now - state.fps.t0;
+                if (dt >= 800) {
+                    state.fps.value = Math.round((state.fps.frames * 1000) / dt);
+                    state.fps.frames = 0;
+                    state.fps.t0 = now;
+                }
+                const augCount = state.subNodes.filter(n => n.isAug).length;
+                hud.textContent = `3D | ${state.subNodes.length} nodes | ${state.subLinks.length} links | ${augCount} aug | ${state.fps.value} fps`;
+            }
+
+            // Camera reset function
+            function resetCamera() {
+                Graph.cameraPosition({ x: 0, y: 0, z: 420 }, { x: 0, y: 0, z: 0 }, 700);
+            }
+
+            // Event handlers
+            Graph.onNodeClick(node => {
+                console.log('Node clicked:', node);
+                state.selectedGid = node ? node.gid : null;
+                console.log('Calling updateDetails with node:', node ? node.label : null);
+                updateDetails(node);
+            });
+
+            // Debounced degree filter - uses rebuildFromDegree to properly seed visible nodes
+            minDegreeEl.addEventListener('input', () => {
+                state.minDegree = +minDegreeEl.value;
+                degreeValueEl.textContent = String(state.minDegree);
+                if (state.degreeDebounce) clearTimeout(state.degreeDebounce);
+                state.degreeDebounce = setTimeout(() => rebuildFromDegree(), 150);
+            });
+
+            linkStrengthEl.addEventListener('input', () => {
+                state.linkStrength = +linkStrengthEl.value;
+                applyForces();
+                Graph.d3ReheatSimulation();
+            });
+
+            repulsionEl.addEventListener('input', () => {
+                state.repulsion = +repulsionEl.value;
+                applyForces();
+                Graph.d3ReheatSimulation();
+            });
+
+            // Debounced max nodes control
+            maxNodesEl.addEventListener('input', () => {
+                state.maxNodes = +maxNodesEl.value;
+                maxNodesValEl.textContent = String(state.maxNodes);
+                if (state.maxNodesDebounce) clearTimeout(state.maxNodesDebounce);
+                state.maxNodesDebounce = setTimeout(() => rebuildFromDegree(), 200);
+            });
+
+            depthEl.addEventListener('input', () => {
+                state.depthSpread = +depthEl.value;
+                depthValEl.textContent = String(state.depthSpread);
+                applyDepth();
+                Graph.refresh();
+            });
+
+            goBtn.addEventListener('click', () => {
+                const q = (searchEl.value || '').trim().toLowerCase();
+                if (!q) return;
+                let idx = labelsLower.indexOf(q);
+                if (idx === -1) {
+                    for (let i = 0; i < labelsLower.length; i++) {
+                        if (labelsLower[i].includes(q)) { idx = i; break; }
+                    }
+                }
+                if (idx === -1) {
+                    detailsEl.innerHTML = `<div style="color:#ffb74d;">No match for "${escapeHtml(q)}".</div>`;
+                    return;
+                }
+                state.selectedGid = idx;
+                state.visible.add(idx);
+                rebuildAndRender('Searching...');
+                updateDetails(data.nodes[idx]);
+            });
+
+            searchEl.addEventListener('keydown', e => { if (e.key === 'Enter') goBtn.click(); });
+
+            exp1Btn.addEventListener('click', () => expandSelected(1));
+            exp2Btn.addEventListener('click', () => expandSelected(2));
+            resetBtn.addEventListener('click', () => {
+                state.selectedGid = null;
+                updateDetails(null);
+                rebuildAndRender('Resetting view...');
+            });
+            camResetBtn.addEventListener('click', resetCamera);
+
+            showAugEl.addEventListener('change', () => {
+                state.showAug = showAugEl.checked;
+                if (state.showAug) mergeAugmentation();  // Merge aug data on first enable
+                rebuildAndRender('Toggling augmentation...');
+            });
+
+            augOpacityEl.addEventListener('input', () => {
+                state.augOpacity = +augOpacityEl.value;
+                augOpacityValEl.textContent = state.augOpacity.toFixed(1);
+                applyStyles();
+            });
+
+            augOnlyEl.addEventListener('change', () => {
+                state.augOnlyMode = augOnlyEl.checked;
+                if (state.augOnlyMode) {
+                    mergeAugmentation();  // Merge aug data if entering aug-only mode
+                    // Also enable showAug when entering aug-only mode
+                    state.showAug = true;
+                    showAugEl.checked = true;
+                } else {
+                    state.showAug = false;
+                    if (showAugEl) showAugEl.checked = false;
+                }
+                // Reseed visible nodes so we return to the same base-graph view as graph.html.
+                rebuildFromDegree();
+            });
+
+            focusAugBtn.addEventListener('click', () => {
+                const augNodes = state.subNodes.filter(n => n.isAug);
+                if (augNodes.length === 0) return;
+
+                let cx = 0, cy = 0, cz = 0;
+                for (const n of augNodes) {
+                    cx += n.x || 0;
+                    cy += n.y || 0;
+                    cz += n.z || 0;
+                }
+                cx /= augNodes.length;
+                cy /= augNodes.length;
+                cz /= augNodes.length;
+
+                Graph.cameraPosition({ x: cx, y: cy, z: cz + 300 }, { x: cx, y: cy, z: cz }, 1000);
+            });
+
+            // Directional arrows toggle
+            arrowsEl.addEventListener('change', () => {
+                state.showArrows = !!arrowsEl.checked;
+                applyStyles();
+            });
+
+            // Show labels toggle (only renders labels for high-degree/selected nodes)
+            showLabelsEl.addEventListener('change', () => {
+                applyLabels();
+            });
+
+            // Clustering event handlers
+            clusterOnEl.addEventListener('change', () => {
+                state.clusterOn = !!clusterOnEl.checked;
+                if (state.clusterOn) runClustering();
+                else {
+                    clearClusterLabels();
+                    applyStyles();
+                }
+            });
+
+            clusterModeEl.addEventListener('change', () => {
+                state.clusterMode = clusterModeEl.value;
+                if (state.clusterMode === 'spatial') {
+                    topoResRow.style.display = 'none';
+                    spatialRadiusRow.style.display = '';
+                    spatialMinRow.style.display = '';
+                } else {
+                    topoResRow.style.display = '';
+                    spatialRadiusRow.style.display = 'none';
+                    spatialMinRow.style.display = 'none';
+                }
+                if (state.clusterOn) runClustering();
+            });
+
+            clusterRadiusEl.addEventListener('input', () => {
+                state.clusterRadius = +clusterRadiusEl.value;
+                clusterRadiusValEl.textContent = String(state.clusterRadius);
+            });
+            clusterRadiusEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            minClusterEl.addEventListener('input', () => {
+                state.minClusterSize = +minClusterEl.value;
+                minClusterValEl.textContent = String(state.minClusterSize);
+            });
+            minClusterEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            topoResEl.addEventListener('input', () => {
+                state.topoResolution = +topoResEl.value;
+                topoResValEl.textContent = state.topoResolution.toFixed(2);
+            });
+            topoResEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            paletteEl.addEventListener('change', () => {
+                state.palette = paletteEl.value;
+                applyStyles();
+                drawClusterLabels();
+            });
+
+            reclusterBtn.addEventListener('click', () => runClustering());
+
+            autoClusterEl.addEventListener('change', () => {
+                state.autoCluster = !!autoClusterEl.checked;
+            });
+
+            // Tooltip hover
+            Graph.onNodeHover(rafThrottle((node) => {
+                const tt = document.getElementById('tooltip');
+                if (!tt) return;
+                if (!node) { tt.style.opacity = 0; return; }
+                tt.style.opacity = 1;
+                let info = `<strong>${escapeHtml(node.label || node.id || '')}</strong><br/>`;
+                info += `<span style="opacity:0.85;">${escapeHtml(node.type || '')}`;
+                if (typeof node.degree === 'number') info += ` deg ${node.degree}`;
+                if (node.isAug && typeof node.confidence === 'number') info += ` conf ${node.confidence.toFixed(2)}`;
+                info += '</span>';
+                tt.innerHTML = info;
+            }));
+
+            // Auto-freeze handler
+            autoFreezeEl.addEventListener('change', () => {
+                state.autoFreeze = !!autoFreezeEl.checked;
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+                Graph.d3ReheatSimulation();
+            });
+
+            // FPS counter
+            if (Graph.onRenderFramePost) {
+                Graph.onRenderFramePost(updateHud);
+            } else {
+                setInterval(updateHud, 250);
+            }
+
+            // Window resize
+            window.addEventListener('resize', () => {
+                Graph.width(window.innerWidth);
+                Graph.height(window.innerHeight);
+            });
+
+            // ---- Boot sequence (matching graph.html exactly) ----
+            // Start in augmentation-only mode, but allow user to toggle back
+            state.showAug = true;
+            state.augOnlyMode = true;
+            if (showAugEl) showAugEl.checked = true;
+            if (augOnlyEl) augOnlyEl.checked = true;
+            mergeAugmentation();
+
+            // Function to update cluster mode UI (matching graph.html)
+            function updateClusterModeUI() {
+                if (state.clusterMode === 'spatial') {
+                    if (topoResRow) topoResRow.style.display = 'none';
+                    if (spatialRadiusRow) spatialRadiusRow.style.display = '';
+                    if (spatialMinRow) spatialMinRow.style.display = '';
+                } else {
+                    if (topoResRow) topoResRow.style.display = '';
+                    if (spatialRadiusRow) spatialRadiusRow.style.display = 'none';
+                    if (spatialMinRow) spatialMinRow.style.display = 'none';
+                }
+            }
+
+            // Initialize UI (matching graph.html boot sequence exactly)
+            updateDetails(null);
+            if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+            if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+            if (clusterRadiusValEl) clusterRadiusValEl.textContent = String(state.clusterRadius);
+            if (minClusterValEl) minClusterValEl.textContent = String(state.minClusterSize);
+            if (topoResValEl) topoResValEl.textContent = state.topoResolution.toFixed(2);
+            updateClusterModeUI();
+
+            applyDepth();
+            resetCamera();
+            console.log(`Boot: minDegree=${state.minDegree}, maxNodes=${state.maxNodes}`);
+            state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+            console.log(`After seedVisibleByDegree: ${state.visible.size} visible nodes`);
+            buildSubgraphFromVisible();
+            console.log(`After buildSubgraph: ${state.subNodes.length} subNodes, ${state.subLinks.length} subLinks`);
+
+            hideOverlay();
+            rebuildAndRender('Rendering initial 3D view...');
+        })();
+    </script>
+</body>
+</html>

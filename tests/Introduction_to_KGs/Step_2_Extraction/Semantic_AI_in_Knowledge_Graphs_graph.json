@@ -1,0 +1,202 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_73",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Semantic_AI_in_Knowledge_Graphs_chunk_174",
+      "source_document": "Semantic_AI_in_Knowledge_Graphs",
+      "sources": [
+        "kg approach"
+      ],
+      "targets": [
+        "evaluate entities’ semantic relatedness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_74",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Semantic_AI_in_Knowledge_Graphs_chunk_144",
+      "source_document": "Semantic_AI_in_Knowledge_Graphs",
+      "sources": [
+        "knowledge transfers via sentence alignment"
+      ],
+      "targets": [
+        "neural machine translation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_75",
+      "properties": {},
+      "relation": "enables addressing",
+      "source_chunk_id": "Semantic_AI_in_Knowledge_Graphs_chunk_19",
+      "source_document": "Semantic_AI_in_Knowledge_Graphs",
+      "sources": [
+        "semantic knowledge graph"
+      ],
+      "targets": [
+        "cold-start problem"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_76",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Semantic_AI_in_Knowledge_Graphs_chunk_7",
+      "source_document": "Semantic_AI_in_Knowledge_Graphs",
+      "sources": [
+        "transferring knowledge"
+      ],
+      "targets": [
+        "inferring knowledge for unseen topic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_77",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Semantic_AI_in_Knowledge_Graphs_chunk_113",
+      "source_document": "Semantic_AI_in_Knowledge_Graphs",
+      "sources": [
+        "triplet concept"
+      ],
+      "targets": [
+        "training process"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_78",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Semantic_AI_in_Knowledge_Graphs_chunk_159",
+      "source_document": "Semantic_AI_in_Knowledge_Graphs",
+      "sources": [
+        "world wide web"
+      ],
+      "targets": [
+        "access to web page"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 6,
+    "num_nodes": 12
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "access to web page",
+      "incident_edges": [
+        "edge_78"
+      ],
+      "label": "access to web pages",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "cold-start problem",
+      "incident_edges": [
+        "edge_75"
+      ],
+      "label": "Cold-Start Problem",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "evaluate entities’ semantic relatedness",
+      "incident_edges": [
+        "edge_73"
+      ],
+      "label": "evaluate entities’ semantic relatedness",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "inferring knowledge for unseen topic",
+      "incident_edges": [
+        "edge_76"
+      ],
+      "label": "inferring knowledge for unseen topic",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "kg approach",
+      "incident_edges": [
+        "edge_73"
+      ],
+      "label": "KG approach",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "knowledge transfers via sentence alignment",
+      "incident_edges": [
+        "edge_74"
+      ],
+      "label": "Knowledge Transfers via Sentence Alignment",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "neural machine translation",
+      "incident_edges": [
+        "edge_74"
+      ],
+      "label": "Neural Machine Translation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "semantic knowledge graph",
+      "incident_edges": [
+        "edge_75"
+      ],
+      "label": "Semantic Knowledge Graphs",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "training process",
+      "incident_edges": [
+        "edge_77"
+      ],
+      "label": "training process",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "transferring knowledge",
+      "incident_edges": [
+        "edge_76"
+      ],
+      "label": "transferring knowledge",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "triplet concept",
+      "incident_edges": [
+        "edge_77"
+      ],
+      "label": "triplet concept",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "world wide web",
+      "incident_edges": [
+        "edge_78"
+      ],
+      "label": "World Wide Web",
+      "properties": {}
+    }
+  ]
+}
