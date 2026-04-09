@@ -1,0 +1,4187 @@
+{
+  "insights": [
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: false syntactic tokens in property iri (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000100",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "false syntactic tokens in property iri"
+      ],
+      "seed_nodes": [
+        "false syntactic tokens in property iri"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "false syntactic tokens in property iri"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Undirected graphs do not have in-degree or out-degree.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_295"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000309",
+      "llm": {
+        "claim": "Undirected graphs do not have in-degree or out-degree.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "graph not directed",
+        "compute in-degree and out-degree"
+      ],
+      "seed_nodes": [
+        "graph not directed",
+        "compute in-degree and out-degree"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_63"
+      ],
+      "witness_nodes": [
+        "graph not directed",
+        "compute in-degree and out-degree"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "High centrality node in bipartite PageRank: knowledge graph",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:centrality:000120",
+      "llm": null,
+      "novelty_tags": [
+        "centrality",
+        "bipartite_pagerank"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "centrality": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "centrality",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47"
+      ],
+      "witness_nodes": [
+        "significant business value",
+        "cypher code",
+        "linked data",
+        "application",
+        "richer data use",
+        "knowledge graph"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: gnns are valuable for real-world problem (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000107",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "gnns are valuable for real-world problem"
+      ],
+      "seed_nodes": [
+        "gnns are valuable for real-world problem"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "gnns are valuable for real-world problem"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: syntactic errors in property identifier (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000106",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "syntactic errors in property identifier"
+      ],
+      "seed_nodes": [
+        "syntactic errors in property identifier"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "syntactic errors in property identifier"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: islets of langerhan (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000105",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "islets of langerhan"
+      ],
+      "seed_nodes": [
+        "islets of langerhan"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "islets of langerhan"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: ability of gnns to capture complex relationship (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000104",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "ability of gnns to capture complex relationship"
+      ],
+      "seed_nodes": [
+        "ability of gnns to capture complex relationship"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "ability of gnns to capture complex relationship"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: diabetes type 1 (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000103",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "diabetes type 1"
+      ],
+      "seed_nodes": [
+        "diabetes type 1"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "diabetes type 1"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: result interpretation (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000102",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "result interpretation"
+      ],
+      "seed_nodes": [
+        "result interpretation"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "result interpretation"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: llm integration (degree=0, hub=0.00, authority=0.00).",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:core_periphery:000101",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.0,
+        "hub_score": 0.0,
+        "integration_score": 0.0,
+        "periphery_score": 1.0
+      },
+      "seed_labels": [
+        "llm integration"
+      ],
+      "seed_nodes": [
+        "llm integration"
+      ],
+      "source_documents": [],
+      "type": "core_periphery",
+      "witness_edges": [],
+      "witness_nodes": [
+        "llm integration"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Knowledge graphs facilitate richer data use.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000294",
+      "llm": {
+        "claim": "Knowledge graphs facilitate richer data use.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "richer data use"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "richer data use"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_47"
+      ],
+      "witness_nodes": [
+        "knowledge graph",
+        "richer data use"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Metadata clarifies entities.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000282",
+      "llm": {
+        "claim": "Metadata clarifies entities.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "additional metadata",
+        "entity"
+      ],
+      "seed_nodes": [
+        "additional metadata",
+        "entity"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_36"
+      ],
+      "witness_nodes": [
+        "additional metadata",
+        "entity"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Algorithm execution leads to printing the shortest path.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000285",
+      "llm": {
+        "claim": "Algorithm execution leads to printing the shortest path.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "algorithm execution",
+        "shortest path printing"
+      ],
+      "seed_nodes": [
+        "algorithm execution",
+        "shortest path printing"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_39"
+      ],
+      "witness_nodes": [
+        "algorithm execution",
+        "shortest path printing"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Missing property values can cause inconsistency.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_172"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000252",
+      "llm": {
+        "claim": "Missing property values can cause inconsistency.",
+        "confidence": 1.0,
+        "stance": "opposes"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "opposes"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "an instance of a class not having any value for property p",
+        "inconsistency"
+      ],
+      "seed_nodes": [
+        "an instance of a class not having any value for property p",
+        "inconsistency"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_0"
+      ],
+      "witness_nodes": [
+        "an instance of a class not having any value for property p",
+        "inconsistency"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Data preparation ensures data quality.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_150"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000291",
+      "llm": {
+        "claim": "Data preparation ensures data quality.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "data preparation",
+        "data to meet required quality characteristic"
+      ],
+      "seed_nodes": [
+        "data preparation",
+        "data to meet required quality characteristic"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_44"
+      ],
+      "witness_nodes": [
+        "data preparation",
+        "data to meet required quality characteristic"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Knowledge graphs generate significant business value.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000293",
+      "llm": {
+        "claim": "Knowledge graphs generate significant business value.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "significant business value"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "significant business value"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_46"
+      ],
+      "witness_nodes": [
+        "knowledge graph",
+        "significant business value"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Offering data makes sharing possible.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_434"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000275",
+      "llm": {
+        "claim": "Offering data makes sharing possible.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "data offer",
+        "data sharing"
+      ],
+      "seed_nodes": [
+        "data offer",
+        "data sharing"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_3"
+      ],
+      "witness_nodes": [
+        "data offer",
+        "data sharing"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Core node: knowledge graph (degree=5, hub=1.00, authority=1.00).",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000080",
+      "llm": null,
+      "novelty_tags": [
+        "core",
+        "hub"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "authority_score": 1.0,
+        "core_score": 1.0,
+        "degree_norm": 1.0,
+        "hub_score": 1.0,
+        "integration_score": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47"
+      ],
+      "witness_nodes": [
+        "significant business value",
+        "cypher code",
+        "linked data",
+        "application",
+        "richer data use",
+        "knowledge graph"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "A knowledge graph enables an application.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000255",
+      "llm": {
+        "claim": "A knowledge graph enables an application.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "application"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "application"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_11"
+      ],
+      "witness_nodes": [
+        "knowledge graph",
+        "application"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'trigger' → TRIGGERS. Indicates that the subject causes the object to begin an action, process, or state.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000346",
+      "llm": {
+        "confidence": 1.0,
+        "description": "Indicates that the subject causes the object to begin an action, process, or state.",
+        "relation": "trigger",
+        "type": "TRIGGERS"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=TRIGGERS"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "natural language command",
+        "virtual assistants carry task"
+      ],
+      "seed_nodes": [
+        "natural language command",
+        "virtual assistants carry task"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_13"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'produces' → PRODUCES. The source creates, generates, or yields the target as an outcome or output.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000329",
+      "llm": {
+        "confidence": 1.0,
+        "description": "The source creates, generates, or yields the target as an outcome or output.",
+        "relation": "produces",
+        "type": "PRODUCES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=PRODUCES"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "cypher code",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "cypher code",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_42",
+        "edge_43",
+        "edge_54"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "transformational",
+      "description": "Multiple immediate supertypes result in a non-tree hierarchy.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_274"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000273",
+      "llm": {
+        "claim": "Multiple immediate supertypes result in a non-tree hierarchy.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "type having multiple immediate supertype",
+        "hierarchy not being a tree"
+      ],
+      "seed_nodes": [
+        "type having multiple immediate supertype",
+        "hierarchy not being a tree"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_28"
+      ],
+      "witness_nodes": [
+        "type having multiple immediate supertype",
+        "hierarchy not being a tree"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Self-referential calculations require iterative solutions.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_52"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000270",
+      "llm": {
+        "claim": "Self-referential calculations require iterative solutions.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "self-referential calculation",
+        "iterative solution"
+      ],
+      "seed_nodes": [
+        "self-referential calculation",
+        "iterative solution"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_25"
+      ],
+      "witness_nodes": [
+        "self-referential calculation",
+        "iterative solution"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Executing Python code can generate a list of entities.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000301",
+      "llm": {
+        "claim": "Executing Python code can generate a list of entities.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "running python code",
+        "list of entity"
+      ],
+      "seed_nodes": [
+        "running python code",
+        "list of entity"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_54"
+      ],
+      "witness_nodes": [
+        "running python code",
+        "list of entity"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Converting the HPO ontology to a Neo4j graph enables its processing using Cypher.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_184"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000311",
+      "llm": {
+        "claim": "Converting the HPO ontology to a Neo4j graph enables its processing using Cypher.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "hpo ontology conversion to neo4j graph",
+        "processing using cypher"
+      ],
+      "seed_nodes": [
+        "hpo ontology conversion to neo4j graph",
+        "processing using cypher"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_65"
+      ],
+      "witness_nodes": [
+        "hpo ontology conversion to neo4j graph",
+        "processing using cypher"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Information from higher-level nodes enables the classification of deeper nodes.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_212"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000312",
+      "llm": {
+        "claim": "Information from higher-level nodes enables the classification of deeper nodes.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "information from first-level node",
+        "categorization of deeper node"
+      ],
+      "seed_nodes": [
+        "information from first-level node",
+        "categorization of deeper node"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_66"
+      ],
+      "witness_nodes": [
+        "information from first-level node",
+        "categorization of deeper node"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Semantic knowledge graphs help address the cold-start problem.",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_19"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000321",
+      "llm": {
+        "claim": "Semantic knowledge graphs help address the cold-start problem.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "semantic knowledge graph",
+        "cold-start problem"
+      ],
+      "seed_nodes": [
+        "semantic knowledge graph",
+        "cold-start problem"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_75"
+      ],
+      "witness_nodes": [
+        "semantic knowledge graph",
+        "cold-start problem"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "GraphDB reasoners infer new facts.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_332"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000326",
+      "llm": {
+        "claim": "GraphDB reasoners infer new facts.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "graphdb reasoner",
+        "new fact"
+      ],
+      "seed_nodes": [
+        "graphdb reasoner",
+        "new fact"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_9"
+      ],
+      "witness_nodes": [
+        "graphdb reasoner",
+        "new fact"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "WWW enables web page access.",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_159"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000324",
+      "llm": {
+        "claim": "WWW enables web page access.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "world wide web",
+        "access to web page"
+      ],
+      "seed_nodes": [
+        "world wide web",
+        "access to web page"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_78"
+      ],
+      "witness_nodes": [
+        "world wide web",
+        "access to web page"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Community cluster (6 nodes): knowledge graph, application, cypher code",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "insight_id": "run_20260325_215039:community_detection:000150",
+      "llm": null,
+      "novelty_tags": [
+        "community_detection",
+        "size=6"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "size": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "application",
+        "cypher code"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "application",
+        "cypher code"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_detection",
+      "witness_edges": [
+        "edge_46",
+        "edge_47",
+        "edge_42",
+        "edge_12",
+        "edge_11"
+      ],
+      "witness_nodes": [
+        "application",
+        "cypher code",
+        "knowledge graph",
+        "linked data",
+        "richer data use",
+        "significant business value"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Linked data facilitates knowledge graphs.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000256",
+      "llm": {
+        "claim": "Linked data facilitates knowledge graphs.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "linked data",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "linked data",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_12"
+      ],
+      "witness_nodes": [
+        "linked data",
+        "knowledge graph"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Virtual assistants perform tasks in response to natural language commands.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000257",
+      "llm": {
+        "claim": "Virtual assistants perform tasks in response to natural language commands.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "natural language command",
+        "virtual assistants carry task"
+      ],
+      "seed_nodes": [
+        "natural language command",
+        "virtual assistants carry task"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_13"
+      ],
+      "witness_nodes": [
+        "natural language command",
+        "virtual assistants carry task"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Transferring knowledge enables inferring knowledge for new topics.",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_7"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000322",
+      "llm": {
+        "claim": "Transferring knowledge enables inferring knowledge for new topics.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "transferring knowledge",
+        "inferring knowledge for unseen topic"
+      ],
+      "seed_nodes": [
+        "transferring knowledge",
+        "inferring knowledge for unseen topic"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_76"
+      ],
+      "witness_nodes": [
+        "transferring knowledge",
+        "inferring knowledge for unseen topic"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "OrthoMatcher does not cause coreference resolution.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_76"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000259",
+      "llm": {
+        "claim": "OrthoMatcher does not cause coreference resolution.",
+        "confidence": 1.0,
+        "stance": "opposes"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "opposes"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "orthomatcher",
+        "coreference resolution"
+      ],
+      "seed_nodes": [
+        "orthomatcher",
+        "coreference resolution"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_15"
+      ],
+      "witness_nodes": [
+        "orthomatcher",
+        "coreference resolution"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Assessing KG quality status is essential for improving KG quality.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_346"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000264",
+      "llm": {
+        "claim": "Assessing KG quality status is essential for improving KG quality.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "assessing kg quality statu",
+        "improving kg quality"
+      ],
+      "seed_nodes": [
+        "assessing kg quality statu",
+        "improving kg quality"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_2"
+      ],
+      "witness_nodes": [
+        "assessing kg quality statu",
+        "improving kg quality"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "SNOMED 'is_a' relationships transmit semantic types.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_184"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000318",
+      "llm": {
+        "claim": "SNOMED 'is_a' relationships transmit semantic types.",
+        "confidence": 1.0,
+        "stance": "supports"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "supports"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "snomed_is_a relationship",
+        "semantic type"
+      ],
+      "seed_nodes": [
+        "snomed_is_a relationship",
+        "semantic type"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_72"
+      ],
+      "witness_nodes": [
+        "snomed_is_a relationship",
+        "semantic type"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "GATE gazetteers are a resource or method used for entity recognition.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_76"
+      ],
+      "insight_id": "run_20260325_215039:claim_stance:000315",
+      "llm": {
+        "claim": "GATE gazetteers are a resource or method used for entity recognition.",
+        "confidence": 1.0,
+        "stance": "opposes"
+      },
+      "novelty_tags": [
+        "claim_stance",
+        "opposes"
+      ],
+      "score": 1.0,
+      "score_breakdown": {
+        "confidence": 1.0
+      },
+      "seed_labels": [
+        "gate gazetteer",
+        "entity recognition"
+      ],
+      "seed_nodes": [
+        "gate gazetteer",
+        "entity recognition"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "claim_stance",
+      "witness_edges": [
+        "edge_7"
+      ],
+      "witness_nodes": [
+        "gate gazetteer",
+        "entity recognition"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'enable' → Enables. The subject provides the means or capability for the object to occur or be performed.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_353",
+        "An_Introduction_to_Knowledge_Graphs_chunk_96"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000332",
+      "llm": {
+        "confidence": 0.98,
+        "description": "The subject provides the means or capability for the object to occur or be performed.",
+        "relation": "enable",
+        "type": "Enables"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Enables"
+      ],
+      "score": 0.98,
+      "score_breakdown": {
+        "confidence": 0.98
+      },
+      "seed_labels": [
+        "search engine",
+        "searching linked data"
+      ],
+      "seed_nodes": [
+        "search engine",
+        "searching linked data"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_24",
+        "edge_27"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'infers' → Infer. The subject logically deduces or concludes the object from available information or premises.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_332"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000348",
+      "llm": {
+        "confidence": 0.98,
+        "description": "The subject logically deduces or concludes the object from available information or premises.",
+        "relation": "infers",
+        "type": "Infer"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Infer"
+      ],
+      "score": 0.98,
+      "score_breakdown": {
+        "confidence": 0.98
+      },
+      "seed_labels": [
+        "graphdb reasoner",
+        "new fact"
+      ],
+      "seed_nodes": [
+        "graphdb reasoner",
+        "new fact"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_9"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'boosts' → Enhances. Indicates that one entity improves, strengthens, or increases the effectiveness, quality, or quantity of another.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000333",
+      "llm": {
+        "confidence": 0.98,
+        "description": "Indicates that one entity improves, strengthens, or increases the effectiveness, quality, or quantity of another.",
+        "relation": "boosts",
+        "type": "Enhances"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Enhances"
+      ],
+      "score": 0.98,
+      "score_breakdown": {
+        "confidence": 0.98
+      },
+      "seed_labels": [
+        "leacock-chodorow formula",
+        "similarity"
+      ],
+      "seed_nodes": [
+        "leacock-chodorow formula",
+        "similarity"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_48"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'solves' → Solves. Indicates that the subject entity provides a solution or resolution for the object entity, which is typically a problem, challenge, or issue.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_67"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000344",
+      "llm": {
+        "confidence": 0.95,
+        "description": "Indicates that the subject entity provides a solution or resolution for the object entity, which is typically a problem, challenge, or issue.",
+        "relation": "solves",
+        "type": "Solves"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Solves"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "kg principles application",
+        "real-world problem"
+      ],
+      "seed_nodes": [
+        "kg principles application",
+        "real-world problem"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_67"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'improves' → Improves. Indicates that the subject enhances the quality, performance, or effectiveness of the object.",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_144"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000351",
+      "llm": {
+        "confidence": 0.95,
+        "description": "Indicates that the subject enhances the quality, performance, or effectiveness of the object.",
+        "relation": "improves",
+        "type": "Improves"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Improves"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "knowledge transfers via sentence alignment",
+        "neural machine translation"
+      ],
+      "seed_nodes": [
+        "knowledge transfers via sentence alignment",
+        "neural machine translation"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_74"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'triggers' → INITIATES. The subject causes the object to begin or start.",
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180",
+        "An_Introduction_to_Knowledge_Graphs_chunk_411"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000330",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The subject causes the object to begin or start.",
+        "relation": "triggers",
+        "type": "INITIATES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=INITIATES"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "query",
+        "karl answering process"
+      ],
+      "seed_nodes": [
+        "query",
+        "karl answering process"
+      ],
+      "source_documents": [
+        "Building_Applications_with_AI_Agents",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_20",
+        "edge_32"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'disambiguates' → IDENTIFIES. The source provides information that helps to uniquely identify or pinpoint the target, often by resolving ambiguity.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000334",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The source provides information that helps to uniquely identify or pinpoint the target, often by resolving ambiguity.",
+        "relation": "disambiguates",
+        "type": "IDENTIFIES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=IDENTIFIES"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "additional metadata",
+        "entity"
+      ],
+      "seed_nodes": [
+        "additional metadata",
+        "entity"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_36"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'drives' → LEADS_TO. The subject entity is a cause, precursor, or strong influence that results in the object entity.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000337",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The subject entity is a cause, precursor, or strong influence that results in the object entity.",
+        "relation": "drives",
+        "type": "LEADS_TO"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=LEADS_TO"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "significant business value"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "significant business value"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_46"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'adjusts' → MODIFIES. The subject alters or changes an aspect of the object, often to improve or adapt it.",
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000347",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The subject alters or changes an aspect of the object, often to improve or adapt it.",
+        "relation": "adjusts",
+        "type": "MODIFIES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=MODIFIES"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "beta parameter",
+        "model prioritization of preferred response"
+      ],
+      "seed_nodes": [
+        "beta parameter",
+        "model prioritization of preferred response"
+      ],
+      "source_documents": [
+        "Building_Applications_with_AI_Agents"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_31"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'enables' → Enables. The source entity provides the means, capability, or conditions for the target entity to exist, occur, or be performed.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203",
+        "Building_Applications_with_AI_Agents_chunk_180",
+        "An_Introduction_to_Knowledge_Graphs_chunk_434",
+        "An_Introduction_to_Knowledge_Graphs_chunk_400",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000327",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The source entity provides the means, capability, or conditions for the target entity to exist, occur, or be performed.",
+        "relation": "enables",
+        "type": "Enables"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Enables"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "linked data",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "linked data",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "Building_Applications_with_AI_Agents",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_12",
+        "edge_26",
+        "edge_3",
+        "edge_33",
+        "edge_37"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'contributed to' → contributesTo. The subject provided input, effort, or resources towards the creation, development, or outcome of the object.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000335",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The subject provided input, effort, or resources towards the creation, development, or outcome of the object.",
+        "relation": "contributed to",
+        "type": "contributesTo"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=contributesTo"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "author grew up in birmingham",
+        "birmingham new street choice"
+      ],
+      "seed_nodes": [
+        "author grew up in birmingham",
+        "birmingham new street choice"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_40"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'provide' → OFFERS. Indicates that a subject makes a service, product, or capability available.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_434"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000340",
+      "llm": {
+        "confidence": 0.95,
+        "description": "Indicates that a subject makes a service, product, or capability available.",
+        "relation": "provide",
+        "type": "OFFERS"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=OFFERS"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "applications using data",
+        "services like analytic"
+      ],
+      "seed_nodes": [
+        "applications using data",
+        "services like analytic"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_1"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'leads to' → CAUSES. Indicates that one entity, event, or state is the reason or origin for another.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000341",
+      "llm": {
+        "confidence": 0.95,
+        "description": "Indicates that one entity, event, or state is the reason or origin for another.",
+        "relation": "leads to",
+        "type": "CAUSES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=CAUSES"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "needs not met by client-server paradigm",
+        "need for server-side logic"
+      ],
+      "seed_nodes": [
+        "needs not met by client-server paradigm",
+        "need for server-side logic"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_49"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'creates' → produces. The subject brings the object into existence as an outcome or result.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_296"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000342",
+      "llm": {
+        "confidence": 0.95,
+        "description": "The subject brings the object into existence as an outcome or result.",
+        "relation": "creates",
+        "type": "produces"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=produces"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "extracting features from distant neighborhood",
+        "comprehensive view of node's structural context"
+      ],
+      "seed_nodes": [
+        "extracting features from distant neighborhood",
+        "comprehensive view of node's structural context"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_61"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'returns' → Outputs. Indicates that an entity or process yields another entity as its direct output or result.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000338",
+      "llm": {
+        "confidence": 0.95,
+        "description": "Indicates that an entity or process yields another entity as its direct output or result.",
+        "relation": "returns",
+        "type": "Outputs"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Outputs"
+      ],
+      "score": 0.95,
+      "score_breakdown": {
+        "confidence": 0.95
+      },
+      "seed_labels": [
+        "query in example 5-4",
+        "list of global customer"
+      ],
+      "seed_nodes": [
+        "query in example 5-4",
+        "list of global customer"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_53"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'enables addressing' → Facilitates. The first entity makes it possible or easier to deal with the second entity.",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_19"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000339",
+      "llm": {
+        "confidence": 0.9,
+        "description": "The first entity makes it possible or easier to deal with the second entity.",
+        "relation": "enables addressing",
+        "type": "Facilitates"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Facilitates"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "semantic knowledge graph",
+        "cold-start problem"
+      ],
+      "seed_nodes": [
+        "semantic knowledge graph",
+        "cold-start problem"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_75"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'causes' → RESULTS_IN. Indicates that the subject entity produces or leads to the object entity as an outcome or consequence.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_346",
+        "An_Introduction_to_Knowledge_Graphs_chunk_76",
+        "An_Introduction_to_Knowledge_Graphs_chunk_223",
+        "An_Introduction_to_Knowledge_Graphs_chunk_6"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000328",
+      "llm": {
+        "confidence": 0.9,
+        "description": "Indicates that the subject entity produces or leads to the object entity as an outcome or consequence.",
+        "relation": "causes",
+        "type": "RESULTS_IN"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=RESULTS_IN"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "kg choice",
+        "kg success and adoption"
+      ],
+      "seed_nodes": [
+        "kg choice",
+        "kg success and adoption"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_10",
+        "edge_14",
+        "edge_15",
+        "edge_16",
+        "edge_17"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'enriches' → ENHANCES. Indicates that one entity improves the quality, value, or effectiveness of another, often by adding to it.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000336",
+      "llm": {
+        "confidence": 0.9,
+        "description": "Indicates that one entity improves the quality, value, or effectiveness of another, often by adding to it.",
+        "relation": "enriches",
+        "type": "ENHANCES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=ENHANCES"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "explicit entities collection",
+        "search option"
+      ],
+      "seed_nodes": [
+        "explicit entities collection",
+        "search option"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_45"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'address' → APPLIES_TO_PROBLEM. Indicates that a method, technology, or approach is used to address, tackle, or resolve a particular problem, challenge, or issue.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_363"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000343",
+      "llm": {
+        "confidence": 0.9,
+        "description": "Indicates that a method, technology, or approach is used to address, tackle, or resolve a particular problem, challenge, or issue.",
+        "relation": "address",
+        "type": "APPLIES_TO_PROBLEM"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=APPLIES_TO_PROBLEM"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "graph neural network",
+        "fundamental challenges in graph-based ml task"
+      ],
+      "seed_nodes": [
+        "graph neural network",
+        "fundamental challenges in graph-based ml task"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_62"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'powers' → ENABLES. The source entity provides the essential functionality, data, or intelligence that allows the target entity to operate or achieve its purpose.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000350",
+      "llm": {
+        "confidence": 0.9,
+        "description": "The source entity provides the essential functionality, data, or intelligence that allows the target entity to operate or achieve its purpose.",
+        "relation": "powers",
+        "type": "ENABLES"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=ENABLES"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "application"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "application"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_11"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'maintains' → Sustains. Subject causes the object to continue or persist.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_25"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000349",
+      "llm": {
+        "confidence": 0.9,
+        "description": "Subject causes the object to continue or persist.",
+        "relation": "maintains",
+        "type": "Sustains"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=Sustains"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "challenging question",
+        "author interest"
+      ],
+      "seed_nodes": [
+        "challenging question",
+        "author interest"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_59"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Relation 'propagates' → SPREADS. Indicates that an entity or phenomenon extends its influence, presence, or effect over an area, through a medium, or among a population.",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_184"
+      ],
+      "insight_id": "run_20260325_215039:relation_induction:000345",
+      "llm": {
+        "confidence": 0.9,
+        "description": "Indicates that an entity or phenomenon extends its influence, presence, or effect over an area, through a medium, or among a population.",
+        "relation": "propagates",
+        "type": "SPREADS"
+      },
+      "novelty_tags": [
+        "relation_induction",
+        "type=SPREADS"
+      ],
+      "score": 0.9,
+      "score_breakdown": {
+        "confidence": 0.9
+      },
+      "seed_labels": [
+        "snomed_is_a relationship",
+        "semantic type"
+      ],
+      "seed_nodes": [
+        "snomed_is_a relationship",
+        "semantic type"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "relation_induction",
+      "witness_edges": [
+        "edge_72"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "combinatorial",
+      "description": "Mechanism consolidation: clustered 4 insights (4 mechanistic hypotheses, 0 long-chain links, 0 explanatory chains). Core nodes: 'cypher code', 'significant business value', 'richer data use', ...",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228"
+      ],
+      "insight_id": "run_20260325_215039:mechanism_consolidation:000811",
+      "llm": null,
+      "novelty_tags": [
+        "mechanism_consolidation",
+        "cluster_size=4"
+      ],
+      "score": 0.8495458333333332,
+      "score_breakdown": {
+        "avg_member_score": 0.7318194444444445,
+        "cluster_size": 4.0,
+        "cohesion": 1.0
+      },
+      "seed_labels": [
+        "cypher code",
+        "significant business value"
+      ],
+      "seed_nodes": [
+        "cypher code",
+        "significant business value"
+      ],
+      "source_documents": [],
+      "type": "mechanism_consolidation",
+      "witness_edges": [
+        "edge_42",
+        "edge_47",
+        "edge_12",
+        "edge_11",
+        "edge_46"
+      ],
+      "witness_nodes": [
+        "cypher code",
+        "significant business value",
+        "richer data use",
+        "knowledge graph",
+        "application",
+        "linked data"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: Algorithm execution describes the process or procedure used to achieve a result or cause an effect.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000244",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "algorithm execution"
+      ],
+      "seed_nodes": [
+        "algorithm execution"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_39"
+      ],
+      "witness_nodes": [
+        "algorithm execution"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: outcome\nReason: This describes a resulting state or capability of the model after a learning process, rather than the process itself.",
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000248",
+      "llm": {
+        "role": "outcome"
+      },
+      "novelty_tags": [
+        "outcome"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "model learns to favor output"
+      ],
+      "seed_nodes": [
+        "model learns to favor output"
+      ],
+      "source_documents": [
+        "Building_Applications_with_AI_Agents"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_33"
+      ],
+      "witness_nodes": [
+        "model learns to favor output"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: A \"kg approach\" describes a specific technique or strategy used to achieve a goal, making it a method.",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_174"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000247",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "kg approach"
+      ],
+      "seed_nodes": [
+        "kg approach"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_73"
+      ],
+      "witness_nodes": [
+        "kg approach"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: It describes a specific process or technique used to verify the accuracy of a model, serving as a way to achieve a larger objective.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000246",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "dependency model correctness validation"
+      ],
+      "seed_nodes": [
+        "dependency model correctness validation"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_38"
+      ],
+      "witness_nodes": [
+        "dependency model correctness validation"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: A calculation is a process or technique used to determine or achieve a result, thus serving as a means to an end.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000245",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "complex impact propagation calculation"
+      ],
+      "seed_nodes": [
+        "complex impact propagation calculation"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_37"
+      ],
+      "witness_nodes": [
+        "complex impact propagation calculation"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: The entity \"advanced graph dependency modeling\" is described by relations where it acts as the enabler, indicating it is a technique or process used to achieve other things.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000243",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_37",
+        "edge_38"
+      ],
+      "witness_nodes": [
+        "advanced graph dependency modeling"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: It describes the process of analyzing and explaining the meaning of findings, which is a step or technique within a larger procedure.",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:method_outcome:000251",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "result interpretation"
+      ],
+      "seed_nodes": [
+        "result interpretation"
+      ],
+      "source_documents": [],
+      "type": "method_outcome",
+      "witness_edges": [],
+      "witness_nodes": [
+        "result interpretation"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Domain bridge: 'knowledge graph' connects 4 different domains",
+      "evidence_chunk_ids": [],
+      "insight_id": "run_20260325_215039:domain_bridge:000201",
+      "llm": null,
+      "novelty_tags": [],
+      "score": 0.8,
+      "score_breakdown": {
+        "bridge_strength": 0.8,
+        "domain_diversity": 4.0
+      },
+      "seed_labels": [
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "knowledge graph"
+      ],
+      "source_documents": [],
+      "type": "domain_bridge",
+      "witness_edges": [],
+      "witness_nodes": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: method\nReason: \"Model prioritization of preferred response\" describes the technique or process a model uses to rank or select responses, making it a method that can be adjusted.",
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000249",
+      "llm": {
+        "role": "method"
+      },
+      "novelty_tags": [
+        "method"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "model prioritization of preferred response"
+      ],
+      "seed_nodes": [
+        "model prioritization of preferred response"
+      ],
+      "source_documents": [
+        "Building_Applications_with_AI_Agents"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_31"
+      ],
+      "witness_nodes": [
+        "model prioritization of preferred response"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Analogical transfer: 'linked data' enables 'knowledge graph' and 'organizing principle' enables 'building knowledge graph' → suggest 'linked data' enables 'building knowledge graph'. If linked data enables the existence of a knowledge graph, it inherently enables the process of building that knowledge graph.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "insight_id": "run_20260325_215039:analogical_transfer:000352",
+      "llm": {
+        "confidence": 1.0,
+        "rationale": "If linked data enables the existence of a knowledge graph, it inherently enables the process of building that knowledge graph."
+      },
+      "novelty_tags": [
+        "analogical_transfer",
+        "relation=enables"
+      ],
+      "score": 0.8,
+      "score_breakdown": {
+        "llm_confidence": 1.0,
+        "similarity_source": 0.0,
+        "similarity_target": 0.6666666666666666
+      },
+      "seed_labels": [
+        "linked data",
+        "building knowledge graph"
+      ],
+      "seed_nodes": [
+        "linked data",
+        "building knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "analogical_transfer",
+      "witness_edges": [
+        "edge_12",
+        "edge_51"
+      ],
+      "witness_nodes": [
+        "linked data",
+        "knowledge graph",
+        "organizing principle",
+        "building knowledge graph"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Label: outcome\nReason: A \"result\" is inherently what is produced or achieved by an action or process, making it the consequence or outcome.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"
+      ],
+      "insight_id": "run_20260325_215039:method_outcome:000250",
+      "llm": {
+        "role": "outcome"
+      },
+      "novelty_tags": [
+        "outcome"
+      ],
+      "score": 0.8,
+      "score_breakdown": {},
+      "seed_labels": [
+        "similar result"
+      ],
+      "seed_nodes": [
+        "similar result"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "method_outcome",
+      "witness_edges": [
+        "edge_43"
+      ],
+      "witness_nodes": [
+        "similar result"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: organizing principle <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000441",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "organizing principle",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "organizing principle",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: building knowledge graph <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000439",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "building knowledge graph",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "building knowledge graph",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: few publisher constraint <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000517",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "few publisher constraint",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "few publisher constraint",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: forum accessibility <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_25",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000587",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "forum accessibility",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "forum accessibility",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_58"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: extensive data publishing <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000515",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "extensive data publishing",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "extensive data publishing",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: book in print <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_25",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000589",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "book in print",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "book in print",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_58"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: organizing principle <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000484",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "organizing principle",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "organizing principle",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: few publisher constraint <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000560",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "few publisher constraint",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "few publisher constraint",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: building knowledge graph <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000482",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "building knowledge graph",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "building knowledge graph",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: extensive data publishing <-> knowledge graph (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000558",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.792804162054804,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 6.0
+      },
+      "seed_labels": [
+        "extensive data publishing",
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "extensive data publishing",
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_46",
+        "edge_47",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "transformational",
+      "description": "Intervention bottleneck: 'knowledge graph' appears in 8/8 causal chains and connects 4 endpoint pairs.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "insight_id": "run_20260325_215039:intervention_bottleneck:000812",
+      "llm": null,
+      "novelty_tags": [
+        "intervention_bottleneck"
+      ],
+      "score": 0.7621233891324553,
+      "score_breakdown": {
+        "affected_chains": 8.0,
+        "chain_strength": 0.32035254037844385,
+        "coverage": 1.0,
+        "dynamic_min_coverage": 0.05,
+        "span": 1.0
+      },
+      "seed_labels": [
+        "knowledge graph"
+      ],
+      "seed_nodes": [
+        "knowledge graph"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "intervention_bottleneck",
+      "witness_edges": [
+        "edge_12",
+        "edge_46",
+        "edge_47",
+        "edge_42"
+      ],
+      "witness_nodes": [
+        "knowledge graph",
+        "linked data",
+        "richer data use",
+        "significant business value",
+        "cypher code"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Mechanistic chain (cause_mediator_effect): Cause 'cypher code' --produces--> Mediator 'knowledge graph' --enables--> Effect 'richer data use'. Explanation subgraph adds 3 nodes and 3 edges.",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "insight_id": "run_20260325_215039:hypotheses_2:000353",
+      "llm": null,
+      "novelty_tags": [],
+      "score": 0.7558611111111111,
+      "score_breakdown": {
+        "chain_score": 0.8312499999999999,
+        "chain_support": 1.0,
+        "coherence": 1.0,
+        "explanation_alignment": 0.3333333333333333,
+        "explanation_confidence": 0.9,
+        "explanation_density": 0.8333333333333334,
+        "explanation_score": 0.6427777777777778,
+        "novelty": 0.0,
+        "relation_strength": 0.925,
+        "type_fidelity": 1.0
+      },
+      "seed_labels": [
+        "cypher code",
+        "richer data use"
+      ],
+      "seed_nodes": [
+        "cypher code",
+        "richer data use"
+      ],
+      "source_documents": [],
+      "type": "hypotheses_2",
+      "witness_edges": [
+        "edge_46",
+        "edge_11",
+        "edge_12",
+        "edge_47",
+        "edge_42"
+      ],
+      "witness_nodes": [
+        "application",
+        "linked data",
+        "richer data use",
+        "knowledge graph",
+        "significant business value",
+        "cypher code"
+      ]
+    },
+    {
+      "category": "transformational",
+      "description": "Mechanistic chain (cause_mediator_effect): Cause 'linked data' --enables--> Mediator 'knowledge graph' --drives--> Effect 'significant business value'. Explanation subgraph adds 3 nodes and 3 edges.",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:hypotheses_2:000354",
+      "llm": null,
+      "novelty_tags": [],
+      "score": 0.7544444444444445,
+      "score_breakdown": {
+        "chain_score": 0.8250000000000001,
+        "chain_support": 1.0,
+        "coherence": 1.0,
+        "explanation_alignment": 0.3333333333333333,
+        "explanation_confidence": 0.9166666666666666,
+        "explanation_density": 0.8333333333333334,
+        "explanation_score": 0.648611111111111,
+        "novelty": 0.0,
+        "relation_strength": 0.9,
+        "type_fidelity": 1.0
+      },
+      "seed_labels": [
+        "linked data",
+        "significant business value"
+      ],
+      "seed_nodes": [
+        "linked data",
+        "significant business value"
+      ],
+      "source_documents": [],
+      "type": "hypotheses_2",
+      "witness_edges": [
+        "edge_11",
+        "edge_42",
+        "edge_47",
+        "edge_46",
+        "edge_12"
+      ],
+      "witness_nodes": [
+        "application",
+        "cypher code",
+        "significant business value",
+        "richer data use",
+        "knowledge graph",
+        "linked data"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Text similarity link: 'linked data' ~ 'searching linked data' (cosine=0.75).",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_96",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "insight_id": "run_20260325_215039:text_similarity:000230",
+      "llm": null,
+      "novelty_tags": [
+        "text_similarity"
+      ],
+      "score": 0.7538463212766184,
+      "score_breakdown": {
+        "text_similarity": 0.7538463212766184
+      },
+      "seed_labels": [
+        "linked data",
+        "searching linked data"
+      ],
+      "seed_nodes": [
+        "linked data",
+        "searching linked data"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "text_similarity",
+      "witness_edges": [
+        "edge_12",
+        "edge_24"
+      ],
+      "witness_nodes": [
+        "searching linked data",
+        "search engine",
+        "knowledge graph",
+        "linked data"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Text similarity link: 'knowledge graph' ~ 'semantic knowledge graph' (cosine=0.75).",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_19",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+        "An_Introduction_to_Knowledge_Graphs_chunk_98",
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:text_similarity:000231",
+      "llm": null,
+      "novelty_tags": [
+        "text_similarity"
+      ],
+      "score": 0.7508215908411017,
+      "score_breakdown": {
+        "text_similarity": 0.7508215908411017
+      },
+      "seed_labels": [
+        "knowledge graph",
+        "semantic knowledge graph"
+      ],
+      "seed_nodes": [
+        "knowledge graph",
+        "semantic knowledge graph"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "text_similarity",
+      "witness_edges": [
+        "edge_11",
+        "edge_12",
+        "edge_42",
+        "edge_75"
+      ],
+      "witness_nodes": [
+        "cold-start problem",
+        "semantic knowledge graph",
+        "cypher code",
+        "linked data",
+        "application",
+        "knowledge graph"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: natural language command (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_422"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000111",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "natural language command"
+      ],
+      "seed_nodes": [
+        "natural language command"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_13"
+      ],
+      "witness_nodes": [
+        "virtual assistants carry task",
+        "natural language command"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: kg principles application (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_67"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000109",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "kg principles application"
+      ],
+      "seed_nodes": [
+        "kg principles application"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_67"
+      ],
+      "witness_nodes": [
+        "real-world problem",
+        "kg principles application"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: linked data (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_98"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000117",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "linked data"
+      ],
+      "seed_nodes": [
+        "linked data"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_12"
+      ],
+      "witness_nodes": [
+        "knowledge graph",
+        "linked data"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: local path not found (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Building_Applications_with_AI_Agents_chunk_180"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000113",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "local path not found"
+      ],
+      "seed_nodes": [
+        "local path not found"
+      ],
+      "source_documents": [
+        "Building_Applications_with_AI_Agents"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_32"
+      ],
+      "witness_nodes": [
+        "download attempt",
+        "local path not found"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: node passing values to neighbor (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Knowledge_Graphs_and_LLMs_in_Action_chunk_296"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000114",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "node passing values to neighbor"
+      ],
+      "seed_nodes": [
+        "node passing values to neighbor"
+      ],
+      "source_documents": [
+        "Knowledge_Graphs_and_LLMs_in_Action"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_69"
+      ],
+      "witness_nodes": [
+        "neighbors aggregating value",
+        "node passing values to neighbor"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: knowledge transfers via sentence alignment (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Semantic_AI_in_Knowledge_Graphs_chunk_144"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000119",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "knowledge transfers via sentence alignment"
+      ],
+      "seed_nodes": [
+        "knowledge transfers via sentence alignment"
+      ],
+      "source_documents": [
+        "Semantic_AI_in_Knowledge_Graphs"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_74"
+      ],
+      "witness_nodes": [
+        "neural machine translation",
+        "knowledge transfers via sentence alignment"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: leacock-chodorow formula (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000118",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "leacock-chodorow formula"
+      ],
+      "seed_nodes": [
+        "leacock-chodorow formula"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_48"
+      ],
+      "witness_nodes": [
+        "similarity",
+        "leacock-chodorow formula"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: orthomatcher (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_76"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000116",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "orthomatcher"
+      ],
+      "seed_nodes": [
+        "orthomatcher"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_15"
+      ],
+      "witness_nodes": [
+        "coreference resolution",
+        "orthomatcher"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: no function symbol (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_223"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000112",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "no function symbol"
+      ],
+      "seed_nodes": [
+        "no function symbol"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_14"
+      ],
+      "witness_nodes": [
+        "dl decidability",
+        "no function symbol"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: neo4j fabric (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000108",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "neo4j fabric"
+      ],
+      "seed_nodes": [
+        "neo4j fabric"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_50"
+      ],
+      "witness_nodes": [
+        "user to focus on domain",
+        "neo4j fabric"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: organizing principle (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000115",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "organizing principle"
+      ],
+      "seed_nodes": [
+        "organizing principle"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_51"
+      ],
+      "witness_nodes": [
+        "building knowledge graph",
+        "organizing principle"
+      ]
+    },
+    {
+      "category": "combinatorial",
+      "description": "Periphery node: needs not met by client-server paradigm (degree=1, hub=0.33, authority=0.00).",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "insight_id": "run_20260325_215039:core_periphery:000110",
+      "llm": null,
+      "novelty_tags": [
+        "periphery"
+      ],
+      "score": 0.7466666666666667,
+      "score_breakdown": {
+        "authority_score": 0.0,
+        "degree_norm": 0.2,
+        "hub_score": 0.3333333333333333,
+        "integration_score": 0.0,
+        "periphery_score": 0.7466666666666667
+      },
+      "seed_labels": [
+        "needs not met by client-server paradigm"
+      ],
+      "seed_nodes": [
+        "needs not met by client-server paradigm"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "core_periphery",
+      "witness_edges": [
+        "edge_49"
+      ],
+      "witness_nodes": [
+        "need for server-side logic",
+        "needs not met by client-server paradigm"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Text similarity link: 'query in example 5-3' ~ 'query in example 5-4' (cosine=0.74).",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85"
+      ],
+      "insight_id": "run_20260325_215039:text_similarity:000232",
+      "llm": null,
+      "novelty_tags": [
+        "text_similarity"
+      ],
+      "score": 0.7383388007888071,
+      "score_breakdown": {
+        "text_similarity": 0.7383388007888071
+      },
+      "seed_labels": [
+        "query in example 5-3",
+        "query in example 5-4"
+      ],
+      "seed_nodes": [
+        "query in example 5-3",
+        "query in example 5-4"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "text_similarity",
+      "witness_edges": [
+        "edge_52",
+        "edge_53"
+      ],
+      "witness_nodes": [
+        "query in example 5-4",
+        "list of global customer",
+        "aggregated view",
+        "query in example 5-3"
+      ]
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: few publisher constraint <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000569",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "few publisher constraint",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "few publisher constraint",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: extensive data publishing <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000571",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "extensive data publishing",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "extensive data publishing",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: extensive data publishing <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000567",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "extensive data publishing",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "extensive data publishing",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: building knowledge graph <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000491",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "building knowledge graph",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "building knowledge graph",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: organizing principle <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000497",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "organizing principle",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "organizing principle",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: organizing principle <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000493",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "organizing principle",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "organizing principle",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: few publisher constraint <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "An_Introduction_to_Knowledge_Graphs_chunk_283",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000573",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "few publisher constraint",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "few publisher constraint",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "An_Introduction_to_Knowledge_Graphs",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_6"
+      ],
+      "witness_nodes": []
+    },
+    {
+      "category": "exploratory",
+      "description": "Community link: building knowledge graph <-> advanced graph dependency modeling (relation overlap=1.00)",
+      "evidence_chunk_ids": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203"
+      ],
+      "insight_id": "run_20260325_215039:community_link:000495",
+      "llm": null,
+      "novelty_tags": [
+        "community_link",
+        "s=2"
+      ],
+      "score": 0.7212843676229435,
+      "score_breakdown": {
+        "novelty": 1.0,
+        "specificity": 1.0,
+        "support": 3.0
+      },
+      "seed_labels": [
+        "building knowledge graph",
+        "advanced graph dependency modeling"
+      ],
+      "seed_nodes": [
+        "building knowledge graph",
+        "advanced graph dependency modeling"
+      ],
+      "source_documents": [
+        "Building_Knowledge_Graphs__A_Practitioner___s_Guide"
+      ],
+      "type": "community_link",
+      "witness_edges": [
+        "edge_37",
+        "edge_38",
+        "edge_51"
+      ],
+      "witness_nodes": []
+    }
+  ],
+  "meta": {
+    "created_utc": "2026-03-26T03:21:45Z",
+    "run_id": "run_20260325_215039",
+    "source_graph": "runs/run_20260325_215039/Step_4_GraphBuilding/graph.json",
+    "total_insights": 107
+  },
+  "summary_by_category": {
+    "combinatorial": 24,
+    "exploratory": 55,
+    "transformational": 28
+  },
+  "summary_by_type": {
+    "analogical_transfer": 1,
+    "centrality": 1,
+    "claim_stance": 24,
+    "community_detection": 1,
+    "community_link": 18,
+    "core_periphery": 21,
+    "domain_bridge": 1,
+    "hypotheses_2": 2,
+    "intervention_bottleneck": 1,
+    "mechanism_consolidation": 1,
+    "method_outcome": 9,
+    "relation_induction": 24,
+    "text_similarity": 3
+  }
+}

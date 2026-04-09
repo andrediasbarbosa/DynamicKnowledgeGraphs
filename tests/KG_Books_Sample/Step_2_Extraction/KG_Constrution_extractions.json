@@ -1,0 +1,2438 @@
+[
+  {
+    "chunk_id": "KG_Constrution_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "Knowledge Graph",
+          "KG"
+        ],
+        "targets": [
+          "entities",
+          "relationships"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "KG",
+          "LLM"
+        ],
+        "targets": [
+          "data retrieval",
+          "interpretability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mitigates",
+        "sources": [
+          "LLM"
+        ],
+        "targets": [
+          "hallucination effects"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "addresses",
+        "sources": [
+          "KG construction"
+        ],
+        "targets": [
+          "knowledge gaps"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "KG"
+        ],
+        "targets": [
+          "semantic search",
+          "recommendation systems",
+          "question answering"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "extraction techniques",
+          "machine learning methods"
+        ],
+        "targets": [
+          "extraction accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "traditional embedding models",
+          "relation learning algorithms"
+        ],
+        "targets": [
+          "foundational framework"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "Graph Neural Networks",
+          "attention-based architectures"
+        ],
+        "targets": [
+          "complex interactions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "measures",
+        "sources": [
+          "intrinsic evaluation",
+          "extrinsic evaluation"
+        ],
+        "targets": [
+          "performance of KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "highlights",
+        "sources": [
+          "evaluation frameworks",
+          "evaluation benchmarks"
+        ],
+        "targets": [
+          "strengths and limitations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "semi-automatic survey"
+        ],
+        "targets": [
+          "research trends"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "knowledge graph"
+        ],
+        "targets": [
+          "extraction",
+          "learning",
+          "evaluation"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "emerges_from",
+        "sources": [
+          "research trends"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "determines",
+        "sources": [
+          "scoring process",
+          "relevance scores"
+        ],
+        "targets": [
+          "number of papers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "helps",
+        "sources": [
+          "automated methods",
+          "keyword matching",
+          "topic modeling"
+        ],
+        "targets": [
+          "identify candidate labels"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "GPT-4o mini",
+          "GPT-4o"
+        ],
+        "targets": [
+          "relevance scores"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prioritizes",
+        "sources": [
+          "manual composition",
+          "expert review"
+        ],
+        "targets": [
+          "writing phase"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "semi-automated measures",
+          "human-centered measures"
+        ],
+        "targets": [
+          "efficient literature handling"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "BERT",
+          "language models"
+        ],
+        "targets": [
+          "NER precision"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used in",
+        "sources": [
+          "dependency parsing",
+          "semantic feature extraction"
+        ],
+        "targets": [
+          "relation extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "Bi-LSTM model",
+          "SGC"
+        ],
+        "targets": [
+          "relational information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "BERT-based NER",
+          "rule-learning methods"
+        ],
+        "targets": [
+          "extraction queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "supervised information extraction",
+          "BERT transformer"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "BERT-based NER",
+          "GCN"
+        ],
+        "targets": [
+          "threat behavior recognition"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "optimizes",
+        "sources": [
+          "multi-relational graph attention networks",
+          "embedding-based models"
+        ],
+        "targets": [
+          "KG performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "token classification",
+          "Seq2Seq models"
+        ],
+        "targets": [
+          "engineering facts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "SelfKG"
+        ],
+        "targets": [
+          "labeling cost"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "document-level dynamic graph attention"
+        ],
+        "targets": [
+          "relation accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "extract",
+        "sources": [
+          "Large Language Models",
+          "entity-relation tuples"
+        ],
+        "targets": [
+          "relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "filter",
+        "sources": [
+          "automated validation steps",
+          "cross-referencing"
+        ],
+        "targets": [
+          "spurious links"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "verify",
+        "sources": [
+          "BERT-based NER",
+          "deep learning transformer"
+        ],
+        "targets": [
+          "entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "detect",
+        "sources": [
+          "knowledge graph consistency checks",
+          "multimodal cross-validation"
+        ],
+        "targets": [
+          "unsubstantiated relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "capture",
+        "sources": [
+          "multi-task graph convolution networks",
+          "dependency trees"
+        ],
+        "targets": [
+          "structure information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "multimodal approaches",
+          "domain-specific approaches"
+        ],
+        "targets": [
+          "high-precision extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "demonstrates",
+        "sources": [
+          "Gri- dOnto system"
+        ],
+        "targets": [
+          "energy sector"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "LLM-TIKG"
+        ],
+        "targets": [
+          "threat intelligence KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focuses on",
+        "sources": [
+          "Knowledge Guided Attention"
+        ],
+        "targets": [
+          "chemical–disease relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "PharmKE"
+        ],
+        "targets": [
+          "transfer learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "MHlinker model",
+          "fault entity relations"
+        ],
+        "targets": [
+          "mine hoists"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "proposes",
+        "sources": [
+          "Heterogeneous Affinity Graph Inference",
+          "noise reduction"
+        ],
+        "targets": [
+          "document-level entity relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "Image2Triplets",
+          "BERT-based NER"
+        ],
+        "targets": [
+          "computer vision techniques"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "DAGCN",
+          "local attention"
+        ],
+        "targets": [
+          "local structural information"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "Interactive Optimization",
+          "model performance"
+        ],
+        "targets": [
+          "user feedback"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Named Entity Recognition",
+          "BERT-based models"
+        ],
+        "targets": [
+          "entity mapping"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "Relation Extraction",
+          "dependency parsing"
+        ],
+        "targets": [
+          "subject-relation-object triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "organizes",
+        "sources": [
+          "Graph-based Methods",
+          "graph neural networks"
+        ],
+        "targets": [
+          "structured graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Multimodal Extraction",
+          "text and images"
+        ],
+        "targets": [
+          "precision"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Intelligent Reasoning Methods",
+          "causal inference"
+        ],
+        "targets": [
+          "inference tasks"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "breakthroughs",
+          "reinforcement learning frameworks"
+        ],
+        "targets": [
+          "increase in research"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "natural language processing models",
+          "large language models"
+        ],
+        "targets": [
+          "integration of textual information"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "fuels",
+        "sources": [
+          "computational resources"
+        ],
+        "targets": [
+          "incremental increases"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "causes",
+        "sources": [
+          "shifting priorities"
+        ],
+        "targets": [
+          "sharp decrease"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "competition",
+          "advanced approaches"
+        ],
+        "targets": [
+          "popular techniques"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "spurs",
+        "sources": [
+          "reinforcement learning",
+          "NLP integration"
+        ],
+        "targets": [
+          "interest"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "TransE"
+        ],
+        "targets": [
+          "embeddings"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "Multi-Filter Soft Shrinkage",
+          "TransE embeddings"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supplements",
+        "sources": [
+          "iterative rule-guided reasoning",
+          "reinforcement learning"
+        ],
+        "targets": [
+          "missing paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "Temporal-Structural Adaptation Network"
+        ],
+        "targets": [
+          "temporal dependencies"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "GNN",
+          "message passing"
+        ],
+        "targets": [
+          "node embeddings"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "handles",
+        "sources": [
+          "GNN",
+          "heterogeneous graphs"
+        ],
+        "targets": [
+          "diverse nodes",
+          "relationship types"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "learns",
+        "sources": [
+          "GNN",
+          "multi-grained semantics"
+        ],
+        "targets": [
+          "semantic information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "GNN",
+          "node classification"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "ensures",
+        "sources": [
+          "GNN",
+          "self-supervised learning"
+        ],
+        "targets": [
+          "stable performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "GNNs"
+        ],
+        "targets": [
+          "knowledge graph learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "contrastive learning",
+          "GNN frameworks"
+        ],
+        "targets": [
+          "embedding alignment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "GNNs"
+        ],
+        "targets": [
+          "relational structures"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "MuCoMiD"
+        ],
+        "targets": [
+          "biological knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "GSSC"
+        ],
+        "targets": [
+          "graph-based learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "GATFCN",
+          "tensor factorization",
+          "graph convolution"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "detects",
+        "sources": [
+          "GNN",
+          "self-supervised learning"
+        ],
+        "targets": [
+          "drug-drug interactions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "predicts",
+        "sources": [
+          "GraphX-Net",
+          "patient data"
+        ],
+        "targets": [
+          "cancer survival"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "HINs",
+          "GNNs"
+        ],
+        "targets": [
+          "diverse proximities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maximizes",
+        "sources": [
+          "distributed RESCAL",
+          "GNN-like operations"
+        ],
+        "targets": [
+          "efficiency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "employs",
+        "sources": [
+          "MTRN",
+          "neighbor-aware encoders",
+          "self-attention encoders"
+        ],
+        "targets": [
+          "task transitions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "Knowledgebra",
+          "embedding method"
+        ],
+        "targets": [
+          "model performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "dynamic relation learning",
+          "link prediction"
+        ],
+        "targets": [
+          "link prediction performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "incorporates",
+        "sources": [
+          "BHGNN",
+          "uncertainty"
+        ],
+        "targets": [
+          "learning process"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "T-GAE",
+          "temporal information"
+        ],
+        "targets": [
+          "node interactions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "BiG-Fed",
+          "hierarchical optimization",
+          "federated learning"
+        ],
+        "targets": [
+          "recommendation performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "subgraphs",
+          "local subgraphs"
+        ],
+        "targets": [
+          "training time"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "subgraphs"
+        ],
+        "targets": [
+          "question generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Transformers",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "KG learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "expands",
+        "sources": [
+          "pretrained language models",
+          "BERT"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "NLP",
+          "KG"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "FTL-LM"
+        ],
+        "targets": [
+          "KG learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "MCBERT"
+        ],
+        "targets": [
+          "relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "AHTM"
+        ],
+        "targets": [
+          "KG embeddings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "expands",
+        "sources": [
+          "LLMs",
+          "graph data"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "adopts",
+        "sources": [
+          "USS-Graph",
+          "unsupervised learning"
+        ],
+        "targets": [
+          "graph data"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "suits",
+        "sources": [
+          "hyperbolic space",
+          "hierarchical KGs"
+        ],
+        "targets": [
+          "traditional transformers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "AInvR",
+          "IRL"
+        ],
+        "targets": [
+          "Transformer-based inference"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adopts",
+        "sources": [
+          "HG-SCM",
+          "structural causal model"
+        ],
+        "targets": [
+          "causal inference"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "FSGCL",
+          "graph motifs"
+        ],
+        "targets": [
+          "representation learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "introduces",
+        "sources": [
+          "contrastive learning",
+          "personalized augmentations"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "self-attention mechanisms"
+        ],
+        "targets": [
+          "link prediction performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "Generative Adversarial Networks"
+        ],
+        "targets": [
+          "negative triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "supervised learning",
+          "reinforcement learning"
+        ],
+        "targets": [
+          "link candidates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Poincaré geometry"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "meta-learning",
+          "data sparsity"
+        ],
+        "targets": [
+          "domain shifts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG embeddings",
+          "few-shot relation prediction"
+        ],
+        "targets": [
+          "selective transfer"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "dynamic prompt learning",
+          "meta-learning"
+        ],
+        "targets": [
+          "disease diagnosis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "capture",
+        "sources": [
+          "GNN-based methods",
+          "complex interactions"
+        ],
+        "targets": [
+          "node classification",
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "self-supervised learning",
+          "contrastive learning"
+        ],
+        "targets": [
+          "few-shot learning",
+          "long-tail learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "indicate",
+        "sources": [
+          "qualitative methods",
+          "quantifiable metrics"
+        ],
+        "targets": [
+          "research priorities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assess",
+        "sources": [
+          "intrinsic evaluation",
+          "quantitative metrics"
+        ],
+        "targets": [
+          "knowledge graph model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "become",
+        "sources": [
+          "high Precision",
+          "Recall"
+        ],
+        "targets": [
+          "evaluation metrics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "Mean Reciprocal Rank",
+          "Hits@K"
+        ],
+        "targets": [
+          "rank-based metrics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are used in",
+        "sources": [
+          "RMSE",
+          "MAE"
+        ],
+        "targets": [
+          "regression metrics"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "describes",
+        "sources": [
+          "evaluation metrics",
+          "mathematical definitions"
+        ],
+        "targets": [
+          "TP",
+          "FP",
+          "FN",
+          "F1 score",
+          "MRR",
+          "Hits@K",
+          "RMSE",
+          "MAE",
+          "MAPE",
+          "PCC",
+          "Average Effectiveness",
+          "SD",
+          "Mean Execution Time",
+          "Memory Usage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "measures",
+        "sources": [
+          "GTFS Madrid benchmark",
+          "CSV-based RML"
+        ],
+        "targets": [
+          "public transportation data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "matches",
+        "sources": [
+          "mapping tool",
+          "public transportation data"
+        ],
+        "targets": [
+          "mapping errors",
+          "attribute matching success rates"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "link prediction techniques",
+          "knowledge graph datasets"
+        ],
+        "targets": [
+          "performance differences"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "entity linking model",
+          "FB15K237",
+          "WN18RR",
+          "SCWS"
+        ],
+        "targets": [
+          "embedding representation",
+          "negative samples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "introduces",
+        "sources": [
+          "mutation operators"
+        ],
+        "targets": [
+          "metrics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "patient similarity search",
+          "MIMIC-III",
+          "MIMIC-IV"
+        ],
+        "targets": [
+          "high accuracy",
+          "F1-Scores"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_24",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "ECHR",
+          "CAIL2018"
+        ],
+        "targets": [
+          "superior accuracy",
+          "AUC-ROC"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "demonstrates",
+        "sources": [
+          "KG models"
+        ],
+        "targets": [
+          "performance benefits"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "degrades",
+        "sources": [
+          "LLM-based systems"
+        ],
+        "targets": [
+          "KG performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "benefits",
+        "sources": [
+          "extrinsic evaluation"
+        ],
+        "targets": [
+          "error-detection strategies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "MIMIC-III",
+          "MIMIC-IV"
+        ],
+        "targets": [
+          "high accuracy",
+          "F1-score"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_25",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "mutation operator"
+        ],
+        "targets": [
+          "model performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "visual attention mechanism"
+        ],
+        "targets": [
+          "result interpretation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "Sub-Entity Embedding model"
+        ],
+        "targets": [
+          "existing methods"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "provides",
+        "sources": [
+          "text embeddings",
+          "domain knowledge"
+        ],
+        "targets": [
+          "insights"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "EHR data integration"
+        ],
+        "targets": [
+          "practical usability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_26",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "assesses",
+        "sources": [
+          "GTFS Madrid",
+          "mapping tools"
+        ],
+        "targets": [
+          "transit data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "FB15K237",
+          "WN18RR",
+          "SCWS"
+        ],
+        "targets": [
+          "entity linking"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "MIMIC-III",
+          "MIMIC-IV"
+        ],
+        "targets": [
+          "model performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "Yago",
+          "DBpedia",
+          "Wikidata"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "ICEWS",
+          "GDELT"
+        ],
+        "targets": [
+          "event data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_27",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "cerebral aneurysm",
+          "COVID-19"
+        ],
+        "targets": [
+          "evidence-based medicine"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "MIMIC-III",
+          "MIMIC-IV",
+          "eICU"
+        ],
+        "targets": [
+          "medical diagnosis",
+          "disease prediction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "evaluates",
+        "sources": [
+          "AMR2.0",
+          "AMR3.0"
+        ],
+        "targets": [
+          "natural language processing"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "refines",
+        "sources": [
+          "FB15K",
+          "FB15K-237"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "MIMIC-III",
+          "MIMIC-IV",
+          "eICU"
+        ],
+        "targets": [
+          "clinical support"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_28",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "CAIL2018",
+          "legal AI evaluation dataset"
+        ],
+        "targets": [
+          "legal judgment prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "KEGG50k",
+          "biomedical data"
+        ],
+        "targets": [
+          "drug-disease link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "NLPCC2017",
+          "QA system evaluation"
+        ],
+        "targets": [
+          "Mean Average Precision",
+          "Mean Reciprocal Rank"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "DPV",
+          "Data Privacy Vocabulary"
+        ],
+        "targets": [
+          "sensitive personal data classification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Instacart",
+          "E-commerce recommendation systems"
+        ],
+        "targets": [
+          "product relationship extraction"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_29",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "Pearson correlation",
+          "similarity-based F1-Score"
+        ],
+        "targets": [
+          "context-based embeddings"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assesses",
+        "sources": [
+          "Accuracy",
+          "F1-Score"
+        ],
+        "targets": [
+          "disease prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assesses",
+        "sources": [
+          "regression metrics",
+          "ranking metrics"
+        ],
+        "targets": [
+          "spatiotemporal prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "Precision",
+          "Recall"
+        ],
+        "targets": [
+          "drug mapping"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assesses",
+        "sources": [
+          "F1-Score",
+          "ranking metrics"
+        ],
+        "targets": [
+          "commonsense reasoning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_30",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "drives",
+        "sources": [
+          "knowledge graph",
+          "KG research"
+        ],
+        "targets": [
+          "advancements"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assesses",
+        "sources": [
+          "evaluation",
+          "knowledge graph model"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "advances",
+        "sources": [
+          "deep learning",
+          "natural language processing"
+        ],
+        "targets": [
+          "knowledge graph research"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "focuses on",
+        "sources": [
+          "multimodal extraction",
+          "domain-specific extraction"
+        ],
+        "targets": [
+          "large-scale data"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "analyzes",
+        "sources": [
+          "case studies",
+          "qualitative evaluation"
+        ],
+        "targets": [
+          "decision-making"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_31",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "classical embedding methods",
+          "TransE"
+        ],
+        "targets": [
+          "KG Learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "gains traction",
+        "sources": [
+          "Graph Neural Networks",
+          "Transformer-based models"
+        ],
+        "targets": [
+          "node classification",
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "large language models",
+          "hybrid approaches"
+        ],
+        "targets": [
+          "accurate modeling"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "peaks",
+        "sources": [
+          "KG Evaluation"
+        ],
+        "targets": [
+          "2023"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "multimodal data integration"
+        ],
+        "targets": [
+          "KG usability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_32",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "KG"
+        ],
+        "targets": [
+          "model explainability",
+          "AI predictions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "real-time updates",
+          "dynamic knowledge updates"
+        ],
+        "targets": [
+          "knowledge graphs",
+          "applicability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "automated pipelines"
+        ],
+        "targets": [
+          "current knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "AI-assisted technology",
+          "ChatGPT"
+        ],
+        "targets": [
+          "writing assistance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_33",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "engineering design knowledge"
+        ],
+        "targets": [
+          "retrieval augmented generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "large language models"
+        ],
+        "targets": [
+          "knowledge graph alignment"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "drug–drug interaction",
+          "heterogeneous knowledge graphs"
+        ],
+        "targets": [
+          "extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructed_by",
+        "sources": [
+          "multi-modal educational knowledge graph"
+        ],
+        "targets": [
+          "deep-learning-based approach"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructed_by",
+        "sources": [
+          "marine expert management knowledge graph"
+        ],
+        "targets": [
+          "Trellisnet-CRF"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_34",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "knowledge graph",
+          "fault events"
+        ],
+        "targets": [
+          "power grid"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "large language model",
+          "threat intelligence"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "deep learning",
+          "multimodal data"
+        ],
+        "targets": [
+          "knowledge graph construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "fuses",
+        "sources": [
+          "entity description",
+          "type information"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "generates",
+        "sources": [
+          "data processing pipeline",
+          "unstructured data"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_35",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Heterogenous affinity graph",
+          "document-level relation extraction"
+        ],
+        "targets": [
+          "knowledge extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Image2Triplets",
+          "computer vision"
+        ],
+        "targets": [
+          "construction activity knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "transformer-based model",
+          "adverse drug event relation"
+        ],
+        "targets": [
+          "knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "empowers",
+        "sources": [
+          "quantum logic",
+          "knowledge graph completion"
+        ],
+        "targets": [
+          "embedding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forecasts",
+        "sources": [
+          "graph neural network",
+          "technological knowledge flow"
+        ],
+        "targets": [
+          "prediction accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_36",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "distills",
+        "sources": [
+          "graph neural networks",
+          "heterogeneous graph neural networks"
+        ],
+        "targets": [
+          "high-order relational knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "completes",
+        "sources": [
+          "graph attention network",
+          "dynamic representation"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "graph convolutional network",
+          "local influence"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "detects",
+        "sources": [
+          "graph neural networks",
+          "self-supervised learning"
+        ],
+        "targets": [
+          "adverse drug reactions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "predicts",
+        "sources": [
+          "graph neural network",
+          "Shapley values"
+        ],
+        "targets": [
+          "breast cancer occurrence"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_37",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "negative sampling",
+          "collaborative knowledge graph"
+        ],
+        "targets": [
+          "recommendation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge-aware Transformer",
+          "edge-enabled federated recommendation"
+        ],
+        "targets": [
+          "recommendation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "multi-task learning",
+          "knowledge graph"
+        ],
+        "targets": [
+          "recommender system"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph embeddings",
+          "first-order logic rules"
+        ],
+        "targets": [
+          "recommender systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "graph neural networks",
+          "subgraph-guided question generation"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_38",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "transformers",
+          "contrastive learning"
+        ],
+        "targets": [
+          "knowledge graph embedding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph convolutional network",
+          "text-enhanced"
+        ],
+        "targets": [
+          "knowledge graph embedding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "aids",
+        "sources": [
+          "knowledge-based dynamic prompt learning"
+        ],
+        "targets": [
+          "disease diagnosis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "multi-level graph knowledge contrastive learning"
+        ],
+        "targets": [
+          "data representation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "self-attention"
+        ],
+        "targets": [
+          "low-dimensional embeddings"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_39",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "temporal knowledge graph"
+        ],
+        "targets": [
+          "reasoning framework"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "temporal logical rules"
+        ],
+        "targets": [
+          "knowledge graph reasoning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "comes from",
+        "sources": [
+          "bias",
+          "common sense knowledge models"
+        ],
+        "targets": [
+          "data sources"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "clinical decision support"
+        ],
+        "targets": [
+          "diabetic nephropathy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "detects",
+        "sources": [
+          "graph neural network",
+          "IoT programming"
+        ],
+        "targets": [
+          "conflicts"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Constrution_chunk_40",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph embedding",
+          "entity alignment"
+        ],
+        "targets": [
+          "data mining"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "spatial-temporal graph neural network",
+          "automated bug triaging"
+        ],
+        "targets": [
+          "software development"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "medical federated learning",
+          "joint graph purification"
+        ],
+        "targets": [
+          "noisy label learning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "Gaussian mixture embedding",
+          "few-shot knowledge graph completion"
+        ],
+        "targets": [
+          "machine learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "duality-induced regularizer",
+          "semantic matching"
+        ],
+        "targets": [
+          "knowledge graph embeddings"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

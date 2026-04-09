@@ -1,0 +1,1912 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_747",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Curation_chunk_2",
+      "source_document": "KG_Curation",
+      "sources": [
+        "action research",
+        "c&cb team"
+      ],
+      "targets": [
+        "intervention"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_748",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Curation_chunk_8",
+      "source_document": "KG_Curation",
+      "sources": [
+        "action research"
+      ],
+      "targets": [
+        "dashboard development"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_749",
+      "properties": {},
+      "relation": "lack",
+      "source_chunk_id": "KG_Curation_chunk_0",
+      "source_document": "KG_Curation",
+      "sources": [
+        "automated method"
+      ],
+      "targets": [
+        "precision"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_750",
+      "properties": {},
+      "relation": "fits",
+      "source_chunk_id": "KG_Curation_chunk_2",
+      "source_document": "KG_Curation",
+      "sources": [
+        "rkg quality",
+        "c&cb team need"
+      ],
+      "targets": [
+        "context"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_751",
+      "properties": {},
+      "relation": "meets",
+      "source_chunk_id": "KG_Curation_chunk_2",
+      "source_document": "KG_Curation",
+      "sources": [
+        "mvp",
+        "c&cb team workflow"
+      ],
+      "targets": [
+        "objective"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_752",
+      "properties": {},
+      "relation": "prioritizes",
+      "source_chunk_id": "KG_Curation_chunk_4",
+      "source_document": "KG_Curation",
+      "sources": [
+        "comment functionality",
+        "c&cb team"
+      ],
+      "targets": [
+        "resource management"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_753",
+      "properties": {},
+      "relation": "participated in",
+      "source_chunk_id": "KG_Curation_chunk_5",
+      "source_document": "KG_Curation",
+      "sources": [
+        "c&cb team",
+        "evaluation session"
+      ],
+      "targets": [
+        "action research"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_754",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Curation_chunk_2",
+      "source_document": "KG_Curation",
+      "sources": [
+        "feedback",
+        "c&cb team"
+      ],
+      "targets": [
+        "dashboard usability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_755",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Curation_chunk_2",
+      "source_document": "KG_Curation",
+      "sources": [
+        "c&cb team",
+        "observational role"
+      ],
+      "targets": [
+        "insight"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_756",
+      "properties": {},
+      "relation": "evaluate",
+      "source_chunk_id": "KG_Curation_chunk_3",
+      "source_document": "KG_Curation",
+      "sources": [
+        "participant",
+        "c&cb team"
+      ],
+      "targets": [
+        "usability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_757",
+      "properties": {},
+      "relation": "informs",
+      "source_chunk_id": "KG_Curation_chunk_4",
+      "source_document": "KG_Curation",
+      "sources": [
+        "user story",
+        "c&cb team"
+      ],
+      "targets": [
+        "mvp development"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_758",
+      "properties": {},
+      "relation": "identified",
+      "source_chunk_id": "KG_Curation_chunk_0",
+      "source_document": "KG_Curation",
+      "sources": [
+        "c&cb team"
+      ],
+      "targets": [
+        "need for dashboard"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_759",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Curation_chunk_8",
+      "source_document": "KG_Curation",
+      "sources": [
+        "c&cb team"
+      ],
+      "targets": [
+        "insight"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_760",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Curation_chunk_1",
+      "source_document": "KG_Curation",
+      "sources": [
+        "cleangraph",
+        "user"
+      ],
+      "targets": [
+        "data quality"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_761",
+      "properties": {},
+      "relation": "impacts",
+      "source_chunk_id": "KG_Curation_chunk_9",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard design",
+        "internal structure"
+      ],
+      "targets": [
+        "querying strategy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_762",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Curation_chunk_4",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard",
+        "data analysi"
+      ],
+      "targets": [
+        "quality assessment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_763",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Curation_chunk_7",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard",
+        "mvp"
+      ],
+      "targets": [
+        "c&cb team",
+        "orkg team"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_764",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Curation_chunk_7",
+      "source_document": "KG_Curation",
+      "sources": [
+        "participant",
+        "dashboard"
+      ],
+      "targets": [
+        "task completion"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_765",
+      "properties": {},
+      "relation": "reflects",
+      "source_chunk_id": "KG_Curation_chunk_7",
+      "source_document": "KG_Curation",
+      "sources": [
+        "participant",
+        "dashboard"
+      ],
+      "targets": [
+        "user experience"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_766",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "KG_Curation_chunk_4",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard",
+        "user experience"
+      ],
+      "targets": [
+        "satisfaction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_767",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Curation_chunk_4",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard",
+        "user story"
+      ],
+      "targets": [
+        "tracking visitor path"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_768",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Curation_chunk_1",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard",
+        "data consumer"
+      ],
+      "targets": [
+        "data access"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_769",
+      "properties": {},
+      "relation": "support",
+      "source_chunk_id": "KG_Curation_chunk_0",
+      "source_document": "KG_Curation",
+      "sources": [
+        "dashboard"
+      ],
+      "targets": [
+        "knowledge curation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_770",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Curation_chunk_9",
+      "source_document": "KG_Curation",
+      "sources": [
+        "data quality",
+        "visual dashboard"
+      ],
+      "targets": [
+        "curation workflow"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_771",
+      "properties": {},
+      "relation": "provide",
+      "source_chunk_id": "KG_Curation_chunk_3",
+      "source_document": "KG_Curation",
+      "sources": [
+        "demographic data",
+        "participant"
+      ],
+      "targets": [
+        "feedback"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_772",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "KG_Curation_chunk_9",
+      "source_document": "KG_Curation",
+      "sources": [
+        "end user",
+        "development cycle"
+      ],
+      "targets": [
+        "feature relevance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_773",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Curation_chunk_8",
+      "source_document": "KG_Curation",
+      "sources": [
+        "domain expertise"
+      ],
+      "targets": [
+        "quality assessment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_774",
+      "properties": {},
+      "relation": "assess",
+      "source_chunk_id": "KG_Curation_chunk_3",
+      "source_document": "KG_Curation",
+      "sources": [
+        "task",
+        "experiment"
+      ],
+      "targets": [
+        "effectiveness",
+        "efficiency",
+        "satisfaction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_775",
+      "properties": {},
+      "relation": "reject",
+      "source_chunk_id": "KG_Curation_chunk_6",
+      "source_document": "KG_Curation",
+      "sources": [
+        "null hypothesi",
+        "h0, efficiency"
+      ],
+      "targets": [
+        "good efficiency"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_776",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Curation_chunk_1",
+      "source_document": "KG_Curation",
+      "sources": [
+        "human oversight",
+        "hitl method"
+      ],
+      "targets": [
+        "knowledge curation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_777",
+      "properties": {},
+      "relation": "assists",
+      "source_chunk_id": "KG_Curation_chunk_1",
+      "source_document": "KG_Curation",
+      "sources": [
+        "kg-curate",
+        "human expert"
+      ],
+      "targets": [
+        "structured graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_778",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "KG_Curation_chunk_0",
+      "source_document": "KG_Curation",
+      "sources": [
+        "knowledge curation",
+        "human-based curation"
+      ],
+      "targets": [
+        "high accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_779",
+      "properties": {},
+      "relation": "offer",
+      "source_chunk_id": "KG_Curation_chunk_0",
+      "source_document": "KG_Curation",
+      "sources": [
+        "hybrid approach"
+      ],
+      "targets": [
+        "promising solution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_780",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Curation_chunk_1",
+      "source_document": "KG_Curation",
+      "sources": [
+        "knowledge curation",
+        "rkg"
+      ],
+      "targets": [
+        "data quality"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_781",
+      "properties": {},
+      "relation": "navigate",
+      "source_chunk_id": "KG_Curation_chunk_9",
+      "source_document": "KG_Curation",
+      "sources": [
+        "modular system",
+        "knowledge graph"
+      ],
+      "targets": [
+        "domain constraint"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_782",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Curation_chunk_3",
+      "source_document": "KG_Curation",
+      "sources": [
+        "scikgdash",
+        "mvp"
+      ],
+      "targets": [
+        "curation",
+        "community building"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_783",
+      "properties": {},
+      "relation": "indicates",
+      "source_chunk_id": "KG_Curation_chunk_7",
+      "source_document": "KG_Curation",
+      "sources": [
+        "mvp",
+        "task"
+      ],
+      "targets": [
+        "efficiency"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_784",
+      "properties": {},
+      "relation": "may influence",
+      "source_chunk_id": "KG_Curation_chunk_7",
+      "source_document": "KG_Curation",
+      "sources": [
+        "technical issue",
+        "mvp"
+      ],
+      "targets": [
+        "task completion"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_785",
+      "properties": {},
+      "relation": "reflect",
+      "source_chunk_id": "KG_Curation_chunk_6",
+      "source_document": "KG_Curation",
+      "sources": [
+        "team need",
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      "targets": [
+        "strong agreement"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_786",
+      "properties": {},
+      "relation": "influences",
+      "source_chunk_id": "KG_Curation_chunk_5",
+      "source_document": "KG_Curation",
+      "sources": [
+        "number of evaluation",
+        "repeated participation"
+      ],
+      "targets": [
+        "task performance"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_787",
+      "properties": {},
+      "relation": "rated as",
+      "source_chunk_id": "KG_Curation_chunk_5",
+      "source_document": "KG_Curation",
+      "sources": [
+        "task completion time",
+        "participant"
+      ],
+      "targets": [
+        "quick"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_788",
+      "properties": {},
+      "relation": "rated as",
+      "source_chunk_id": "KG_Curation_chunk_5",
+      "source_document": "KG_Curation",
+      "sources": [
+        "participant",
+        "task completion"
+      ],
+      "targets": [
+        "successful"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_789",
+      "properties": {},
+      "relation": "ensure",
+      "source_chunk_id": "KG_Curation_chunk_3",
+      "source_document": "KG_Curation",
+      "sources": [
+        "think-aloud method",
+        "participant"
+      ],
+      "targets": [
+        "clarity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_790",
+      "properties": {},
+      "relation": "reinforces",
+      "source_chunk_id": "KG_Curation_chunk_9",
+      "source_document": "KG_Curation",
+      "sources": [
+        "research finding",
+        "user involvement"
+      ],
+      "targets": [
+        "development relevance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_791",
+      "properties": {},
+      "relation": "measure",
+      "source_chunk_id": "KG_Curation_chunk_6",
+      "source_document": "KG_Curation",
+      "sources": [
+        "satisfaction",
+        "ueq"
+      ],
+      "targets": [
+        "positive user experience"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_792",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Curation_chunk_8",
+      "source_document": "KG_Curation",
+      "sources": [
+        "tailored solution"
+      ],
+      "targets": [
+        "quality assessment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_793",
+      "properties": {},
+      "relation": "indicate",
+      "source_chunk_id": "KG_Curation_chunk_6",
+      "source_document": "KG_Curation",
+      "sources": [
+        "task",
+        "task 1",
+        "task 2.2",
+        "task 3",
+        "task 4"
+      ],
+      "targets": [
+        "good efficiency"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_794",
+      "properties": {},
+      "relation": "shows",
+      "source_chunk_id": "KG_Curation_chunk_5",
+      "source_document": "KG_Curation",
+      "sources": [
+        "task complexity",
+        "task 2.1"
+      ],
+      "targets": [
+        "variation in respons"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_795",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "KG_Curation_chunk_8",
+      "source_document": "KG_Curation",
+      "sources": [
+        "user behavior"
+      ],
+      "targets": [
+        "ui improvement"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 49,
+    "num_nodes": 102
+  },
+  "nodes": [
+    {
+      "degree": 3,
+      "id": "action research",
+      "incident_edges": [
+        "edge_747",
+        "edge_748",
+        "edge_753"
+      ],
+      "label": "action research",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automated method",
+      "incident_edges": [
+        "edge_749"
+      ],
+      "label": "automated methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 10,
+      "id": "c&cb team",
+      "incident_edges": [
+        "edge_747",
+        "edge_752",
+        "edge_753",
+        "edge_754",
+        "edge_755",
+        "edge_756",
+        "edge_757",
+        "edge_758",
+        "edge_759",
+        "edge_763"
+      ],
+      "label": "C&CB team",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "c&cb team need",
+      "incident_edges": [
+        "edge_750"
+      ],
+      "label": "C&CB team needs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "c&cb team workflow",
+      "incident_edges": [
+        "edge_751"
+      ],
+      "label": "C&CB team workflows",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "clarity",
+      "incident_edges": [
+        "edge_789"
+      ],
+      "label": "clarity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cleangraph",
+      "incident_edges": [
+        "edge_760"
+      ],
+      "label": "CleanGraph",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "comment functionality",
+      "incident_edges": [
+        "edge_752"
+      ],
+      "label": "comment functionality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "community building",
+      "incident_edges": [
+        "edge_782"
+      ],
+      "label": "community building",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "context",
+      "incident_edges": [
+        "edge_750"
+      ],
+      "label": "context",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "curation",
+      "incident_edges": [
+        "edge_782"
+      ],
+      "label": "curation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "curation workflow",
+      "incident_edges": [
+        "edge_770"
+      ],
+      "label": "curation workflows",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 8,
+      "id": "dashboard",
+      "incident_edges": [
+        "edge_762",
+        "edge_763",
+        "edge_764",
+        "edge_765",
+        "edge_766",
+        "edge_767",
+        "edge_768",
+        "edge_769"
+      ],
+      "label": "dashboard",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dashboard design",
+      "incident_edges": [
+        "edge_761"
+      ],
+      "label": "dashboard design",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dashboard development",
+      "incident_edges": [
+        "edge_748"
+      ],
+      "label": "dashboard development",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dashboard usability",
+      "incident_edges": [
+        "edge_754"
+      ],
+      "label": "dashboard usability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data access",
+      "incident_edges": [
+        "edge_768"
+      ],
+      "label": "data access",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data analysi",
+      "incident_edges": [
+        "edge_762"
+      ],
+      "label": "data analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data consumer",
+      "incident_edges": [
+        "edge_768"
+      ],
+      "label": "data consumers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "data quality",
+      "incident_edges": [
+        "edge_760",
+        "edge_770",
+        "edge_780"
+      ],
+      "label": "data quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "demographic data",
+      "incident_edges": [
+        "edge_771"
+      ],
+      "label": "demographic data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "development cycle",
+      "incident_edges": [
+        "edge_772"
+      ],
+      "label": "development cycle",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "development relevance",
+      "incident_edges": [
+        "edge_790"
+      ],
+      "label": "development relevance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "domain constraint",
+      "incident_edges": [
+        "edge_781"
+      ],
+      "label": "domain constraints",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "domain expertise",
+      "incident_edges": [
+        "edge_773"
+      ],
+      "label": "domain expertise",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "effectiveness",
+      "incident_edges": [
+        "edge_774"
+      ],
+      "label": "effectiveness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "efficiency",
+      "incident_edges": [
+        "edge_774",
+        "edge_783"
+      ],
+      "label": "efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "end user",
+      "incident_edges": [
+        "edge_772"
+      ],
+      "label": "end users",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "evaluation session",
+      "incident_edges": [
+        "edge_753"
+      ],
+      "label": "evaluation sessions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "experiment",
+      "incident_edges": [
+        "edge_774"
+      ],
+      "label": "experiment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "feature relevance",
+      "incident_edges": [
+        "edge_772"
+      ],
+      "label": "feature relevance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "feedback",
+      "incident_edges": [
+        "edge_754",
+        "edge_771"
+      ],
+      "label": "feedback",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "good efficiency",
+      "incident_edges": [
+        "edge_775",
+        "edge_793"
+      ],
+      "label": "good efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "h0, efficiency",
+      "incident_edges": [
+        "edge_775"
+      ],
+      "label": "H0, Efficiency",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "high accuracy",
+      "incident_edges": [
+        "edge_778"
+      ],
+      "label": "high accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hitl method",
+      "incident_edges": [
+        "edge_776"
+      ],
+      "label": "HITL methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human expert",
+      "incident_edges": [
+        "edge_777"
+      ],
+      "label": "human experts",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human oversight",
+      "incident_edges": [
+        "edge_776"
+      ],
+      "label": "human oversight",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human-based curation",
+      "incident_edges": [
+        "edge_778"
+      ],
+      "label": "human-based curation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hybrid approach",
+      "incident_edges": [
+        "edge_779"
+      ],
+      "label": "hybrid approaches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "insight",
+      "incident_edges": [
+        "edge_755",
+        "edge_759"
+      ],
+      "label": "insight",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "internal structure",
+      "incident_edges": [
+        "edge_761"
+      ],
+      "label": "internal structures",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intervention",
+      "incident_edges": [
+        "edge_747"
+      ],
+      "label": "intervention",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg-curate",
+      "incident_edges": [
+        "edge_777"
+      ],
+      "label": "KG-CURATE",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "knowledge curation",
+      "incident_edges": [
+        "edge_769",
+        "edge_776",
+        "edge_778",
+        "edge_780"
+      ],
+      "label": "knowledge curation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_781"
+      ],
+      "label": "knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "modular system",
+      "incident_edges": [
+        "edge_781"
+      ],
+      "label": "modular systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "mvp",
+      "incident_edges": [
+        "edge_751",
+        "edge_763",
+        "edge_782",
+        "edge_783",
+        "edge_784"
+      ],
+      "label": "MVP",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mvp development",
+      "incident_edges": [
+        "edge_757"
+      ],
+      "label": "MVP development",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "n1",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "N1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "n2",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "N2",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "n3",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "N3",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "n4",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "N4",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "n5",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "N5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "need for dashboard",
+      "incident_edges": [
+        "edge_758"
+      ],
+      "label": "need for dashboard",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "null hypothesi",
+      "incident_edges": [
+        "edge_775"
+      ],
+      "label": "null hypothesis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "number of evaluation",
+      "incident_edges": [
+        "edge_786"
+      ],
+      "label": "number of evaluations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "objective",
+      "incident_edges": [
+        "edge_751"
+      ],
+      "label": "objective",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "observational role",
+      "incident_edges": [
+        "edge_755"
+      ],
+      "label": "observational role",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "orkg team",
+      "incident_edges": [
+        "edge_763"
+      ],
+      "label": "ORKG team",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "participant",
+      "incident_edges": [
+        "edge_756",
+        "edge_764",
+        "edge_765",
+        "edge_771",
+        "edge_787",
+        "edge_788",
+        "edge_789"
+      ],
+      "label": "participant",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "positive user experience",
+      "incident_edges": [
+        "edge_791"
+      ],
+      "label": "positive user experience",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "precision",
+      "incident_edges": [
+        "edge_749"
+      ],
+      "label": "precision",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "promising solution",
+      "incident_edges": [
+        "edge_779"
+      ],
+      "label": "promising solution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "quality assessment",
+      "incident_edges": [
+        "edge_762",
+        "edge_773",
+        "edge_792"
+      ],
+      "label": "quality assessment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "querying strategy",
+      "incident_edges": [
+        "edge_761"
+      ],
+      "label": "querying strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "quick",
+      "incident_edges": [
+        "edge_787"
+      ],
+      "label": "quick",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "repeated participation",
+      "incident_edges": [
+        "edge_786"
+      ],
+      "label": "repeated participation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research finding",
+      "incident_edges": [
+        "edge_790"
+      ],
+      "label": "research findings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "resource management",
+      "incident_edges": [
+        "edge_752"
+      ],
+      "label": "resource management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rkg",
+      "incident_edges": [
+        "edge_780"
+      ],
+      "label": "RKG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rkg quality",
+      "incident_edges": [
+        "edge_750"
+      ],
+      "label": "RKG quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "satisfaction",
+      "incident_edges": [
+        "edge_766",
+        "edge_774",
+        "edge_791"
+      ],
+      "label": "satisfaction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scikgdash",
+      "incident_edges": [
+        "edge_782"
+      ],
+      "label": "SciKGDash",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "strong agreement",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "strong agreement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured graph",
+      "incident_edges": [
+        "edge_777"
+      ],
+      "label": "structured graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "successful",
+      "incident_edges": [
+        "edge_788"
+      ],
+      "label": "successful",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tailored solution",
+      "incident_edges": [
+        "edge_792"
+      ],
+      "label": "tailored solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "task",
+      "incident_edges": [
+        "edge_774",
+        "edge_783",
+        "edge_793"
+      ],
+      "label": "task",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task 1",
+      "incident_edges": [
+        "edge_793"
+      ],
+      "label": "Task 1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task 2.1",
+      "incident_edges": [
+        "edge_794"
+      ],
+      "label": "task 2.1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task 2.2",
+      "incident_edges": [
+        "edge_793"
+      ],
+      "label": "Task 2.2",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task 3",
+      "incident_edges": [
+        "edge_793"
+      ],
+      "label": "Task 3",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task 4",
+      "incident_edges": [
+        "edge_793"
+      ],
+      "label": "Task 4",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "task completion",
+      "incident_edges": [
+        "edge_764",
+        "edge_784",
+        "edge_788"
+      ],
+      "label": "task completion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task completion time",
+      "incident_edges": [
+        "edge_787"
+      ],
+      "label": "task completion time",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task complexity",
+      "incident_edges": [
+        "edge_794"
+      ],
+      "label": "task complexity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task performance",
+      "incident_edges": [
+        "edge_786"
+      ],
+      "label": "task performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "team need",
+      "incident_edges": [
+        "edge_785"
+      ],
+      "label": "team needs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "technical issue",
+      "incident_edges": [
+        "edge_784"
+      ],
+      "label": "technical issues",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "think-aloud method",
+      "incident_edges": [
+        "edge_789"
+      ],
+      "label": "think-aloud method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tracking visitor path",
+      "incident_edges": [
+        "edge_767"
+      ],
+      "label": "tracking visitor paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ueq",
+      "incident_edges": [
+        "edge_791"
+      ],
+      "label": "UEQ",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ui improvement",
+      "incident_edges": [
+        "edge_795"
+      ],
+      "label": "UI improvements",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "usability",
+      "incident_edges": [
+        "edge_756"
+      ],
+      "label": "usability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user",
+      "incident_edges": [
+        "edge_760"
+      ],
+      "label": "user",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user behavior",
+      "incident_edges": [
+        "edge_795"
+      ],
+      "label": "user behavior",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "user experience",
+      "incident_edges": [
+        "edge_765",
+        "edge_766"
+      ],
+      "label": "user experience",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user involvement",
+      "incident_edges": [
+        "edge_790"
+      ],
+      "label": "user involvement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "user story",
+      "incident_edges": [
+        "edge_757",
+        "edge_767"
+      ],
+      "label": "user stories",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "variation in respon",
+      "incident_edges": [],
+      "label": "variation in responses",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "visual dashboard",
+      "incident_edges": [
+        "edge_770"
+      ],
+      "label": "visual dashboard",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

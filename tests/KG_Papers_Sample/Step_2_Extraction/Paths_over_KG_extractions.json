@@ -1,0 +1,974 @@
+[
+  {
+    "chunk_id": "Paths_over_KG_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "struggle with",
+        "sources": [
+          "Large Language Models",
+          "LLMs"
+        ],
+        "targets": [
+          "hallucination problems",
+          "lack of relevant knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "offer",
+        "sources": [
+          "Knowledge Graphs",
+          "KGs"
+        ],
+        "targets": [
+          "source of knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Paths-over-Graph",
+          "PoG"
+        ],
+        "targets": [
+          "LLM reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "PoG"
+        ],
+        "targets": [
+          "interpretability",
+          "faithfulness"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "relies on",
+        "sources": [
+          "plan-retrieval-answering method"
+        ],
+        "targets": [
+          "reasoning abilities"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "serves",
+        "sources": [
+          "Belgium",
+          "Nijmegen"
+        ],
+        "targets": [
+          "Brussels Airport"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "borders",
+        "sources": [
+          "Netherlands",
+          "France"
+        ],
+        "targets": [
+          "Germany"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contains",
+        "sources": [
+          "Germany",
+          "Nijmegen"
+        ],
+        "targets": [
+          "airport"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Knowledge Graphs",
+          "LLMs"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "KGs",
+          "knowledge"
+        ],
+        "targets": [
+          "structured knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "PoG",
+          "LLMs"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "reduces",
+        "sources": [
+          "PoG",
+          "KG"
+        ],
+        "targets": [
+          "computational costs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "LLMs",
+          "knowledge paths"
+        ],
+        "targets": [
+          "faithfulness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "dynamic multi-hop reasoning",
+          "LLMs"
+        ],
+        "targets": [
+          "complex tasks"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "question",
+          "topic entities"
+        ],
+        "targets": [
+          "subgraph detection"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "subgraph detection",
+          "question analysis"
+        ],
+        "targets": [
+          "answer formulation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "LLM",
+          "knowledge graph"
+        ],
+        "targets": [
+          "entity paths"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "exploration phases",
+          "beam search"
+        ],
+        "targets": [
+          "path pruning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "question",
+          "KGQA"
+        ],
+        "targets": [
+          "reasoning paths"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "question",
+          "topic entities"
+        ],
+        "targets": [
+          "LLM"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "graph pruning",
+          "node clustering"
+        ],
+        "targets": [
+          "computational cost"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "predicted depth",
+          "topic entities"
+        ],
+        "targets": [
+          "induced subgraphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "LLM indicator",
+          "question analysis"
+        ],
+        "targets": [
+          "answer accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG-based LLM",
+          "path exploration"
+        ],
+        "targets": [
+          "efficient knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "PoG prompts",
+          "LLMs"
+        ],
+        "targets": [
+          "path understanding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "fuzzy selection",
+          "beam search"
+        ],
+        "targets": [
+          "irrelevant paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leverages",
+        "sources": [
+          "LLM",
+          "provided knowledge"
+        ],
+        "targets": [
+          "response formulation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "path pruning",
+          "summarization strategy"
+        ],
+        "targets": [
+          "hallucinations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "PoG",
+          "GPT-3.5-Turbo"
+        ],
+        "targets": [
+          "SOTA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "surpasses",
+        "sources": [
+          "PoG",
+          "GPT-4"
+        ],
+        "targets": [
+          "fine-tuned SOTA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "external knowledge",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "reasoning tasks"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "depth",
+          "Dmax"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "combines",
+        "sources": [
+          "PoG",
+          "LLM"
+        ],
+        "targets": [
+          "structured information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "PoG",
+          "KGs"
+        ],
+        "targets": [
+          "interpretable reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "graph pruning",
+          "three-step process"
+        ],
+        "targets": [
+          "efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "handles",
+        "sources": [
+          "PoG",
+          "multi-hop tasks"
+        ],
+        "targets": [
+          "complex reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "PoG",
+          "WebQSP dataset"
+        ],
+        "targets": [
+          "90% accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "demonstrates",
+        "sources": [
+          "multi-entity questions",
+          "PoG"
+        ],
+        "targets": [
+          "excellent accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "empowers",
+        "sources": [
+          "knowledge graph",
+          "large language model"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "question answering"
+        ],
+        "targets": [
+          "language models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "large language model",
+          "knowledge retrieval"
+        ],
+        "targets": [
+          "fact retrieval"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "guides",
+        "sources": [
+          "knowledge graph",
+          "language model prompting"
+        ],
+        "targets": [
+          "zero-shot answering"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Path Pruning",
+          "Exploration"
+        ],
+        "targets": [
+          "candidate paths"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "Fuzzy Selection",
+          "Precise Path Selection"
+        ],
+        "targets": [
+          "final reasoning path"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "produces",
+        "sources": [
+          "Question Answering",
+          "Path Pruning"
+        ],
+        "targets": [
+          "answers"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "summary prompts",
+          "PoG"
+        ],
+        "targets": [
+          "LLM hallucinations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "increases",
+        "sources": [
+          "path summarization",
+          "PoG-E"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "demonstrates",
+        "sources": [
+          "Fuzzy Selection",
+          "PoG-E"
+        ],
+        "targets": [
+          "strong performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "BranchReduced Selection",
+          "graph structure"
+        ],
+        "targets": [
+          "token usage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "PoG",
+          "beam search methods"
+        ],
+        "targets": [
+          "highest accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "KG",
+          "LLM"
+        ],
+        "targets": [
+          "knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "PoG",
+          "PoG-E"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supplements",
+        "sources": [
+          "LLM",
+          "KG"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "PoG"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "explores",
+        "sources": [
+          "PoG-E"
+        ],
+        "targets": [
+          "novel paths"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "PoG",
+          "LLM"
+        ],
+        "targets": [
+          "LLM call costs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "PoG",
+          "accuracy"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "PoG",
+          "GrailQA"
+        ],
+        "targets": [
+          "LLM call costs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "increases",
+        "sources": [
+          "PoG",
+          "format errors"
+        ],
+        "targets": [
+          "errors"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "PoG",
+          "answer generation errors"
+        ],
+        "targets": [
+          "errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph pruning",
+          "path pruning"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "handles",
+        "sources": [
+          "PoG"
+        ],
+        "targets": [
+          "multi-hop tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "serves as",
+        "sources": [
+          "Freebase"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "GPT-3.5",
+          "GPT-4"
+        ],
+        "targets": [
+          "OpenAI API"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares with",
+        "sources": [
+          "SOTA"
+        ],
+        "targets": [
+          "previous methods"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "mascot for",
+        "sources": [
+          "Lou Seal",
+          "San Francisco Giants"
+        ],
+        "targets": [
+          "2014 World Series"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "contained by",
+        "sources": [
+          "Lejre Municipality",
+          "Denmark"
+        ],
+        "targets": [
+          "Germany"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "belongs to",
+        "sources": [
+          "Falkland Islands",
+          "Central Time Zone"
+        ],
+        "targets": [
+          "Americas"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "retrieves",
+        "sources": [
+          "SPARQL query",
+          "1-hop neighbors"
+        ],
+        "targets": [
+          "connected entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "indicates",
+        "sources": [
+          "connected entity",
+          "relation"
+        ],
+        "targets": [
+          "tail or head"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "returns",
+        "sources": [
+          "entity ID",
+          "relation ID"
+        ],
+        "targets": [
+          "connected entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "converts",
+        "sources": [
+          "function",
+          "entity ID"
+        ],
+        "targets": [
+          "natural language description"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "breaks into",
+        "sources": [
+          "multi-hop question",
+          "topic entities"
+        ],
+        "targets": [
+          "simpler parts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "LLM-generated thinking",
+          "knowledge paths"
+        ],
+        "targets": [
+          "predicted results"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "candidate paths",
+          "final answer"
+        ],
+        "targets": [
+          "top three lists"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "derived from",
+        "sources": [
+          "split questions",
+          "main question"
+        ],
+        "targets": [
+          "LLM thinking"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Paths_over_KG_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "summarizes",
+        "sources": [
+          "LLM-generated thinking",
+          "knowledge triple"
+        ],
+        "targets": [
+          "main topic entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "answers",
+        "sources": [
+          "knowledge graph path",
+          "split question"
+        ],
+        "targets": [
+          "main question"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "retrieves",
+        "sources": [
+          "knowledge graph path",
+          "entities"
+        ],
+        "targets": [
+          "relationships"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

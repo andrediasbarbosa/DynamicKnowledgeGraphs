@@ -1,0 +1,4114 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1149",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "KGs_and_LLMs_chunk_13",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "ai methodology"
+      ],
+      "targets": [
+        "llm"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1150",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "KGs_and_LLMs_chunk_24",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "ai"
+      ],
+      "targets": [
+        "human"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1151",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_6",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "ai-driven solution",
+        "business"
+      ],
+      "targets": [
+        "efficiency",
+        "customer experience",
+        "competitive advantage"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1152",
+      "properties": {},
+      "relation": "link",
+      "source_chunk_id": "KGs_and_LLMs_chunk_11",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "ambiguous entity"
+      ],
+      "targets": [
+        "kg node"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1153",
+      "properties": {},
+      "relation": "maps",
+      "source_chunk_id": "KGs_and_LLMs_chunk_14",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "attention mechanism",
+        "kg"
+      ],
+      "targets": [
+        "llm decision"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1154",
+      "properties": {},
+      "relation": "addresses",
+      "source_chunk_id": "KGs_and_LLMs_chunk_17",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "automated schema generation"
+      ],
+      "targets": [
+        "automation deficit"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1155",
+      "properties": {},
+      "relation": "automates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_6",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "autoregressive transformer",
+        "bidirectional transformer"
+      ],
+      "targets": [
+        "task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1156",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_8",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "autoregressive transformer",
+        "decoder-only"
+      ],
+      "targets": [
+        "coherent text"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1157",
+      "properties": {},
+      "relation": "used_for",
+      "source_chunk_id": "KGs_and_LLMs_chunk_7",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "bert"
+      ],
+      "targets": [
+        "classification",
+        "entity extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1158",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_18",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "ethical governance",
+        "bias mitigation"
+      ],
+      "targets": [
+        "ethical oversight"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1159",
+      "properties": {},
+      "relation": "understands",
+      "source_chunk_id": "KGs_and_LLMs_chunk_8",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "bidirectional transformer",
+        "encoder-only"
+      ],
+      "targets": [
+        "word context"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1160",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "KGs_and_LLMs_chunk_25",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "chatgpt",
+        "medical knowledge graph"
+      ],
+      "targets": [
+        "chinese medical knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1161",
+      "properties": {},
+      "relation": "underutilized in",
+      "source_chunk_id": "KGs_and_LLMs_chunk_17",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "chatgpt"
+      ],
+      "targets": [
+        "real-world application"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1162",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "KGs_and_LLMs_chunk_4",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "full-text review",
+        "collaborative review session"
+      ],
+      "targets": [
+        "consistency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1163",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "KGs_and_LLMs_chunk_7",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "data extraction",
+        "data analysi"
+      ],
+      "targets": [
+        "structured insight"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1164",
+      "properties": {},
+      "relation": "ensure",
+      "source_chunk_id": "KGs_and_LLMs_chunk_16",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "data governance",
+        "regulatory compliance"
+      ],
+      "targets": [
+        "data misuse"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1165",
+      "properties": {},
+      "relation": "employs in",
+      "source_chunk_id": "KGs_and_LLMs_chunk_17",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "domain-specific kgs"
+      ],
+      "targets": [
+        "healthcare"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1166",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_2",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "domain-specific kgs"
+      ],
+      "targets": [
+        "llm reliability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1167",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_25",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "dynamic document-based knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "story comprehension"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1168",
+      "properties": {},
+      "relation": "used_for",
+      "source_chunk_id": "KGs_and_LLMs_chunk_7",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "seq2seq model",
+        "encoder-decoder transformer"
+      ],
+      "targets": [
+        "summarization",
+        "translation",
+        "kg-to-text generation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1169",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KGs_and_LLMs_chunk_8",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "encoder–decoder transformer",
+        "seq2seq model"
+      ],
+      "targets": [
+        "structured output"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1170",
+      "properties": {},
+      "relation": "automates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_1",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "entity extraction"
+      ],
+      "targets": [
+        "kg construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1171",
+      "properties": {},
+      "relation": "bridges",
+      "source_chunk_id": "KGs_and_LLMs_chunk_13",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "xai",
+        "symbolic ai",
+        "ml",
+        "evolutionary computation"
+      ],
+      "targets": [
+        "transparency",
+        "trust"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1172",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "KGs_and_LLMs_chunk_12",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "evolutionary computation"
+      ],
+      "targets": [
+        "graph structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1173",
+      "properties": {},
+      "relation": "define",
+      "source_chunk_id": "KGs_and_LLMs_chunk_5",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "inclusion criteria",
+        "exclusion criteria"
+      ],
+      "targets": [
+        "paper selection"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1174",
+      "properties": {},
+      "relation": "reduce",
+      "source_chunk_id": "KGs_and_LLMs_chunk_4",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "exclusion criteria",
+        "inclusion criteria"
+      ],
+      "targets": [
+        "total paper"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1175",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KGs_and_LLMs_chunk_5",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "full-text review"
+      ],
+      "targets": [
+        "clarification"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1176",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KGs_and_LLMs_chunk_24",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "gpt-4"
+      ],
+      "targets": [
+        "medical knowledge construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1177",
+      "properties": {},
+      "relation": "construct",
+      "source_chunk_id": "KGs_and_LLMs_chunk_9",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "gpt-4"
+      ],
+      "targets": [
+        "viemedkg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1178",
+      "properties": {},
+      "relation": "applied_in",
+      "source_chunk_id": "KGs_and_LLMs_chunk_7",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "gpt-based model"
+      ],
+      "targets": [
+        "generative pipeline",
+        "open-ended question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1179",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_14",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kg embedding",
+        "gradient-based attribution"
+      ],
+      "targets": [
+        "transparency",
+        "interpretability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1180",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_25",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "graph neural network"
+      ],
+      "targets": [
+        "recommender system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1181",
+      "properties": {},
+      "relation": "extracts",
+      "source_chunk_id": "KGs_and_LLMs_chunk_15",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "healthcare"
+      ],
+      "targets": [
+        "insight"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1182",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_6",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "hybrid model",
+        "retrieval-augmented model"
+      ],
+      "targets": [
+        "factual grounding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1183",
+      "properties": {},
+      "relation": "dominate",
+      "source_chunk_id": "KGs_and_LLMs_chunk_16",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "hybrid model"
+      ],
+      "targets": [
+        "research"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1184",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_7",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "hybrid/retrieval-augmented model",
+        "llm"
+      ],
+      "targets": [
+        "factuality",
+        "transparency",
+        "contextual grounding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1185",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KGs_and_LLMs_chunk_12",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "neural network technique",
+        "hybridgcn"
+      ],
+      "targets": [
+        "kg discovery"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1186",
+      "properties": {},
+      "relation": "leads_to",
+      "source_chunk_id": "KGs_and_LLMs_chunk_5",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "initial screening"
+      ],
+      "targets": [
+        "shortlisted paper"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1187",
+      "properties": {},
+      "relation": "advances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_18",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "interdisciplinary research",
+        "llm-kg system"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1188",
+      "properties": {},
+      "relation": "drives",
+      "source_chunk_id": "KGs_and_LLMs_chunk_6",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kg"
+      ],
+      "targets": [
+        "innovation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1189",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KGs_and_LLMs_chunk_14",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kg",
+        "llm"
+      ],
+      "targets": [
+        "data governance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1190",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_6",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kg"
+      ],
+      "targets": [
+        "knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1191",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_14",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kg",
+        "llm"
+      ],
+      "targets": [
+        "output accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1192",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_14",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kg",
+        "xai"
+      ],
+      "targets": [
+        "transparency",
+        "trust"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1193",
+      "properties": {},
+      "relation": "use",
+      "source_chunk_id": "KGs_and_LLMs_chunk_3",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm-based kg system",
+        "kg-based llm"
+      ],
+      "targets": [
+        "ai methodology"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1194",
+      "properties": {},
+      "relation": "reduce",
+      "source_chunk_id": "KGs_and_LLMs_chunk_11",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm output"
+      ],
+      "targets": [
+        "error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1195",
+      "properties": {},
+      "relation": "builds",
+      "source_chunk_id": "KGs_and_LLMs_chunk_15",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "domain-specific kgs"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1196",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KGs_and_LLMs_chunk_15",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "insight"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1197",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KGs_and_LLMs_chunk_10",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "multi-hop reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1198",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "KGs_and_LLMs_chunk_11",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "complex reasoning task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1199",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_1",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "output"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1200",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_10",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1201",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_18",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "traceability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1202",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "KGs_and_LLMs_chunk_16",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "interpretability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1203",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "KGs_and_LLMs_chunk_19",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "llm performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1204",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_2",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "ai system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1205",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_1",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "explainability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1206",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_10",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "output"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1207",
+      "properties": {},
+      "relation": "integrate",
+      "source_chunk_id": "KGs_and_LLMs_chunk_3",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "generative ai"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1208",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "KGs_and_LLMs_chunk_13",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "factual error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1209",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "KGs_and_LLMs_chunk_10",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "llm"
+      ],
+      "targets": [
+        "hallucination"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1210",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_2",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "entity extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1211",
+      "properties": {},
+      "relation": "unlock",
+      "source_chunk_id": "KGs_and_LLMs_chunk_16",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "kgs"
+      ],
+      "targets": [
+        "new possibility"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1212",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "KGs_and_LLMs_chunk_11",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "multimodal data"
+      ],
+      "targets": [
+        "llm performance"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_1213",
+      "properties": {},
+      "relation": "develops",
+      "source_chunk_id": "KGs_and_LLMs_chunk_18",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "multimodal integration",
+        "kgs"
+      ],
+      "targets": [
+        "framework"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1214",
+      "properties": {},
+      "relation": "retrieves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_13",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "rag",
+        "kgs"
+      ],
+      "targets": [
+        "subgraph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1215",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "KGs_and_LLMs_chunk_15",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "sensitive information"
+      ],
+      "targets": [
+        "misuse"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1216",
+      "properties": {},
+      "relation": "improve",
+      "source_chunk_id": "KGs_and_LLMs_chunk_11",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs",
+        "visual input"
+      ],
+      "targets": [
+        "multimodal reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1217",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_17",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs"
+      ],
+      "targets": [
+        "llm output"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1218",
+      "properties": {},
+      "relation": "improve",
+      "source_chunk_id": "KGs_and_LLMs_chunk_3",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs"
+      ],
+      "targets": [
+        "llm output"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1219",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KGs_and_LLMs_chunk_2",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs"
+      ],
+      "targets": [
+        "structured knowledge"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1220",
+      "properties": {},
+      "relation": "reduce",
+      "source_chunk_id": "KGs_and_LLMs_chunk_19",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs"
+      ],
+      "targets": [
+        "hallucination"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1221",
+      "properties": {},
+      "relation": "support",
+      "source_chunk_id": "KGs_and_LLMs_chunk_19",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "kgs"
+      ],
+      "targets": [
+        "multi-hop reasoning"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1222",
+      "properties": {},
+      "relation": "assist",
+      "source_chunk_id": "KGs_and_LLMs_chunk_22",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "fact verification"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1223",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_25",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "adaptive knowledge construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1224",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_24",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1225",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "KGs_and_LLMs_chunk_22",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "named entity disambiguation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1226",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_25",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1227",
+      "properties": {},
+      "relation": "related_to",
+      "source_chunk_id": "KGs_and_LLMs_chunk_5",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "research topic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1228",
+      "properties": {},
+      "relation": "aids",
+      "source_chunk_id": "KGs_and_LLMs_chunk_23",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "llm"
+      ],
+      "targets": [
+        "esg question-answering"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1229",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_23",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "knowledge graph"
+      ],
+      "targets": [
+        "task-oriented dialogue system"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1230",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_23",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "knowledge graph"
+      ],
+      "targets": [
+        "semantic mapping"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1231",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_23",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "knowledge graph"
+      ],
+      "targets": [
+        "automated model generation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1232",
+      "properties": {},
+      "relation": "creates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_23",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "rag"
+      ],
+      "targets": [
+        "conference knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1233",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_21",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "data mining"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1234",
+      "properties": {},
+      "relation": "enhance",
+      "source_chunk_id": "KGs_and_LLMs_chunk_0",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "artificial intelligence"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1235",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_21",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1236",
+      "properties": {},
+      "relation": "facilitate",
+      "source_chunk_id": "KGs_and_LLMs_chunk_22",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "knowledge extraction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1237",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_21",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "recommendation system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1238",
+      "properties": {},
+      "relation": "improve",
+      "source_chunk_id": "KGs_and_LLMs_chunk_22",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "cyber threat intelligence"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1239",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_20",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "fusion inference method"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1240",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_24",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "explanation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1241",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_21",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "semantic extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1242",
+      "properties": {},
+      "relation": "support",
+      "source_chunk_id": "KGs_and_LLMs_chunk_22",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "intelligent question-answering system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1243",
+      "properties": {},
+      "relation": "synergizes",
+      "source_chunk_id": "KGs_and_LLMs_chunk_21",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "large language model"
+      ],
+      "targets": [
+        "explainable ai"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1244",
+      "properties": {},
+      "relation": "utilizes",
+      "source_chunk_id": "KGs_and_LLMs_chunk_20",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "industrial recommendation system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1245",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_24",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph",
+        "llm-based explanation"
+      ],
+      "targets": [
+        "learning recommendation"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1246",
+      "properties": {},
+      "relation": "address",
+      "source_chunk_id": "KGs_and_LLMs_chunk_0",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "knowledge graph"
+      ],
+      "targets": [
+        "explainability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1247",
+      "properties": {},
+      "relation": "improve",
+      "source_chunk_id": "KGs_and_LLMs_chunk_0",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "llm application"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1248",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "KGs_and_LLMs_chunk_17",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "language modeling",
+        "recommendation system"
+      ],
+      "targets": [
+        "study attention"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_1249",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_20",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "large language model"
+      ],
+      "targets": [
+        "causal inference"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1250",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_10",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "medical kgs",
+        "llm"
+      ],
+      "targets": [
+        "reliability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1251",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_1",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "medical kgs"
+      ],
+      "targets": [
+        "decision-making"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1252",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KGs_and_LLMs_chunk_15",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "unstructured data"
+      ],
+      "targets": [
+        "structured knowledge"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1253",
+      "properties": {},
+      "relation": "resolves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_18",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "xai framework",
+        "llm"
+      ],
+      "targets": [
+        "explainability deficit"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1254",
+      "properties": {},
+      "relation": "bridges",
+      "source_chunk_id": "KGs_and_LLMs_chunk_1",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "xai",
+        "llm"
+      ],
+      "targets": [
+        "interpretability gap"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1255",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KGs_and_LLMs_chunk_13",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "xai",
+        "llm"
+      ],
+      "targets": [
+        "interpretability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1256",
+      "properties": {},
+      "relation": "pose",
+      "source_chunk_id": "KGs_and_LLMs_chunk_16",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm",
+        "xai"
+      ],
+      "targets": [
+        "trust challenge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1257",
+      "properties": {},
+      "relation": "automate",
+      "source_chunk_id": "KGs_and_LLMs_chunk_19",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "kg construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1258",
+      "properties": {},
+      "relation": "construct",
+      "source_chunk_id": "KGs_and_LLMs_chunk_3",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "kgs"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1259",
+      "properties": {},
+      "relation": "create",
+      "source_chunk_id": "KGs_and_LLMs_chunk_0",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "trust issue"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1260",
+      "properties": {},
+      "relation": "generate",
+      "source_chunk_id": "KGs_and_LLMs_chunk_9",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "structured kgs"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1261",
+      "properties": {},
+      "relation": "support",
+      "source_chunk_id": "KGs_and_LLMs_chunk_0",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "kg construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1262",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KGs_and_LLMs_chunk_12",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "unstructured text",
+        "structured data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1263",
+      "properties": {},
+      "relation": "transform",
+      "source_chunk_id": "KGs_and_LLMs_chunk_9",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "llm"
+      ],
+      "targets": [
+        "kgs"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1264",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KGs_and_LLMs_chunk_12",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "symbolic ai",
+        "machine learning"
+      ],
+      "targets": [
+        "llm methodology"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1265",
+      "properties": {},
+      "relation": "aligns with",
+      "source_chunk_id": "KGs_and_LLMs_chunk_4",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "paper",
+        "metadata"
+      ],
+      "targets": [
+        "research scope"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1266",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_8",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "symbolic–neural hybrid",
+        "other"
+      ],
+      "targets": [
+        "neural network",
+        "rule-based component"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1267",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_4",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "panda"
+      ],
+      "targets": [
+        "data cleaning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1268",
+      "properties": {},
+      "relation": "guides",
+      "source_chunk_id": "KGs_and_LLMs_chunk_12",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "prompt engineering"
+      ],
+      "targets": [
+        "llm extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1269",
+      "properties": {},
+      "relation": "automates",
+      "source_chunk_id": "KGs_and_LLMs_chunk_4",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "python script",
+        "selenium library"
+      ],
+      "targets": [
+        "data extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1270",
+      "properties": {},
+      "relation": "build",
+      "source_chunk_id": "KGs_and_LLMs_chunk_9",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "rag system"
+      ],
+      "targets": [
+        "kgs"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1271",
+      "properties": {},
+      "relation": "guide",
+      "source_chunk_id": "KGs_and_LLMs_chunk_5",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "research question"
+      ],
+      "targets": [
+        "paper evaluation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1272",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_8",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "retrieve-and-discriminate prompter"
+      ],
+      "targets": [
+        "performance",
+        "reliability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1273",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KGs_and_LLMs_chunk_19",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "xai"
+      ],
+      "targets": [
+        "trust",
+        "transparency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1274",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KGs_and_LLMs_chunk_2",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "xai"
+      ],
+      "targets": [
+        "explainability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1275",
+      "properties": {},
+      "relation": "enable",
+      "source_chunk_id": "KGs_and_LLMs_chunk_9",
+      "source_document": "KGs_and_LLMs",
+      "sources": [
+        "zero-shot learning"
+      ],
+      "targets": [
+        "entity extraction"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 127,
+    "num_nodes": 185
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_1187"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adaptive knowledge construction",
+      "incident_edges": [
+        "edge_1223"
+      ],
+      "label": "adaptive knowledge construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ai",
+      "incident_edges": [
+        "edge_1150"
+      ],
+      "label": "AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "ai methodology",
+      "incident_edges": [
+        "edge_1149",
+        "edge_1193"
+      ],
+      "label": "AI methodologies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ai system",
+      "incident_edges": [
+        "edge_1204"
+      ],
+      "label": "AI systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ai-driven solution",
+      "incident_edges": [
+        "edge_1151"
+      ],
+      "label": "AI-driven solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ambiguous entity",
+      "incident_edges": [
+        "edge_1152"
+      ],
+      "label": "ambiguous entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "artificial intelligence",
+      "incident_edges": [
+        "edge_1234"
+      ],
+      "label": "artificial intelligence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "attention mechanism",
+      "incident_edges": [
+        "edge_1153"
+      ],
+      "label": "attention mechanisms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automated model generation",
+      "incident_edges": [
+        "edge_1231"
+      ],
+      "label": "automated model generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automated schema generation",
+      "incident_edges": [
+        "edge_1154"
+      ],
+      "label": "automated schema generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automation deficit",
+      "incident_edges": [
+        "edge_1154"
+      ],
+      "label": "automation deficits",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "autoregressive transformer",
+      "incident_edges": [
+        "edge_1155",
+        "edge_1156"
+      ],
+      "label": "Autoregressive Transformers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bert",
+      "incident_edges": [
+        "edge_1157"
+      ],
+      "label": "BERT",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bias mitigation",
+      "incident_edges": [
+        "edge_1158"
+      ],
+      "label": "bias mitigation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "bidirectional transformer",
+      "incident_edges": [
+        "edge_1155",
+        "edge_1159"
+      ],
+      "label": "Bidirectional Transformers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "business",
+      "incident_edges": [
+        "edge_1151"
+      ],
+      "label": "business",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "causal inference",
+      "incident_edges": [
+        "edge_1249"
+      ],
+      "label": "causal inference",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "chatgpt",
+      "incident_edges": [
+        "edge_1160",
+        "edge_1161"
+      ],
+      "label": "ChatGPT",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "chinese medical knowledge",
+      "incident_edges": [
+        "edge_1160"
+      ],
+      "label": "Chinese medical knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "clarification",
+      "incident_edges": [
+        "edge_1175"
+      ],
+      "label": "clarification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "classification",
+      "incident_edges": [
+        "edge_1157"
+      ],
+      "label": "classification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "coherent text",
+      "incident_edges": [
+        "edge_1156"
+      ],
+      "label": "coherent text",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "collaborative review session",
+      "incident_edges": [
+        "edge_1162"
+      ],
+      "label": "collaborative review sessions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "competitive advantage",
+      "incident_edges": [
+        "edge_1151"
+      ],
+      "label": "competitive advantage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex reasoning task",
+      "incident_edges": [
+        "edge_1198"
+      ],
+      "label": "complex reasoning tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "conference knowledge graph",
+      "incident_edges": [
+        "edge_1232"
+      ],
+      "label": "conference knowledge graph",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "consistency",
+      "incident_edges": [
+        "edge_1162"
+      ],
+      "label": "consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "contextual grounding",
+      "incident_edges": [
+        "edge_1184"
+      ],
+      "label": "contextual grounding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "customer experience",
+      "incident_edges": [
+        "edge_1151"
+      ],
+      "label": "customer experience",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cyber threat intelligence",
+      "incident_edges": [
+        "edge_1238"
+      ],
+      "label": "cyber threat intelligence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data analysi",
+      "incident_edges": [
+        "edge_1163"
+      ],
+      "label": "data analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data cleaning",
+      "incident_edges": [
+        "edge_1267"
+      ],
+      "label": "data cleaning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "data extraction",
+      "incident_edges": [
+        "edge_1163",
+        "edge_1269"
+      ],
+      "label": "data extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "data governance",
+      "incident_edges": [
+        "edge_1164",
+        "edge_1189"
+      ],
+      "label": "data governance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data mining",
+      "incident_edges": [
+        "edge_1233"
+      ],
+      "label": "data mining",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data misuse",
+      "incident_edges": [
+        "edge_1164"
+      ],
+      "label": "data misuse",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "decision-making",
+      "incident_edges": [
+        "edge_1251"
+      ],
+      "label": "decision-making",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "decoder-only",
+      "incident_edges": [
+        "edge_1156"
+      ],
+      "label": "Decoder-Only",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "domain-specific kgs",
+      "incident_edges": [
+        "edge_1165",
+        "edge_1166",
+        "edge_1195"
+      ],
+      "label": "domain-specific KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dynamic document-based knowledge graph",
+      "incident_edges": [
+        "edge_1167"
+      ],
+      "label": "dynamic document-based knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "efficiency",
+      "incident_edges": [
+        "edge_1151"
+      ],
+      "label": "efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "encoder-decoder transformer",
+      "incident_edges": [
+        "edge_1168"
+      ],
+      "label": "Encoder-Decoder Transformers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "encoder-only",
+      "incident_edges": [
+        "edge_1159"
+      ],
+      "label": "Encoder-Only",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "encoder–decoder transformer",
+      "incident_edges": [
+        "edge_1169"
+      ],
+      "label": "Encoder–Decoder Transformers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "entity extraction",
+      "incident_edges": [
+        "edge_1157",
+        "edge_1170",
+        "edge_1210",
+        "edge_1275"
+      ],
+      "label": "entity extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error",
+      "incident_edges": [
+        "edge_1194"
+      ],
+      "label": "error",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "esg question-answering",
+      "incident_edges": [
+        "edge_1228"
+      ],
+      "label": "ESG question-answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ethical governance",
+      "incident_edges": [
+        "edge_1158"
+      ],
+      "label": "ethical governance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ethical oversight",
+      "incident_edges": [
+        "edge_1158"
+      ],
+      "label": "ethical oversights",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "evolutionary computation",
+      "incident_edges": [
+        "edge_1171",
+        "edge_1172"
+      ],
+      "label": "evolutionary computation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "exclusion criteria",
+      "incident_edges": [
+        "edge_1173",
+        "edge_1174"
+      ],
+      "label": "exclusion criteria",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "explainability",
+      "incident_edges": [
+        "edge_1205",
+        "edge_1246",
+        "edge_1274"
+      ],
+      "label": "explainability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "explainability deficit",
+      "incident_edges": [
+        "edge_1253"
+      ],
+      "label": "explainability deficits",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "explainable ai",
+      "incident_edges": [
+        "edge_1243"
+      ],
+      "label": "explainable AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "explanation",
+      "incident_edges": [
+        "edge_1240"
+      ],
+      "label": "explanation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fact verification",
+      "incident_edges": [
+        "edge_1222"
+      ],
+      "label": "fact verification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual error",
+      "incident_edges": [
+        "edge_1208"
+      ],
+      "label": "factual errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual grounding",
+      "incident_edges": [
+        "edge_1182"
+      ],
+      "label": "factual grounding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factuality",
+      "incident_edges": [
+        "edge_1184"
+      ],
+      "label": "factuality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "framework",
+      "incident_edges": [
+        "edge_1213"
+      ],
+      "label": "framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "full-text review",
+      "incident_edges": [
+        "edge_1162",
+        "edge_1175"
+      ],
+      "label": "full-text reviews",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fusion inference method",
+      "incident_edges": [
+        "edge_1239"
+      ],
+      "label": "fusion inference method",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "generative ai",
+      "incident_edges": [
+        "edge_1207"
+      ],
+      "label": "generative AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "generative pipeline",
+      "incident_edges": [
+        "edge_1178"
+      ],
+      "label": "generative pipelines",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "gpt-4",
+      "incident_edges": [
+        "edge_1176",
+        "edge_1177"
+      ],
+      "label": "GPT-4",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gpt-based model",
+      "incident_edges": [
+        "edge_1178"
+      ],
+      "label": "GPT-based models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient-based attribution",
+      "incident_edges": [
+        "edge_1179"
+      ],
+      "label": "gradient-based attribution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph neural network",
+      "incident_edges": [
+        "edge_1180"
+      ],
+      "label": "graph neural networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph structure",
+      "incident_edges": [
+        "edge_1172"
+      ],
+      "label": "graph structures",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "hallucination",
+      "incident_edges": [
+        "edge_1209",
+        "edge_1220"
+      ],
+      "label": "hallucination",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "healthcare",
+      "incident_edges": [
+        "edge_1165",
+        "edge_1181"
+      ],
+      "label": "healthcare",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human",
+      "incident_edges": [
+        "edge_1150"
+      ],
+      "label": "human",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "hybrid model",
+      "incident_edges": [
+        "edge_1182",
+        "edge_1183"
+      ],
+      "label": "Hybrid Models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hybrid/retrieval-augmented model",
+      "incident_edges": [
+        "edge_1184"
+      ],
+      "label": "Hybrid/Retrieval-Augmented Models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hybridgcn",
+      "incident_edges": [
+        "edge_1185"
+      ],
+      "label": "HybridGCN",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "inclusion criteria",
+      "incident_edges": [
+        "edge_1173",
+        "edge_1174"
+      ],
+      "label": "inclusion criteria",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "industrial recommendation system",
+      "incident_edges": [
+        "edge_1244"
+      ],
+      "label": "Industrial Recommendation Systems",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "initial screening",
+      "incident_edges": [
+        "edge_1186"
+      ],
+      "label": "initial screening",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "innovation",
+      "incident_edges": [
+        "edge_1188"
+      ],
+      "label": "innovation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "insight",
+      "incident_edges": [
+        "edge_1181",
+        "edge_1196"
+      ],
+      "label": "insight",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intelligent question-answering system",
+      "incident_edges": [
+        "edge_1242"
+      ],
+      "label": "intelligent question-answering systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interdisciplinary research",
+      "incident_edges": [
+        "edge_1187"
+      ],
+      "label": "interdisciplinary research",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "interpretability",
+      "incident_edges": [
+        "edge_1179",
+        "edge_1202",
+        "edge_1255"
+      ],
+      "label": "interpretability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interpretability gap",
+      "incident_edges": [
+        "edge_1254"
+      ],
+      "label": "interpretability gap",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "kg",
+      "incident_edges": [
+        "edge_1153",
+        "edge_1188",
+        "edge_1189",
+        "edge_1190",
+        "edge_1191",
+        "edge_1192"
+      ],
+      "label": "KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "kg construction",
+      "incident_edges": [
+        "edge_1170",
+        "edge_1257",
+        "edge_1261"
+      ],
+      "label": "KG construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg discovery",
+      "incident_edges": [
+        "edge_1185"
+      ],
+      "label": "KG discovery",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg embedding",
+      "incident_edges": [
+        "edge_1179"
+      ],
+      "label": "KG embeddings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg node",
+      "incident_edges": [
+        "edge_1152"
+      ],
+      "label": "KG nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg-based llm",
+      "incident_edges": [
+        "edge_1193"
+      ],
+      "label": "KG-based LLMs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg-to-text generation",
+      "incident_edges": [
+        "edge_1168"
+      ],
+      "label": "KG-to-text generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 33,
+      "id": "kgs",
+      "incident_edges": [
+        "edge_1149",
+        "edge_1152",
+        "edge_1194",
+        "edge_1195",
+        "edge_1196",
+        "edge_1197",
+        "edge_1198",
+        "edge_1199",
+        "edge_1200",
+        "edge_1201",
+        "edge_1202",
+        "edge_1203",
+        "edge_1204",
+        "edge_1205",
+        "edge_1206",
+        "edge_1207",
+        "edge_1208",
+        "edge_1209",
+        "edge_1210",
+        "edge_1211",
+        "edge_1212",
+        "edge_1213",
+        "edge_1214",
+        "edge_1215",
+        "edge_1216",
+        "edge_1217",
+        "edge_1218",
+        "edge_1219",
+        "edge_1220",
+        "edge_1221",
+        "edge_1258",
+        "edge_1263",
+        "edge_1270"
+      ],
+      "label": "KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge",
+      "incident_edges": [
+        "edge_1190"
+      ],
+      "label": "knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge extraction",
+      "incident_edges": [
+        "edge_1236"
+      ],
+      "label": "knowledge extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 29,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1150",
+        "edge_1176",
+        "edge_1180",
+        "edge_1222",
+        "edge_1223",
+        "edge_1224",
+        "edge_1225",
+        "edge_1226",
+        "edge_1227",
+        "edge_1228",
+        "edge_1229",
+        "edge_1230",
+        "edge_1231",
+        "edge_1232",
+        "edge_1233",
+        "edge_1234",
+        "edge_1235",
+        "edge_1236",
+        "edge_1237",
+        "edge_1238",
+        "edge_1239",
+        "edge_1240",
+        "edge_1241",
+        "edge_1242",
+        "edge_1243",
+        "edge_1244",
+        "edge_1245",
+        "edge_1246",
+        "edge_1247"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "language modeling",
+      "incident_edges": [
+        "edge_1248"
+      ],
+      "label": "language modeling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 20,
+      "id": "large language model",
+      "incident_edges": [
+        "edge_1167",
+        "edge_1222",
+        "edge_1223",
+        "edge_1224",
+        "edge_1225",
+        "edge_1226",
+        "edge_1227",
+        "edge_1233",
+        "edge_1234",
+        "edge_1235",
+        "edge_1236",
+        "edge_1237",
+        "edge_1238",
+        "edge_1239",
+        "edge_1240",
+        "edge_1241",
+        "edge_1242",
+        "edge_1243",
+        "edge_1244",
+        "edge_1249"
+      ],
+      "label": "large language models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "learning recommendation",
+      "incident_edges": [
+        "edge_1245"
+      ],
+      "label": "learning recommendations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 44,
+      "id": "llm",
+      "incident_edges": [
+        "edge_1149",
+        "edge_1170",
+        "edge_1181",
+        "edge_1184",
+        "edge_1188",
+        "edge_1189",
+        "edge_1190",
+        "edge_1191",
+        "edge_1195",
+        "edge_1196",
+        "edge_1197",
+        "edge_1198",
+        "edge_1199",
+        "edge_1200",
+        "edge_1201",
+        "edge_1202",
+        "edge_1203",
+        "edge_1204",
+        "edge_1205",
+        "edge_1206",
+        "edge_1207",
+        "edge_1208",
+        "edge_1209",
+        "edge_1210",
+        "edge_1211",
+        "edge_1228",
+        "edge_1229",
+        "edge_1230",
+        "edge_1231",
+        "edge_1246",
+        "edge_1250",
+        "edge_1251",
+        "edge_1252",
+        "edge_1253",
+        "edge_1254",
+        "edge_1255",
+        "edge_1256",
+        "edge_1257",
+        "edge_1258",
+        "edge_1259",
+        "edge_1260",
+        "edge_1261",
+        "edge_1262",
+        "edge_1263"
+      ],
+      "label": "LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm application",
+      "incident_edges": [
+        "edge_1247"
+      ],
+      "label": "LLM applications",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm decision",
+      "incident_edges": [
+        "edge_1153"
+      ],
+      "label": "LLM decisions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm extraction",
+      "incident_edges": [
+        "edge_1268"
+      ],
+      "label": "LLM extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm methodology",
+      "incident_edges": [
+        "edge_1264"
+      ],
+      "label": "LLM methodologies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "llm output",
+      "incident_edges": [
+        "edge_1194",
+        "edge_1217",
+        "edge_1218"
+      ],
+      "label": "LLM outputs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "llm performance",
+      "incident_edges": [
+        "edge_1203",
+        "edge_1212"
+      ],
+      "label": "LLM performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm reliability",
+      "incident_edges": [
+        "edge_1166"
+      ],
+      "label": "LLM reliability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm-based explanation",
+      "incident_edges": [
+        "edge_1245"
+      ],
+      "label": "LLM-based explanations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm-based kg system",
+      "incident_edges": [
+        "edge_1193"
+      ],
+      "label": "LLM-based KG systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm-kg system",
+      "incident_edges": [
+        "edge_1187"
+      ],
+      "label": "LLM-KG systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "machine learning",
+      "incident_edges": [
+        "edge_1264"
+      ],
+      "label": "machine learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "medical kgs",
+      "incident_edges": [
+        "edge_1250",
+        "edge_1251"
+      ],
+      "label": "medical KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "medical knowledge construction",
+      "incident_edges": [
+        "edge_1176"
+      ],
+      "label": "medical knowledge construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "medical knowledge graph",
+      "incident_edges": [
+        "edge_1160"
+      ],
+      "label": "medical knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metadata",
+      "incident_edges": [
+        "edge_1265"
+      ],
+      "label": "metadata",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "misuse",
+      "incident_edges": [
+        "edge_1215"
+      ],
+      "label": "misuse",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ml",
+      "incident_edges": [
+        "edge_1171"
+      ],
+      "label": "ML",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "multi-hop reasoning",
+      "incident_edges": [
+        "edge_1197",
+        "edge_1221"
+      ],
+      "label": "multi-hop reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal data",
+      "incident_edges": [
+        "edge_1212"
+      ],
+      "label": "multimodal data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal integration",
+      "incident_edges": [
+        "edge_1213"
+      ],
+      "label": "multimodal integration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal reasoning",
+      "incident_edges": [
+        "edge_1216"
+      ],
+      "label": "multimodal reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "named entity disambiguation",
+      "incident_edges": [
+        "edge_1225"
+      ],
+      "label": "named entity disambiguation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural network",
+      "incident_edges": [
+        "edge_1266"
+      ],
+      "label": "neural networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural network technique",
+      "incident_edges": [
+        "edge_1185"
+      ],
+      "label": "neural network techniques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new possibility",
+      "incident_edges": [
+        "edge_1211"
+      ],
+      "label": "new possibilities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "open-ended question answering",
+      "incident_edges": [
+        "edge_1178"
+      ],
+      "label": "open-ended question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "other",
+      "incident_edges": [
+        "edge_1266"
+      ],
+      "label": "Other",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "output",
+      "incident_edges": [
+        "edge_1199",
+        "edge_1206"
+      ],
+      "label": "output",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "output accuracy",
+      "incident_edges": [
+        "edge_1191"
+      ],
+      "label": "output accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "panda",
+      "incident_edges": [
+        "edge_1267"
+      ],
+      "label": "Panda",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "paper",
+      "incident_edges": [
+        "edge_1265"
+      ],
+      "label": "paper",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "paper evaluation",
+      "incident_edges": [
+        "edge_1271"
+      ],
+      "label": "paper evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "paper selection",
+      "incident_edges": [
+        "edge_1173"
+      ],
+      "label": "paper selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "performance",
+      "incident_edges": [
+        "edge_1200",
+        "edge_1272"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "prompt engineering",
+      "incident_edges": [
+        "edge_1268"
+      ],
+      "label": "prompt engineering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "python script",
+      "incident_edges": [
+        "edge_1269"
+      ],
+      "label": "Python script",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "question answering",
+      "incident_edges": [
+        "edge_1224",
+        "edge_1226",
+        "edge_1235"
+      ],
+      "label": "question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rag",
+      "incident_edges": [
+        "edge_1214",
+        "edge_1232"
+      ],
+      "label": "RAG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rag system",
+      "incident_edges": [
+        "edge_1270"
+      ],
+      "label": "RAG systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "real-world application",
+      "incident_edges": [
+        "edge_1161"
+      ],
+      "label": "real-world applications",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "recommendation system",
+      "incident_edges": [
+        "edge_1237",
+        "edge_1248"
+      ],
+      "label": "recommendation systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommender system",
+      "incident_edges": [
+        "edge_1180"
+      ],
+      "label": "recommender systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "regulatory compliance",
+      "incident_edges": [
+        "edge_1164"
+      ],
+      "label": "regulatory compliance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "reliability",
+      "incident_edges": [
+        "edge_1250",
+        "edge_1272"
+      ],
+      "label": "reliability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research",
+      "incident_edges": [
+        "edge_1183"
+      ],
+      "label": "research",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research question",
+      "incident_edges": [
+        "edge_1271"
+      ],
+      "label": "research questions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research scope",
+      "incident_edges": [
+        "edge_1265"
+      ],
+      "label": "research scope",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research topic",
+      "incident_edges": [
+        "edge_1227"
+      ],
+      "label": "research topic",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval-augmented model",
+      "incident_edges": [
+        "edge_1182"
+      ],
+      "label": "Retrieval-Augmented Models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieve-and-discriminate prompter",
+      "incident_edges": [
+        "edge_1272"
+      ],
+      "label": "Retrieve-and-Discriminate Prompter",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rule-based component",
+      "incident_edges": [
+        "edge_1266"
+      ],
+      "label": "rule-based components",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "selenium library",
+      "incident_edges": [
+        "edge_1269"
+      ],
+      "label": "Selenium library",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic extraction",
+      "incident_edges": [
+        "edge_1241"
+      ],
+      "label": "semantic extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic mapping",
+      "incident_edges": [
+        "edge_1230"
+      ],
+      "label": "semantic mapping",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sensitive information",
+      "incident_edges": [
+        "edge_1215"
+      ],
+      "label": "sensitive information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "seq2seq model",
+      "incident_edges": [
+        "edge_1168",
+        "edge_1169"
+      ],
+      "label": "Seq2Seq Models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "shortlisted paper",
+      "incident_edges": [
+        "edge_1186"
+      ],
+      "label": "shortlisted papers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "story comprehension",
+      "incident_edges": [
+        "edge_1167"
+      ],
+      "label": "story comprehension",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured data",
+      "incident_edges": [
+        "edge_1262"
+      ],
+      "label": "structured data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured insight",
+      "incident_edges": [
+        "edge_1163"
+      ],
+      "label": "structured insights",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured kgs",
+      "incident_edges": [
+        "edge_1260"
+      ],
+      "label": "structured KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "structured knowledge",
+      "incident_edges": [
+        "edge_1219",
+        "edge_1252"
+      ],
+      "label": "structured knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured output",
+      "incident_edges": [
+        "edge_1169"
+      ],
+      "label": "structured outputs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "study attention",
+      "incident_edges": [
+        "edge_1248"
+      ],
+      "label": "study attention",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph",
+      "incident_edges": [
+        "edge_1214"
+      ],
+      "label": "subgraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "summarization",
+      "incident_edges": [
+        "edge_1168"
+      ],
+      "label": "summarization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "symbolic ai",
+      "incident_edges": [
+        "edge_1171",
+        "edge_1264"
+      ],
+      "label": "symbolic AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic–neural hybrid",
+      "incident_edges": [
+        "edge_1266"
+      ],
+      "label": "Symbolic–Neural Hybrids",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task",
+      "incident_edges": [
+        "edge_1155"
+      ],
+      "label": "task",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "task-oriented dialogue system",
+      "incident_edges": [
+        "edge_1229"
+      ],
+      "label": "task-oriented dialogue systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "total paper",
+      "incident_edges": [
+        "edge_1174"
+      ],
+      "label": "total papers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "traceability",
+      "incident_edges": [
+        "edge_1201"
+      ],
+      "label": "traceability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "translation",
+      "incident_edges": [
+        "edge_1168"
+      ],
+      "label": "translation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "transparency",
+      "incident_edges": [
+        "edge_1171",
+        "edge_1179",
+        "edge_1184",
+        "edge_1192",
+        "edge_1273"
+      ],
+      "label": "transparency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "trust",
+      "incident_edges": [
+        "edge_1171",
+        "edge_1192",
+        "edge_1273"
+      ],
+      "label": "trust",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "trust challenge",
+      "incident_edges": [
+        "edge_1256"
+      ],
+      "label": "trust challenges",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "trust issue",
+      "incident_edges": [
+        "edge_1259"
+      ],
+      "label": "trust issues",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "unstructured data",
+      "incident_edges": [
+        "edge_1252"
+      ],
+      "label": "unstructured data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "unstructured text",
+      "incident_edges": [
+        "edge_1262"
+      ],
+      "label": "unstructured text",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "viemedkg",
+      "incident_edges": [
+        "edge_1177"
+      ],
+      "label": "VieMedKG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "visual input",
+      "incident_edges": [
+        "edge_1216"
+      ],
+      "label": "visual inputs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "word context",
+      "incident_edges": [
+        "edge_1159"
+      ],
+      "label": "word context",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "xai",
+      "incident_edges": [
+        "edge_1171",
+        "edge_1192",
+        "edge_1254",
+        "edge_1255",
+        "edge_1256",
+        "edge_1273",
+        "edge_1274"
+      ],
+      "label": "XAI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "xai framework",
+      "incident_edges": [
+        "edge_1253"
+      ],
+      "label": "XAI frameworks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "zero-shot learning",
+      "incident_edges": [
+        "edge_1275"
+      ],
+      "label": "zero-shot learning",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

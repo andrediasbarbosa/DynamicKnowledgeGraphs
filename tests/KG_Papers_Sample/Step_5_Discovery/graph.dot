@@ -1,0 +1,4369 @@
+digraph Hypergraph {
+  rankdir=LR;
+  node [shape=ellipse, style=filled, color=lightblue];
+
+  "1-1 correspondence" [label="1-1 correspondence"];
+  "2014 world sery" [label="2014 world sery"];
+  "69 italian university" [label="69 italian university"];
+  "90% accuracy" [label="90% accuracy"];
+  "abnormal detection" [label="abnormal detection"];
+  "abstract" [label="abstract"];
+  "academia" [label="academia"];
+  "access" [label="access"];
+  "accuracy" [label="accuracy"];
+  "accuracy metric" [label="accuracy metric"];
+  "accuracy rate" [label="accuracy rate"];
+  "action research" [label="action research"];
+  "active exploration controller" [label="active exploration controller"];
+  "active exploration mechanism" [label="active exploration mechanism"];
+  "active learning" [label="active learning"];
+  "active query" [label="active query"];
+  "active selection strategy" [label="active selection strategy"];
+  "active sensemaking" [label="active sensemaking"];
+  "active supervision" [label="active supervision"];
+  "activeclean" [label="activeclean"];
+  "adaptive strategy" [label="adaptive strategy"];
+  "addintent" [label="addintent"];
+  "additional data" [label="additional data"];
+  "addressing challenge" [label="addressing challenge"];
+  "advanced feature" [label="advanced feature"];
+  "advanced service" [label="advanced service"];
+  "advanced technique" [label="advanced technique"];
+  "advances in kg construction" [label="advances in kg construction"];
+  "agent" [label="agent"];
+  "aggregate query" [label="aggregate query"];
+  "ahtm" [label="ahtm"];
+  "ai" [label="ai"];
+  "ai-driven solution" [label="ai-driven solution"];
+  "ai-kg" [label="ai-kg"];
+  "airport" [label="airport"];
+  "ais-kg" [label="ais-kg"];
+  "ais-kg theory" [label="ais-kg theory"];
+  "alarm" [label="alarm"];
+  "alarm_001" [label="alarm_001"];
+  "algorithm" [label="algorithm"];
+  "algorithmic model" [label="algorithmic model"];
+  "amazon neptune" [label="amazon neptune"];
+  "ambiguous information" [label="ambiguous information"];
+  "america" [label="america"];
+  "amie" [label="amie"];
+  "amr2.0" [label="amr2.0"];
+  "analytic" [label="analytic"];
+  "animal" [label="animal"];
+  "annotation budget" [label="annotation budget"];
+  "answer" [label="answer"];
+  "answer accuracy" [label="answer accuracy"];
+  "answer correctness" [label="answer correctness"];
+  "answer extraction" [label="answer extraction"];
+  "answer formulation" [label="answer formulation"];
+  "answer selection" [label="answer selection"];
+  "aphex twin" [label="aphex twin"];
+  "application" [label="application"];
+  "application effectiveness" [label="application effectiveness"];
+  "approach" [label="approach"];
+  "approximation" [label="approximation"];
+  "aql" [label="aql"];
+  "arangodb" [label="arangodb"];
+  "architectural imperative" [label="architectural imperative"];
+  "array data" [label="array data"];
+  "artist" [label="artist"];
+  "artist-kg" [label="artist-kg"];
+  "assistant performance" [label="assistant performance"];
+  "asymmetric merge" [label="asymmetric merge"];
+  "asymptotic coverage" [label="asymptotic coverage"];
+  "asyncio" [label="asyncio"];
+  "attention in ai" [label="attention in ai"];
+  "attention mechanism" [label="attention mechanism"];
+  "attribute" [label="attribute"];
+  "attribute combination" [label="attribute combination"];
+  "attribute implication" [label="attribute implication"];
+  "attribute logic" [label="attribute logic"];
+  "augment algorithm" [label="augment algorithm"];
+  "author's book" [label="author's book"];
+  "authorkeyword" [label="authorkeyword"];
+  "autoblock" [label="autoblock"];
+  "automated method" [label="automated method"];
+  "automated model generation" [label="automated model generation"];
+  "automated pipeline" [label="automated pipeline"];
+  "automated schema generation" [label="automated schema generation"];
+  "automated selection" [label="automated selection"];
+  "automated transformation" [label="automated transformation"];
+  "automated workflow" [label="automated workflow"];
+  "automatic acquisition" [label="automatic acquisition"];
+  "automatic and manual method" [label="automatic and manual method"];
+  "automatic construction" [label="automatic construction"];
+  "automatic fault location" [label="automatic fault location"];
+  "automatic knowledge graph completion" [label="automatic knowledge graph completion"];
+  "automatic ontology construction" [label="automatic ontology construction"];
+  "automation deficit" [label="automation deficit"];
+  "autoregressive transformer" [label="autoregressive transformer"];
+  "auxiliary information" [label="auxiliary information"];
+  "availability" [label="availability"];
+  "backend architecture" [label="backend architecture"];
+  "base entity" [label="base entity"];
+  "baseline" [label="baseline"];
+  "batch approach" [label="batch approach"];
+  "bayesian head" [label="bayesian head"];
+  "belgium" [label="belgium"];
+  "benchmark" [label="benchmark"];
+  "bert" [label="bert"];
+  "best accuracy" [label="best accuracy"];
+  "best mrr" [label="best mrr"];
+  "best practice" [label="best practice"];
+  "bi-lstm-crf" [label="bi-lstm-crf"];
+  "bia" [label="bia"];
+  "bidirectional transformer" [label="bidirectional transformer"];
+  "big data" [label="big data"];
+  "big-fed" [label="big-fed"];
+  "bigdansing" [label="bigdansing"];
+  "binary classifier" [label="binary classifier"];
+  "binary cross entropy" [label="binary cross entropy"];
+  "binet" [label="binet"];
+  "biobert" [label="biobert"];
+  "biological knowledge graph" [label="biological knowledge graph"];
+  "biomedicine" [label="biomedicine"];
+  "bird" [label="bird"];
+  "blind spot" [label="blind spot"];
+  "blocking" [label="blocking"];
+  "bos feature" [label="bos feature"];
+  "bounded variance" [label="bounded variance"];
+  "branchreduced selection" [label="branchreduced selection"];
+  "breakthrough" [label="breakthrough"];
+  "breast cancer occurrence" [label="breast cancer occurrence"];
+  "brussels airport" [label="brussels airport"];
+  "bug triaging" [label="bug triaging"];
+  "builder" [label="builder"];
+  "building" [label="building"];
+  "business consultation" [label="business consultation"];
+  "c id" [label="c id"];
+  "c&cb team" [label="c&cb team"];
+  "cail2018" [label="cail2018"];
+  "cancer survival" [label="cancer survival"];
+  "candidate path" [label="candidate path"];
+  "candidate system" [label="candidate system"];
+  "carnivore" [label="carnivore"];
+  "case-based reasoning" [label="case-based reasoning"];
+  "causal inference" [label="causal inference"];
+  "centrality" [label="centrality"];
+  "centrality of sub-kg" [label="centrality of sub-kg"];
+  "cerebral aneurysm" [label="cerebral aneurysm"];
+  "challenge" [label="challenge"];
+  "change" [label="change"];
+  "change detection" [label="change detection"];
+  "change-based versioning" [label="change-based versioning"];
+  "changes in input data" [label="changes in input data"];
+  "changeset" [label="changeset"];
+  "changeset computation" [label="changeset computation"];
+  "chatbot" [label="chatbot"];
+  "chatgpt" [label="chatgpt"];
+  "chemical–disease relationship" [label="chemical–disease relationship"];
+  "children" [label="children"];
+  "chinese language" [label="chinese language"];
+  "chinese medical knowledge" [label="chinese medical knowledge"];
+  "city" [label="city"];
+  "clarification" [label="clarification"];
+  "class" [label="class"];
+  "classical method" [label="classical method"];
+  "classification" [label="classification"];
+  "cleangraph" [label="cleangraph"];
+  "clear problem description" [label="clear problem description"];
+  "clinical decision support" [label="clinical decision support"];
+  "closed kgs" [label="closed kgs"];
+  "closed-source tool" [label="closed-source tool"];
+  "closed-world assumption" [label="closed-world assumption"];
+  "closest embedding" [label="closest embedding"];
+  "cloud-based platform" [label="cloud-based platform"];
+  "cluster" [label="cluster"];
+  "clustering" [label="clustering"];
+  "cn-dbpedia" [label="cn-dbpedia"];
+  "co-occurrence shortcut" [label="co-occurrence shortcut"];
+  "co-occurrence-based sft" [label="co-occurrence-based sft"];
+  "cognitive approach" [label="cognitive approach"];
+  "cognitive state" [label="cognitive state"];
+  "coherent text" [label="coherent text"];
+  "collaboration opportunity" [label="collaboration opportunity"];
+  "collective annotation" [label="collective annotation"];
+  "comment functionality" [label="comment functionality"];
+  "commercial model" [label="commercial model"];
+  "commonsense knowledge graph" [label="commonsense knowledge graph"];
+  "community node" [label="community node"];
+  "community structure" [label="community structure"];
+  "community summary" [label="community summary"];
+  "community-building activity" [label="community-building activity"];
+  "compact prompt tuning" [label="compact prompt tuning"];
+  "company" [label="company"];
+  "comparison criteria" [label="comparison criteria"];
+  "competition" [label="competition"];
+  "completion" [label="completion"];
+  "completion algorithm" [label="completion algorithm"];
+  "complex" [label="complex"];
+  "component reuse" [label="component reuse"];
+  "comprehensive dataspace" [label="comprehensive dataspace"];
+  "comprehensive knowledge" [label="comprehensive knowledge"];
+  "computational cost" [label="computational cost"];
+  "computational efficiency" [label="computational efficiency"];
+  "computational social science" [label="computational social science"];
+  "compute changeset" [label="compute changeset"];
+  "computer process" [label="computer process"];
+  "computer processing" [label="computer processing"];
+  "computer translation" [label="computer translation"];
+  "computer vision technique" [label="computer vision technique"];
+  "concept" [label="concept"];
+  "concept lattice" [label="concept lattice"];
+  "conceptnet" [label="conceptnet"];
+  "conditional functional dependency" [label="conditional functional dependency"];
+  "conference knowledge graph" [label="conference knowledge graph"];
+  "configuration" [label="configuration"];
+  "conflict detection" [label="conflict detection"];
+  "conflict resolution" [label="conflict resolution"];
+  "connected entity" [label="connected entity"];
+  "connection" [label="connection"];
+  "consensus-based aggregation" [label="consensus-based aggregation"];
+  "consistency" [label="consistency"];
+  "consistency check" [label="consistency check"];
+  "consistent performance" [label="consistent performance"];
+  "constraint" [label="constraint"];
+  "constructed entity" [label="constructed entity"];
+  "construction" [label="construction"];
+  "construction activity knowledge graph" [label="construction activity knowledge graph"];
+  "construction method" [label="construction method"];
+  "consulting service" [label="consulting service"];
+  "content quality assessment" [label="content quality assessment"];
+  "context fragmentation" [label="context fragmentation"];
+  "context-based embedding" [label="context-based embedding"];
+  "context-sensitive parse tree" [label="context-sensitive parse tree"];
+  "continual relation extraction" [label="continual relation extraction"];
+  "continuous improvement" [label="continuous improvement"];
+  "continuous maintenance" [label="continuous maintenance"];
+  "continuous vector-based knowledge representation" [label="continuous vector-based knowledge representation"];
+  "contrastive learning" [label="contrastive learning"];
+  "convergence" [label="convergence"];
+  "conversational qa" [label="conversational qa"];
+  "convolution operation" [label="convolution operation"];
+  "convolutional neural network" [label="convolutional neural network"];
+  "cookin’s on 3 b." [label="cookin’s on 3 b."];
+  "core class" [label="core class"];
+  "correct answer" [label="correct answer"];
+  "correct fact" [label="correct fact"];
+  "correctness" [label="correctness"];
+  "cosign" [label="cosign"];
+  "cost" [label="cost"];
+  "cost-effective solution" [label="cost-effective solution"];
+  "cot reasoning" [label="cot reasoning"];
+  "coverage" [label="coverage"];
+  "covid-19 knowledge graph" [label="covid-19 knowledge graph"];
+  "covid-19 pathophysiology" [label="covid-19 pathophysiology"];
+  "covidgraph" [label="covidgraph"];
+  "crf model" [label="crf model"];
+  "cross-disciplinary research" [label="cross-disciplinary research"];
+  "crowdsourcing" [label="crowdsourcing"];
+  "cumulative expenditure" [label="cumulative expenditure"];
+  "curation" [label="curation"];
+  "current database state" [label="current database state"];
+  "custom mapping" [label="custom mapping"];
+  "custom model" [label="custom model"];
+  "cyber threat intelligence" [label="cyber threat intelligence"];
+  "cyc" [label="cyc"];
+  "cypher" [label="cypher"];
+  "dashboard" [label="dashboard"];
+  "data" [label="data"];
+  "data analysi" [label="data analysi"];
+  "data extraction" [label="data extraction"];
+  "data fusion" [label="data fusion"];
+  "data gathering" [label="data gathering"];
+  "data governance" [label="data governance"];
+  "data graph" [label="data graph"];
+  "data inconsistency" [label="data inconsistency"];
+  "data ingestion" [label="data ingestion"];
+  "data integration" [label="data integration"];
+  "data integrity" [label="data integrity"];
+  "data interoperability" [label="data interoperability"];
+  "data lake" [label="data lake"];
+  "data layer" [label="data layer"];
+  "data management" [label="data management"];
+  "data manipulation" [label="data manipulation"];
+  "data mapping" [label="data mapping"];
+  "data matching" [label="data matching"];
+  "data mining" [label="data mining"];
+  "data misuse" [label="data misuse"];
+  "data modeling" [label="data modeling"];
+  "data preprocessing" [label="data preprocessing"];
+  "data processing pipeline" [label="data processing pipeline"];
+  "data profiling" [label="data profiling"];
+  "data quality" [label="data quality"];
+  "data redundancy" [label="data redundancy"];
+  "data representation" [label="data representation"];
+  "data resource" [label="data resource"];
+  "data retrieval" [label="data retrieval"];
+  "data science application" [label="data science application"];
+  "data security" [label="data security"];
+  "data source" [label="data source"];
+  "data transformation" [label="data transformation"];
+  "data update" [label="data update"];
+  "data validation" [label="data validation"];
+  "data value" [label="data value"];
+  "data-driven ai" [label="data-driven ai"];
+  "database" [label="database"];
+  "database indexing" [label="database indexing"];
+  "database state" [label="database state"];
+  "datalog" [label="datalog"];
+  "dataset" [label="dataset"];
+  "dataset builder" [label="dataset builder"];
+  "datatype property foaf:name" [label="datatype property foaf:name"];
+  "dbp15k" [label="dbp15k"];
+  "dbpedia" [label="dbpedia"];
+  "dc:title" [label="dc:title"];
+  "debugging" [label="debugging"];
+  "decoding" [label="decoding"];
+  "deductive-based reasoning" [label="deductive-based reasoning"];
+  "deep cognitive reasoning network" [label="deep cognitive reasoning network"];
+  "deep graph library" [label="deep graph library"];
+  "deep learning" [label="deep learning"];
+  "deep neural network" [label="deep neural network"];
+  "deepblock" [label="deepblock"];
+  "deeplogic" [label="deeplogic"];
+  "deficient kga" [label="deficient kga"];
+  "deleted tuple" [label="deleted tuple"];
+  "deletion component" [label="deletion component"];
+  "dependency parsing" [label="dependency parsing"];
+  "depth" [label="depth"];
+  "description logic" [label="description logic"];
+  "design aspect" [label="design aspect"];
+  "design principle" [label="design principle"];
+  "design science" [label="design science"];
+  "deterministic unlearning" [label="deterministic unlearning"];
+  "developer" [label="developer"];
+  "diabetic nephropathy" [label="diabetic nephropathy"];
+  "dialogue understanding" [label="dialogue understanding"];
+  "dictionary" [label="dictionary"];
+  "different community" [label="different community"];
+  "differentiable approximation" [label="differentiable approximation"];
+  "differentiable logic programming" [label="differentiable logic programming"];
+  "differentiable module" [label="differentiable module"];
+  "differentiable neural-symbolic module" [label="differentiable neural-symbolic module"];
+  "differentiable retrieval" [label="differentiable retrieval"];
+  "digital assistant" [label="digital assistant"];
+  "digital home" [label="digital home"];
+  "diminishing return" [label="diminishing return"];
+  "directed graph" [label="directed graph"];
+  "discriminative formulation" [label="discriminative formulation"];
+  "discriminative prompt" [label="discriminative prompt"];
+  "discriminative reasoning" [label="discriminative reasoning"];
+  "discriminative relational knowledge" [label="discriminative relational knowledge"];
+  "discriminative-sft-extraction" [label="discriminative-sft-extraction"];
+  "disease" [label="disease"];
+  "distance education" [label="distance education"];
+  "distmult" [label="distmult"];
+  "diverse exploration" [label="diverse exploration"];
+  "dka setup" [label="dka setup"];
+  "document" [label="document"];
+  "domain-specific kgs" [label="domain-specific kgs"];
+  "domain-specific knowledge graph" [label="domain-specific knowledge graph"];
+  "domain-specific search" [label="domain-specific search"];
+  "drug mapping" [label="drug mapping"];
+  "drug repurposing" [label="drug repurposing"];
+  "drug-drug interaction" [label="drug-drug interaction"];
+  "duplicate" [label="duplicate"];
+  "dynamic" [label="dynamic"];
+  "dynamic document-based knowledge graph" [label="dynamic document-based knowledge graph"];
+  "dynamic knowledge update" [label="dynamic knowledge update"];
+  "dynamic sorted neighborhood indexing" [label="dynamic sorted neighborhood indexing"];
+  "e-commerce kgs" [label="e-commerce kgs"];
+  "early-stage query" [label="early-stage query"];
+  "echr" [label="echr"];
+  "edge" [label="edge"];
+  "effective reasoning" [label="effective reasoning"];
+  "effective solution" [label="effective solution"];
+  "effectiveness" [label="effectiveness"];
+  "efficiency" [label="efficiency"];
+  "efficient querying" [label="efficient querying"];
+  "effort for maintenance" [label="effort for maintenance"];
+  "ehr data integration" [label="ehr data integration"];
+  "electric power data" [label="electric power data"];
+  "eleventh position" [label="eleventh position"];
+  "embedding alignment" [label="embedding alignment"];
+  "embedding layer" [label="embedding layer"];
+  "embedding learning" [label="embedding learning"];
+  "embedding representation" [label="embedding representation"];
+  "embedding similarity" [label="embedding similarity"];
+  "embedding technique" [label="embedding technique"];
+  "embedding-based method" [label="embedding-based method"];
+  "encoded knowledge" [label="encoded knowledge"];
+  "encoder representation" [label="encoder representation"];
+  "encoder–decoder transformer" [label="encoder–decoder transformer"];
+  "end user" [label="end user"];
+  "energy sector" [label="energy sector"];
+  "energy system" [label="energy system"];
+  "engineering fact" [label="engineering fact"];
+  "engineering significance" [label="engineering significance"];
+  "enhanced detection" [label="enhanced detection"];
+  "enterprise knowledge graph" [label="enterprise knowledge graph"];
+  "entities and relation" [label="entities and relation"];
+  "entity" [label="entity"];
+  "entity alignment" [label="entity alignment"];
+  "entity attribute" [label="entity attribute"];
+  "entity classification" [label="entity classification"];
+  "entity clustering" [label="entity clustering"];
+  "entity description" [label="entity description"];
+  "entity extraction" [label="entity extraction"];
+  "entity fusion" [label="entity fusion"];
+  "entity id" [label="entity id"];
+  "entity identifier" [label="entity identifier"];
+  "entity linking" [label="entity linking"];
+  "entity linking model" [label="entity linking model"];
+  "entity matching" [label="entity matching"];
+  "entity mention" [label="entity mention"];
+  "entity normalization" [label="entity normalization"];
+  "entity pair" [label="entity pair"];
+  "entity path" [label="entity path"];
+  "entity recognition" [label="entity recognition"];
+  "entity relation prediction" [label="entity relation prediction"];
+  "entity relationship" [label="entity relationship"];
+  "entity representation" [label="entity representation"];
+  "entity resolution" [label="entity resolution"];
+  "entity type" [label="entity type"];
+  "entity-ranking approach" [label="entity-ranking approach"];
+  "epistwin" [label="epistwin"];
+  "epistwin core agent" [label="epistwin core agent"];
+  "epistwin reasoning engine" [label="epistwin reasoning engine"];
+  "equivalent entity" [label="equivalent entity"];
+  "erroneous value" [label="erroneous value"];
+  "error" [label="error"];
+  "error correction" [label="error correction"];
+  "error evaluation" [label="error evaluation"];
+  "error rate" [label="error rate"];
+  "esg question-answering" [label="esg question-answering"];
+  "ethical governance" [label="ethical governance"];
+  "ethical oversight" [label="ethical oversight"];
+  "etl process" [label="etl process"];
+  "evaluating approach" [label="evaluating approach"];
+  "evaluation" [label="evaluation"];
+  "evaluation framework" [label="evaluation framework"];
+  "evaluation goal" [label="evaluation goal"];
+  "evaluation limitation" [label="evaluation limitation"];
+  "evaluation method" [label="evaluation method"];
+  "evaluation metric" [label="evaluation metric"];
+  "evaluation session" [label="evaluation session"];
+  "evaluation_graph" [label="evaluation_graph"];
+  "evaluation_time" [label="evaluation_time"];
+  "event_001" [label="event_001"];
+  "evidence retrieval" [label="evidence retrieval"];
+  "evidence-based medicine" [label="evidence-based medicine"];
+  "evolutionary computation" [label="evolutionary computation"];
+  "evolvable kg" [label="evolvable kg"];
+  "example" [label="example"];
+  "exclusion criteria" [label="exclusion criteria"];
+  "execution time" [label="execution time"];
+  "existing concept" [label="existing concept"];
+  "existing method" [label="existing method"];
+  "expected predictive entropy" [label="expected predictive entropy"];
+  "experiment" [label="experiment"];
+  "expert interview" [label="expert interview"];
+  "explainability" [label="explainability"];
+  "exploration pha" [label="exploration phas"];
+  "exploration regularization" [label="exploration regularization"];
+  "exploration term" [label="exploration term"];
+  "extent" [label="extent"];
+  "extent and intent" [label="extent and intent"];
+  "external evidence" [label="external evidence"];
+  "external knowledge" [label="external knowledge"];
+  "external knowledge consumption" [label="external knowledge consumption"];
+  "extraction" [label="extraction"];
+  "extraction accuracy" [label="extraction accuracy"];
+  "extraction technique" [label="extraction technique"];
+  "extrinsic evaluation" [label="extrinsic evaluation"];
+  "f1 score" [label="f1 score"];
+  "fact checking" [label="fact checking"];
+  "fact-level change" [label="fact-level change"];
+  "fact-level metadata" [label="fact-level metadata"];
+  "factcheck" [label="factcheck"];
+  "factual correctness" [label="factual correctness"];
+  "factual dispute" [label="factual dispute"];
+  "factual error" [label="factual error"];
+  "failure" [label="failure"];
+  "failure diagnostic" [label="failure diagnostic"];
+  "faithfulness" [label="faithfulness"];
+  "falkland island" [label="falkland island"];
+  "false claim" [label="false claim"];
+  "fault diagnosi" [label="fault diagnosi"];
+  "fault maintenance" [label="fault maintenance"];
+  "fault-assisted decision" [label="fault-assisted decision"];
+  "fb15k" [label="fb15k"];
+  "fcatab plug-in" [label="fcatab plug-in"];
+  "feedback" [label="feedback"];
+  "final generation" [label="final generation"];
+  "final performance" [label="final performance"];
+  "final quality" [label="final quality"];
+  "final reasoning path" [label="final reasoning path"];
+  "findability" [label="findability"];
+  "fine-tuned sota" [label="fine-tuned sota"];
+  "finite-sample concentration" [label="finite-sample concentration"];
+  "first-generation ai" [label="first-generation ai"];
+  "foaf:name" [label="foaf:name"];
+  "focused resource" [label="focused resource"];
+  "football match" [label="football match"];
+  "formal concept analysi" [label="formal concept analysi"];
+  "formal context" [label="formal context"];
+  "formal framework" [label="formal framework"];
+  "formalism" [label="formalism"];
+  "format" [label="format"];
+  "foundational framework" [label="foundational framework"];
+  "framework" [label="framework"];
+  "freebase" [label="freebase"];
+  "frozen large language model" [label="frozen large language model"];
+  "fsgcl" [label="fsgcl"];
+  "ftl-lm" [label="ftl-lm"];
+  "full-text review" [label="full-text review"];
+  "function" [label="function"];
+  "further study" [label="further study"];
+  "fused representation" [label="fused representation"];
+  "fusion" [label="fusion"];
+  "fusion error bound" [label="fusion error bound"];
+  "future development" [label="future development"];
+  "future research direction" [label="future research direction"];
+  "fuzzy date" [label="fuzzy date"];
+  "fuzzy logic-based method" [label="fuzzy logic-based method"];
+  "fuzzy selection" [label="fuzzy selection"];
+  "g-core" [label="g-core"];
+  "gaia" [label="gaia"];
+  "gain" [label="gain"];
+  "gating function" [label="gating function"];
+  "gcn" [label="gcn"];
+  "gdl method" [label="gdl method"];
+  "generalizability" [label="generalizability"];
+  "generalization" [label="generalization"];
+  "generative ai" [label="generative ai"];
+  "generative summarization operator" [label="generative summarization operator"];
+  "genre" [label="genre"];
+  "geonames location" [label="geonames location"];
+  "geranium" [label="geranium"];
+  "geranium architecture" [label="geranium architecture"];
+  "geranium platform" [label="geranium platform"];
+  "germany" [label="germany"];
+  "giv-f" [label="giv-f"];
+  "global outcome" [label="global outcome"];
+  "global sensemaking" [label="global sensemaking"];
+  "gnn" [label="gnn"];
+  "good efficiency" [label="good efficiency"];
+  "google knowledge graph" [label="google knowledge graph"];
+  "google serp" [label="google serp"];
+  "gradient normalization" [label="gradient normalization"];
+  "gradient-based optimization" [label="gradient-based optimization"];
+  "gradient-based refinement" [label="gradient-based refinement"];
+  "graph" [label="graph"];
+  "graph attention network" [label="graph attention network"];
+  "graph convolutional network" [label="graph convolutional network"];
+  "graph data" [label="graph data"];
+  "graph data model" [label="graph data model"];
+  "graph database" [label="graph database"];
+  "graph exploration" [label="graph exploration"];
+  "graph model" [label="graph model"];
+  "graph neural network" [label="graph neural network"];
+  "graph operation" [label="graph operation"];
+  "graph pruning" [label="graph pruning"];
+  "graph query" [label="graph query"];
+  "graph query processing" [label="graph query processing"];
+  "graph retrieval" [label="graph retrieval"];
+  "graph retrieval-augmented generation" [label="graph retrieval-augmented generation"];
+  "graph search" [label="graph search"];
+  "graph structure" [label="graph structure"];
+  "graph technology" [label="graph technology"];
+  "graph theory" [label="graph theory"];
+  "graph topology" [label="graph topology"];
+  "graph transformation" [label="graph transformation"];
+  "graph transformation phase" [label="graph transformation phase"];
+  "graph traversal algorithm" [label="graph traversal algorithm"];
+  "graph type" [label="graph type"];
+  "graph-based approach" [label="graph-based approach"];
+  "graph-based method" [label="graph-based method"];
+  "graph-enhanced model" [label="graph-enhanced model"];
+  "graph-oriented databa" [label="graph-oriented databas"];
+  "graph_sampling" [label="graph_sampling"];
+  "graphql" [label="graphql"];
+  "graphrag" [label="graphrag"];
+  "graphrag framework" [label="graphrag framework"];
+  "graphx-net" [label="graphx-net"];
+  "grcomb" [label="grcomb"];
+  "gremlin" [label="gremlin"];
+  "gri- donto system" [label="gri- donto system"];
+  "grokking" [label="grokking"];
+  "gssc" [label="gssc"];
+  "gtfs madrid" [label="gtfs madrid"];
+  "gumbel-softmax" [label="gumbel-softmax"];
+  "gutao method" [label="gutao method"];
+  "haav method" [label="haav method"];
+  "handle large volume of literature" [label="handle large volume of literature"];
+  "handling complexity" [label="handling complexity"];
+  "head" [label="head"];
+  "health outcome" [label="health outcome"];
+  "healthcare" [label="healthcare"];
+  "healthcare data integration" [label="healthcare data integration"];
+  "heterogeneous data" [label="heterogeneous data"];
+  "heterogeneous graph" [label="heterogeneous graph"];
+  "heterogeneous information" [label="heterogeneous information"];
+  "heterogeneous information network" [label="heterogeneous information network"];
+  "heterogeneous reasoning" [label="heterogeneous reasoning"];
+  "heterogenous affinity graph" [label="heterogenous affinity graph"];
+  "hg-scm" [label="hg-scm"];
+  "high accuracy" [label="high accuracy"];
+  "high degree" [label="high degree"];
+  "high fidelity sensemaking" [label="high fidelity sensemaking"];
+  "high-order relational knowledge" [label="high-order relational knowledge"];
+  "high-precision extraction" [label="high-precision extraction"];
+  "high-quality kgs" [label="high-quality kgs"];
+  "higher prediction accuracy" [label="higher prediction accuracy"];
+  "higher training cost" [label="higher training cost"];
+  "highest accuracy" [label="highest accuracy"];
+  "hin" [label="hin"];
+  "hoeffding-type concentration" [label="hoeffding-type concentration"];
+  "holistic sensemaking" [label="holistic sensemaking"];
+  "holoclean" [label="holoclean"];
+  "holographic awareness" [label="holographic awareness"];
+  "human" [label="human"];
+  "human annotation" [label="human annotation"];
+  "human interaction" [label="human interaction"];
+  "human involvement" [label="human involvement"];
+  "human knowledge" [label="human knowledge"];
+  "human label" [label="human label"];
+  "human query" [label="human query"];
+  "human trafficking" [label="human trafficking"];
+  "human-cost penalty" [label="human-cost penalty"];
+  "human-in-the-loop" [label="human-in-the-loop"];
+  "human-in-the-loop strategy" [label="human-in-the-loop strategy"];
+  "human-query node" [label="human-query node"];
+  "hybrid model" [label="hybrid model"];
+  "hybrid retrieval strategy" [label="hybrid retrieval strategy"];
+  "hyperbolic space" [label="hyperbolic space"];
+  "hyperparameter" [label="hyperparameter"];
+  "icew" [label="icew"];
+  "identify candidate label" [label="identify candidate label"];
+  "ids" [label="ids"];
+  "image" [label="image"];
+  "image2triplets" [label="image2triplets"];
+  "implication" [label="implication"];
+  "implication formal context" [label="implication formal context"];
+  "implication set" [label="implication set"];
+  "implicit knowledge" [label="implicit knowledge"];
+  "importance" [label="importance"];
+  "importance score" [label="importance score"];
+  "important role" [label="important role"];
+  "improved accuracy" [label="improved accuracy"];
+  "improvement" [label="improvement"];
+  "incidence matrix" [label="incidence matrix"];
+  "inclusion criteria" [label="inclusion criteria"];
+  "incomplete kgs" [label="incomplete kgs"];
+  "inconsistency" [label="inconsistency"];
+  "incorrect path" [label="incorrect path"];
+  "increase in research" [label="increase in research"];
+  "increased latency" [label="increased latency"];
+  "incremental algorithm" [label="incremental algorithm"];
+  "indirect object identification" [label="indirect object identification"];
+  "inductive-based reasoning" [label="inductive-based reasoning"];
+  "industrial field" [label="industrial field"];
+  "industrial maintenance" [label="industrial maintenance"];
+  "industry 4.0" [label="industry 4.0"];
+  "industry challenge" [label="industry challenge"];
+  "ineffective" [label="ineffective"];
+  "infancy" [label="infancy"];
+  "infer missing triple" [label="infer missing triple"];
+  "inference" [label="inference"];
+  "inference task" [label="inference task"];
+  "inference time" [label="inference time"];
+  "inferencing algorithm" [label="inferencing algorithm"];
+  "inferencing method" [label="inferencing method"];
+  "inferential prediction" [label="inferential prediction"];
+  "information" [label="information"];
+  "information about an entity" [label="information about an entity"];
+  "information extraction" [label="information extraction"];
+  "information gain" [label="information gain"];
+  "information integration" [label="information integration"];
+  "information representation" [label="information representation"];
+  "information retrieval" [label="information retrieval"];
+  "information-theoretic probe" [label="information-theoretic probe"];
+  "initial kg" [label="initial kg"];
+  "initial pkg" [label="initial pkg"];
+  "initial screening" [label="initial screening"];
+  "inner loop" [label="inner loop"];
+  "inner optimization" [label="inner optimization"];
+  "innovation" [label="innovation"];
+  "input format" [label="input format"];
+  "inserted tuple" [label="inserted tuple"];
+  "insight" [label="insight"];
+  "instability" [label="instability"];
+  "instance" [label="instance"];
+  "instruction-following" [label="instruction-following"];
+  "instruction-following model" [label="instruction-following model"];
+  "integration order" [label="integration order"];
+  "integration step" [label="integration step"];
+  "integration task" [label="integration task"];
+  "intelligence and efficiency" [label="intelligence and efficiency"];
+  "intelligent assistant" [label="intelligent assistant"];
+  "intelligent dispatching" [label="intelligent dispatching"];
+  "intelligent reasoning method" [label="intelligent reasoning method"];
+  "intelligent system" [label="intelligent system"];
+  "intent" [label="intent"];
+  "inter-relationships" [label="inter-relationships"];
+  "interactive optimization" [label="interactive optimization"];
+  "interchangeable operation" [label="interchangeable operation"];
+  "interdisciplinary research" [label="interdisciplinary research"];
+  "interest" [label="interest"];
+  "intermediate layer" [label="intermediate layer"];
+  "intermediate representation" [label="intermediate representation"];
+  "intermediate supervision signal" [label="intermediate supervision signal"];
+  "internal approach" [label="internal approach"];
+  "internal knowledge" [label="internal knowledge"];
+  "interoperability" [label="interoperability"];
+  "interplay" [label="interplay"];
+  "interpretability" [label="interpretability"];
+  "interpretability gap" [label="interpretability gap"];
+  "interpretable reasoning" [label="interpretable reasoning"];
+  "intrinsic evaluation" [label="intrinsic evaluation"];
+  "iri" [label="iri"];
+  "irrelevant path" [label="irrelevant path"];
+  "issue" [label="issue"];
+  "iterative process" [label="iterative process"];
+  "iterative rule-guided reasoning" [label="iterative rule-guided reasoning"];
+  "joint extraction" [label="joint extraction"];
+  "kagnet" [label="kagnet"];
+  "karma" [label="karma"];
+  "katara" [label="katara"];
+  "key problem" [label="key problem"];
+  "key stage" [label="key stage"];
+  "key-value memory network" [label="key-value memory network"];
+  "keyword search" [label="keyword search"];
+  "keyword-based search" [label="keyword-based search"];
+  "kg" [label="kg"];
+  "kg alignment" [label="kg alignment"];
+  "kg application" [label="kg application"];
+  "kg completion" [label="kg completion"];
+  "kg completion model" [label="kg completion model"];
+  "kg component" [label="kg component"];
+  "kg construction" [label="kg construction"];
+  "kg construction pipeline" [label="kg construction pipeline"];
+  "kg construction task" [label="kg construction task"];
+  "kg development" [label="kg development"];
+  "kg discovery" [label="kg discovery"];
+  "kg embedding" [label="kg embedding"];
+  "kg evaluation" [label="kg evaluation"];
+  "kg extraction" [label="kg extraction"];
+  "kg fact-checking" [label="kg fact-checking"];
+  "kg identification" [label="kg identification"];
+  "kg infrastructure" [label="kg infrastructure"];
+  "kg learning" [label="kg learning"];
+  "kg model" [label="kg model"];
+  "kg node" [label="kg node"];
+  "kg performance" [label="kg performance"];
+  "kg purpose" [label="kg purpose"];
+  "kg quality" [label="kg quality"];
+  "kg query accuracy" [label="kg query accuracy"];
+  "kg query processing" [label="kg query processing"];
+  "kg querying" [label="kg querying"];
+  "kg representation" [label="kg representation"];
+  "kg research" [label="kg research"];
+  "kg technology" [label="kg technology"];
+  "kg triple" [label="kg triple"];
+  "kg-bert" [label="kg-bert"];
+  "kg-llama" [label="kg-llama"];
+  "kg-to-text" [label="kg-to-text"];
+  "kga" [label="kga"];
+  "kgclean" [label="kgclean"];
+  "kgcp" [label="kgcp"];
+  "kgs" [label="kgs"];
+  "kgt5" [label="kgt5"];
+  "kgvalidator" [label="kgvalidator"];
+  "knowledge" [label="knowledge"];
+  "knowledge bas" [label="knowledge bas"];
+  "knowledge calculation" [label="knowledge calculation"];
+  "knowledge completion" [label="knowledge completion"];
+  "knowledge connection" [label="knowledge connection"];
+  "knowledge data structure" [label="knowledge data structure"];
+  "knowledge deduction" [label="knowledge deduction"];
+  "knowledge discovery" [label="knowledge discovery"];
+  "knowledge editing" [label="knowledge editing"];
+  "knowledge engineering" [label="knowledge engineering"];
+  "knowledge extraction" [label="knowledge extraction"];
+  "knowledge fusion" [label="knowledge fusion"];
+  "knowledge graph" [label="knowledge graph"];
+  "knowledge graph inference" [label="knowledge graph inference"];
+  "knowledge graph learning" [label="knowledge graph learning"];
+  "knowledge graph lifecycle" [label="knowledge graph lifecycle"];
+  "knowledge graph matching" [label="knowledge graph matching"];
+  "knowledge graph path" [label="knowledge graph path"];
+  "knowledge graph reasoning" [label="knowledge graph reasoning"];
+  "knowledge graph refinement" [label="knowledge graph refinement"];
+  "knowledge graph-based system" [label="knowledge graph-based system"];
+  "knowledge guided attention" [label="knowledge guided attention"];
+  "knowledge integration" [label="knowledge integration"];
+  "knowledge map" [label="knowledge map"];
+  "knowledge processing" [label="knowledge processing"];
+  "knowledge reasoning" [label="knowledge reasoning"];
+  "knowledge representation" [label="knowledge representation"];
+  "knowledge sharing" [label="knowledge sharing"];
+  "knowledge source" [label="knowledge source"];
+  "knowledge structure" [label="knowledge structure"];
+  "knowledge structuring" [label="knowledge structuring"];
+  "knowledge transfer" [label="knowledge transfer"];
+  "knowledge utilization" [label="knowledge utilization"];
+  "knowledge validation" [label="knowledge validation"];
+  "knowledge verification" [label="knowledge verification"];
+  "knowledge-aware graph network" [label="knowledge-aware graph network"];
+  "knowledge-aware prompt-tuning" [label="knowledge-aware prompt-tuning"];
+  "knowledge-aware transformer" [label="knowledge-aware transformer"];
+  "knowledge-driven service" [label="knowledge-driven service"];
+  "knowledge-graph incompleteness" [label="knowledge-graph incompleteness"];
+  "knowledgebra" [label="knowledgebra"];
+  "kopa" [label="kopa"];
+  "kung" [label="kung"];
+  "kylie auldist" [label="kylie auldist"];
+  "königsberg bridge problem" [label="königsberg bridge problem"];
+  "label cost" [label="label cost"];
+  "label-informative subspace" [label="label-informative subspace"];
+  "labeling cost" [label="labeling cost"];
+  "language model" [label="language model"];
+  "large organisation" [label="large organisation"];
+  "large pretrained language model" [label="large pretrained language model"];
+  "large-scale language model" [label="large-scale language model"];
+  "large-scale system" [label="large-scale system"];
+  "larger k" [label="larger k"];
+  "largest reduction" [label="largest reduction"];
+  "latency" [label="latency"];
+  "latent representation" [label="latent representation"];
+  "layer depth" [label="layer depth"];
+  "learning" [label="learning"];
+  "legal judgment prediction" [label="legal judgment prediction"];
+  "leiden algorithm" [label="leiden algorithm"];
+  "lejre municipality" [label="lejre municipality"];
+  "limerick" [label="limerick"];
+  "limitation" [label="limitation"];
+  "linearization phase" [label="linearization phase"];
+  "linearized text" [label="linearized text"];
+  "link" [label="link"];
+  "link enrichment" [label="link enrichment"];
+  "link evaluator" [label="link evaluator"];
+  "link prediction" [label="link prediction"];
+  "linked data" [label="linked data"];
+  "linked open data" [label="linked open data"];
+  "linking/matching" [label="linking/matching"];
+  "literal representation" [label="literal representation"];
+  "literature review" [label="literature review"];
+  "llama3.1" [label="llama3.1"];
+  "llm" [label="llm"];
+  "llm application" [label="llm application"];
+  "llm call cost" [label="llm call cost"];
+  "llm decision" [label="llm decision"];
+  "llm extraction" [label="llm extraction"];
+  "llm hallucination" [label="llm hallucination"];
+  "llm indicator" [label="llm indicator"];
+  "logic loss" [label="logic loss"];
+  "long-document rag" [label="long-document rag"];
+  "loss of information" [label="loss of information"];
+  "lou seal" [label="lou seal"];
+  "low computational efficiency" [label="low computational efficiency"];
+  "low-dimensional embedding" [label="low-dimensional embedding"];
+  "lower layer" [label="lower layer"];
+  "lstm-crf" [label="lstm-crf"];
+  "ltotal" [label="ltotal"];
+  "machine learning" [label="machine learning"];
+  "machine unlearning" [label="machine unlearning"];
+  "main question" [label="main question"];
+  "maintenance" [label="maintenance"];
+  "mammal" [label="mammal"];
+  "management efficiency" [label="management efficiency"];
+  "manual annotation" [label="manual annotation"];
+  "manual composition" [label="manual composition"];
+  "manual interaction" [label="manual interaction"];
+  "manual selection process" [label="manual selection process"];
+  "mapping error" [label="mapping error"];
+  "mapping language" [label="mapping language"];
+  "mapping technique" [label="mapping technique"];
+  "mapping tool" [label="mapping tool"];
+  "marek obitko method" [label="marek obitko method"];
+  "marginal gain" [label="marginal gain"];
+  "mastro studio" [label="mastro studio"];
+  "match candidate" [label="match candidate"];
+  "matching accuracy" [label="matching accuracy"];
+  "matching candidate" [label="matching candidate"];
+  "matching process" [label="matching process"];
+  "materialized rdb2rdf view" [label="materialized rdb2rdf view"];
+  "materialized rdf view" [label="materialized rdf view"];
+  "materialized view" [label="materialized view"];
+  "mbz:r.ga1" [label="mbz:r.ga1"];
+  "meaning" [label="meaning"];
+  "medical background knowledge" [label="medical background knowledge"];
+  "medical diagnosi" [label="medical diagnosi"];
+  "medical entity" [label="medical entity"];
+  "medical kgs" [label="medical kgs"];
+  "medical knowledge construction" [label="medical knowledge construction"];
+  "medical terminology" [label="medical terminology"];
+  "medium" [label="medium"];
+  "memory consumption" [label="memory consumption"];
+  "meta-learning" [label="meta-learning"];
+  "metadata" [label="metadata"];
+  "metadata acquisition" [label="metadata acquisition"];
+  "metadata availability" [label="metadata availability"];
+  "metadata principle" [label="metadata principle"];
+  "metadata repository" [label="metadata repository"];
+  "metadata standard" [label="metadata standard"];
+  "metaqa" [label="metaqa"];
+  "method" [label="method"];
+  "method selection" [label="method selection"];
+  "methodological complexity" [label="methodological complexity"];
+  "methodology" [label="methodology"];
+  "metric" [label="metric"];
+  "mhlinker model" [label="mhlinker model"];
+  "mid" [label="mid"];
+  "milestone" [label="milestone"];
+  "mimic-iii" [label="mimic-iii"];
+  "mine hoist" [label="mine hoist"];
+  "missed oracle invocation" [label="missed oracle invocation"];
+  "missing fact" [label="missing fact"];
+  "missing information" [label="missing information"];
+  "missing path" [label="missing path"];
+  "missing relation" [label="missing relation"];
+  "mistral" [label="mistral"];
+  "misuse" [label="misuse"];
+  "mo:duration" [label="mo:duration"];
+  "mo:track_count" [label="mo:track_count"];
+  "mobile application" [label="mobile application"];
+  "mock api" [label="mock api"];
+  "mock-up assistant" [label="mock-up assistant"];
+  "model" [label="model"];
+  "model alignment" [label="model alignment"];
+  "model capability" [label="model capability"];
+  "model consensu" [label="model consensu"];
+  "model explainability" [label="model explainability"];
+  "model hallucination" [label="model hallucination"];
+  "model output" [label="model output"];
+  "model overconfidence" [label="model overconfidence"];
+  "model performance" [label="model performance"];
+  "model trainer" [label="model trainer"];
+  "model understanding" [label="model understanding"];
+  "model usability" [label="model usability"];
+  "model_performance" [label="model_performance"];
+  "modeling accuracy" [label="modeling accuracy"];
+  "modular approach" [label="modular approach"];
+  "modular system" [label="modular system"];
+  "modularity" [label="modularity"];
+  "monte carlo tree search" [label="monte carlo tree search"];
+  "mtrn" [label="mtrn"];
+  "mucomid" [label="mucomid"];
+  "multi-hop question answering" [label="multi-hop question answering"];
+  "multi-level graph knowledge" [label="multi-level graph knowledge"];
+  "multi-lingual querying" [label="multi-lingual querying"];
+  "multi-modal data" [label="multi-modal data"];
+  "multi-modal kg embedding" [label="multi-modal kg embedding"];
+  "multi-modal kg storage" [label="multi-modal kg storage"];
+  "multi-modal kgs" [label="multi-modal kgs"];
+  "multi-modal knowledge graph transformer" [label="multi-modal knowledge graph transformer"];
+  "multi-modal ner" [label="multi-modal ner"];
+  "multi-model consensu" [label="multi-model consensu"];
+  "multi-relational graph attention network" [label="multi-relational graph attention network"];
+  "multi-robot system" [label="multi-robot system"];
+  "multi-task graph convolution network" [label="multi-task graph convolution network"];
+  "multi-task learning" [label="multi-task learning"];
+  "multilingual kgs" [label="multilingual kgs"];
+  "multilingual support" [label="multilingual support"];
+  "multimodal approach" [label="multimodal approach"];
+  "multimodal extraction" [label="multimodal extraction"];
+  "multimodal integration" [label="multimodal integration"];
+  "multimodal perception" [label="multimodal perception"];
+  "multimodal reasoning" [label="multimodal reasoning"];
+  "multimodal relation extraction" [label="multimodal relation extraction"];
+  "multiple kgs" [label="multiple kgs"];
+  "multiple llm" [label="multiple llm"];
+  "music artist" [label="music artist"];
+  "musicartist" [label="musicartist"];
+  "musicbrainz" [label="musicbrainz"];
+  "musicbrainz rdf" [label="musicbrainz rdf"];
+  "mutation operator" [label="mutation operator"];
+  "mutual information" [label="mutual information"];
+  "mvp" [label="mvp"];
+  "named entity" [label="named entity"];
+  "named graph" [label="named graph"];
+  "natural language" [label="natural language"];
+  "natural language processing" [label="natural language processing"];
+  "natural language task" [label="natural language task"];
+  "nell" [label="nell"];
+  "neo4j" [label="neo4j"];
+  "ner" [label="ner"];
+  "netherland" [label="netherland"];
+  "network" [label="network"];
+  "network analysi" [label="network analysi"];
+  "network science" [label="network science"];
+  "networkx" [label="networkx"];
+  "neupsl" [label="neupsl"];
+  "neural component" [label="neural component"];
+  "neural embedding" [label="neural embedding"];
+  "neural encoding" [label="neural encoding"];
+  "neural entropy predictor" [label="neural entropy predictor"];
+  "neural method" [label="neural method"];
+  "neural model" [label="neural model"];
+  "neural network" [label="neural network"];
+  "neural policy" [label="neural policy"];
+  "neural relation-extraction method" [label="neural relation-extraction method"];
+  "neural-symbolic exploration" [label="neural-symbolic exploration"];
+  "new data source" [label="new data source"];
+  "new knowledge" [label="new knowledge"];
+  "new possibility" [label="new possibility"];
+  "new view state" [label="new view state"];
+  "next-generation power system" [label="next-generation power system"];
+  "nextclosure" [label="nextclosure"];
+  "nlp" [label="nlp"];
+  "nlp community" [label="nlp community"];
+  "nlp technique" [label="nlp technique"];
+  "nlp tool" [label="nlp tool"];
+  "nlq answering" [label="nlq answering"];
+  "node" [label="node"];
+  "node classification" [label="node classification"];
+  "node embedding" [label="node embedding"];
+  "node interaction" [label="node interaction"];
+  "node representation" [label="node representation"];
+  "nodepiece" [label="nodepiece"];
+  "noise" [label="noise"];
+  "non-existent relation" [label="non-existent relation"];
+  "nonlinear feature interaction" [label="nonlinear feature interaction"];
+  "novel path" [label="novel path"];
+  "null hypothesi" [label="null hypothesi"];
+  "numerical prediction task" [label="numerical prediction task"];
+  "numerical representation" [label="numerical representation"];
+  "o&m of power equipment" [label="o&m of power equipment"];
+  "o&m plan" [label="o&m plan"];
+  "object base" [label="object base"];
+  "object property" [label="object property"];
+  "object property foaf:made" [label="object property foaf:made"];
+  "object-preserving property" [label="object-preserving property"];
+  "objective function" [label="objective function"];
+  "objective measure" [label="objective measure"];
+  "obstacles and opportunity" [label="obstacles and opportunity"];
+  "off-policy update" [label="off-policy update"];
+  "old rdf state" [label="old rdf state"];
+  "old version" [label="old version"];
+  "ollama" [label="ollama"];
+  "omission" [label="omission"];
+  "omitted relation" [label="omitted relation"];
+  "online deep visual refinement tool" [label="online deep visual refinement tool"];
+  "ontological knowledge bas" [label="ontological knowledge bas"];
+  "ontology vocabulary" [label="ontology vocabulary"];
+  "open archives protocol" [label="open archives protocol"];
+  "open challenge" [label="open challenge"];
+  "open domain question answering" [label="open domain question answering"];
+  "open information extraction" [label="open information extraction"];
+  "open kg toolset" [label="open kg toolset"];
+  "open knowledge graph" [label="open knowledge graph"];
+  "open-source llm" [label="open-source llm"];
+  "open-source tool" [label="open-source tool"];
+  "open-world assumption" [label="open-world assumption"];
+  "operational efficiency" [label="operational efficiency"];
+  "optimal efficiency" [label="optimal efficiency"];
+  "optimal method" [label="optimal method"];
+  "optimal subgraph" [label="optimal subgraph"];
+  "optimization noise" [label="optimization noise"];
+  "optional function" [label="optional function"];
+  "order" [label="order"];
+  "originating paper" [label="originating paper"];
+  "orkg" [label="orkg"];
+  "other representation method" [label="other representation method"];
+  "otr" [label="otr"];
+  "outlier" [label="outlier"];
+  "output" [label="output"];
+  "output accuracy" [label="output accuracy"];
+  "overcome local myopia" [label="overcome local myopia"];
+  "owl" [label="owl"];
+  "owl 2" [label="owl 2"];
+  "owl:datatypeproperty" [label="owl:datatypeproperty"];
+  "paper" [label="paper"];
+  "paper evaluation" [label="paper evaluation"];
+  "paper selection" [label="paper selection"];
+  "pareto frontier" [label="pareto frontier"];
+  "partial order relation" [label="partial order relation"];
+  "participant" [label="participant"];
+  "path" [label="path"];
+  "path embedding" [label="path embedding"];
+  "path pruning" [label="path pruning"];
+  "path ranking algorithm" [label="path ranking algorithm"];
+  "path summarization" [label="path summarization"];
+  "path understanding" [label="path understanding"];
+  "path-based approach" [label="path-based approach"];
+  "patient data" [label="patient data"];
+  "pearson correlation" [label="pearson correlation"];
+  "performance" [label="performance"];
+  "performance benefit" [label="performance benefit"];
+  "performance degradation" [label="performance degradation"];
+  "performance difference" [label="performance difference"];
+  "performance gain" [label="performance gain"];
+  "performance improvement" [label="performance improvement"];
+  "performance of kgs" [label="performance of kgs"];
+  "personal knowledge graph" [label="personal knowledge graph"];
+  "personalized reranking" [label="personalized reranking"];
+  "perturbed fact" [label="perturbed fact"];
+  "pgm" [label="pgm"];
+  "pharmke" [label="pharmke"];
+  "phenomena" [label="phenomena"];
+  "pipeline" [label="pipeline"];
+  "pivot relation" [label="pivot relation"];
+  "pivot tuple" [label="pivot tuple"];
+  "pkg" [label="pkg"];
+  "pkg constructor" [label="pkg constructor"];
+  "pkg ontology" [label="pkg ontology"];
+  "pkg population task" [label="pkg population task"];
+  "place" [label="place"];
+  "plan-retrieval-answering method" [label="plan-retrieval-answering method"];
+  "plausibility score" [label="plausibility score"];
+  "pog" [label="pog"];
+  "pog prompt" [label="pog prompt"];
+  "pog-e" [label="pog-e"];
+  "poincaré geometry" [label="poincaré geometry"];
+  "policy diversity" [label="policy diversity"];
+  "polito knowledge graph" [label="polito knowledge graph"];
+  "popular technique" [label="popular technique"];
+  "positive experience" [label="positive experience"];
+  "post-update state" [label="post-update state"];
+  "power domain" [label="power domain"];
+  "power equipment data" [label="power equipment data"];
+  "power grid" [label="power grid"];
+  "power iot" [label="power iot"];
+  "power safety regulation" [label="power safety regulation"];
+  "pre-trained language model" [label="pre-trained language model"];
+  "pre-update state" [label="pre-update state"];
+  "precision" [label="precision"];
+  "predefined ontology axiom" [label="predefined ontology axiom"];
+  "predpath" [label="predpath"];
+  "prelu non-linearity" [label="prelu non-linearity"];
+  "premium data source" [label="premium data source"];
+  "preprocessing condition" [label="preprocessing condition"];
+  "pretrained model" [label="pretrained model"];
+  "previous method" [label="previous method"];
+  "probabilistic graphical model" [label="probabilistic graphical model"];
+  "probabilistic inference" [label="probabilistic inference"];
+  "probability mass" [label="probability mass"];
+  "problem" [label="problem"];
+  "problem definition" [label="problem definition"];
+  "process element" [label="process element"];
+  "products and service" [label="products and service"];
+  "progress measure" [label="progress measure"];
+  "progressive widening" [label="progressive widening"];
+  "prompt engineering" [label="prompt engineering"];
+  "property" [label="property"];
+  "property graph model" [label="property graph model"];
+  "property matching" [label="property matching"];
+  "proposed model" [label="proposed model"];
+  "prototype development" [label="prototype development"];
+  "provenance" [label="provenance"];
+  "provide answer" [label="provide answer"];
+  "psychosocial work exposure" [label="psychosocial work exposure"];
+  "publication" [label="publication"];
+  "pullnet" [label="pullnet"];
+  "q id" [label="q id"];
+  "qualitative method" [label="qualitative method"];
+  "quality" [label="quality"];
+  "quantum logic" [label="quantum logic"];
+  "query" [label="query"];
+  "question" [label="question"];
+  "question generation" [label="question generation"];
+  "question processing" [label="question processing"];
+  "qwen2.5" [label="qwen2.5"];
+  "r-gcn" [label="r-gcn"];
+  "r2rml mapping" [label="r2rml mapping"];
+  "radar" [label="radar"];
+  "rag" [label="rag"];
+  "rag baseline" [label="rag baseline"];
+  "rag system" [label="rag system"];
+  "random projection" [label="random projection"];
+  "raw input noise" [label="raw input noise"];
+  "rbo score" [label="rbo score"];
+  "rdb" [label="rdb"];
+  "rdb2rdf view" [label="rdb2rdf view"];
+  "rdf" [label="rdf"];
+  "rdf triple" [label="rdf triple"];
+  "rdf-star" [label="rdf-star"];
+  "rdf/s knowledge bas" [label="rdf/s knowledge bas"];
+  "rdf:type" [label="rdf:type"];
+  "rdflib" [label="rdflib"];
+  "rdfliteral" [label="rdfliteral"];
+  "real-time update" [label="real-time update"];
+  "real-world application" [label="real-world application"];
+  "real-world fact" [label="real-world fact"];
+  "reasoner" [label="reasoner"];
+  "reasoning" [label="reasoning"];
+  "reasoning ability" [label="reasoning ability"];
+  "reasoning accuracy" [label="reasoning accuracy"];
+  "reasoning engine" [label="reasoning engine"];
+  "reasoning error" [label="reasoning error"];
+  "reasoning framework" [label="reasoning framework"];
+  "reasoning path" [label="reasoning path"];
+  "reasoning task" [label="reasoning task"];
+  "recall" [label="recall"];
+  "recent research" [label="recent research"];
+  "recognition accuracy" [label="recognition accuracy"];
+  "recommendation" [label="recommendation"];
+  "recommendation accuracy" [label="recommendation accuracy"];
+  "recommendation algorithm" [label="recommendation algorithm"];
+  "recommendation feature" [label="recommendation feature"];
+  "recommendation function" [label="recommendation function"];
+  "recommendation performance" [label="recommendation performance"];
+  "recommendation system" [label="recommendation system"];
+  "recommendation task" [label="recommendation task"];
+  "recommended publication" [label="recommended publication"];
+  "recommender system" [label="recommender system"];
+  "record" [label="record"];
+  "record embedding" [label="record embedding"];
+  "record finding" [label="record finding"];
+  "recording" [label="recording"];
+  "recordingtag" [label="recordingtag"];
+  "redundant computation" [label="redundant computation"];
+  "reflexivity" [label="reflexivity"];
+  "regression metric" [label="regression metric"];
+  "regularization" [label="regularization"];
+  "reinforcement learning" [label="reinforcement learning"];
+  "rejection rate" [label="rejection rate"];
+  "related to preference" [label="related to preference"];
+  "relation" [label="relation"];
+  "relation classification" [label="relation classification"];
+  "relation extraction" [label="relation extraction"];
+  "relationship extraction" [label="relationship extraction"];
+  "relative distance" [label="relative distance"];
+  "release" [label="release"];
+  "releasegroup" [label="releasegroup"];
+  "relevance" [label="relevance"];
+  "relevant image" [label="relevant image"];
+  "relevant path" [label="relevant path"];
+  "relevant relation" [label="relevant relation"];
+  "relevant source" [label="relevant source"];
+  "relevant subset" [label="relevant subset"];
+  "relevant tuple" [label="relevant tuple"];
+  "relevant tuples after" [label="relevant tuples after"];
+  "relevant tuples before" [label="relevant tuples before"];
+  "reliability" [label="reliability"];
+  "reliable validation" [label="reliable validation"];
+  "repeated participation" [label="repeated participation"];
+  "replication in industry" [label="replication in industry"];
+  "representation" [label="representation"];
+  "representation learning" [label="representation learning"];
+  "reproducible benchmarking" [label="reproducible benchmarking"];
+  "research" [label="research"];
+  "research contribution" [label="research contribution"];
+  "research frontier" [label="research frontier"];
+  "research opportunity" [label="research opportunity"];
+  "research outcome" [label="research outcome"];
+  "research priority" [label="research priority"];
+  "research question" [label="research question"];
+  "research scope" [label="research scope"];
+  "research synthesi" [label="research synthesi"];
+  "research topic" [label="research topic"];
+  "residual error" [label="residual error"];
+  "residual error mass" [label="residual error mass"];
+  "resource management" [label="resource management"];
+  "response formulation" [label="response formulation"];
+  "response generator" [label="response generator"];
+  "response quality" [label="response quality"];
+  "rest api" [label="rest api"];
+  "result interpretation" [label="result interpretation"];
+  "retrieval augmented generation" [label="retrieval augmented generation"];
+  "retrieval component" [label="retrieval component"];
+  "retrieval effort" [label="retrieval effort"];
+  "retrieval error" [label="retrieval error"];
+  "retrieval problem" [label="retrieval problem"];
+  "retrieval quality" [label="retrieval quality"];
+  "retrieval-augmented learning" [label="retrieval-augmented learning"];
+  "retrieval-based system" [label="retrieval-based system"];
+  "retrieved document" [label="retrieved document"];
+  "reverse edge" [label="reverse edge"];
+  "right to be forgotten" [label="right to be forgotten"];
+  "rkg quality" [label="rkg quality"];
+  "rnew" [label="rnew"];
+  "robust semantic" [label="robust semantic"];
+  "rule body" [label="rule body"];
+  "rule confidence" [label="rule confidence"];
+  "rule language" [label="rule language"];
+  "rule mining" [label="rule mining"];
+  "rule parameter" [label="rule parameter"];
+  "rule ψ10" [label="rule ψ10"];
+  "rule-based method" [label="rule-based method"];
+  "rxnorm" [label="rxnorm"];
+  "s id" [label="s id"];
+  "saga" [label="saga"];
+  "sample efficiency" [label="sample efficiency"];
+  "sample_size" [label="sample_size"];
+  "satisfaction" [label="satisfaction"];
+  "satisfactory performance" [label="satisfactory performance"];
+  "scalability" [label="scalability"];
+  "scheduling domain kg" [label="scheduling domain kg"];
+  "schema matching" [label="schema matching"];
+  "schema validation" [label="schema validation"];
+  "schema-agnostic approach" [label="schema-agnostic approach"];
+  "scholarly data" [label="scholarly data"];
+  "scholarly knowledge graph" [label="scholarly knowledge graph"];
+  "scientific knowledge graph" [label="scientific knowledge graph"];
+  "scientific publication" [label="scientific publication"];
+  "scikgdash" [label="scikgdash"];
+  "score function" [label="score function"];
+  "search" [label="search"];
+  "search engine" [label="search engine"];
+  "search temperature" [label="search temperature"];
+  "secure health data management" [label="secure health data management"];
+  "selection distribution" [label="selection distribution"];
+  "selective transfer" [label="selective transfer"];
+  "self-attention" [label="self-attention"];
+  "self-correction" [label="self-correction"];
+  "self-learning method" [label="self-learning method"];
+  "selfkg" [label="selfkg"];
+  "semantic" [label="semantic"];
+  "semantic parsing" [label="semantic parsing"];
+  "semantic prior" [label="semantic prior"];
+  "semantic property" [label="semantic property"];
+  "semantic reasoning" [label="semantic reasoning"];
+  "semantic relation" [label="semantic relation"];
+  "semantic search" [label="semantic search"];
+  "semantic structure" [label="semantic structure"];
+  "semantic technology" [label="semantic technology"];
+  "semantic topic" [label="semantic topic"];
+  "semantic triple" [label="semantic triple"];
+  "semantic web" [label="semantic web"];
+  "semi-automated measure" [label="semi-automated measure"];
+  "semi-automatic linking" [label="semi-automatic linking"];
+  "semi-automatic ontology construction" [label="semi-automatic ontology construction"];
+  "semi-automatic survey" [label="semi-automatic survey"];
+  "sensitive information leakage" [label="sensitive information leakage"];
+  "sensitivity" [label="sensitivity"];
+  "sentence embedding" [label="sentence embedding"];
+  "separator" [label="separator"];
+  "seq2seq model" [label="seq2seq model"];
+  "service quality" [label="service quality"];
+  "service report" [label="service report"];
+  "set" [label="set"];
+  "sft" [label="sft"];
+  "shacl" [label="shacl"];
+  "shallow embedding" [label="shallow embedding"];
+  "sharp decrease" [label="sharp decrease"];
+  "shifting priority" [label="shifting priority"];
+  "shifts in target domain" [label="shifts in target domain"];
+  "shortcut" [label="shortcut"];
+  "shortlisted paper" [label="shortlisted paper"];
+  "sigma0" [label="sigma0"];
+  "signal" [label="signal"];
+  "similarity graph" [label="similarity graph"];
+  "similarity ranking" [label="similarity ranking"];
+  "single representation" [label="single representation"];
+  "sliced mutual information" [label="sliced mutual information"];
+  "slogert" [label="slogert"];
+  "smaller model" [label="smaller model"];
+  "smart grid" [label="smart grid"];
+  "snapshot" [label="snapshot"];
+  "social advocacy" [label="social advocacy"];
+  "social network" [label="social network"];
+  "soft tree policy" [label="soft tree policy"];
+  "soft-unification" [label="soft-unification"];
+  "solomusicartist" [label="solomusicartist"];
+  "solution design" [label="solution design"];
+  "sota" [label="sota"];
+  "source of knowledge" [label="source of knowledge"];
+  "source selection" [label="source selection"];
+  "source update" [label="source update"];
+  "sparql query" [label="sparql query"];
+  "spatial-temporal graph neural network" [label="spatial-temporal graph neural network"];
+  "spatiotemporal event prediction" [label="spatiotemporal event prediction"];
+  "spatiotemporal information" [label="spatiotemporal information"];
+  "special node" [label="special node"];
+  "specialized ontology" [label="specialized ontology"];
+  "specific class" [label="specific class"];
+  "specific error" [label="specific error"];
+  "spire" [label="spire"];
+  "sql/xml view" [label="sql/xml view"];
+  "squerall" [label="squerall"];
+  "stability" [label="stability"];
+  "stable solution" [label="stable solution"];
+  "standardized service" [label="standardized service"];
+  "stanford corenlp" [label="stanford corenlp"];
+  "statement score" [label="statement score"];
+  "stationary convergence" [label="stationary convergence"];
+  "stationary point" [label="stationary point"];
+  "statistical analysi" [label="statistical analysi"];
+  "statistical information" [label="statistical information"];
+  "statistical modeling" [label="statistical modeling"];
+  "stochastic gradient estimator" [label="stochastic gradient estimator"];
+  "storage" [label="storage"];
+  "stored knowledge" [label="stored knowledge"];
+  "story comprehension" [label="story comprehension"];
+  "strengths and limitation" [label="strengths and limitation"];
+  "strong performance" [label="strong performance"];
+  "stronger learning signal" [label="stronger learning signal"];
+  "structure and function" [label="structure and function"];
+  "structure-encoding strategy" [label="structure-encoding strategy"];
+  "structured data" [label="structured data"];
+  "structured dataset" [label="structured dataset"];
+  "structured entity" [label="structured entity"];
+  "structured information" [label="structured information"];
+  "structured insight" [label="structured insight"];
+  "structured kgs" [label="structured kgs"];
+  "structured knowledge" [label="structured knowledge"];
+  "structured output" [label="structured output"];
+  "structured query" [label="structured query"];
+  "structured semantic knowledge base" [label="structured semantic knowledge base"];
+  "structured triple" [label="structured triple"];
+  "sub-entity embedding model" [label="sub-entity embedding model"];
+  "sub-gaussianity" [label="sub-gaussianity"];
+  "sub-graph extraction" [label="sub-graph extraction"];
+  "subconcept" [label="subconcept"];
+  "subgraph" [label="subgraph"];
+  "subgraph detection" [label="subgraph detection"];
+  "subgraph extraction" [label="subgraph extraction"];
+  "subgraph matching" [label="subgraph matching"];
+  "subject uri" [label="subject uri"];
+  "subject-relation-object triple" [label="subject-relation-object triple"];
+  "subjective context" [label="subjective context"];
+  "successful" [label="successful"];
+  "summarization" [label="summarization"];
+  "summary" [label="summary"];
+  "summary prompt" [label="summary prompt"];
+  "summary sp" [label="summary sp"];
+  "superior accuracy" [label="superior accuracy"];
+  "supervised annotation" [label="supervised annotation"];
+  "supervised information extraction model" [label="supervised information extraction model"];
+  "supervised learning" [label="supervised learning"];
+  "supervised optimization" [label="supervised optimization"];
+  "survey" [label="survey"];
+  "svo triple" [label="svo triple"];
+  "swrl" [label="swrl"];
+  "symbolic ai" [label="symbolic ai"];
+  "symbolic approximation error" [label="symbolic approximation error"];
+  "symbolic consistency" [label="symbolic consistency"];
+  "symbolic layer" [label="symbolic layer"];
+  "symbolic module" [label="symbolic module"];
+  "symbolic plausibility" [label="symbolic plausibility"];
+  "symbolic score" [label="symbolic score"];
+  "symbolic triple" [label="symbolic triple"];
+  "symbolic-consistency term" [label="symbolic-consistency term"];
+  "symbolic–neural hybrid" [label="symbolic–neural hybrid"];
+  "synergistic optimization" [label="synergistic optimization"];
+  "synthetic data generation" [label="synthetic data generation"];
+  "synthetic dataset" [label="synthetic dataset"];
+  "system" [label="system"];
+  "system propensity" [label="system propensity"];
+  "systematic bia" [label="systematic bias"];
+  "systematic framework" [label="systematic framework"];
+  "systematic review" [label="systematic review"];
+  "t-gae" [label="t-gae"];
+  "table 2" [label="table 2"];
+  "table-filling method" [label="table-filling method"];
+  "tacit knowledge gathering" [label="tacit knowledge gathering"];
+  "tag" [label="tag"];
+  "tail or head" [label="tail or head"];
+  "task" [label="task"];
+  "task completion" [label="task completion"];
+  "task complexity" [label="task complexity"];
+  "task difficulty" [label="task difficulty"];
+  "task formulation" [label="task formulation"];
+  "task transition" [label="task transition"];
+  "task-adaptive mutual information" [label="task-adaptive mutual information"];
+  "task-oriented dialogue system" [label="task-oriented dialogue system"];
+  "taxonomy" [label="taxonomy"];
+  "team need" [label="team need"];
+  "technical issue" [label="technical issue"];
+  "technology" [label="technology"];
+  "temperature" [label="temperature"];
+  "temporal analysi" [label="temporal analysi"];
+  "temporal dependency" [label="temporal dependency"];
+  "temporal event" [label="temporal event"];
+  "temporal evolution" [label="temporal evolution"];
+  "temporal kgs" [label="temporal kgs"];
+  "temporal logical rule" [label="temporal logical rule"];
+  "temporal metadata" [label="temporal metadata"];
+  "temporal order constraint" [label="temporal order constraint"];
+  "temporal reasoning" [label="temporal reasoning"];
+  "temporal-structural adaptation network" [label="temporal-structural adaptation network"];
+  "text corpu" [label="text corpu"];
+  "text embedding" [label="text embedding"];
+  "text information" [label="text information"];
+  "textual representation" [label="textual representation"];
+  "thing" [label="thing"];
+  "this girl" [label="this girl"];
+  "three task" [label="three task"];
+  "tie-breaking" [label="tie-breaking"];
+  "time-aware model" [label="time-aware model"];
+  "timestamp" [label="timestamp"];
+  "timestamp-based solution" [label="timestamp-based solution"];
+  "tmf" [label="tmf"];
+  "tmfresource" [label="tmfresource"];
+  "token classification" [label="token classification"];
+  "token usage" [label="token usage"];
+  "tool" [label="tool"];
+  "tool-kit" [label="tool-kit"];
+  "top three list" [label="top three list"];
+  "top-n candidate" [label="top-n candidate"];
+  "topic-based search" [label="topic-based search"];
+  "total loss" [label="total loss"];
+  "total paper" [label="total paper"];
+  "tp" [label="tp"];
+  "tr pattern" [label="tr pattern"];
+  "traceability" [label="traceability"];
+  "track" [label="track"];
+  "track resource" [label="track resource"];
+  "tracking visitor path" [label="tracking visitor path"];
+  "traditional embedding model" [label="traditional embedding model"];
+  "traditional transformer" [label="traditional transformer"];
+  "trained model" [label="trained model"];
+  "training" [label="training"];
+  "transformation rule" [label="transformation rule"];
+  "transformation strategy" [label="transformation strategy"];
+  "transformer" [label="transformer"];
+  "transformerlen" [label="transformerlen"];
+  "transit data" [label="transit data"];
+  "transparency" [label="transparency"];
+  "trg_compute_delta_r_stmt" [label="trg_compute_delta_r_stmt"];
+  "trigger" [label="trigger"];
+  "triple" [label="triple"];
+  "triple identification" [label="triple identification"];
+  "triple structure" [label="triple structure"];
+  "triple validity" [label="triple validity"];
+  "triplecheckmate" [label="triplecheckmate"];
+  "triplestore" [label="triplestore"];
+  "true plausibility vector" [label="true plausibility vector"];
+  "true triple" [label="true triple"];
+  "trust" [label="trust"];
+  "trust challenge" [label="trust challenge"];
+  "trust issue" [label="trust issue"];
+  "trustworthiness" [label="trustworthiness"];
+  "truth degree" [label="truth degree"];
+  "tucker" [label="tucker"];
+  "tuple" [label="tuple"];
+  "tuple identification" [label="tuple identification"];
+  "tuple r" [label="tuple r"];
+  "tuple variable" [label="tuple variable"];
+  "tuples in d" [label="tuples in d"];
+  "type information" [label="type information"];
+  "type recognition" [label="type recognition"];
+  "ui improvement" [label="ui improvement"];
+  "uml" [label="uml"];
+  "understandability" [label="understandability"];
+  "unified query approach" [label="unified query approach"];
+  "unstructured content" [label="unstructured content"];
+  "unsupervised learning" [label="unsupervised learning"];
+  "update" [label="update"];
+  "upper-right quadrant" [label="upper-right quadrant"];
+  "uri" [label="uri"];
+  "usability" [label="usability"];
+  "usage boundary" [label="usage boundary"];
+  "user" [label="user"];
+  "user behavior" [label="user behavior"];
+  "user data" [label="user data"];
+  "user experience" [label="user experience"];
+  "user feedback" [label="user feedback"];
+  "user interaction" [label="user interaction"];
+  "user need" [label="user need"];
+  "user story" [label="user story"];
+  "user's pkg" [label="user's pkg"];
+  "user_1" [label="user_1"];
+  "uss-graph" [label="uss-graph"];
+  "validation process" [label="validation process"];
+  "value" [label="value"];
+  "value selection" [label="value selection"];
+  "variance" [label="variance"];
+  "variance estimator" [label="variance estimator"];
+  "variation in respon" [label="variation in respons"];
+  "variety of information" [label="variety of information"];
+  "vehicle collision" [label="vehicle collision"];
+  "verification accuracy" [label="verification accuracy"];
+  "version" [label="version"];
+  "view maintenance" [label="view maintenance"];
+  "viewer module" [label="viewer module"];
+  "virtual global node" [label="virtual global node"];
+  "visual attention mechanism" [label="visual attention mechanism"];
+  "visual dashboard" [label="visual dashboard"];
+  "visual relationship" [label="visual relationship"];
+  "visualization tool" [label="visualization tool"];
+  "visualsem" [label="visualsem"];
+  "vulnerability" [label="vulnerability"];
+  "web application" [label="web application"];
+  "web data" [label="web data"];
+  "web text" [label="web text"];
+  "web user interface" [label="web user interface"];
+  "wikidata" [label="wikidata"];
+  "wikipedia" [label="wikipedia"];
+  "wille" [label="wille"];
+  "word context" [label="word context"];
+  "wordnet" [label="wordnet"];
+  "workload" [label="workload"];
+  "workstation" [label="workstation"];
+  "worldkg" [label="worldkg"];
+  "writing phase" [label="writing phase"];
+  "xai" [label="xai"];
+  "xlnet model" [label="xlnet model"];
+  "xtal" [label="xtal"];
+  "yago" [label="yago"];
+  "zero-shot answering" [label="zero-shot answering"];
+  "Φc function" [label="Φc function"];
+
+  rel_0 [shape=diamond, style=filled, color=orange, label="provides"];
+  "dbpedia" -> rel_0;
+  "freebase" -> rel_0;
+  rel_0 -> "correct fact";
+
+  rel_1 [shape=diamond, style=filled, color=orange, label="cleans"];
+  "bigdansing" -> rel_1;
+  rel_1 -> "big data";
+
+  rel_2 [shape=diamond, style=filled, color=orange, label="provides"];
+  "mobile application" -> rel_2;
+  rel_2 -> "standardized service";
+
+  rel_3 [shape=diamond, style=filled, color=orange, label="adapts"];
+  "biobert" -> rel_3;
+  rel_3 -> "biomedicine";
+
+  rel_4 [shape=diamond, style=filled, color=orange, label="enables"];
+  "path ranking algorithm" -> rel_4;
+  rel_4 -> "similarity ranking";
+
+  rel_5 [shape=diamond, style=filled, color=orange, label="faces"];
+  "power safety regulation" -> rel_5;
+  rel_5 -> "challenge";
+
+  rel_6 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "reinforcement learning" -> rel_6;
+  rel_6 -> "relation classification";
+
+  rel_7 [shape=diamond, style=filled, color=orange, label="is based on"];
+  "supervised learning" -> rel_7;
+  "relationship extraction" -> rel_7;
+  rel_7 -> "manual annotation";
+
+  rel_8 [shape=diamond, style=filled, color=orange, label="measures"];
+  "score function" -> rel_8;
+  rel_8 -> "approximation";
+
+  rel_9 [shape=diamond, style=filled, color=orange, label="improves"];
+  "xlnet model" -> rel_9;
+  rel_9 -> "accuracy rate";
+
+  rel_10 [shape=diamond, style=filled, color=orange, label="represent"];
+  "node" -> rel_10;
+  "attribute" -> rel_10;
+  rel_10 -> "entity attribute";
+
+  rel_11 [shape=diamond, style=filled, color=orange, label="causes"];
+  "large-scale language model" -> rel_11;
+  "bert" -> rel_11;
+  rel_11 -> "attention in ai";
+
+  rel_12 [shape=diamond, style=filled, color=orange, label="improves"];
+  "entity resolution" -> rel_12;
+  "big data" -> rel_12;
+  rel_12 -> "data quality";
+
+  rel_13 [shape=diamond, style=filled, color=orange, label="enables"];
+  "computational social science" -> rel_13;
+  "network science" -> rel_13;
+  rel_13 -> "obstacles and opportunity";
+
+  rel_14 [shape=diamond, style=filled, color=orange, label="models"];
+  "covid-19 knowledge graph" -> rel_14;
+  rel_14 -> "covid-19 pathophysiology";
+
+  rel_15 [shape=diamond, style=filled, color=orange, label="instrumental"];
+  "cross-disciplinary research" -> rel_15;
+  rel_15 -> "knowledge graph";
+
+  rel_16 [shape=diamond, style=filled, color=orange, label="is related to"];
+  "entity resolution" -> rel_16;
+  "data mining" -> rel_16;
+  rel_16 -> "knowledge graph";
+
+  rel_17 [shape=diamond, style=filled, color=orange, label="influences"];
+  "description logic" -> rel_17;
+  rel_17 -> "kg research";
+
+  rel_18 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "domain-specific knowledge graph" -> rel_18;
+  rel_18 -> "search engine";
+
+  rel_19 [shape=diamond, style=filled, color=orange, label="represent"];
+  "edge" -> rel_19;
+  "property" -> rel_19;
+  rel_19 -> "relation";
+
+  rel_20 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "deep learning" -> rel_20;
+  "blocking" -> rel_20;
+  rel_20 -> "entity matching";
+
+  rel_21 [shape=diamond, style=filled, color=orange, label="improves"];
+  "entity linking" -> rel_21;
+  rel_21 -> "kg quality";
+
+  rel_22 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge graph" -> rel_22;
+  "external knowledge" -> rel_22;
+  rel_22 -> "recommender system";
+
+  rel_23 [shape=diamond, style=filled, color=orange, label="enables"];
+  "google knowledge graph" -> rel_23;
+  rel_23 -> "replication in industry";
+
+  rel_24 [shape=diamond, style=filled, color=orange, label="influences"];
+  "google knowledge graph" -> rel_24;
+  rel_24 -> "kg research";
+
+  rel_25 [shape=diamond, style=filled, color=orange, label="serves as"];
+  "google knowledge graph" -> rel_25;
+  rel_25 -> "example";
+
+  rel_26 [shape=diamond, style=filled, color=orange, label="uses"];
+  "neo4j" -> rel_26;
+  "graph database" -> rel_26;
+  rel_26 -> "cypher";
+
+  rel_27 [shape=diamond, style=filled, color=orange, label="compared_to"];
+  "graph database" -> rel_27;
+  "triplestore" -> rel_27;
+  rel_27 -> "graph-oriented databa";
+
+  rel_28 [shape=diamond, style=filled, color=orange, label="includes"];
+  "entity resolution" -> rel_28;
+  "blocking" -> rel_28;
+  rel_28 -> "linking/matching";
+  rel_28 -> "clustering";
+
+  rel_29 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "graph neural network" -> rel_29;
+  "knowledge graph" -> rel_29;
+  rel_29 -> "recommender system";
+
+  rel_30 [shape=diamond, style=filled, color=orange, label="improves"];
+  "graph neural network" -> rel_30;
+  "recommendation system" -> rel_30;
+  rel_30 -> "recommendation accuracy";
+
+  rel_31 [shape=diamond, style=filled, color=orange, label="proposed"];
+  "graph theory" -> rel_31;
+  rel_31 -> "königsberg bridge problem";
+
+  rel_32 [shape=diamond, style=filled, color=orange, label="resembles"];
+  "hin" -> rel_32;
+  "knowledge graph" -> rel_32;
+  rel_32 -> "directed graph";
+
+  rel_33 [shape=diamond, style=filled, color=orange, label="leads to"];
+  "information extraction" -> rel_33;
+  rel_33 -> "kgs";
+
+  rel_34 [shape=diamond, style=filled, color=orange, label="supports"];
+  "entity resolution" -> rel_34;
+  "blocking" -> rel_34;
+  rel_34 -> "scalability";
+
+  rel_35 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kg research" -> rel_35;
+  rel_35 -> "performance";
+
+  rel_36 [shape=diamond, style=filled, color=orange, label="is prioritized in"];
+  "kg research" -> rel_36;
+  rel_36 -> "different community";
+
+  rel_37 [shape=diamond, style=filled, color=orange, label="emerged"];
+  "knowledge graph" -> rel_37;
+  "kgs" -> rel_37;
+  rel_37 -> "ai";
+
+  rel_38 [shape=diamond, style=filled, color=orange, label="benefits"];
+  "kgs" -> rel_38;
+  rel_38 -> "visualization tool";
+
+  rel_39 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge graph refinement" -> rel_39;
+  rel_39 -> "evaluation method";
+
+  rel_40 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_40;
+  "semantic web" -> rel_40;
+  rel_40 -> "data interoperability";
+
+  rel_41 [shape=diamond, style=filled, color=orange, label="defines"];
+  "linked data" -> rel_41;
+  "structured data" -> rel_41;
+  rel_41 -> "best practice";
+
+  rel_42 [shape=diamond, style=filled, color=orange, label="transforms"];
+  "linked data" -> rel_42;
+  rel_42 -> "web data";
+
+  rel_43 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "linked open data" -> rel_43;
+  rel_43 -> "data integration";
+
+  rel_44 [shape=diamond, style=filled, color=orange, label="are popular in"];
+  "multilingual kgs" -> rel_44;
+  rel_44 -> "recent research";
+
+  rel_45 [shape=diamond, style=filled, color=orange, label="emerged"];
+  "network" -> rel_45;
+  rel_45 -> "computational social science";
+
+  rel_46 [shape=diamond, style=filled, color=orange, label="supports"];
+  "neural embedding" -> rel_46;
+  rel_46 -> "geonames location";
+
+  rel_47 [shape=diamond, style=filled, color=orange, label="originates from"];
+  "nlp" -> rel_47;
+  "semantic web" -> rel_47;
+  rel_47 -> "kg research";
+
+  rel_48 [shape=diamond, style=filled, color=orange, label="plays"];
+  "representation learning" -> rel_48;
+  "probabilistic graphical model" -> rel_48;
+  rel_48 -> "kg research";
+
+  rel_49 [shape=diamond, style=filled, color=orange, label="affects"];
+  "psychosocial work exposure" -> rel_49;
+  rel_49 -> "health outcome";
+
+  rel_50 [shape=diamond, style=filled, color=orange, label="contributes to"];
+  "semantic web" -> rel_50;
+  rel_50 -> "knowledge graph";
+
+  rel_51 [shape=diamond, style=filled, color=orange, label="enables"];
+  "semantic web" -> rel_51;
+  rel_51 -> "linked data";
+
+  rel_52 [shape=diamond, style=filled, color=orange, label="fuel"];
+  "structured dataset" -> rel_52;
+  rel_52 -> "knowledge graph";
+
+  rel_53 [shape=diamond, style=filled, color=orange, label="affects"];
+  "centrality of sub-kg" -> rel_53;
+  rel_53 -> "final generation";
+
+  rel_54 [shape=diamond, style=filled, color=orange, label="corrupts"];
+  "deficient kga" -> rel_54;
+  rel_54 -> "llm";
+
+  rel_55 [shape=diamond, style=filled, color=orange, label="activate"];
+  "separator" -> rel_55;
+  "entity" -> rel_55;
+  rel_55 -> "head";
+
+  rel_56 [shape=diamond, style=filled, color=orange, label="influences"];
+  "format" -> rel_56;
+  rel_56 -> "kga";
+
+  rel_57 [shape=diamond, style=filled, color=orange, label="affects"];
+  "graph transformation phase" -> rel_57;
+  "linearization phase" -> rel_57;
+  rel_57 -> "final generation";
+
+  rel_58 [shape=diamond, style=filled, color=orange, label="includes"];
+  "graph transformation" -> rel_58;
+  "kga" -> rel_58;
+  rel_58 -> "linearization phase";
+
+  rel_59 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kga" -> rel_59;
+  "kg alignment" -> rel_59;
+  rel_59 -> "llm";
+
+  rel_60 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kg alignment" -> rel_60;
+  "kga" -> rel_60;
+  rel_60 -> "performance";
+
+  rel_61 [shape=diamond, style=filled, color=orange, label="convert"];
+  "kg-to-text" -> rel_61;
+  "model" -> rel_61;
+  rel_61 -> "kgs";
+
+  rel_62 [shape=diamond, style=filled, color=orange, label="are"];
+  "order" -> rel_62;
+  rel_62 -> "related to preference";
+  rel_62 -> "model";
+
+  rel_63 [shape=diamond, style=filled, color=orange, label="show"];
+  "rbo score" -> rel_63;
+  rel_63 -> "generalizability";
+
+  rel_64 [shape=diamond, style=filled, color=orange, label="improve"];
+  "virtual global node" -> rel_64;
+  "reverse edge" -> rel_64;
+  rel_64 -> "centrality";
+
+  rel_65 [shape=diamond, style=filled, color=orange, label="connects"];
+  "knowledge graph" -> rel_65;
+  "ai" -> rel_65;
+  rel_65 -> "human";
+
+  rel_66 [shape=diamond, style=filled, color=orange, label="maps"];
+  "attention mechanism" -> rel_66;
+  "kg" -> rel_66;
+  rel_66 -> "llm decision";
+
+  rel_67 [shape=diamond, style=filled, color=orange, label="addresses"];
+  "automated schema generation" -> rel_67;
+  rel_67 -> "automation deficit";
+
+  rel_68 [shape=diamond, style=filled, color=orange, label="automates"];
+  "autoregressive transformer" -> rel_68;
+  "bidirectional transformer" -> rel_68;
+  rel_68 -> "task";
+
+  rel_69 [shape=diamond, style=filled, color=orange, label="used_for"];
+  "bert" -> rel_69;
+  rel_69 -> "classification";
+  rel_69 -> "entity extraction";
+
+  rel_70 [shape=diamond, style=filled, color=orange, label="underutilized in"];
+  "chatgpt" -> rel_70;
+  rel_70 -> "real-world application";
+
+  rel_71 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "data extraction" -> rel_71;
+  "data analysi" -> rel_71;
+  rel_71 -> "structured insight";
+
+  rel_72 [shape=diamond, style=filled, color=orange, label="employs in"];
+  "domain-specific kgs" -> rel_72;
+  rel_72 -> "healthcare";
+
+  rel_73 [shape=diamond, style=filled, color=orange, label="transforms"];
+  "encoder–decoder transformer" -> rel_73;
+  "seq2seq model" -> rel_73;
+  rel_73 -> "structured output";
+
+  rel_74 [shape=diamond, style=filled, color=orange, label="are_largest"];
+  "closed kgs" -> rel_74;
+  "dbpedia" -> rel_74;
+  rel_74 -> "entity";
+
+  rel_75 [shape=diamond, style=filled, color=orange, label="automates"];
+  "llm" -> rel_75;
+  "entity extraction" -> rel_75;
+  rel_75 -> "kg construction";
+
+  rel_76 [shape=diamond, style=filled, color=orange, label="optimizes"];
+  "evolutionary computation" -> rel_76;
+  rel_76 -> "graph structure";
+
+  rel_77 [shape=diamond, style=filled, color=orange, label="define"];
+  "inclusion criteria" -> rel_77;
+  "exclusion criteria" -> rel_77;
+  rel_77 -> "paper selection";
+
+  rel_78 [shape=diamond, style=filled, color=orange, label="reduce"];
+  "exclusion criteria" -> rel_78;
+  "inclusion criteria" -> rel_78;
+  rel_78 -> "total paper";
+
+  rel_79 [shape=diamond, style=filled, color=orange, label="provides"];
+  "full-text review" -> rel_79;
+  rel_79 -> "clarification";
+
+  rel_80 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "knowledge graph" -> rel_80;
+  "graph neural network" -> rel_80;
+  rel_80 -> "recommender system";
+
+  rel_81 [shape=diamond, style=filled, color=orange, label="extracts"];
+  "llm" -> rel_81;
+  "healthcare" -> rel_81;
+  rel_81 -> "insight";
+
+  rel_82 [shape=diamond, style=filled, color=orange, label="dominate"];
+  "hybrid model" -> rel_82;
+  rel_82 -> "research";
+
+  rel_83 [shape=diamond, style=filled, color=orange, label="leads_to"];
+  "initial screening" -> rel_83;
+  rel_83 -> "shortlisted paper";
+
+  rel_84 [shape=diamond, style=filled, color=orange, label="drives"];
+  "llm" -> rel_84;
+  "kg" -> rel_84;
+  rel_84 -> "innovation";
+
+  rel_85 [shape=diamond, style=filled, color=orange, label="enables"];
+  "kg" -> rel_85;
+  "llm" -> rel_85;
+  rel_85 -> "data governance";
+
+  rel_86 [shape=diamond, style=filled, color=orange, label="improves"];
+  "clustering" -> rel_86;
+  "similarity graph" -> rel_86;
+  rel_86 -> "entity resolution";
+
+  rel_87 [shape=diamond, style=filled, color=orange, label="integrates"];
+  "llm" -> rel_87;
+  "kg" -> rel_87;
+  rel_87 -> "knowledge";
+
+  rel_88 [shape=diamond, style=filled, color=orange, label="supports"];
+  "kg" -> rel_88;
+  "llm" -> rel_88;
+  rel_88 -> "output accuracy";
+
+  rel_89 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "kg" -> rel_89;
+  "xai" -> rel_89;
+  rel_89 -> "transparency";
+  rel_89 -> "trust";
+
+  rel_90 [shape=diamond, style=filled, color=orange, label="builds"];
+  "llm" -> rel_90;
+  "kgs" -> rel_90;
+  rel_90 -> "domain-specific kgs";
+
+  rel_91 [shape=diamond, style=filled, color=orange, label="enables"];
+  "kgs" -> rel_91;
+  "llm" -> rel_91;
+  rel_91 -> "insight";
+
+  rel_92 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "kgs" -> rel_92;
+  "llm" -> rel_92;
+  rel_92 -> "output";
+
+  rel_93 [shape=diamond, style=filled, color=orange, label="dominates"];
+  "dka setup" -> rel_93;
+  rel_93 -> "retrieval-based system";
+
+  rel_94 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "kgs" -> rel_94;
+  "llm" -> rel_94;
+  rel_94 -> "performance";
+
+  rel_95 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "kgs" -> rel_95;
+  "llm" -> rel_95;
+  rel_95 -> "traceability";
+
+  rel_96 [shape=diamond, style=filled, color=orange, label="enhance"];
+  "kgs" -> rel_96;
+  "llm" -> rel_96;
+  rel_96 -> "interpretability";
+
+  rel_97 [shape=diamond, style=filled, color=orange, label="improves"];
+  "llm" -> rel_97;
+  "kgs" -> rel_97;
+  rel_97 -> "explainability";
+
+  rel_98 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kgs" -> rel_98;
+  "llm" -> rel_98;
+  rel_98 -> "output";
+
+  rel_99 [shape=diamond, style=filled, color=orange, label="integrate"];
+  "llm" -> rel_99;
+  "kgs" -> rel_99;
+  rel_99 -> "generative ai";
+
+  rel_100 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "kgs" -> rel_100;
+  "llm" -> rel_100;
+  rel_100 -> "factual error";
+
+  rel_101 [shape=diamond, style=filled, color=orange, label="will_be_useful"];
+  "comparison criteria" -> rel_101;
+  "methodology" -> rel_101;
+  rel_101 -> "evaluating approach";
+
+  rel_102 [shape=diamond, style=filled, color=orange, label="supports"];
+  "llm" -> rel_102;
+  "kgs" -> rel_102;
+  rel_102 -> "entity extraction";
+
+  rel_103 [shape=diamond, style=filled, color=orange, label="unlock"];
+  "llm" -> rel_103;
+  "kgs" -> rel_103;
+  rel_103 -> "new possibility";
+
+  rel_104 [shape=diamond, style=filled, color=orange, label="develops"];
+  "multimodal integration" -> rel_104;
+  "kgs" -> rel_104;
+  rel_104 -> "framework";
+
+  rel_105 [shape=diamond, style=filled, color=orange, label="retrieves"];
+  "rag" -> rel_105;
+  "kgs" -> rel_105;
+  rel_105 -> "subgraph";
+
+  rel_106 [shape=diamond, style=filled, color=orange, label="provides"];
+  "kgs" -> rel_106;
+  rel_106 -> "structured knowledge";
+
+  rel_107 [shape=diamond, style=filled, color=orange, label="extracts"];
+  "image2triplets" -> rel_107;
+  "computer vision technique" -> rel_107;
+  rel_107 -> "visual relationship";
+
+  rel_108 [shape=diamond, style=filled, color=orange, label="aids"];
+  "knowledge graph" -> rel_108;
+  "llm" -> rel_108;
+  rel_108 -> "esg question-answering";
+
+  rel_109 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "llm" -> rel_109;
+  "knowledge graph" -> rel_109;
+  rel_109 -> "task-oriented dialogue system";
+
+  rel_110 [shape=diamond, style=filled, color=orange, label="supports"];
+  "llm" -> rel_110;
+  "knowledge graph" -> rel_110;
+  rel_110 -> "automated model generation";
+
+  rel_111 [shape=diamond, style=filled, color=orange, label="creates"];
+  "knowledge graph" -> rel_111;
+  "rag" -> rel_111;
+  rel_111 -> "conference knowledge graph";
+
+  rel_112 [shape=diamond, style=filled, color=orange, label="captures"];
+  "conditional functional dependency" -> rel_112;
+  rel_112 -> "data inconsistency";
+
+  rel_113 [shape=diamond, style=filled, color=orange, label="address"];
+  "llm" -> rel_113;
+  "knowledge graph" -> rel_113;
+  rel_113 -> "explainability";
+
+  rel_114 [shape=diamond, style=filled, color=orange, label="improve"];
+  "knowledge graph" -> rel_114;
+  rel_114 -> "llm application";
+
+  rel_115 [shape=diamond, style=filled, color=orange, label="handles"];
+  "conflict resolution" -> rel_115;
+  rel_115 -> "inconsistency";
+
+  rel_116 [shape=diamond, style=filled, color=orange, label="improves"];
+  "medical kgs" -> rel_116;
+  "llm" -> rel_116;
+  rel_116 -> "reliability";
+
+  rel_117 [shape=diamond, style=filled, color=orange, label="bridges"];
+  "xai" -> rel_117;
+  "llm" -> rel_117;
+  rel_117 -> "interpretability gap";
+
+  rel_118 [shape=diamond, style=filled, color=orange, label="improves"];
+  "xai" -> rel_118;
+  "llm" -> rel_118;
+  rel_118 -> "interpretability";
+
+  rel_119 [shape=diamond, style=filled, color=orange, label="pose"];
+  "llm" -> rel_119;
+  "xai" -> rel_119;
+  rel_119 -> "trust challenge";
+
+  rel_120 [shape=diamond, style=filled, color=orange, label="automate"];
+  "llm" -> rel_120;
+  rel_120 -> "kg construction";
+
+  rel_121 [shape=diamond, style=filled, color=orange, label="construct"];
+  "llm" -> rel_121;
+  rel_121 -> "kgs";
+
+  rel_122 [shape=diamond, style=filled, color=orange, label="create"];
+  "llm" -> rel_122;
+  rel_122 -> "trust issue";
+
+  rel_123 [shape=diamond, style=filled, color=orange, label="generate"];
+  "llm" -> rel_123;
+  rel_123 -> "structured kgs";
+
+  rel_124 [shape=diamond, style=filled, color=orange, label="support"];
+  "llm" -> rel_124;
+  rel_124 -> "kg construction";
+
+  rel_125 [shape=diamond, style=filled, color=orange, label="transform"];
+  "llm" -> rel_125;
+  rel_125 -> "kgs";
+
+  rel_126 [shape=diamond, style=filled, color=orange, label="aligns with"];
+  "paper" -> rel_126;
+  "metadata" -> rel_126;
+  rel_126 -> "research scope";
+
+  rel_127 [shape=diamond, style=filled, color=orange, label="guides"];
+  "prompt engineering" -> rel_127;
+  rel_127 -> "llm extraction";
+
+  rel_128 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "contrastive learning" -> rel_128;
+  rel_128 -> "accuracy";
+
+  rel_129 [shape=diamond, style=filled, color=orange, label="build"];
+  "rag system" -> rel_129;
+  rel_129 -> "kgs";
+
+  rel_130 [shape=diamond, style=filled, color=orange, label="guide"];
+  "research question" -> rel_130;
+  rel_130 -> "paper evaluation";
+
+  rel_131 [shape=diamond, style=filled, color=orange, label="enables"];
+  "xai" -> rel_131;
+  rel_131 -> "trust";
+  rel_131 -> "transparency";
+
+  rel_132 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "xai" -> rel_132;
+  rel_132 -> "explainability";
+
+  rel_133 [shape=diamond, style=filled, color=orange, label="surpasses"];
+  "advanced technique" -> rel_133;
+  rel_133 -> "existing method";
+
+  rel_134 [shape=diamond, style=filled, color=orange, label="improves"];
+  "convolutional neural network" -> rel_134;
+  "relation extraction" -> rel_134;
+  rel_134 -> "relation classification";
+
+  rel_135 [shape=diamond, style=filled, color=orange, label="enables"];
+  "deep cognitive reasoning network" -> rel_135;
+  rel_135 -> "multi-hop question answering";
+
+  rel_136 [shape=diamond, style=filled, color=orange, label="reads"];
+  "key-value memory network" -> rel_136;
+  "document" -> rel_136;
+  rel_136 -> "information";
+
+  rel_137 [shape=diamond, style=filled, color=orange, label="forms"];
+  "svo triple" -> rel_137;
+  "knowledge bas" -> rel_137;
+  rel_137 -> "knowledge graph";
+
+  rel_138 [shape=diamond, style=filled, color=orange, label="captures"];
+  "sentence embedding" -> rel_138;
+  "path embedding" -> rel_138;
+  rel_138 -> "meaning";
+
+  rel_139 [shape=diamond, style=filled, color=orange, label="improves"];
+  "relative distance" -> rel_139;
+  "sentence embedding" -> rel_139;
+  rel_139 -> "answer extraction";
+
+  rel_140 [shape=diamond, style=filled, color=orange, label="verifies"];
+  "katara" -> rel_140;
+  "crowdsourcing" -> rel_140;
+  rel_140 -> "data value";
+
+  rel_141 [shape=diamond, style=filled, color=orange, label="updates"];
+  "human label" -> rel_141;
+  "active supervision" -> rel_141;
+  rel_141 -> "rule parameter";
+
+  rel_142 [shape=diamond, style=filled, color=orange, label="composes"];
+  "active supervision" -> rel_142;
+  rel_142 -> "residual error";
+
+  rel_143 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "annotation budget" -> rel_143;
+  rel_143 -> "error rate";
+
+  rel_144 [shape=diamond, style=filled, color=orange, label="improves"];
+  "compact prompt tuning" -> rel_144;
+  "llm" -> rel_144;
+  rel_144 -> "external knowledge consumption";
+
+  rel_145 [shape=diamond, style=filled, color=orange, label="optimizes"];
+  "database indexing" -> rel_145;
+  "monte carlo tree search" -> rel_145;
+  rel_145 -> "graph neural network";
+
+  rel_146 [shape=diamond, style=filled, color=orange, label="deliver"];
+  "early-stage query" -> rel_146;
+  rel_146 -> "largest reduction";
+
+  rel_147 [shape=diamond, style=filled, color=orange, label="harms"];
+  "exploration term" -> rel_147;
+  rel_147 -> "policy diversity";
+
+  rel_148 [shape=diamond, style=filled, color=orange, label="used_for"];
+  "human annotation" -> rel_148;
+  rel_148 -> "off-policy update";
+
+  rel_149 [shape=diamond, style=filled, color=orange, label="increases"];
+  "human involvement" -> rel_149;
+  rel_149 -> "sample efficiency";
+  rel_149 -> "correctness";
+
+  rel_150 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "human query" -> rel_150;
+  rel_150 -> "expected predictive entropy";
+
+  rel_151 [shape=diamond, style=filled, color=orange, label="establishes"];
+  "inner optimization" -> rel_151;
+  rel_151 -> "stationary convergence";
+
+  rel_152 [shape=diamond, style=filled, color=orange, label="improves"];
+  "intermediate supervision signal" -> rel_152;
+  rel_152 -> "multi-hop question answering";
+
+  rel_153 [shape=diamond, style=filled, color=orange, label="arise"];
+  "knowledge-graph incompleteness" -> rel_153;
+  rel_153 -> "residual error mass";
+
+  rel_154 [shape=diamond, style=filled, color=orange, label="approximates"];
+  "neural entropy predictor" -> rel_154;
+  rel_154 -> "information gain";
+
+  rel_155 [shape=diamond, style=filled, color=orange, label="increases"];
+  "progressive widening" -> rel_155;
+  rel_155 -> "cost";
+
+  rel_156 [shape=diamond, style=filled, color=orange, label="tends"];
+  "search temperature" -> rel_156;
+  rel_156 -> "probability mass";
+
+  rel_157 [shape=diamond, style=filled, color=orange, label="satisfies"];
+  "soft tree policy" -> rel_157;
+  rel_157 -> "probability mass";
+
+  rel_158 [shape=diamond, style=filled, color=orange, label="have"];
+  "stochastic gradient estimator" -> rel_158;
+  rel_158 -> "bounded variance";
+
+  rel_159 [shape=diamond, style=filled, color=orange, label="affects"];
+  "structure-encoding strategy" -> rel_159;
+  rel_159 -> "sensitivity";
+
+  rel_160 [shape=diamond, style=filled, color=orange, label="implies"];
+  "sub-gaussianity" -> rel_160;
+  rel_160 -> "hoeffding-type concentration";
+
+  rel_161 [shape=diamond, style=filled, color=orange, label="produces"];
+  "symbolic consistency" -> rel_161;
+  rel_161 -> "stable solution";
+
+  rel_162 [shape=diamond, style=filled, color=orange, label="lead to"];
+  "systematic bia" -> rel_162;
+  rel_162 -> "missed oracle invocation";
+
+  rel_163 [shape=diamond, style=filled, color=orange, label="improves"];
+  "pog" -> rel_163;
+  "accuracy" -> rel_163;
+  rel_163 -> "accuracy";
+
+  rel_164 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "branchreduced selection" -> rel_164;
+  "graph structure" -> rel_164;
+  rel_164 -> "token usage";
+
+  rel_165 [shape=diamond, style=filled, color=orange, label="indicates"];
+  "connected entity" -> rel_165;
+  "relation" -> rel_165;
+  rel_165 -> "tail or head";
+
+  rel_166 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "external knowledge" -> rel_166;
+  "knowledge graph" -> rel_166;
+  rel_166 -> "reasoning task";
+
+  rel_167 [shape=diamond, style=filled, color=orange, label="serves as"];
+  "freebase" -> rel_167;
+  rel_167 -> "knowledge graph";
+
+  rel_168 [shape=diamond, style=filled, color=orange, label="demonstrates"];
+  "fuzzy selection" -> rel_168;
+  "pog-e" -> rel_168;
+  rel_168 -> "strong performance";
+
+  rel_169 [shape=diamond, style=filled, color=orange, label="improves"];
+  "graph pruning" -> rel_169;
+  "path pruning" -> rel_169;
+  rel_169 -> "graph structure";
+
+  rel_170 [shape=diamond, style=filled, color=orange, label="integrates"];
+  "kg" -> rel_170;
+  "llm" -> rel_170;
+  rel_170 -> "knowledge";
+
+  rel_171 [shape=diamond, style=filled, color=orange, label="supplements"];
+  "llm" -> rel_171;
+  "kg" -> rel_171;
+  rel_171 -> "reasoning";
+
+  rel_172 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "pog" -> rel_172;
+  "kg" -> rel_172;
+  rel_172 -> "computational cost";
+
+  rel_173 [shape=diamond, style=filled, color=orange, label="offer"];
+  "knowledge graph" -> rel_173;
+  "kgs" -> rel_173;
+  rel_173 -> "source of knowledge";
+
+  rel_174 [shape=diamond, style=filled, color=orange, label="provides"];
+  "kgs" -> rel_174;
+  "knowledge" -> rel_174;
+  rel_174 -> "structured knowledge";
+
+  rel_175 [shape=diamond, style=filled, color=orange, label="enables"];
+  "pog" -> rel_175;
+  "kgs" -> rel_175;
+  rel_175 -> "interpretable reasoning";
+
+  rel_176 [shape=diamond, style=filled, color=orange, label="utilizes"];
+  "llm" -> rel_176;
+  "knowledge graph" -> rel_176;
+  rel_176 -> "entity path";
+
+  rel_177 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge graph" -> rel_177;
+  "llm" -> rel_177;
+  rel_177 -> "reasoning";
+
+  rel_178 [shape=diamond, style=filled, color=orange, label="combines"];
+  "pog" -> rel_178;
+  "llm" -> rel_178;
+  rel_178 -> "structured information";
+
+  rel_179 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "pog" -> rel_179;
+  "llm" -> rel_179;
+  rel_179 -> "llm call cost";
+
+  rel_180 [shape=diamond, style=filled, color=orange, label="improves"];
+  "external evidence" -> rel_180;
+  "llm" -> rel_180;
+  rel_180 -> "kg fact-checking";
+
+  rel_181 [shape=diamond, style=filled, color=orange, label="supports"];
+  "pog prompt" -> rel_181;
+  "llm" -> rel_181;
+  rel_181 -> "path understanding";
+
+  rel_182 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "pog" -> rel_182;
+  "llm" -> rel_182;
+  rel_182 -> "reasoning";
+
+  rel_183 [shape=diamond, style=filled, color=orange, label="increases"];
+  "path summarization" -> rel_183;
+  "pog-e" -> rel_183;
+  rel_183 -> "accuracy";
+
+  rel_184 [shape=diamond, style=filled, color=orange, label="combines"];
+  "data fusion" -> rel_184;
+  rel_184 -> "information";
+
+  rel_185 [shape=diamond, style=filled, color=orange, label="relies on"];
+  "plan-retrieval-answering method" -> rel_185;
+  rel_185 -> "reasoning ability";
+
+  rel_186 [shape=diamond, style=filled, color=orange, label="compares"];
+  "pog" -> rel_186;
+  "pog-e" -> rel_186;
+  rel_186 -> "accuracy";
+
+  rel_187 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "summary prompt" -> rel_187;
+  "pog" -> rel_187;
+  rel_187 -> "llm hallucination";
+
+  rel_188 [shape=diamond, style=filled, color=orange, label="explores"];
+  "pog-e" -> rel_188;
+  rel_188 -> "novel path";
+
+  rel_189 [shape=diamond, style=filled, color=orange, label="achieves"];
+  "pog" -> rel_189;
+  rel_189 -> "accuracy";
+
+  rel_190 [shape=diamond, style=filled, color=orange, label="improves"];
+  "pog" -> rel_190;
+  rel_190 -> "interpretability";
+  rel_190 -> "faithfulness";
+
+  rel_191 [shape=diamond, style=filled, color=orange, label="creates"];
+  "data integration" -> rel_191;
+  "entity linking" -> rel_191;
+  rel_191 -> "single representation";
+
+  rel_192 [shape=diamond, style=filled, color=orange, label="compares with"];
+  "sota" -> rel_192;
+  rel_192 -> "previous method";
+
+  rel_193 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_193;
+  "data integration" -> rel_193;
+  rel_193 -> "data science application";
+
+  rel_194 [shape=diamond, style=filled, color=orange, label="encourages"];
+  "radar" -> rel_194;
+  "discriminative reasoning" -> rel_194;
+  rel_194 -> "robust semantic";
+
+  rel_195 [shape=diamond, style=filled, color=orange, label="improves"];
+  "llm" -> rel_195;
+  "data integration" -> rel_195;
+  rel_195 -> "kg construction";
+
+  rel_196 [shape=diamond, style=filled, color=orange, label="replaces"];
+  "representation" -> rel_196;
+  "inference" -> rel_196;
+  rel_196 -> "decoding";
+
+  rel_197 [shape=diamond, style=filled, color=orange, label="validates"];
+  "information-theoretic probe" -> rel_197;
+  "radar" -> rel_197;
+  rel_197 -> "mutual information";
+
+  rel_198 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "kg construction" -> rel_198;
+  "data mining" -> rel_198;
+  rel_198 -> "information extraction";
+
+  rel_199 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "representation learning" -> rel_199;
+  "knowledge graph" -> rel_199;
+  rel_199 -> "inference";
+
+  rel_200 [shape=diamond, style=filled, color=orange, label="computes"];
+  "data profiling" -> rel_200;
+  rel_200 -> "statistical information";
+
+  rel_201 [shape=diamond, style=filled, color=orange, label="is second to"];
+  "kopa" -> rel_201;
+  "radar" -> rel_201;
+  rel_201 -> "uml";
+
+  rel_202 [shape=diamond, style=filled, color=orange, label="achieves"];
+  "radar" -> rel_202;
+  "link prediction" -> rel_202;
+  rel_202 -> "best mrr";
+
+  rel_203 [shape=diamond, style=filled, color=orange, label="improves"];
+  "human interaction" -> rel_203;
+  "data quality" -> rel_203;
+  rel_203 -> "quality";
+
+  rel_204 [shape=diamond, style=filled, color=orange, label="may introduce"];
+  "optimization noise" -> rel_204;
+  rel_204 -> "stronger learning signal";
+
+  rel_205 [shape=diamond, style=filled, color=orange, label="aligns with"];
+  "reinforcement learning" -> rel_205;
+  "sft" -> rel_205;
+  rel_205 -> "global outcome";
+
+  rel_206 [shape=diamond, style=filled, color=orange, label="aims_at"];
+  "kg construction pipeline" -> rel_206;
+  "data quality" -> rel_206;
+  rel_206 -> "high degree";
+
+  rel_207 [shape=diamond, style=filled, color=orange, label="relevant_to"];
+  "track" -> rel_207;
+  "artist" -> rel_207;
+  "medium" -> rel_207;
+  rel_207 -> "update";
+
+  rel_208 [shape=diamond, style=filled, color=orange, label="creates"];
+  "artist" -> rel_208;
+  rel_208 -> "musicartist";
+
+  rel_209 [shape=diamond, style=filled, color=orange, label="affects"];
+  "data quality" -> rel_209;
+  "kg construction" -> rel_209;
+  rel_209 -> "blind spot";
+
+  rel_210 [shape=diamond, style=filled, color=orange, label="defines"];
+  "artist" -> rel_210;
+  rel_210 -> "musicbrainz rdf";
+
+  rel_211 [shape=diamond, style=filled, color=orange, label="generates"];
+  "artist" -> rel_211;
+  rel_211 -> "uri";
+
+  rel_212 [shape=diamond, style=filled, color=orange, label="makes"];
+  "artist" -> rel_212;
+  rel_212 -> "releasegroup";
+
+  rel_213 [shape=diamond, style=filled, color=orange, label="produces"];
+  "artist" -> rel_213;
+  rel_213 -> "musicartist";
+
+  rel_214 [shape=diamond, style=filled, color=orange, label="produces"];
+  "artist" -> rel_214;
+  rel_214 -> "solomusicartist";
+
+  rel_215 [shape=diamond, style=filled, color=orange, label="transforms"];
+  "optional function" -> rel_215;
+  "attribute" -> rel_215;
+  rel_215 -> "value";
+
+  rel_216 [shape=diamond, style=filled, color=orange, label="maintains"];
+  "changeset" -> rel_216;
+  "formal framework" -> rel_216;
+  rel_216 -> "rdb2rdf view";
+
+  rel_217 [shape=diamond, style=filled, color=orange, label="publish"];
+  "changeset" -> rel_217;
+  "linked open data" -> rel_217;
+  rel_217 -> "materialized rdf view";
+
+  rel_218 [shape=diamond, style=filled, color=orange, label="is"];
+  "cookin’s on 3 b." -> rel_218;
+  "musicartist" -> rel_218;
+  rel_218 -> "this girl";
+
+  rel_219 [shape=diamond, style=filled, color=orange, label="integrate"];
+  "enterprise knowledge graph" -> rel_219;
+  "data source" -> rel_219;
+  rel_219 -> "comprehensive dataspace";
+
+  rel_220 [shape=diamond, style=filled, color=orange, label="applies"];
+  "transformation rule" -> rel_220;
+  "database state" -> rel_220;
+  rel_220 -> "triple";
+
+  rel_221 [shape=diamond, style=filled, color=orange, label="determines"];
+  "update" -> rel_221;
+  "database state" -> rel_221;
+  rel_221 -> "changeset";
+
+  rel_222 [shape=diamond, style=filled, color=orange, label="adopts"];
+  "transformation rule" -> rel_222;
+  "datalog" -> rel_222;
+  rel_222 -> "query";
+
+  rel_223 [shape=diamond, style=filled, color=orange, label="is_a"];
+  "dc:title" -> rel_223;
+  rel_223 -> "owl:datatypeproperty";
+
+  rel_224 [shape=diamond, style=filled, color=orange, label="combines"];
+  "inserted tuple" -> rel_224;
+  "deleted tuple" -> rel_224;
+  rel_224 -> "current database state";
+
+  rel_225 [shape=diamond, style=filled, color=orange, label="corresponds to"];
+  "deletion component" -> rel_225;
+  "pivot tuple" -> rel_225;
+  rel_225 -> "tuples in d";
+
+  rel_226 [shape=diamond, style=filled, color=orange, label="focuses on"];
+  "entity resolution" -> rel_226;
+  "data source" -> rel_226;
+  rel_226 -> "1-1 correspondence";
+
+  rel_227 [shape=diamond, style=filled, color=orange, label="is_a"];
+  "foaf:name" -> rel_227;
+  rel_227 -> "owl:datatypeproperty";
+
+  rel_228 [shape=diamond, style=filled, color=orange, label="includes"];
+  "formal framework" -> rel_228;
+  rel_228 -> "rule language";
+
+  rel_229 [shape=diamond, style=filled, color=orange, label="supports"];
+  "formalism" -> rel_229;
+  rel_229 -> "automatic construction";
+
+  rel_230 [shape=diamond, style=filled, color=orange, label="calls"];
+  "trigger" -> rel_230;
+  "function" -> rel_230;
+  rel_230 -> "trg_compute_delta_r_stmt";
+
+  rel_231 [shape=diamond, style=filled, color=orange, label="made"];
+  "kung" -> rel_231;
+  "musicartist" -> rel_231;
+  rel_231 -> "this girl";
+
+  rel_232 [shape=diamond, style=filled, color=orange, label="is"];
+  "kylie auldist" -> rel_232;
+  "musicartist" -> rel_232;
+  rel_232 -> "this girl";
+
+  rel_233 [shape=diamond, style=filled, color=orange, label="requires"];
+  "materialized rdb2rdf view" -> rel_233;
+  rel_233 -> "continuous maintenance";
+
+  rel_234 [shape=diamond, style=filled, color=orange, label="references"];
+  "track" -> rel_234;
+  "medium" -> rel_234;
+  rel_234 -> "mid";
+
+  rel_235 [shape=diamond, style=filled, color=orange, label="is_a"];
+  "mo:duration" -> rel_235;
+  rel_235 -> "owl:datatypeproperty";
+
+  rel_236 [shape=diamond, style=filled, color=orange, label="is_a"];
+  "mo:track_count" -> rel_236;
+  rel_236 -> "owl:datatypeproperty";
+
+  rel_237 [shape=diamond, style=filled, color=orange, label="has_genre"];
+  "music artist" -> rel_237;
+  rel_237 -> "genre";
+
+  rel_238 [shape=diamond, style=filled, color=orange, label="makes"];
+  "music artist" -> rel_238;
+  rel_238 -> "thing";
+
+  rel_239 [shape=diamond, style=filled, color=orange, label="influence"];
+  "integration order" -> rel_239;
+  "data source" -> rel_239;
+  rel_239 -> "final quality";
+
+  rel_240 [shape=diamond, style=filled, color=orange, label="satisfies"];
+  "rdb2rdf view" -> rel_240;
+  "object-preserving property" -> rel_240;
+  rel_240 -> "base entity";
+
+  rel_241 [shape=diamond, style=filled, color=orange, label="defines"];
+  "otr" -> rel_241;
+  "pivot relation" -> rel_241;
+  rel_241 -> "object property";
+
+  rel_242 [shape=diamond, style=filled, color=orange, label="connects"];
+  "path" -> rel_242;
+  "relation" -> rel_242;
+  rel_242 -> "relation";
+
+  rel_243 [shape=diamond, style=filled, color=orange, label="is related to"];
+  "tuple" -> rel_243;
+  "path" -> rel_243;
+  rel_243 -> "tuple";
+
+  rel_244 [shape=diamond, style=filled, color=orange, label="generates"];
+  "pivot relation" -> rel_244;
+  "rdf triple" -> rel_244;
+  rel_244 -> "subject uri";
+
+  rel_245 [shape=diamond, style=filled, color=orange, label="connects"];
+  "relevant path" -> rel_245;
+  "pivot relation" -> rel_245;
+  rel_245 -> "relation";
+
+  rel_246 [shape=diamond, style=filled, color=orange, label="produces"];
+  "triple" -> rel_246;
+  "pivot relation" -> rel_246;
+  rel_246 -> "duplicate";
+
+  rel_247 [shape=diamond, style=filled, color=orange, label="affects"];
+  "pivot tuple" -> rel_247;
+  "update" -> rel_247;
+  rel_247 -> "triple";
+
+  rel_248 [shape=diamond, style=filled, color=orange, label="guarantees"];
+  "rdb2rdf view" -> rel_248;
+  "transformation rule" -> rel_248;
+  rel_248 -> "object-preserving property";
+
+  rel_249 [shape=diamond, style=filled, color=orange, label="preserves"];
+  "rdb2rdf view" -> rel_249;
+  rel_249 -> "base entity";
+
+  rel_250 [shape=diamond, style=filled, color=orange, label="holds"];
+  "rdfliteral" -> rel_250;
+  "value" -> rel_250;
+  rel_250 -> "literal representation";
+
+  rel_251 [shape=diamond, style=filled, color=orange, label="references"];
+  "recordingtag" -> rel_251;
+  "recording" -> rel_251;
+  rel_251 -> "s id";
+
+  rel_252 [shape=diamond, style=filled, color=orange, label="references"];
+  "recordingtag" -> rel_252;
+  "tag" -> rel_252;
+  rel_252 -> "q id";
+
+  rel_253 [shape=diamond, style=filled, color=orange, label="produces"];
+  "recording" -> rel_253;
+  rel_253 -> "signal";
+
+  rel_254 [shape=diamond, style=filled, color=orange, label="determines"];
+  "source selection" -> rel_254;
+  "data source" -> rel_254;
+  rel_254 -> "relevant subset";
+
+  rel_255 [shape=diamond, style=filled, color=orange, label="tracks"];
+  "record" -> rel_255;
+  rel_255 -> "track";
+
+  rel_256 [shape=diamond, style=filled, color=orange, label="impacts"];
+  "update" -> rel_256;
+  "relation" -> rel_256;
+  rel_256 -> "transformation rule";
+
+  rel_257 [shape=diamond, style=filled, color=orange, label="affects"];
+  "update" -> rel_257;
+  "relation" -> rel_257;
+  rel_257 -> "database state";
+
+  rel_258 [shape=diamond, style=filled, color=orange, label="contains"];
+  "release" -> rel_258;
+  rel_258 -> "track";
+
+  rel_259 [shape=diamond, style=filled, color=orange, label="records"];
+  "release" -> rel_259;
+  rel_259 -> "record";
+
+  rel_260 [shape=diamond, style=filled, color=orange, label="identified_by"];
+  "relevant relation" -> rel_260;
+  "update" -> rel_260;
+  rel_260 -> "relevant tuple";
+
+  rel_261 [shape=diamond, style=filled, color=orange, label="defined_by"];
+  "relevant tuple" -> rel_261;
+  "update" -> rel_261;
+  rel_261 -> "transformation rule";
+
+  rel_262 [shape=diamond, style=filled, color=orange, label="describes"];
+  "tag" -> rel_262;
+  rel_262 -> "genre";
+
+  rel_263 [shape=diamond, style=filled, color=orange, label="is"];
+  "this girl" -> rel_263;
+  "track" -> rel_263;
+  rel_263 -> "record";
+
+  rel_264 [shape=diamond, style=filled, color=orange, label="generates"];
+  "tool" -> rel_264;
+  rel_264 -> "trigger";
+
+  rel_265 [shape=diamond, style=filled, color=orange, label="determines"];
+  "transformation rule" -> rel_265;
+  "update" -> rel_265;
+  rel_265 -> "relevant tuple";
+
+  rel_266 [shape=diamond, style=filled, color=orange, label="executes"];
+  "trigger" -> rel_266;
+  "update" -> rel_266;
+  rel_266 -> "compute changeset";
+
+  rel_267 [shape=diamond, style=filled, color=orange, label="computes"];
+  "trigger" -> rel_267;
+  "update" -> rel_267;
+  rel_267 -> "changeset";
+
+  rel_268 [shape=diamond, style=filled, color=orange, label="applied_to"];
+  "ais-kg theory" -> rel_268;
+  "knowledge graph" -> rel_268;
+  rel_268 -> "completion";
+
+  rel_269 [shape=diamond, style=filled, color=orange, label="improves"];
+  "ais-kg theory" -> rel_269;
+  "knowledge graph" -> rel_269;
+  rel_269 -> "knowledge engineering";
+
+  rel_270 [shape=diamond, style=filled, color=orange, label="applies"];
+  "ais-kg theory" -> rel_270;
+  rel_270 -> "industrial field";
+
+  rel_271 [shape=diamond, style=filled, color=orange, label="constructs"];
+  "attribute implication" -> rel_271;
+  "ais-kg" -> rel_271;
+  rel_271 -> "knowledge graph";
+
+  rel_272 [shape=diamond, style=filled, color=orange, label="implements"];
+  "algorithm" -> rel_272;
+  "augment algorithm" -> rel_272;
+  rel_272 -> "formal context";
+
+  rel_273 [shape=diamond, style=filled, color=orange, label="comprises"];
+  "knowledge graph" -> rel_273;
+  "data" -> rel_273;
+  "relation" -> rel_273;
+  "semantic structure" -> rel_273;
+  rel_273 -> "knowledge graph";
+
+  rel_274 [shape=diamond, style=filled, color=orange, label="studies"];
+  "attribute combination" -> rel_274;
+  rel_274 -> "attribute logic";
+
+  rel_275 [shape=diamond, style=filled, color=orange, label="transforms"];
+  "attribute implication" -> rel_275;
+  "formal context" -> rel_275;
+  "concept lattice" -> rel_275;
+  rel_275 -> "knowledge graph";
+
+  rel_276 [shape=diamond, style=filled, color=orange, label="generates"];
+  "attribute implication" -> rel_276;
+  "formal context" -> rel_276;
+  rel_276 -> "concept lattice";
+
+  rel_277 [shape=diamond, style=filled, color=orange, label="defines"];
+  "concept lattice" -> rel_277;
+  "attribute implication" -> rel_277;
+  rel_277 -> "class";
+
+  rel_278 [shape=diamond, style=filled, color=orange, label="defines"];
+  "attribute implication" -> rel_278;
+  "concept lattice" -> rel_278;
+  rel_278 -> "core class";
+
+  rel_279 [shape=diamond, style=filled, color=orange, label="generates"];
+  "attribute" -> rel_279;
+  "implication" -> rel_279;
+  rel_279 -> "formal context";
+
+  rel_280 [shape=diamond, style=filled, color=orange, label="describes"];
+  "attribute" -> rel_280;
+  "relation" -> rel_280;
+  rel_280 -> "implication";
+
+  rel_281 [shape=diamond, style=filled, color=orange, label="defines"];
+  "class" -> rel_281;
+  "attribute" -> rel_281;
+  rel_281 -> "relation";
+
+  rel_282 [shape=diamond, style=filled, color=orange, label="used_in"];
+  "dataset" -> rel_282;
+  "cn-dbpedia" -> rel_282;
+  rel_282 -> "evaluation";
+
+  rel_283 [shape=diamond, style=filled, color=orange, label="supports"];
+  "cn-dbpedia" -> rel_283;
+  "knowledge extraction" -> rel_283;
+  rel_283 -> "chinese language";
+
+  rel_284 [shape=diamond, style=filled, color=orange, label="focuses on"];
+  "knowledge graph" -> rel_284;
+  "commonsense knowledge graph" -> rel_284;
+  rel_284 -> "reliability";
+
+  rel_285 [shape=diamond, style=filled, color=orange, label="constructs"];
+  "concept lattice" -> rel_285;
+  "formal context" -> rel_285;
+  rel_285 -> "concept";
+
+  rel_286 [shape=diamond, style=filled, color=orange, label="updates"];
+  "incremental algorithm" -> rel_286;
+  "concept lattice" -> rel_286;
+  rel_286 -> "existing concept";
+
+  rel_287 [shape=diamond, style=filled, color=orange, label="represents"];
+  "node" -> rel_287;
+  "concept lattice" -> rel_287;
+  rel_287 -> "concept";
+
+  rel_288 [shape=diamond, style=filled, color=orange, label="is"];
+  "concept lattice" -> rel_288;
+  "partial order relation" -> rel_288;
+  rel_288 -> "set";
+
+  rel_289 [shape=diamond, style=filled, color=orange, label="produces"];
+  "table-filling method" -> rel_289;
+  "concept lattice" -> rel_289;
+  rel_289 -> "formal context";
+
+  rel_290 [shape=diamond, style=filled, color=orange, label="constructs"];
+  "incremental algorithm" -> rel_290;
+  "concept lattice" -> rel_290;
+  rel_290 -> "addintent";
+
+  rel_291 [shape=diamond, style=filled, color=orange, label="mines"];
+  "concept lattice" -> rel_291;
+  rel_291 -> "formal context";
+
+  rel_292 [shape=diamond, style=filled, color=orange, label="defines"];
+  "formal context" -> rel_292;
+  "concept" -> rel_292;
+  rel_292 -> "intent";
+  rel_292 -> "extent";
+
+  rel_293 [shape=diamond, style=filled, color=orange, label="contains"];
+  "node" -> rel_293;
+  "extent" -> rel_293;
+  "intent" -> rel_293;
+  rel_293 -> "children";
+
+  rel_294 [shape=diamond, style=filled, color=orange, label="composes"];
+  "extent" -> rel_294;
+  "intent" -> rel_294;
+  rel_294 -> "concept";
+
+  rel_295 [shape=diamond, style=filled, color=orange, label="generates"];
+  "implication set" -> rel_295;
+  "formal context" -> rel_295;
+  rel_295 -> "object base";
+
+  rel_296 [shape=diamond, style=filled, color=orange, label="develops"];
+  "gutao method" -> rel_296;
+  rel_296 -> "fcatab plug-in";
+
+  rel_297 [shape=diamond, style=filled, color=orange, label="puts forward"];
+  "haav method" -> rel_297;
+  rel_297 -> "semi-automatic ontology construction";
+
+  rel_298 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_298;
+  "knowledge reasoning" -> rel_298;
+  rel_298 -> "knowledge sharing";
+
+  rel_299 [shape=diamond, style=filled, color=orange, label="contribute"];
+  "fact checking" -> rel_299;
+  "knowledge graph" -> rel_299;
+  rel_299 -> "accuracy";
+
+  rel_300 [shape=diamond, style=filled, color=orange, label="integrate_from"];
+  "dbpedia" -> rel_300;
+  "yago" -> rel_300;
+  "nell" -> rel_300;
+  rel_300 -> "wikipedia";
+
+  rel_301 [shape=diamond, style=filled, color=orange, label="applies"];
+  "marek obitko method" -> rel_301;
+  rel_301 -> "formal concept analysi";
+
+  rel_302 [shape=diamond, style=filled, color=orange, label="performs"];
+  "dbpedia" -> rel_302;
+  "yago" -> rel_302;
+  rel_302 -> "consistency check";
+
+  rel_303 [shape=diamond, style=filled, color=orange, label="creates"];
+  "community summary" -> rel_303;
+  "knowledge graph" -> rel_303;
+  rel_303 -> "summary";
+
+  rel_304 [shape=diamond, style=filled, color=orange, label="combines"];
+  "encoded knowledge" -> rel_304;
+  "external knowledge" -> rel_304;
+  rel_304 -> "performance";
+
+  rel_305 [shape=diamond, style=filled, color=orange, label="improves"];
+  "grcomb" -> rel_305;
+  "external knowledge" -> rel_305;
+  rel_305 -> "error correction";
+
+  rel_306 [shape=diamond, style=filled, color=orange, label="contribute"];
+  "internal knowledge" -> rel_306;
+  "external knowledge" -> rel_306;
+  rel_306 -> "llm";
+
+  rel_307 [shape=diamond, style=filled, color=orange, label="improves"];
+  "external knowledge" -> rel_307;
+  rel_307 -> "rejection rate";
+
+  rel_308 [shape=diamond, style=filled, color=orange, label="stores"];
+  "dbpedia" -> rel_308;
+  "yago" -> rel_308;
+  rel_308 -> "version";
+
+  rel_309 [shape=diamond, style=filled, color=orange, label="demonstrates"];
+  "graphrag framework" -> rel_309;
+  rel_309 -> "model overconfidence";
+
+  rel_310 [shape=diamond, style=filled, color=orange, label="improves"];
+  "graphrag" -> rel_310;
+  "knowledge graph" -> rel_310;
+  rel_310 -> "performance";
+
+  rel_311 [shape=diamond, style=filled, color=orange, label="enables"];
+  "knowledge graph" -> rel_311;
+  "rag" -> rel_311;
+  rel_311 -> "improved accuracy";
+
+  rel_312 [shape=diamond, style=filled, color=orange, label="mitigates"];
+  "rag" -> rel_312;
+  "llm" -> rel_312;
+  rel_312 -> "factual error";
+
+  rel_313 [shape=diamond, style=filled, color=orange, label="hinders"];
+  "retrieved document" -> rel_313;
+  "llm" -> rel_313;
+  rel_313 -> "correct answer";
+
+  rel_314 [shape=diamond, style=filled, color=orange, label="attempt"];
+  "llm" -> rel_314;
+  rel_314 -> "provide answer";
+
+  rel_315 [shape=diamond, style=filled, color=orange, label="face"];
+  "rag system" -> rel_315;
+  rel_315 -> "challenge";
+
+  rel_316 [shape=diamond, style=filled, color=orange, label="improves"];
+  "deep learning" -> rel_316;
+  "entity matching" -> rel_316;
+  rel_316 -> "data matching";
+
+  rel_317 [shape=diamond, style=filled, color=orange, label="maps"];
+  "dictionary" -> rel_317;
+  rel_317 -> "entity identifier";
+
+  rel_318 [shape=diamond, style=filled, color=orange, label="categorizes"];
+  "domain-specific kgs" -> rel_318;
+  "method" -> rel_318;
+  rel_318 -> "approach";
+
+  rel_319 [shape=diamond, style=filled, color=orange, label="improves"];
+  "embedding-based method" -> rel_319;
+  "entity alignment" -> rel_319;
+  rel_319 -> "knowledge graph";
+
+  rel_320 [shape=diamond, style=filled, color=orange, label="uses"];
+  "link prediction" -> rel_320;
+  "embedding-based method" -> rel_320;
+  rel_320 -> "shallow embedding";
+
+  rel_321 [shape=diamond, style=filled, color=orange, label="leverages"];
+  "encoder representation" -> rel_321;
+  "transformer" -> rel_321;
+  rel_321 -> "bidirectional transformer";
+
+  rel_322 [shape=diamond, style=filled, color=orange, label="enriches"];
+  "entity fusion" -> rel_322;
+  rel_322 -> "information about an entity";
+
+  rel_323 [shape=diamond, style=filled, color=orange, label="supports"];
+  "entity linking" -> rel_323;
+  "entity resolution" -> rel_323;
+  rel_323 -> "knowledge extraction";
+
+  rel_324 [shape=diamond, style=filled, color=orange, label="is_separate_from"];
+  "kg construction" -> rel_324;
+  "entity resolution" -> rel_324;
+  rel_324 -> "fusion";
+
+  rel_325 [shape=diamond, style=filled, color=orange, label="identifies"];
+  "entity resolution" -> rel_325;
+  rel_325 -> "entity";
+
+  rel_326 [shape=diamond, style=filled, color=orange, label="supports"];
+  "fact-level metadata" -> rel_326;
+  rel_326 -> "value selection";
+
+  rel_327 [shape=diamond, style=filled, color=orange, label="migrates"];
+  "wikidata" -> rel_327;
+  "freebase" -> rel_327;
+  rel_327 -> "wikidata";
+
+  rel_328 [shape=diamond, style=filled, color=orange, label="facilitates"];
+  "graph data model" -> rel_328;
+  "kg construction" -> rel_328;
+  rel_328 -> "data integration";
+
+  rel_329 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "pgm" -> rel_329;
+  "graph theory" -> rel_329;
+  rel_329 -> "understandability";
+
+  rel_330 [shape=diamond, style=filled, color=orange, label="provides"];
+  "graphql" -> rel_330;
+  "rdf" -> rel_330;
+  "pgm" -> rel_330;
+  rel_330 -> "unified query approach";
+
+  rel_331 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "high-quality kgs" -> rel_331;
+  rel_331 -> "effort for maintenance";
+
+  rel_332 [shape=diamond, style=filled, color=orange, label="provides"];
+  "karma" -> rel_332;
+  rel_332 -> "semi-automatic linking";
+
+  rel_333 [shape=diamond, style=filled, color=orange, label="identifies"];
+  "kg construction" -> rel_333;
+  "open challenge" -> rel_333;
+  rel_333 -> "limitation";
+
+  rel_334 [shape=diamond, style=filled, color=orange, label="enabling"];
+  "open-source tool" -> rel_334;
+  "kg construction" -> rel_334;
+  rel_334 -> "kg development";
+
+  rel_335 [shape=diamond, style=filled, color=orange, label="infer"];
+  "kg embedding" -> rel_335;
+  rel_335 -> "type information";
+
+  rel_336 [shape=diamond, style=filled, color=orange, label="influences"];
+  "kg purpose" -> rel_336;
+  "method" -> rel_336;
+  rel_336 -> "construction";
+
+  rel_337 [shape=diamond, style=filled, color=orange, label="is_a"];
+  "knowledge graph" -> rel_337;
+  "kg" -> rel_337;
+  rel_337 -> "graph";
+
+  rel_338 [shape=diamond, style=filled, color=orange, label="infers"];
+  "kg" -> rel_338;
+  "reasoning engine" -> rel_338;
+  rel_338 -> "implicit knowledge";
+
+  rel_339 [shape=diamond, style=filled, color=orange, label="classifies"];
+  "kg-bert" -> rel_339;
+  "triple" -> rel_339;
+  rel_339 -> "link";
+  rel_339 -> "relation";
+
+  rel_340 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kgs" -> rel_340;
+  "llm" -> rel_340;
+  rel_340 -> "information";
+
+  rel_341 [shape=diamond, style=filled, color=orange, label="utilizes"];
+  "factcheck" -> rel_341;
+  "llm" -> rel_341;
+  rel_341 -> "external evidence";
+
+  rel_342 [shape=diamond, style=filled, color=orange, label="represents"];
+  "snapshot" -> rel_342;
+  "knowledge graph" -> rel_342;
+  rel_342 -> "timestamp";
+
+  rel_343 [shape=diamond, style=filled, color=orange, label="compares"];
+  "predpath" -> rel_343;
+  "factcheck" -> rel_343;
+  rel_343 -> "evaluation goal";
+
+  rel_344 [shape=diamond, style=filled, color=orange, label="helps"];
+  "rdf" -> rel_344;
+  "knowledge graph" -> rel_344;
+  rel_344 -> "data representation";
+
+  rel_345 [shape=diamond, style=filled, color=orange, label="identify"];
+  "knowledge graph" -> rel_345;
+  rel_345 -> "open challenge";
+
+  rel_346 [shape=diamond, style=filled, color=orange, label="organize"];
+  "knowledge graph" -> rel_346;
+  rel_346 -> "patient data";
+
+  rel_347 [shape=diamond, style=filled, color=orange, label="support"];
+  "knowledge graph" -> rel_347;
+  rel_347 -> "data integration";
+
+  rel_348 [shape=diamond, style=filled, color=orange, label="enables"];
+  "language model" -> rel_348;
+  "knowledge integration" -> rel_348;
+  rel_348 -> "automatic knowledge graph completion";
+
+  rel_349 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "knowledge-aware prompt-tuning" -> rel_349;
+  "relation extraction" -> rel_349;
+  rel_349 -> "synergistic optimization";
+
+  rel_350 [shape=diamond, style=filled, color=orange, label="find"];
+  "link prediction" -> rel_350;
+  rel_350 -> "missing relation";
+
+  rel_351 [shape=diamond, style=filled, color=orange, label="leads to"];
+  "rdf" -> rel_351;
+  "linked open data" -> rel_351;
+  rel_351 -> "kgs";
+
+  rel_352 [shape=diamond, style=filled, color=orange, label="generate"];
+  "llm" -> rel_352;
+  rel_352 -> "synthetic dataset";
+
+  rel_353 [shape=diamond, style=filled, color=orange, label="improves"];
+  "llm" -> rel_353;
+  rel_353 -> "matching process";
+
+  rel_354 [shape=diamond, style=filled, color=orange, label="provides"];
+  "machine learning" -> rel_354;
+  rel_354 -> "type recognition";
+
+  rel_355 [shape=diamond, style=filled, color=orange, label="created"];
+  "manual selection process" -> rel_355;
+  rel_355 -> "candidate system";
+
+  rel_356 [shape=diamond, style=filled, color=orange, label="enriches"];
+  "medical background knowledge" -> rel_356;
+  "patient data" -> rel_356;
+  rel_356 -> "clinical decision support";
+
+  rel_357 [shape=diamond, style=filled, color=orange, label="stores"];
+  "metadata repository" -> rel_357;
+  rel_357 -> "metadata";
+
+  rel_358 [shape=diamond, style=filled, color=orange, label="provides"];
+  "provenance" -> rel_358;
+  "metadata" -> rel_358;
+  rel_358 -> "fact-level change";
+
+  rel_359 [shape=diamond, style=filled, color=orange, label="integrates"];
+  "timestamp-based solution" -> rel_359;
+  "metadata" -> rel_359;
+  rel_359 -> "knowledge graph";
+
+  rel_360 [shape=diamond, style=filled, color=orange, label="helps"];
+  "metadata" -> rel_360;
+  rel_360 -> "debugging";
+
+  rel_361 [shape=diamond, style=filled, color=orange, label="evaluate"];
+  "method" -> rel_361;
+  rel_361 -> "quality";
+
+  rel_362 [shape=diamond, style=filled, color=orange, label="aims"];
+  "multi-modal ner" -> rel_362;
+  rel_362 -> "named entity";
+
+  rel_363 [shape=diamond, style=filled, color=orange, label="improves"];
+  "neural method" -> rel_363;
+  rel_363 -> "entity resolution";
+
+  rel_364 [shape=diamond, style=filled, color=orange, label="allows"];
+  "open archives protocol" -> rel_364;
+  rel_364 -> "metadata acquisition";
+
+  rel_365 [shape=diamond, style=filled, color=orange, label="increases"];
+  "open information extraction" -> rel_365;
+  "relation extraction" -> rel_365;
+  rel_365 -> "variety of information";
+
+  rel_366 [shape=diamond, style=filled, color=orange, label="are_in"];
+  "open kg toolset" -> rel_366;
+  rel_366 -> "infancy";
+
+  rel_367 [shape=diamond, style=filled, color=orange, label="focuses_on"];
+  "orkg" -> rel_367;
+  "publication" -> rel_367;
+  rel_367 -> "metadata";
+
+  rel_368 [shape=diamond, style=filled, color=orange, label="adds"];
+  "owl 2" -> rel_368;
+  "rdf" -> rel_368;
+  rel_368 -> "semantic";
+
+  rel_369 [shape=diamond, style=filled, color=orange, label="lowers"];
+  "transformation strategy" -> rel_369;
+  "rdf" -> rel_369;
+  "pgm" -> rel_369;
+  rel_369 -> "usage boundary";
+
+  rel_370 [shape=diamond, style=filled, color=orange, label="competes with"];
+  "pgm" -> rel_370;
+  "rdf" -> rel_370;
+  rel_370 -> "custom model";
+
+  rel_371 [shape=diamond, style=filled, color=orange, label="requires"];
+  "rdf" -> rel_371;
+  "pgm" -> rel_371;
+  rel_371 -> "interoperability";
+
+  rel_372 [shape=diamond, style=filled, color=orange, label="recommend"];
+  "premium data source" -> rel_372;
+  "wikipedia" -> rel_372;
+  rel_372 -> "kg construction";
+
+  rel_373 [shape=diamond, style=filled, color=orange, label="clusters"];
+  "rag" -> rel_373;
+  "giv-f" -> rel_373;
+  rel_373 -> "upper-right quadrant";
+
+  rel_374 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "property matching" -> rel_374;
+  rel_374 -> "entity resolution";
+  rel_374 -> "entity fusion";
+
+  rel_375 [shape=diamond, style=filled, color=orange, label="extends"];
+  "rdf" -> rel_375;
+  "rdf-star" -> rel_375;
+  rel_375 -> "triple structure";
+
+  rel_376 [shape=diamond, style=filled, color=orange, label="defines"];
+  "rdf" -> rel_376;
+  "rdf" -> rel_376;
+  rel_376 -> "semantic structure";
+
+  rel_377 [shape=diamond, style=filled, color=orange, label="depends on"];
+  "trustworthiness" -> rel_377;
+  "source selection" -> rel_377;
+  rel_377 -> "trustworthiness";
+
+  rel_378 [shape=diamond, style=filled, color=orange, label="utilizes"];
+  "spire" -> rel_378;
+  rel_378 -> "llm";
+
+  rel_379 [shape=diamond, style=filled, color=orange, label="reducing"];
+  "giv-f" -> rel_379;
+  "rag" -> rel_379;
+  rel_379 -> "variance";
+
+  rel_380 [shape=diamond, style=filled, color=orange, label="allows"];
+  "triplecheckmate" -> rel_380;
+  rel_380 -> "error evaluation";
+
+  rel_381 [shape=diamond, style=filled, color=orange, label="inspired"];
+  "knowledge fusion" -> rel_381;
+  "data fusion" -> rel_381;
+  rel_381 -> "triple identification";
+
+  rel_382 [shape=diamond, style=filled, color=orange, label="ensures"];
+  "knowledge validation" -> rel_382;
+  "data integrity" -> rel_382;
+  rel_382 -> "factual dispute";
+
+  rel_383 [shape=diamond, style=filled, color=orange, label="emerges"];
+  "design principle" -> rel_383;
+  "kg construction" -> rel_383;
+  rel_383 -> "evolvable kg";
+
+  rel_384 [shape=diamond, style=filled, color=orange, label="improves"];
+  "inferencing algorithm" -> rel_384;
+  "industrial maintenance" -> rel_384;
+  rel_384 -> "knowledge processing";
+
+  rel_385 [shape=diamond, style=filled, color=orange, label="is necessary for"];
+  "industrial maintenance" -> rel_385;
+  "knowledge" -> rel_385;
+  rel_385 -> "comprehensive knowledge";
+
+  rel_386 [shape=diamond, style=filled, color=orange, label="enables"];
+  "learning" -> rel_386;
+  "intelligent system" -> rel_386;
+  rel_386 -> "assistant performance";
+
+  rel_387 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "hybrid retrieval strategy" -> rel_387;
+  rel_387 -> "retrieval quality";
+
+  rel_388 [shape=diamond, style=filled, color=orange, label="focus"];
+  "literature review" -> rel_388;
+  "kgcp" -> rel_388;
+  rel_388 -> "process element";
+
+  rel_389 [shape=diamond, style=filled, color=orange, label="enable"];
+  "knowledge graph" -> rel_389;
+  "kgs" -> rel_389;
+  rel_389 -> "intelligent system";
+
+  rel_390 [shape=diamond, style=filled, color=orange, label="integrate"];
+  "kgs" -> rel_390;
+  "semantic web" -> rel_390;
+  rel_390 -> "heterogeneous information";
+
+  rel_391 [shape=diamond, style=filled, color=orange, label="enables"];
+  "knowledge reasoning" -> rel_391;
+  "knowledge graph" -> rel_391;
+  rel_391 -> "inference";
+
+  rel_392 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_392;
+  "linked data" -> rel_392;
+  rel_392 -> "large organisation";
+
+  rel_393 [shape=diamond, style=filled, color=orange, label="exchanged_for"];
+  "increased latency" -> rel_393;
+  rel_393 -> "enhanced detection";
+
+  rel_394 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_394;
+  "recommender system" -> rel_394;
+  rel_394 -> "technology";
+
+  rel_395 [shape=diamond, style=filled, color=orange, label="promotes"];
+  "semantic web" -> rel_395;
+  "knowledge graph" -> rel_395;
+  rel_395 -> "industry 4.0";
+
+  rel_396 [shape=diamond, style=filled, color=orange, label="improves"];
+  "meta-learning" -> rel_396;
+  rel_396 -> "machine learning";
+
+  rel_397 [shape=diamond, style=filled, color=orange, label="improves"];
+  "personalized reranking" -> rel_397;
+  "user behavior" -> rel_397;
+  rel_397 -> "recommendation";
+
+  rel_398 [shape=diamond, style=filled, color=orange, label="models"];
+  "semantic web" -> rel_398;
+  rel_398 -> "information";
+
+  rel_399 [shape=diamond, style=filled, color=orange, label="labels"];
+  "authorkeyword" -> rel_399;
+  rel_399 -> "publication";
+
+  rel_400 [shape=diamond, style=filled, color=orange, label="contrasts"];
+  "closed-world assumption" -> rel_400;
+  "open-world assumption" -> rel_400;
+  rel_400 -> "knowledge representation";
+
+  rel_401 [shape=diamond, style=filled, color=orange, label="translates"];
+  "dataset builder" -> rel_401;
+  "pkg" -> rel_401;
+  rel_401 -> "dataset";
+
+  rel_402 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "dbpedia" -> rel_402;
+  "iri" -> rel_402;
+  rel_402 -> "metadata availability";
+
+  rel_403 [shape=diamond, style=filled, color=orange, label="transforms"];
+  "kg triple" -> rel_403;
+  "llm" -> rel_403;
+  rel_403 -> "natural language";
+
+  rel_404 [shape=diamond, style=filled, color=orange, label="provides"];
+  "dbpedia" -> rel_404;
+  "rdf" -> rel_404;
+  rel_404 -> "structured information";
+
+  rel_405 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "semantic relation" -> rel_405;
+  "dbpedia" -> rel_405;
+  rel_405 -> "topic-based search";
+
+  rel_406 [shape=diamond, style=filled, color=orange, label="extracts"];
+  "deep neural network" -> rel_406;
+  "nlp" -> rel_406;
+  rel_406 -> "rdf triple";
+
+  rel_407 [shape=diamond, style=filled, color=orange, label="implements"];
+  "r-gcn" -> rel_407;
+  "distmult" -> rel_407;
+  rel_407 -> "model trainer";
+
+  rel_408 [shape=diamond, style=filled, color=orange, label="reconstructs"];
+  "distmult" -> rel_408;
+  rel_408 -> "graph structure";
+
+  rel_409 [shape=diamond, style=filled, color=orange, label="performed_on"];
+  "training" -> rel_409;
+  "evaluation" -> rel_409;
+  rel_409 -> "workstation";
+
+  rel_410 [shape=diamond, style=filled, color=orange, label="causes"];
+  "evaluation_graph" -> rel_410;
+  rel_410 -> "evaluation_time";
+
+  rel_411 [shape=diamond, style=filled, color=orange, label="overcomes"];
+  "geranium architecture" -> rel_411;
+  rel_411 -> "limitation";
+
+  rel_412 [shape=diamond, style=filled, color=orange, label="retrieves"];
+  "geranium platform" -> rel_412;
+  "iri" -> rel_412;
+  rel_412 -> "publication";
+
+  rel_413 [shape=diamond, style=filled, color=orange, label="allows"];
+  "web application" -> rel_413;
+  "geranium platform" -> rel_413;
+  rel_413 -> "user";
+
+  rel_414 [shape=diamond, style=filled, color=orange, label="integrates"];
+  "geranium platform" -> rel_414;
+  rel_414 -> "scholarly data";
+
+  rel_415 [shape=diamond, style=filled, color=orange, label="provide"];
+  "geranium" -> rel_415;
+  "polito knowledge graph" -> rel_415;
+  rel_415 -> "semantic search";
+
+  rel_416 [shape=diamond, style=filled, color=orange, label="leverages"];
+  "geranium" -> rel_416;
+  rel_416 -> "polito knowledge graph";
+
+  rel_417 [shape=diamond, style=filled, color=orange, label="improves"];
+  "gnn" -> rel_417;
+  "link prediction" -> rel_417;
+  rel_417 -> "accuracy";
+
+  rel_418 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kgs" -> rel_418;
+  "graph neural network" -> rel_418;
+  rel_418 -> "recommendation task";
+
+  rel_419 [shape=diamond, style=filled, color=orange, label="improves"];
+  "graph neural network" -> rel_419;
+  rel_419 -> "knowledge graph inference";
+
+  rel_420 [shape=diamond, style=filled, color=orange, label="suggests"];
+  "graph neural network" -> rel_420;
+  rel_420 -> "collaboration opportunity";
+
+  rel_421 [shape=diamond, style=filled, color=orange, label="limits"];
+  "graph_sampling" -> rel_421;
+  rel_421 -> "sample_size";
+
+  rel_422 [shape=diamond, style=filled, color=orange, label="provides"];
+  "iri" -> rel_422;
+  rel_422 -> "pkg";
+
+  rel_423 [shape=diamond, style=filled, color=orange, label="computes"];
+  "kg embedding" -> rel_423;
+  rel_423 -> "recommendation";
+
+  rel_424 [shape=diamond, style=filled, color=orange, label="organize"];
+  "knowledge graph" -> rel_424;
+  "kgs" -> rel_424;
+  rel_424 -> "structured data";
+
+  rel_425 [shape=diamond, style=filled, color=orange, label="models"];
+  "kgs" -> rel_425;
+  "scholarly data" -> rel_425;
+  rel_425 -> "advanced service";
+
+  rel_426 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "knowledge graph-based system" -> rel_426;
+  rel_426 -> "recommendation accuracy";
+
+  rel_427 [shape=diamond, style=filled, color=orange, label="enable"];
+  "knowledge graph" -> rel_427;
+  rel_427 -> "semantic property";
+
+  rel_428 [shape=diamond, style=filled, color=orange, label="enriches"];
+  "metadata" -> rel_428;
+  "semantic topic" -> rel_428;
+  rel_428 -> "kg";
+
+  rel_429 [shape=diamond, style=filled, color=orange, label="are"];
+  "language model" -> rel_429;
+  "knowledge graph" -> rel_429;
+  rel_429 -> "open knowledge graph";
+
+  rel_430 [shape=diamond, style=filled, color=orange, label="evaluate"];
+  "metric" -> rel_430;
+  rel_430 -> "model performance";
+
+  rel_431 [shape=diamond, style=filled, color=orange, label="is saved in"];
+  "polito knowledge graph" -> rel_431;
+  "triplestore" -> rel_431;
+  rel_431 -> "triplestore";
+
+  rel_432 [shape=diamond, style=filled, color=orange, label="provides"];
+  "recommendation system" -> rel_432;
+  "user" -> rel_432;
+  rel_432 -> "recommended publication";
+
+  rel_433 [shape=diamond, style=filled, color=orange, label="suggests"];
+  "recommendation system" -> rel_433;
+  rel_433 -> "research topic";
+
+  rel_434 [shape=diamond, style=filled, color=orange, label="enable"];
+  "scholarly knowledge graph" -> rel_434;
+  rel_434 -> "advanced feature";
+
+  rel_435 [shape=diamond, style=filled, color=orange, label="enables"];
+  "semantic technology" -> rel_435;
+  rel_435 -> "advanced service";
+
+  rel_436 [shape=diamond, style=filled, color=orange, label="represents"];
+  "tmfresource" -> rel_436;
+  rel_436 -> "semantic topic";
+
+  rel_437 [shape=diamond, style=filled, color=orange, label="classifies"];
+  "tmf" -> rel_437;
+  rel_437 -> "abstract";
+
+  rel_438 [shape=diamond, style=filled, color=orange, label="displays"];
+  "viewer module" -> rel_438;
+  rel_438 -> "recommendation";
+
+  rel_439 [shape=diamond, style=filled, color=orange, label="enables"];
+  "automated pipeline" -> rel_439;
+  rel_439 -> "information integration";
+
+  rel_440 [shape=diamond, style=filled, color=orange, label="improves"];
+  "automated pipeline" -> rel_440;
+  rel_440 -> "data preprocessing";
+
+  rel_441 [shape=diamond, style=filled, color=orange, label="supports"];
+  "intelligent reasoning method" -> rel_441;
+  "causal inference" -> rel_441;
+  rel_441 -> "inference task";
+
+  rel_442 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_442;
+  "clinical decision support" -> rel_442;
+  rel_442 -> "diabetic nephropathy";
+
+  rel_443 [shape=diamond, style=filled, color=orange, label="improves"];
+  "dataset" -> rel_443;
+  "spatiotemporal information" -> rel_443;
+  rel_443 -> "performance";
+
+  rel_444 [shape=diamond, style=filled, color=orange, label="verifies"];
+  "dbp15k" -> rel_444;
+  rel_444 -> "performance improvement";
+
+  rel_445 [shape=diamond, style=filled, color=orange, label="evaluates"];
+  "yago" -> rel_445;
+  "dbpedia" -> rel_445;
+  "wikidata" -> rel_445;
+  rel_445 -> "link prediction";
+
+  rel_446 [shape=diamond, style=filled, color=orange, label="provides"];
+  "dbpedia" -> rel_446;
+  "wikidata" -> rel_446;
+  rel_446 -> "spatiotemporal information";
+
+  rel_447 [shape=diamond, style=filled, color=orange, label="drives"];
+  "deep learning" -> rel_447;
+  "natural language processing" -> rel_447;
+  rel_447 -> "kg research";
+
+  rel_448 [shape=diamond, style=filled, color=orange, label="generates"];
+  "deep learning" -> rel_448;
+  "nlp" -> rel_448;
+  rel_448 -> "scientific knowledge graph";
+
+  rel_449 [shape=diamond, style=filled, color=orange, label="leverages"];
+  "relation extraction" -> rel_449;
+  "dependency parsing" -> rel_449;
+  rel_449 -> "subject-relation-object triple";
+
+  rel_450 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "model consensu" -> rel_450;
+  "llm" -> rel_450;
+  rel_450 -> "error";
+
+  rel_451 [shape=diamond, style=filled, color=orange, label="improves"];
+  "multi-model consensu" -> rel_451;
+  "llm" -> rel_451;
+  rel_451 -> "verification accuracy";
+
+  rel_452 [shape=diamond, style=filled, color=orange, label="contributes to"];
+  "ehr data integration" -> rel_452;
+  rel_452 -> "model usability";
+
+  rel_453 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "rag" -> rel_453;
+  "llm" -> rel_453;
+  rel_453 -> "evidence retrieval";
+
+  rel_454 [shape=diamond, style=filled, color=orange, label="fuses"];
+  "entity description" -> rel_454;
+  "type information" -> rel_454;
+  rel_454 -> "knowledge graph";
+
+  rel_455 [shape=diamond, style=filled, color=orange, label="assesses"];
+  "evaluation method" -> rel_455;
+  rel_455 -> "model output";
+
+  rel_456 [shape=diamond, style=filled, color=orange, label="measures"];
+  "intrinsic evaluation" -> rel_456;
+  "extrinsic evaluation" -> rel_456;
+  rel_456 -> "performance of kgs";
+
+  rel_457 [shape=diamond, style=filled, color=orange, label="provides"];
+  "extrinsic evaluation" -> rel_457;
+  rel_457 -> "objective measure";
+
+  rel_458 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "ftl-lm" -> rel_458;
+  "graph topology" -> rel_458;
+  rel_458 -> "knowledge graph learning";
+
+  rel_459 [shape=diamond, style=filled, color=orange, label="introduces"];
+  "graph convolutional network" -> rel_459;
+  "gcn" -> rel_459;
+  rel_459 -> "convolution operation";
+
+  rel_460 [shape=diamond, style=filled, color=orange, label="learns"];
+  "graph neural network" -> rel_460;
+  "gnn" -> rel_460;
+  rel_460 -> "node embedding";
+
+  rel_461 [shape=diamond, style=filled, color=orange, label="handles"];
+  "gnn" -> rel_461;
+  "knowledge graph" -> rel_461;
+  rel_461 -> "heterogeneous graph";
+
+  rel_462 [shape=diamond, style=filled, color=orange, label="organizes"];
+  "graph-based method" -> rel_462;
+  "gnn" -> rel_462;
+  rel_462 -> "entities and relation";
+
+  rel_463 [shape=diamond, style=filled, color=orange, label="supports"];
+  "gnn" -> rel_463;
+  rel_463 -> "knowledge graph learning";
+
+  rel_464 [shape=diamond, style=filled, color=orange, label="mitigates"];
+  "multi-model consensu" -> rel_464;
+  rel_464 -> "error";
+
+  rel_465 [shape=diamond, style=filled, color=orange, label="predicts"];
+  "graphx-net" -> rel_465;
+  "patient data" -> rel_465;
+  rel_465 -> "cancer survival";
+
+  rel_466 [shape=diamond, style=filled, color=orange, label="demonstrates"];
+  "gri- donto system" -> rel_466;
+  rel_466 -> "energy sector";
+
+  rel_467 [shape=diamond, style=filled, color=orange, label="improves"];
+  "gssc" -> rel_467;
+  rel_467 -> "node classification";
+
+  rel_468 [shape=diamond, style=filled, color=orange, label="assesses"];
+  "gtfs madrid" -> rel_468;
+  "mapping tool" -> rel_468;
+  rel_468 -> "transit data";
+
+  rel_469 [shape=diamond, style=filled, color=orange, label="executed"];
+  "open-source llm" -> rel_469;
+  rel_469 -> "ollama";
+
+  rel_470 [shape=diamond, style=filled, color=orange, label="improves"];
+  "interactive optimization" -> rel_470;
+  "model performance" -> rel_470;
+  rel_470 -> "user feedback";
+
+  rel_471 [shape=diamond, style=filled, color=orange, label="supplements"];
+  "iterative rule-guided reasoning" -> rel_471;
+  "reinforcement learning" -> rel_471;
+  rel_471 -> "missing path";
+
+  rel_472 [shape=diamond, style=filled, color=orange, label="involves"];
+  "kg extraction" -> rel_472;
+  rel_472 -> "data preprocessing";
+  rel_472 -> "multimodal extraction";
+
+  rel_473 [shape=diamond, style=filled, color=orange, label="indicates"];
+  "pareto frontier" -> rel_473;
+  rel_473 -> "optimal efficiency";
+
+  rel_474 [shape=diamond, style=filled, color=orange, label="applies"];
+  "kg learning" -> rel_474;
+  rel_474 -> "graph neural network";
+  rel_474 -> "transformer";
+
+  rel_475 [shape=diamond, style=filled, color=orange, label="demonstrate"];
+  "kg model" -> rel_475;
+  rel_475 -> "performance benefit";
+
+  rel_476 [shape=diamond, style=filled, color=orange, label="evaluates"];
+  "knowledge graph" -> rel_476;
+  "kg research" -> rel_476;
+  rel_476 -> "model performance";
+
+  rel_477 [shape=diamond, style=filled, color=orange, label="enables"];
+  "knowledge graph" -> rel_477;
+  "kg" -> rel_477;
+  rel_477 -> "model explainability";
+
+  rel_478 [shape=diamond, style=filled, color=orange, label="improves"];
+  "multi-task learning" -> rel_478;
+  "knowledge graph" -> rel_478;
+  rel_478 -> "recommender system";
+
+  rel_479 [shape=diamond, style=filled, color=orange, label="enables"];
+  "knowledge graph" -> rel_479;
+  "subgraph" -> rel_479;
+  rel_479 -> "question generation";
+
+  rel_480 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "pretrained model" -> rel_480;
+  "knowledge graph" -> rel_480;
+  rel_480 -> "semantic";
+
+  rel_481 [shape=diamond, style=filled, color=orange, label="improves"];
+  "transformer" -> rel_481;
+  "knowledge graph" -> rel_481;
+  rel_481 -> "kg learning";
+
+  rel_482 [shape=diamond, style=filled, color=orange, label="focuses on"];
+  "knowledge guided attention" -> rel_482;
+  rel_482 -> "chemical–disease relationship";
+
+  rel_483 [shape=diamond, style=filled, color=orange, label="improves"];
+  "rag" -> rel_483;
+  rel_483 -> "performance";
+
+  rel_484 [shape=diamond, style=filled, color=orange, label="addresses"];
+  "mucomid" -> rel_484;
+  rel_484 -> "biological knowledge graph";
+
+  rel_485 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "multi-level graph knowledge" -> rel_485;
+  rel_485 -> "contrastive learning";
+
+  rel_486 [shape=diamond, style=filled, color=orange, label="extract"];
+  "multi-task graph convolution network" -> rel_486;
+  rel_486 -> "entities and relation";
+
+  rel_487 [shape=diamond, style=filled, color=orange, label="introduces"];
+  "mutation operator" -> rel_487;
+  rel_487 -> "metric";
+
+  rel_488 [shape=diamond, style=filled, color=orange, label="affects"];
+  "mutation operator" -> rel_488;
+  rel_488 -> "model performance";
+
+  rel_489 [shape=diamond, style=filled, color=orange, label="quantifies"];
+  "pearson correlation" -> rel_489;
+  rel_489 -> "embedding similarity";
+
+  rel_490 [shape=diamond, style=filled, color=orange, label="extracts"];
+  "pharmke" -> rel_490;
+  rel_490 -> "medical entity";
+
+  rel_491 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "poincaré geometry" -> rel_491;
+  rel_491 -> "link prediction";
+
+  rel_492 [shape=diamond, style=filled, color=orange, label="calculates"];
+  "precision" -> rel_492;
+  "recall" -> rel_492;
+  rel_492 -> "f1 score";
+
+  rel_493 [shape=diamond, style=filled, color=orange, label="evaluates"];
+  "precision" -> rel_493;
+  "recall" -> rel_493;
+  rel_493 -> "drug mapping";
+
+  rel_494 [shape=diamond, style=filled, color=orange, label="used for"];
+  "regression metric" -> rel_494;
+  rel_494 -> "numerical prediction task";
+
+  rel_495 [shape=diamond, style=filled, color=orange, label="integrates"];
+  "supervised learning" -> rel_495;
+  "reinforcement learning" -> rel_495;
+  rel_495 -> "link prediction";
+
+  rel_496 [shape=diamond, style=filled, color=orange, label="represents"];
+  "research opportunity" -> rel_496;
+  rel_496 -> "dynamic knowledge update";
+
+  rel_497 [shape=diamond, style=filled, color=orange, label="provides"];
+  "self-attention" -> rel_497;
+  rel_497 -> "low-dimensional embedding";
+
+  rel_498 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "selfkg" -> rel_498;
+  rel_498 -> "labeling cost";
+
+  rel_499 [shape=diamond, style=filled, color=orange, label="improves"];
+  "semi-automatic survey" -> rel_499;
+  rel_499 -> "research synthesi";
+
+  rel_500 [shape=diamond, style=filled, color=orange, label="extracts"];
+  "token classification" -> rel_500;
+  "seq2seq model" -> rel_500;
+  rel_500 -> "engineering fact";
+
+  rel_501 [shape=diamond, style=filled, color=orange, label="causes"];
+  "shifting priority" -> rel_501;
+  rel_501 -> "sharp decrease";
+
+  rel_502 [shape=diamond, style=filled, color=orange, label="outperforms"];
+  "sub-entity embedding model" -> rel_502;
+  rel_502 -> "existing method";
+
+  rel_503 [shape=diamond, style=filled, color=orange, label="captures"];
+  "temporal-structural adaptation network" -> rel_503;
+  rel_503 -> "temporal dependency";
+
+  rel_504 [shape=diamond, style=filled, color=orange, label="adopts"];
+  "uss-graph" -> rel_504;
+  "unsupervised learning" -> rel_504;
+  rel_504 -> "graph data";
+
+  rel_505 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "visual attention mechanism" -> rel_505;
+  rel_505 -> "result interpretation";
+
+  rel_506 [shape=diamond, style=filled, color=orange, label="enables"];
+  "action research" -> rel_506;
+  "c&cb team" -> rel_506;
+  rel_506 -> "solution design";
+
+  rel_507 [shape=diamond, style=filled, color=orange, label="promises"];
+  "addressing challenge" -> rel_507;
+  rel_507 -> "advances in kg construction";
+
+  rel_508 [shape=diamond, style=filled, color=orange, label="enables"];
+  "comment functionality" -> rel_508;
+  "c&cb team" -> rel_508;
+  rel_508 -> "track resource";
+
+  rel_509 [shape=diamond, style=filled, color=orange, label="develop"];
+  "c&cb team" -> rel_509;
+  "dashboard" -> rel_509;
+  rel_509 -> "scikgdash";
+
+  rel_510 [shape=diamond, style=filled, color=orange, label="participated in"];
+  "evaluation session" -> rel_510;
+  "c&cb team" -> rel_510;
+  rel_510 -> "experiment";
+
+  rel_511 [shape=diamond, style=filled, color=orange, label="validate"];
+  "c&cb team" -> rel_511;
+  "mvp" -> rel_511;
+  rel_511 -> "usability";
+
+  rel_512 [shape=diamond, style=filled, color=orange, label="depends on"];
+  "rkg quality" -> rel_512;
+  "c&cb team" -> rel_512;
+  rel_512 -> "user need";
+
+  rel_513 [shape=diamond, style=filled, color=orange, label="forms"];
+  "user story" -> rel_513;
+  "c&cb team" -> rel_513;
+  rel_513 -> "mvp";
+
+  rel_514 [shape=diamond, style=filled, color=orange, label="guides"];
+  "user story" -> rel_514;
+  "c&cb team" -> rel_514;
+  rel_514 -> "prototype development";
+
+  rel_515 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "cleangraph" -> rel_515;
+  "user" -> rel_515;
+  rel_515 -> "data quality";
+
+  rel_516 [shape=diamond, style=filled, color=orange, label="supports"];
+  "dashboard" -> rel_516;
+  "data analysi" -> rel_516;
+  rel_516 -> "content quality assessment";
+
+  rel_517 [shape=diamond, style=filled, color=orange, label="is"];
+  "mvp" -> rel_517;
+  "dashboard" -> rel_517;
+  rel_517 -> "effective solution";
+
+  rel_518 [shape=diamond, style=filled, color=orange, label="supports"];
+  "dashboard" -> rel_518;
+  "mvp" -> rel_518;
+  rel_518 -> "c&cb team";
+
+  rel_519 [shape=diamond, style=filled, color=orange, label="agreed"];
+  "participant" -> rel_519;
+  "dashboard" -> rel_519;
+  rel_519 -> "positive experience";
+
+  rel_520 [shape=diamond, style=filled, color=orange, label="improves"];
+  "repeated participation" -> rel_520;
+  "dashboard" -> rel_520;
+  rel_520 -> "performance";
+
+  rel_521 [shape=diamond, style=filled, color=orange, label="affects"];
+  "dashboard" -> rel_521;
+  "user experience" -> rel_521;
+  rel_521 -> "satisfaction";
+
+  rel_522 [shape=diamond, style=filled, color=orange, label="enables"];
+  "dashboard" -> rel_522;
+  "user story" -> rel_522;
+  rel_522 -> "tracking visitor path";
+
+  rel_523 [shape=diamond, style=filled, color=orange, label="provides"];
+  "design science" -> rel_523;
+  "mvp" -> rel_523;
+  rel_523 -> "framework";
+
+  rel_524 [shape=diamond, style=filled, color=orange, label="define"];
+  "effectiveness" -> rel_524;
+  "efficiency" -> rel_524;
+  rel_524 -> "usability";
+
+  rel_525 [shape=diamond, style=filled, color=orange, label="completed more than"];
+  "effectiveness" -> rel_525;
+  "participant" -> rel_525;
+  rel_525 -> "three task";
+
+  rel_526 [shape=diamond, style=filled, color=orange, label="provide"];
+  "participant" -> rel_526;
+  "feedback" -> rel_526;
+  rel_526 -> "future development";
+
+  rel_527 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "machine learning" -> rel_527;
+  "algorithm" -> rel_527;
+  rel_527 -> "kg quality";
+  rel_527 -> "efficiency";
+
+  rel_528 [shape=diamond, style=filled, color=orange, label="limits"];
+  "modular approach" -> rel_528;
+  rel_528 -> "component reuse";
+
+  rel_529 [shape=diamond, style=filled, color=orange, label="may influence"];
+  "technical issue" -> rel_529;
+  "mvp" -> rel_529;
+  rel_529 -> "task completion";
+
+  rel_530 [shape=diamond, style=filled, color=orange, label="rated as"];
+  "task completion" -> rel_530;
+  "participant" -> rel_530;
+  rel_530 -> "successful";
+
+  rel_531 [shape=diamond, style=filled, color=orange, label="complete"];
+  "participant" -> rel_531;
+  "task" -> rel_531;
+  rel_531 -> "experiment";
+
+  rel_532 [shape=diamond, style=filled, color=orange, label="affects"];
+  "user behavior" -> rel_532;
+  rel_532 -> "ui improvement";
+
+  rel_533 [shape=diamond, style=filled, color=orange, label="triggers"];
+  "alarm_001" -> rel_533;
+  rel_533 -> "event_001";
+
+  rel_534 [shape=diamond, style=filled, color=orange, label="involves"];
+  "knowledge graph" -> rel_534;
+  "automatic construction" -> rel_534;
+  rel_534 -> "data integration";
+
+  rel_535 [shape=diamond, style=filled, color=orange, label="allows"];
+  "amazon neptune" -> rel_535;
+  "pgm" -> rel_535;
+  "rdf" -> rel_535;
+  rel_535 -> "interchangeable operation";
+
+  rel_536 [shape=diamond, style=filled, color=orange, label="optimizes"];
+  "leiden algorithm" -> rel_536;
+  "community structure" -> rel_536;
+  rel_536 -> "modularity";
+
+  rel_537 [shape=diamond, style=filled, color=orange, label="defines"];
+  "community structure" -> rel_537;
+  "personal knowledge graph" -> rel_537;
+  rel_537 -> "cluster";
+
+  rel_538 [shape=diamond, style=filled, color=orange, label="mitigates"];
+  "machine unlearning" -> rel_538;
+  "context fragmentation" -> rel_538;
+  rel_538 -> "long-document rag";
+
+  rel_539 [shape=diamond, style=filled, color=orange, label="enables"];
+  "epistwin reasoning engine" -> rel_539;
+  rel_539 -> "holistic sensemaking";
+
+  rel_540 [shape=diamond, style=filled, color=orange, label="bridges"];
+  "epistwin" -> rel_540;
+  "knowledge graph" -> rel_540;
+  rel_540 -> "active sensemaking";
+
+  rel_541 [shape=diamond, style=filled, color=orange, label="overcomes"];
+  "epistwin" -> rel_541;
+  "personal knowledge graph" -> rel_541;
+  rel_541 -> "context fragmentation";
+
+  rel_542 [shape=diamond, style=filled, color=orange, label="improves"];
+  "epistwin" -> rel_542;
+  "rag" -> rel_542;
+  rel_542 -> "data retrieval";
+
+  rel_543 [shape=diamond, style=filled, color=orange, label="achieves"];
+  "epistwin" -> rel_543;
+  rel_543 -> "satisfactory performance";
+
+  rel_544 [shape=diamond, style=filled, color=orange, label="is"];
+  "football match" -> rel_544;
+  rel_544 -> "event_001";
+
+  rel_545 [shape=diamond, style=filled, color=orange, label="prevents"];
+  "frozen large language model" -> rel_545;
+  "user data" -> rel_545;
+  rel_545 -> "sensitive information leakage";
+
+  rel_546 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "fuzzy date" -> rel_546;
+  "personal knowledge graph" -> rel_546;
+  rel_546 -> "dialogue understanding";
+
+  rel_547 [shape=diamond, style=filled, color=orange, label="generates"];
+  "generative summarization operator" -> rel_547;
+  rel_547 -> "summary sp";
+
+  rel_548 [shape=diamond, style=filled, color=orange, label="aims"];
+  "graph retrieval-augmented generation" -> rel_548;
+  rel_548 -> "overcome local myopia";
+
+  rel_549 [shape=diamond, style=filled, color=orange, label="limits"];
+  "human-in-the-loop strategy" -> rel_549;
+  rel_549 -> "scalability";
+
+  rel_550 [shape=diamond, style=filled, color=orange, label="identifies"];
+  "leiden algorithm" -> rel_550;
+  rel_550 -> "community structure";
+
+  rel_551 [shape=diamond, style=filled, color=orange, label="represents"];
+  "personal knowledge graph" -> rel_551;
+  "user" -> rel_551;
+  rel_551 -> "subjective context";
+
+  rel_552 [shape=diamond, style=filled, color=orange, label="reviews"];
+  "survey" -> rel_552;
+  rel_552 -> "construction method";
+
+  rel_553 [shape=diamond, style=filled, color=orange, label="maps"];
+  "Φc function" -> rel_553;
+  "unstructured content" -> rel_553;
+  rel_553 -> "knowledge graph";
+
+  rel_554 [shape=diamond, style=filled, color=orange, label="has"];
+  "user_1" -> rel_554;
+  rel_554 -> "alarm";
+
+  rel_555 [shape=diamond, style=filled, color=orange, label="sets"];
+  "user_1" -> rel_555;
+  rel_555 -> "alarm_001";
+
+  rel_556 [shape=diamond, style=filled, color=orange, label="store"];
+  "knowledge graph" -> rel_556;
+  "dbpedia" -> rel_556;
+  "freebase" -> rel_556;
+  "yago" -> rel_556;
+  "wikidata" -> rel_556;
+  "nell" -> rel_556;
+  rel_556 -> "real-world fact";
+
+  rel_557 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "deep learning" -> rel_557;
+  "kg query processing" -> rel_557;
+  rel_557 -> "kg query accuracy";
+
+  rel_558 [shape=diamond, style=filled, color=orange, label="contributes to"];
+  "deep learning" -> rel_558;
+  "neural network" -> rel_558;
+  rel_558 -> "kg query processing";
+
+  rel_559 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "explainability" -> rel_559;
+  "interoperability" -> rel_559;
+  rel_559 -> "multi-lingual querying";
+
+  rel_560 [shape=diamond, style=filled, color=orange, label="links"];
+  "artist-kg" -> rel_560;
+  "data source" -> rel_560;
+  rel_560 -> "knowledge graph";
+
+  rel_561 [shape=diamond, style=filled, color=orange, label="provides"];
+  "neo4j" -> rel_561;
+  "graph database" -> rel_561;
+  rel_561 -> "property graph model";
+
+  rel_562 [shape=diamond, style=filled, color=orange, label="follow"];
+  "incomplete kgs" -> rel_562;
+  rel_562 -> "open-world assumption";
+
+  rel_563 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge graph" -> rel_563;
+  "machine learning" -> rel_563;
+  rel_563 -> "data analysi";
+
+  rel_564 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "knowledge graph" -> rel_564;
+  "semantic search" -> rel_564;
+  rel_564 -> "information retrieval";
+
+  rel_565 [shape=diamond, style=filled, color=orange, label="added to"];
+  "machine learning" -> rel_565;
+  "algorithm" -> rel_565;
+  rel_565 -> "knowledge graph";
+
+  rel_566 [shape=diamond, style=filled, color=orange, label="develops"];
+  "self-learning method" -> rel_566;
+  "algorithm" -> rel_566;
+  rel_566 -> "o&m plan";
+
+  rel_567 [shape=diamond, style=filled, color=orange, label="improves"];
+  "application" -> rel_567;
+  rel_567 -> "accuracy";
+  rel_567 -> "efficiency";
+
+  rel_568 [shape=diamond, style=filled, color=orange, label="used in"];
+  "lstm-crf" -> rel_568;
+  "bi-lstm-crf" -> rel_568;
+  rel_568 -> "power domain";
+
+  rel_569 [shape=diamond, style=filled, color=orange, label="improves"];
+  "bi-lstm-crf" -> rel_569;
+  rel_569 -> "information extraction";
+
+  rel_570 [shape=diamond, style=filled, color=orange, label="affects"];
+  "knowledge extraction" -> rel_570;
+  "data quality" -> rel_570;
+  rel_570 -> "kg construction";
+
+  rel_571 [shape=diamond, style=filled, color=orange, label="affects"];
+  "data quality" -> rel_571;
+  rel_571 -> "knowledge graph";
+
+  rel_572 [shape=diamond, style=filled, color=orange, label="must be represented as"];
+  "knowledge" -> rel_572;
+  "database" -> rel_572;
+  rel_572 -> "computer process";
+
+  rel_573 [shape=diamond, style=filled, color=orange, label="is a step of"];
+  "relationship extraction" -> rel_573;
+  "entity extraction" -> rel_573;
+  rel_573 -> "entity extraction";
+
+  rel_574 [shape=diamond, style=filled, color=orange, label="reduces"];
+  "batch approach" -> rel_574;
+  rel_574 -> "redundant computation";
+
+  rel_575 [shape=diamond, style=filled, color=orange, label="reads from"];
+  "gcn" -> rel_575;
+  rel_575 -> "scheduling domain kg";
+
+  rel_576 [shape=diamond, style=filled, color=orange, label="optimizes"];
+  "gradient-based optimization" -> rel_576;
+  rel_576 -> "function";
+
+  rel_577 [shape=diamond, style=filled, color=orange, label="stores"];
+  "knowledge graph" -> rel_577;
+  "graph database" -> rel_577;
+  rel_577 -> "knowledge map";
+
+  rel_578 [shape=diamond, style=filled, color=orange, label="is_faster_than"];
+  "graph database" -> rel_578;
+  "rdf" -> rel_578;
+  rel_578 -> "aggregate query";
+
+  rel_579 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge graph" -> rel_579;
+  "graph neural network" -> rel_579;
+  rel_579 -> "knowledge transfer";
+
+  rel_580 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge-driven service" -> rel_580;
+  "graph neural network" -> rel_580;
+  rel_580 -> "energy system";
+
+  rel_581 [shape=diamond, style=filled, color=orange, label="achieves"];
+  "kg technology" -> rel_581;
+  rel_581 -> "holographic awareness";
+
+  rel_582 [shape=diamond, style=filled, color=orange, label="assists in"];
+  "kg technology" -> rel_582;
+  rel_582 -> "o&m of power equipment";
+
+  rel_583 [shape=diamond, style=filled, color=orange, label="enables"];
+  "kg technology" -> rel_583;
+  rel_583 -> "fault diagnosi";
+
+  rel_584 [shape=diamond, style=filled, color=orange, label="supports"];
+  "kg technology" -> rel_584;
+  rel_584 -> "consulting service";
+
+  rel_585 [shape=diamond, style=filled, color=orange, label="becomes"];
+  "kg" -> rel_585;
+  rel_585 -> "future research direction";
+
+  rel_586 [shape=diamond, style=filled, color=orange, label="improves"];
+  "kg" -> rel_586;
+  rel_586 -> "intelligence and efficiency";
+
+  rel_587 [shape=diamond, style=filled, color=orange, label="provides"];
+  "kg" -> rel_587;
+  rel_587 -> "fault-assisted decision";
+
+  rel_588 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "bert" -> rel_588;
+  rel_588 -> "ner";
+
+  rel_589 [shape=diamond, style=filled, color=orange, label="hinders"];
+  "llm" -> rel_589;
+  "bia" -> rel_589;
+  rel_589 -> "effectiveness";
+
+  rel_590 [shape=diamond, style=filled, color=orange, label="supports"];
+  "knowledge graph" -> rel_590;
+  "power grid" -> rel_590;
+  rel_590 -> "intelligent dispatching";
+
+  rel_591 [shape=diamond, style=filled, color=orange, label="facilitates"];
+  "knowledge graph" -> rel_591;
+  "power safety regulation" -> rel_591;
+  rel_591 -> "entity recognition";
+
+  rel_592 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "knowledge graph" -> rel_592;
+  "recommender system" -> rel_592;
+  rel_592 -> "user experience";
+
+  rel_593 [shape=diamond, style=filled, color=orange, label="contributes"];
+  "knowledge graph" -> rel_593;
+  "reinforcement learning" -> rel_593;
+  rel_593 -> "rule mining";
+
+  rel_594 [shape=diamond, style=filled, color=orange, label="enhances"];
+  "knowledge graph" -> rel_594;
+  "semantic web" -> rel_594;
+  rel_594 -> "information retrieval";
+
+  rel_595 [shape=diamond, style=filled, color=orange, label="requires"];
+  "power equipment data" -> rel_595;
+  "knowledge graph" -> rel_595;
+  rel_595 -> "representation";
+
+}

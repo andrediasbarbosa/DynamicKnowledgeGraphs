@@ -1,0 +1,4326 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1596",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_21",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "after trigger",
+        "update operation"
+      ],
+      "targets": [
+        "rdf quad"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1597",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_26",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "array data",
+        "incremental view maintenance"
+      ],
+      "targets": [
+        "data management"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1598",
+      "properties": {},
+      "relation": "relevant_to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_20",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "track",
+        "artist",
+        "medium"
+      ],
+      "targets": [
+        "update"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1599",
+      "properties": {},
+      "relation": "creates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_12",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "artist"
+      ],
+      "targets": [
+        "musicartist"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1600",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_11",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "artist"
+      ],
+      "targets": [
+        "musicbrainz rdf"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1601",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_11",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "artist"
+      ],
+      "targets": [
+        "uri"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1602",
+      "properties": {},
+      "relation": "makes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_12",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "artist"
+      ],
+      "targets": [
+        "releasegroup"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1603",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_11",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "artist"
+      ],
+      "targets": [
+        "musicartist"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1604",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_11",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "artist"
+      ],
+      "targets": [
+        "solomusicartist"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1605",
+      "properties": {},
+      "relation": "matches",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_13",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rule ψ10",
+        "attribute name"
+      ],
+      "targets": [
+        "datatype property foaf:name"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1606",
+      "properties": {},
+      "relation": "matches",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_5",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "foreign key",
+        "attribute"
+      ],
+      "targets": [
+        "r",
+        "s"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1607",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_10",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "optional function",
+        "attribute"
+      ],
+      "targets": [
+        "value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1608",
+      "properties": {},
+      "relation": "is part of",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_10",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "attribute",
+        "primary key"
+      ],
+      "targets": [
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1609",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_4",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "changeset computation",
+        "third-party tool"
+      ],
+      "targets": [
+        "real-time update"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1610",
+      "properties": {},
+      "relation": "computed_from",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_16",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "changeset",
+        "update"
+      ],
+      "targets": [
+        "old rdf state",
+        "new rdf state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1611",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_2",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "changeset",
+        "view mapping"
+      ],
+      "targets": [
+        "new view state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1612",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_24",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "changeset",
+        "formal framework"
+      ],
+      "targets": [
+        "rdb2rdf view"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1613",
+      "properties": {},
+      "relation": "publish",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_1",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "changeset",
+        "linked open data"
+      ],
+      "targets": [
+        "materialized rdf view"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1614",
+      "properties": {},
+      "relation": "maps",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_7",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "class transformation rule",
+        "tuple"
+      ],
+      "targets": [
+        "instance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1615",
+      "properties": {},
+      "relation": "includes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_5",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relational schema",
+        "constraint"
+      ],
+      "targets": [
+        "primary key",
+        "mandatory attribute"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1616",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_23",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "cookin’s on 3 b.",
+        "musicartist"
+      ],
+      "targets": [
+        "this girl"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1617",
+      "properties": {},
+      "relation": "references",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_27",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "recording",
+        "credit"
+      ],
+      "targets": [
+        "c id"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1618",
+      "properties": {},
+      "relation": "references",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_27",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "releasegroup",
+        "credit"
+      ],
+      "targets": [
+        "c id"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1619",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_25",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "data exchange",
+        "foundation"
+      ],
+      "targets": [
+        "data integration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1620",
+      "properties": {},
+      "relation": "support",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_9",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tr pattern",
+        "data restructuring"
+      ],
+      "targets": [
+        "r2rml mapping"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1621",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_2",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant tuple",
+        "data source update"
+      ],
+      "targets": [
+        "rdf instance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1622",
+      "properties": {},
+      "relation": "integrate",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_1",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "enterprise knowledge graph",
+        "data source"
+      ],
+      "targets": [
+        "comprehensive dataspace"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1623",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_8",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "h",
+        "tuple r",
+        "data values y"
+      ],
+      "targets": [
+        "predicate"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1624",
+      "properties": {},
+      "relation": "depends on",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_15",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdf state",
+        "database state"
+      ],
+      "targets": [
+        "pivot tuple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1625",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_14",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "database state"
+      ],
+      "targets": [
+        "triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1626",
+      "properties": {},
+      "relation": "contains",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_6",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "database state",
+        "tuple"
+      ],
+      "targets": [
+        "relation scheme"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1627",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_2",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "update",
+        "database state"
+      ],
+      "targets": [
+        "changeset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1628",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_21",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "update",
+        "database"
+      ],
+      "targets": [
+        "rdf state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1629",
+      "properties": {},
+      "relation": "adopts",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_7",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "datalog"
+      ],
+      "targets": [
+        "query"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1630",
+      "properties": {},
+      "relation": "is a type of",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_10",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "object property",
+        "datatype property"
+      ],
+      "targets": [
+        "property"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_1631",
+      "properties": {
+        "hierarchy_type": "is_a",
+        "relation_type": "hierarchical"
+      },
+      "relation": "is_a",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_29",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "dc:title"
+      ],
+      "targets": [
+        "owl:datatypeproperty"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1632",
+      "properties": {},
+      "relation": "combines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_22",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "inserted tuple",
+        "deleted tuple"
+      ],
+      "targets": [
+        "current database state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1633",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_22",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "deleted tuple",
+        "updated tuple"
+      ],
+      "targets": [
+        "old version"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1634",
+      "properties": {},
+      "relation": "corresponds to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_19",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "deletion component",
+        "pivot tuple"
+      ],
+      "targets": [
+        "tuples in d"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1635",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_16",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "update",
+        "deletion",
+        "insertion"
+      ],
+      "targets": [
+        "database state"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1636",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_26",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdf/s knowledge bas",
+        "delta"
+      ],
+      "targets": [
+        "change"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1637",
+      "properties": {},
+      "relation": "matches",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_8",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "dtr",
+        "pivot relation r"
+      ],
+      "targets": [
+        "class d"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1638",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_4",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "duplicate",
+        "relational view"
+      ],
+      "targets": [
+        "complexity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1639",
+      "properties": {},
+      "relation": "introduces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_4",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "interest-based rdf update",
+        "endris et al."
+      ],
+      "targets": [
+        "update propagation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1640",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_0",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "enterprise knowledge graph",
+        "rdf view"
+      ],
+      "targets": [
+        "data layer"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1641",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_26",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relational data",
+        "enterprise knowledge graph"
+      ],
+      "targets": [
+        "publication"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1642",
+      "properties": {},
+      "relation": "relates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_8",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "f",
+        "tuple r",
+        "tuple s"
+      ],
+      "targets": [
+        "foreign key"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_1643",
+      "properties": {
+        "hierarchy_type": "is_a",
+        "relation_type": "hierarchical"
+      },
+      "relation": "is_a",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_29",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "foaf:name"
+      ],
+      "targets": [
+        "owl:datatypeproperty"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1644",
+      "properties": {},
+      "relation": "traverses",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_6",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "path",
+        "foreign key"
+      ],
+      "targets": [
+        "tuple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1645",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_6",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "foreign key",
+        "relation scheme"
+      ],
+      "targets": [
+        "relation scheme"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1646",
+      "properties": {},
+      "relation": "relates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_5",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "foreign key",
+        "relation scheme"
+      ],
+      "targets": [
+        "r",
+        "s"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1647",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_5",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tuple",
+        "foreign key"
+      ],
+      "targets": [
+        "r",
+        "s"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1648",
+      "properties": {},
+      "relation": "includes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_24",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "formal framework"
+      ],
+      "targets": [
+        "rule language"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1649",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_2",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "formalism"
+      ],
+      "targets": [
+        "automatic construction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1650",
+      "properties": {},
+      "relation": "proposes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_0",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "framework"
+      ],
+      "targets": [
+        "incremental maintenance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1651",
+      "properties": {},
+      "relation": "outperform",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_1",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "incremental maintenance",
+        "full view rematerialization"
+      ],
+      "targets": [
+        "query performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1652",
+      "properties": {},
+      "relation": "calls",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_22",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "trigger",
+        "function"
+      ],
+      "targets": [
+        "trg_compute_delta_r_stmt"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1653",
+      "properties": {},
+      "relation": "results_in",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_4",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdf graph",
+        "incremental generation"
+      ],
+      "targets": [
+        "exporting relational data"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1654",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_25",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "incremental maintenance",
+        "xpath view"
+      ],
+      "targets": [
+        "data integration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1655",
+      "properties": {},
+      "relation": "implements",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_4",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "incremental refresh",
+        "oracle"
+      ],
+      "targets": [
+        "view maintenance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1656",
+      "properties": {},
+      "relation": "describe",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_1",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "ontology",
+        "knowledge graph"
+      ],
+      "targets": [
+        "information"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1657",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_25",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "linked data",
+        "knowledge graph"
+      ],
+      "targets": [
+        "large organization"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1658",
+      "properties": {},
+      "relation": "made",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_23",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "kung",
+        "musicartist"
+      ],
+      "targets": [
+        "this girl"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1659",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_23",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "kylie auldist",
+        "musicartist"
+      ],
+      "targets": [
+        "this girl"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1660",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_26",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "ontology",
+        "logic databas"
+      ],
+      "targets": [
+        "materialization"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1661",
+      "properties": {},
+      "relation": "maintains",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_26",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "sql/xml view",
+        "mapping-driven approach"
+      ],
+      "targets": [
+        "view maintenance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1662",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_0",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "materialized rdb2rdf view"
+      ],
+      "targets": [
+        "query performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1663",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_0",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "materialized rdb2rdf view"
+      ],
+      "targets": [
+        "continuous maintenance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1664",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_3",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "materialized view",
+        "remote data source"
+      ],
+      "targets": [
+        "access"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1665",
+      "properties": {},
+      "relation": "references",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_27",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "track",
+        "medium"
+      ],
+      "targets": [
+        "mid"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_1666",
+      "properties": {
+        "hierarchy_type": "is_a",
+        "relation_type": "hierarchical"
+      },
+      "relation": "is_a",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_29",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "mo:duration"
+      ],
+      "targets": [
+        "owl:datatypeproperty"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_1667",
+      "properties": {
+        "hierarchy_type": "is_a",
+        "relation_type": "hierarchical"
+      },
+      "relation": "is_a",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_29",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "mo:track_count"
+      ],
+      "targets": [
+        "owl:datatypeproperty"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1668",
+      "properties": {},
+      "relation": "has_genre",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_28",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "music artist"
+      ],
+      "targets": [
+        "genre"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1669",
+      "properties": {},
+      "relation": "makes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_28",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "music artist"
+      ],
+      "targets": [
+        "thing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1670",
+      "properties": {},
+      "relation": "collects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_9",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "musicbrainz",
+        "music metadata"
+      ],
+      "targets": [
+        "information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1671",
+      "properties": {},
+      "relation": "built_on",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_9",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "musicbrainz",
+        "postgresql"
+      ],
+      "targets": [
+        "relational database"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1672",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_25",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdf dataset",
+        "n-quads"
+      ],
+      "targets": [
+        "syntax"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1673",
+      "properties": {},
+      "relation": "stores",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_14",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "named graph",
+        "rdf dataset"
+      ],
+      "targets": [
+        "triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1674",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_8",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "nonnull",
+        "value"
+      ],
+      "targets": [
+        "not null"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1675",
+      "properties": {},
+      "relation": "satisfies",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_7",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "object-preserving property"
+      ],
+      "targets": [
+        "base entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1676",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_24",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "object-preserving"
+      ],
+      "targets": [
+        "tuple identification"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1677",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_9",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "otr",
+        "pivot relation"
+      ],
+      "targets": [
+        "object property"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1678",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_10",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "path",
+        "relation"
+      ],
+      "targets": [
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1679",
+      "properties": {},
+      "relation": "is related to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_6",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tuple",
+        "path"
+      ],
+      "targets": [
+        "tuple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1680",
+      "properties": {},
+      "relation": "is computed by",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_15",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdf state",
+        "pivot relation"
+      ],
+      "targets": [
+        "transformation rule"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1681",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_7",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "pivot relation",
+        "rdf triple"
+      ],
+      "targets": [
+        "subject uri"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1682",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_18",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant path",
+        "pivot relation"
+      ],
+      "targets": [
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1683",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_14",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "triple",
+        "pivot relation"
+      ],
+      "targets": [
+        "duplicate"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1684",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_15",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "pivot tuple"
+      ],
+      "targets": [
+        "rdf quad"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1685",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_14",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "pivot tuple",
+        "update"
+      ],
+      "targets": [
+        "triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1686",
+      "properties": {},
+      "relation": "synchronizes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_3",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "relational database"
+      ],
+      "targets": [
+        "rdb2rdf view"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1687",
+      "properties": {},
+      "relation": "creates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_0",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "relational data"
+      ],
+      "targets": [
+        "materialized view"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1688",
+      "properties": {},
+      "relation": "translate",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_1",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "relational data"
+      ],
+      "targets": [
+        "ontology vocabulary"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1689",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_21",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant relation",
+        "rdb2rdf view"
+      ],
+      "targets": [
+        "rdf state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1690",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_15",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "set of transformation rule"
+      ],
+      "targets": [
+        "pivot relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1691",
+      "properties": {},
+      "relation": "translates to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_13",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "source data"
+      ],
+      "targets": [
+        "data graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1692",
+      "properties": {},
+      "relation": "guarantees",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_9",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view",
+        "transformation rule"
+      ],
+      "targets": [
+        "object-preserving property"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1693",
+      "properties": {},
+      "relation": "preserves",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_2",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdb2rdf view"
+      ],
+      "targets": [
+        "base entity"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1694",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_25",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relational databas",
+        "rdf graph"
+      ],
+      "targets": [
+        "data export"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1695",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_11",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdf resource"
+      ],
+      "targets": [
+        "hasuri"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1696",
+      "properties": {},
+      "relation": "holds",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_8",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rdfliteral",
+        "value"
+      ],
+      "targets": [
+        "literal representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1697",
+      "properties": {},
+      "relation": "references",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_27",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "recordingtag",
+        "recording"
+      ],
+      "targets": [
+        "s id"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1698",
+      "properties": {},
+      "relation": "references",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_27",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "recordingtag",
+        "tag"
+      ],
+      "targets": [
+        "q id"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1699",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_12",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "recording"
+      ],
+      "targets": [
+        "signal"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1700",
+      "properties": {},
+      "relation": "tracks",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_28",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "record"
+      ],
+      "targets": [
+        "track"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1701",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_10",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "relation name"
+      ],
+      "targets": [
+        "tuple variable"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1702",
+      "properties": {},
+      "relation": "obtained by evaluating",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_19",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant tuples after",
+        "relation r"
+      ],
+      "targets": [
+        "post-update state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1703",
+      "properties": {},
+      "relation": "obtained by evaluating",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_19",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant tuples before",
+        "relation r"
+      ],
+      "targets": [
+        "pre-update state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1704",
+      "properties": {},
+      "relation": "relevant to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_19",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "relation r"
+      ],
+      "targets": [
+        "update"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1705",
+      "properties": {},
+      "relation": "relevant_to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_17",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "relation scheme"
+      ],
+      "targets": [
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1706",
+      "properties": {},
+      "relation": "impacts",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_17",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "update",
+        "relation"
+      ],
+      "targets": [
+        "transformation rule"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1707",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_18",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "update",
+        "relation"
+      ],
+      "targets": [
+        "database state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1708",
+      "properties": {},
+      "relation": "contains",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_12",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "release"
+      ],
+      "targets": [
+        "track"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1709",
+      "properties": {},
+      "relation": "records",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_28",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "release"
+      ],
+      "targets": [
+        "record"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1710",
+      "properties": {},
+      "relation": "identified_by",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_16",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant relation",
+        "update"
+      ],
+      "targets": [
+        "relevant tuple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1711",
+      "properties": {},
+      "relation": "defined_by",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_17",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "relevant tuple",
+        "update"
+      ],
+      "targets": [
+        "transformation rule"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1712",
+      "properties": {},
+      "relation": "related_to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_20",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rnew",
+        "rold"
+      ],
+      "targets": [
+        "artist"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1713",
+      "properties": {},
+      "relation": "related_to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_20",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "rnew",
+        "rold"
+      ],
+      "targets": [
+        "medium"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1714",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_22",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "sigma0",
+        "sigma1"
+      ],
+      "targets": [
+        "pre-update state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1715",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_3",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "source update",
+        "source state"
+      ],
+      "targets": [
+        "changeset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1716",
+      "properties": {},
+      "relation": "describes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_12",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tag"
+      ],
+      "targets": [
+        "genre"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1717",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_23",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "this girl",
+        "track"
+      ],
+      "targets": [
+        "record"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1718",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_24",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tool"
+      ],
+      "targets": [
+        "trigger"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1719",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_18",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "transformation rule",
+        "update"
+      ],
+      "targets": [
+        "relevant tuple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1720",
+      "properties": {},
+      "relation": "executes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_22",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "trigger",
+        "update"
+      ],
+      "targets": [
+        "compute changeset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1721",
+      "properties": {},
+      "relation": "computes",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_3",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "trigger",
+        "update"
+      ],
+      "targets": [
+        "changeset"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1722",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_13",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tuple r",
+        "triple"
+      ],
+      "targets": [
+        "mbz:r.ga1",
+        "mbz:r.ga2",
+        "mbz:r.ga3"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1723",
+      "properties": {},
+      "relation": "is related to",
+      "source_chunk_id": "Relational_Data_on_KGs_chunk_13",
+      "source_document": "Relational_Data_on_KGs",
+      "sources": [
+        "tuple r",
+        "tuple r3"
+      ],
+      "targets": [
+        "object property foaf:made"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 128,
+    "num_nodes": 204
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "access",
+      "incident_edges": [
+        "edge_1664"
+      ],
+      "label": "access",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "after trigger",
+      "incident_edges": [
+        "edge_1596"
+      ],
+      "label": "AFTER trigger",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "array data",
+      "incident_edges": [
+        "edge_1597"
+      ],
+      "label": "array data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 8,
+      "id": "artist",
+      "incident_edges": [
+        "edge_1598",
+        "edge_1599",
+        "edge_1600",
+        "edge_1601",
+        "edge_1602",
+        "edge_1603",
+        "edge_1604",
+        "edge_1712"
+      ],
+      "label": "Artist",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "attribute",
+      "incident_edges": [
+        "edge_1606",
+        "edge_1607",
+        "edge_1608"
+      ],
+      "label": "attribute",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "attribute name",
+      "incident_edges": [
+        "edge_1605"
+      ],
+      "label": "attribute name",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic construction",
+      "incident_edges": [
+        "edge_1649"
+      ],
+      "label": "automatic construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "base entity",
+      "incident_edges": [
+        "edge_1675",
+        "edge_1693"
+      ],
+      "label": "base entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "c id",
+      "incident_edges": [
+        "edge_1617",
+        "edge_1618"
+      ],
+      "label": "c id",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "change",
+      "incident_edges": [
+        "edge_1636"
+      ],
+      "label": "change",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "changeset",
+      "incident_edges": [
+        "edge_1610",
+        "edge_1611",
+        "edge_1612",
+        "edge_1613",
+        "edge_1627",
+        "edge_1715",
+        "edge_1721"
+      ],
+      "label": "changeset",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "changeset computation",
+      "incident_edges": [
+        "edge_1609"
+      ],
+      "label": "changeset computation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "class d",
+      "incident_edges": [
+        "edge_1637"
+      ],
+      "label": "class D",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "class transformation rule",
+      "incident_edges": [
+        "edge_1614"
+      ],
+      "label": "class transformation rule",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complexity",
+      "incident_edges": [
+        "edge_1638"
+      ],
+      "label": "complexity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "comprehensive dataspace",
+      "incident_edges": [
+        "edge_1622"
+      ],
+      "label": "comprehensive dataspace",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "compute changeset",
+      "incident_edges": [
+        "edge_1720"
+      ],
+      "label": "compute changeset",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "constraint",
+      "incident_edges": [
+        "edge_1615"
+      ],
+      "label": "constraint",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "continuous maintenance",
+      "incident_edges": [
+        "edge_1663"
+      ],
+      "label": "continuous maintenance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cookin’s on 3 b.",
+      "incident_edges": [
+        "edge_1616"
+      ],
+      "label": "Cookin’s on 3 B.",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "credit",
+      "incident_edges": [
+        "edge_1617",
+        "edge_1618"
+      ],
+      "label": "Credit",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "current database state",
+      "incident_edges": [
+        "edge_1632"
+      ],
+      "label": "current database state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data exchange",
+      "incident_edges": [
+        "edge_1619"
+      ],
+      "label": "data exchange",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data export",
+      "incident_edges": [
+        "edge_1694"
+      ],
+      "label": "data export",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data graph",
+      "incident_edges": [
+        "edge_1691"
+      ],
+      "label": "data graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "data integration",
+      "incident_edges": [
+        "edge_1619",
+        "edge_1654"
+      ],
+      "label": "data integration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data layer",
+      "incident_edges": [
+        "edge_1640"
+      ],
+      "label": "data layer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data management",
+      "incident_edges": [
+        "edge_1597"
+      ],
+      "label": "data management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data restructuring",
+      "incident_edges": [
+        "edge_1620"
+      ],
+      "label": "data restructuring",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data source",
+      "incident_edges": [
+        "edge_1622"
+      ],
+      "label": "data sources",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data source update",
+      "incident_edges": [
+        "edge_1621"
+      ],
+      "label": "data source update",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data values y",
+      "incident_edges": [
+        "edge_1623"
+      ],
+      "label": "data values y",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "database",
+      "incident_edges": [
+        "edge_1628"
+      ],
+      "label": "database",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "database state",
+      "incident_edges": [
+        "edge_1624",
+        "edge_1625",
+        "edge_1626",
+        "edge_1627",
+        "edge_1635",
+        "edge_1707"
+      ],
+      "label": "database state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "datalog",
+      "incident_edges": [
+        "edge_1629"
+      ],
+      "label": "DATALOG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "datatype property",
+      "incident_edges": [
+        "edge_1630"
+      ],
+      "label": "datatype property",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "datatype property foaf:name",
+      "incident_edges": [
+        "edge_1605"
+      ],
+      "label": "datatype property foaf:name",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dc:title",
+      "incident_edges": [
+        "edge_1631"
+      ],
+      "label": "dc:title",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "deleted tuple",
+      "incident_edges": [
+        "edge_1632",
+        "edge_1633"
+      ],
+      "label": "deleted tuples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deletion",
+      "incident_edges": [
+        "edge_1635"
+      ],
+      "label": "deletion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deletion component",
+      "incident_edges": [
+        "edge_1634"
+      ],
+      "label": "deletion component",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "delta",
+      "incident_edges": [
+        "edge_1636"
+      ],
+      "label": "delta",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dtr",
+      "incident_edges": [
+        "edge_1637"
+      ],
+      "label": "DTR",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "duplicate",
+      "incident_edges": [
+        "edge_1638",
+        "edge_1683"
+      ],
+      "label": "duplicate",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "endris et al.",
+      "incident_edges": [
+        "edge_1639"
+      ],
+      "label": "Endris et al.",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "enterprise knowledge graph",
+      "incident_edges": [
+        "edge_1622",
+        "edge_1640",
+        "edge_1641"
+      ],
+      "label": "enterprise knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "exporting relational data",
+      "incident_edges": [
+        "edge_1653"
+      ],
+      "label": "exporting relational data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "f",
+      "incident_edges": [
+        "edge_1642"
+      ],
+      "label": "F",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "foaf:name",
+      "incident_edges": [
+        "edge_1643"
+      ],
+      "label": "foaf:name",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "foreign key",
+      "incident_edges": [
+        "edge_1606",
+        "edge_1642",
+        "edge_1644",
+        "edge_1645",
+        "edge_1646",
+        "edge_1647"
+      ],
+      "label": "foreign key",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "formal framework",
+      "incident_edges": [
+        "edge_1612",
+        "edge_1648"
+      ],
+      "label": "formal framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "formalism",
+      "incident_edges": [
+        "edge_1649"
+      ],
+      "label": "formalism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "foundation",
+      "incident_edges": [
+        "edge_1619"
+      ],
+      "label": "foundation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "framework",
+      "incident_edges": [
+        "edge_1650"
+      ],
+      "label": "framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "full view rematerialization",
+      "incident_edges": [
+        "edge_1651"
+      ],
+      "label": "full view rematerialization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "function",
+      "incident_edges": [
+        "edge_1652"
+      ],
+      "label": "function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "genre",
+      "incident_edges": [
+        "edge_1668",
+        "edge_1716"
+      ],
+      "label": "Genre",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "h",
+      "incident_edges": [
+        "edge_1623"
+      ],
+      "label": "H",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hasuri",
+      "incident_edges": [
+        "edge_1695"
+      ],
+      "label": "hasURI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "incremental generation",
+      "incident_edges": [
+        "edge_1653"
+      ],
+      "label": "incremental generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "incremental maintenance",
+      "incident_edges": [
+        "edge_1650",
+        "edge_1651",
+        "edge_1654"
+      ],
+      "label": "incremental maintenance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "incremental refresh",
+      "incident_edges": [
+        "edge_1655"
+      ],
+      "label": "incremental refresh",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "incremental view maintenance",
+      "incident_edges": [
+        "edge_1597"
+      ],
+      "label": "incremental view maintenance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "information",
+      "incident_edges": [
+        "edge_1656",
+        "edge_1670"
+      ],
+      "label": "information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inserted tuple",
+      "incident_edges": [
+        "edge_1632"
+      ],
+      "label": "inserted tuples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "insertion",
+      "incident_edges": [
+        "edge_1635"
+      ],
+      "label": "insertion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "instance",
+      "incident_edges": [
+        "edge_1614"
+      ],
+      "label": "instance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interest-based rdf update",
+      "incident_edges": [
+        "edge_1639"
+      ],
+      "label": "interest-based RDF update",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1656",
+        "edge_1657"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kung",
+      "incident_edges": [
+        "edge_1658"
+      ],
+      "label": "Kung",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kylie auldist",
+      "incident_edges": [
+        "edge_1659"
+      ],
+      "label": "Kylie Auldist",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "large organization",
+      "incident_edges": [
+        "edge_1657"
+      ],
+      "label": "large organizations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "linked data",
+      "incident_edges": [
+        "edge_1657"
+      ],
+      "label": "linked data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "linked open data",
+      "incident_edges": [
+        "edge_1613"
+      ],
+      "label": "Linked Open Data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "literal representation",
+      "incident_edges": [
+        "edge_1696"
+      ],
+      "label": "literal representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "logic databa",
+      "incident_edges": [],
+      "label": "logic databases",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "mandatory attribute",
+      "incident_edges": [
+        "edge_1615"
+      ],
+      "label": "mandatory attribute",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mapping-driven approach",
+      "incident_edges": [
+        "edge_1661"
+      ],
+      "label": "mapping-driven approach",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "materialization",
+      "incident_edges": [
+        "edge_1660"
+      ],
+      "label": "materialization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "materialized rdb2rdf view",
+      "incident_edges": [
+        "edge_1662",
+        "edge_1663"
+      ],
+      "label": "materialized RDB2RDF view",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "materialized rdf view",
+      "incident_edges": [
+        "edge_1613"
+      ],
+      "label": "materialized RDF views",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "materialized view",
+      "incident_edges": [
+        "edge_1664",
+        "edge_1687"
+      ],
+      "label": "materialized view",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mbz:r.ga1",
+      "incident_edges": [
+        "edge_1722"
+      ],
+      "label": "mbz:r.ga1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mbz:r.ga2",
+      "incident_edges": [
+        "edge_1722"
+      ],
+      "label": "mbz:r.ga2",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mbz:r.ga3",
+      "incident_edges": [
+        "edge_1722"
+      ],
+      "label": "mbz:r.ga3",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "medium",
+      "incident_edges": [
+        "edge_1598",
+        "edge_1665",
+        "edge_1713"
+      ],
+      "label": "Medium",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mid",
+      "incident_edges": [
+        "edge_1665"
+      ],
+      "label": "mid",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mo:duration",
+      "incident_edges": [
+        "edge_1666"
+      ],
+      "label": "mo:duration",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mo:track_count",
+      "incident_edges": [
+        "edge_1667"
+      ],
+      "label": "mo:track_count",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "music artist",
+      "incident_edges": [
+        "edge_1668",
+        "edge_1669"
+      ],
+      "label": "Music Artist",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "music metadata",
+      "incident_edges": [
+        "edge_1670"
+      ],
+      "label": "music metadata",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "musicartist",
+      "incident_edges": [
+        "edge_1599",
+        "edge_1603",
+        "edge_1616",
+        "edge_1658",
+        "edge_1659"
+      ],
+      "label": "MusicArtist",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "musicbrainz",
+      "incident_edges": [
+        "edge_1670",
+        "edge_1671"
+      ],
+      "label": "MusicBrainz",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "musicbrainz rdf",
+      "incident_edges": [
+        "edge_1600"
+      ],
+      "label": "MusicBrainz RDF",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "n-quads",
+      "incident_edges": [
+        "edge_1672"
+      ],
+      "label": "n-quads",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "named graph",
+      "incident_edges": [
+        "edge_1673"
+      ],
+      "label": "named graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new rdf state",
+      "incident_edges": [
+        "edge_1610"
+      ],
+      "label": "new RDF states",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "new view state",
+      "incident_edges": [
+        "edge_1611"
+      ],
+      "label": "new view state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "nonnull",
+      "incident_edges": [
+        "edge_1674"
+      ],
+      "label": "nonNull",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "not null",
+      "incident_edges": [
+        "edge_1674"
+      ],
+      "label": "not null",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "object property",
+      "incident_edges": [
+        "edge_1630",
+        "edge_1677"
+      ],
+      "label": "object property",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "object property foaf:made",
+      "incident_edges": [
+        "edge_1723"
+      ],
+      "label": "object property foaf:made",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "object-preserving",
+      "incident_edges": [
+        "edge_1676"
+      ],
+      "label": "object-preserving",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "object-preserving property",
+      "incident_edges": [
+        "edge_1675",
+        "edge_1692"
+      ],
+      "label": "object-preserving property",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "old rdf state",
+      "incident_edges": [
+        "edge_1610"
+      ],
+      "label": "old RDF states",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "old version",
+      "incident_edges": [
+        "edge_1633"
+      ],
+      "label": "old versions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "ontology",
+      "incident_edges": [
+        "edge_1656",
+        "edge_1660"
+      ],
+      "label": "ontology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology vocabulary",
+      "incident_edges": [
+        "edge_1688"
+      ],
+      "label": "ontology vocabulary",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optional function",
+      "incident_edges": [
+        "edge_1607"
+      ],
+      "label": "optional function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "oracle",
+      "incident_edges": [
+        "edge_1655"
+      ],
+      "label": "Oracle",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "otr",
+      "incident_edges": [
+        "edge_1677"
+      ],
+      "label": "OTR",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "owl:datatypeproperty",
+      "incident_edges": [
+        "edge_1631",
+        "edge_1643",
+        "edge_1666",
+        "edge_1667"
+      ],
+      "label": "owl:DatatypeProperty",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "path",
+      "incident_edges": [
+        "edge_1644",
+        "edge_1678",
+        "edge_1679"
+      ],
+      "label": "path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "pivot relation",
+      "incident_edges": [
+        "edge_1677",
+        "edge_1680",
+        "edge_1681",
+        "edge_1682",
+        "edge_1683",
+        "edge_1690"
+      ],
+      "label": "pivot relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pivot relation r",
+      "incident_edges": [
+        "edge_1637"
+      ],
+      "label": "pivot relation R",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "pivot tuple",
+      "incident_edges": [
+        "edge_1624",
+        "edge_1634",
+        "edge_1684",
+        "edge_1685"
+      ],
+      "label": "pivot tuples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "post-update state",
+      "incident_edges": [
+        "edge_1702"
+      ],
+      "label": "post-update state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "postgresql",
+      "incident_edges": [
+        "edge_1671"
+      ],
+      "label": "PostgreSQL",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "pre-update state",
+      "incident_edges": [
+        "edge_1703",
+        "edge_1714"
+      ],
+      "label": "pre-update state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predicate",
+      "incident_edges": [
+        "edge_1623"
+      ],
+      "label": "predicate",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "primary key",
+      "incident_edges": [
+        "edge_1608",
+        "edge_1615"
+      ],
+      "label": "primary key",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "property",
+      "incident_edges": [
+        "edge_1630"
+      ],
+      "label": "property",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "publication",
+      "incident_edges": [
+        "edge_1641"
+      ],
+      "label": "publication",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "q id",
+      "incident_edges": [
+        "edge_1698"
+      ],
+      "label": "q id",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query",
+      "incident_edges": [
+        "edge_1629"
+      ],
+      "label": "query",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "query performance",
+      "incident_edges": [
+        "edge_1651",
+        "edge_1662"
+      ],
+      "label": "query performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "r",
+      "incident_edges": [
+        "edge_1606",
+        "edge_1646",
+        "edge_1647"
+      ],
+      "label": "R",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "r2rml mapping",
+      "incident_edges": [
+        "edge_1620"
+      ],
+      "label": "R2RML mapping",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 11,
+      "id": "rdb2rdf view",
+      "incident_edges": [
+        "edge_1612",
+        "edge_1675",
+        "edge_1676",
+        "edge_1686",
+        "edge_1687",
+        "edge_1688",
+        "edge_1689",
+        "edge_1690",
+        "edge_1691",
+        "edge_1692",
+        "edge_1693"
+      ],
+      "label": "RDB2RDF views",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rdf dataset",
+      "incident_edges": [
+        "edge_1672",
+        "edge_1673"
+      ],
+      "label": "RDF datasets",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rdf graph",
+      "incident_edges": [
+        "edge_1653",
+        "edge_1694"
+      ],
+      "label": "RDF graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf instance",
+      "incident_edges": [
+        "edge_1621"
+      ],
+      "label": "RDF instances",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rdf quad",
+      "incident_edges": [
+        "edge_1596",
+        "edge_1684"
+      ],
+      "label": "RDF quads",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf resource",
+      "incident_edges": [
+        "edge_1695"
+      ],
+      "label": "RDF resources",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "rdf state",
+      "incident_edges": [
+        "edge_1624",
+        "edge_1628",
+        "edge_1680",
+        "edge_1689"
+      ],
+      "label": "RDF state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf triple",
+      "incident_edges": [
+        "edge_1681"
+      ],
+      "label": "RDF triples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf view",
+      "incident_edges": [
+        "edge_1640"
+      ],
+      "label": "RDF view",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf/s knowledge bas",
+      "incident_edges": [
+        "edge_1636"
+      ],
+      "label": "rdf/s knowledge bases",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdfliteral",
+      "incident_edges": [
+        "edge_1696"
+      ],
+      "label": "RDFLiteral",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "real-time update",
+      "incident_edges": [
+        "edge_1609"
+      ],
+      "label": "real-time updates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "record",
+      "incident_edges": [
+        "edge_1700",
+        "edge_1709",
+        "edge_1717"
+      ],
+      "label": "Record",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "recording",
+      "incident_edges": [
+        "edge_1617",
+        "edge_1697",
+        "edge_1699"
+      ],
+      "label": "Recording",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "recordingtag",
+      "incident_edges": [
+        "edge_1697",
+        "edge_1698"
+      ],
+      "label": "RecordingTag",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "relation",
+      "incident_edges": [
+        "edge_1608",
+        "edge_1678",
+        "edge_1682",
+        "edge_1705",
+        "edge_1706",
+        "edge_1707"
+      ],
+      "label": "relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation name",
+      "incident_edges": [
+        "edge_1701"
+      ],
+      "label": "relation name",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "relation r",
+      "incident_edges": [
+        "edge_1702",
+        "edge_1703",
+        "edge_1704"
+      ],
+      "label": "relation R",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "relation scheme",
+      "incident_edges": [
+        "edge_1626",
+        "edge_1645",
+        "edge_1646",
+        "edge_1705"
+      ],
+      "label": "relation schemes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "relational data",
+      "incident_edges": [
+        "edge_1641",
+        "edge_1687",
+        "edge_1688"
+      ],
+      "label": "relational data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "relational databa",
+      "incident_edges": [],
+      "label": "relational databases",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "relational database",
+      "incident_edges": [
+        "edge_1671",
+        "edge_1686"
+      ],
+      "label": "relational database",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational schema",
+      "incident_edges": [
+        "edge_1615"
+      ],
+      "label": "relational schema",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational view",
+      "incident_edges": [
+        "edge_1638"
+      ],
+      "label": "relational views",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "release",
+      "incident_edges": [
+        "edge_1708",
+        "edge_1709"
+      ],
+      "label": "Release",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "releasegroup",
+      "incident_edges": [
+        "edge_1602",
+        "edge_1618"
+      ],
+      "label": "ReleaseGroup",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relevant path",
+      "incident_edges": [
+        "edge_1682"
+      ],
+      "label": "relevant path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relevant relation",
+      "incident_edges": [
+        "edge_1689",
+        "edge_1710"
+      ],
+      "label": "relevant relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "relevant tuple",
+      "incident_edges": [
+        "edge_1621",
+        "edge_1710",
+        "edge_1711",
+        "edge_1719"
+      ],
+      "label": "relevant tuples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relevant tuples after",
+      "incident_edges": [
+        "edge_1702"
+      ],
+      "label": "relevant tuples after",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relevant tuples before",
+      "incident_edges": [
+        "edge_1703"
+      ],
+      "label": "relevant tuples before",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "remote data source",
+      "incident_edges": [
+        "edge_1664"
+      ],
+      "label": "remote data source",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rnew",
+      "incident_edges": [
+        "edge_1712",
+        "edge_1713"
+      ],
+      "label": "rnew",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rold",
+      "incident_edges": [
+        "edge_1712",
+        "edge_1713"
+      ],
+      "label": "rold",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rule language",
+      "incident_edges": [
+        "edge_1648"
+      ],
+      "label": "rule language",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rule ψ10",
+      "incident_edges": [
+        "edge_1605"
+      ],
+      "label": "rule ψ10",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "s",
+      "incident_edges": [
+        "edge_1606",
+        "edge_1646",
+        "edge_1647"
+      ],
+      "label": "S",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "s id",
+      "incident_edges": [
+        "edge_1697"
+      ],
+      "label": "s id",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "set of transformation rule",
+      "incident_edges": [
+        "edge_1690"
+      ],
+      "label": "set of transformation rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sigma0",
+      "incident_edges": [
+        "edge_1714"
+      ],
+      "label": "sigma0",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sigma1",
+      "incident_edges": [
+        "edge_1714"
+      ],
+      "label": "sigma1",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "signal",
+      "incident_edges": [
+        "edge_1699"
+      ],
+      "label": "Signal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "solomusicartist",
+      "incident_edges": [
+        "edge_1604"
+      ],
+      "label": "SoloMusicArtist",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "source data",
+      "incident_edges": [
+        "edge_1691"
+      ],
+      "label": "source data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "source state",
+      "incident_edges": [
+        "edge_1715"
+      ],
+      "label": "source state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "source update",
+      "incident_edges": [
+        "edge_1715"
+      ],
+      "label": "source update",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sql/xml view",
+      "incident_edges": [
+        "edge_1661"
+      ],
+      "label": "sql/xml view",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subject uri",
+      "incident_edges": [
+        "edge_1681"
+      ],
+      "label": "subject URI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "syntax",
+      "incident_edges": [
+        "edge_1672"
+      ],
+      "label": "syntax",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "tag",
+      "incident_edges": [
+        "edge_1698",
+        "edge_1716"
+      ],
+      "label": "Tag",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "thing",
+      "incident_edges": [
+        "edge_1669"
+      ],
+      "label": "Thing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "third-party tool",
+      "incident_edges": [
+        "edge_1609"
+      ],
+      "label": "third-party tool",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "this girl",
+      "incident_edges": [
+        "edge_1616",
+        "edge_1658",
+        "edge_1659",
+        "edge_1717"
+      ],
+      "label": "This Girl",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tool",
+      "incident_edges": [
+        "edge_1718"
+      ],
+      "label": "tool",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tr pattern",
+      "incident_edges": [
+        "edge_1620"
+      ],
+      "label": "TR Patterns",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "track",
+      "incident_edges": [
+        "edge_1598",
+        "edge_1665",
+        "edge_1700",
+        "edge_1708",
+        "edge_1717"
+      ],
+      "label": "Track",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 11,
+      "id": "transformation rule",
+      "incident_edges": [
+        "edge_1625",
+        "edge_1629",
+        "edge_1680",
+        "edge_1684",
+        "edge_1692",
+        "edge_1701",
+        "edge_1704",
+        "edge_1705",
+        "edge_1706",
+        "edge_1711",
+        "edge_1719"
+      ],
+      "label": "transformation rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "trg_compute_delta_r_stmt",
+      "incident_edges": [
+        "edge_1652"
+      ],
+      "label": "trg_compute_delta_R_stmt",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "trigger",
+      "incident_edges": [
+        "edge_1652",
+        "edge_1718",
+        "edge_1720",
+        "edge_1721"
+      ],
+      "label": "trigger",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "triple",
+      "incident_edges": [
+        "edge_1625",
+        "edge_1673",
+        "edge_1683",
+        "edge_1685",
+        "edge_1722"
+      ],
+      "label": "triple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "tuple",
+      "incident_edges": [
+        "edge_1614",
+        "edge_1626",
+        "edge_1644",
+        "edge_1647",
+        "edge_1679"
+      ],
+      "label": "tuple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tuple identification",
+      "incident_edges": [
+        "edge_1676"
+      ],
+      "label": "tuple identification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "tuple r",
+      "incident_edges": [
+        "edge_1623",
+        "edge_1642",
+        "edge_1722",
+        "edge_1723"
+      ],
+      "label": "tuple r",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tuple r3",
+      "incident_edges": [
+        "edge_1723"
+      ],
+      "label": "tuple r3",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tuple s",
+      "incident_edges": [
+        "edge_1642"
+      ],
+      "label": "tuple s",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tuple variable",
+      "incident_edges": [
+        "edge_1701"
+      ],
+      "label": "tuple variable",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tuples in d",
+      "incident_edges": [
+        "edge_1634"
+      ],
+      "label": "tuples in D",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 14,
+      "id": "update",
+      "incident_edges": [
+        "edge_1598",
+        "edge_1610",
+        "edge_1627",
+        "edge_1628",
+        "edge_1635",
+        "edge_1685",
+        "edge_1704",
+        "edge_1706",
+        "edge_1707",
+        "edge_1710",
+        "edge_1711",
+        "edge_1719",
+        "edge_1720",
+        "edge_1721"
+      ],
+      "label": "update",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "update operation",
+      "incident_edges": [
+        "edge_1596"
+      ],
+      "label": "update operation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "update propagation",
+      "incident_edges": [
+        "edge_1639"
+      ],
+      "label": "update propagation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "updated tuple",
+      "incident_edges": [
+        "edge_1633"
+      ],
+      "label": "updated tuples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "uri",
+      "incident_edges": [
+        "edge_1601"
+      ],
+      "label": "URI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "value",
+      "incident_edges": [
+        "edge_1607",
+        "edge_1674",
+        "edge_1696"
+      ],
+      "label": "value",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "view maintenance",
+      "incident_edges": [
+        "edge_1655",
+        "edge_1661"
+      ],
+      "label": "view maintenance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "view mapping",
+      "incident_edges": [
+        "edge_1611"
+      ],
+      "label": "view mappings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "xpath view",
+      "incident_edges": [
+        "edge_1654"
+      ],
+      "label": "xpath view",
+      "properties": {
+        "node_level": "class"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1800 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.85,
+      "id": "edge_796",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_9",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "ai technique"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_797",
+      "properties": {},
+      "relation": "triggers",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_5",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "alarm_001"
+      ],
+      "targets": [
+        "event_001"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_798",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_9",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "knowledge graph",
+        "automatic construction"
+      ],
+      "targets": [
+        "data integration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_799",
+      "properties": {},
+      "relation": "denotes",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_4",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "community node",
+        "cluster p"
+      ],
+      "targets": [
+        "subgraph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_800",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_2",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "leiden algorithm",
+        "community detection"
+      ],
+      "targets": [
+        "modularity"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_801",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_2",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "community structure",
+        "personal knowledge graph"
+      ],
+      "targets": [
+        "cluster"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_802",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_8",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "machine unlearning",
+        "context fragmentation"
+      ],
+      "targets": [
+        "long-document rag"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_803",
+      "properties": {},
+      "relation": "contributes to",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_9",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "data source"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_804",
+      "properties": {},
+      "relation": "operationalizes",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_7",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "deterministic unlearning",
+        "gdpr article 17"
+      ],
+      "targets": [
+        "right to be forgotten"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_805",
+      "properties": {},
+      "relation": "is essential for",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_7",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "multimodal perception",
+        "dynamic interplay"
+      ],
+      "targets": [
+        "handling complexity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_806",
+      "properties": {},
+      "relation": "implements",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_3",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "pkg population task",
+        "epistemic twin constructor"
+      ],
+      "targets": [
+        "pkg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_807",
+      "properties": {},
+      "relation": "judges",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_1",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin core agent",
+        "user query"
+      ],
+      "targets": [
+        "response quality"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_808",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_4",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin reasoning engine"
+      ],
+      "targets": [
+        "sensemaking"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_809",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_7",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "local lms",
+        "epistwin"
+      ],
+      "targets": [
+        "physical sovereignty"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_810",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_6",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "neuro-symbolic architecture"
+      ],
+      "targets": [
+        "high performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_811",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_0",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "personal knowledge graph"
+      ],
+      "targets": [
+        "complex reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_812",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_6",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "personal knowledge graph"
+      ],
+      "targets": [
+        "retrieval problem"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_813",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_0",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "rag"
+      ],
+      "targets": [
+        "data silo"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_814",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_6",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "structural benefit"
+      ],
+      "targets": [
+        "active sensemaking"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_815",
+      "properties": {},
+      "relation": "prioritizes",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_7",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "user agency"
+      ],
+      "targets": [
+        "architectural imperative"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_816",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_6",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "user-controlled pkg"
+      ],
+      "targets": [
+        "right to be forgotten"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_817",
+      "properties": {},
+      "relation": "investigates",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_6",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin",
+        "visual evidence"
+      ],
+      "targets": [
+        "complex query"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_818",
+      "properties": {},
+      "relation": "addresses",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_1",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "epistwin"
+      ],
+      "targets": [
+        "data sovereignty"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_819",
+      "properties": {},
+      "relation": "exploits",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_1",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "online deep visual refinement tool",
+        "fallback agent"
+      ],
+      "targets": [
+        "neural retrieval model"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_820",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_5",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "football match"
+      ],
+      "targets": [
+        "event_001"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_821",
+      "properties": {},
+      "relation": "treats as",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_7",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "frozen large language model",
+        "user data"
+      ],
+      "targets": [
+        "ephemeral context"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_822",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_8",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "fuzzy date",
+        "personal knowledge graph"
+      ],
+      "targets": [
+        "dialogue understanding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_823",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_4",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "generative summarization operator"
+      ],
+      "targets": [
+        "summary sp"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_824",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_8",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "large language model",
+        "gpt-4"
+      ],
+      "targets": [
+        "knowledge graph question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_825",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_3",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "graph retrieval-augmented generation",
+        "graphrag"
+      ],
+      "targets": [
+        "reasoning"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_826",
+      "properties": {},
+      "relation": "aims",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_1",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "graph retrieval-augmented generation"
+      ],
+      "targets": [
+        "overcome local myopia"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_827",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_8",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "personal knowledge graph",
+        "health knowledge graph"
+      ],
+      "targets": [
+        "secure health data management"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_828",
+      "properties": {},
+      "relation": "hinders",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_4",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "pkg",
+        "high-density triple"
+      ],
+      "targets": [
+        "global sensemaking"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_829",
+      "properties": {},
+      "relation": "limits",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_1",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "human-in-the-loop strategy"
+      ],
+      "targets": [
+        "scalability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_830",
+      "properties": {},
+      "relation": "includes",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_2",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "personal knowledge",
+        "information object"
+      ],
+      "targets": [
+        "user data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_831",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_0",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "user data fragmentation",
+        "isolated application"
+      ],
+      "targets": [
+        "effective reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_832",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_2",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "llm",
+        "knowledge graph construction"
+      ],
+      "targets": [
+        "transformation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_833",
+      "properties": {},
+      "relation": "governs",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_2",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "knowledge graph",
+        "metadata"
+      ],
+      "targets": [
+        "provenance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_834",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_9",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "ai application"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_835",
+      "properties": {},
+      "relation": "orchestrates",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_3",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "llm",
+        "large language model"
+      ],
+      "targets": [
+        "adaptive reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_836",
+      "properties": {},
+      "relation": "identifies",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_4",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "leiden algorithm"
+      ],
+      "targets": [
+        "community structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_837",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_3",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "metadata extraction",
+        "Φm"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_838",
+      "properties": {},
+      "relation": "combines",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_0",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "neural model",
+        "symbolic method"
+      ],
+      "targets": [
+        "inference time"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_839",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_0",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "pkg constructor",
+        "unstructured data"
+      ],
+      "targets": [
+        "semantic triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_840",
+      "properties": {},
+      "relation": "maps",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_3",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "unstructured content",
+        "Φc"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_841",
+      "properties": {},
+      "relation": "participates_in",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_5",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "user_1"
+      ],
+      "targets": [
+        "football match"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_842",
+      "properties": {},
+      "relation": "sets",
+      "source_chunk_id": "KG_NeuroSymbolic_chunk_5",
+      "source_document": "KG_NeuroSymbolic",
+      "sources": [
+        "user_1"
+      ],
+      "targets": [
+        "alarm_001"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 47,
+    "num_nodes": 97
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "active sensemaking",
+      "incident_edges": [
+        "edge_814"
+      ],
+      "label": "active sensemaking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adaptive reasoning",
+      "incident_edges": [
+        "edge_835"
+      ],
+      "label": "adaptive reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ai application",
+      "incident_edges": [
+        "edge_834"
+      ],
+      "label": "AI applications",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ai technique",
+      "incident_edges": [
+        "edge_796"
+      ],
+      "label": "AI techniques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "alarm_001",
+      "incident_edges": [
+        "edge_797",
+        "edge_842"
+      ],
+      "label": "Alarm_001",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "architectural imperative",
+      "incident_edges": [
+        "edge_815"
+      ],
+      "label": "architectural imperative",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic construction",
+      "incident_edges": [
+        "edge_798"
+      ],
+      "label": "automatic construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cluster",
+      "incident_edges": [
+        "edge_801"
+      ],
+      "label": "cluster",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cluster p",
+      "incident_edges": [
+        "edge_799"
+      ],
+      "label": "cluster P",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "community detection",
+      "incident_edges": [
+        "edge_800"
+      ],
+      "label": "community detection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "community node",
+      "incident_edges": [
+        "edge_799"
+      ],
+      "label": "Community Node",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "community structure",
+      "incident_edges": [
+        "edge_801",
+        "edge_836"
+      ],
+      "label": "Community Structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex query",
+      "incident_edges": [
+        "edge_817"
+      ],
+      "label": "complex queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex reasoning",
+      "incident_edges": [
+        "edge_811"
+      ],
+      "label": "complex reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "context fragmentation",
+      "incident_edges": [
+        "edge_802"
+      ],
+      "label": "context fragmentation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data integration",
+      "incident_edges": [
+        "edge_798"
+      ],
+      "label": "data integration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data silo",
+      "incident_edges": [
+        "edge_813"
+      ],
+      "label": "data silos",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data source",
+      "incident_edges": [
+        "edge_803"
+      ],
+      "label": "data sources",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data sovereignty",
+      "incident_edges": [
+        "edge_818"
+      ],
+      "label": "data sovereignty",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deterministic unlearning",
+      "incident_edges": [
+        "edge_804"
+      ],
+      "label": "deterministic unlearning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dialogue understanding",
+      "incident_edges": [
+        "edge_822"
+      ],
+      "label": "dialogue understanding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dynamic interplay",
+      "incident_edges": [
+        "edge_805"
+      ],
+      "label": "dynamic interplay",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "effective reasoning",
+      "incident_edges": [
+        "edge_831"
+      ],
+      "label": "effective reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ephemeral context",
+      "incident_edges": [
+        "edge_821"
+      ],
+      "label": "ephemeral context",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "epistemic twin constructor",
+      "incident_edges": [
+        "edge_806"
+      ],
+      "label": "Epistemic Twin Constructor",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 10,
+      "id": "epistwin",
+      "incident_edges": [
+        "edge_809",
+        "edge_810",
+        "edge_811",
+        "edge_812",
+        "edge_813",
+        "edge_814",
+        "edge_815",
+        "edge_816",
+        "edge_817",
+        "edge_818"
+      ],
+      "label": "EpisTwin",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "epistwin core agent",
+      "incident_edges": [
+        "edge_807"
+      ],
+      "label": "EpisTwin Core Agent",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "epistwin reasoning engine",
+      "incident_edges": [
+        "edge_808"
+      ],
+      "label": "EpisTwin Reasoning Engine",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "event_001",
+      "incident_edges": [
+        "edge_797",
+        "edge_820"
+      ],
+      "label": "Event_001",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fallback agent",
+      "incident_edges": [
+        "edge_819"
+      ],
+      "label": "Fallback Agent",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "football match",
+      "incident_edges": [
+        "edge_820",
+        "edge_841"
+      ],
+      "label": "Football Match",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "frozen large language model",
+      "incident_edges": [
+        "edge_821"
+      ],
+      "label": "frozen Large Language Models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fuzzy date",
+      "incident_edges": [
+        "edge_822"
+      ],
+      "label": "fuzzy dates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gdpr article 17",
+      "incident_edges": [
+        "edge_804"
+      ],
+      "label": "GDPR Article 17",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "generative summarization operator",
+      "incident_edges": [
+        "edge_823"
+      ],
+      "label": "Generative Summarization Operator",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global sensemaking",
+      "incident_edges": [
+        "edge_828"
+      ],
+      "label": "global sensemaking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gpt-4",
+      "incident_edges": [
+        "edge_824"
+      ],
+      "label": "gpt-4",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph retrieval-augmented generation",
+      "incident_edges": [
+        "edge_825",
+        "edge_826"
+      ],
+      "label": "Graph Retrieval-Augmented Generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graphrag",
+      "incident_edges": [
+        "edge_825"
+      ],
+      "label": "GraphRAG",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "handling complexity",
+      "incident_edges": [
+        "edge_805"
+      ],
+      "label": "handling complexity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "health knowledge graph",
+      "incident_edges": [
+        "edge_827"
+      ],
+      "label": "health knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "high performance",
+      "incident_edges": [
+        "edge_810"
+      ],
+      "label": "high performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "high-density triple",
+      "incident_edges": [
+        "edge_828"
+      ],
+      "label": "high-density triples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human-in-the-loop strategy",
+      "incident_edges": [
+        "edge_829"
+      ],
+      "label": "Human-in-the-Loop strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inference time",
+      "incident_edges": [
+        "edge_838"
+      ],
+      "label": "inference time",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "information object",
+      "incident_edges": [
+        "edge_830"
+      ],
+      "label": "Information Objects",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "isolated application",
+      "incident_edges": [
+        "edge_831"
+      ],
+      "label": "isolated applications",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 7,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_796",
+        "edge_798",
+        "edge_803",
+        "edge_833",
+        "edge_834",
+        "edge_837",
+        "edge_840"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph construction",
+      "incident_edges": [
+        "edge_832"
+      ],
+      "label": "Knowledge Graph Construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph question answering",
+      "incident_edges": [
+        "edge_824"
+      ],
+      "label": "knowledge graph question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "large language model",
+      "incident_edges": [
+        "edge_824",
+        "edge_835"
+      ],
+      "label": "large language model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "leiden algorithm",
+      "incident_edges": [
+        "edge_800",
+        "edge_836"
+      ],
+      "label": "Leiden Algorithm",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "llm",
+      "incident_edges": [
+        "edge_832",
+        "edge_835"
+      ],
+      "label": "LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "local lms",
+      "incident_edges": [
+        "edge_809"
+      ],
+      "label": "local LMs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "long-document rag",
+      "incident_edges": [
+        "edge_802"
+      ],
+      "label": "long-document RAG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "machine unlearning",
+      "incident_edges": [
+        "edge_802"
+      ],
+      "label": "machine unlearning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metadata",
+      "incident_edges": [
+        "edge_833"
+      ],
+      "label": "metadata",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "metadata extraction",
+      "incident_edges": [
+        "edge_837"
+      ],
+      "label": "metadata extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "modularity",
+      "incident_edges": [
+        "edge_800"
+      ],
+      "label": "Modularity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal perception",
+      "incident_edges": [
+        "edge_805"
+      ],
+      "label": "multimodal perception",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural model",
+      "incident_edges": [
+        "edge_838"
+      ],
+      "label": "neural models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural retrieval model",
+      "incident_edges": [
+        "edge_819"
+      ],
+      "label": "neural retrieval models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neuro-symbolic architecture",
+      "incident_edges": [
+        "edge_810"
+      ],
+      "label": "neuro-symbolic architecture",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "online deep visual refinement tool",
+      "incident_edges": [
+        "edge_819"
+      ],
+      "label": "Online Deep Visual Refinement tool",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "overcome local myopia",
+      "incident_edges": [
+        "edge_826"
+      ],
+      "label": "overcome local myopia",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "personal knowledge",
+      "incident_edges": [
+        "edge_830"
+      ],
+      "label": "Personal Knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "personal knowledge graph",
+      "incident_edges": [
+        "edge_801",
+        "edge_811",
+        "edge_812",
+        "edge_822",
+        "edge_827"
+      ],
+      "label": "Personal Knowledge Graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "physical sovereignty",
+      "incident_edges": [
+        "edge_809"
+      ],
+      "label": "physical sovereignty",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "pkg",
+      "incident_edges": [
+        "edge_806",
+        "edge_828"
+      ],
+      "label": "PKG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pkg constructor",
+      "incident_edges": [
+        "edge_839"
+      ],
+      "label": "PKG Constructor",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pkg population task",
+      "incident_edges": [
+        "edge_806"
+      ],
+      "label": "PKG Population Task",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "provenance",
+      "incident_edges": [
+        "edge_833"
+      ],
+      "label": "provenance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rag",
+      "incident_edges": [
+        "edge_813"
+      ],
+      "label": "RAG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning",
+      "incident_edges": [
+        "edge_825"
+      ],
+      "label": "reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "response quality",
+      "incident_edges": [
+        "edge_807"
+      ],
+      "label": "response quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval problem",
+      "incident_edges": [
+        "edge_812"
+      ],
+      "label": "retrieval problem",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "right to be forgotten",
+      "incident_edges": [
+        "edge_804",
+        "edge_816"
+      ],
+      "label": "Right to be Forgotten",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scalability",
+      "incident_edges": [
+        "edge_829"
+      ],
+      "label": "scalability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "secure health data management",
+      "incident_edges": [
+        "edge_827"
+      ],
+      "label": "secure health data management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic triple",
+      "incident_edges": [
+        "edge_839"
+      ],
+      "label": "semantic triples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sensemaking",
+      "incident_edges": [
+        "edge_808"
+      ],
+      "label": "sensemaking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural benefit",
+      "incident_edges": [
+        "edge_814"
+      ],
+      "label": "structural benefits",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph",
+      "incident_edges": [
+        "edge_799"
+      ],
+      "label": "subgraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "summary sp",
+      "incident_edges": [
+        "edge_823"
+      ],
+      "label": "summary SP",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic method",
+      "incident_edges": [
+        "edge_838"
+      ],
+      "label": "symbolic methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "transformation",
+      "incident_edges": [
+        "edge_832"
+      ],
+      "label": "transformation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "unstructured content",
+      "incident_edges": [
+        "edge_840"
+      ],
+      "label": "unstructured content",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "unstructured data",
+      "incident_edges": [
+        "edge_839"
+      ],
+      "label": "unstructured data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user agency",
+      "incident_edges": [
+        "edge_815"
+      ],
+      "label": "user agency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "user data",
+      "incident_edges": [
+        "edge_821",
+        "edge_830"
+      ],
+      "label": "user data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user data fragmentation",
+      "incident_edges": [
+        "edge_831"
+      ],
+      "label": "user data fragmentation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user query",
+      "incident_edges": [
+        "edge_807"
+      ],
+      "label": "user query",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user-controlled pkg",
+      "incident_edges": [
+        "edge_816"
+      ],
+      "label": "user-controlled PKG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "user_1",
+      "incident_edges": [
+        "edge_841",
+        "edge_842"
+      ],
+      "label": "User_1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "visual evidence",
+      "incident_edges": [
+        "edge_817"
+      ],
+      "label": "visual evidence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "Φc",
+      "incident_edges": [
+        "edge_840"
+      ],
+      "label": "ΦC",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "Φm",
+      "incident_edges": [
+        "edge_837"
+      ],
+      "label": "ΦM",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

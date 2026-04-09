@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "augmentation": "Step_5_Discovery/augmentation.json",
+    "extraction_stats": "Step_2_Extraction/extraction_stats.json",
+    "graph": "graph.json",
+    "index": "Step_5_Discovery/index.json",
+    "insights": "Step_5_Discovery/insights.json",
+    "reports": {
+      "html": "Step_5_Discovery/report.html",
+      "markdown": "Step_5_Discovery/report.md"
+    },
+    "visualizations": {
+      "augmented": "Step_5_Discovery/graph_augmented.html",
+      "baseline": "Step_5_Discovery/graph.html",
+      "dot": "Step_5_Discovery/graph.dot",
+      "rag": "Step_5_Discovery/graph_rag.html"
+    }
+  },
+  "created_utc": "2026-03-26 03:37:32 UTC",
+  "last_updated_utc": "2026-03-26 03:37:32 UTC",
+  "pipeline": {
+    "completed_stages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "from_stage": 1
+  },
+  "run_id": "run_20260325_215039",
+  "sources": [
+    "tests/An Introduction to Knowledge Graphs.pdf",
+    "tests/Building Applications with AI Agents.pdf",
+    "tests/Building Knowledge Graphs_ A Practitioner’s Guide.pdf",
+    "tests/HigherOrdeerKGAgentic.pdf",
+    "tests/Knowledge Graphs and LLMs in Action.pdf",
+    "tests/Neuro-Symbolic AI Knowledge Discovery.pdf",
+    "tests/Semantic AI in Knowledge Graphs.pdf"
+  ],
+  "statistics": {
+    "entities": 151,
+    "insights": 107,
+    "insights_by_type": {
+      "analogical_transfer": 1,
+      "centrality": 1,
+      "claim_stance": 24,
+      "community_detection": 1,
+      "community_link": 18,
+      "core_periphery": 21,
+      "domain_bridge": 1,
+      "hypotheses_2": 2,
+      "intervention_bottleneck": 1,
+      "mechanism_consolidation": 1,
+      "method_outcome": 9,
+      "relation_induction": 24,
+      "text_similarity": 3
+    },
+    "relationships": 75
+  },
+  "title": "An Introduction to Knowledge Graphs Knowledge Discovery"
+}

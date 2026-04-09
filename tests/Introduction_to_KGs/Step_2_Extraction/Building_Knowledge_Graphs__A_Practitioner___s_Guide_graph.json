@@ -1,0 +1,690 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_34",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_84",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "adding code to neo4j.conf"
+      ],
+      "targets": [
+        "composite database creation"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_35",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_52",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "adding predicate to query"
+      ],
+      "targets": [
+        "finding specific friend of a friend"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_36",
+      "properties": {},
+      "relation": "disambiguates",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "additional metadata"
+      ],
+      "targets": [
+        "entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_37",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "advanced graph dependency modeling"
+      ],
+      "targets": [
+        "complex impact propagation calculation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_38",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_203",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "advanced graph dependency modeling"
+      ],
+      "targets": [
+        "dependency model correctness validation"
+      ]
+    },
+    {
+      "confidence": 1.0,
+      "id": "edge_39",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "algorithm execution"
+      ],
+      "targets": [
+        "shortest path printing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_40",
+      "properties": {},
+      "relation": "contributed to",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_117",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "author grew up in birmingham"
+      ],
+      "targets": [
+        "birmingham new street choice"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_41",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_29",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "composing hierarchy"
+      ],
+      "targets": [
+        "more insight"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_42",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "cypher code"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_43",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "cypher implementation"
+      ],
+      "targets": [
+        "similar result"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_44",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_150",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "data preparation"
+      ],
+      "targets": [
+        "data to meet required quality characteristic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_45",
+      "properties": {},
+      "relation": "enriches",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "explicit entities collection"
+      ],
+      "targets": [
+        "search option"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_46",
+      "properties": {},
+      "relation": "drives",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "significant business value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_47",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_228",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "richer data use"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_48",
+      "properties": {},
+      "relation": "boosts",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_273",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "leacock-chodorow formula"
+      ],
+      "targets": [
+        "similarity"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_49",
+      "properties": {},
+      "relation": "leads to",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "needs not met by client-server paradigm"
+      ],
+      "targets": [
+        "need for server-side logic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_50",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "neo4j fabric"
+      ],
+      "targets": [
+        "user to focus on domain"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_51",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "organizing principle"
+      ],
+      "targets": [
+        "building knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_52",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "query in example 5-3"
+      ],
+      "targets": [
+        "aggregated view"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_53",
+      "properties": {},
+      "relation": "returns",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_85",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "query in example 5-4"
+      ],
+      "targets": [
+        "list of global customer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_54",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_236",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "running python code"
+      ],
+      "targets": [
+        "list of entity"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_55",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "Building_Knowledge_Graphs__A_Practitioner___s_Guide_chunk_279",
+      "source_document": "Building_Knowledge_Graphs__A_Practitioner___s_Guide",
+      "sources": [
+        "scope of knowledge graph grow"
+      ],
+      "targets": [
+        "infrastructure moves down stack"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 22,
+    "num_nodes": 41
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "adding code to neo4j.conf",
+      "incident_edges": [
+        "edge_34"
+      ],
+      "label": "adding code to neo4j.conf",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "adding predicate to query",
+      "incident_edges": [
+        "edge_35"
+      ],
+      "label": "adding predicate to query",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "additional metadata",
+      "incident_edges": [
+        "edge_36"
+      ],
+      "label": "additional metadata",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "advanced graph dependency modeling",
+      "incident_edges": [
+        "edge_37",
+        "edge_38"
+      ],
+      "label": "Advanced Graph Dependency Modeling",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "aggregated view",
+      "incident_edges": [
+        "edge_52"
+      ],
+      "label": "aggregated view",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "algorithm execution",
+      "incident_edges": [
+        "edge_39"
+      ],
+      "label": "algorithm execution",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "author grew up in birmingham",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "author grew up in Birmingham",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "birmingham new street choice",
+      "incident_edges": [
+        "edge_40"
+      ],
+      "label": "Birmingham New Street choice",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "building knowledge graph",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "building knowledge graph",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "complex impact propagation calculation",
+      "incident_edges": [
+        "edge_37"
+      ],
+      "label": "complex impact propagation calculation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "composing hierarchy",
+      "incident_edges": [
+        "edge_41"
+      ],
+      "label": "composing hierarchies",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "composite database creation",
+      "incident_edges": [
+        "edge_34"
+      ],
+      "label": "composite database creation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "cypher code",
+      "incident_edges": [
+        "edge_42"
+      ],
+      "label": "Cypher code",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "cypher implementation",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "Cypher implementation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "data preparation",
+      "incident_edges": [
+        "edge_44"
+      ],
+      "label": "Data Preparation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "data to meet required quality characteristic",
+      "incident_edges": [
+        "edge_44"
+      ],
+      "label": "data to meet required quality characteristics",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "dependency model correctness validation",
+      "incident_edges": [
+        "edge_38"
+      ],
+      "label": "dependency model correctness validation",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "entity",
+      "incident_edges": [
+        "edge_36"
+      ],
+      "label": "entity",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "explicit entities collection",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "explicit entities collection",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "finding specific friend of a friend",
+      "incident_edges": [
+        "edge_35"
+      ],
+      "label": "finding specific friend of a friend",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "infrastructure moves down stack",
+      "incident_edges": [
+        "edge_55"
+      ],
+      "label": "infrastructure moves down stack",
+      "properties": {}
+    },
+    {
+      "degree": 3,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_42",
+        "edge_46",
+        "edge_47"
+      ],
+      "label": "knowledge graph",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "leacock-chodorow formula",
+      "incident_edges": [
+        "edge_48"
+      ],
+      "label": "Leacock-Chodorow formula",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "list of entity",
+      "incident_edges": [
+        "edge_54"
+      ],
+      "label": "list of entities",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "list of global customer",
+      "incident_edges": [
+        "edge_53"
+      ],
+      "label": "list of global customers",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "more insight",
+      "incident_edges": [
+        "edge_41"
+      ],
+      "label": "more insight",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "need for server-side logic",
+      "incident_edges": [
+        "edge_49"
+      ],
+      "label": "need for server-side logic",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "needs not met by client-server paradigm",
+      "incident_edges": [
+        "edge_49"
+      ],
+      "label": "needs not met by client-server paradigm",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "neo4j fabric",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "Neo4j Fabric",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "organizing principle",
+      "incident_edges": [
+        "edge_51"
+      ],
+      "label": "organizing principle",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "query in example 5-3",
+      "incident_edges": [
+        "edge_52"
+      ],
+      "label": "Query in Example 5-3",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "query in example 5-4",
+      "incident_edges": [
+        "edge_53"
+      ],
+      "label": "Query in Example 5-4",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "richer data use",
+      "incident_edges": [
+        "edge_47"
+      ],
+      "label": "richer data use",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "running python code",
+      "incident_edges": [
+        "edge_54"
+      ],
+      "label": "running Python code",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "scope of knowledge graph grow",
+      "incident_edges": [
+        "edge_55"
+      ],
+      "label": "scope of knowledge graph grows",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "search option",
+      "incident_edges": [
+        "edge_45"
+      ],
+      "label": "search options",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "shortest path printing",
+      "incident_edges": [
+        "edge_39"
+      ],
+      "label": "shortest path printing",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "significant business value",
+      "incident_edges": [
+        "edge_46"
+      ],
+      "label": "significant business value",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "similar result",
+      "incident_edges": [
+        "edge_43"
+      ],
+      "label": "similar results",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "similarity",
+      "incident_edges": [
+        "edge_48"
+      ],
+      "label": "similarity",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "user to focus on domain",
+      "incident_edges": [
+        "edge_50"
+      ],
+      "label": "user to focus on domain",
+      "properties": {}
+    }
+  ]
+}

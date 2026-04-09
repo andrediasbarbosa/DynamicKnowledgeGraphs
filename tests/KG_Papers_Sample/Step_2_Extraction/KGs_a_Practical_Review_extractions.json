@@ -1,0 +1,1014 @@
+[
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "emerged",
+        "sources": [
+          "knowledge graphs",
+          "KGs"
+        ],
+        "targets": [
+          "AI"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "fuel",
+        "sources": [
+          "structured datasets"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "instrumental",
+        "sources": [
+          "cross-disciplinary research"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "proposed",
+        "sources": [
+          "graph theory"
+        ],
+        "targets": [
+          "Königsberg Bridge Problem"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "emerged",
+        "sources": [
+          "networks"
+        ],
+        "targets": [
+          "computational social sciences"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "edges",
+          "properties"
+        ],
+        "targets": [
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "nodes",
+          "attributes"
+        ],
+        "targets": [
+          "entity attributes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provide",
+        "sources": [
+          "ontology",
+          "KG semantics"
+        ],
+        "targets": [
+          "semantics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "declare",
+        "sources": [
+          "rdf:type",
+          "A-Box"
+        ],
+        "targets": [
+          "entity type"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "map",
+        "sources": [
+          "constraints",
+          "predicates"
+        ],
+        "targets": [
+          "entity types"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "is related to",
+        "sources": [
+          "entity resolution",
+          "data mining"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "Google Knowledge Graph"
+        ],
+        "targets": [
+          "KG research"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "Semantic Web"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "is part of",
+        "sources": [
+          "KG representation",
+          "KG acquisition"
+        ],
+        "targets": [
+          "KG applications"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "is defined by",
+        "sources": [
+          "KG models"
+        ],
+        "targets": [
+          "KG research strands"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is discussed in",
+        "sources": [
+          "KG construction",
+          "domain-specific KG"
+        ],
+        "targets": [
+          "author's book"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are popular in",
+        "sources": [
+          "multilingual KGs"
+        ],
+        "targets": [
+          "recent research"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "serves as",
+        "sources": [
+          "Google Knowledge Graph"
+        ],
+        "targets": [
+          "example"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "gained prominence in",
+        "sources": [
+          "domain-specific searches"
+        ],
+        "targets": [
+          "academia",
+          "industry"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is prioritized in",
+        "sources": [
+          "KG research"
+        ],
+        "targets": [
+          "different communities"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "originates from",
+        "sources": [
+          "NLP",
+          "Semantic Web"
+        ],
+        "targets": [
+          "KG research"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "information extraction"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "entity linking"
+        ],
+        "targets": [
+          "KG quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "description logics"
+        ],
+        "targets": [
+          "KG research"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "transforms",
+        "sources": [
+          "Linked Data"
+        ],
+        "targets": [
+          "Web data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "Linked Data",
+          "structured data"
+        ],
+        "targets": [
+          "best practices"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "entity resolution",
+          "automatic linking"
+        ],
+        "targets": [
+          "equivalent entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "triplestores",
+          "graph databases"
+        ],
+        "targets": [
+          "KG querying"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "plays",
+        "sources": [
+          "representation learning",
+          "probabilistic graphical models"
+        ],
+        "targets": [
+          "KG research"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "time-aware models",
+          "temporal information"
+        ],
+        "targets": [
+          "KG embeddings"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "imposes",
+        "sources": [
+          "temporal order constraints",
+          "time-sensitive relation pairs"
+        ],
+        "targets": [
+          "temporal evolution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies to",
+        "sources": [
+          "probabilistic graphical models",
+          "probabilistic soft logic"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graphs",
+          "external knowledge"
+        ],
+        "targets": [
+          "recommender systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "graph neural networks",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "recommender systems"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "resembles",
+        "sources": [
+          "HINs",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "directed graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "querying",
+          "graph databases"
+        ],
+        "targets": [
+          "efficient querying"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "depends on",
+        "sources": [
+          "KG access",
+          "infrastructure"
+        ],
+        "targets": [
+          "KG representation model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "works with",
+        "sources": [
+          "NLP community",
+          "inputs"
+        ],
+        "targets": [
+          "natural language"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "ontology representation language",
+          "KG access"
+        ],
+        "targets": [
+          "success or failure"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "advanced graph query optimization",
+          "graph representations"
+        ],
+        "targets": [
+          "understanding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ontology",
+          "domain modeling"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "data acquisition",
+          "domain modeling"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is important for",
+        "sources": [
+          "NLP techniques",
+          "information extraction"
+        ],
+        "targets": [
+          "knowledge graph construction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "entity linking",
+          "canonical KG"
+        ],
+        "targets": [
+          "initial KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "processes",
+        "sources": [
+          "KG identification",
+          "extracted graph"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compared_to",
+        "sources": [
+          "graph database",
+          "triplestore"
+        ],
+        "targets": [
+          "graph-oriented databases"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "used_for",
+        "sources": [
+          "RDF",
+          "document store"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "noise",
+          "KG construction"
+        ],
+        "targets": [
+          "KG identification",
+          "querying"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_example_of",
+        "sources": [
+          "Amazon Neptune",
+          "cloud service"
+        ],
+        "targets": [
+          "KG infrastructure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "Neo4j",
+          "graph database"
+        ],
+        "targets": [
+          "Cypher"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "large-scale language models",
+          "BERT"
+        ],
+        "targets": [
+          "attention in AI"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "Google Knowledge Graph"
+        ],
+        "targets": [
+          "replication in industries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KG research"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "pushes",
+        "sources": [
+          "transformers",
+          "neural models"
+        ],
+        "targets": [
+          "state-of-the-art"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "benefits",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "visualization tools"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "computational social science",
+          "network science"
+        ],
+        "targets": [
+          "obstacles and opportunities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "network science",
+          "multilayer networks"
+        ],
+        "targets": [
+          "structure and function"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "applies to",
+        "sources": [
+          "link prediction",
+          "complex networks"
+        ],
+        "targets": [
+          "social networks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "entity resolution",
+          "big data"
+        ],
+        "targets": [
+          "data quality"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graphs",
+          "semantic web"
+        ],
+        "targets": [
+          "data interoperability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "ontology matching"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "psychosocial work exposures"
+        ],
+        "targets": [
+          "health outcomes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "COVID-19 knowledge graph"
+        ],
+        "targets": [
+          "COVID-19 pathophysiology"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "domain-specific knowledge graphs"
+        ],
+        "targets": [
+          "search engines"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "involves",
+        "sources": [
+          "knowledge graph construction"
+        ],
+        "targets": [
+          "data sources"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "relation extraction",
+          "distant supervision"
+        ],
+        "targets": [
+          "survey"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "deep learning methods",
+          "relation extraction"
+        ],
+        "targets": [
+          "survey"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "entity linking",
+          "knowledge base"
+        ],
+        "targets": [
+          "issues",
+          "techniques",
+          "solutions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "semantic web"
+        ],
+        "targets": [
+          "linked data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "linked open data"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph embedding"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph refinement"
+        ],
+        "targets": [
+          "evaluation methods"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "neural embeddings"
+        ],
+        "targets": [
+          "geonames locations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph embedding"
+        ],
+        "targets": [
+          "recommendations"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "taxonomies"
+        ],
+        "targets": [
+          "user behavior learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "applies to",
+        "sources": [
+          "heterogeneous information network",
+          "human health"
+        ],
+        "targets": [
+          "disease"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph neural networks",
+          "recommendation systems"
+        ],
+        "targets": [
+          "recommendation accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "ontology representation",
+          "conceptual modeling"
+        ],
+        "targets": [
+          "domain ontology"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graphs",
+          "social good"
+        ],
+        "targets": [
+          "human trafficking"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "schema validation",
+          "graph databases"
+        ],
+        "targets": [
+          "data integrity"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_a_Practical_Review_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "Kagnet",
+          "commonsense reasoning"
+        ],
+        "targets": [
+          "knowledge-aware graph networks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "BERT",
+          "language understanding"
+        ],
+        "targets": [
+          "deep bidirectional transformers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "ConceptNet",
+          "commonsense reasoning"
+        ],
+        "targets": [
+          "tool-kit"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "invests_in",
+        "sources": [
+          "CYC",
+          "knowledge infrastructure"
+        ],
+        "targets": [
+          "large-scale systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "act_as",
+        "sources": [
+          "language models",
+          "knowledge bases"
+        ],
+        "targets": [
+          "few-shot learners"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "generated_at": "2026-03-28 02:32:40 UTC",
+    "run_id": "run_20260328_004433",
+    "total_patterns": 0
+  },
+  "patterns": [
+    {
+      "id": "run_20260328_004433:meta_pattern:003681",
+      "type": "Meta-Pattern",
+      "size": 10,
+      "confidence": 1.000,
+      "nodes": ["transparency", "trust", "precision", "recall", "exclusion criteria", "inclusion criteria", "community structure", "leiden algorithm", "kg learning", "transformer"],
+      "node_ids": ["transparency", "trust", "precision", "recall", "exclusion criteria", "inclusion criteria", "community structure", "leiden algorithm", "kg learning", "transformer"],
+      "metadata": {
+        "occurrences": 40.000,
+        "pattern_size": 2.000
+      },
+      "description": "Meta-pattern: 40 similar 2-node structures detected",
+      "sources": []
+    },
+    {
+      "id": "run_20260328_004433:k_truss:000784",
+      "type": "k-Truss",
+      "size": 2,
+      "confidence": 1.000,
+      "nodes": ["kgs", "llm"],
+      "node_ids": ["kgs", "llm"],
+      "metadata": {
+        "support": 16.000
+      },
+      "description": "Dense edge in k-truss (k=3): kgs - llm",
+      "sources": ["KGs_and_LLMs", "Construxtion_of_KGs"]
+    }
+  ],
+  "statistics": {
+    "total_patterns": 2,
+    "by_type": {
+      "Meta-Pattern": 1,
+      "k-Truss": 1
+    },
+    "by_size": {
+      "10-node": 1,
+      "2-node": 1
+    }
+  },
+  "usage": {
+    "description": "Pattern library for reuse and querying",
+    "query_by_id": "Use 'id' field to retrieve specific patterns",
+    "query_by_size": "Use 'size' field to find patterns of specific dimensions",
+    "query_by_nodes": "Use 'node_ids' to find patterns containing specific entities",
+    "similarity_search": "Compare 'nodes' arrays to find structurally similar patterns"
+  }
+}

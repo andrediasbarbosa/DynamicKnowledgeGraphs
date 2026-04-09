@@ -1,0 +1,1773 @@
+[
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_0",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_1",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_2",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 54, column 71: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Insight into AI agent tools, orchestration, and]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_3",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_4",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_5",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_6",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_7",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_8",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_9",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_10",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 25: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_11",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_12",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_14",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_15",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_16",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"cont]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_17",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_18",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_19",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_20",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_21",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_22",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 67, column 22: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_23",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_24",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_25",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_26",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 15, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_27",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 18: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"type]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_28",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 24, column 23: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"evidence_]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_29",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_30",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_31",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_32",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_33",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_34",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_35",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_36",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 47, column 43: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_38",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_39",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_40",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 33, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_41",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 36, column 204: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_42",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_cause]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_43",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_44",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_45",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_46",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_47",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_48",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_49",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_50",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_51",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_52",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_53",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_54",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_55",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_56",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_57",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_58",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_59",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_60",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_62",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 40, column 76: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_63",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_64",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 51, column 6: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_65",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_66",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_67",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_68",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_69",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_70",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_71",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_72",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_73",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_74",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 14, column 11: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_75",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_76",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 40, column 24: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"sufficient]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_77",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_78",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_79",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_80",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_81",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_82",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_83",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_84",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_85",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_86",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 17, column 24: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_87",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_88",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_89",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_90",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_92",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 44, column 30: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"evidence_sources]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_93",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_94",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_95",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 32, column 17: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"causal]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_96",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_97",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_98",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 7, column 25: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_99",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_100",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_101",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_102",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_103",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_104",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_105",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_106",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_107",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_108",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_109",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_110",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 14, column 75: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_111",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 47, column 36: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_112",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_113",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_114",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_115",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_116",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_117",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_118",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_119",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_120",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_121",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_122",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_123",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_124",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_125",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_126",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_127",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 144: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The user query provides the task context and requirements, prompting the model to identify and choose the]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_128",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_129",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_130",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_131",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_cause]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_132",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_133",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_134",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_136",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 20, column 313: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Knowledge (often implemented via retrieval-augmented generation) pulls in factual or domain-specific content—technical specs, policy documents, product catalogs, customer or system logs—at generation time so the agent “knows” verifiable information beyond the immediate]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_137",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_138",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 40, column 55: syntax error while parsing value - invalid string: missing closing quote; last read: '\"applies to rolling]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_139",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_140",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_141",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 27, column 6: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_142",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_143",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_144",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_145",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_146",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_147",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_148",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_149",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_150",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_151",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 18: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"type]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_152",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_153",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_154",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_155",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 86, column 31: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_156",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_157",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_158",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_159",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_160",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_161",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_162",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_163",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 36, column 152: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Insights provide actionable knowledge or understanding that allows the agent to adjust its strategies or actions,]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_164",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_165",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_166",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_167",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_168",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_169",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_170",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_171",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_172",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_173",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_174",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_175",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 30: syntax error while parsing value - invalid string: missing closing quote; last read: '\"enabling]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_176",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_177",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 28, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_178",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 55, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_179",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_180",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "triggers",
+        "sources": [
+          "local path not found"
+        ],
+        "targets": [
+          "download attempt"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ranked pairs structure"
+        ],
+        "targets": [
+          "model learns to favor outputs"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "adjusts",
+        "sources": [
+          "beta parameter"
+        ],
+        "targets": [
+          "model prioritization of preferred response"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_181",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_182",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 37: syntax error while parsing value - invalid string: missing closing quote; last read: '\"when shaping]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_183",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_184",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_185",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_186",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_187",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_188",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 17, column 50: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_189",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_190",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_191",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_192",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_193",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_194",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_195",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_196",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_197",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 14, column 45: syntax error while parsing value - invalid string: missing closing quote; last read: '\"supervisor]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_198",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_199",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_200",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_201",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_202",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_203",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_204",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_205",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_206",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_207",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_208",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_209",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_210",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_211",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 26, column 7: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_212",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_213",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_214",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 17: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"causal]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_215",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_cause]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_216",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_217",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_218",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 33, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"evidence]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_219",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 39: syntax error while parsing value - invalid string: missing closing quote; last read: '\"deterministic]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_220",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_221",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_222",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_223",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_224",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_225",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 43: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_226",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_227",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_228",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_229",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_230",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_231",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_232",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_233",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_234",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_235",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_236",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_237",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_238",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_239",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_240",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_241",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_242",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_244",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 24: syntax error while parsing value - invalid string: missing closing quote; last read: '\"en]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_245",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_246",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_247",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_248",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 34, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_249",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_250",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_251",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_252",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_253",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 7, column 21: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"confidence]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_254",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_255",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_256",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 27: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_257",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_258",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_259",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_260",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_261",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 20, column 57: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Teams often adopt the]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_262",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_263",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_264",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_265",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_266",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_267",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_268",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 55, column 26: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_269",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_270",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_271",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_272",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 25: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_273",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_274",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_275",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 30: syntax error while parsing value - invalid string: missing closing quote; last read: '\"enabling]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_276",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 55, column 23: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"mechanism]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_277",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_278",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 39: syntax error while parsing value - invalid string: missing closing quote; last read: '\"short_term]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_279",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_280",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_281",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_282",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_283",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_284",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_285",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_286",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_287",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_288",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_289",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_290",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_292",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_293",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 39, column 57: syntax error while parsing value - invalid string: missing closing quote; last read: '\"reliance on large]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_294",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 48, column 19: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"scope]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_295",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"contributing]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_296",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_297",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_298",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_299",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_300",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_301",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_302",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_303",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"contributing]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_304",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_305",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_306",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_307",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 21: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"context]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_308",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_309",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_310",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_311",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_312",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_313",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_314",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_315",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_316",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_317",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 53: syntax error while parsing value - invalid string: missing closing quote; last read: '\"internal agent failures remain isolated]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_318",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_319",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_320",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_321",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_322",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_323",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 30, column 67: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Adoption of agents at different abstraction]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_324",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_325",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_326",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_327",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_328",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_329",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_330",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_331",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 36, column 33: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_332",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_333",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_334",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 32, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_335",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_336",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 54, column 38: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_337",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_338",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_339",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_340",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_341",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_342",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_343",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_344",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_345",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_346",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_347",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_348",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_349",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_350",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_351",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_352",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_353",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 24: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"mechanism_]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Building_Applications_with_AI_Agents_chunk_354",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  }
+]

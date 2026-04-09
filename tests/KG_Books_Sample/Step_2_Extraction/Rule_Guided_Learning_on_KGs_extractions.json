@@ -1,0 +1,518 @@
+[
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "representation learning",
+          "knowledge graph"
+        ],
+        "targets": [
+          "accuracy",
+          "explainability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "logic rules",
+          "paths"
+        ],
+        "targets": [
+          "representation learning"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "provides",
+        "sources": [
+          "KG embedding",
+          "multi-step paths"
+        ],
+        "targets": [
+          "extra relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "store",
+        "sources": [
+          "knowledge graphs",
+          "triple facts"
+        ],
+        "targets": [
+          "entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "benefits",
+        "sources": [
+          "KG completion",
+          "embedding models"
+        ],
+        "targets": [
+          "large scale KGs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "logic rules",
+          "semantic information"
+        ],
+        "targets": [
+          "knowledge inference"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "paths",
+          "KG embedding"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "TransE",
+          "Horn rules"
+        ],
+        "targets": [
+          "path representations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "rule mining methods",
+          "KGs"
+        ],
+        "targets": [
+          "rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "recurrent neural networks",
+          "path embeddings"
+        ],
+        "targets": [
+          "relations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "utilized in",
+        "sources": [
+          "rules",
+          "Rules R2"
+        ],
+        "targets": [
+          "path composition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracted from",
+        "sources": [
+          "Horn rules",
+          "KGs"
+        ],
+        "targets": [
+          "rules"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "create",
+        "sources": [
+          "rules",
+          "Rules R1"
+        ],
+        "targets": [
+          "semantic associations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "implemented by",
+        "sources": [
+          "path extraction",
+          "PTransE"
+        ],
+        "targets": [
+          "KGs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "rules",
+          "Rules R2"
+        ],
+        "targets": [
+          "generalization"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.86,
+        "relation": "causes",
+        "sources": [
+          "citylocatedincountry",
+          "citycapitalof"
+        ],
+        "targets": [
+          "parentof"
+        ]
+      },
+      {
+        "confidence": 1.0,
+        "relation": "causes",
+        "sources": [
+          "people born here",
+          "place of birth"
+        ],
+        "targets": [
+          "person"
+        ]
+      },
+      {
+        "confidence": 1.0,
+        "relation": "causes",
+        "sources": [
+          "hasspouse",
+          "fatherof"
+        ],
+        "targets": [
+          "parentof"
+        ]
+      },
+      {
+        "confidence": 0.81,
+        "relation": "causes",
+        "sources": [
+          "directed by",
+          "language"
+        ],
+        "targets": [
+          "film"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "distinguishes",
+        "sources": [
+          "FB15K",
+          "FB15K-237"
+        ],
+        "targets": [
+          "datasets"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracted_from",
+        "sources": [
+          "WordNet",
+          "WN18"
+        ],
+        "targets": [
+          "dataset"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracted_from",
+        "sources": [
+          "NELL",
+          "NELL-995"
+        ],
+        "targets": [
+          "dataset"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "SGD",
+          "mini-batch"
+        ],
+        "targets": [
+          "optimization"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "considered_as",
+        "sources": [
+          "conﬁdence levels",
+          "rules"
+        ],
+        "targets": [
+          "penalty coefficients"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contributes",
+        "sources": [
+          "conﬁdence levels",
+          "rules"
+        ],
+        "targets": [
+          "representation learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "RPJE",
+          "PTransE"
+        ],
+        "targets": [
+          "conﬁdence threshold"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "lower conﬁdence threshold",
+          "incorrect rules"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "filters",
+        "sources": [
+          "conﬁdence threshold",
+          "rules"
+        ],
+        "targets": [
+          "noisy rules"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "RPJE",
+          "baselines"
+        ],
+        "targets": [
+          "metrics"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "paths",
+          "rules"
+        ],
+        "targets": [
+          "relation prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compares",
+        "sources": [
+          "RPJE",
+          "PTransE"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "provide",
+        "sources": [
+          "Horn rules",
+          "paths"
+        ],
+        "targets": [
+          "semantic associations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "RPJE"
+        ],
+        "targets": [
+          "KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "paths",
+          "rules"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "removing paths",
+          "removing rules"
+        ],
+        "targets": [
+          "performance degradation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "convolutional embeddings"
+        ],
+        "targets": [
+          "multi-relational data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "rules",
+          "paths"
+        ],
+        "targets": [
+          "representation learning"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Rule_Guided_Learning_on_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "rule learning"
+        ],
+        "targets": [
+          "knowledge base completion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "embedding model",
+          "knowledge representation"
+        ],
+        "targets": [
+          "knowledge base inference"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "deep neural networks",
+          "logic rules"
+        ],
+        "targets": [
+          "knowledge graph learning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "random walk",
+          "graph inference"
+        ],
+        "targets": [
+          "knowledge base learning"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "semantic embeddings",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "zero-shot recognition"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

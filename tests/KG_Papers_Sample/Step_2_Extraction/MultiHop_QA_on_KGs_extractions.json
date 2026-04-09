@@ -1,0 +1,529 @@
+[
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Multi-Hop Question Answering",
+          "Knowledge Graphs"
+        ],
+        "targets": [
+          "Question Answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes to",
+        "sources": [
+          "Knowledge Graphs",
+          "large-scale knowledge graphs"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "SVO triples",
+          "Knowledge Bases"
+        ],
+        "targets": [
+          "Knowledge Graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "MHQA",
+          "complex questions"
+        ],
+        "targets": [
+          "natural language questions"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "path embedding",
+          "question embedding"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "question decomposition",
+          "question-answering systems"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "subgraph extraction",
+          "multi-hop reasoning"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "pre-trained models",
+          "subgraph structures"
+        ],
+        "targets": [
+          "KBQA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "sentence embeddings",
+          "path embeddings"
+        ],
+        "targets": [
+          "meaning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "BERT model",
+          "multi-head attention"
+        ],
+        "targets": [
+          "embeddings"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "QAP framework",
+          "question embeddings"
+        ],
+        "targets": [
+          "answer performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "sentence embeddings",
+          "self-attention mechanism"
+        ],
+        "targets": [
+          "medical terminologies"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "KG embeddings",
+          "EmbedKGQA"
+        ],
+        "targets": [
+          "KG sparsity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "START Information Server",
+          "natural language processing"
+        ],
+        "targets": [
+          "knowledge base construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "semantic graphs",
+          "QA systems"
+        ],
+        "targets": [
+          "explanations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "question processing",
+          "document retrieval"
+        ],
+        "targets": [
+          "answer selection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "defines",
+        "sources": [
+          "knowledge graph",
+          "SVO triples"
+        ],
+        "targets": [
+          "knowledge graph G"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "question embedding",
+          "path embedding"
+        ],
+        "targets": [
+          "subgraph-based QA"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "subgraph extraction",
+          "question decomposition"
+        ],
+        "targets": [
+          "computational efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "binary templates",
+          "natural language queries"
+        ],
+        "targets": [
+          "question comprehension"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "serves as",
+        "sources": [
+          "binary cross entropy",
+          "multi-hot encoding"
+        ],
+        "targets": [
+          "objective function"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "calculates",
+        "sources": [
+          "path embeddings",
+          "L1 distance"
+        ],
+        "targets": [
+          "closest embedding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "Knowledge Graph",
+          "entity-relation-entity triplets"
+        ],
+        "targets": [
+          "connection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "adaptive thresholding",
+          "probabilities"
+        ],
+        "targets": [
+          "correct answer"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "trains",
+        "sources": [
+          "ComplexSQ model",
+          "MetaQA dataset"
+        ],
+        "targets": [
+          "Knowledge Graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "feeds",
+        "sources": [
+          "QA dataset",
+          "Knowledge Graph"
+        ],
+        "targets": [
+          "model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "head entity",
+          "topic entity"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "incidence matrix",
+          "ERE triplets"
+        ],
+        "targets": [
+          "entity relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "sentence embedding",
+          "word embeddings"
+        ],
+        "targets": [
+          "inter-relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "centers",
+        "sources": [
+          "subgraph",
+          "topic entity"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "relative distance",
+          "sentence embedding"
+        ],
+        "targets": [
+          "answer extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "sub-graph extraction",
+          "path discontinuity"
+        ],
+        "targets": [
+          "non-existent relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "auxiliary information",
+          "question answering"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "proposed model",
+          "state-of-the-art models"
+        ],
+        "targets": [
+          "MetaQA"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "offers",
+        "sources": [
+          "cloud-based platforms",
+          "AWS",
+          "Microsoft Azure"
+        ],
+        "targets": [
+          "cost-effective solutions",
+          "machine learning training"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "knowledge graphs"
+        ],
+        "targets": [
+          "natural language question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "multi-hop reasoning"
+        ],
+        "targets": [
+          "traversing relationships",
+          "making inferences"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "identifies",
+        "sources": [
+          "methodology"
+        ],
+        "targets": [
+          "optimal subgraphs",
+          "candidate answers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "surpasses",
+        "sources": [
+          "advanced techniques"
+        ],
+        "targets": [
+          "existing methods"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "MultiHop_QA_on_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "reads",
+        "sources": [
+          "key-value memory networks",
+          "documents"
+        ],
+        "targets": [
+          "information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "fuses",
+        "sources": [
+          "open domain question answering",
+          "knowledge bases",
+          "text"
+        ],
+        "targets": [
+          "answers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "retrieves",
+        "sources": [
+          "pullnet"
+        ],
+        "targets": [
+          "knowledge bases",
+          "text"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "deep cognitive reasoning network"
+        ],
+        "targets": [
+          "multi-hop question answering"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

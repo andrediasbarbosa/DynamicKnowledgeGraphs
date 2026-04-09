@@ -1,0 +1,106 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.95,
+      "id": "edge_31",
+      "properties": {},
+      "relation": "adjusts",
+      "source_chunk_id": "Building_Applications_with_AI_Agents_chunk_180",
+      "source_document": "Building_Applications_with_AI_Agents",
+      "sources": [
+        "beta parameter"
+      ],
+      "targets": [
+        "model prioritization of preferred response"
+      ]
+    },
+    {
+      "confidence": 0.95,
+      "id": "edge_32",
+      "properties": {},
+      "relation": "triggers",
+      "source_chunk_id": "Building_Applications_with_AI_Agents_chunk_180",
+      "source_document": "Building_Applications_with_AI_Agents",
+      "sources": [
+        "local path not found"
+      ],
+      "targets": [
+        "download attempt"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_33",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Building_Applications_with_AI_Agents_chunk_180",
+      "source_document": "Building_Applications_with_AI_Agents",
+      "sources": [
+        "ranked pairs structure"
+      ],
+      "targets": [
+        "model learns to favor output"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 3,
+    "num_nodes": 6
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "beta parameter",
+      "incident_edges": [
+        "edge_31"
+      ],
+      "label": "beta parameter",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "download attempt",
+      "incident_edges": [
+        "edge_32"
+      ],
+      "label": "download attempt",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "local path not found",
+      "incident_edges": [
+        "edge_32"
+      ],
+      "label": "local path not found",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "model learns to favor output",
+      "incident_edges": [
+        "edge_33"
+      ],
+      "label": "model learns to favor outputs",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "model prioritization of preferred response",
+      "incident_edges": [
+        "edge_31"
+      ],
+      "label": "model prioritization of preferred response",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "ranked pairs structure",
+      "incident_edges": [
+        "edge_33"
+      ],
+      "label": "ranked pairs structure",
+      "properties": {}
+    }
+  ]
+}

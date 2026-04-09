@@ -1,0 +1,363 @@
+[
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "RAG",
+          "LLMs"
+        ],
+        "targets": [
+          "factual hallucinations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Knowledge Graph",
+          "RAG"
+        ],
+        "targets": [
+          "improved accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "retrieved documents",
+          "LLMs"
+        ],
+        "targets": [
+          "response quality"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "compares",
+        "sources": [
+          "GraphRAG",
+          "RGB"
+        ],
+        "targets": [
+          "RAG baseline"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reduces",
+        "sources": [
+          "RAG",
+          "LLMs"
+        ],
+        "targets": [
+          "factual errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "customizes",
+        "sources": [
+          "GraphRAG",
+          "RGB Benchmark"
+        ],
+        "targets": [
+          "RobustGraphRAG"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "answers",
+        "sources": [
+          "community summaries",
+          "users' questions"
+        ],
+        "targets": [
+          "information retrieval"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "structured knowledge",
+          "retrieval-generation pipeline"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "customizations",
+          "GraphRAG"
+        ],
+        "targets": [
+          "robustness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "builds",
+        "sources": [
+          "LLM capabilities",
+          "knowledge graph"
+        ],
+        "targets": [
+          "entity-based knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contain",
+        "sources": [
+          "external documents"
+        ],
+        "targets": [
+          "noisy information",
+          "irrelevant information",
+          "factually incorrect information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "attempt",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "provide answer"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "cause",
+        "sources": [
+          "noisy documents"
+        ],
+        "targets": [
+          "rejection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assess",
+        "sources": [
+          "RGB benchmark"
+        ],
+        "targets": [
+          "LLMs' robustness"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "contribute",
+        "sources": [
+          "internal knowledge",
+          "external knowledge"
+        ],
+        "targets": [
+          "LLMs' performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "impacts",
+        "sources": [
+          "GPT-3.5",
+          "noise"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "GPT-4o-mini",
+          "noise"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "GraphRAG",
+          "knowledge graph"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "combines",
+        "sources": [
+          "encoded knowledge",
+          "external knowledge"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "impacts",
+        "sources": [
+          "GPT-3.5",
+          "factual errors"
+        ],
+        "targets": [
+          "performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "GraphRAG",
+          "GPT-3.5"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "GPT-4o-mini",
+          "encoded knowledge"
+        ],
+        "targets": [
+          "better performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "noise",
+          "RGB baseline"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "GRcomb",
+          "external knowledge"
+        ],
+        "targets": [
+          "error correction rate"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "GPT-4o-mini",
+          "knowledge graph"
+        ],
+        "targets": [
+          "structured knowledge"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "Retrieval-Augmented Generation"
+        ],
+        "targets": [
+          "LLM robustness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "GRcomb",
+          "GRext"
+        ],
+        "targets": [
+          "performance gains"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "external knowledge"
+        ],
+        "targets": [
+          "rejection rates"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "refines",
+        "sources": [
+          "confidence scores"
+        ],
+        "targets": [
+          "model capabilities"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "multimodal RAG"
+        ],
+        "targets": [
+          "LLM reliability"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

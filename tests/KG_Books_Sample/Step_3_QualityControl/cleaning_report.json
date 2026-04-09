@@ -1,0 +1,41 @@
+{
+  "cleaning_time_ms": 262814.577998,
+  "connectivity": {
+    "average_degree": 1.5994318181818181,
+    "clustering_coefficient": 0.027816073387783535,
+    "graph_density": 0.0009412631143728358,
+    "hub_node_degree": 126,
+    "hub_node_label": "knowledge graph",
+    "largest_component_size": 766,
+    "num_connected_components": 440,
+    "num_isolated_nodes": 0
+  },
+  "final_edges": 1457,
+  "final_nodes": 1760,
+  "initial_edges": 1954,
+  "initial_nodes": 3184,
+  "level1": {
+    "labels_simplified": 38,
+    "removed_by_artifacts": 0,
+    "removed_by_length": 13,
+    "removed_by_numbers": 9,
+    "removed_by_stopwords": 0,
+    "total_removed": 22
+  },
+  "level1_5": {
+    "semantic_duplicates_found": 173,
+    "semantic_duplicates_merged": 464
+  },
+  "level2": {
+    "removed_by_degree": 938,
+    "removed_by_importance": 0,
+    "removed_by_outliers": 0,
+    "total_removed": 938
+  },
+  "level3": {
+    "removed_by_llm": 0,
+    "total_removed": 0,
+    "validated_by_llm": 0
+  },
+  "total_removed": 960
+}

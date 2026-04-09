@@ -1,0 +1,889 @@
+[
+  {
+    "chunk_id": "Evolvable_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "knowledge graphs",
+          "KGs"
+        ],
+        "targets": [
+          "intelligent systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is necessary for",
+        "sources": [
+          "knowledge of factory",
+          "machinery",
+          "components"
+        ],
+        "targets": [
+          "industrial maintenance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represent",
+        "sources": [
+          "knowledge bases",
+          "KBs"
+        ],
+        "targets": [
+          "human knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are applied to",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "information retrieval",
+          "recommendations",
+          "question-answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "semantic web"
+        ],
+        "targets": [
+          "information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "support",
+        "sources": [
+          "knowledge graphs",
+          "KGs"
+        ],
+        "targets": [
+          "AI-driven decisions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrate",
+        "sources": [
+          "KGs"
+        ],
+        "targets": [
+          "heterogeneous information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimize",
+        "sources": [
+          "AI"
+        ],
+        "targets": [
+          "activities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhance",
+        "sources": [
+          "failure diagnostics"
+        ],
+        "targets": [
+          "products and services"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focus",
+        "sources": [
+          "literature review"
+        ],
+        "targets": [
+          "KG creation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "expert interviews",
+          "service specialists"
+        ],
+        "targets": [
+          "problem definition",
+          "design challenges"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "KG",
+          "digital assistant"
+        ],
+        "targets": [
+          "maintenance engineers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "forms",
+        "sources": [
+          "mock-up assistant",
+          "Pandora",
+          "Media Wiki"
+        ],
+        "targets": [
+          "chatbot"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "existing documents"
+        ],
+        "targets": [
+          "maintenance engineers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "KG creation process"
+        ],
+        "targets": [
+          "understanding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "knowledge engineering",
+          "knowledge acquisition"
+        ],
+        "targets": [
+          "data gathering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge representation",
+          "knowledge base"
+        ],
+        "targets": [
+          "computer processing"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "ensures",
+        "sources": [
+          "knowledge validation",
+          "data integrity"
+        ],
+        "targets": [
+          "factual accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "knowledge processing",
+          "model creation"
+        ],
+        "targets": [
+          "quality evaluation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "exploits",
+        "sources": [
+          "knowledge utilization",
+          "knowledge graph"
+        ],
+        "targets": [
+          "specific use cases"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "knowledge acquisition",
+          "ontology building"
+        ],
+        "targets": [
+          "data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "knowledge fusion"
+        ],
+        "targets": [
+          "knowledge storage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "ontology"
+        ],
+        "targets": [
+          "knowledge extraction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge processing"
+        ],
+        "targets": [
+          "knowledge utilization"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "relies on",
+        "sources": [
+          "industrial maintenance"
+        ],
+        "targets": [
+          "human effort",
+          "technology"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "eases",
+        "sources": [
+          "digital assistant",
+          "maintenance engineers"
+        ],
+        "targets": [
+          "workload"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "digital assistant",
+          "expert knowledge"
+        ],
+        "targets": [
+          "knowledge-based tasks"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "ontology",
+          "common entities"
+        ],
+        "targets": [
+          "application ontologies"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "data sources",
+          "duplicate information"
+        ],
+        "targets": [
+          "integration task"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "tackles",
+        "sources": [
+          "computer translation",
+          "local languages"
+        ],
+        "targets": [
+          "record finding"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "NLP techniques",
+          "text analysis"
+        ],
+        "targets": [
+          "digital assistant"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "requires",
+        "sources": [
+          "machine learning methods",
+          "knowledge processing"
+        ],
+        "targets": [
+          "further study"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "feedback",
+          "user suggestions"
+        ],
+        "targets": [
+          "stored knowledge"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "leads to",
+        "sources": [
+          "document to vector-model",
+          "service reports"
+        ],
+        "targets": [
+          "memory consumption"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "serves as",
+        "sources": [
+          "KG",
+          "assistant operations"
+        ],
+        "targets": [
+          "foundation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "learning",
+          "intelligent system"
+        ],
+        "targets": [
+          "assistant performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "finds",
+        "sources": [
+          "machine learning algorithms",
+          "KGCP"
+        ],
+        "targets": [
+          "new entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "adds",
+        "sources": [
+          "inferencing methods",
+          "existing knowledge"
+        ],
+        "targets": [
+          "new knowledge"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "updates",
+        "sources": [
+          "user feedback",
+          "contemporary systems"
+        ],
+        "targets": [
+          "KG"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "intelligent assistant",
+          "personalized education"
+        ],
+        "targets": [
+          "continuous improvement"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "machine learning methods",
+          "KG construction"
+        ],
+        "targets": [
+          "knowledge connections"
+        ]
+      },
+      {
+        "confidence": 0.7,
+        "relation": "affects",
+        "sources": [
+          "inferencing algorithms",
+          "industrial maintenance"
+        ],
+        "targets": [
+          "KG"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "user feedback",
+          "Five-star rating system"
+        ],
+        "targets": [
+          "recommendations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "introduces",
+        "sources": [
+          "knowledge utilization",
+          "KGCP"
+        ],
+        "targets": [
+          "new component"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge utilization",
+          "knowledge acquisition"
+        ],
+        "targets": [
+          "tacit knowledge gathering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "evolvability",
+          "knowledge processing"
+        ],
+        "targets": [
+          "learning objectives"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "knowledge fusion",
+          "changing knowledge"
+        ],
+        "targets": [
+          "integration activities"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "must consider",
+        "sources": [
+          "design aspects",
+          "KGCP stages"
+        ],
+        "targets": [
+          "incremental changes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "lead to",
+        "sources": [
+          "design principles",
+          "evolvable KG"
+        ],
+        "targets": [
+          "mechanisms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "data cleaning",
+          "rule-based solutions"
+        ],
+        "targets": [
+          "reliable methods"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "refine",
+        "sources": [
+          "design objectives",
+          "study"
+        ],
+        "targets": [
+          "practical feasibility"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "highlight",
+        "sources": [
+          "learning aspects",
+          "KGCP"
+        ],
+        "targets": [
+          "requirements"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "drive",
+        "sources": [
+          "design objectives",
+          "study"
+        ],
+        "targets": [
+          "KG research"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graphs",
+          "KGCP"
+        ],
+        "targets": [
+          "decision-making",
+          "collaboration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "iterative process",
+          "design objectives"
+        ],
+        "targets": [
+          "evolvable KG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "advances",
+        "sources": [
+          "knowledge processing",
+          "utilization"
+        ],
+        "targets": [
+          "intelligent systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "systematic framework",
+          "process model"
+        ],
+        "targets": [
+          "KG development"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "informs",
+        "sources": [
+          "research insights",
+          "study"
+        ],
+        "targets": [
+          "KG design"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "recommender systems"
+        ],
+        "targets": [
+          "technologies"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "semantic web",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "industry 4.0"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "explainable AI"
+        ],
+        "targets": [
+          "system transparency"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "actionable knowledge graph",
+          "maintenance operations"
+        ],
+        "targets": [
+          "cognitive approach"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "informs",
+        "sources": [
+          "ontology development",
+          "knowledge graph"
+        ],
+        "targets": [
+          "AI systems"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "linked data"
+        ],
+        "targets": [
+          "large organisations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "ontology matching"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "convolutional neural networks",
+          "ontology matching"
+        ],
+        "targets": [
+          "ontology matching accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge reasoning",
+          "knowledge graph"
+        ],
+        "targets": [
+          "inference"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "influences",
+        "sources": [
+          "personalized recommendations",
+          "user behavior"
+        ],
+        "targets": [
+          "paper recommendations"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Evolvable_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "power grid education"
+        ],
+        "targets": [
+          "resource management"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "big data",
+          "distance education"
+        ],
+        "targets": [
+          "personalized learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "meta-learning"
+        ],
+        "targets": [
+          "automated machine learning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graph",
+          "manufacturing"
+        ],
+        "targets": [
+          "knowledge completion"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "predicts",
+        "sources": [
+          "knowledge graph",
+          "elevator system"
+        ],
+        "targets": [
+          "failure"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

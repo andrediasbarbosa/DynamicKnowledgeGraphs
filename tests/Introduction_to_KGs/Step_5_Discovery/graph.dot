@@ -1,0 +1,457 @@
+digraph Hypergraph {
+  rankdir=LR;
+  node [shape=ellipse, style=filled, color=lightblue];
+
+  "ability of gnns to capture complex relationship" [label="ability of gnns to capture complex relationship"];
+  "access to web page" [label="access to web page"];
+  "adding code to neo4j.conf" [label="adding code to neo4j.conf"];
+  "adding predicate to query" [label="adding predicate to query"];
+  "additional metadata" [label="additional metadata"];
+  "advanced graph dependency modeling" [label="advanced graph dependency modeling"];
+  "aggregated view" [label="aggregated view"];
+  "algorithm execution" [label="algorithm execution"];
+  "an instance of a class not having any value for property p" [label="an instance of a class not having any value for property p"];
+  "answer with book titles, authors, link" [label="answer with book titles, authors, link"];
+  "application" [label="application"];
+  "applications using data" [label="applications using data"];
+  "assessing kg quality statu" [label="assessing kg quality statu"];
+  "assigning incremental id to node" [label="assigning incremental id to node"];
+  "author grew up in birmingham" [label="author grew up in birmingham"];
+  "author interest" [label="author interest"];
+  "beta parameter" [label="beta parameter"];
+  "birmingham new street choice" [label="birmingham new street choice"];
+  "book in print" [label="book in print"];
+  "building knowledge graph" [label="building knowledge graph"];
+  "categorization of deeper node" [label="categorization of deeper node"];
+  "challenging question" [label="challenging question"];
+  "cold-start problem" [label="cold-start problem"];
+  "compact numerical representation" [label="compact numerical representation"];
+  "complex impact propagation calculation" [label="complex impact propagation calculation"];
+  "composing hierarchy" [label="composing hierarchy"];
+  "composite database creation" [label="composite database creation"];
+  "comprehensive view of node's structural context" [label="comprehensive view of node's structural context"];
+  "compute in-degree and out-degree" [label="compute in-degree and out-degree"];
+  "coreference resolution" [label="coreference resolution"];
+  "cypher code" [label="cypher code"];
+  "cypher implementation" [label="cypher implementation"];
+  "data offer" [label="data offer"];
+  "data preparation" [label="data preparation"];
+  "data sharing" [label="data sharing"];
+  "data to meet required quality characteristic" [label="data to meet required quality characteristic"];
+  "dependency model correctness validation" [label="dependency model correctness validation"];
+  "deployment" [label="deployment"];
+  "diabetes type 1" [label="diabetes type 1"];
+  "distinguishing typo from undefined property" [label="distinguishing typo from undefined property"];
+  "dl decidability" [label="dl decidability"];
+  "download attempt" [label="download attempt"];
+  "each iteration" [label="each iteration"];
+  "entity" [label="entity"];
+  "entity recognition" [label="entity recognition"];
+  "evaluate entities’ semantic relatedness" [label="evaluate entities’ semantic relatedness"];
+  "explicit entities collection" [label="explicit entities collection"];
+  "extensive data publishing" [label="extensive data publishing"];
+  "extracting features from distant neighborhood" [label="extracting features from distant neighborhood"];
+  "false syntactic tokens in property iri" [label="false syntactic tokens in property iri"];
+  "few publisher constraint" [label="few publisher constraint"];
+  "financial transaction graph suitable for gnn" [label="financial transaction graph suitable for gnn"];
+  "finding specific friend of a friend" [label="finding specific friend of a friend"];
+  "forum accessibility" [label="forum accessibility"];
+  "functional property" [label="functional property"];
+  "fundamental challenges in graph-based ml task" [label="fundamental challenges in graph-based ml task"];
+  "gate gazetteer" [label="gate gazetteer"];
+  "german tourism kg excerpt" [label="german tourism kg excerpt"];
+  "gnns are valuable for real-world problem" [label="gnns are valuable for real-world problem"];
+  "graph neural network" [label="graph neural network"];
+  "graph not directed" [label="graph not directed"];
+  "graphdb reasoner" [label="graphdb reasoner"];
+  "hierarchical structure" [label="hierarchical structure"];
+  "hierarchy not being a tree" [label="hierarchy not being a tree"];
+  "hpo ontology conversion to neo4j graph" [label="hpo ontology conversion to neo4j graph"];
+  "improving kg quality" [label="improving kg quality"];
+  "inconsistency" [label="inconsistency"];
+  "inferring knowledge for unseen topic" [label="inferring knowledge for unseen topic"];
+  "information from first-level node" [label="information from first-level node"];
+  "information propagation" [label="information propagation"];
+  "infrastructure moves down stack" [label="infrastructure moves down stack"];
+  "islets of langerhan" [label="islets of langerhan"];
+  "iterative solution" [label="iterative solution"];
+  "karl answering process" [label="karl answering process"];
+  "kg approach" [label="kg approach"];
+  "kg choice" [label="kg choice"];
+  "kg principles application" [label="kg principles application"];
+  "kg success and adoption" [label="kg success and adoption"];
+  "knowledge enrichment" [label="knowledge enrichment"];
+  "knowledge graph" [label="knowledge graph"];
+  "knowledge transfers via sentence alignment" [label="knowledge transfers via sentence alignment"];
+  "leacock-chodorow formula" [label="leacock-chodorow formula"];
+  "linked data" [label="linked data"];
+  "list of entity" [label="list of entity"];
+  "list of global customer" [label="list of global customer"];
+  "llm integration" [label="llm integration"];
+  "local path not found" [label="local path not found"];
+  "model learns to favor output" [label="model learns to favor output"];
+  "model prioritization of preferred response" [label="model prioritization of preferred response"];
+  "more insight" [label="more insight"];
+  "natural language command" [label="natural language command"];
+  "need for server-side logic" [label="need for server-side logic"];
+  "needs not met by client-server paradigm" [label="needs not met by client-server paradigm"];
+  "neighbors aggregating value" [label="neighbors aggregating value"];
+  "neo4j fabric" [label="neo4j fabric"];
+  "neural machine translation" [label="neural machine translation"];
+  "new fact" [label="new fact"];
+  "no function symbol" [label="no function symbol"];
+  "no query violation" [label="no query violation"];
+  "node expansion" [label="node expansion"];
+  "node passing values to neighbor" [label="node passing values to neighbor"];
+  "organizing principle" [label="organizing principle"];
+  "orthomatcher" [label="orthomatcher"];
+  "pagerank values update" [label="pagerank values update"];
+  "poor quality kgs" [label="poor quality kgs"];
+  "preprocessing csv file" [label="preprocessing csv file"];
+  "preprocessing phase" [label="preprocessing phase"];
+  "processing using cypher" [label="processing using cypher"];
+  "pronominal coreference resolution module" [label="pronominal coreference resolution module"];
+  "query" [label="query"];
+  "query execution" [label="query execution"];
+  "query in example 5-3" [label="query in example 5-3"];
+  "query in example 5-4" [label="query in example 5-4"];
+  "query to chatgpt" [label="query to chatgpt"];
+  "ranked pairs structure" [label="ranked pairs structure"];
+  "real-world problem" [label="real-world problem"];
+  "result interpretation" [label="result interpretation"];
+  "richer data use" [label="richer data use"];
+  "running python code" [label="running python code"];
+  "schema identifier uniqueness" [label="schema identifier uniqueness"];
+  "schema:location value invalid literal" [label="schema:location value invalid literal"];
+  "schema:location value is iri" [label="schema:location value is iri"];
+  "scope of knowledge graph grow" [label="scope of knowledge graph grow"];
+  "search engine" [label="search engine"];
+  "search option" [label="search option"];
+  "searching linked data" [label="searching linked data"];
+  "self-referential calculation" [label="self-referential calculation"];
+  "semantic knowledge graph" [label="semantic knowledge graph"];
+  "semantic type" [label="semantic type"];
+  "semantify page" [label="semantify page"];
+  "services like analytic" [label="services like analytic"];
+  "shortest path printing" [label="shortest path printing"];
+  "significant business value" [label="significant business value"];
+  "significant organizational cost" [label="significant organizational cost"];
+  "similar result" [label="similar result"];
+  "similarity" [label="similarity"];
+  "snomed_is_a relationship" [label="snomed_is_a relationship"];
+  "sparql query returns false" [label="sparql query returns false"];
+  "sparql query returns true" [label="sparql query returns true"];
+  "string similarity measure" [label="string similarity measure"];
+  "syntactic errors in property identifier" [label="syntactic errors in property identifier"];
+  "training process" [label="training process"];
+  "transferring knowledge" [label="transferring knowledge"];
+  "triplet concept" [label="triplet concept"];
+  "type having multiple immediate supertype" [label="type having multiple immediate supertype"];
+  "updated edge data" [label="updated edge data"];
+  "user" [label="user"];
+  "user to focus on domain" [label="user to focus on domain"];
+  "value 3 being within range [1,5]" [label="value 3 being within range [1,5]"];
+  "virtual assistants carry task" [label="virtual assistants carry task"];
+  "world wide web" [label="world wide web"];
+
+  rel_0 [shape=diamond, style=filled, color=orange, label="prevents"];
+  "an instance of a class not having any value for property p" -> rel_0;
+  rel_0 -> "inconsistency";
+
+  rel_1 [shape=diamond, style=filled, color=orange, label="provide"];
+  "applications using data" -> rel_1;
+  rel_1 -> "services like analytic";
+
+  rel_2 [shape=diamond, style=filled, color=orange, label="causes"];
+  "kg choice" -> rel_2;
+  rel_2 -> "kg success and adoption";
+
+  rel_3 [shape=diamond, style=filled, color=orange, label="powers"];
+  "knowledge graph" -> rel_3;
+  rel_3 -> "application";
+
+  rel_4 [shape=diamond, style=filled, color=orange, label="enables"];
+  "linked data" -> rel_4;
+  rel_4 -> "knowledge graph";
+
+  rel_5 [shape=diamond, style=filled, color=orange, label="trigger"];
+  "natural language command" -> rel_5;
+  rel_5 -> "virtual assistants carry task";
+
+  rel_6 [shape=diamond, style=filled, color=orange, label="causes"];
+  "no function symbol" -> rel_6;
+  rel_6 -> "dl decidability";
+
+  rel_7 [shape=diamond, style=filled, color=orange, label="causes"];
+  "orthomatcher" -> rel_7;
+  rel_7 -> "coreference resolution";
+
+  rel_8 [shape=diamond, style=filled, color=orange, label="causes"];
+  "poor quality kgs" -> rel_8;
+  rel_8 -> "significant organizational cost";
+
+  rel_9 [shape=diamond, style=filled, color=orange, label="causes"];
+  "pronominal coreference resolution module" -> rel_9;
+  rel_9 -> "coreference resolution";
+
+  rel_10 [shape=diamond, style=filled, color=orange, label="results in"];
+  "query execution" -> rel_10;
+  rel_10 -> "no query violation";
+
+  rel_11 [shape=diamond, style=filled, color=orange, label="causes"];
+  "query to chatgpt" -> rel_11;
+  rel_11 -> "answer with book titles, authors, link";
+
+  rel_12 [shape=diamond, style=filled, color=orange, label="is necessary for"];
+  "assessing kg quality statu" -> rel_12;
+  rel_12 -> "improving kg quality";
+
+  rel_13 [shape=diamond, style=filled, color=orange, label="triggers"];
+  "query" -> rel_13;
+  rel_13 -> "karl answering process";
+
+  rel_14 [shape=diamond, style=filled, color=orange, label="requires"];
+  "schema identifier uniqueness" -> rel_14;
+  rel_14 -> "functional property";
+
+  rel_15 [shape=diamond, style=filled, color=orange, label="causes"];
+  "schema:location value invalid literal" -> rel_15;
+  rel_15 -> "sparql query returns false";
+
+  rel_16 [shape=diamond, style=filled, color=orange, label="causes"];
+  "schema:location value is iri" -> rel_16;
+  rel_16 -> "sparql query returns true";
+
+  rel_17 [shape=diamond, style=filled, color=orange, label="enable"];
+  "search engine" -> rel_17;
+  rel_17 -> "searching linked data";
+
+  rel_18 [shape=diamond, style=filled, color=orange, label="necessitates"];
+  "self-referential calculation" -> rel_18;
+  rel_18 -> "iterative solution";
+
+  rel_19 [shape=diamond, style=filled, color=orange, label="enables"];
+  "semantify page" -> rel_19;
+  rel_19 -> "deployment";
+
+  rel_20 [shape=diamond, style=filled, color=orange, label="enable"];
+  "string similarity measure" -> rel_20;
+  rel_20 -> "distinguishing typo from undefined property";
+
+  rel_21 [shape=diamond, style=filled, color=orange, label="causes"];
+  "type having multiple immediate supertype" -> rel_21;
+  rel_21 -> "hierarchy not being a tree";
+
+  rel_22 [shape=diamond, style=filled, color=orange, label="cause"];
+  "user" -> rel_22;
+  rel_22 -> "node expansion";
+
+  rel_23 [shape=diamond, style=filled, color=orange, label="enables"];
+  "data offer" -> rel_23;
+  rel_23 -> "data sharing";
+
+  rel_24 [shape=diamond, style=filled, color=orange, label="causes"];
+  "value 3 being within range [1,5]" -> rel_24;
+  rel_24 -> "sparql query returns true";
+
+  rel_25 [shape=diamond, style=filled, color=orange, label="adjusts"];
+  "beta parameter" -> rel_25;
+  rel_25 -> "model prioritization of preferred response";
+
+  rel_26 [shape=diamond, style=filled, color=orange, label="triggers"];
+  "local path not found" -> rel_26;
+  rel_26 -> "download attempt";
+
+  rel_27 [shape=diamond, style=filled, color=orange, label="enables"];
+  "ranked pairs structure" -> rel_27;
+  rel_27 -> "model learns to favor output";
+
+  rel_28 [shape=diamond, style=filled, color=orange, label="causes"];
+  "adding code to neo4j.conf" -> rel_28;
+  rel_28 -> "composite database creation";
+
+  rel_29 [shape=diamond, style=filled, color=orange, label="causes"];
+  "adding predicate to query" -> rel_29;
+  rel_29 -> "finding specific friend of a friend";
+
+  rel_30 [shape=diamond, style=filled, color=orange, label="disambiguates"];
+  "additional metadata" -> rel_30;
+  rel_30 -> "entity";
+
+  rel_31 [shape=diamond, style=filled, color=orange, label="enables"];
+  "advanced graph dependency modeling" -> rel_31;
+  rel_31 -> "complex impact propagation calculation";
+
+  rel_32 [shape=diamond, style=filled, color=orange, label="enables"];
+  "advanced graph dependency modeling" -> rel_32;
+  rel_32 -> "dependency model correctness validation";
+
+  rel_33 [shape=diamond, style=filled, color=orange, label="causes"];
+  "algorithm execution" -> rel_33;
+  rel_33 -> "shortest path printing";
+
+  rel_34 [shape=diamond, style=filled, color=orange, label="causes"];
+  "each iteration" -> rel_34;
+  rel_34 -> "pagerank values update";
+
+  rel_35 [shape=diamond, style=filled, color=orange, label="contributed to"];
+  "author grew up in birmingham" -> rel_35;
+  rel_35 -> "birmingham new street choice";
+
+  rel_36 [shape=diamond, style=filled, color=orange, label="enables"];
+  "composing hierarchy" -> rel_36;
+  rel_36 -> "more insight";
+
+  rel_37 [shape=diamond, style=filled, color=orange, label="produces"];
+  "cypher code" -> rel_37;
+  rel_37 -> "knowledge graph";
+
+  rel_38 [shape=diamond, style=filled, color=orange, label="produces"];
+  "cypher implementation" -> rel_38;
+  rel_38 -> "similar result";
+
+  rel_39 [shape=diamond, style=filled, color=orange, label="enables"];
+  "data preparation" -> rel_39;
+  rel_39 -> "data to meet required quality characteristic";
+
+  rel_40 [shape=diamond, style=filled, color=orange, label="enriches"];
+  "explicit entities collection" -> rel_40;
+  rel_40 -> "search option";
+
+  rel_41 [shape=diamond, style=filled, color=orange, label="drives"];
+  "knowledge graph" -> rel_41;
+  rel_41 -> "significant business value";
+
+  rel_42 [shape=diamond, style=filled, color=orange, label="enables"];
+  "knowledge graph" -> rel_42;
+  rel_42 -> "richer data use";
+
+  rel_43 [shape=diamond, style=filled, color=orange, label="boosts"];
+  "leacock-chodorow formula" -> rel_43;
+  rel_43 -> "similarity";
+
+  rel_44 [shape=diamond, style=filled, color=orange, label="leads to"];
+  "needs not met by client-server paradigm" -> rel_44;
+  rel_44 -> "need for server-side logic";
+
+  rel_45 [shape=diamond, style=filled, color=orange, label="enables"];
+  "neo4j fabric" -> rel_45;
+  rel_45 -> "user to focus on domain";
+
+  rel_46 [shape=diamond, style=filled, color=orange, label="enables"];
+  "organizing principle" -> rel_46;
+  rel_46 -> "building knowledge graph";
+
+  rel_47 [shape=diamond, style=filled, color=orange, label="provides"];
+  "query in example 5-3" -> rel_47;
+  rel_47 -> "aggregated view";
+
+  rel_48 [shape=diamond, style=filled, color=orange, label="returns"];
+  "query in example 5-4" -> rel_48;
+  rel_48 -> "list of global customer";
+
+  rel_49 [shape=diamond, style=filled, color=orange, label="produces"];
+  "running python code" -> rel_49;
+  rel_49 -> "list of entity";
+
+  rel_50 [shape=diamond, style=filled, color=orange, label="causes"];
+  "scope of knowledge graph grow" -> rel_50;
+  rel_50 -> "infrastructure moves down stack";
+
+  rel_51 [shape=diamond, style=filled, color=orange, label="causes"];
+  "assigning incremental id to node" -> rel_51;
+  rel_51 -> "updated edge data";
+
+  rel_52 [shape=diamond, style=filled, color=orange, label="enables"];
+  "book in print" -> rel_52;
+  rel_52 -> "forum accessibility";
+
+  rel_53 [shape=diamond, style=filled, color=orange, label="maintains"];
+  "challenging question" -> rel_53;
+  rel_53 -> "author interest";
+
+  rel_54 [shape=diamond, style=filled, color=orange, label="enables"];
+  "few publisher constraint" -> rel_54;
+  rel_54 -> "extensive data publishing";
+
+  rel_55 [shape=diamond, style=filled, color=orange, label="creates"];
+  "extracting features from distant neighborhood" -> rel_55;
+  rel_55 -> "comprehensive view of node's structural context";
+
+  rel_56 [shape=diamond, style=filled, color=orange, label="address"];
+  "graph neural network" -> rel_56;
+  rel_56 -> "fundamental challenges in graph-based ml task";
+
+  rel_57 [shape=diamond, style=filled, color=orange, label="prevents"];
+  "graph not directed" -> rel_57;
+  rel_57 -> "compute in-degree and out-degree";
+
+  rel_58 [shape=diamond, style=filled, color=orange, label="enables"];
+  "hierarchical structure" -> rel_58;
+  rel_58 -> "information propagation";
+
+  rel_59 [shape=diamond, style=filled, color=orange, label="enables"];
+  "hpo ontology conversion to neo4j graph" -> rel_59;
+  rel_59 -> "processing using cypher";
+
+  rel_60 [shape=diamond, style=filled, color=orange, label="enables"];
+  "information from first-level node" -> rel_60;
+  rel_60 -> "categorization of deeper node";
+
+  rel_61 [shape=diamond, style=filled, color=orange, label="solves"];
+  "kg principles application" -> rel_61;
+  rel_61 -> "real-world problem";
+
+  rel_62 [shape=diamond, style=filled, color=orange, label="causes"];
+  "node passing values to neighbor" -> rel_62;
+  rel_62 -> "neighbors aggregating value";
+
+  rel_63 [shape=diamond, style=filled, color=orange, label="causes"];
+  "gate gazetteer" -> rel_63;
+  rel_63 -> "entity recognition";
+
+  rel_64 [shape=diamond, style=filled, color=orange, label="causes"];
+  "preprocessing csv file" -> rel_64;
+  rel_64 -> "compact numerical representation";
+
+  rel_65 [shape=diamond, style=filled, color=orange, label="enables"];
+  "preprocessing phase" -> rel_65;
+  rel_65 -> "financial transaction graph suitable for gnn";
+
+  rel_66 [shape=diamond, style=filled, color=orange, label="propagates"];
+  "snomed_is_a relationship" -> rel_66;
+  rel_66 -> "semantic type";
+
+  rel_67 [shape=diamond, style=filled, color=orange, label="enables"];
+  "kg approach" -> rel_67;
+  rel_67 -> "evaluate entities’ semantic relatedness";
+
+  rel_68 [shape=diamond, style=filled, color=orange, label="improves"];
+  "knowledge transfers via sentence alignment" -> rel_68;
+  rel_68 -> "neural machine translation";
+
+  rel_69 [shape=diamond, style=filled, color=orange, label="enables addressing"];
+  "semantic knowledge graph" -> rel_69;
+  rel_69 -> "cold-start problem";
+
+  rel_70 [shape=diamond, style=filled, color=orange, label="enables"];
+  "transferring knowledge" -> rel_70;
+  rel_70 -> "inferring knowledge for unseen topic";
+
+  rel_71 [shape=diamond, style=filled, color=orange, label="enables"];
+  "triplet concept" -> rel_71;
+  rel_71 -> "training process";
+
+  rel_72 [shape=diamond, style=filled, color=orange, label="enables"];
+  "world wide web" -> rel_72;
+  rel_72 -> "access to web page";
+
+  rel_73 [shape=diamond, style=filled, color=orange, label="enables demonstration of"];
+  "german tourism kg excerpt" -> rel_73;
+  rel_73 -> "knowledge enrichment";
+
+  rel_74 [shape=diamond, style=filled, color=orange, label="infers"];
+  "graphdb reasoner" -> rel_74;
+  rel_74 -> "new fact";
+
+}

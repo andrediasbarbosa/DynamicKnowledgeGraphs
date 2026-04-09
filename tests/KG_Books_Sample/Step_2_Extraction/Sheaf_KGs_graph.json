@@ -1,0 +1,3838 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1848",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Sheaf_KGs_chunk_21",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "b",
+        "a",
+        "d"
+      ],
+      "targets": [
+        "local interpretation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1849",
+      "properties": {},
+      "relation": "reflects",
+      "source_chunk_id": "Sheaf_KGs_chunk_5",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "adjacency matrix",
+        "block diagonal"
+      ],
+      "targets": [
+        "spectrum"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1850",
+      "properties": {},
+      "relation": "is part of",
+      "source_chunk_id": "Sheaf_KGs_chunk_15",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "inverse-image functor",
+        "adjoint triple"
+      ],
+      "targets": [
+        "semantic operation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1851",
+      "properties": {},
+      "relation": "are",
+      "source_chunk_id": "Sheaf_KGs_chunk_4",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "aout",
+        "ain"
+      ],
+      "targets": [
+        "adjacency matrice"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1852",
+      "properties": {},
+      "relation": "evaluate",
+      "source_chunk_id": "Sheaf_KGs_chunk_22",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "algorithm"
+      ],
+      "targets": [
+        "sheaf condition"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1853",
+      "properties": {},
+      "relation": "consists of",
+      "source_chunk_id": "Sheaf_KGs_chunk_4",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "aout"
+      ],
+      "targets": [
+        "eigenvalue"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1854",
+      "properties": {},
+      "relation": "corresponds",
+      "source_chunk_id": "Sheaf_KGs_chunk_16",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "grothendieck topology",
+        "appearance"
+      ],
+      "targets": [
+        "interpretation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1855",
+      "properties": {},
+      "relation": "are",
+      "source_chunk_id": "Sheaf_KGs_chunk_13",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "site",
+        "path-covering topology",
+        "atomic topology"
+      ],
+      "targets": [
+        "category"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1856",
+      "properties": {},
+      "relation": "allows",
+      "source_chunk_id": "Sheaf_KGs_chunk_18",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "atomic topology",
+        "path-covering topology"
+      ],
+      "targets": [
+        "semantic information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1857",
+      "properties": {},
+      "relation": "leads_to",
+      "source_chunk_id": "Sheaf_KGs_chunk_12",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "atomic topology",
+        "path-covering topology"
+      ],
+      "targets": [
+        "distinct site structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1858",
+      "properties": {},
+      "relation": "induces",
+      "source_chunk_id": "Sheaf_KGs_chunk_14",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph homomorphism",
+        "f",
+        "c(f)"
+      ],
+      "targets": [
+        "geometric morphism",
+        "sh(c(k), j)",
+        "sh(c(k ′), j ′)"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1859",
+      "properties": {},
+      "relation": "preserves",
+      "source_chunk_id": "Sheaf_KGs_chunk_12",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph homomorphism",
+        "c(f)"
+      ],
+      "targets": [
+        "covering family"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1860",
+      "properties": {},
+      "relation": "maps_to",
+      "source_chunk_id": "Sheaf_KGs_chunk_12",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "relational path",
+        "c(f)"
+      ],
+      "targets": [
+        "relational paths in k'"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1861",
+      "properties": {},
+      "relation": "induces",
+      "source_chunk_id": "Sheaf_KGs_chunk_14",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "identity functor",
+        "c(k)"
+      ],
+      "targets": [
+        "geometric morphism",
+        "sh(c(k), j)",
+        "sh(c(k), jatom)"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1862",
+      "properties": {},
+      "relation": "gives rise to",
+      "source_chunk_id": "Sheaf_KGs_chunk_14",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "site",
+        "c(k)",
+        "j"
+      ],
+      "targets": [
+        "grothendieck topo",
+        "sh(c(k), j)",
+        "sh(c(k), jatom)"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1863",
+      "properties": {},
+      "relation": "maps to",
+      "source_chunk_id": "Sheaf_KGs_chunk_8",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "c(k)",
+        "k"
+      ],
+      "targets": [
+        "d"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1864",
+      "properties": {},
+      "relation": "decomposes into",
+      "source_chunk_id": "Sheaf_KGs_chunk_8",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "morphism",
+        "c(k)"
+      ],
+      "targets": [
+        "fibre"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1865",
+      "properties": {},
+      "relation": "connect",
+      "source_chunk_id": "Sheaf_KGs_chunk_0",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "graph-theoretic structure",
+        "categorical composition"
+      ],
+      "targets": [
+        "sheaf semantic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1866",
+      "properties": {},
+      "relation": "extends",
+      "source_chunk_id": "Sheaf_KGs_chunk_2",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "categorical framework",
+        "higher-dimensional model"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1867",
+      "properties": {},
+      "relation": "develops",
+      "source_chunk_id": "Sheaf_KGs_chunk_1",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "categorical framework",
+        "knowledge graph"
+      ],
+      "targets": [
+        "structural result"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1868",
+      "properties": {},
+      "relation": "link",
+      "source_chunk_id": "Sheaf_KGs_chunk_0",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "categorical framework",
+        "knowledge graph"
+      ],
+      "targets": [
+        "topos-theoretic semantic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1869",
+      "properties": {},
+      "relation": "mirrors",
+      "source_chunk_id": "Sheaf_KGs_chunk_7",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "line digraph",
+        "categorical organisation"
+      ],
+      "targets": [
+        "morphism"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1870",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Sheaf_KGs_chunk_9",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "categorical representation"
+      ],
+      "targets": [
+        "study transformation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1871",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Sheaf_KGs_chunk_16",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "topos theory",
+        "categorical structure"
+      ],
+      "targets": [
+        "logical reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1872",
+      "properties": {},
+      "relation": "equips",
+      "source_chunk_id": "Sheaf_KGs_chunk_21",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "categorical structure"
+      ],
+      "targets": [
+        "grothendieck topology"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1873",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "Sheaf_KGs_chunk_23",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "category theory",
+        "data migration"
+      ],
+      "targets": [
+        "functorial data migration"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1874",
+      "properties": {},
+      "relation": "informs",
+      "source_chunk_id": "Sheaf_KGs_chunk_23",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "topos theory",
+        "category theory"
+      ],
+      "targets": [
+        "mathematical structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1875",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Sheaf_KGs_chunk_13",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "category",
+        "grothendieck topo"
+      ],
+      "targets": [
+        "left-exact localisation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1876",
+      "properties": {},
+      "relation": "lies in",
+      "source_chunk_id": "Sheaf_KGs_chunk_7",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "column space",
+        "h(h)"
+      ],
+      "targets": [
+        "rn"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1877",
+      "properties": {},
+      "relation": "studied through",
+      "source_chunk_id": "Sheaf_KGs_chunk_3",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "combinatorial property",
+        "knowledge graph"
+      ],
+      "targets": [
+        "linear-algebraic operation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1878",
+      "properties": {},
+      "relation": "gives",
+      "source_chunk_id": "Sheaf_KGs_chunk_11",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "composing",
+        "morphism"
+      ],
+      "targets": [
+        "composite path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1879",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Sheaf_KGs_chunk_22",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "topo",
+        "context-dependent reasoning"
+      ],
+      "targets": [
+        "formal setting"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1880",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Sheaf_KGs_chunk_17",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "sheaf",
+        "contravariant functor"
+      ],
+      "targets": [
+        "c(k)",
+        "set"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1881",
+      "properties": {},
+      "relation": "satisfy",
+      "source_chunk_id": "Sheaf_KGs_chunk_11",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "covering family",
+        "grothendieck topology"
+      ],
+      "targets": [
+        "axiom"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1882",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Sheaf_KGs_chunk_10",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "covering family",
+        "entity"
+      ],
+      "targets": [
+        "finite set of morphism"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1883",
+      "properties": {},
+      "relation": "is_included_in",
+      "source_chunk_id": "Sheaf_KGs_chunk_12",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "covering family",
+        "jatom"
+      ],
+      "targets": [
+        "covering family in j"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1884",
+      "properties": {},
+      "relation": "assigns",
+      "source_chunk_id": "Sheaf_KGs_chunk_20",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "sheaf",
+        "covering family"
+      ],
+      "targets": [
+        "set"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1885",
+      "properties": {},
+      "relation": "extends",
+      "source_chunk_id": "Sheaf_KGs_chunk_17",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "semantic assignment",
+        "covering"
+      ],
+      "targets": [
+        "whole entity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1886",
+      "properties": {},
+      "relation": "investigates",
+      "source_chunk_id": "Sheaf_KGs_chunk_1",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "cultural analytic"
+      ],
+      "targets": [
+        "visual object",
+        "cultural object"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1887",
+      "properties": {},
+      "relation": "characterizes",
+      "source_chunk_id": "Sheaf_KGs_chunk_23",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "graph theory",
+        "derived graph"
+      ],
+      "targets": [
+        "characterization"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1888",
+      "properties": {},
+      "relation": "provide",
+      "source_chunk_id": "Sheaf_KGs_chunk_22",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "description logic",
+        "formal concept analysi"
+      ],
+      "targets": [
+        "bridge"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1889",
+      "properties": {},
+      "relation": "emphasize",
+      "source_chunk_id": "Sheaf_KGs_chunk_0",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "relational data representation",
+        "digital humanity"
+      ],
+      "targets": [
+        "social practice",
+        "cultural production"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1890",
+      "properties": {},
+      "relation": "generalizes",
+      "source_chunk_id": "Sheaf_KGs_chunk_2",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "directed graph"
+      ],
+      "targets": [
+        "edge-labelled digraph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1891",
+      "properties": {},
+      "relation": "assigned",
+      "source_chunk_id": "Sheaf_KGs_chunk_16",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "semantic information",
+        "entity"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1892",
+      "properties": {},
+      "relation": "appears as",
+      "source_chunk_id": "Sheaf_KGs_chunk_7",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "entity",
+        "triple"
+      ],
+      "targets": [
+        "head"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1893",
+      "properties": {},
+      "relation": "preserves",
+      "source_chunk_id": "Sheaf_KGs_chunk_15",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "precomposition",
+        "finite limit"
+      ],
+      "targets": [
+        "inverse-image functor"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1894",
+      "properties": {},
+      "relation": "suggests",
+      "source_chunk_id": "Sheaf_KGs_chunk_22",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "framework"
+      ],
+      "targets": [
+        "connection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1895",
+      "properties": {},
+      "relation": "define",
+      "source_chunk_id": "Sheaf_KGs_chunk_0",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "grothendieck topology",
+        "free category"
+      ],
+      "targets": [
+        "context-dependent meaning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1896",
+      "properties": {},
+      "relation": "induces",
+      "source_chunk_id": "Sheaf_KGs_chunk_1",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "identity functor",
+        "free category"
+      ],
+      "targets": [
+        "geometric morphism"
+      ]
+    },
+    {
+      "confidence": 0.91,
+      "id": "edge_1897",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Sheaf_KGs_chunk_7",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "free category"
+      ],
+      "targets": [
+        "c(k)"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1898",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Sheaf_KGs_chunk_1",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "free category",
+        "knowledge graph"
+      ],
+      "targets": [
+        "object"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1899",
+      "properties": {},
+      "relation": "correspond",
+      "source_chunk_id": "Sheaf_KGs_chunk_11",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "morphism",
+        "free category"
+      ],
+      "targets": [
+        "relational path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1900",
+      "properties": {},
+      "relation": "represent",
+      "source_chunk_id": "Sheaf_KGs_chunk_9",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "schema mapping",
+        "functor"
+      ],
+      "targets": [
+        "category"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1901",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Sheaf_KGs_chunk_15",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "geometric morphism",
+        "theorem 6.4"
+      ],
+      "targets": [
+        "essential"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1902",
+      "properties": {},
+      "relation": "shows",
+      "source_chunk_id": "Sheaf_KGs_chunk_18",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "geometric morphism",
+        "theorem 6.4"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1903",
+      "properties": {},
+      "relation": "glue",
+      "source_chunk_id": "Sheaf_KGs_chunk_17",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "local interpretation",
+        "global interpretation"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1904",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "Sheaf_KGs_chunk_19",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "graph lout",
+        "shared-head relation"
+      ],
+      "targets": [
+        "component"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1905",
+      "properties": {},
+      "relation": "forms",
+      "source_chunk_id": "Sheaf_KGs_chunk_20",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "graph lout",
+        "strongly connected component"
+      ],
+      "targets": [
+        "complete directed graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1906",
+      "properties": {},
+      "relation": "has",
+      "source_chunk_id": "Sheaf_KGs_chunk_5",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "line digraph",
+        "graph theory"
+      ],
+      "targets": [
+        "classical precedent"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1907",
+      "properties": {},
+      "relation": "analyzes",
+      "source_chunk_id": "Sheaf_KGs_chunk_23",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "spectra",
+        "graph"
+      ],
+      "targets": [
+        "graph property"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1908",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "Sheaf_KGs_chunk_11",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "path-covering condition",
+        "grothendieck coverage"
+      ],
+      "targets": [
+        "topology j"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1909",
+      "properties": {},
+      "relation": "equips",
+      "source_chunk_id": "Sheaf_KGs_chunk_10",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "grothendieck topology",
+        "knowledge graph"
+      ],
+      "targets": [
+        "semantic structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1910",
+      "properties": {},
+      "relation": "changes",
+      "source_chunk_id": "Sheaf_KGs_chunk_18",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "grothendieck topology"
+      ],
+      "targets": [
+        "interpretive environment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1911",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "Sheaf_KGs_chunk_15",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "grothendieck topo"
+      ],
+      "targets": [
+        "intuitionistic logic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1912",
+      "properties": {},
+      "relation": "encodes",
+      "source_chunk_id": "Sheaf_KGs_chunk_4",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "h(h)",
+        "h(t)"
+      ],
+      "targets": [
+        "shared-head relation",
+        "shared-tail relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1913",
+      "properties": {},
+      "relation": "assigns",
+      "source_chunk_id": "Sheaf_KGs_chunk_8",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "h",
+        "t"
+      ],
+      "targets": [
+        "e"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1914",
+      "properties": {},
+      "relation": "generate",
+      "source_chunk_id": "Sheaf_KGs_chunk_19",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "triple",
+        "head entity"
+      ],
+      "targets": [
+        "strongly connected component"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1915",
+      "properties": {},
+      "relation": "share",
+      "source_chunk_id": "Sheaf_KGs_chunk_6",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "triple",
+        "head entity"
+      ],
+      "targets": [
+        "complete directed subgraph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1916",
+      "properties": {},
+      "relation": "occurs in",
+      "source_chunk_id": "Sheaf_KGs_chunk_6",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "head entity",
+        "τ"
+      ],
+      "targets": [
+        "m triple"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1917",
+      "properties": {},
+      "relation": "encodes",
+      "source_chunk_id": "Sheaf_KGs_chunk_5",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "head incidence matrix",
+        "tail incidence matrix"
+      ],
+      "targets": [
+        "shared relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1918",
+      "properties": {},
+      "relation": "contains",
+      "source_chunk_id": "Sheaf_KGs_chunk_3",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "head-incidence matrix",
+        "tail-incidence matrix"
+      ],
+      "targets": [
+        "non-zero entry"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1919",
+      "properties": {},
+      "relation": "forms",
+      "source_chunk_id": "Sheaf_KGs_chunk_9",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "homomorphism"
+      ],
+      "targets": [
+        "category"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1920",
+      "properties": {},
+      "relation": "represent",
+      "source_chunk_id": "Sheaf_KGs_chunk_2",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "simplicial complex",
+        "hypergraph"
+      ],
+      "targets": [
+        "multi-way relationship"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1921",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Sheaf_KGs_chunk_10",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "identity morphism",
+        "knowledge graph"
+      ],
+      "targets": [
+        "identity map"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1922",
+      "properties": {},
+      "relation": "records",
+      "source_chunk_id": "Sheaf_KGs_chunk_8",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "out-line digraph",
+        "in-line digraph"
+      ],
+      "targets": [
+        "adjacency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1923",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Sheaf_KGs_chunk_3",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "incidence matrice",
+        "knowledge graph"
+      ],
+      "targets": [
+        "algebraic representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1924",
+      "properties": {},
+      "relation": "illustrates",
+      "source_chunk_id": "Sheaf_KGs_chunk_19",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "incidence matrice",
+        "line digraph"
+      ],
+      "targets": [
+        "structural decomposition"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1925",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "Sheaf_KGs_chunk_13",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "sheafification functor",
+        "inclusion functor"
+      ],
+      "targets": [
+        "left adjoint"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1926",
+      "properties": {},
+      "relation": "relates",
+      "source_chunk_id": "Sheaf_KGs_chunk_1",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "interpretive logic",
+        "knowledge graph"
+      ],
+      "targets": [
+        "categorical construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1927",
+      "properties": {},
+      "relation": "corresponds",
+      "source_chunk_id": "Sheaf_KGs_chunk_6",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "lout",
+        "k"
+      ],
+      "targets": [
+        "strongly connected component"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1928",
+      "properties": {},
+      "relation": "induces",
+      "source_chunk_id": "Sheaf_KGs_chunk_6",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "te",
+        "k"
+      ],
+      "targets": [
+        "complete directed subgraph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1929",
+      "properties": {},
+      "relation": "consists_of",
+      "source_chunk_id": "Sheaf_KGs_chunk_10",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "morphism",
+        "knowledge graph"
+      ],
+      "targets": [
+        "map"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1930",
+      "properties": {},
+      "relation": "encodes",
+      "source_chunk_id": "Sheaf_KGs_chunk_11",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "path-covering topology",
+        "knowledge graph"
+      ],
+      "targets": [
+        "relational information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1931",
+      "properties": {},
+      "relation": "results_in",
+      "source_chunk_id": "Sheaf_KGs_chunk_21",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "path-covering topology",
+        "knowledge graph"
+      ],
+      "targets": [
+        "grothendieck topo"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1932",
+      "properties": {},
+      "relation": "propagates",
+      "source_chunk_id": "Sheaf_KGs_chunk_10",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "relational information",
+        "knowledge graph"
+      ],
+      "targets": [
+        "composable path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1933",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "Sheaf_KGs_chunk_5",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "triple"
+      ],
+      "targets": [
+        "knowledge digraph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1934",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "Sheaf_KGs_chunk_3",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "triple"
+      ],
+      "targets": [
+        "directed edge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1935",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "Sheaf_KGs_chunk_2",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "matrix-based method"
+      ],
+      "targets": [
+        "relational data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1936",
+      "properties": {},
+      "relation": "represent",
+      "source_chunk_id": "Sheaf_KGs_chunk_0",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph",
+        "relational data"
+      ],
+      "targets": [
+        "entity",
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1937",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "Sheaf_KGs_chunk_21",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "combinatorial structure",
+        "categorical composition",
+        "topos-theoretic semantic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1938",
+      "properties": {},
+      "relation": "reviewed in",
+      "source_chunk_id": "Sheaf_KGs_chunk_22",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "relational machine learning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1939",
+      "properties": {},
+      "relation": "adapts",
+      "source_chunk_id": "Sheaf_KGs_chunk_19",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "knowledge-graph formulation",
+        "triple"
+      ],
+      "targets": [
+        "graph theory"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1940",
+      "properties": {},
+      "relation": "reveals",
+      "source_chunk_id": "Sheaf_KGs_chunk_21",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "line knowledge digraph"
+      ],
+      "targets": [
+        "structural relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1941",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "Sheaf_KGs_chunk_17",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "local section",
+        "sheaf condition"
+      ],
+      "targets": [
+        "global section"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1942",
+      "properties": {},
+      "relation": "induces",
+      "source_chunk_id": "Sheaf_KGs_chunk_17",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "morphism",
+        "restriction map"
+      ],
+      "targets": [
+        "map"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1943",
+      "properties": {},
+      "relation": "correspond",
+      "source_chunk_id": "Sheaf_KGs_chunk_20",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "morphism",
+        "object"
+      ],
+      "targets": [
+        "arrow"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1944",
+      "properties": {},
+      "relation": "corresponds to",
+      "source_chunk_id": "Sheaf_KGs_chunk_7",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "triple",
+        "morphism"
+      ],
+      "targets": [
+        "generating morphism"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1945",
+      "properties": {},
+      "relation": "extends",
+      "source_chunk_id": "Sheaf_KGs_chunk_23",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "network",
+        "pairwise interaction"
+      ],
+      "targets": [
+        "network dynamic"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1946",
+      "properties": {},
+      "relation": "strengthens",
+      "source_chunk_id": "Sheaf_KGs_chunk_13",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "presheaf",
+        "sheaf"
+      ],
+      "targets": [
+        "presheaf structure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1947",
+      "properties": {},
+      "relation": "propagates",
+      "source_chunk_id": "Sheaf_KGs_chunk_16",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "sheaf structure",
+        "relational path"
+      ],
+      "targets": [
+        "semantic information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1948",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "Sheaf_KGs_chunk_9",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "topo",
+        "sheave"
+      ],
+      "targets": [
+        "semantic extension"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1949",
+      "properties": {},
+      "relation": "assigns",
+      "source_chunk_id": "Sheaf_KGs_chunk_16",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "subobject classifier",
+        "topo"
+      ],
+      "targets": [
+        "truth value"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1950",
+      "properties": {},
+      "relation": "generates",
+      "source_chunk_id": "Sheaf_KGs_chunk_8",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "triple",
+        "t"
+      ],
+      "targets": [
+        "morphism"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1951",
+      "properties": {},
+      "relation": "governs",
+      "source_chunk_id": "Sheaf_KGs_chunk_18",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "topoi"
+      ],
+      "targets": [
+        "regimes of appearance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1952",
+      "properties": {},
+      "relation": "equips",
+      "source_chunk_id": "Sheaf_KGs_chunk_15",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "topos theory"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1953",
+      "properties": {},
+      "relation": "share",
+      "source_chunk_id": "Sheaf_KGs_chunk_4",
+      "source_document": "Sheaf_KGs",
+      "sources": [
+        "triple"
+      ],
+      "targets": [
+        "head entity"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 106,
+    "num_nodes": 191
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "a",
+      "incident_edges": [
+        "edge_1848"
+      ],
+      "label": "A",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adjacency",
+      "incident_edges": [
+        "edge_1922"
+      ],
+      "label": "adjacency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adjacency matrice",
+      "incident_edges": [
+        "edge_1851"
+      ],
+      "label": "adjacency matrices",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adjacency matrix",
+      "incident_edges": [
+        "edge_1849"
+      ],
+      "label": "adjacency matrix",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adjoint triple",
+      "incident_edges": [
+        "edge_1850"
+      ],
+      "label": "adjoint triple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ain",
+      "incident_edges": [
+        "edge_1851"
+      ],
+      "label": "Ain",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "algebraic representation",
+      "incident_edges": [
+        "edge_1923"
+      ],
+      "label": "algebraic representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "algorithm",
+      "incident_edges": [
+        "edge_1852"
+      ],
+      "label": "algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "aout",
+      "incident_edges": [
+        "edge_1851",
+        "edge_1853"
+      ],
+      "label": "Aout",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "appearance",
+      "incident_edges": [
+        "edge_1854"
+      ],
+      "label": "appearance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "arrow",
+      "incident_edges": [
+        "edge_1943"
+      ],
+      "label": "arrow",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "atomic topology",
+      "incident_edges": [
+        "edge_1855",
+        "edge_1856",
+        "edge_1857"
+      ],
+      "label": "atomic topology",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "axiom",
+      "incident_edges": [
+        "edge_1881"
+      ],
+      "label": "axiom",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "b",
+      "incident_edges": [
+        "edge_1848"
+      ],
+      "label": "B",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "block diagonal",
+      "incident_edges": [
+        "edge_1849"
+      ],
+      "label": "block diagonal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bridge",
+      "incident_edges": [
+        "edge_1888"
+      ],
+      "label": "bridge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "c(f)",
+      "incident_edges": [
+        "edge_1858",
+        "edge_1859",
+        "edge_1860"
+      ],
+      "label": "C(f)",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "c(k)",
+      "incident_edges": [
+        "edge_1861",
+        "edge_1862",
+        "edge_1863",
+        "edge_1864",
+        "edge_1880",
+        "edge_1897"
+      ],
+      "label": "C(K)",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "categorical composition",
+      "incident_edges": [
+        "edge_1865",
+        "edge_1937"
+      ],
+      "label": "categorical composition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "categorical construction",
+      "incident_edges": [
+        "edge_1926"
+      ],
+      "label": "categorical constructions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "categorical framework",
+      "incident_edges": [
+        "edge_1866",
+        "edge_1867",
+        "edge_1868"
+      ],
+      "label": "categorical framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "categorical organisation",
+      "incident_edges": [
+        "edge_1869"
+      ],
+      "label": "categorical organisation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "categorical representation",
+      "incident_edges": [
+        "edge_1870"
+      ],
+      "label": "categorical representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "categorical structure",
+      "incident_edges": [
+        "edge_1871",
+        "edge_1872"
+      ],
+      "label": "categorical structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "category",
+      "incident_edges": [
+        "edge_1855",
+        "edge_1875",
+        "edge_1900",
+        "edge_1919"
+      ],
+      "label": "category",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "category theory",
+      "incident_edges": [
+        "edge_1873",
+        "edge_1874"
+      ],
+      "label": "category theory",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "characterization",
+      "incident_edges": [
+        "edge_1887"
+      ],
+      "label": "characterization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "classical precedent",
+      "incident_edges": [
+        "edge_1906"
+      ],
+      "label": "classical precedents",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "column space",
+      "incident_edges": [
+        "edge_1876"
+      ],
+      "label": "column space",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "combinatorial property",
+      "incident_edges": [
+        "edge_1877"
+      ],
+      "label": "combinatorial properties",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "combinatorial structure",
+      "incident_edges": [
+        "edge_1937"
+      ],
+      "label": "combinatorial structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complete directed graph",
+      "incident_edges": [
+        "edge_1905"
+      ],
+      "label": "complete directed graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "complete directed subgraph",
+      "incident_edges": [
+        "edge_1915",
+        "edge_1928"
+      ],
+      "label": "complete directed subgraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "component",
+      "incident_edges": [
+        "edge_1904"
+      ],
+      "label": "component",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "composable path",
+      "incident_edges": [
+        "edge_1932"
+      ],
+      "label": "composable paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "composing",
+      "incident_edges": [
+        "edge_1878"
+      ],
+      "label": "composing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "composite path",
+      "incident_edges": [
+        "edge_1878"
+      ],
+      "label": "composite path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "connection",
+      "incident_edges": [
+        "edge_1894"
+      ],
+      "label": "connection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "context-dependent meaning",
+      "incident_edges": [
+        "edge_1895"
+      ],
+      "label": "context-dependent meaning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "context-dependent reasoning",
+      "incident_edges": [
+        "edge_1879"
+      ],
+      "label": "context-dependent reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "contravariant functor",
+      "incident_edges": [
+        "edge_1880"
+      ],
+      "label": "contravariant functor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "covering",
+      "incident_edges": [
+        "edge_1885"
+      ],
+      "label": "covering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "covering family",
+      "incident_edges": [
+        "edge_1859",
+        "edge_1881",
+        "edge_1882",
+        "edge_1883",
+        "edge_1884"
+      ],
+      "label": "covering families",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "covering family in j",
+      "incident_edges": [
+        "edge_1883"
+      ],
+      "label": "covering family in J",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cultural analytic",
+      "incident_edges": [
+        "edge_1886"
+      ],
+      "label": "cultural analytics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cultural object",
+      "incident_edges": [
+        "edge_1886"
+      ],
+      "label": "cultural objects",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cultural production",
+      "incident_edges": [
+        "edge_1889"
+      ],
+      "label": "cultural production",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "d",
+      "incident_edges": [
+        "edge_1848",
+        "edge_1863"
+      ],
+      "label": "D",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data migration",
+      "incident_edges": [
+        "edge_1873"
+      ],
+      "label": "data migration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "derived graph",
+      "incident_edges": [
+        "edge_1887"
+      ],
+      "label": "derived graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "description logic",
+      "incident_edges": [
+        "edge_1888"
+      ],
+      "label": "description logics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "digital humanity",
+      "incident_edges": [
+        "edge_1889"
+      ],
+      "label": "digital humanities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "directed edge",
+      "incident_edges": [
+        "edge_1934"
+      ],
+      "label": "directed edge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "directed graph",
+      "incident_edges": [
+        "edge_1890"
+      ],
+      "label": "directed graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "distinct site structure",
+      "incident_edges": [
+        "edge_1857"
+      ],
+      "label": "distinct site structures",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "e",
+      "incident_edges": [
+        "edge_1913"
+      ],
+      "label": "E",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "edge-labelled digraph",
+      "incident_edges": [
+        "edge_1890"
+      ],
+      "label": "edge-labelled digraphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "eigenvalue",
+      "incident_edges": [
+        "edge_1853"
+      ],
+      "label": "eigenvalue",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "entity",
+      "incident_edges": [
+        "edge_1882",
+        "edge_1891",
+        "edge_1892",
+        "edge_1936"
+      ],
+      "label": "entity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "essential",
+      "incident_edges": [
+        "edge_1901"
+      ],
+      "label": "essential",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "f",
+      "incident_edges": [
+        "edge_1858"
+      ],
+      "label": "f",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fibre",
+      "incident_edges": [
+        "edge_1864"
+      ],
+      "label": "fibre",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "finite limit",
+      "incident_edges": [
+        "edge_1893"
+      ],
+      "label": "finite limits",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "finite set of morphism",
+      "incident_edges": [
+        "edge_1882"
+      ],
+      "label": "finite set of morphisms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "formal concept analysi",
+      "incident_edges": [
+        "edge_1888"
+      ],
+      "label": "formal concept analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "formal setting",
+      "incident_edges": [
+        "edge_1879"
+      ],
+      "label": "formal setting",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "framework",
+      "incident_edges": [
+        "edge_1894"
+      ],
+      "label": "framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "free category",
+      "incident_edges": [
+        "edge_1895",
+        "edge_1896",
+        "edge_1897",
+        "edge_1898",
+        "edge_1899"
+      ],
+      "label": "free category",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "functor",
+      "incident_edges": [
+        "edge_1900"
+      ],
+      "label": "functor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "functorial data migration",
+      "incident_edges": [
+        "edge_1873"
+      ],
+      "label": "functorial data migration",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "generating morphism",
+      "incident_edges": [
+        "edge_1944"
+      ],
+      "label": "generating morphisms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "geometric morphism",
+      "incident_edges": [
+        "edge_1858",
+        "edge_1861",
+        "edge_1896",
+        "edge_1901",
+        "edge_1902"
+      ],
+      "label": "geometric morphism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global interpretation",
+      "incident_edges": [
+        "edge_1903"
+      ],
+      "label": "global interpretation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "global section",
+      "incident_edges": [
+        "edge_1941"
+      ],
+      "label": "global section",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph",
+      "incident_edges": [
+        "edge_1907"
+      ],
+      "label": "graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph lout",
+      "incident_edges": [
+        "edge_1904",
+        "edge_1905"
+      ],
+      "label": "graph Lout",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph property",
+      "incident_edges": [
+        "edge_1907"
+      ],
+      "label": "graph properties",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "graph theory",
+      "incident_edges": [
+        "edge_1887",
+        "edge_1906",
+        "edge_1939"
+      ],
+      "label": "graph theory",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph-theoretic structure",
+      "incident_edges": [
+        "edge_1865"
+      ],
+      "label": "graph-theoretic structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "grothendieck coverage",
+      "incident_edges": [
+        "edge_1908"
+      ],
+      "label": "Grothendieck coverage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "grothendieck topo",
+      "incident_edges": [
+        "edge_1862",
+        "edge_1875",
+        "edge_1911",
+        "edge_1931"
+      ],
+      "label": "Grothendieck topos",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 6,
+      "id": "grothendieck topology",
+      "incident_edges": [
+        "edge_1854",
+        "edge_1872",
+        "edge_1881",
+        "edge_1895",
+        "edge_1909",
+        "edge_1910"
+      ],
+      "label": "Grothendieck topologies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "h",
+      "incident_edges": [
+        "edge_1913"
+      ],
+      "label": "h",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "h(h)",
+      "incident_edges": [
+        "edge_1876",
+        "edge_1912"
+      ],
+      "label": "H(h)",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "h(t)",
+      "incident_edges": [
+        "edge_1912"
+      ],
+      "label": "H(t)",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "head",
+      "incident_edges": [
+        "edge_1892"
+      ],
+      "label": "head",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "head entity",
+      "incident_edges": [
+        "edge_1914",
+        "edge_1915",
+        "edge_1916",
+        "edge_1953"
+      ],
+      "label": "head entity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "head incidence matrix",
+      "incident_edges": [
+        "edge_1917"
+      ],
+      "label": "head incidence matrix",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "head-incidence matrix",
+      "incident_edges": [
+        "edge_1918"
+      ],
+      "label": "head-incidence matrix",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "higher-dimensional model",
+      "incident_edges": [
+        "edge_1866"
+      ],
+      "label": "higher-dimensional models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "homomorphism",
+      "incident_edges": [
+        "edge_1919"
+      ],
+      "label": "homomorphism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hypergraph",
+      "incident_edges": [
+        "edge_1920"
+      ],
+      "label": "hypergraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "identity functor",
+      "incident_edges": [
+        "edge_1861",
+        "edge_1896"
+      ],
+      "label": "identity functor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "identity map",
+      "incident_edges": [
+        "edge_1921"
+      ],
+      "label": "identity maps",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "identity morphism",
+      "incident_edges": [
+        "edge_1921"
+      ],
+      "label": "identity morphism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "in-line digraph",
+      "incident_edges": [
+        "edge_1922"
+      ],
+      "label": "in-line digraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "incidence matrice",
+      "incident_edges": [
+        "edge_1923",
+        "edge_1924"
+      ],
+      "label": "incidence matrices",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inclusion functor",
+      "incident_edges": [
+        "edge_1925"
+      ],
+      "label": "inclusion functor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interpretation",
+      "incident_edges": [
+        "edge_1854"
+      ],
+      "label": "interpretation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interpretive environment",
+      "incident_edges": [
+        "edge_1910"
+      ],
+      "label": "interpretive environment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interpretive logic",
+      "incident_edges": [
+        "edge_1926"
+      ],
+      "label": "interpretive logics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intuitionistic logic",
+      "incident_edges": [
+        "edge_1911"
+      ],
+      "label": "intuitionistic logic",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "inverse-image functor",
+      "incident_edges": [
+        "edge_1850",
+        "edge_1893"
+      ],
+      "label": "inverse-image functor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "j",
+      "incident_edges": [
+        "edge_1862"
+      ],
+      "label": "J",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "jatom",
+      "incident_edges": [
+        "edge_1883"
+      ],
+      "label": "Jatom",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "k",
+      "incident_edges": [
+        "edge_1863",
+        "edge_1927",
+        "edge_1928"
+      ],
+      "label": "K",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge digraph",
+      "incident_edges": [
+        "edge_1933"
+      ],
+      "label": "knowledge digraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 28,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1866",
+        "edge_1867",
+        "edge_1868",
+        "edge_1870",
+        "edge_1877",
+        "edge_1886",
+        "edge_1890",
+        "edge_1891",
+        "edge_1897",
+        "edge_1898",
+        "edge_1902",
+        "edge_1903",
+        "edge_1909",
+        "edge_1919",
+        "edge_1921",
+        "edge_1923",
+        "edge_1926",
+        "edge_1929",
+        "edge_1930",
+        "edge_1931",
+        "edge_1932",
+        "edge_1933",
+        "edge_1934",
+        "edge_1935",
+        "edge_1936",
+        "edge_1937",
+        "edge_1938",
+        "edge_1952"
+      ],
+      "label": "knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "knowledge graph homomorphism",
+      "incident_edges": [
+        "edge_1858",
+        "edge_1859"
+      ],
+      "label": "knowledge graph homomorphism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge-graph formulation",
+      "incident_edges": [
+        "edge_1939"
+      ],
+      "label": "knowledge-graph formulation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "left adjoint",
+      "incident_edges": [
+        "edge_1925"
+      ],
+      "label": "left adjoint",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "left-exact localisation",
+      "incident_edges": [
+        "edge_1875"
+      ],
+      "label": "left-exact localisation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "line digraph",
+      "incident_edges": [
+        "edge_1869",
+        "edge_1906",
+        "edge_1924"
+      ],
+      "label": "line digraphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "line knowledge digraph",
+      "incident_edges": [
+        "edge_1940"
+      ],
+      "label": "line knowledge digraphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "linear-algebraic operation",
+      "incident_edges": [
+        "edge_1877"
+      ],
+      "label": "linear-algebraic operations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "local interpretation",
+      "incident_edges": [
+        "edge_1848",
+        "edge_1903"
+      ],
+      "label": "local interpretations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "local section",
+      "incident_edges": [
+        "edge_1941"
+      ],
+      "label": "local sections",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "logical reasoning",
+      "incident_edges": [
+        "edge_1871"
+      ],
+      "label": "logical reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lout",
+      "incident_edges": [
+        "edge_1927"
+      ],
+      "label": "Lout",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "m triple",
+      "incident_edges": [
+        "edge_1916"
+      ],
+      "label": "m triples",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "map",
+      "incident_edges": [
+        "edge_1929",
+        "edge_1942"
+      ],
+      "label": "map",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mathematical structure",
+      "incident_edges": [
+        "edge_1874"
+      ],
+      "label": "mathematical structures",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "matrix-based method",
+      "incident_edges": [
+        "edge_1935"
+      ],
+      "label": "matrix-based methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 9,
+      "id": "morphism",
+      "incident_edges": [
+        "edge_1864",
+        "edge_1869",
+        "edge_1878",
+        "edge_1899",
+        "edge_1929",
+        "edge_1942",
+        "edge_1943",
+        "edge_1944",
+        "edge_1950"
+      ],
+      "label": "morphism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-way relationship",
+      "incident_edges": [
+        "edge_1920"
+      ],
+      "label": "multi-way relationships",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "network",
+      "incident_edges": [
+        "edge_1945"
+      ],
+      "label": "network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "network dynamic",
+      "incident_edges": [
+        "edge_1945"
+      ],
+      "label": "network dynamics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "non-zero entry",
+      "incident_edges": [
+        "edge_1918"
+      ],
+      "label": "non-zero entry",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "object",
+      "incident_edges": [
+        "edge_1898",
+        "edge_1943"
+      ],
+      "label": "object",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "out-line digraph",
+      "incident_edges": [
+        "edge_1922"
+      ],
+      "label": "out-line digraph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pairwise interaction",
+      "incident_edges": [
+        "edge_1945"
+      ],
+      "label": "pairwise interactions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "path-covering condition",
+      "incident_edges": [
+        "edge_1908"
+      ],
+      "label": "path-covering condition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "path-covering topology",
+      "incident_edges": [
+        "edge_1855",
+        "edge_1856",
+        "edge_1857",
+        "edge_1930",
+        "edge_1931"
+      ],
+      "label": "path-covering topology",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "precomposition",
+      "incident_edges": [
+        "edge_1893"
+      ],
+      "label": "precomposition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "presheaf",
+      "incident_edges": [
+        "edge_1946"
+      ],
+      "label": "presheaf",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "presheaf structure",
+      "incident_edges": [
+        "edge_1946"
+      ],
+      "label": "presheaf structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "regimes of appearance",
+      "incident_edges": [
+        "edge_1951"
+      ],
+      "label": "regimes of appearance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation",
+      "incident_edges": [
+        "edge_1936"
+      ],
+      "label": "relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relational data",
+      "incident_edges": [
+        "edge_1935",
+        "edge_1936"
+      ],
+      "label": "relational data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational data representation",
+      "incident_edges": [
+        "edge_1889"
+      ],
+      "label": "relational data representations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relational information",
+      "incident_edges": [
+        "edge_1930",
+        "edge_1932"
+      ],
+      "label": "relational information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational machine learning",
+      "incident_edges": [
+        "edge_1938"
+      ],
+      "label": "relational machine learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "relational path",
+      "incident_edges": [
+        "edge_1860",
+        "edge_1899",
+        "edge_1947"
+      ],
+      "label": "relational paths",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational paths in k'",
+      "incident_edges": [
+        "edge_1860"
+      ],
+      "label": "relational paths in K'",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "restriction map",
+      "incident_edges": [
+        "edge_1942"
+      ],
+      "label": "restriction map",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rn",
+      "incident_edges": [
+        "edge_1876"
+      ],
+      "label": "Rn",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "schema mapping",
+      "incident_edges": [
+        "edge_1900"
+      ],
+      "label": "schema mappings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic assignment",
+      "incident_edges": [
+        "edge_1885"
+      ],
+      "label": "semantic assignment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic extension",
+      "incident_edges": [
+        "edge_1948"
+      ],
+      "label": "semantic extension",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "semantic information",
+      "incident_edges": [
+        "edge_1856",
+        "edge_1891",
+        "edge_1947"
+      ],
+      "label": "semantic information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic operation",
+      "incident_edges": [
+        "edge_1850"
+      ],
+      "label": "semantic operations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic structure",
+      "incident_edges": [
+        "edge_1909"
+      ],
+      "label": "semantic structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "set",
+      "incident_edges": [
+        "edge_1880",
+        "edge_1884"
+      ],
+      "label": "Set",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sh(c(k ′), j ′)",
+      "incident_edges": [
+        "edge_1858"
+      ],
+      "label": "Sh(C(K ′), J ′)",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "sh(c(k), j)",
+      "incident_edges": [
+        "edge_1858",
+        "edge_1861",
+        "edge_1862"
+      ],
+      "label": "Sh(C(K), J)",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "sh(c(k), jatom)",
+      "incident_edges": [
+        "edge_1861",
+        "edge_1862"
+      ],
+      "label": "Sh(C(K), Jatom)",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "shared relation",
+      "incident_edges": [
+        "edge_1917"
+      ],
+      "label": "shared relations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "shared-head relation",
+      "incident_edges": [
+        "edge_1904",
+        "edge_1912"
+      ],
+      "label": "shared-head relations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "shared-tail relation",
+      "incident_edges": [
+        "edge_1912"
+      ],
+      "label": "shared-tail relations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "sheaf",
+      "incident_edges": [
+        "edge_1880",
+        "edge_1884",
+        "edge_1946"
+      ],
+      "label": "sheaf",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "sheaf condition",
+      "incident_edges": [
+        "edge_1852",
+        "edge_1941"
+      ],
+      "label": "sheaf conditions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sheaf semantic",
+      "incident_edges": [
+        "edge_1865"
+      ],
+      "label": "sheaf semantics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sheaf structure",
+      "incident_edges": [
+        "edge_1947"
+      ],
+      "label": "sheaf structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sheafification functor",
+      "incident_edges": [
+        "edge_1925"
+      ],
+      "label": "sheafification functor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sheave",
+      "incident_edges": [
+        "edge_1948"
+      ],
+      "label": "sheave",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "simplicial complex",
+      "incident_edges": [
+        "edge_1920"
+      ],
+      "label": "simplicial complexes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "site",
+      "incident_edges": [
+        "edge_1855",
+        "edge_1862"
+      ],
+      "label": "site",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "social practice",
+      "incident_edges": [
+        "edge_1889"
+      ],
+      "label": "social practices",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "spectra",
+      "incident_edges": [
+        "edge_1907"
+      ],
+      "label": "spectra",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "spectrum",
+      "incident_edges": [
+        "edge_1849"
+      ],
+      "label": "spectrum",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "strongly connected component",
+      "incident_edges": [
+        "edge_1905",
+        "edge_1914",
+        "edge_1927"
+      ],
+      "label": "strongly connected components",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural decomposition",
+      "incident_edges": [
+        "edge_1924"
+      ],
+      "label": "structural decomposition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural relation",
+      "incident_edges": [
+        "edge_1940"
+      ],
+      "label": "structural relations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural result",
+      "incident_edges": [
+        "edge_1867"
+      ],
+      "label": "structural result",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "study transformation",
+      "incident_edges": [
+        "edge_1870"
+      ],
+      "label": "study transformations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subobject classifier",
+      "incident_edges": [
+        "edge_1949"
+      ],
+      "label": "subobject classifier",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "t",
+      "incident_edges": [
+        "edge_1913",
+        "edge_1950"
+      ],
+      "label": "t",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tail incidence matrix",
+      "incident_edges": [
+        "edge_1917"
+      ],
+      "label": "tail incidence matrix",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "tail-incidence matrix",
+      "incident_edges": [
+        "edge_1918"
+      ],
+      "label": "tail-incidence matrix",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "te",
+      "incident_edges": [
+        "edge_1928"
+      ],
+      "label": "Te",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "theorem 6.4",
+      "incident_edges": [
+        "edge_1901",
+        "edge_1902"
+      ],
+      "label": "Theorem 6.4",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "topo",
+      "incident_edges": [
+        "edge_1879",
+        "edge_1948",
+        "edge_1949"
+      ],
+      "label": "topo",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "topoi",
+      "incident_edges": [
+        "edge_1951"
+      ],
+      "label": "topoi",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "topology j",
+      "incident_edges": [
+        "edge_1908"
+      ],
+      "label": "topology J",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "topos theory",
+      "incident_edges": [
+        "edge_1871",
+        "edge_1874",
+        "edge_1952"
+      ],
+      "label": "topos theory",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "topos-theoretic semantic",
+      "incident_edges": [
+        "edge_1868",
+        "edge_1937"
+      ],
+      "label": "topos-theoretic semantics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 9,
+      "id": "triple",
+      "incident_edges": [
+        "edge_1892",
+        "edge_1914",
+        "edge_1915",
+        "edge_1933",
+        "edge_1934",
+        "edge_1939",
+        "edge_1944",
+        "edge_1950",
+        "edge_1953"
+      ],
+      "label": "triple",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "truth value",
+      "incident_edges": [
+        "edge_1949"
+      ],
+      "label": "truth values",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "visual object",
+      "incident_edges": [
+        "edge_1886"
+      ],
+      "label": "visual objects",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "whole entity",
+      "incident_edges": [
+        "edge_1885"
+      ],
+      "label": "whole entity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "τ",
+      "incident_edges": [
+        "edge_1916"
+      ],
+      "label": "τ",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_0",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_1",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_2",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_3",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"contributing]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_4",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_5",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_6",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_7",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_8",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_9",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_10",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_11",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_12",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_13",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "Neuro-Symbolic_AI_Knowledge_Discovery_chunk_14",
+    "relations": [],
+    "success": true
+  }
+]

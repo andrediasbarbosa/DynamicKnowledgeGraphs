@@ -1,0 +1,4765 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1000",
+      "properties": {},
+      "relation": "defines",
+      "source_chunk_id": "KG_Reasoning_chunk_6",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "loss function",
+        "maximum interval"
+      ],
+      "targets": [
+        "positive sample",
+        "negative sample"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1001",
+      "properties": {},
+      "relation": "connects",
+      "source_chunk_id": "KG_Reasoning_chunk_2",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "lstm-crf model",
+        "word vector"
+      ],
+      "targets": [
+        "sentence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1002",
+      "properties": {},
+      "relation": "adds",
+      "source_chunk_id": "KG_Reasoning_chunk_7",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "machine learning"
+      ],
+      "targets": [
+        "algorithm"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1003",
+      "properties": {},
+      "relation": "classifies",
+      "source_chunk_id": "KG_Reasoning_chunk_5",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "probabilistic graph-based approach",
+        "markov logic network"
+      ],
+      "targets": [
+        "entity",
+        "relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1004",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_15",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "multi-domain knowledge",
+        "scheduling"
+      ],
+      "targets": [
+        "safety",
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1005",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_2",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "neural network learning",
+        "named entity recognition"
+      ],
+      "targets": [
+        "entity extraction"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1006",
+      "properties": {},
+      "relation": "implements",
+      "source_chunk_id": "KG_Reasoning_chunk_7",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "nell"
+      ],
+      "targets": [
+        "self-correction",
+        "automatic updating"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1007",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_14",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "neural network model",
+        "various algorithm"
+      ],
+      "targets": [
+        "smart grid dispatching"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1008",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_19",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "reinforcement learning",
+        "noisy data"
+      ],
+      "targets": [
+        "relation classification"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1009",
+      "properties": {},
+      "relation": "relates to",
+      "source_chunk_id": "KG_Reasoning_chunk_11",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "text information",
+        "o&m log",
+        "power inspection work order"
+      ],
+      "targets": [
+        "knowledge data structure"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1010",
+      "properties": {},
+      "relation": "proposes",
+      "source_chunk_id": "KG_Reasoning_chunk_12",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "optimization model"
+      ],
+      "targets": [
+        "bi-lstm-crf"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1011",
+      "properties": {},
+      "relation": "applies to",
+      "source_chunk_id": "KG_Reasoning_chunk_11",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "path ranking algorithm"
+      ],
+      "targets": [
+        "similarity ranking"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1012",
+      "properties": {},
+      "relation": "constructs",
+      "source_chunk_id": "KG_Reasoning_chunk_15",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "power metering kg",
+        "text matching"
+      ],
+      "targets": [
+        "knowledge base"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1013",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "KG_Reasoning_chunk_3",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "supervised learning",
+        "relationship extraction"
+      ],
+      "targets": [
+        "manual annotation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1014",
+      "properties": {},
+      "relation": "captures",
+      "source_chunk_id": "KG_Reasoning_chunk_9",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "representation learning",
+        "vector representation"
+      ],
+      "targets": [
+        "feature"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1015",
+      "properties": {},
+      "relation": "measures",
+      "source_chunk_id": "KG_Reasoning_chunk_6",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "score function"
+      ],
+      "targets": [
+        "degree of approximation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1016",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_7",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "transe",
+        "transd"
+      ],
+      "targets": [
+        "model framework"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1017",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_6",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "transh",
+        "transr",
+        "transd"
+      ],
+      "targets": [
+        "transe"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1018",
+      "properties": {},
+      "relation": "captures",
+      "source_chunk_id": "KG_Reasoning_chunk_6",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "transe"
+      ],
+      "targets": [
+        "one-to-one relationship"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1019",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_13",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "xlnet model"
+      ],
+      "targets": [
+        "accuracy rate"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1020",
+      "properties": {},
+      "relation": "proposes",
+      "source_chunk_id": "KG_Reasoning_chunk_7",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "yago"
+      ],
+      "targets": [
+        "knowledge base"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_902",
+      "properties": {},
+      "relation": "develops",
+      "source_chunk_id": "KG_Reasoning_chunk_10",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "self-learning method",
+        "algorithm",
+        "predictive model"
+      ],
+      "targets": [
+        "o&m plan"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_903",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_16",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "application"
+      ],
+      "targets": [
+        "accuracy",
+        "efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_904",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_18",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "artificial intelligence"
+      ],
+      "targets": [
+        "operational efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_905",
+      "properties": {},
+      "relation": "discovers",
+      "source_chunk_id": "KG_Reasoning_chunk_5",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "rule mining",
+        "associative relationship"
+      ],
+      "targets": [
+        "inferential prediction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_906",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_2",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "attention mechanism",
+        "neural network model"
+      ],
+      "targets": [
+        "recognition accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_907",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "KG_Reasoning_chunk_13",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "bert model"
+      ],
+      "targets": [
+        "intention recognition accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_908",
+      "properties": {},
+      "relation": "extracts",
+      "source_chunk_id": "KG_Reasoning_chunk_15",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "bert-based model",
+        "knowledge extraction"
+      ],
+      "targets": [
+        "triadic information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_909",
+      "properties": {},
+      "relation": "develops",
+      "source_chunk_id": "KG_Reasoning_chunk_23",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "bert-bilstm-crf",
+        "entity recognition model"
+      ],
+      "targets": [
+        "power safety regulation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_910",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "KG_Reasoning_chunk_12",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "crf model",
+        "bi-lstm"
+      ],
+      "targets": [
+        "entity extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_911",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_12",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "lstm-crf",
+        "bi-lstm-crf"
+      ],
+      "targets": [
+        "text extraction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_912",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "KG_Reasoning_chunk_12",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "bi-lstm-crf"
+      ],
+      "targets": [
+        "high accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_913",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "KG_Reasoning_chunk_4",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "candidate entity disambiguation"
+      ],
+      "targets": [
+        "ranking problem"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_914",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "KG_Reasoning_chunk_9",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "case-based reasoning",
+        "historical case base"
+      ],
+      "targets": [
+        "recommendation function"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_915",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_4",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "continuous vector-based knowledge representation"
+      ],
+      "targets": [
+        "computational efficiency",
+        "data sparsity",
+        "heterogeneous information fusion"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_916",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_13",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "neural network",
+        "customer service kg"
+      ],
+      "targets": [
+        "business consultation",
+        "fault recovery",
+        "user satisfaction survey"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_917",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_22",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "customer service"
+      ],
+      "targets": [
+        "response accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_918",
+      "properties": {},
+      "relation": "collects",
+      "source_chunk_id": "KG_Reasoning_chunk_17",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "power iot",
+        "data center"
+      ],
+      "targets": [
+        "grid integration data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_919",
+      "properties": {},
+      "relation": "transforms",
+      "source_chunk_id": "KG_Reasoning_chunk_17",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge calculation",
+        "data integration"
+      ],
+      "targets": [
+        "knowledge integration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_920",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "KG_Reasoning_chunk_2",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge extraction",
+        "data quality"
+      ],
+      "targets": [
+        "kg construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_921",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_18",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "data representation"
+      ],
+      "targets": [
+        "cognitive manufacturing"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_922",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_8",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "noise filtering",
+        "data sample expansion"
+      ],
+      "targets": [
+        "quality of acquired data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_923",
+      "properties": {},
+      "relation": "determines",
+      "source_chunk_id": "KG_Reasoning_chunk_8",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "data",
+        "expert experience"
+      ],
+      "targets": [
+        "quality of kg"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_924",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_0",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "data",
+        "knowledge"
+      ],
+      "targets": [
+        "fault detection performance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_925",
+      "properties": {},
+      "relation": "competes_with",
+      "source_chunk_id": "KG_Reasoning_chunk_17",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "data-driven ai",
+        "knowledge-driven ai"
+      ],
+      "targets": [
+        "third-generation ai"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_926",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_20",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "data-driven path representation"
+      ],
+      "targets": [
+        "knowledge graph reasoning"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_927",
+      "properties": {},
+      "relation": "compared_to",
+      "source_chunk_id": "KG_Reasoning_chunk_16",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "database",
+        "inference model"
+      ],
+      "targets": [
+        "mapping technique"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_928",
+      "properties": {},
+      "relation": "is represented as",
+      "source_chunk_id": "KG_Reasoning_chunk_3",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge",
+        "database"
+      ],
+      "targets": [
+        "database"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_929",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_5",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "deductive-based reasoning",
+        "ontology reasoning"
+      ],
+      "targets": [
+        "predefined ontology axiom"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_930",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_19",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "deep learning",
+        "feature extraction"
+      ],
+      "targets": [
+        "intrusion detection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_931",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_15",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg technology",
+        "dispatch automation system"
+      ],
+      "targets": [
+        "automatic fault location",
+        "intelligent fault diagnosi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_932",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Reasoning_chunk_14",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "dispatching rule",
+        "semantic library"
+      ],
+      "targets": [
+        "decision support"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_933",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_17",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph technology",
+        "electric power field"
+      ],
+      "targets": [
+        "data mining"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_934",
+      "properties": {},
+      "relation": "is shared by",
+      "source_chunk_id": "KG_Reasoning_chunk_3",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "embedding layer",
+        "sequence layer"
+      ],
+      "targets": [
+        "entity recognition",
+        "relationship classification"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_935",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Reasoning_chunk_20",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "embedding model"
+      ],
+      "targets": [
+        "knowledge base completion"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_936",
+      "properties": {},
+      "relation": "is a step of",
+      "source_chunk_id": "KG_Reasoning_chunk_3",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "relationship extraction",
+        "entity extraction"
+      ],
+      "targets": [
+        "entity extraction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_937",
+      "properties": {},
+      "relation": "is_stagnant_in",
+      "source_chunk_id": "KG_Reasoning_chunk_16",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "entity identification"
+      ],
+      "targets": [
+        "power safety regulation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_938",
+      "properties": {},
+      "relation": "involves",
+      "source_chunk_id": "KG_Reasoning_chunk_4",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "entity linking"
+      ],
+      "targets": [
+        "entity name",
+        "target entity"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_939",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_22",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge base",
+        "equipment condition maintenance"
+      ],
+      "targets": [
+        "power iot"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_940",
+      "properties": {},
+      "relation": "learns",
+      "source_chunk_id": "KG_Reasoning_chunk_5",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "inductive-based reasoning",
+        "existing data"
+      ],
+      "targets": [
+        "knowledge"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_941",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Reasoning_chunk_22",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "financial news recommendation"
+      ],
+      "targets": [
+        "user engagement"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_942",
+      "properties": {},
+      "relation": "applied for",
+      "source_chunk_id": "KG_Reasoning_chunk_0",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "fuzzy petri net"
+      ],
+      "targets": [
+        "fault segment estimation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_943",
+      "properties": {},
+      "relation": "reads",
+      "source_chunk_id": "KG_Reasoning_chunk_14",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "gcn"
+      ],
+      "targets": [
+        "feature"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_944",
+      "properties": {},
+      "relation": "trains",
+      "source_chunk_id": "KG_Reasoning_chunk_6",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "gradient-based optimization"
+      ],
+      "targets": [
+        "transe"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_945",
+      "properties": {},
+      "relation": "adopts",
+      "source_chunk_id": "KG_Reasoning_chunk_8",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph construction"
+      ],
+      "targets": [
+        "top-down and bottom-up process"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_946",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Reasoning_chunk_21",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "graph database"
+      ],
+      "targets": [
+        "knowledge storage"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_947",
+      "properties": {},
+      "relation": "is_faster_than",
+      "source_chunk_id": "KG_Reasoning_chunk_10",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph database",
+        "rdf"
+      ],
+      "targets": [
+        "aggregate query"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_948",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_9",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph databas",
+        "neo4j"
+      ],
+      "targets": [
+        "storage efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_949",
+      "properties": {},
+      "relation": "compared",
+      "source_chunk_id": "KG_Reasoning_chunk_9",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "rdf table",
+        "graph databas"
+      ],
+      "targets": [
+        "query performance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_950",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_21",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "graph neural network"
+      ],
+      "targets": [
+        "knowledge transfer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_951",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_23",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge-driven service",
+        "graph neural network"
+      ],
+      "targets": [
+        "energy system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_952",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "KG_Reasoning_chunk_0",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph neural network"
+      ],
+      "targets": [
+        "state of power system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_953",
+      "properties": {},
+      "relation": "utilizes",
+      "source_chunk_id": "KG_Reasoning_chunk_7",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph neural network"
+      ],
+      "targets": [
+        "knowledge inference method"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_954",
+      "properties": {},
+      "relation": "needs",
+      "source_chunk_id": "KG_Reasoning_chunk_18",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "graph technology",
+        "power system operation"
+      ],
+      "targets": [
+        "further study"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_955",
+      "properties": {},
+      "relation": "combines with",
+      "source_chunk_id": "KG_Reasoning_chunk_14",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "recommendation algorithm",
+        "historical comment"
+      ],
+      "targets": [
+        "algorithmic model"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_956",
+      "properties": {},
+      "relation": "avoids",
+      "source_chunk_id": "KG_Reasoning_chunk_3",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "joint extraction",
+        "pipeline method"
+      ],
+      "targets": [
+        "performance degradation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_957",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Reasoning_chunk_8",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "joint model"
+      ],
+      "targets": [
+        "accurate extraction result"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_958",
+      "properties": {},
+      "relation": "manages",
+      "source_chunk_id": "KG_Reasoning_chunk_5",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge fusion",
+        "kg merging"
+      ],
+      "targets": [
+        "multiple kgs"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_959",
+      "properties": {},
+      "relation": "is_better_than",
+      "source_chunk_id": "KG_Reasoning_chunk_10",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg representation",
+        "other representation method"
+      ],
+      "targets": [
+        "precision",
+        "recall",
+        "f1-score"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_960",
+      "properties": {},
+      "relation": "assists in",
+      "source_chunk_id": "KG_Reasoning_chunk_11",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg technology"
+      ],
+      "targets": [
+        "o&m of power equipment"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_961",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_14",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg technology"
+      ],
+      "targets": [
+        "fault diagnosi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_962",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_12",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg technology"
+      ],
+      "targets": [
+        "holographic awareness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_963",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_13",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg technology"
+      ],
+      "targets": [
+        "consulting service"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_964",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_1",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "knowledge-centered"
+      ],
+      "targets": [
+        "next-generation power system"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_965",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_1",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "power iot center"
+      ],
+      "targets": [
+        "data resource"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_966",
+      "properties": {},
+      "relation": "extracts",
+      "source_chunk_id": "KG_Reasoning_chunk_15",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "power monitoring information"
+      ],
+      "targets": [
+        "fault information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_967",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "KG_Reasoning_chunk_1",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "power system"
+      ],
+      "targets": [
+        "data integration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_968",
+      "properties": {},
+      "relation": "visualizes",
+      "source_chunk_id": "KG_Reasoning_chunk_1",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "power system"
+      ],
+      "targets": [
+        "complex model"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_969",
+      "properties": {},
+      "relation": "overcomes",
+      "source_chunk_id": "KG_Reasoning_chunk_1",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "technical difficulty"
+      ],
+      "targets": [
+        "industry challenge"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_970",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "KG_Reasoning_chunk_13",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg",
+        "user intent"
+      ],
+      "targets": [
+        "clear problem description"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_971",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "KG_Reasoning_chunk_16",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg-based model"
+      ],
+      "targets": [
+        "textrank algorithm"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_972",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_11",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg"
+      ],
+      "targets": [
+        "intelligence of operation",
+        "efficiency of management"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_973",
+      "properties": {},
+      "relation": "is_key_in",
+      "source_chunk_id": "KG_Reasoning_chunk_16",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg"
+      ],
+      "targets": [
+        "electric power system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_974",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "KG_Reasoning_chunk_11",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "kg"
+      ],
+      "targets": [
+        "fault-assisted decision"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_975",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_19",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge discovery",
+        "mapping knowledge domain"
+      ],
+      "targets": [
+        "research analysi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_976",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_9",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge extraction",
+        "ontology construction"
+      ],
+      "targets": [
+        "knowledge reasoning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_977",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "KG_Reasoning_chunk_17",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge extraction",
+        "power operation system"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_978",
+      "properties": {},
+      "relation": "eliminates",
+      "source_chunk_id": "KG_Reasoning_chunk_8",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge fusion technique"
+      ],
+      "targets": [
+        "redundancy of data"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_979",
+      "properties": {},
+      "relation": "applies_to",
+      "source_chunk_id": "KG_Reasoning_chunk_4",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph embedding"
+      ],
+      "targets": [
+        "link prediction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_980",
+      "properties": {},
+      "relation": "guides",
+      "source_chunk_id": "KG_Reasoning_chunk_0",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "knowledge representation"
+      ],
+      "targets": [
+        "power equipment operation",
+        "decision-making"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_981",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_20",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "link prediction"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_982",
+      "properties": {},
+      "relation": "aids",
+      "source_chunk_id": "KG_Reasoning_chunk_21",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "machine learning"
+      ],
+      "targets": [
+        "data analysi"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_983",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_20",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "multi-source knowledge fusion",
+        "knowledge graph"
+      ],
+      "targets": [
+        "data integration"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_984",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_21",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "multimodal data"
+      ],
+      "targets": [
+        "representation learning"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_985",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "KG_Reasoning_chunk_22",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "power dispatching"
+      ],
+      "targets": [
+        "resource allocation"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_986",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_22",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "power equipment management"
+      ],
+      "targets": [
+        "efficiency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_987",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_21",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "power grid"
+      ],
+      "targets": [
+        "intelligent dispatching"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_988",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "KG_Reasoning_chunk_18",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "power system"
+      ],
+      "targets": [
+        "factual knowledge"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_989",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "KG_Reasoning_chunk_23",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "recommender system"
+      ],
+      "targets": [
+        "recommendation accuracy"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_990",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_20",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "reinforcement learning"
+      ],
+      "targets": [
+        "rule mining"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_991",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "KG_Reasoning_chunk_19",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "relational data"
+      ],
+      "targets": [
+        "automatic construction"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_992",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "KG_Reasoning_chunk_2",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "semantic network"
+      ],
+      "targets": [
+        "structured semantic knowledge base"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_993",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "KG_Reasoning_chunk_23",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "semantic search algorithm"
+      ],
+      "targets": [
+        "smart grid"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_994",
+      "properties": {},
+      "relation": "represents",
+      "source_chunk_id": "KG_Reasoning_chunk_0",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "multi-source data"
+      ],
+      "targets": [
+        "potential information"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_995",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "KG_Reasoning_chunk_10",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "power equipment data",
+        "knowledge graph"
+      ],
+      "targets": [
+        "representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_996",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "KG_Reasoning_chunk_10",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "human cost",
+        "material cost",
+        "work efficiency"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_997",
+      "properties": {},
+      "relation": "assists",
+      "source_chunk_id": "KG_Reasoning_chunk_23",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge map",
+        "network security"
+      ],
+      "targets": [
+        "vulnerability analysi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_998",
+      "properties": {},
+      "relation": "suffers_from",
+      "source_chunk_id": "KG_Reasoning_chunk_4",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge representation",
+        "rdf triple",
+        "owl language"
+      ],
+      "targets": [
+        "low computational efficiency",
+        "data sparsity"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_999",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "KG_Reasoning_chunk_19",
+      "source_document": "KG_Reasoning",
+      "sources": [
+        "knowledge representation",
+        "power system modelling"
+      ],
+      "targets": [
+        "system design"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 119,
+    "num_nodes": 264
+  },
+  "nodes": [
+    {
+      "degree": 2,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_903",
+        "edge_1004"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "accuracy rate",
+      "incident_edges": [
+        "edge_1019"
+      ],
+      "label": "accuracy rate",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "accurate extraction result",
+      "incident_edges": [
+        "edge_957"
+      ],
+      "label": "accurate extraction results",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "aggregate query",
+      "incident_edges": [
+        "edge_947"
+      ],
+      "label": "aggregate queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "algorithm",
+      "incident_edges": [
+        "edge_902",
+        "edge_1002"
+      ],
+      "label": "algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "algorithmic model",
+      "incident_edges": [
+        "edge_955"
+      ],
+      "label": "algorithmic models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "application",
+      "incident_edges": [
+        "edge_903"
+      ],
+      "label": "application",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "artificial intelligence",
+      "incident_edges": [
+        "edge_904"
+      ],
+      "label": "artificial intelligence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "associative relationship",
+      "incident_edges": [
+        "edge_905"
+      ],
+      "label": "associative relationships",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "attention mechanism",
+      "incident_edges": [
+        "edge_906"
+      ],
+      "label": "attention mechanism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic construction",
+      "incident_edges": [
+        "edge_991"
+      ],
+      "label": "automatic construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic fault location",
+      "incident_edges": [
+        "edge_931"
+      ],
+      "label": "automatic fault location",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "automatic updating",
+      "incident_edges": [
+        "edge_1006"
+      ],
+      "label": "automatic updating",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bert model",
+      "incident_edges": [
+        "edge_907"
+      ],
+      "label": "Bert model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bert-based model",
+      "incident_edges": [
+        "edge_908"
+      ],
+      "label": "Bert-based model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bert-bilstm-crf",
+      "incident_edges": [
+        "edge_909"
+      ],
+      "label": "BERT-BiLSTM-CRF",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bi-lstm",
+      "incident_edges": [
+        "edge_910"
+      ],
+      "label": "Bi-LSTM",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "bi-lstm-crf",
+      "incident_edges": [
+        "edge_911",
+        "edge_912",
+        "edge_1010"
+      ],
+      "label": "Bi-LSTM-CRF",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "business consultation",
+      "incident_edges": [
+        "edge_916"
+      ],
+      "label": "business consultation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "candidate entity disambiguation",
+      "incident_edges": [
+        "edge_913"
+      ],
+      "label": "candidate entity disambiguation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "case-based reasoning",
+      "incident_edges": [
+        "edge_914"
+      ],
+      "label": "case-based reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "clear problem description",
+      "incident_edges": [
+        "edge_970"
+      ],
+      "label": "clear problem description",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cognitive manufacturing",
+      "incident_edges": [
+        "edge_921"
+      ],
+      "label": "cognitive manufacturing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "complex model",
+      "incident_edges": [
+        "edge_968"
+      ],
+      "label": "complex models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "computational efficiency",
+      "incident_edges": [
+        "edge_915"
+      ],
+      "label": "computational efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "consulting service",
+      "incident_edges": [
+        "edge_963"
+      ],
+      "label": "consulting services",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "continuous vector-based knowledge representation",
+      "incident_edges": [
+        "edge_915"
+      ],
+      "label": "continuous vector-based knowledge representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "crf model",
+      "incident_edges": [
+        "edge_910"
+      ],
+      "label": "CRF model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "customer service",
+      "incident_edges": [
+        "edge_917"
+      ],
+      "label": "customer service",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "customer service kg",
+      "incident_edges": [
+        "edge_916"
+      ],
+      "label": "customer service KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "data",
+      "incident_edges": [
+        "edge_923",
+        "edge_924"
+      ],
+      "label": "data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data analysi",
+      "incident_edges": [
+        "edge_982"
+      ],
+      "label": "data analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data center",
+      "incident_edges": [
+        "edge_918"
+      ],
+      "label": "data center",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "data integration",
+      "incident_edges": [
+        "edge_919",
+        "edge_967",
+        "edge_983"
+      ],
+      "label": "data integration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data mining",
+      "incident_edges": [
+        "edge_933"
+      ],
+      "label": "data mining",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data quality",
+      "incident_edges": [
+        "edge_920"
+      ],
+      "label": "data quality",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data representation",
+      "incident_edges": [
+        "edge_921"
+      ],
+      "label": "data representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data resource",
+      "incident_edges": [
+        "edge_965"
+      ],
+      "label": "data resources",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data sample expansion",
+      "incident_edges": [
+        "edge_922"
+      ],
+      "label": "data sample expansion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "data sparsity",
+      "incident_edges": [
+        "edge_915",
+        "edge_998"
+      ],
+      "label": "data sparsity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data-driven ai",
+      "incident_edges": [
+        "edge_925"
+      ],
+      "label": "data-driven AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data-driven path representation",
+      "incident_edges": [
+        "edge_926"
+      ],
+      "label": "data-driven path representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "database",
+      "incident_edges": [
+        "edge_927",
+        "edge_928"
+      ],
+      "label": "database",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "decision support",
+      "incident_edges": [
+        "edge_932"
+      ],
+      "label": "decision support",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "decision-making",
+      "incident_edges": [
+        "edge_980"
+      ],
+      "label": "decision-making",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deductive-based reasoning",
+      "incident_edges": [
+        "edge_929"
+      ],
+      "label": "deductive-based reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deep learning",
+      "incident_edges": [
+        "edge_930"
+      ],
+      "label": "deep learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "degree of approximation",
+      "incident_edges": [
+        "edge_1015"
+      ],
+      "label": "degree of approximation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dispatch automation system",
+      "incident_edges": [
+        "edge_931"
+      ],
+      "label": "dispatch automation system",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dispatching rule",
+      "incident_edges": [
+        "edge_932"
+      ],
+      "label": "dispatching rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "efficiency",
+      "incident_edges": [
+        "edge_903",
+        "edge_986"
+      ],
+      "label": "efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "efficiency of management",
+      "incident_edges": [
+        "edge_972"
+      ],
+      "label": "efficiency of management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "electric power field",
+      "incident_edges": [
+        "edge_933"
+      ],
+      "label": "electric power field",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "electric power system",
+      "incident_edges": [
+        "edge_973"
+      ],
+      "label": "electric power systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "embedding layer",
+      "incident_edges": [
+        "edge_934"
+      ],
+      "label": "embedding layer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "embedding model",
+      "incident_edges": [
+        "edge_935"
+      ],
+      "label": "embedding model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "energy system",
+      "incident_edges": [
+        "edge_951"
+      ],
+      "label": "energy systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity",
+      "incident_edges": [
+        "edge_1003"
+      ],
+      "label": "entity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "entity extraction",
+      "incident_edges": [
+        "edge_910",
+        "edge_936",
+        "edge_1005"
+      ],
+      "label": "entity extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity identification",
+      "incident_edges": [
+        "edge_937"
+      ],
+      "label": "entity identification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity linking",
+      "incident_edges": [
+        "edge_938"
+      ],
+      "label": "entity linking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity name",
+      "incident_edges": [
+        "edge_938"
+      ],
+      "label": "entity names",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity recognition",
+      "incident_edges": [
+        "edge_934"
+      ],
+      "label": "entity recognition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entity recognition model",
+      "incident_edges": [
+        "edge_909"
+      ],
+      "label": "entity recognition model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "equipment condition maintenance",
+      "incident_edges": [
+        "edge_939"
+      ],
+      "label": "equipment condition maintenance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "existing data",
+      "incident_edges": [
+        "edge_940"
+      ],
+      "label": "existing data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "expert experience",
+      "incident_edges": [
+        "edge_923"
+      ],
+      "label": "expert experience",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "f1-score",
+      "incident_edges": [
+        "edge_959"
+      ],
+      "label": "F1-score",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual knowledge",
+      "incident_edges": [
+        "edge_988"
+      ],
+      "label": "factual knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault detection performance",
+      "incident_edges": [
+        "edge_924"
+      ],
+      "label": "fault detection performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault diagnosi",
+      "incident_edges": [
+        "edge_961"
+      ],
+      "label": "fault diagnosis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault information",
+      "incident_edges": [
+        "edge_966"
+      ],
+      "label": "fault information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault recovery",
+      "incident_edges": [
+        "edge_916"
+      ],
+      "label": "fault recovery",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault segment estimation",
+      "incident_edges": [
+        "edge_942"
+      ],
+      "label": "fault segment estimation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fault-assisted decision",
+      "incident_edges": [
+        "edge_974"
+      ],
+      "label": "fault-assisted decisions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "feature",
+      "incident_edges": [
+        "edge_943",
+        "edge_1014"
+      ],
+      "label": "feature",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "feature extraction",
+      "incident_edges": [
+        "edge_930"
+      ],
+      "label": "feature extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "financial news recommendation",
+      "incident_edges": [
+        "edge_941"
+      ],
+      "label": "financial news recommendation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "further study",
+      "incident_edges": [
+        "edge_954"
+      ],
+      "label": "further study",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fuzzy petri net",
+      "incident_edges": [
+        "edge_942"
+      ],
+      "label": "fuzzy Petri net",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gcn",
+      "incident_edges": [
+        "edge_943"
+      ],
+      "label": "GCN",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient-based optimization",
+      "incident_edges": [
+        "edge_944"
+      ],
+      "label": "gradient-based optimization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph construction",
+      "incident_edges": [
+        "edge_945"
+      ],
+      "label": "graph construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "graph databa",
+      "incident_edges": [],
+      "label": "graph databases",
+      "properties": {}
+    },
+    {
+      "degree": 2,
+      "id": "graph database",
+      "incident_edges": [
+        "edge_946",
+        "edge_947"
+      ],
+      "label": "graph database",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "graph neural network",
+      "incident_edges": [
+        "edge_950",
+        "edge_951",
+        "edge_952",
+        "edge_953"
+      ],
+      "label": "graph neural network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph technology",
+      "incident_edges": [
+        "edge_933",
+        "edge_954"
+      ],
+      "label": "graph technology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "grid integration data",
+      "incident_edges": [
+        "edge_918"
+      ],
+      "label": "grid integration data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "heterogeneous information fusion",
+      "incident_edges": [
+        "edge_915"
+      ],
+      "label": "heterogeneous information fusion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "high accuracy",
+      "incident_edges": [
+        "edge_912"
+      ],
+      "label": "high accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "historical case base",
+      "incident_edges": [
+        "edge_914"
+      ],
+      "label": "historical case base",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "historical comment",
+      "incident_edges": [
+        "edge_955"
+      ],
+      "label": "historical comments",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "holographic awareness",
+      "incident_edges": [
+        "edge_962"
+      ],
+      "label": "holographic awareness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human cost",
+      "incident_edges": [
+        "edge_996"
+      ],
+      "label": "human costs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inductive-based reasoning",
+      "incident_edges": [
+        "edge_940"
+      ],
+      "label": "inductive-based reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "industry challenge",
+      "incident_edges": [
+        "edge_969"
+      ],
+      "label": "industry challenges",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inference model",
+      "incident_edges": [
+        "edge_927"
+      ],
+      "label": "inference model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inferential prediction",
+      "incident_edges": [
+        "edge_905"
+      ],
+      "label": "inferential prediction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intelligence of operation",
+      "incident_edges": [
+        "edge_972"
+      ],
+      "label": "intelligence of operation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intelligent dispatching",
+      "incident_edges": [
+        "edge_987"
+      ],
+      "label": "intelligent dispatching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intelligent fault diagnosi",
+      "incident_edges": [
+        "edge_931"
+      ],
+      "label": "intelligent fault diagnosis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intention recognition accuracy",
+      "incident_edges": [
+        "edge_907"
+      ],
+      "label": "intention recognition accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intrusion detection",
+      "incident_edges": [
+        "edge_930"
+      ],
+      "label": "intrusion detection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "joint extraction",
+      "incident_edges": [
+        "edge_956"
+      ],
+      "label": "joint extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "joint model",
+      "incident_edges": [
+        "edge_957"
+      ],
+      "label": "joint model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 10,
+      "id": "kg",
+      "incident_edges": [
+        "edge_964",
+        "edge_965",
+        "edge_966",
+        "edge_967",
+        "edge_968",
+        "edge_969",
+        "edge_970",
+        "edge_972",
+        "edge_973",
+        "edge_974"
+      ],
+      "label": "KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg construction",
+      "incident_edges": [
+        "edge_920"
+      ],
+      "label": "KG construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg merging",
+      "incident_edges": [
+        "edge_958"
+      ],
+      "label": "KG merging",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg representation",
+      "incident_edges": [
+        "edge_959"
+      ],
+      "label": "KG representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "kg technology",
+      "incident_edges": [
+        "edge_931",
+        "edge_960",
+        "edge_961",
+        "edge_962",
+        "edge_963"
+      ],
+      "label": "KG technology",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kg-based model",
+      "incident_edges": [
+        "edge_971"
+      ],
+      "label": "KG-based model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "knowledge",
+      "incident_edges": [
+        "edge_924",
+        "edge_928",
+        "edge_940"
+      ],
+      "label": "knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "knowledge base",
+      "incident_edges": [
+        "edge_939",
+        "edge_1012",
+        "edge_1020"
+      ],
+      "label": "knowledge base",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge base completion",
+      "incident_edges": [
+        "edge_935"
+      ],
+      "label": "knowledge base completion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge calculation",
+      "incident_edges": [
+        "edge_919"
+      ],
+      "label": "knowledge calculation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge data structure",
+      "incident_edges": [
+        "edge_1009"
+      ],
+      "label": "knowledge data structure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge discovery",
+      "incident_edges": [
+        "edge_975"
+      ],
+      "label": "knowledge discovery",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "knowledge extraction",
+      "incident_edges": [
+        "edge_908",
+        "edge_920",
+        "edge_976",
+        "edge_977"
+      ],
+      "label": "knowledge extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge fusion",
+      "incident_edges": [
+        "edge_958"
+      ],
+      "label": "knowledge fusion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge fusion technique",
+      "incident_edges": [
+        "edge_978"
+      ],
+      "label": "knowledge fusion technique",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 26,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_904",
+        "edge_917",
+        "edge_921",
+        "edge_926",
+        "edge_935",
+        "edge_941",
+        "edge_946",
+        "edge_950",
+        "edge_977",
+        "edge_980",
+        "edge_981",
+        "edge_982",
+        "edge_983",
+        "edge_984",
+        "edge_985",
+        "edge_986",
+        "edge_987",
+        "edge_988",
+        "edge_989",
+        "edge_990",
+        "edge_991",
+        "edge_992",
+        "edge_993",
+        "edge_994",
+        "edge_995",
+        "edge_996"
+      ],
+      "label": "knowledge graph",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph embedding",
+      "incident_edges": [
+        "edge_979"
+      ],
+      "label": "knowledge graph embedding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph reasoning",
+      "incident_edges": [
+        "edge_926"
+      ],
+      "label": "knowledge graph reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge inference method",
+      "incident_edges": [
+        "edge_953"
+      ],
+      "label": "knowledge inference methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge integration",
+      "incident_edges": [
+        "edge_919"
+      ],
+      "label": "knowledge integration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge map",
+      "incident_edges": [
+        "edge_997"
+      ],
+      "label": "knowledge map",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge reasoning",
+      "incident_edges": [
+        "edge_976"
+      ],
+      "label": "knowledge reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "knowledge representation",
+      "incident_edges": [
+        "edge_980",
+        "edge_998",
+        "edge_999"
+      ],
+      "label": "knowledge representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge storage",
+      "incident_edges": [
+        "edge_946"
+      ],
+      "label": "knowledge storage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge transfer",
+      "incident_edges": [
+        "edge_950"
+      ],
+      "label": "knowledge transfer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge-centered",
+      "incident_edges": [
+        "edge_964"
+      ],
+      "label": "knowledge-centered",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge-driven ai",
+      "incident_edges": [
+        "edge_925"
+      ],
+      "label": "knowledge-driven AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge-driven service",
+      "incident_edges": [
+        "edge_951"
+      ],
+      "label": "knowledge-driven services",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "link prediction",
+      "incident_edges": [
+        "edge_979",
+        "edge_981"
+      ],
+      "label": "link prediction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "loss function",
+      "incident_edges": [
+        "edge_1000"
+      ],
+      "label": "loss function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "low computational efficiency",
+      "incident_edges": [
+        "edge_998"
+      ],
+      "label": "low computational efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lstm-crf",
+      "incident_edges": [
+        "edge_911"
+      ],
+      "label": "LSTM-CRF",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lstm-crf model",
+      "incident_edges": [
+        "edge_1001"
+      ],
+      "label": "LSTM-CRF model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "machine learning",
+      "incident_edges": [
+        "edge_982",
+        "edge_1002"
+      ],
+      "label": "machine learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "manual annotation",
+      "incident_edges": [
+        "edge_1013"
+      ],
+      "label": "manual annotation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mapping knowledge domain",
+      "incident_edges": [
+        "edge_975"
+      ],
+      "label": "mapping knowledge domain",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mapping technique",
+      "incident_edges": [
+        "edge_927"
+      ],
+      "label": "mapping techniques",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "markov logic network",
+      "incident_edges": [
+        "edge_1003"
+      ],
+      "label": "Markov logic networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "material cost",
+      "incident_edges": [
+        "edge_996"
+      ],
+      "label": "material costs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "maximum interval",
+      "incident_edges": [
+        "edge_1000"
+      ],
+      "label": "maximum interval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model framework",
+      "incident_edges": [
+        "edge_1016"
+      ],
+      "label": "model framework",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-domain knowledge",
+      "incident_edges": [
+        "edge_1004"
+      ],
+      "label": "multi-domain knowledge",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-source data",
+      "incident_edges": [
+        "edge_994"
+      ],
+      "label": "multi-source data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-source knowledge fusion",
+      "incident_edges": [
+        "edge_983"
+      ],
+      "label": "multi-source knowledge fusion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multimodal data",
+      "incident_edges": [
+        "edge_984"
+      ],
+      "label": "multimodal data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multiple kgs",
+      "incident_edges": [
+        "edge_958"
+      ],
+      "label": "multiple KGs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "named entity recognition",
+      "incident_edges": [
+        "edge_1005"
+      ],
+      "label": "named entity recognition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "negative sample",
+      "incident_edges": [
+        "edge_1000"
+      ],
+      "label": "negative samples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "nell",
+      "incident_edges": [
+        "edge_1006"
+      ],
+      "label": "NELL",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neo4j",
+      "incident_edges": [
+        "edge_948"
+      ],
+      "label": "Neo4j",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "network security",
+      "incident_edges": [
+        "edge_997"
+      ],
+      "label": "network security",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural network",
+      "incident_edges": [
+        "edge_916"
+      ],
+      "label": "neural network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural network learning",
+      "incident_edges": [
+        "edge_1005"
+      ],
+      "label": "neural network learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "neural network model",
+      "incident_edges": [
+        "edge_906",
+        "edge_1007"
+      ],
+      "label": "neural network model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "next-generation power system",
+      "incident_edges": [
+        "edge_964"
+      ],
+      "label": "next-generation power systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "noise filtering",
+      "incident_edges": [
+        "edge_922"
+      ],
+      "label": "noise filtering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "noisy data",
+      "incident_edges": [
+        "edge_1008"
+      ],
+      "label": "noisy data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "o&m log",
+      "incident_edges": [
+        "edge_1009"
+      ],
+      "label": "O&M logs",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "o&m of power equipment",
+      "incident_edges": [
+        "edge_960"
+      ],
+      "label": "O&M of power equipment",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "o&m plan",
+      "incident_edges": [
+        "edge_902"
+      ],
+      "label": "O&M plans",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "one-to-one relationship",
+      "incident_edges": [
+        "edge_1018"
+      ],
+      "label": "one-to-one relationships",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology construction",
+      "incident_edges": [
+        "edge_976"
+      ],
+      "label": "ontology construction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ontology reasoning",
+      "incident_edges": [
+        "edge_929"
+      ],
+      "label": "ontology reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "operational efficiency",
+      "incident_edges": [
+        "edge_904"
+      ],
+      "label": "operational efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optimization model",
+      "incident_edges": [
+        "edge_1010"
+      ],
+      "label": "optimization model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "other representation method",
+      "incident_edges": [
+        "edge_959"
+      ],
+      "label": "other representation methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "owl language",
+      "incident_edges": [
+        "edge_998"
+      ],
+      "label": "OWL languages",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "path ranking algorithm",
+      "incident_edges": [
+        "edge_1011"
+      ],
+      "label": "path ranking algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance degradation",
+      "incident_edges": [
+        "edge_956"
+      ],
+      "label": "performance degradation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "pipeline method",
+      "incident_edges": [
+        "edge_956"
+      ],
+      "label": "pipeline method",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "positive sample",
+      "incident_edges": [
+        "edge_1000"
+      ],
+      "label": "positive samples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "potential information",
+      "incident_edges": [
+        "edge_994"
+      ],
+      "label": "potential information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power dispatching",
+      "incident_edges": [
+        "edge_985"
+      ],
+      "label": "power dispatching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power equipment data",
+      "incident_edges": [
+        "edge_995"
+      ],
+      "label": "power equipment data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power equipment management",
+      "incident_edges": [
+        "edge_986"
+      ],
+      "label": "power equipment management",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power equipment operation",
+      "incident_edges": [
+        "edge_980"
+      ],
+      "label": "power equipment operation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power grid",
+      "incident_edges": [
+        "edge_987"
+      ],
+      "label": "power grid",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power inspection work order",
+      "incident_edges": [
+        "edge_1009"
+      ],
+      "label": "power inspection work orders",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "power iot",
+      "incident_edges": [
+        "edge_918",
+        "edge_939"
+      ],
+      "label": "power IoT",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power iot center",
+      "incident_edges": [
+        "edge_965"
+      ],
+      "label": "power IoT center",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power metering kg",
+      "incident_edges": [
+        "edge_1012"
+      ],
+      "label": "power metering KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power monitoring information",
+      "incident_edges": [
+        "edge_966"
+      ],
+      "label": "power monitoring information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power operation system",
+      "incident_edges": [
+        "edge_977"
+      ],
+      "label": "power operation system",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "power safety regulation",
+      "incident_edges": [
+        "edge_909",
+        "edge_937"
+      ],
+      "label": "power safety regulations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "power system",
+      "incident_edges": [
+        "edge_967",
+        "edge_968",
+        "edge_988"
+      ],
+      "label": "power system",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power system modelling",
+      "incident_edges": [
+        "edge_999"
+      ],
+      "label": "power system modelling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "power system operation",
+      "incident_edges": [
+        "edge_954"
+      ],
+      "label": "power system operation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "precision",
+      "incident_edges": [
+        "edge_959"
+      ],
+      "label": "precision",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predefined ontology axiom",
+      "incident_edges": [
+        "edge_929"
+      ],
+      "label": "predefined ontology axioms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predictive model",
+      "incident_edges": [
+        "edge_902"
+      ],
+      "label": "predictive models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "probabilistic graph-based approach",
+      "incident_edges": [
+        "edge_1003"
+      ],
+      "label": "probabilistic graph-based approaches",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "quality of acquired data",
+      "incident_edges": [
+        "edge_922"
+      ],
+      "label": "quality of acquired data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "quality of kg",
+      "incident_edges": [
+        "edge_923"
+      ],
+      "label": "quality of KG",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query performance",
+      "incident_edges": [
+        "edge_949"
+      ],
+      "label": "query performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "question answering",
+      "incident_edges": [
+        "edge_981"
+      ],
+      "label": "question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ranking problem",
+      "incident_edges": [
+        "edge_913"
+      ],
+      "label": "ranking problem",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf",
+      "incident_edges": [
+        "edge_947"
+      ],
+      "label": "RDF",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf table",
+      "incident_edges": [
+        "edge_949"
+      ],
+      "label": "RDF tables",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rdf triple",
+      "incident_edges": [
+        "edge_998"
+      ],
+      "label": "RDF triples",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recall",
+      "incident_edges": [
+        "edge_959"
+      ],
+      "label": "recall",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recognition accuracy",
+      "incident_edges": [
+        "edge_906"
+      ],
+      "label": "recognition accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation accuracy",
+      "incident_edges": [
+        "edge_989"
+      ],
+      "label": "recommendation accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation algorithm",
+      "incident_edges": [
+        "edge_955"
+      ],
+      "label": "recommendation algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommendation function",
+      "incident_edges": [
+        "edge_914"
+      ],
+      "label": "recommendation function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "recommender system",
+      "incident_edges": [
+        "edge_989"
+      ],
+      "label": "recommender systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "redundancy of data",
+      "incident_edges": [
+        "edge_978"
+      ],
+      "label": "redundancy of data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "reinforcement learning",
+      "incident_edges": [
+        "edge_990",
+        "edge_1008"
+      ],
+      "label": "reinforcement learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation",
+      "incident_edges": [
+        "edge_1003"
+      ],
+      "label": "relation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation classification",
+      "incident_edges": [
+        "edge_1008"
+      ],
+      "label": "relation classification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relational data",
+      "incident_edges": [
+        "edge_991"
+      ],
+      "label": "relational data",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relationship classification",
+      "incident_edges": [
+        "edge_934"
+      ],
+      "label": "relationship classification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "relationship extraction",
+      "incident_edges": [
+        "edge_936",
+        "edge_1013"
+      ],
+      "label": "relationship extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "representation",
+      "incident_edges": [
+        "edge_995"
+      ],
+      "label": "representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "representation learning",
+      "incident_edges": [
+        "edge_984",
+        "edge_1014"
+      ],
+      "label": "representation learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "research analysi",
+      "incident_edges": [
+        "edge_975"
+      ],
+      "label": "research analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "resource allocation",
+      "incident_edges": [
+        "edge_985"
+      ],
+      "label": "resource allocation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "response accuracy",
+      "incident_edges": [
+        "edge_917"
+      ],
+      "label": "response accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "rule mining",
+      "incident_edges": [
+        "edge_905",
+        "edge_990"
+      ],
+      "label": "rule mining",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "safety",
+      "incident_edges": [
+        "edge_1004"
+      ],
+      "label": "safety",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "scheduling",
+      "incident_edges": [
+        "edge_1004"
+      ],
+      "label": "scheduling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "score function",
+      "incident_edges": [
+        "edge_1015"
+      ],
+      "label": "score function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "self-correction",
+      "incident_edges": [
+        "edge_1006"
+      ],
+      "label": "self-correction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "self-learning method",
+      "incident_edges": [
+        "edge_902"
+      ],
+      "label": "self-learning methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic library",
+      "incident_edges": [
+        "edge_932"
+      ],
+      "label": "semantic library",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic network",
+      "incident_edges": [
+        "edge_992"
+      ],
+      "label": "semantic network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic search algorithm",
+      "incident_edges": [
+        "edge_993"
+      ],
+      "label": "semantic search algorithm",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sentence",
+      "incident_edges": [
+        "edge_1001"
+      ],
+      "label": "sentence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sequence layer",
+      "incident_edges": [
+        "edge_934"
+      ],
+      "label": "sequence layer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "similarity ranking",
+      "incident_edges": [
+        "edge_1011"
+      ],
+      "label": "similarity ranking",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "smart grid",
+      "incident_edges": [
+        "edge_993"
+      ],
+      "label": "smart grid",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "smart grid dispatching",
+      "incident_edges": [
+        "edge_1007"
+      ],
+      "label": "smart grid dispatching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "state of power system",
+      "incident_edges": [
+        "edge_952"
+      ],
+      "label": "state of power systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "storage efficiency",
+      "incident_edges": [
+        "edge_948"
+      ],
+      "label": "storage efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured semantic knowledge base",
+      "incident_edges": [
+        "edge_992"
+      ],
+      "label": "structured semantic knowledge base",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "supervised learning",
+      "incident_edges": [
+        "edge_1013"
+      ],
+      "label": "supervised learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "system design",
+      "incident_edges": [
+        "edge_999"
+      ],
+      "label": "system design",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "target entity",
+      "incident_edges": [
+        "edge_938"
+      ],
+      "label": "target entities",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "technical difficulty",
+      "incident_edges": [
+        "edge_969"
+      ],
+      "label": "technical difficulties",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text extraction",
+      "incident_edges": [
+        "edge_911"
+      ],
+      "label": "text extraction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text information",
+      "incident_edges": [
+        "edge_1009"
+      ],
+      "label": "text information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text matching",
+      "incident_edges": [
+        "edge_1012"
+      ],
+      "label": "text matching",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "textrank algorithm",
+      "incident_edges": [
+        "edge_971"
+      ],
+      "label": "TextRank algorithm",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "third-generation ai",
+      "incident_edges": [
+        "edge_925"
+      ],
+      "label": "third-generation AI",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "top-down and bottom-up process",
+      "incident_edges": [
+        "edge_945"
+      ],
+      "label": "top-down and bottom-up processes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "transd",
+      "incident_edges": [
+        "edge_1016",
+        "edge_1017"
+      ],
+      "label": "TransD",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "transe",
+      "incident_edges": [
+        "edge_944",
+        "edge_1016",
+        "edge_1017",
+        "edge_1018"
+      ],
+      "label": "TransE",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "transh",
+      "incident_edges": [
+        "edge_1017"
+      ],
+      "label": "TransH",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "transr",
+      "incident_edges": [
+        "edge_1017"
+      ],
+      "label": "TransR",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "triadic information",
+      "incident_edges": [
+        "edge_908"
+      ],
+      "label": "triadic information",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user engagement",
+      "incident_edges": [
+        "edge_941"
+      ],
+      "label": "user engagement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user intent",
+      "incident_edges": [
+        "edge_970"
+      ],
+      "label": "user intent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "user satisfaction survey",
+      "incident_edges": [
+        "edge_916"
+      ],
+      "label": "user satisfaction surveys",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "various algorithm",
+      "incident_edges": [
+        "edge_1007"
+      ],
+      "label": "various algorithms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "vector representation",
+      "incident_edges": [
+        "edge_1014"
+      ],
+      "label": "vector representation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "vulnerability analysi",
+      "incident_edges": [
+        "edge_997"
+      ],
+      "label": "vulnerability analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "word vector",
+      "incident_edges": [
+        "edge_1001"
+      ],
+      "label": "word vectors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "work efficiency",
+      "incident_edges": [
+        "edge_996"
+      ],
+      "label": "work efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "xlnet model",
+      "incident_edges": [
+        "edge_1019"
+      ],
+      "label": "XLNet model",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "yago",
+      "incident_edges": [
+        "edge_1020"
+      ],
+      "label": "YAGO",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

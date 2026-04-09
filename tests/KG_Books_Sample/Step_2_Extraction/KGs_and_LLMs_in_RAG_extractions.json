@@ -1,0 +1,524 @@
+[
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Knowledge Graphs",
+          "KGs"
+        ],
+        "targets": [
+          "Large Language Models",
+          "LLMs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is part of",
+        "sources": [
+          "graph transformation",
+          "linearization"
+        ],
+        "targets": [
+          "KG Alignment",
+          "KGA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "centrality",
+          "KG centrality"
+        ],
+        "targets": [
+          "generation quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "optimal factors",
+          "factors"
+        ],
+        "targets": [
+          "KG+RAG"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "lack",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "expertise",
+          "up-to-date knowledge"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KG Alignment",
+          "KGA"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "corrupts",
+        "sources": [
+          "deficient KGA"
+        ],
+        "targets": [
+          "LLMs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "graph transformation phase",
+          "linearization phase"
+        ],
+        "targets": [
+          "final generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "centrality of sub-KG"
+        ],
+        "targets": [
+          "final generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influences",
+        "sources": [
+          "formats"
+        ],
+        "targets": [
+          "KGA"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KGA",
+          "KG Alignment"
+        ],
+        "targets": [
+          "LLMs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "graph features",
+          "sub-KG"
+        ],
+        "targets": [
+          "generation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "graph transformation",
+          "KGA"
+        ],
+        "targets": [
+          "graph operations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "KG",
+          "entity set"
+        ],
+        "targets": [
+          "graph"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "forms",
+        "sources": [
+          "triple",
+          "directed edge"
+        ],
+        "targets": [
+          "KG"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "impact",
+        "sources": [
+          "graph features",
+          "templates"
+        ],
+        "targets": [
+          "generated results"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "determine",
+        "sources": [
+          "formats",
+          "orders",
+          "templates"
+        ],
+        "targets": [
+          "linearized text"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "convert",
+        "sources": [
+          "KG-to-Text",
+          "models"
+        ],
+        "targets": [
+          "natural language"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "calculate",
+        "sources": [
+          "graph traversal algorithms",
+          "feature analysis methods"
+        ],
+        "targets": [
+          "importance scores"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "affect",
+        "sources": [
+          "graph features",
+          "centrality"
+        ],
+        "targets": [
+          "generation results"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "path-based approaches",
+          "path algorithms"
+        ],
+        "targets": [
+          "final performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "influence",
+        "sources": [
+          "graph type",
+          "directed graph",
+          "undirected graph"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improve",
+        "sources": [
+          "virtual global node",
+          "reverse edges"
+        ],
+        "targets": [
+          "centrality"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "benefits",
+        "sources": [
+          "BOS feature",
+          "special tokens"
+        ],
+        "targets": [
+          "model understanding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "plays",
+        "sources": [
+          "separators"
+        ],
+        "targets": [
+          "important role",
+          "LLMs understanding"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "are",
+        "sources": [
+          "orders"
+        ],
+        "targets": [
+          "related to preferences",
+          "models"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "are",
+        "sources": [
+          "GDL methods"
+        ],
+        "targets": [
+          "ineffective",
+          "small LLMs"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "show",
+        "sources": [
+          "RBO scores"
+        ],
+        "targets": [
+          "generalizability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KGA",
+          "KG+RAG"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "correlates",
+        "sources": [
+          "centrality",
+          "sub-KG"
+        ],
+        "targets": [
+          "generation performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "reverse edges",
+          "global node"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "combine",
+        "sources": [
+          "optimal methods",
+          "factors"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "activate",
+        "sources": [
+          "separators",
+          "entities"
+        ],
+        "targets": [
+          "heads"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "NetworkX",
+          "graph structure"
+        ],
+        "targets": [
+          "network dynamics"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "GPT-2",
+          "language model"
+        ],
+        "targets": [
+          "mathematical abilities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "Knowledge Graphs",
+          "domain-specific knowledge"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "optimizes",
+        "sources": [
+          "LoRA",
+          "large language models"
+        ],
+        "targets": [
+          "adaptation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "retrieval-augmented generation",
+          "large language models"
+        ],
+        "targets": [
+          "text generation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KGs_and_LLMs_in_RAG_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "TransformerLens"
+        ],
+        "targets": [
+          "interpretability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "GPT-2"
+        ],
+        "targets": [
+          "indirect object identification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph"
+        ],
+        "targets": [
+          "large language models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "external knowledge"
+        ],
+        "targets": [
+          "large language models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "graph theory"
+        ],
+        "targets": [
+          "knowledge base"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

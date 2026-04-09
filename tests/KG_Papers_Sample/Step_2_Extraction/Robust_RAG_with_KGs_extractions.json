@@ -1,0 +1,363 @@
+[
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "RAG",
+          "LLMs"
+        ],
+        "targets": [
+          "factual hallucinations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Knowledge Graph",
+          "RAG"
+        ],
+        "targets": [
+          "improved accuracy"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "hinders",
+        "sources": [
+          "retrieved documents",
+          "LLMs"
+        ],
+        "targets": [
+          "correct answers"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "compares",
+        "sources": [
+          "GraphRAG",
+          "RGB"
+        ],
+        "targets": [
+          "RAG baseline"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mitigates",
+        "sources": [
+          "RAG",
+          "LLMs"
+        ],
+        "targets": [
+          "factual errors"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "customizes",
+        "sources": [
+          "GraphRAG",
+          "RGB Benchmark"
+        ],
+        "targets": [
+          "summaries"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "mitigates",
+        "sources": [
+          "retrieved information",
+          "noise"
+        ],
+        "targets": [
+          "inconsistency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "LLM capabilities"
+        ],
+        "targets": [
+          "reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "creates",
+        "sources": [
+          "community summaries",
+          "knowledge graph"
+        ],
+        "targets": [
+          "summaries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "builds",
+        "sources": [
+          "document indexing",
+          "entity-based knowledge graph"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contain",
+        "sources": [
+          "external documents"
+        ],
+        "targets": [
+          "noisy information",
+          "irrelevant information",
+          "factually incorrect information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "attempt",
+        "sources": [
+          "LLMs"
+        ],
+        "targets": [
+          "provide answers"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "cause",
+        "sources": [
+          "noisy documents"
+        ],
+        "targets": [
+          "rejection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assess",
+        "sources": [
+          "RGB benchmark"
+        ],
+        "targets": [
+          "LLMs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contribute",
+        "sources": [
+          "internal knowledge",
+          "external knowledge"
+        ],
+        "targets": [
+          "LLMs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "impacts",
+        "sources": [
+          "GPT-3.5",
+          "noise"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "GPT-4o-mini",
+          "noise"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "GraphRAG",
+          "knowledge graph"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "combines",
+        "sources": [
+          "encoded knowledge",
+          "external knowledge"
+        ],
+        "targets": [
+          "performance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "is impacted by",
+        "sources": [
+          "GPT-3.5",
+          "factual errors"
+        ],
+        "targets": [
+          "performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "GraphRAG",
+          "GPT-3.5"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "GPT-4o-mini",
+          "encoded knowledge"
+        ],
+        "targets": [
+          "better performance"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "noise",
+          "GPT-3.5"
+        ],
+        "targets": [
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "GRcomb",
+          "external knowledge"
+        ],
+        "targets": [
+          "error correction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "RGB baseline",
+          "insufficient information"
+        ],
+        "targets": [
+          "answering questions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Robust_RAG_with_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "Retrieval-Augmented Generation"
+        ],
+        "targets": [
+          "LLM robustness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "GRcomb",
+          "GRext"
+        ],
+        "targets": [
+          "performance gains"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "external knowledge"
+        ],
+        "targets": [
+          "rejection rates"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "demonstrates",
+        "sources": [
+          "GraphRAG framework"
+        ],
+        "targets": [
+          "model overconfidence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "face",
+        "sources": [
+          "RAG systems"
+        ],
+        "targets": [
+          "challenges"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

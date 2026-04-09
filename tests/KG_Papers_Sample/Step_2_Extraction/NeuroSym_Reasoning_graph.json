@@ -1,0 +1,5242 @@
+{
+  "hyperedges": [
+    {
+      "confidence": 0.9,
+      "id": "edge_1319",
+      "properties": {},
+      "relation": "prioritizes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_1",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active exploration controller",
+        "neural path evaluator"
+      ],
+      "targets": [
+        "retrieval effort"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1320",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_18",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active exploration mechanism"
+      ],
+      "targets": [
+        "graph retrieval",
+        "model invocation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1321",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_22",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active human query"
+      ],
+      "targets": [
+        "predictive entropy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1322",
+      "properties": {},
+      "relation": "trains",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_8",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active learning efficacy",
+        "query policy"
+      ],
+      "targets": [
+        "information gain"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1323",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_19",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active learning framework",
+        "knowledge graph accuracy"
+      ],
+      "targets": [
+        "data labeling"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1324",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_20",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active learning",
+        "bayesian neural network"
+      ],
+      "targets": [
+        "data analysi"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1325",
+      "properties": {},
+      "relation": "prevent",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_16",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active query",
+        "oracle annotation"
+      ],
+      "targets": [
+        "omission"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1326",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_18",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active querying",
+        "differentiable symbolic layer",
+        "differentiable graph exploration"
+      ],
+      "targets": [
+        "gain"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1327",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_10",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "active retrieval",
+        "differentiable neural-symbolic adapter",
+        "differentiable exploration"
+      ],
+      "targets": [
+        "answer accuracy"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1328",
+      "properties": {},
+      "relation": "distinguishes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_2",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active selection strategy",
+        "interactive protocol"
+      ],
+      "targets": [
+        "label cost"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1329",
+      "properties": {},
+      "relation": "mitigates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_15",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active supervision",
+        "error type"
+      ],
+      "targets": [
+        "specific error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1330",
+      "properties": {},
+      "relation": "updates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_7",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human label",
+        "active supervision"
+      ],
+      "targets": [
+        "rule parameter"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1331",
+      "properties": {},
+      "relation": "contributes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_3",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "uncertainty modeling",
+        "active supervision"
+      ],
+      "targets": [
+        "selective querying"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1332",
+      "properties": {},
+      "relation": "composes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_11",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "active supervision"
+      ],
+      "targets": [
+        "residual error"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1333",
+      "properties": {},
+      "relation": "central to",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_2",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "uncertainty estimate",
+        "adaptive exploration strategy"
+      ],
+      "targets": [
+        "query selection"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1334",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_14",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "adaptive strategy",
+        "neurosymactive"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1335",
+      "properties": {},
+      "relation": "minimizes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_4",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "agent",
+        "annotation cost"
+      ],
+      "targets": [
+        "cumulative expenditure"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1336",
+      "properties": {},
+      "relation": "maximizes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_4",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "agent",
+        "expected accuracy"
+      ],
+      "targets": [
+        "answer correctness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1337",
+      "properties": {},
+      "relation": "triggers",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_4",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "agent",
+        "human-query action"
+      ],
+      "targets": [
+        "supervised annotation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1338",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_11",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "annotation budget"
+      ],
+      "targets": [
+        "error rate"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1339",
+      "properties": {},
+      "relation": "changes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_13",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "symbolic-consistency term",
+        "answer-generation term"
+      ],
+      "targets": [
+        "importance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1340",
+      "properties": {},
+      "relation": "aggregates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_6",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "symbolic plausibility",
+        "applicable rule"
+      ],
+      "targets": [
+        "symbolic score"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1341",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_14",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "batched evaluation"
+      ],
+      "targets": [
+        "latency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1342",
+      "properties": {},
+      "relation": "achieves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_25",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "bayesian head",
+        "entropy predictor"
+      ],
+      "targets": [
+        "finite-sample concentration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1343",
+      "properties": {},
+      "relation": "yields",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_5",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "bayesian head",
+        "semantic encoder"
+      ],
+      "targets": [
+        "distribution over hop budget"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1344",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_23",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "bayesian head",
+        "sub-gaussian noise"
+      ],
+      "targets": [
+        "coverage"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1345",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_20",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "bayesian neural network",
+        "heteroscedastic regression"
+      ],
+      "targets": [
+        "effective prediction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1346",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_23",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "confidence level",
+        "calibration constant"
+      ],
+      "targets": [
+        "predictive interval"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1347",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_2",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "compact prompt tuning",
+        "llm"
+      ],
+      "targets": [
+        "external knowledge consumption"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1348",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_7",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "total loss",
+        "composite objective"
+      ],
+      "targets": [
+        "system"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1349",
+      "properties": {},
+      "relation": "optimizes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_21",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "database indexing",
+        "monte carlo tree search"
+      ],
+      "targets": [
+        "graph neural network"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1350",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_19",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "deeplogic",
+        "neural perception",
+        "logical reasoning"
+      ],
+      "targets": [
+        "knowledge graph"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1351",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_19",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "differentiable logic programming",
+        "structured example"
+      ],
+      "targets": [
+        "learning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1352",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_1",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "differentiable module",
+        "soft logical operator"
+      ],
+      "targets": [
+        "gradient-based refinement"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1353",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_1",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "differentiable neural-symbolic module"
+      ],
+      "targets": [
+        "soft-unification",
+        "differentiable scoring"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1354",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_3",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "differentiable retrieval",
+        "hybrid knowledge adapter"
+      ],
+      "targets": [
+        "graph exploration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1355",
+      "properties": {},
+      "relation": "brings",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_10",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "symbolic layer",
+        "differentiable search"
+      ],
+      "targets": [
+        "improvement"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1356",
+      "properties": {},
+      "relation": "increases",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_18",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "differentiable symbolic layer"
+      ],
+      "targets": [
+        "robustness"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_1357",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_9",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural-symbolic integration",
+        "dill rule learning"
+      ],
+      "targets": [
+        "83.9",
+        "59.1"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1358",
+      "properties": {},
+      "relation": "deliver",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_12",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "early-stage query"
+      ],
+      "targets": [
+        "largest reduction"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1359",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_9",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "kv-mem",
+        "embedkgqa"
+      ],
+      "targets": [
+        "46.7",
+        "66.6"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1360",
+      "properties": {},
+      "relation": "concentrates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_13",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human-query node",
+        "epistemic uncertainty"
+      ],
+      "targets": [
+        "depth"
+      ]
+    },
+    {
+      "confidence": 0.7,
+      "id": "edge_1361",
+      "properties": {},
+      "relation": "shown in",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_15",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "error dynamic",
+        "residual-error composition"
+      ],
+      "targets": [
+        "figure"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1362",
+      "properties": {},
+      "relation": "treats",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_7",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human query",
+        "exploration module"
+      ],
+      "targets": [
+        "special node"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1363",
+      "properties": {},
+      "relation": "encourages",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_8",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "exploration regularization",
+        "shannon entropy"
+      ],
+      "targets": [
+        "diverse exploration"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1364",
+      "properties": {},
+      "relation": "harms",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_17",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "exploration term"
+      ],
+      "targets": [
+        "policy diversity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1365",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_10",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "full fine-tuning method"
+      ],
+      "targets": [
+        "baseline"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1366",
+      "properties": {},
+      "relation": "links",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_25",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "fusion error bound"
+      ],
+      "targets": [
+        "symbolic approximation error",
+        "fused representation accuracy"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1367",
+      "properties": {},
+      "relation": "mediates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_7",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "gating function",
+        "gradient distribution"
+      ],
+      "targets": [
+        "neural component",
+        "symbolic component"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1368",
+      "properties": {},
+      "relation": "is",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_25",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "gating network"
+      ],
+      "targets": [
+        "lipschitz"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1369",
+      "properties": {},
+      "relation": "reflects failures of",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_15",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "generation error",
+        "language model"
+      ],
+      "targets": [
+        "correct output"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1370",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_2",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "retrieval component",
+        "generative model"
+      ],
+      "targets": [
+        "model hallucination"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1371",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_14",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "gnn-based entropy prediction"
+      ],
+      "targets": [
+        "latency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1372",
+      "properties": {},
+      "relation": "prevents",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_13",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "gradient normalization",
+        "symbolic term"
+      ],
+      "targets": [
+        "instability"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1373",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_7",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "logic loss",
+        "gradient"
+      ],
+      "targets": [
+        "rule confidence"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1374",
+      "properties": {},
+      "relation": "facilitates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_20",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "graph neural network",
+        "information acquisition"
+      ],
+      "targets": [
+        "multi-robot system"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1375",
+      "properties": {},
+      "relation": "influences",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_10",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "gumbel temperature",
+        "webqsp performance"
+      ],
+      "targets": [
+        "training stability"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1376",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_6",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "gumbel-softmax",
+        "temperature parameter"
+      ],
+      "targets": [
+        "differentiable approximation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1377",
+      "properties": {},
+      "relation": "converts",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_12",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human annotation",
+        "neurosymactive"
+      ],
+      "targets": [
+        "focused resource"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1378",
+      "properties": {},
+      "relation": "used_for",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_5",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human annotation"
+      ],
+      "targets": [
+        "off-policy update"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1379",
+      "properties": {},
+      "relation": "validate",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_16",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human check"
+      ],
+      "targets": [
+        "relation relevance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1380",
+      "properties": {},
+      "relation": "increases",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_1",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human involvement"
+      ],
+      "targets": [
+        "sample efficiency",
+        "correctness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1381",
+      "properties": {},
+      "relation": "triggers",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_12",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "uncertainty threshold",
+        "human query"
+      ],
+      "targets": [
+        "accuracy frontier"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1382",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_24",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human query"
+      ],
+      "targets": [
+        "expected predictive entropy"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1383",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_9",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "query rate",
+        "human-cost penalty β"
+      ],
+      "targets": [
+        "accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1384",
+      "properties": {},
+      "relation": "changes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_17",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "human-cost penalty",
+        "β"
+      ],
+      "targets": [
+        "system propensity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1385",
+      "properties": {},
+      "relation": "affect",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_16",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "hyperparameter"
+      ],
+      "targets": [
+        "reasoning accuracy",
+        "computation",
+        "human annotation cost"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1386",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_6",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "knowledge adapter",
+        "inductive logic layer"
+      ],
+      "targets": [
+        "neural-symbolic learning"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1387",
+      "properties": {},
+      "relation": "causes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_23",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "inner loop",
+        "stochastic gradient descent"
+      ],
+      "targets": [
+        "convergence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1388",
+      "properties": {},
+      "relation": "establishes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_25",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "inner optimization"
+      ],
+      "targets": [
+        "stationary convergence"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1389",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_22",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "intermediate supervision signal"
+      ],
+      "targets": [
+        "multi-hop question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1390",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_22",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "knowledge base embedding"
+      ],
+      "targets": [
+        "multi-hop question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1391",
+      "properties": {},
+      "relation": "supports",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_21",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "knowledge base",
+        "text"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1392",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_20",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "multi-document question answering"
+      ],
+      "targets": [
+        "question answering accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1393",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_3",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "knowledge graph"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1394",
+      "properties": {},
+      "relation": "requires",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_4",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "knowledge graph"
+      ],
+      "targets": [
+        "query",
+        "budget",
+        "human buffer"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1395",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_20",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "retrieval-augmented generation",
+        "knowledge graph"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1396",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_21",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "multi-hop question answering",
+        "knowledge graph"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1397",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_1",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural model",
+        "knowledge graph"
+      ],
+      "targets": [
+        "multi-hop reasoning"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1398",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_21",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "knowledge graph",
+        "semantic parse labeling"
+      ],
+      "targets": [
+        "question answering"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1399",
+      "properties": {},
+      "relation": "provide",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_0",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "knowledge graph"
+      ],
+      "targets": [
+        "factual grounding"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1400",
+      "properties": {},
+      "relation": "arise",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_16",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "knowledge-graph incompleteness"
+      ],
+      "targets": [
+        "residual error mass"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1401",
+      "properties": {},
+      "relation": "enables",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_23",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "ltotal",
+        "l-lipschitz gradient"
+      ],
+      "targets": [
+        "stationary point"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1402",
+      "properties": {},
+      "relation": "advance",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_0",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "large pretrained language model",
+        "neural reasoning system"
+      ],
+      "targets": [
+        "natural language task"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1403",
+      "properties": {},
+      "relation": "performs",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_9",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "lightprof",
+        "llama2-7b"
+      ],
+      "targets": [
+        "71.2",
+        "48.5"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1404",
+      "properties": {},
+      "relation": "performs",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_9",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "llama3-8b"
+      ],
+      "targets": [
+        "87.1",
+        "62.5"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1405",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_11",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "llm backbone"
+      ],
+      "targets": [
+        "performance"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1406",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_8",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "llm-augmented kgqa system"
+      ],
+      "targets": [
+        "performance gain"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1407",
+      "properties": {},
+      "relation": "uses",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_19",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "logicenn",
+        "neural model"
+      ],
+      "targets": [
+        "logical rule"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1408",
+      "properties": {},
+      "relation": "advances",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_2",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "mct",
+        "rl-style exploration"
+      ],
+      "targets": [
+        "multi-hop kgqa"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1409",
+      "properties": {},
+      "relation": "governs",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_3",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "monte carlo tree search",
+        "predictive uncertainty"
+      ],
+      "targets": [
+        "progressive widening"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1410",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_13",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "training dynamic",
+        "multi-objective training"
+      ],
+      "targets": [
+        "optimization progress"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1411",
+      "properties": {},
+      "relation": "adjusts",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_8",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "multi-objective weight"
+      ],
+      "targets": [
+        "gradient normalization"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1412",
+      "properties": {},
+      "relation": "applies",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_19",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neupsl",
+        "probabilistic logic"
+      ],
+      "targets": [
+        "neural network"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1413",
+      "properties": {},
+      "relation": "forms",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_3",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural component",
+        "symbolic component"
+      ],
+      "targets": [
+        "cognitive state"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1414",
+      "properties": {},
+      "relation": "represent",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_4",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural embedding",
+        "symbolic identifier"
+      ],
+      "targets": [
+        "reasoning path"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1415",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_6",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural encoding",
+        "structural encoder"
+      ],
+      "targets": [
+        "fused representation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1416",
+      "properties": {},
+      "relation": "approximates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_5",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural entropy predictor"
+      ],
+      "targets": [
+        "information gain"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1417",
+      "properties": {},
+      "relation": "drives",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_5",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural policy",
+        "value estimator"
+      ],
+      "targets": [
+        "neural-symbolic exploration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1418",
+      "properties": {},
+      "relation": "evaluates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_6",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "rule body",
+        "neural predicate grounding"
+      ],
+      "targets": [
+        "truth degree"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1419",
+      "properties": {},
+      "relation": "provides",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_22",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neural-symbolic fusion"
+      ],
+      "targets": [
+        "representational consistency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1420",
+      "properties": {},
+      "relation": "deploys",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_8",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "parameter-efficient language model"
+      ],
+      "targets": [
+        "response consistency"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1421",
+      "properties": {},
+      "relation": "compares",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_12",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "structgpt"
+      ],
+      "targets": [
+        "inference time",
+        "token consumption"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1422",
+      "properties": {},
+      "relation": "contrasts",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_12",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive",
+        "uncertainty-agnostic baseline"
+      ],
+      "targets": [
+        "budget level",
+        "robustness"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1423",
+      "properties": {},
+      "relation": "attains",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_0",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive"
+      ],
+      "targets": [
+        "strong answer accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1424",
+      "properties": {},
+      "relation": "combines",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_0",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive"
+      ],
+      "targets": [
+        "neural-symbolic reasoning",
+        "active exploration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1425",
+      "properties": {},
+      "relation": "improves",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_17",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive"
+      ],
+      "targets": [
+        "answer accuracy"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1426",
+      "properties": {},
+      "relation": "integrates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_18",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive"
+      ],
+      "targets": [
+        "neural-symbolic reasoning",
+        "active exploration controller"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1427",
+      "properties": {},
+      "relation": "reduces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_0",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "neurosymactive"
+      ],
+      "targets": [
+        "graph lookup",
+        "model call"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1428",
+      "properties": {},
+      "relation": "shapes",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_13",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "progressive widening",
+        "parameter"
+      ],
+      "targets": [
+        "search"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1429",
+      "properties": {},
+      "relation": "approximates",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_25",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "symbolic module",
+        "plausibility vector"
+      ],
+      "targets": [
+        "true plausibility vector"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1430",
+      "properties": {},
+      "relation": "ensures",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_24",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "variance estimator",
+        "posterior mode estimator"
+      ],
+      "targets": [
+        "asymptotic coverage"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1431",
+      "properties": {},
+      "relation": "increases",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_14",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "progressive widening"
+      ],
+      "targets": [
+        "cost"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1432",
+      "properties": {},
+      "relation": "enhances",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_21",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "retrieval-augmented learning",
+        "prompt learning"
+      ],
+      "targets": [
+        "knowledge editing"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1433",
+      "properties": {},
+      "relation": "favors",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_15",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "reasoning error",
+        "search policy"
+      ],
+      "targets": [
+        "incorrect path"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1434",
+      "properties": {},
+      "relation": "originates from",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_15",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "retrieval error",
+        "subgraph expansion"
+      ],
+      "targets": [
+        "omitted relation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1435",
+      "properties": {},
+      "relation": "tends",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_24",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "search temperature"
+      ],
+      "targets": [
+        "probability mass"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1436",
+      "properties": {},
+      "relation": "satisfies",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_24",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "soft tree policy"
+      ],
+      "targets": [
+        "probability mass"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1437",
+      "properties": {},
+      "relation": "have",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_22",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "stochastic gradient estimator"
+      ],
+      "targets": [
+        "bounded variance"
+      ]
+    },
+    {
+      "confidence": 0.8,
+      "id": "edge_1438",
+      "properties": {},
+      "relation": "affects",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_11",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "structure-encoding strategy"
+      ],
+      "targets": [
+        "sensitivity"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1439",
+      "properties": {},
+      "relation": "implies",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_24",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "sub-gaussianity"
+      ],
+      "targets": [
+        "hoeffding-type concentration"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1440",
+      "properties": {},
+      "relation": "produces",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_17",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "symbolic consistency"
+      ],
+      "targets": [
+        "stable solution"
+      ]
+    },
+    {
+      "confidence": 0.85,
+      "id": "edge_1441",
+      "properties": {},
+      "relation": "lead to",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_16",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "systematic bias"
+      ],
+      "targets": [
+        "missed oracle invocation"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1442",
+      "properties": {},
+      "relation": "controls",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_17",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "temperature",
+        "τ"
+      ],
+      "targets": [
+        "selection distribution"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1443",
+      "properties": {},
+      "relation": "decides",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_5",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "uncertainty quantifier"
+      ],
+      "targets": [
+        "query_human"
+      ]
+    },
+    {
+      "confidence": 0.9,
+      "id": "edge_1444",
+      "properties": {},
+      "relation": "controls",
+      "source_chunk_id": "NeuroSym_Reasoning_chunk_14",
+      "source_document": "NeuroSym_Reasoning",
+      "sources": [
+        "uncertainty threshold"
+      ],
+      "targets": [
+        "annotation cost"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_edges": 126,
+    "num_nodes": 300
+  },
+  "nodes": [
+    {
+      "degree": 1,
+      "id": "46.7",
+      "incident_edges": [
+        "edge_1359"
+      ],
+      "label": "46.7",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "48.5",
+      "incident_edges": [
+        "edge_1403"
+      ],
+      "label": "48.5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "59.1",
+      "incident_edges": [
+        "edge_1357"
+      ],
+      "label": "59.1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "62.5",
+      "incident_edges": [
+        "edge_1404"
+      ],
+      "label": "62.5",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "66.6",
+      "incident_edges": [
+        "edge_1359"
+      ],
+      "label": "66.6",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "71.2",
+      "incident_edges": [
+        "edge_1403"
+      ],
+      "label": "71.2",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "83.9",
+      "incident_edges": [
+        "edge_1357"
+      ],
+      "label": "83.9",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "87.1",
+      "incident_edges": [
+        "edge_1404"
+      ],
+      "label": "87.1",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "accuracy",
+      "incident_edges": [
+        "edge_1334",
+        "edge_1383"
+      ],
+      "label": "accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "accuracy frontier",
+      "incident_edges": [
+        "edge_1381"
+      ],
+      "label": "accuracy frontier",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active exploration",
+      "incident_edges": [
+        "edge_1424"
+      ],
+      "label": "active exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "active exploration controller",
+      "incident_edges": [
+        "edge_1319",
+        "edge_1426"
+      ],
+      "label": "active exploration controller",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active exploration mechanism",
+      "incident_edges": [
+        "edge_1320"
+      ],
+      "label": "active exploration mechanism",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active human query",
+      "incident_edges": [
+        "edge_1321"
+      ],
+      "label": "active human queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active learning",
+      "incident_edges": [
+        "edge_1324"
+      ],
+      "label": "active learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active learning efficacy",
+      "incident_edges": [
+        "edge_1322"
+      ],
+      "label": "active learning efficacy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active learning framework",
+      "incident_edges": [
+        "edge_1323"
+      ],
+      "label": "active learning framework",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active query",
+      "incident_edges": [
+        "edge_1325"
+      ],
+      "label": "active queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active querying",
+      "incident_edges": [
+        "edge_1326"
+      ],
+      "label": "active querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active retrieval",
+      "incident_edges": [
+        "edge_1327"
+      ],
+      "label": "active retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "active selection strategy",
+      "incident_edges": [
+        "edge_1328"
+      ],
+      "label": "active selection strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 4,
+      "id": "active supervision",
+      "incident_edges": [
+        "edge_1329",
+        "edge_1330",
+        "edge_1331",
+        "edge_1332"
+      ],
+      "label": "active supervision",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adaptive exploration strategy",
+      "incident_edges": [
+        "edge_1333"
+      ],
+      "label": "adaptive exploration strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "adaptive strategy",
+      "incident_edges": [
+        "edge_1334"
+      ],
+      "label": "adaptive strategy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "agent",
+      "incident_edges": [
+        "edge_1335",
+        "edge_1336",
+        "edge_1337"
+      ],
+      "label": "agent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "annotation budget",
+      "incident_edges": [
+        "edge_1338"
+      ],
+      "label": "annotation budget",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "annotation cost",
+      "incident_edges": [
+        "edge_1335",
+        "edge_1444"
+      ],
+      "label": "annotation cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "answer accuracy",
+      "incident_edges": [
+        "edge_1327",
+        "edge_1425"
+      ],
+      "label": "answer accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer correctness",
+      "incident_edges": [
+        "edge_1336"
+      ],
+      "label": "answer correctness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "answer-generation term",
+      "incident_edges": [
+        "edge_1339"
+      ],
+      "label": "answer-generation term",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "applicable rule",
+      "incident_edges": [
+        "edge_1340"
+      ],
+      "label": "applicable rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "asymptotic coverage",
+      "incident_edges": [
+        "edge_1430"
+      ],
+      "label": "asymptotic coverage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "baseline",
+      "incident_edges": [
+        "edge_1365"
+      ],
+      "label": "baseline",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "batched evaluation",
+      "incident_edges": [
+        "edge_1341"
+      ],
+      "label": "batched evaluation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "bayesian head",
+      "incident_edges": [
+        "edge_1342",
+        "edge_1343",
+        "edge_1344"
+      ],
+      "label": "Bayesian head",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "bayesian neural network",
+      "incident_edges": [
+        "edge_1324",
+        "edge_1345"
+      ],
+      "label": "bayesian neural networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "bounded variance",
+      "incident_edges": [
+        "edge_1437"
+      ],
+      "label": "bounded variance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "budget",
+      "incident_edges": [
+        "edge_1394"
+      ],
+      "label": "budget",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "budget level",
+      "incident_edges": [
+        "edge_1422"
+      ],
+      "label": "budget levels",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "calibration constant",
+      "incident_edges": [
+        "edge_1346"
+      ],
+      "label": "calibration constant",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cognitive state",
+      "incident_edges": [
+        "edge_1413"
+      ],
+      "label": "cognitive state",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "compact prompt tuning",
+      "incident_edges": [
+        "edge_1347"
+      ],
+      "label": "compact prompt tuning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "composite objective",
+      "incident_edges": [
+        "edge_1348"
+      ],
+      "label": "composite objective",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "computation",
+      "incident_edges": [
+        "edge_1385"
+      ],
+      "label": "computation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "confidence level",
+      "incident_edges": [
+        "edge_1346"
+      ],
+      "label": "confidence level",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "convergence",
+      "incident_edges": [
+        "edge_1387"
+      ],
+      "label": "convergence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correct output",
+      "incident_edges": [
+        "edge_1369"
+      ],
+      "label": "correct output",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "correctness",
+      "incident_edges": [
+        "edge_1380"
+      ],
+      "label": "correctness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cost",
+      "incident_edges": [
+        "edge_1431"
+      ],
+      "label": "cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "coverage",
+      "incident_edges": [
+        "edge_1344"
+      ],
+      "label": "coverage",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "cumulative expenditure",
+      "incident_edges": [
+        "edge_1335"
+      ],
+      "label": "cumulative expenditure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data analysi",
+      "incident_edges": [
+        "edge_1324"
+      ],
+      "label": "data analysis",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "data labeling",
+      "incident_edges": [
+        "edge_1323"
+      ],
+      "label": "data labeling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "database indexing",
+      "incident_edges": [
+        "edge_1349"
+      ],
+      "label": "database indexing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "deeplogic",
+      "incident_edges": [
+        "edge_1350"
+      ],
+      "label": "Deeplogic",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "depth",
+      "incident_edges": [
+        "edge_1360"
+      ],
+      "label": "depth",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable approximation",
+      "incident_edges": [
+        "edge_1376"
+      ],
+      "label": "differentiable approximation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable exploration",
+      "incident_edges": [
+        "edge_1327"
+      ],
+      "label": "differentiable exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable graph exploration",
+      "incident_edges": [
+        "edge_1326"
+      ],
+      "label": "differentiable graph exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable logic programming",
+      "incident_edges": [
+        "edge_1351"
+      ],
+      "label": "differentiable logic programming",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable module",
+      "incident_edges": [
+        "edge_1352"
+      ],
+      "label": "differentiable modules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable neural-symbolic adapter",
+      "incident_edges": [
+        "edge_1327"
+      ],
+      "label": "differentiable neural-symbolic adapter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable neural-symbolic module",
+      "incident_edges": [
+        "edge_1353"
+      ],
+      "label": "differentiable neural-symbolic module",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable retrieval",
+      "incident_edges": [
+        "edge_1354"
+      ],
+      "label": "differentiable retrieval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable scoring",
+      "incident_edges": [
+        "edge_1353"
+      ],
+      "label": "differentiable scoring",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "differentiable search",
+      "incident_edges": [
+        "edge_1355"
+      ],
+      "label": "differentiable search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "differentiable symbolic layer",
+      "incident_edges": [
+        "edge_1326",
+        "edge_1356"
+      ],
+      "label": "differentiable symbolic layer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "dill rule learning",
+      "incident_edges": [
+        "edge_1357"
+      ],
+      "label": "DILL rule learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "distribution over hop budget",
+      "incident_edges": [
+        "edge_1343"
+      ],
+      "label": "distribution over hop budgets",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "diverse exploration",
+      "incident_edges": [
+        "edge_1363"
+      ],
+      "label": "diverse exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "early-stage query",
+      "incident_edges": [
+        "edge_1358"
+      ],
+      "label": "early-stage queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "effective prediction",
+      "incident_edges": [
+        "edge_1345"
+      ],
+      "label": "effective prediction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "embedkgqa",
+      "incident_edges": [
+        "edge_1359"
+      ],
+      "label": "EmbedKGQA",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "entropy predictor",
+      "incident_edges": [
+        "edge_1342"
+      ],
+      "label": "entropy predictor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "epistemic uncertainty",
+      "incident_edges": [
+        "edge_1360"
+      ],
+      "label": "epistemic uncertainty",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error dynamic",
+      "incident_edges": [
+        "edge_1361"
+      ],
+      "label": "error dynamics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error rate",
+      "incident_edges": [
+        "edge_1338"
+      ],
+      "label": "error rates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "error type",
+      "incident_edges": [
+        "edge_1329"
+      ],
+      "label": "error types",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "expected accuracy",
+      "incident_edges": [
+        "edge_1336"
+      ],
+      "label": "expected accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "expected predictive entropy",
+      "incident_edges": [
+        "edge_1382"
+      ],
+      "label": "expected predictive entropy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "exploration module",
+      "incident_edges": [
+        "edge_1362"
+      ],
+      "label": "exploration module",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "exploration regularization",
+      "incident_edges": [
+        "edge_1363"
+      ],
+      "label": "exploration regularization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "exploration term",
+      "incident_edges": [
+        "edge_1364"
+      ],
+      "label": "exploration terms",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "external knowledge consumption",
+      "incident_edges": [
+        "edge_1347"
+      ],
+      "label": "external knowledge consumption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "factual grounding",
+      "incident_edges": [
+        "edge_1399"
+      ],
+      "label": "factual grounding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "figure",
+      "incident_edges": [
+        "edge_1361"
+      ],
+      "label": "figure",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "finite-sample concentration",
+      "incident_edges": [
+        "edge_1342"
+      ],
+      "label": "finite-sample concentration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "focused resource",
+      "incident_edges": [
+        "edge_1377"
+      ],
+      "label": "focused resource",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "full fine-tuning method",
+      "incident_edges": [
+        "edge_1365"
+      ],
+      "label": "full fine-tuning methods",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fused representation",
+      "incident_edges": [
+        "edge_1415"
+      ],
+      "label": "fused representations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fused representation accuracy",
+      "incident_edges": [
+        "edge_1366"
+      ],
+      "label": "fused representation accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "fusion error bound",
+      "incident_edges": [
+        "edge_1366"
+      ],
+      "label": "fusion error bound",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gain",
+      "incident_edges": [
+        "edge_1326"
+      ],
+      "label": "gain",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gating function",
+      "incident_edges": [
+        "edge_1367"
+      ],
+      "label": "gating function",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gating network",
+      "incident_edges": [
+        "edge_1368"
+      ],
+      "label": "gating network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "generation error",
+      "incident_edges": [
+        "edge_1369"
+      ],
+      "label": "generation errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "generative model",
+      "incident_edges": [
+        "edge_1370"
+      ],
+      "label": "generative models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gnn-based entropy prediction",
+      "incident_edges": [
+        "edge_1371"
+      ],
+      "label": "GNN-based entropy prediction",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient",
+      "incident_edges": [
+        "edge_1373"
+      ],
+      "label": "gradient",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient distribution",
+      "incident_edges": [
+        "edge_1367"
+      ],
+      "label": "gradient distribution",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "gradient normalization",
+      "incident_edges": [
+        "edge_1372",
+        "edge_1411"
+      ],
+      "label": "gradient normalization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gradient-based refinement",
+      "incident_edges": [
+        "edge_1352"
+      ],
+      "label": "gradient-based refinement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph exploration",
+      "incident_edges": [
+        "edge_1354"
+      ],
+      "label": "graph exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph lookup",
+      "incident_edges": [
+        "edge_1427"
+      ],
+      "label": "graph lookups",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "graph neural network",
+      "incident_edges": [
+        "edge_1349",
+        "edge_1374"
+      ],
+      "label": "graph neural network",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "graph retrieval",
+      "incident_edges": [
+        "edge_1320"
+      ],
+      "label": "graph retrievals",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gumbel temperature",
+      "incident_edges": [
+        "edge_1375"
+      ],
+      "label": "Gumbel temperature",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "gumbel-softmax",
+      "incident_edges": [
+        "edge_1376"
+      ],
+      "label": "Gumbel-Softmax",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "heteroscedastic regression",
+      "incident_edges": [
+        "edge_1345"
+      ],
+      "label": "heteroscedastic regression",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hoeffding-type concentration",
+      "incident_edges": [
+        "edge_1439"
+      ],
+      "label": "Hoeffding-type concentration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "human annotation",
+      "incident_edges": [
+        "edge_1377",
+        "edge_1378"
+      ],
+      "label": "human annotations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human annotation cost",
+      "incident_edges": [
+        "edge_1385"
+      ],
+      "label": "human annotation cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human buffer",
+      "incident_edges": [
+        "edge_1394"
+      ],
+      "label": "human buffer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human check",
+      "incident_edges": [
+        "edge_1379"
+      ],
+      "label": "human checks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human involvement",
+      "incident_edges": [
+        "edge_1380"
+      ],
+      "label": "human involvement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human label",
+      "incident_edges": [
+        "edge_1330"
+      ],
+      "label": "human labels",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "human query",
+      "incident_edges": [
+        "edge_1362",
+        "edge_1381",
+        "edge_1382"
+      ],
+      "label": "human queries",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human-cost penalty",
+      "incident_edges": [
+        "edge_1384"
+      ],
+      "label": "human-cost penalty",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human-cost penalty β",
+      "incident_edges": [
+        "edge_1383"
+      ],
+      "label": "human-cost penalty β",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human-query action",
+      "incident_edges": [
+        "edge_1337"
+      ],
+      "label": "human-query action",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "human-query node",
+      "incident_edges": [
+        "edge_1360"
+      ],
+      "label": "human-query nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hybrid knowledge adapter",
+      "incident_edges": [
+        "edge_1354"
+      ],
+      "label": "hybrid knowledge adapter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "hyperparameter",
+      "incident_edges": [
+        "edge_1385"
+      ],
+      "label": "hyperparameter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "importance",
+      "incident_edges": [
+        "edge_1339"
+      ],
+      "label": "importance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "improvement",
+      "incident_edges": [
+        "edge_1355"
+      ],
+      "label": "improvement",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "incorrect path",
+      "incident_edges": [
+        "edge_1433"
+      ],
+      "label": "incorrect path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inductive logic layer",
+      "incident_edges": [
+        "edge_1386"
+      ],
+      "label": "inductive logic layer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inference time",
+      "incident_edges": [
+        "edge_1421"
+      ],
+      "label": "inference time",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "information acquisition",
+      "incident_edges": [
+        "edge_1374"
+      ],
+      "label": "information acquisition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "information gain",
+      "incident_edges": [
+        "edge_1322",
+        "edge_1416"
+      ],
+      "label": "information gain",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inner loop",
+      "incident_edges": [
+        "edge_1387"
+      ],
+      "label": "inner loop",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "inner optimization",
+      "incident_edges": [
+        "edge_1388"
+      ],
+      "label": "inner optimization",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "instability",
+      "incident_edges": [
+        "edge_1372"
+      ],
+      "label": "instability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "interactive protocol",
+      "incident_edges": [
+        "edge_1328"
+      ],
+      "label": "interactive protocols",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "intermediate supervision signal",
+      "incident_edges": [
+        "edge_1389"
+      ],
+      "label": "intermediate supervision signals",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge adapter",
+      "incident_edges": [
+        "edge_1386"
+      ],
+      "label": "knowledge adapter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge base",
+      "incident_edges": [
+        "edge_1391"
+      ],
+      "label": "knowledge base",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge base embedding",
+      "incident_edges": [
+        "edge_1390"
+      ],
+      "label": "knowledge base embeddings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge editing",
+      "incident_edges": [
+        "edge_1432"
+      ],
+      "label": "knowledge editing",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 9,
+      "id": "knowledge graph",
+      "incident_edges": [
+        "edge_1350",
+        "edge_1392",
+        "edge_1393",
+        "edge_1394",
+        "edge_1395",
+        "edge_1396",
+        "edge_1397",
+        "edge_1398",
+        "edge_1399"
+      ],
+      "label": "knowledge graphs",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge graph accuracy",
+      "incident_edges": [
+        "edge_1323"
+      ],
+      "label": "knowledge graph accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "knowledge-graph incompleteness",
+      "incident_edges": [
+        "edge_1400"
+      ],
+      "label": "knowledge-graph incompleteness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "kv-mem",
+      "incident_edges": [
+        "edge_1359"
+      ],
+      "label": "KV-Mem",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "l-lipschitz gradient",
+      "incident_edges": [
+        "edge_1401"
+      ],
+      "label": "L-Lipschitz gradients",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "label cost",
+      "incident_edges": [
+        "edge_1328"
+      ],
+      "label": "label cost",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "language model",
+      "incident_edges": [
+        "edge_1369"
+      ],
+      "label": "language model",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "large pretrained language model",
+      "incident_edges": [
+        "edge_1402"
+      ],
+      "label": "large pretrained language models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "largest reduction",
+      "incident_edges": [
+        "edge_1358"
+      ],
+      "label": "largest reductions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "latency",
+      "incident_edges": [
+        "edge_1341",
+        "edge_1371"
+      ],
+      "label": "latency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "learning",
+      "incident_edges": [
+        "edge_1351"
+      ],
+      "label": "learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lightprof",
+      "incident_edges": [
+        "edge_1403"
+      ],
+      "label": "LightPROF",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "lipschitz",
+      "incident_edges": [
+        "edge_1368"
+      ],
+      "label": "Lipschitz",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llama2-7b",
+      "incident_edges": [
+        "edge_1403"
+      ],
+      "label": "LLaMa2-7B",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llama3-8b",
+      "incident_edges": [
+        "edge_1404"
+      ],
+      "label": "LLaMa3-8B",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm",
+      "incident_edges": [
+        "edge_1347"
+      ],
+      "label": "LLM",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm backbone",
+      "incident_edges": [
+        "edge_1405"
+      ],
+      "label": "LLM backbones",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "llm-augmented kgqa system",
+      "incident_edges": [
+        "edge_1406"
+      ],
+      "label": "LLM-augmented KGQA systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "logic loss",
+      "incident_edges": [
+        "edge_1373"
+      ],
+      "label": "logic loss",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "logical reasoning",
+      "incident_edges": [
+        "edge_1350"
+      ],
+      "label": "logical reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "logical rule",
+      "incident_edges": [
+        "edge_1407"
+      ],
+      "label": "logical rules",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "logicenn",
+      "incident_edges": [
+        "edge_1407"
+      ],
+      "label": "Logicenn",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "ltotal",
+      "incident_edges": [
+        "edge_1401"
+      ],
+      "label": "Ltotal",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "mct",
+      "incident_edges": [
+        "edge_1408"
+      ],
+      "label": "MCTS",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "missed oracle invocation",
+      "incident_edges": [
+        "edge_1441"
+      ],
+      "label": "missed oracle invocations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model call",
+      "incident_edges": [
+        "edge_1427"
+      ],
+      "label": "model calls",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model hallucination",
+      "incident_edges": [
+        "edge_1370"
+      ],
+      "label": "model hallucinations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "model invocation",
+      "incident_edges": [
+        "edge_1320"
+      ],
+      "label": "model invocations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "monte carlo tree search",
+      "incident_edges": [
+        "edge_1349",
+        "edge_1409"
+      ],
+      "label": "monte carlo tree search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-document question answering",
+      "incident_edges": [
+        "edge_1392"
+      ],
+      "label": "multi-document question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-hop kgqa",
+      "incident_edges": [
+        "edge_1408"
+      ],
+      "label": "multi-hop KGQA",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "multi-hop question answering",
+      "incident_edges": [
+        "edge_1389",
+        "edge_1390",
+        "edge_1396"
+      ],
+      "label": "multi-hop question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-hop reasoning",
+      "incident_edges": [
+        "edge_1397"
+      ],
+      "label": "multi-hop reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-objective training",
+      "incident_edges": [
+        "edge_1410"
+      ],
+      "label": "multi-objective training",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-objective weight",
+      "incident_edges": [
+        "edge_1411"
+      ],
+      "label": "multi-objective weights",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "multi-robot system",
+      "incident_edges": [
+        "edge_1374"
+      ],
+      "label": "multi-robot systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "natural language task",
+      "incident_edges": [
+        "edge_1402"
+      ],
+      "label": "natural language tasks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neupsl",
+      "incident_edges": [
+        "edge_1412"
+      ],
+      "label": "Neupsl",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "neural component",
+      "incident_edges": [
+        "edge_1367",
+        "edge_1413"
+      ],
+      "label": "neural components",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural embedding",
+      "incident_edges": [
+        "edge_1414"
+      ],
+      "label": "neural embeddings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural encoding",
+      "incident_edges": [
+        "edge_1415"
+      ],
+      "label": "neural encodings",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural entropy predictor",
+      "incident_edges": [
+        "edge_1416"
+      ],
+      "label": "neural entropy predictor",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "neural model",
+      "incident_edges": [
+        "edge_1397",
+        "edge_1407"
+      ],
+      "label": "neural models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural network",
+      "incident_edges": [
+        "edge_1412"
+      ],
+      "label": "neural networks",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural path evaluator",
+      "incident_edges": [
+        "edge_1319"
+      ],
+      "label": "neural path evaluator",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural perception",
+      "incident_edges": [
+        "edge_1350"
+      ],
+      "label": "neural perception",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural policy",
+      "incident_edges": [
+        "edge_1417"
+      ],
+      "label": "neural policy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural predicate grounding",
+      "incident_edges": [
+        "edge_1418"
+      ],
+      "label": "neural predicate grounding",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural reasoning system",
+      "incident_edges": [
+        "edge_1402"
+      ],
+      "label": "neural reasoning systems",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural-symbolic exploration",
+      "incident_edges": [
+        "edge_1417"
+      ],
+      "label": "neural-symbolic exploration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural-symbolic fusion",
+      "incident_edges": [
+        "edge_1419"
+      ],
+      "label": "neural-symbolic fusion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural-symbolic integration",
+      "incident_edges": [
+        "edge_1357"
+      ],
+      "label": "Neural-symbolic integration",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "neural-symbolic learning",
+      "incident_edges": [
+        "edge_1386"
+      ],
+      "label": "neural-symbolic learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "neural-symbolic reasoning",
+      "incident_edges": [
+        "edge_1424",
+        "edge_1426"
+      ],
+      "label": "neural-symbolic reasoning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 19,
+      "id": "neurosymactive",
+      "incident_edges": [
+        "edge_1327",
+        "edge_1334",
+        "edge_1365",
+        "edge_1377",
+        "edge_1390",
+        "edge_1393",
+        "edge_1394",
+        "edge_1404",
+        "edge_1405",
+        "edge_1406",
+        "edge_1411",
+        "edge_1420",
+        "edge_1421",
+        "edge_1422",
+        "edge_1423",
+        "edge_1424",
+        "edge_1425",
+        "edge_1426",
+        "edge_1427"
+      ],
+      "label": "NeuroSymActive",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "off-policy update",
+      "incident_edges": [
+        "edge_1378"
+      ],
+      "label": "off-policy updates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "omission",
+      "incident_edges": [
+        "edge_1325"
+      ],
+      "label": "omission",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "omitted relation",
+      "incident_edges": [
+        "edge_1434"
+      ],
+      "label": "omitted relations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "optimization progress",
+      "incident_edges": [
+        "edge_1410"
+      ],
+      "label": "optimization progress",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "oracle annotation",
+      "incident_edges": [
+        "edge_1325"
+      ],
+      "label": "oracle annotations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "parameter",
+      "incident_edges": [
+        "edge_1428"
+      ],
+      "label": "parameter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "parameter-efficient language model",
+      "incident_edges": [
+        "edge_1420"
+      ],
+      "label": "parameter-efficient language models",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance",
+      "incident_edges": [
+        "edge_1405"
+      ],
+      "label": "performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "performance gain",
+      "incident_edges": [
+        "edge_1406"
+      ],
+      "label": "performance gains",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "plausibility vector",
+      "incident_edges": [
+        "edge_1429"
+      ],
+      "label": "plausibility vector",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "policy diversity",
+      "incident_edges": [
+        "edge_1364"
+      ],
+      "label": "policy diversity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "posterior mode estimator",
+      "incident_edges": [
+        "edge_1430"
+      ],
+      "label": "posterior mode estimator",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predictive entropy",
+      "incident_edges": [
+        "edge_1321"
+      ],
+      "label": "predictive entropy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predictive interval",
+      "incident_edges": [
+        "edge_1346"
+      ],
+      "label": "predictive interval",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "predictive uncertainty",
+      "incident_edges": [
+        "edge_1409"
+      ],
+      "label": "predictive uncertainty",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "probabilistic logic",
+      "incident_edges": [
+        "edge_1412"
+      ],
+      "label": "probabilistic logic",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "probability mass",
+      "incident_edges": [
+        "edge_1435",
+        "edge_1436"
+      ],
+      "label": "probability mass",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 3,
+      "id": "progressive widening",
+      "incident_edges": [
+        "edge_1409",
+        "edge_1428",
+        "edge_1431"
+      ],
+      "label": "Progressive Widening",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "prompt learning",
+      "incident_edges": [
+        "edge_1432"
+      ],
+      "label": "prompt learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query",
+      "incident_edges": [
+        "edge_1394"
+      ],
+      "label": "query",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query policy",
+      "incident_edges": [
+        "edge_1322"
+      ],
+      "label": "query policy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query rate",
+      "incident_edges": [
+        "edge_1383"
+      ],
+      "label": "Query rate",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query selection",
+      "incident_edges": [
+        "edge_1333"
+      ],
+      "label": "query selection",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "query_human",
+      "incident_edges": [
+        "edge_1443"
+      ],
+      "label": "QUERY_HUMAN",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 5,
+      "id": "question answering",
+      "incident_edges": [
+        "edge_1391",
+        "edge_1393",
+        "edge_1395",
+        "edge_1396",
+        "edge_1398"
+      ],
+      "label": "question answering",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "question answering accuracy",
+      "incident_edges": [
+        "edge_1392"
+      ],
+      "label": "question answering accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning accuracy",
+      "incident_edges": [
+        "edge_1385"
+      ],
+      "label": "reasoning accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning error",
+      "incident_edges": [
+        "edge_1433"
+      ],
+      "label": "reasoning errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "reasoning path",
+      "incident_edges": [
+        "edge_1414"
+      ],
+      "label": "reasoning path",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "relation relevance",
+      "incident_edges": [
+        "edge_1379"
+      ],
+      "label": "relation relevance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "representational consistency",
+      "incident_edges": [
+        "edge_1419"
+      ],
+      "label": "representational consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "residual error",
+      "incident_edges": [
+        "edge_1332"
+      ],
+      "label": "residual errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "residual error mass",
+      "incident_edges": [
+        "edge_1400"
+      ],
+      "label": "residual error mass",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "residual-error composition",
+      "incident_edges": [
+        "edge_1361"
+      ],
+      "label": "residual-error composition",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "response consistency",
+      "incident_edges": [
+        "edge_1420"
+      ],
+      "label": "response consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval component",
+      "incident_edges": [
+        "edge_1370"
+      ],
+      "label": "retrieval components",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval effort",
+      "incident_edges": [
+        "edge_1319"
+      ],
+      "label": "retrieval effort",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval error",
+      "incident_edges": [
+        "edge_1434"
+      ],
+      "label": "retrieval errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval-augmented generation",
+      "incident_edges": [
+        "edge_1395"
+      ],
+      "label": "retrieval-augmented generation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "retrieval-augmented learning",
+      "incident_edges": [
+        "edge_1432"
+      ],
+      "label": "retrieval-augmented learning",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rl-style exploration",
+      "incident_edges": [
+        "edge_1408"
+      ],
+      "label": "RL-style explorations",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "robustness",
+      "incident_edges": [
+        "edge_1356",
+        "edge_1422"
+      ],
+      "label": "robustness",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rule body",
+      "incident_edges": [
+        "edge_1418"
+      ],
+      "label": "rule body",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rule confidence",
+      "incident_edges": [
+        "edge_1373"
+      ],
+      "label": "rule confidence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "rule parameter",
+      "incident_edges": [
+        "edge_1330"
+      ],
+      "label": "rule parameters",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sample efficiency",
+      "incident_edges": [
+        "edge_1380"
+      ],
+      "label": "sample efficiency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search",
+      "incident_edges": [
+        "edge_1428"
+      ],
+      "label": "search",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search policy",
+      "incident_edges": [
+        "edge_1433"
+      ],
+      "label": "search policy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "search temperature",
+      "incident_edges": [
+        "edge_1435"
+      ],
+      "label": "search temperature",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "selection distribution",
+      "incident_edges": [
+        "edge_1442"
+      ],
+      "label": "selection distributions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "selective querying",
+      "incident_edges": [
+        "edge_1331"
+      ],
+      "label": "selective querying",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic encoder",
+      "incident_edges": [
+        "edge_1343"
+      ],
+      "label": "semantic encoder",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "semantic parse labeling",
+      "incident_edges": [
+        "edge_1398"
+      ],
+      "label": "semantic parse labeling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sensitivity",
+      "incident_edges": [
+        "edge_1438"
+      ],
+      "label": "sensitivity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "shannon entropy",
+      "incident_edges": [
+        "edge_1363"
+      ],
+      "label": "Shannon entropy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "soft logical operator",
+      "incident_edges": [
+        "edge_1352"
+      ],
+      "label": "soft logical operators",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "soft tree policy",
+      "incident_edges": [
+        "edge_1436"
+      ],
+      "label": "soft tree policy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "soft-unification",
+      "incident_edges": [
+        "edge_1353"
+      ],
+      "label": "soft-unification",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "special node",
+      "incident_edges": [
+        "edge_1362"
+      ],
+      "label": "special nodes",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "specific error",
+      "incident_edges": [
+        "edge_1329"
+      ],
+      "label": "specific errors",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stable solution",
+      "incident_edges": [
+        "edge_1440"
+      ],
+      "label": "stable solutions",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stationary convergence",
+      "incident_edges": [
+        "edge_1388"
+      ],
+      "label": "stationary convergence",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stationary point",
+      "incident_edges": [
+        "edge_1401"
+      ],
+      "label": "stationary points",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stochastic gradient descent",
+      "incident_edges": [
+        "edge_1387"
+      ],
+      "label": "stochastic gradient descent",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "stochastic gradient estimator",
+      "incident_edges": [
+        "edge_1437"
+      ],
+      "label": "stochastic gradient estimators",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "strong answer accuracy",
+      "incident_edges": [
+        "edge_1423"
+      ],
+      "label": "strong answer accuracy",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structgpt",
+      "incident_edges": [
+        "edge_1421"
+      ],
+      "label": "StructGPT",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structural encoder",
+      "incident_edges": [
+        "edge_1415"
+      ],
+      "label": "structural encoders",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structure-encoding strategy",
+      "incident_edges": [
+        "edge_1438"
+      ],
+      "label": "structure-encoding strategies",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "structured example",
+      "incident_edges": [
+        "edge_1351"
+      ],
+      "label": "structured examples",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sub-gaussian noise",
+      "incident_edges": [
+        "edge_1344"
+      ],
+      "label": "sub-Gaussian noise",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "sub-gaussianity",
+      "incident_edges": [
+        "edge_1439"
+      ],
+      "label": "sub-Gaussianity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "subgraph expansion",
+      "incident_edges": [
+        "edge_1434"
+      ],
+      "label": "subgraph expansion",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "supervised annotation",
+      "incident_edges": [
+        "edge_1337"
+      ],
+      "label": "supervised annotation",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic approximation error",
+      "incident_edges": [
+        "edge_1366"
+      ],
+      "label": "symbolic approximation error",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "symbolic component",
+      "incident_edges": [
+        "edge_1367",
+        "edge_1413"
+      ],
+      "label": "symbolic components",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic consistency",
+      "incident_edges": [
+        "edge_1440"
+      ],
+      "label": "symbolic consistency",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic identifier",
+      "incident_edges": [
+        "edge_1414"
+      ],
+      "label": "symbolic identifiers",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic layer",
+      "incident_edges": [
+        "edge_1355"
+      ],
+      "label": "symbolic layer",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic module",
+      "incident_edges": [
+        "edge_1429"
+      ],
+      "label": "symbolic module",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic plausibility",
+      "incident_edges": [
+        "edge_1340"
+      ],
+      "label": "symbolic plausibility",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic score",
+      "incident_edges": [
+        "edge_1340"
+      ],
+      "label": "symbolic score",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic term",
+      "incident_edges": [
+        "edge_1372"
+      ],
+      "label": "symbolic term",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "symbolic-consistency term",
+      "incident_edges": [
+        "edge_1339"
+      ],
+      "label": "symbolic-consistency term",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "system",
+      "incident_edges": [
+        "edge_1348"
+      ],
+      "label": "system",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "system propensity",
+      "incident_edges": [
+        "edge_1384"
+      ],
+      "label": "system propensity",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 0,
+      "id": "systematic bia",
+      "incident_edges": [],
+      "label": "systematic biases",
+      "properties": {}
+    },
+    {
+      "degree": 1,
+      "id": "temperature",
+      "incident_edges": [
+        "edge_1442"
+      ],
+      "label": "temperature",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "temperature parameter",
+      "incident_edges": [
+        "edge_1376"
+      ],
+      "label": "temperature parameter",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "text",
+      "incident_edges": [
+        "edge_1391"
+      ],
+      "label": "text",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "token consumption",
+      "incident_edges": [
+        "edge_1421"
+      ],
+      "label": "token consumption",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "total loss",
+      "incident_edges": [
+        "edge_1348"
+      ],
+      "label": "total loss",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training dynamic",
+      "incident_edges": [
+        "edge_1410"
+      ],
+      "label": "training dynamics",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "training stability",
+      "incident_edges": [
+        "edge_1375"
+      ],
+      "label": "training stability",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "true plausibility vector",
+      "incident_edges": [
+        "edge_1429"
+      ],
+      "label": "true plausibility vector",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "truth degree",
+      "incident_edges": [
+        "edge_1418"
+      ],
+      "label": "truth degrees",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "uncertainty estimate",
+      "incident_edges": [
+        "edge_1333"
+      ],
+      "label": "uncertainty estimates",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "uncertainty modeling",
+      "incident_edges": [
+        "edge_1331"
+      ],
+      "label": "uncertainty modeling",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "uncertainty quantifier",
+      "incident_edges": [
+        "edge_1443"
+      ],
+      "label": "uncertainty quantifier",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 2,
+      "id": "uncertainty threshold",
+      "incident_edges": [
+        "edge_1381",
+        "edge_1444"
+      ],
+      "label": "uncertainty threshold",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "uncertainty-agnostic baseline",
+      "incident_edges": [
+        "edge_1422"
+      ],
+      "label": "uncertainty-agnostic baselines",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "value estimator",
+      "incident_edges": [
+        "edge_1417"
+      ],
+      "label": "value estimator",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "variance estimator",
+      "incident_edges": [
+        "edge_1430"
+      ],
+      "label": "variance estimator",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "webqsp performance",
+      "incident_edges": [
+        "edge_1375"
+      ],
+      "label": "WebQSP performance",
+      "properties": {
+        "node_level": "class"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "β",
+      "incident_edges": [
+        "edge_1384"
+      ],
+      "label": "β",
+      "properties": {
+        "node_level": "instance"
+      }
+    },
+    {
+      "degree": 1,
+      "id": "τ",
+      "incident_edges": [
+        "edge_1442"
+      ],
+      "label": "τ",
+      "properties": {
+        "node_level": "instance"
+      }
+    }
+  ]
+}

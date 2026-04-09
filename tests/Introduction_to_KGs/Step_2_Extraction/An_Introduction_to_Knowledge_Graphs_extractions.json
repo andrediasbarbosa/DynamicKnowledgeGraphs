@@ -1,0 +1,2534 @@
+[
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_0",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_1",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_2",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_3",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_4",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_5",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "KG choices"
+        ],
+        "targets": [
+          "KG success and adoption"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_7",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_8",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_9",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_10",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_11",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 17, column 36: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_12",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_13",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_14",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 77: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_15",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_16",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_17",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_18",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_19",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_20",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_21",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_22",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_23",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_24",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_25",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 69, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporal]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_26",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_27",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_28",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_29",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_30",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_31",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_32",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_33",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_34",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 32, column 43: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_35",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_36",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_37",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_38",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_39",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_40",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_41",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_42",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_43",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 36, column 147: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The belief that there is a single correct ontology leads to disagreements and debates over which ontology is]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_44",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_45",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_46",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_47",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_48",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 56, column 36: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_49",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_50",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_51",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_52",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "causes",
+        "sources": [
+          "each iteration"
+        ],
+        "targets": [
+          "PageRank values update"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "necessitates",
+        "sources": [
+          "self-referential calculation"
+        ],
+        "targets": [
+          "iterative solution"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_53",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_54",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_55",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_56",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_57",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_58",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 16, column 42: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_59",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_60",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_61",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_62",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_63",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_64",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_65",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 23: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"mechanism]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_66",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_67",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_68",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 34, column 28: syntax error while parsing value - invalid string: missing closing quote; last read: '\"name]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_69",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_70",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_71",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_72",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_73",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_74",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_75",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_76",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "causes",
+        "sources": [
+          "GATE gazetteer"
+        ],
+        "targets": [
+          "entity recognition"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "causes",
+        "sources": [
+          "OrthoMatcher"
+        ],
+        "targets": [
+          "coreference resolution"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "Pronominal Coreference Resolution module"
+        ],
+        "targets": [
+          "coreference resolution"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_77",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 69, column 49: syntax error while parsing value - invalid string: missing closing quote; last read: '\"inherent design]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_78",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_79",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_80",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 26, column 7: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_81",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 15, column 36: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_82",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_83",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_84",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_85",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_86",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_87",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_88",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_89",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_90",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_91",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_92",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_93",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 24: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_94",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 102, column 48: syntax error while parsing value - invalid string: missing closing quote; last read: '\"retrieval of information]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_95",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 23: syntax error while parsing value - invalid number; expected digit after '.'; last read: '0.]'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_96",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "enable",
+        "sources": [
+          "Search engines"
+        ],
+        "targets": [
+          "searching Linked Data"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_97",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_98",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Linked Data"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_99",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_100",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_101",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_102",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_103",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_104",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_105",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_106",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_107",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 68: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_108",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_109",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_110",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_111",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_112",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 14, column 30: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_113",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_114",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_115",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_116",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_117",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_118",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_119",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_120",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_121",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_122",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 18: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"type]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_123",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 25, column 8: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_124",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 31, column 23: syntax error while parsing value - invalid number; expected digit after '.'; last read: '0.]'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_125",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 49, column 8: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_126",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_127",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_128",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_129",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_130",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_131",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_132",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_133",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_134",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_135",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_136",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_137",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 21, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_138",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_139",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_140",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_141",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_142",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_143",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 60, column 147: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Target declarations specify criteria (e.g., node targets, class targets) that identify specific nodes within]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_144",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 7, column 25: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_145",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 28: syntax error while parsing value - invalid string: missing closing quote; last read: '\"dzt-entity:599]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_146",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_147",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_148",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "schema:location value invalid literal"
+        ],
+        "targets": [
+          "SPARQL query returns false"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "schema:location value is IRI"
+        ],
+        "targets": [
+          "SPARQL query returns true"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_149",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_150",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_cause]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_151",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_152",
+    "relations": [
+      {
+        "confidence": 1.0,
+        "relation": "causes",
+        "sources": [
+          "Value 3 being within range [1,5]"
+        ],
+        "targets": [
+          "SPARQL query returns true"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_153",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_154",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_155",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 71: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_156",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_157",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 11: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_158",
+    "relations": [
+      {
+        "confidence": 1.0,
+        "relation": "results in",
+        "sources": [
+          "query execution"
+        ],
+        "targets": [
+          "no query violation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_159",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 24, column 23: syntax error while parsing value - invalid string: missing closing quote; last read: '\"SPARQL]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_160",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_161",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 21, column 36: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_162",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 24: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"mechanism_]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_163",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_164",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 24: syntax error while parsing value - invalid string: missing closing quote; last read: '\"en]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_165",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_cause]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_166",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_167",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_168",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_169",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 25, column 55: syntax error while parsing value - invalid string: missing closing quote; last read: '\"An individual can never be an instance]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_170",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 21: syntax error while parsing value - invalid string: missing closing quote; last read: '\"b and c]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_171",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_172",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "prevents",
+        "sources": [
+          "an instance of a class not having any value for property P"
+        ],
+        "targets": [
+          "inconsistency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_173",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_174",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_175",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 169: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The specific design and features of OWL EL, including its subset of OWL DL axiom constructs, enable efficient reasoning algorithms]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_176",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 29, column 23: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_177",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_178",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_179",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_180",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_181",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_182",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_183",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_184",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_185",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 27: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_186",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_187",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_188",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_189",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_190",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_191",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_192",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_193",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_194",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_195",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_196",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_197",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_198",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_199",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_200",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 14, column 53: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_201",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_202",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_203",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_204",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_205",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 195: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Representing knowledge graphs at the logical level provides the formal structure and semantics necessary for machines to process and interpret their content]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_206",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 48, column 32: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_207",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_208",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_209",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_210",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_211",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_212",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 8, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_213",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_214",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_215",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_216",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_217",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_218",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 22: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_219",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 16, column 66: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The specific arrangement of]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_220",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_221",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_222",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_223",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "causes",
+        "sources": [
+          "No function symbols"
+        ],
+        "targets": [
+          "DL decidability"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_224",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_225",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_226",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_227",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_228",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_229",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 30, column 24: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_230",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_231",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_232",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_233",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_234",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_235",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_236",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_237",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_238",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_239",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 76, column 11: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_240",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_241",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_242",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_243",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_244",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 25: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_245",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_246",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_247",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_248",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_249",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 77, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_250",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_251",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_252",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 24, column 19: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"scope]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_253",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_254",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 30: syntax error while parsing value - invalid string: missing closing quote; last read: '\"enabling]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_255",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_256",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 39: syntax error while parsing value - invalid string: missing closing quote; last read: '\"IEXT(I(:hasFather)) ⊆ I]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_257",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 49: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Iinstances(I(:Man)) ⊆ Iinstances(]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_258",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_259",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_260",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 17: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"causal]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_261",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_262",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_263",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_264",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_265",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 52, column 28: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Left]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_266",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_267",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 25: syntax error while parsing value - invalid number; expected digit after '.'; last read: '0.]'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_268",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_269",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_270",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 26: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_271",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_272",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_273",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_274",
+    "relations": [
+      {
+        "confidence": 1.0,
+        "relation": "causes",
+        "sources": [
+          "type having multiple immediate supertypes"
+        ],
+        "targets": [
+          "hierarchy not being a tree"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_275",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 36, column 126: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The range of a property explicitly specifies and sets the boundaries for the types that]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_276",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_277",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_278",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_279",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_280",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_281",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 82: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_282",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 16: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_283",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "Schema identifier uniqueness"
+        ],
+        "targets": [
+          "Functional properties"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "Few publisher constraints"
+        ],
+        "targets": [
+          "Extensive data publishing"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_284",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"short]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_285",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_286",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_287",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_288",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_289",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_290",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 14, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_291",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_292",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_293",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_294",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_295",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 70, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_296",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_297",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_298",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_299",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_300",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_301",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_cause]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_302",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_303",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_304",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_305",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_306",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_307",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 20, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_308",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_309",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_310",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_311",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_312",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_313",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_314",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 12, column 110: syntax error while parsing value - invalid string: missing closing quote; last read: '\"The inherent nature and requirements of hosting knowledge graphs create]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_315",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_316",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 40, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_317",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 20, column 45: syntax error while parsing value - invalid string: missing closing quote; last read: '\"Here, the]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_318",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_319",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 21, column 44: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_320",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_321",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 30, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_322",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_323",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_324",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 44, column 40: syntax error while parsing value - invalid string: missing closing quote; last read: '\"This]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_325",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_326",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_327",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 56, column 17: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"causal]}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_328",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 35, column 52: syntax error while parsing value - invalid string: missing closing quote; last read: '\"IRI of named graph in subject position]]}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_329",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 32, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_330",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_331",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 17, column 34: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"contributing_factors]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_332",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "cause",
+        "sources": [
+          "Users"
+        ],
+        "targets": [
+          "Node expansion"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "infers",
+        "sources": [
+          "GraphDB reasoner"
+        ],
+        "targets": [
+          "New facts"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_333",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_334",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_335",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_336",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_337",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_338",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_339",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_340",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_341",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_342",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_343",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 18: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_344",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_345",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_346",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "causes",
+        "sources": [
+          "Poor quality KGs"
+        ],
+        "targets": [
+          "Significant organizational costs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is necessary for",
+        "sources": [
+          "Assessing KG quality status"
+        ],
+        "targets": [
+          "Improving KG quality"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_347",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 28: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_348",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_349",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_350",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_351",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_352",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 20, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_353",
+    "relations": [
+      {
+        "confidence": 1.0,
+        "relation": "cause",
+        "sources": [
+          "false syntactic tokens in property IRI",
+          "missing syntactic tokens in property IRI"
+        ],
+        "targets": [
+          "syntactic errors in property identifiers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enable",
+        "sources": [
+          "string similarity measures"
+        ],
+        "targets": [
+          "distinguishing typo from undefined property"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_354",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 23: syntax error while parsing value - invalid string: missing closing quote; last read: '\"schema]]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_355",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 41, column 34: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"contributing_factors]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_356",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_357",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_358",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 42, column 26: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_359",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_360",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_361",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_362",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_363",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_364",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_365",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 25, column 36: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_366",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_367",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_368",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_369",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables demonstration of",
+        "sources": [
+          "German Tourism KG excerpt"
+        ],
+        "targets": [
+          "knowledge enrichment"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_370",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_371",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_372",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_373",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_374",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 29: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_375",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 29: syntax error while parsing value - invalid string: missing closing quote; last read: '\"direct_]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_376",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_377",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_378",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_379",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_380",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 53, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_381",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_382",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_383",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_384",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_385",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_386",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 20: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_387",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_388",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 24, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"scope_]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_389",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_390",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 24: syntax error while parsing value - invalid string: missing closing quote; last read: '\"en]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_391",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_392",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 23: syntax error while parsing value - unexpected ']'; expected '[', '{', or a literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_393",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_394",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_395",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 66, column 26: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_396",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 33, column 18: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"type]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_397",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 19, column 26: syntax error while parsing object - unexpected ']'; expected '}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_398",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 25: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_399",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_400",
+    "relations": [
+      {
+        "confidence": 0.7,
+        "relation": "enables",
+        "sources": [
+          "Semantify pages"
+        ],
+        "targets": [
+          "Deployment"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_401",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_402",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 22: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_403",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"strong]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_404",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 61, column 23: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"mechanism]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_405",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_406",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_407",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_408",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_409",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 13, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_410",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_411",
+    "relations": [
+      {
+        "confidence": 0.7,
+        "relation": "triggers",
+        "sources": [
+          "Query"
+        ],
+        "targets": [
+          "KARL answering process"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_412",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_413",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing value - invalid string: missing closing quote; last read: '\"sufficient]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_414",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_415",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_416",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_417",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_418",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 9, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_419",
+    "relations": [],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_420",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 25: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"temporality]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_421",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 20: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"tempor]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_422",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "powers",
+        "sources": [
+          "knowledge graph"
+        ],
+        "targets": [
+          "applications"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "trigger",
+        "sources": [
+          "natural language commands"
+        ],
+        "targets": [
+          "virtual assistants carry tasks"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_423",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 35, column 36: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_424",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_425",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 15, column 23: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"necessary]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_426",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "causes",
+        "sources": [
+          "query to ChatGPT"
+        ],
+        "targets": [
+          "answer with book titles, authors, links"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_427",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_428",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 35, column 37: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_429",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 26: syntax error while parsing value - invalid string: missing closing quote; last read: '\"]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_430",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_431",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 23, column 27: syntax error while parsing value - invalid string: missing closing quote; last read: '\"In]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_432",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_433",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 32: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_434",
+    "relations": [
+      {
+        "confidence": 0.95,
+        "relation": "enables",
+        "sources": [
+          "Data offer"
+        ],
+        "targets": [
+          "Data sharing"
+        ]
+      },
+      {
+        "confidence": 0.95,
+        "relation": "provide",
+        "sources": [
+          "Applications using data"
+        ],
+        "targets": [
+          "Services like analytics"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_435",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 34: syntax error while parsing value - invalid string: missing closing quote; last read: '\"moderate]}}}'",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_436",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 22: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"strength]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_437",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 11, column 14: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"]}}}'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_438",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 10, column 30: syntax error while parsing object key - unexpected ']'; expected string literal",
+    "success": false
+  },
+  {
+    "chunk_id": "An_Introduction_to_Knowledge_Graphs_chunk_439",
+    "error": "Failed to parse relations: Failed to parse relations JSON: [json.exception.parse_error.101] parse error at line 15, column 24: syntax error while parsing object key - invalid string: missing closing quote; last read: '\"necessary_]}}}'; expected string literal",
+    "success": false
+  }
+]

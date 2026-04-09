@@ -1,0 +1,1429 @@
+[
+  {
+    "chunk_id": "KG_Reasoning_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "knowledge representation"
+        ],
+        "targets": [
+          "power system operation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "data",
+          "knowledge graph"
+        ],
+        "targets": [
+          "fault detection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "fuzzy Petri net"
+        ],
+        "targets": [
+          "fault identification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "graph neural network"
+        ],
+        "targets": [
+          "power system state"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG",
+          "knowledge-centered"
+        ],
+        "targets": [
+          "next-generation power systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "applies",
+        "sources": [
+          "KG",
+          "power system"
+        ],
+        "targets": [
+          "data integration"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "overcomes",
+        "sources": [
+          "KG",
+          "technical difficulties"
+        ],
+        "targets": [
+          "industry challenges"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "integrates",
+        "sources": [
+          "KG",
+          "power IoT center"
+        ],
+        "targets": [
+          "data resources"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "visualizes",
+        "sources": [
+          "KG",
+          "power system"
+        ],
+        "targets": [
+          "complex models"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is",
+        "sources": [
+          "knowledge graph",
+          "semantic network"
+        ],
+        "targets": [
+          "structured semantic knowledge base"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "affects",
+        "sources": [
+          "knowledge extraction",
+          "data quality"
+        ],
+        "targets": [
+          "KG construction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "neural network learning",
+          "named entity recognition"
+        ],
+        "targets": [
+          "entity extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "connects",
+        "sources": [
+          "LSTM-CRF model",
+          "word vectors"
+        ],
+        "targets": [
+          "sentence"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "attention mechanism",
+          "neural network model"
+        ],
+        "targets": [
+          "recognition accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is a step of",
+        "sources": [
+          "relationship extraction",
+          "entity extraction"
+        ],
+        "targets": [
+          "entity extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is based on",
+        "sources": [
+          "supervised learning",
+          "relationship extraction"
+        ],
+        "targets": [
+          "manual annotation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "avoids",
+        "sources": [
+          "joint extraction",
+          "pipeline method"
+        ],
+        "targets": [
+          "performance degradation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is shared by",
+        "sources": [
+          "embedding layer",
+          "sequence layer"
+        ],
+        "targets": [
+          "entity recognition",
+          "relationship classification"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "must be represented as",
+        "sources": [
+          "knowledge",
+          "database"
+        ],
+        "targets": [
+          "computer process"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "suffers_from",
+        "sources": [
+          "knowledge representation",
+          "RDF triples",
+          "OWL languages"
+        ],
+        "targets": [
+          "low computational efficiency",
+          "data sparsity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "continuous vector-based knowledge representation"
+        ],
+        "targets": [
+          "computational efficiency",
+          "data sparsity",
+          "information fusion"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "applies_to",
+        "sources": [
+          "knowledge graph embedding"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "involves",
+        "sources": [
+          "entity linking"
+        ],
+        "targets": [
+          "named entity recognition",
+          "candidate entity disambiguation"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "represent",
+        "sources": [
+          "graph-based approaches"
+        ],
+        "targets": [
+          "entity mentions",
+          "entities",
+          "relationships"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "discovers",
+        "sources": [
+          "rule mining",
+          "associative relationships"
+        ],
+        "targets": [
+          "inferential prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "classifies",
+        "sources": [
+          "probabilistic graph-based approaches",
+          "Markov logic networks"
+        ],
+        "targets": [
+          "entities",
+          "relations"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "manages",
+        "sources": [
+          "knowledge fusion",
+          "KG merging"
+        ],
+        "targets": [
+          "multiple KGs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "deductive-based reasoning",
+          "ontology reasoning"
+        ],
+        "targets": [
+          "predefined ontology axioms"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "inductive-based reasoning",
+          "existing data"
+        ],
+        "targets": [
+          "knowledge"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "loss function",
+          "interval"
+        ],
+        "targets": [
+          "training objective"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "captures",
+        "sources": [
+          "TransE"
+        ],
+        "targets": [
+          "one-to-one relationships"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "TransH",
+          "TransR",
+          "TransD"
+        ],
+        "targets": [
+          "TransE"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "optimizes",
+        "sources": [
+          "gradient-based optimization"
+        ],
+        "targets": [
+          "function"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "measures",
+        "sources": [
+          "score function"
+        ],
+        "targets": [
+          "approximation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improved",
+        "sources": [
+          "TransE",
+          "classical model"
+        ],
+        "targets": [
+          "TransG",
+          "TransS",
+          "TransAE"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilize",
+        "sources": [
+          "graph structure",
+          "graph neural networks"
+        ],
+        "targets": [
+          "knowledge base complementation",
+          "link prediction",
+          "entity discovery"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "added to",
+        "sources": [
+          "machine learning",
+          "algorithms"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "NELL",
+          "internet data"
+        ],
+        "targets": [
+          "self-correction",
+          "automatic updating"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "YAGO 4",
+          "Wikidata"
+        ],
+        "targets": [
+          "schema.org"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contributes to",
+        "sources": [
+          "data collection",
+          "graph construction"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "affects",
+        "sources": [
+          "data quality"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "noise filtering",
+          "data sample expansion"
+        ],
+        "targets": [
+          "data quality"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "knowledge extraction model"
+        ],
+        "targets": [
+          "accurate extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "eliminates",
+        "sources": [
+          "knowledge fusion technique"
+        ],
+        "targets": [
+          "data redundancy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge extraction",
+          "ontology construction"
+        ],
+        "targets": [
+          "knowledge reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "case-based reasoning",
+          "historical case base"
+        ],
+        "targets": [
+          "recommendation function"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "representation learning",
+          "vector representation"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph databases",
+          "Neo4j"
+        ],
+        "targets": [
+          "data processing"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "compared",
+        "sources": [
+          "RDF tables",
+          "graph databases"
+        ],
+        "targets": [
+          "query performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "is_faster_than",
+        "sources": [
+          "graph database",
+          "RDF"
+        ],
+        "targets": [
+          "aggregate queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG",
+          "knowledge search"
+        ],
+        "targets": [
+          "engineering significance"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "develops",
+        "sources": [
+          "self-learning methods",
+          "algorithms"
+        ],
+        "targets": [
+          "O&M plans"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_better_than",
+        "sources": [
+          "KG representation",
+          "defective texts"
+        ],
+        "targets": [
+          "other representation methods"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "power equipment data",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "representation"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "relates to",
+        "sources": [
+          "text information",
+          "O&M logs",
+          "power inspection work orders"
+        ],
+        "targets": [
+          "knowledge data structure"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "assists in",
+        "sources": [
+          "KG technology"
+        ],
+        "targets": [
+          "O&M of power equipment"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "KG"
+        ],
+        "targets": [
+          "fault-assisted decisions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "path ranking algorithm"
+        ],
+        "targets": [
+          "similarity ranking"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KG"
+        ],
+        "targets": [
+          "intelligence and efficiency"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "used in",
+        "sources": [
+          "LSTM-CRF",
+          "Bi-LSTM-CRF"
+        ],
+        "targets": [
+          "power domain"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Bi-LSTM-CRF"
+        ],
+        "targets": [
+          "information extraction"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "compared to",
+        "sources": [
+          "CRF model",
+          "Bi-LSTM"
+        ],
+        "targets": [
+          "entity extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "KG technology"
+        ],
+        "targets": [
+          "holographic awareness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "mobile applications"
+        ],
+        "targets": [
+          "standardized services"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "neural network",
+          "customer service KG"
+        ],
+        "targets": [
+          "business consultation",
+          "fault recovery",
+          "user satisfaction surveys"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "requires",
+        "sources": [
+          "KG",
+          "user intent"
+        ],
+        "targets": [
+          "clear problem description"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "Bert model"
+        ],
+        "targets": [
+          "intention recognition accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "XLNet model"
+        ],
+        "targets": [
+          "accuracy rate"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "KG technology"
+        ],
+        "targets": [
+          "consulting services"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "combines with",
+        "sources": [
+          "recommendation algorithm",
+          "historical comments"
+        ],
+        "targets": [
+          "algorithmic models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG technology"
+        ],
+        "targets": [
+          "fault diagnosis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "dispatching rules",
+          "semantic library"
+        ],
+        "targets": [
+          "decision support"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "neural network models",
+          "various algorithms"
+        ],
+        "targets": [
+          "smart grid dispatching"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reads from",
+        "sources": [
+          "GCN"
+        ],
+        "targets": [
+          "scheduling domain KG"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_15",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "multi-domain knowledge",
+          "scheduling"
+        ],
+        "targets": [
+          "safety",
+          "accuracy"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "KG technology",
+          "dispatch automation system"
+        ],
+        "targets": [
+          "automatic fault location",
+          "intelligent fault diagnosis"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "KG",
+          "power monitoring information"
+        ],
+        "targets": [
+          "fault information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "extracts",
+        "sources": [
+          "Bert-based model",
+          "knowledge extraction"
+        ],
+        "targets": [
+          "triadic information"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "power metering KG",
+          "text matching"
+        ],
+        "targets": [
+          "knowledge base"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_16",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compared_to",
+        "sources": [
+          "database",
+          "inference model"
+        ],
+        "targets": [
+          "mapping techniques"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "application"
+        ],
+        "targets": [
+          "accuracy",
+          "efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "faces",
+        "sources": [
+          "power safety regulations"
+        ],
+        "targets": [
+          "challenges"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "becomes",
+        "sources": [
+          "KG"
+        ],
+        "targets": [
+          "future research direction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "KG-based model"
+        ],
+        "targets": [
+          "TextRank algorithm"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_17",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "compares",
+        "sources": [
+          "data-driven AI",
+          "knowledge-driven AI"
+        ],
+        "targets": [
+          "first-generation AI",
+          "second-generation AI",
+          "third-generation AI"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge extraction",
+          "data source"
+        ],
+        "targets": [
+          "recommendation functions",
+          "Q&A functions"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "extracts",
+        "sources": [
+          "graph technology",
+          "IoT data"
+        ],
+        "targets": [
+          "electric power data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "guides",
+        "sources": [
+          "knowledge calculation",
+          "data reasoning"
+        ],
+        "targets": [
+          "fault maintenance",
+          "equipment management",
+          "customer demand"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "establishes",
+        "sources": [
+          "power IoT",
+          "knowledge base"
+        ],
+        "targets": [
+          "knowledge graph"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_18",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph",
+          "artificial intelligence"
+        ],
+        "targets": [
+          "operational efficiency"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "knowledge graph",
+          "power system"
+        ],
+        "targets": [
+          "factual knowledge",
+          "structured knowledge"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "needs",
+        "sources": [
+          "graph technology",
+          "power system operation"
+        ],
+        "targets": [
+          "further study"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_19",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "analyzes",
+        "sources": [
+          "knowledge discovery"
+        ],
+        "targets": [
+          "research frontier",
+          "hot topics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "deep learning"
+        ],
+        "targets": [
+          "feature extraction",
+          "intrusion detection"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "constructs",
+        "sources": [
+          "knowledge graph"
+        ],
+        "targets": [
+          "relational data"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "reinforcement learning"
+        ],
+        "targets": [
+          "relation classification"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "knowledge representation"
+        ],
+        "targets": [
+          "power system modelling"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_20",
+    "relations": [
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "link prediction"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "knowledge graph",
+          "reinforcement learning"
+        ],
+        "targets": [
+          "rule mining"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph",
+          "path representation"
+        ],
+        "targets": [
+          "knowledge reasoning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "embedding model"
+        ],
+        "targets": [
+          "data modeling"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "semantic web"
+        ],
+        "targets": [
+          "information retrieval"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_21",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph",
+          "graph neural network"
+        ],
+        "targets": [
+          "knowledge transfer"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "multimodal data"
+        ],
+        "targets": [
+          "representation learning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "power grid"
+        ],
+        "targets": [
+          "intelligent dispatching"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "IoT"
+        ],
+        "targets": [
+          "abnormal detection"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "stores",
+        "sources": [
+          "knowledge graph",
+          "graph database"
+        ],
+        "targets": [
+          "knowledge map"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_22",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "power equipment management"
+        ],
+        "targets": [
+          "management efficiency"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "knowledge base",
+          "equipment condition maintenance"
+        ],
+        "targets": [
+          "power IoT"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph",
+          "customer service"
+        ],
+        "targets": [
+          "service quality"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "financial news recommendation"
+        ],
+        "targets": [
+          "recommendation accuracy"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graph",
+          "power dispatching"
+        ],
+        "targets": [
+          "digital homes"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Reasoning_chunk_23",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "semantic search algorithm"
+        ],
+        "targets": [
+          "smart grid"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "recommender systems"
+        ],
+        "targets": [
+          "user experience"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge-driven services",
+          "graph neural networks"
+        ],
+        "targets": [
+          "energy systems"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graph",
+          "power safety regulations"
+        ],
+        "targets": [
+          "entity recognition"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "analyzes",
+        "sources": [
+          "knowledge map",
+          "network security"
+        ],
+        "targets": [
+          "vulnerabilities"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

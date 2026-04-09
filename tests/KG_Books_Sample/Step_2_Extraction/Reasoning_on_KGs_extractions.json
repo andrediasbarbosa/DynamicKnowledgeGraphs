@@ -1,0 +1,881 @@
+[
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "infers",
+        "sources": [
+          "knowledge graph reasoning",
+          "KGR"
+        ],
+        "targets": [
+          "missing facts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "harness",
+        "sources": [
+          "LLMs",
+          "large language models"
+        ],
+        "targets": [
+          "semantic priors",
+          "reasoning capabilities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "reinforces",
+        "sources": [
+          "supervised fine-tuning",
+          "SFT"
+        ],
+        "targets": [
+          "token-level imitation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "yields",
+        "sources": [
+          "co-occurrence-based SFT"
+        ],
+        "targets": [
+          "marginal gains"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "exploit",
+        "sources": [
+          "classical embedding-based methods"
+        ],
+        "targets": [
+          "graph structure"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "RADAR",
+          "KGR"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "Reinforcement Learning",
+          "SFT"
+        ],
+        "targets": [
+          "global outcomes"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "hinders",
+        "sources": [
+          "co-occurrence shortcuts"
+        ],
+        "targets": [
+          "KGR"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "restructures",
+        "sources": [
+          "RADAR"
+        ],
+        "targets": [
+          "supervision"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "emerges",
+        "sources": [
+          "discriminative reasoning"
+        ],
+        "targets": [
+          "relational semantics"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "contains",
+        "sources": [
+          "knowledge graph",
+          "entity set",
+          "relation set",
+          "triple set"
+        ],
+        "targets": [
+          "entities",
+          "relations",
+          "triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focuses on",
+        "sources": [
+          "triple classification",
+          "link prediction"
+        ],
+        "targets": [
+          "KGR tasks"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "SFT",
+          "RL"
+        ],
+        "targets": [
+          "discriminative reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "consists of",
+        "sources": [
+          "training dataset",
+          "training instance"
+        ],
+        "targets": [
+          "discriminative prompt",
+          "target sequence"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "outputs",
+        "sources": [
+          "model",
+          "training prompt"
+        ],
+        "targets": [
+          "option labels"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "better preserve",
+        "sources": [
+          "intermediate representations",
+          "final-layer outputs"
+        ],
+        "targets": [
+          "factual knowledge"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "maps to",
+        "sources": [
+          "binary classifier",
+          "training data"
+        ],
+        "targets": [
+          "plausibility score"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "retrieval-then-reranking approach",
+          "top-n candidates"
+        ],
+        "targets": [
+          "learned classifier"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "task-adaptive mutual information",
+          "KGR training"
+        ],
+        "targets": [
+          "discriminative relational knowledge"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "dilutes",
+        "sources": [
+          "sliced mutual information",
+          "random projections"
+        ],
+        "targets": [
+          "task-relevant information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "RADAR",
+          "KGE model"
+        ],
+        "targets": [
+          "COSIGN"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "achieves",
+        "sources": [
+          "RADAR",
+          "link prediction"
+        ],
+        "targets": [
+          "best MRR"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "KG-LLAMA",
+          "FLAME"
+        ],
+        "targets": [
+          "baselines"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "FB15K-237",
+          "FB15K-237N"
+        ],
+        "targets": [
+          "datasets"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "scores",
+        "sources": [
+          "TuckER",
+          "KGE model"
+        ],
+        "targets": [
+          "candidate entities"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "RADAR",
+          "KG-LLAMA"
+        ],
+        "targets": [
+          "link prediction",
+          "triple classification"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "improves",
+        "sources": [
+          "RADAR",
+          "FLAME"
+        ],
+        "targets": [
+          "KG structural embeddings"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "performs better than",
+        "sources": [
+          "variable-answer setting",
+          "single-answer setting"
+        ],
+        "targets": [
+          "relation-conditioned triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is second to",
+        "sources": [
+          "KoPA",
+          "RADAR"
+        ],
+        "targets": [
+          "UMLS"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "replaces",
+        "sources": [
+          "representation",
+          "inference"
+        ],
+        "targets": [
+          "decoding"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "Discriminative-SFT-Extraction"
+        ],
+        "targets": [
+          "Serial-SFT-Extraction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "yields",
+        "sources": [
+          "reinforcement learning"
+        ],
+        "targets": [
+          "performance improvements"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "requires",
+        "sources": [
+          "task formulation",
+          "optimization",
+          "inference"
+        ],
+        "targets": [
+          "effective relational reasoning"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "mitigates",
+        "sources": [
+          "discriminative formulation"
+        ],
+        "targets": [
+          "entity-relation shortcuts"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "outperforms",
+        "sources": [
+          "RADAR",
+          "Serial-SFT-Extraction"
+        ],
+        "targets": [
+          "baseline"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "leads to",
+        "sources": [
+          "KGR training",
+          "UMLS"
+        ],
+        "targets": [
+          "performance gain"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "excluded from",
+        "sources": [
+          "inductive entities",
+          "training"
+        ],
+        "targets": [
+          "training set"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "RADAR",
+          "discriminative reasoning"
+        ],
+        "targets": [
+          "robust semantics"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "yields",
+        "sources": [
+          "RADAR",
+          "LLM architectures"
+        ],
+        "targets": [
+          "consistent performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "incurs",
+        "sources": [
+          "reinforcement learning",
+          "discriminative alignment"
+        ],
+        "targets": [
+          "higher training costs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "bridges",
+        "sources": [
+          "large language models",
+          "knowledge graph completion"
+        ],
+        "targets": [
+          "structure and text"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "impacts",
+        "sources": [
+          "co-occurrence",
+          "factual knowledge"
+        ],
+        "targets": [
+          "large language models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "multi-task learning",
+          "pre-trained language models"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph embedding",
+          "question answering"
+        ],
+        "targets": [
+          "information retrieval"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "knowledge graph completion"
+        ],
+        "targets": [
+          "contextualization distillation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "language model",
+          "large language model"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "models",
+        "sources": [
+          "graph convolutional networks",
+          "relational data"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "embedding"
+        ],
+        "targets": [
+          "link prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "inductive relation prediction",
+          "subgraph reasoning"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "perform better in",
+        "sources": [
+          "language models",
+          "knowledge graph"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "knowledge graph prompting",
+          "multi-document question answering"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "studies",
+        "sources": [
+          "sliced mutual information",
+          "memorization"
+        ],
+        "targets": [
+          "generalization"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "representation learning",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "entity descriptions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is used for",
+        "sources": [
+          "KG-BERT",
+          "knowledge graph completion"
+        ],
+        "targets": [
+          "knowledge graph completion"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "infers",
+        "sources": [
+          "knowledge graph reasoning",
+          "incomplete KGs"
+        ],
+        "targets": [
+          "missing triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "learns",
+        "sources": [
+          "classical methods",
+          "embedding-based scoring"
+        ],
+        "targets": [
+          "graph topology"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "addresses",
+        "sources": [
+          "language model-based methods",
+          "textual semantics"
+        ],
+        "targets": [
+          "data sparsity"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "co-designs",
+        "sources": [
+          "RADAR",
+          "task formulation"
+        ],
+        "targets": [
+          "training objective"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "utilizes",
+        "sources": [
+          "TuckER model",
+          "retrieve-then-rerank strategy"
+        ],
+        "targets": [
+          "top-n candidates"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_12",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "optimizes",
+        "sources": [
+          "supervised learning",
+          "W1"
+        ],
+        "targets": [
+          "classification loss",
+          "KGR"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "PReLU non-linearity",
+          "W1"
+        ],
+        "targets": [
+          "nonlinear feature interactions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "shapes",
+        "sources": [
+          "supervised optimization",
+          "W1"
+        ],
+        "targets": [
+          "label-informative subspaces",
+          "task-irrelevant dimensions"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "quantifies",
+        "sources": [
+          "task-adaptive mutual information",
+          "KGR"
+        ],
+        "targets": [
+          "intermediate representations"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "dilutes",
+        "sources": [
+          "random projections",
+          "task-relevant information"
+        ],
+        "targets": [
+          "signal"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_13",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "encode",
+        "sources": [
+          "Transformer-based models",
+          "language models"
+        ],
+        "targets": [
+          "knowledge"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "distill",
+        "sources": [
+          "intermediate layers",
+          "upper layers"
+        ],
+        "targets": [
+          "task-salient features"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "fail",
+        "sources": [
+          "lower layers"
+        ],
+        "targets": [
+          "hidden states"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "affect",
+        "sources": [
+          "layer depth"
+        ],
+        "targets": [
+          "prediction accuracy"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "Reasoning_on_KGs_chunk_14",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "drives",
+        "sources": [
+          "classification task",
+          "discrimination mechanism"
+        ],
+        "targets": [
+          "method effectiveness"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "engages",
+        "sources": [
+          "discriminative mode"
+        ],
+        "targets": [
+          "relational reasoning"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "offers",
+        "sources": [
+          "candidate space complexity"
+        ],
+        "targets": [
+          "diminishing returns"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "introduces",
+        "sources": [
+          "optimization noise"
+        ],
+        "targets": [
+          "stronger learning signals"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

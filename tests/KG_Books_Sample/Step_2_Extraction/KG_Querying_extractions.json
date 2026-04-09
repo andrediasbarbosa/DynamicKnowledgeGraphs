@@ -1,0 +1,731 @@
+[
+  {
+    "chunk_id": "KG_Querying_chunk_0",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "store",
+        "sources": [
+          "knowledge graphs",
+          "DBpedia",
+          "Freebase",
+          "YAGO",
+          "Wikidata",
+          "NELL"
+        ],
+        "targets": [
+          "real-world facts"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is critical for",
+        "sources": [
+          "KG querying"
+        ],
+        "targets": [
+          "web search",
+          "question answering",
+          "semantic search",
+          "fact checking",
+          "recommendation"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "advances",
+        "sources": [
+          "deep learning"
+        ],
+        "targets": [
+          "KG querying",
+          "KG embedding",
+          "KG-QA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are different from",
+        "sources": [
+          "KG queries"
+        ],
+        "targets": [
+          "classical relational queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is NP-complete for",
+        "sources": [
+          "subgraph isomorphism"
+        ],
+        "targets": [
+          "exact subgraph pattern matching"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_1",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "studied by",
+        "sources": [
+          "graph query processing",
+          "RDF",
+          "KG querying"
+        ],
+        "targets": [
+          "data management",
+          "theory",
+          "systems communities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are",
+        "sources": [
+          "KGs",
+          "multimodal KGs"
+        ],
+        "targets": [
+          "complex"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "follow",
+        "sources": [
+          "incomplete KGs"
+        ],
+        "targets": [
+          "open-world assumption"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "affects",
+        "sources": [
+          "query intent"
+        ],
+        "targets": [
+          "relevant answers"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "focus on",
+        "sources": [
+          "KG querying methods"
+        ],
+        "targets": [
+          "structured information"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_2",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "KG querying",
+          "web search"
+        ],
+        "targets": [
+          "KG query"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is_related_to",
+        "sources": [
+          "KG query",
+          "QA"
+        ],
+        "targets": [
+          "KG-QA"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are_types_of",
+        "sources": [
+          "RDF model",
+          "property graph model"
+        ],
+        "targets": [
+          "KG data models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "KG embedding",
+          "KG query processing"
+        ],
+        "targets": [
+          "query answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "deep learning",
+          "KG query processing"
+        ],
+        "targets": [
+          "KG-QA"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_3",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "keyword search",
+          "query reformulation"
+        ],
+        "targets": [
+          "structured queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "graph query languages",
+          "SPARQL"
+        ],
+        "targets": [
+          "RDF querying"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "natural language interfaces",
+          "semantic parsing"
+        ],
+        "targets": [
+          "user queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "evaluates",
+        "sources": [
+          "graph operations",
+          "subgraph matching"
+        ],
+        "targets": [
+          "graph queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combines",
+        "sources": [
+          "aggregate queries",
+          "GROUP-BY"
+        ],
+        "targets": [
+          "statistical results"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_4",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "represents",
+        "sources": [
+          "KG embedding",
+          "KG"
+        ],
+        "targets": [
+          "entities",
+          "predicates"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "advances",
+        "sources": [
+          "KG embedding",
+          "deep learning"
+        ],
+        "targets": [
+          "query processing"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "are critical for",
+        "sources": [
+          "conversational QA",
+          "multimodal QA"
+        ],
+        "targets": [
+          "virtual assistants"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "suit",
+        "sources": [
+          "KG querying technologies",
+          "user-friendly means"
+        ],
+        "targets": [
+          "non-expert users"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "process",
+        "sources": [
+          "embedding techniques",
+          "query answering methods"
+        ],
+        "targets": [
+          "complex queries"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_5",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "works_with",
+        "sources": [
+          "KG embedding",
+          "image encoder"
+        ],
+        "targets": [
+          "multi-modal data"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "combine_with",
+        "sources": [
+          "neural encoders",
+          "KG"
+        ],
+        "targets": [
+          "relational models"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "predict",
+        "sources": [
+          "fuzzy logic-based methods",
+          "classification models"
+        ],
+        "targets": [
+          "relation",
+          "entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "embed",
+        "sources": [
+          "KG",
+          "text"
+        ],
+        "targets": [
+          "entities"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "become_popular_for",
+        "sources": [
+          "neural network-based methods",
+          "KG-QA"
+        ],
+        "targets": [
+          "natural language questions"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_6",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "uses",
+        "sources": [
+          "BiNet",
+          "encoder-decoder model"
+        ],
+        "targets": [
+          "relation paths"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "Neo4j",
+          "graph database"
+        ],
+        "targets": [
+          "property graph model"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "is a",
+        "sources": [
+          "Microsoft Cosmos DB",
+          "NoSQL database"
+        ],
+        "targets": [
+          "hybrid graph DB"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "stores",
+        "sources": [
+          "Virtuoso",
+          "hybrid database"
+        ],
+        "targets": [
+          "RDF triples"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "ArangoDB",
+          "document-based graph DB"
+        ],
+        "targets": [
+          "AQL"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_7",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "graph DBMS",
+          "KG data models"
+        ],
+        "targets": [
+          "query languages"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "KG embedding",
+          "graph databases"
+        ],
+        "targets": [
+          "multi-modal KG storage"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "includes",
+        "sources": [
+          "KG querying methods",
+          "SPARQL"
+        ],
+        "targets": [
+          "query languages"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "KG embedding models",
+          "multi-modal data"
+        ],
+        "targets": [
+          "complex data integration"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "provides",
+        "sources": [
+          "graph databases",
+          "interactive visualization"
+        ],
+        "targets": [
+          "user-friendly interfaces"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_8",
+    "relations": [
+      {
+        "confidence": 0.8,
+        "relation": "contributes",
+        "sources": [
+          "explainability",
+          "interoperability"
+        ],
+        "targets": [
+          "multi-lingual querying"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph embedding",
+          "KG-QA"
+        ],
+        "targets": [
+          "explanatory evidences"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "distributed graph pattern matching",
+          "RDF stores"
+        ],
+        "targets": [
+          "querying knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "supports",
+        "sources": [
+          "neural networks",
+          "question answering"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_9",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "graph queries",
+          "pattern queries"
+        ],
+        "targets": [
+          "graph reachability"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "language models"
+        ],
+        "targets": [
+          "query answering"
+        ]
+      },
+      {
+        "confidence": 0.8,
+        "relation": "optimizes",
+        "sources": [
+          "subgraph matching",
+          "fpga-based techniques"
+        ],
+        "targets": [
+          "massive graphs"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph embeddings",
+          "query answering"
+        ],
+        "targets": [
+          "logical queries"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "aggregate SPARQL queries",
+          "materialized views"
+        ],
+        "targets": [
+          "query performance"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_10",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graphs",
+          "graph embeddings"
+        ],
+        "targets": [
+          "relation prediction"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "improves",
+        "sources": [
+          "multi-hop learning",
+          "knowledge graphs"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "RDF data",
+          "SPARQL"
+        ],
+        "targets": [
+          "querying"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "enhances",
+        "sources": [
+          "knowledge base embeddings",
+          "question answering"
+        ],
+        "targets": [
+          "knowledge graphs"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "graph traversal",
+          "semantic networks"
+        ],
+        "targets": [
+          "data retrieval"
+        ]
+      }
+    ],
+    "success": true
+  },
+  {
+    "chunk_id": "KG_Querying_chunk_11",
+    "relations": [
+      {
+        "confidence": 0.9,
+        "relation": "enables",
+        "sources": [
+          "knowledge graph",
+          "graph databases"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "supports",
+        "sources": [
+          "knowledge graph",
+          "query languages"
+        ],
+        "targets": [
+          "data retrieval"
+        ]
+      },
+      {
+        "confidence": 0.85,
+        "relation": "improves",
+        "sources": [
+          "graph databases",
+          "RDF storage"
+        ],
+        "targets": [
+          "data processing"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "enhances",
+        "sources": [
+          "knowledge graph",
+          "language models"
+        ],
+        "targets": [
+          "question answering"
+        ]
+      },
+      {
+        "confidence": 0.9,
+        "relation": "facilitates",
+        "sources": [
+          "knowledge graph",
+          "semantic search"
+        ],
+        "targets": [
+          "keyword queries"
+        ]
+      }
+    ],
+    "success": true
+  }
+]

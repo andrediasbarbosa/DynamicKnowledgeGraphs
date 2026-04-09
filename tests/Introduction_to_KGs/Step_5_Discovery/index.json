@@ -1,0 +1,1970 @@
+{
+  "degree_ranked_nodes": [
+    [
+      "knowledge graph",
+      5
+    ],
+    [
+      "advanced graph dependency modeling",
+      2
+    ],
+    [
+      "sparql query returns true",
+      2
+    ],
+    [
+      "coreference resolution",
+      2
+    ],
+    [
+      "poor quality kgs",
+      1
+    ],
+    [
+      "new fact",
+      1
+    ],
+    [
+      "no function symbol",
+      1
+    ],
+    [
+      "no query violation",
+      1
+    ],
+    [
+      "node expansion",
+      1
+    ],
+    [
+      "node passing values to neighbor",
+      1
+    ],
+    [
+      "organizing principle",
+      1
+    ],
+    [
+      "orthomatcher",
+      1
+    ],
+    [
+      "pagerank values update",
+      1
+    ],
+    [
+      "neighbors aggregating value",
+      1
+    ],
+    [
+      "preprocessing csv file",
+      1
+    ],
+    [
+      "preprocessing phase",
+      1
+    ],
+    [
+      "processing using cypher",
+      1
+    ],
+    [
+      "pronominal coreference resolution module",
+      1
+    ],
+    [
+      "query",
+      1
+    ],
+    [
+      "query execution",
+      1
+    ],
+    [
+      "query in example 5-3",
+      1
+    ],
+    [
+      "local path not found",
+      1
+    ],
+    [
+      "kg principles application",
+      1
+    ],
+    [
+      "kg success and adoption",
+      1
+    ],
+    [
+      "knowledge enrichment",
+      1
+    ],
+    [
+      "knowledge transfers via sentence alignment",
+      1
+    ],
+    [
+      "leacock-chodorow formula",
+      1
+    ],
+    [
+      "linked data",
+      1
+    ],
+    [
+      "list of entity",
+      1
+    ],
+    [
+      "list of global customer",
+      1
+    ],
+    [
+      "neural machine translation",
+      1
+    ],
+    [
+      "model learns to favor output",
+      1
+    ],
+    [
+      "model prioritization of preferred response",
+      1
+    ],
+    [
+      "more insight",
+      1
+    ],
+    [
+      "natural language command",
+      1
+    ],
+    [
+      "need for server-side logic",
+      1
+    ],
+    [
+      "needs not met by client-server paradigm",
+      1
+    ],
+    [
+      "ranked pairs structure",
+      1
+    ],
+    [
+      "neo4j fabric",
+      1
+    ],
+    [
+      "transferring knowledge",
+      1
+    ],
+    [
+      "significant business value",
+      1
+    ],
+    [
+      "significant organizational cost",
+      1
+    ],
+    [
+      "similar result",
+      1
+    ],
+    [
+      "similarity",
+      1
+    ],
+    [
+      "snomed_is_a relationship",
+      1
+    ],
+    [
+      "sparql query returns false",
+      1
+    ],
+    [
+      "string similarity measure",
+      1
+    ],
+    [
+      "training process",
+      1
+    ],
+    [
+      "shortest path printing",
+      1
+    ],
+    [
+      "triplet concept",
+      1
+    ],
+    [
+      "type having multiple immediate supertype",
+      1
+    ],
+    [
+      "updated edge data",
+      1
+    ],
+    [
+      "user",
+      1
+    ],
+    [
+      "user to focus on domain",
+      1
+    ],
+    [
+      "value 3 being within range [1,5]",
+      1
+    ],
+    [
+      "virtual assistants carry task",
+      1
+    ],
+    [
+      "world wide web",
+      1
+    ],
+    [
+      "scope of knowledge graph grow",
+      1
+    ],
+    [
+      "query to chatgpt",
+      1
+    ],
+    [
+      "kg choice",
+      1
+    ],
+    [
+      "real-world problem",
+      1
+    ],
+    [
+      "richer data use",
+      1
+    ],
+    [
+      "running python code",
+      1
+    ],
+    [
+      "schema identifier uniqueness",
+      1
+    ],
+    [
+      "schema:location value invalid literal",
+      1
+    ],
+    [
+      "schema:location value is iri",
+      1
+    ],
+    [
+      "query in example 5-4",
+      1
+    ],
+    [
+      "search engine",
+      1
+    ],
+    [
+      "search option",
+      1
+    ],
+    [
+      "searching linked data",
+      1
+    ],
+    [
+      "self-referential calculation",
+      1
+    ],
+    [
+      "semantic knowledge graph",
+      1
+    ],
+    [
+      "semantic type",
+      1
+    ],
+    [
+      "semantify page",
+      1
+    ],
+    [
+      "services like analytic",
+      1
+    ],
+    [
+      "cypher code",
+      1
+    ],
+    [
+      "categorization of deeper node",
+      1
+    ],
+    [
+      "challenging question",
+      1
+    ],
+    [
+      "cold-start problem",
+      1
+    ],
+    [
+      "compact numerical representation",
+      1
+    ],
+    [
+      "complex impact propagation calculation",
+      1
+    ],
+    [
+      "composing hierarchy",
+      1
+    ],
+    [
+      "composite database creation",
+      1
+    ],
+    [
+      "comprehensive view of node's structural context",
+      1
+    ],
+    [
+      "compute in-degree and out-degree",
+      1
+    ],
+    [
+      "building knowledge graph",
+      1
+    ],
+    [
+      "cypher implementation",
+      1
+    ],
+    [
+      "data offer",
+      1
+    ],
+    [
+      "data preparation",
+      1
+    ],
+    [
+      "data sharing",
+      1
+    ],
+    [
+      "data to meet required quality characteristic",
+      1
+    ],
+    [
+      "dependency model correctness validation",
+      1
+    ],
+    [
+      "deployment",
+      1
+    ],
+    [
+      "distinguishing typo from undefined property",
+      1
+    ],
+    [
+      "application",
+      1
+    ],
+    [
+      "access to web page",
+      1
+    ],
+    [
+      "adding code to neo4j.conf",
+      1
+    ],
+    [
+      "adding predicate to query",
+      1
+    ],
+    [
+      "additional metadata",
+      1
+    ],
+    [
+      "aggregated view",
+      1
+    ],
+    [
+      "algorithm execution",
+      1
+    ],
+    [
+      "an instance of a class not having any value for property p",
+      1
+    ],
+    [
+      "answer with book titles, authors, link",
+      1
+    ],
+    [
+      "kg approach",
+      1
+    ],
+    [
+      "applications using data",
+      1
+    ],
+    [
+      "assessing kg quality statu",
+      1
+    ],
+    [
+      "assigning incremental id to node",
+      1
+    ],
+    [
+      "author grew up in birmingham",
+      1
+    ],
+    [
+      "author interest",
+      1
+    ],
+    [
+      "beta parameter",
+      1
+    ],
+    [
+      "birmingham new street choice",
+      1
+    ],
+    [
+      "book in print",
+      1
+    ],
+    [
+      "functional property",
+      1
+    ],
+    [
+      "information from first-level node",
+      1
+    ],
+    [
+      "inferring knowledge for unseen topic",
+      1
+    ],
+    [
+      "inconsistency",
+      1
+    ],
+    [
+      "information propagation",
+      1
+    ],
+    [
+      "infrastructure moves down stack",
+      1
+    ],
+    [
+      "improving kg quality",
+      1
+    ],
+    [
+      "hpo ontology conversion to neo4j graph",
+      1
+    ],
+    [
+      "hierarchy not being a tree",
+      1
+    ],
+    [
+      "hierarchical structure",
+      1
+    ],
+    [
+      "graphdb reasoner",
+      1
+    ],
+    [
+      "graph not directed",
+      1
+    ],
+    [
+      "graph neural network",
+      1
+    ],
+    [
+      "german tourism kg excerpt",
+      1
+    ],
+    [
+      "gate gazetteer",
+      1
+    ],
+    [
+      "fundamental challenges in graph-based ml task",
+      1
+    ],
+    [
+      "extensive data publishing",
+      1
+    ],
+    [
+      "dl decidability",
+      1
+    ],
+    [
+      "download attempt",
+      1
+    ],
+    [
+      "each iteration",
+      1
+    ],
+    [
+      "karl answering process",
+      1
+    ],
+    [
+      "entity",
+      1
+    ],
+    [
+      "entity recognition",
+      1
+    ],
+    [
+      "evaluate entities’ semantic relatedness",
+      1
+    ],
+    [
+      "explicit entities collection",
+      1
+    ],
+    [
+      "extracting features from distant neighborhood",
+      1
+    ],
+    [
+      "iterative solution",
+      1
+    ],
+    [
+      "few publisher constraint",
+      1
+    ],
+    [
+      "financial transaction graph suitable for gnn",
+      1
+    ],
+    [
+      "finding specific friend of a friend",
+      1
+    ],
+    [
+      "forum accessibility",
+      1
+    ],
+    [
+      "ability of gnns to capture complex relationship",
+      0
+    ],
+    [
+      "islets of langerhan",
+      0
+    ],
+    [
+      "llm integration",
+      0
+    ],
+    [
+      "syntactic errors in property identifier",
+      0
+    ],
+    [
+      "gnns are valuable for real-world problem",
+      0
+    ],
+    [
+      "false syntactic tokens in property iri",
+      0
+    ],
+    [
+      "result interpretation",
+      0
+    ],
+    [
+      "diabetes type 1",
+      0
+    ]
+  ],
+  "entity_cooccurrence": {
+    "access to web page|world wide web": 1,
+    "adding code to neo4j.conf|composite database creation": 1,
+    "adding predicate to query|finding specific friend of a friend": 1,
+    "additional metadata|entity": 1,
+    "advanced graph dependency modeling|complex impact propagation calculation": 1,
+    "advanced graph dependency modeling|dependency model correctness validation": 1,
+    "aggregated view|query in example 5-3": 1,
+    "algorithm execution|shortest path printing": 1,
+    "an instance of a class not having any value for property p|inconsistency": 1,
+    "answer with book titles, authors, link|query to chatgpt": 1,
+    "applications using data|services like analytic": 1,
+    "application|knowledge graph": 1,
+    "assessing kg quality statu|improving kg quality": 1,
+    "assigning incremental id to node|updated edge data": 1,
+    "author grew up in birmingham|birmingham new street choice": 1,
+    "author interest|challenging question": 1,
+    "beta parameter|model prioritization of preferred response": 1,
+    "book in print|forum accessibility": 1,
+    "building knowledge graph|organizing principle": 1,
+    "categorization of deeper node|information from first-level node": 1,
+    "cold-start problem|semantic knowledge graph": 1,
+    "compact numerical representation|preprocessing csv file": 1,
+    "composing hierarchy|more insight": 1,
+    "comprehensive view of node's structural context|extracting features from distant neighborhood": 1,
+    "compute in-degree and out-degree|graph not directed": 1,
+    "coreference resolution|orthomatcher": 1,
+    "coreference resolution|pronominal coreference resolution module": 1,
+    "cypher code|knowledge graph": 1,
+    "cypher implementation|similar result": 1,
+    "data offer|data sharing": 1,
+    "data preparation|data to meet required quality characteristic": 1,
+    "deployment|semantify page": 1,
+    "distinguishing typo from undefined property|string similarity measure": 1,
+    "dl decidability|no function symbol": 1,
+    "download attempt|local path not found": 1,
+    "each iteration|pagerank values update": 1,
+    "entity recognition|gate gazetteer": 1,
+    "evaluate entities’ semantic relatedness|kg approach": 1,
+    "explicit entities collection|search option": 1,
+    "extensive data publishing|few publisher constraint": 1,
+    "financial transaction graph suitable for gnn|preprocessing phase": 1,
+    "functional property|schema identifier uniqueness": 1,
+    "fundamental challenges in graph-based ml task|graph neural network": 1,
+    "german tourism kg excerpt|knowledge enrichment": 1,
+    "graphdb reasoner|new fact": 1,
+    "hierarchical structure|information propagation": 1,
+    "hierarchy not being a tree|type having multiple immediate supertype": 1,
+    "hpo ontology conversion to neo4j graph|processing using cypher": 1,
+    "inferring knowledge for unseen topic|transferring knowledge": 1,
+    "infrastructure moves down stack|scope of knowledge graph grow": 1,
+    "iterative solution|self-referential calculation": 1,
+    "karl answering process|query": 1,
+    "kg choice|kg success and adoption": 1,
+    "kg principles application|real-world problem": 1,
+    "knowledge graph|linked data": 1,
+    "knowledge graph|richer data use": 1,
+    "knowledge graph|significant business value": 1,
+    "knowledge transfers via sentence alignment|neural machine translation": 1,
+    "leacock-chodorow formula|similarity": 1,
+    "list of entity|running python code": 1,
+    "list of global customer|query in example 5-4": 1,
+    "model learns to favor output|ranked pairs structure": 1,
+    "natural language command|virtual assistants carry task": 1,
+    "need for server-side logic|needs not met by client-server paradigm": 1,
+    "neighbors aggregating value|node passing values to neighbor": 1,
+    "neo4j fabric|user to focus on domain": 1,
+    "no query violation|query execution": 1,
+    "node expansion|user": 1,
+    "poor quality kgs|significant organizational cost": 1,
+    "schema:location value invalid literal|sparql query returns false": 1,
+    "schema:location value is iri|sparql query returns true": 1,
+    "search engine|searching linked data": 1,
+    "semantic type|snomed_is_a relationship": 1,
+    "sparql query returns true|value 3 being within range [1,5]": 1,
+    "training process|triplet concept": 1
+  },
+  "label_to_nodes": {
+    "ability of gnns to capture complex relationship": [
+      "ability of gnns to capture complex relationship"
+    ],
+    "access to web page": [
+      "access to web page"
+    ],
+    "adding code to neo4j.conf": [
+      "adding code to neo4j.conf"
+    ],
+    "adding predicate to query": [
+      "adding predicate to query"
+    ],
+    "additional metadata": [
+      "additional metadata"
+    ],
+    "advanced graph dependency modeling": [
+      "advanced graph dependency modeling"
+    ],
+    "aggregated view": [
+      "aggregated view"
+    ],
+    "algorithm execution": [
+      "algorithm execution"
+    ],
+    "an instance of a class not having any value for property p": [
+      "an instance of a class not having any value for property p"
+    ],
+    "answer with book titles, authors, link": [
+      "answer with book titles, authors, link"
+    ],
+    "application": [
+      "application"
+    ],
+    "applications using data": [
+      "applications using data"
+    ],
+    "assessing kg quality statu": [
+      "assessing kg quality statu"
+    ],
+    "assigning incremental id to node": [
+      "assigning incremental id to node"
+    ],
+    "author grew up in birmingham": [
+      "author grew up in birmingham"
+    ],
+    "author interest": [
+      "author interest"
+    ],
+    "beta parameter": [
+      "beta parameter"
+    ],
+    "birmingham new street choice": [
+      "birmingham new street choice"
+    ],
+    "book in print": [
+      "book in print"
+    ],
+    "building knowledge graph": [
+      "building knowledge graph"
+    ],
+    "categorization of deeper node": [
+      "categorization of deeper node"
+    ],
+    "challenging question": [
+      "challenging question"
+    ],
+    "cold-start problem": [
+      "cold-start problem"
+    ],
+    "compact numerical representation": [
+      "compact numerical representation"
+    ],
+    "complex impact propagation calculation": [
+      "complex impact propagation calculation"
+    ],
+    "composing hierarchy": [
+      "composing hierarchy"
+    ],
+    "composite database creation": [
+      "composite database creation"
+    ],
+    "comprehensive view of node's structural context": [
+      "comprehensive view of node's structural context"
+    ],
+    "compute in-degree and out-degree": [
+      "compute in-degree and out-degree"
+    ],
+    "coreference resolution": [
+      "coreference resolution"
+    ],
+    "cypher code": [
+      "cypher code"
+    ],
+    "cypher implementation": [
+      "cypher implementation"
+    ],
+    "data offer": [
+      "data offer"
+    ],
+    "data preparation": [
+      "data preparation"
+    ],
+    "data sharing": [
+      "data sharing"
+    ],
+    "data to meet required quality characteristic": [
+      "data to meet required quality characteristic"
+    ],
+    "dependency model correctness validation": [
+      "dependency model correctness validation"
+    ],
+    "deployment": [
+      "deployment"
+    ],
+    "diabetes type 1": [
+      "diabetes type 1"
+    ],
+    "distinguishing typo from undefined property": [
+      "distinguishing typo from undefined property"
+    ],
+    "dl decidability": [
+      "dl decidability"
+    ],
+    "download attempt": [
+      "download attempt"
+    ],
+    "each iteration": [
+      "each iteration"
+    ],
+    "entity": [
+      "entity"
+    ],
+    "entity recognition": [
+      "entity recognition"
+    ],
+    "evaluate entities’ semantic relatedness": [
+      "evaluate entities’ semantic relatedness"
+    ],
+    "explicit entities collection": [
+      "explicit entities collection"
+    ],
+    "extensive data publishing": [
+      "extensive data publishing"
+    ],
+    "extracting features from distant neighborhood": [
+      "extracting features from distant neighborhood"
+    ],
+    "false syntactic tokens in property iri": [
+      "false syntactic tokens in property iri"
+    ],
+    "few publisher constraint": [
+      "few publisher constraint"
+    ],
+    "financial transaction graph suitable for gnn": [
+      "financial transaction graph suitable for gnn"
+    ],
+    "finding specific friend of a friend": [
+      "finding specific friend of a friend"
+    ],
+    "forum accessibility": [
+      "forum accessibility"
+    ],
+    "functional property": [
+      "functional property"
+    ],
+    "fundamental challenges in graph-based ml task": [
+      "fundamental challenges in graph-based ml task"
+    ],
+    "gate gazetteer": [
+      "gate gazetteer"
+    ],
+    "german tourism kg excerpt": [
+      "german tourism kg excerpt"
+    ],
+    "gnns are valuable for real-world problem": [
+      "gnns are valuable for real-world problem"
+    ],
+    "graph neural network": [
+      "graph neural network"
+    ],
+    "graph not directed": [
+      "graph not directed"
+    ],
+    "graphdb reasoner": [
+      "graphdb reasoner"
+    ],
+    "hierarchical structure": [
+      "hierarchical structure"
+    ],
+    "hierarchy not being a tree": [
+      "hierarchy not being a tree"
+    ],
+    "hpo ontology conversion to neo4j graph": [
+      "hpo ontology conversion to neo4j graph"
+    ],
+    "improving kg quality": [
+      "improving kg quality"
+    ],
+    "inconsistency": [
+      "inconsistency"
+    ],
+    "inferring knowledge for unseen topic": [
+      "inferring knowledge for unseen topic"
+    ],
+    "information from first-level node": [
+      "information from first-level node"
+    ],
+    "information propagation": [
+      "information propagation"
+    ],
+    "infrastructure moves down stack": [
+      "infrastructure moves down stack"
+    ],
+    "islets of langerhan": [
+      "islets of langerhan"
+    ],
+    "iterative solution": [
+      "iterative solution"
+    ],
+    "karl answering process": [
+      "karl answering process"
+    ],
+    "kg approach": [
+      "kg approach"
+    ],
+    "kg choice": [
+      "kg choice"
+    ],
+    "kg principles application": [
+      "kg principles application"
+    ],
+    "kg success and adoption": [
+      "kg success and adoption"
+    ],
+    "knowledge enrichment": [
+      "knowledge enrichment"
+    ],
+    "knowledge graph": [
+      "knowledge graph"
+    ],
+    "knowledge transfers via sentence alignment": [
+      "knowledge transfers via sentence alignment"
+    ],
+    "leacock-chodorow formula": [
+      "leacock-chodorow formula"
+    ],
+    "linked data": [
+      "linked data"
+    ],
+    "list of entity": [
+      "list of entity"
+    ],
+    "list of global customer": [
+      "list of global customer"
+    ],
+    "llm integration": [
+      "llm integration"
+    ],
+    "local path not found": [
+      "local path not found"
+    ],
+    "model learns to favor output": [
+      "model learns to favor output"
+    ],
+    "model prioritization of preferred response": [
+      "model prioritization of preferred response"
+    ],
+    "more insight": [
+      "more insight"
+    ],
+    "natural language command": [
+      "natural language command"
+    ],
+    "need for server-side logic": [
+      "need for server-side logic"
+    ],
+    "needs not met by client-server paradigm": [
+      "needs not met by client-server paradigm"
+    ],
+    "neighbors aggregating value": [
+      "neighbors aggregating value"
+    ],
+    "neo4j fabric": [
+      "neo4j fabric"
+    ],
+    "neural machine translation": [
+      "neural machine translation"
+    ],
+    "new fact": [
+      "new fact"
+    ],
+    "no function symbol": [
+      "no function symbol"
+    ],
+    "no query violation": [
+      "no query violation"
+    ],
+    "node expansion": [
+      "node expansion"
+    ],
+    "node passing values to neighbor": [
+      "node passing values to neighbor"
+    ],
+    "organizing principle": [
+      "organizing principle"
+    ],
+    "orthomatcher": [
+      "orthomatcher"
+    ],
+    "pagerank values update": [
+      "pagerank values update"
+    ],
+    "poor quality kgs": [
+      "poor quality kgs"
+    ],
+    "preprocessing csv file": [
+      "preprocessing csv file"
+    ],
+    "preprocessing phase": [
+      "preprocessing phase"
+    ],
+    "processing using cypher": [
+      "processing using cypher"
+    ],
+    "pronominal coreference resolution module": [
+      "pronominal coreference resolution module"
+    ],
+    "query": [
+      "query"
+    ],
+    "query execution": [
+      "query execution"
+    ],
+    "query in example 5-3": [
+      "query in example 5-3"
+    ],
+    "query in example 5-4": [
+      "query in example 5-4"
+    ],
+    "query to chatgpt": [
+      "query to chatgpt"
+    ],
+    "ranked pairs structure": [
+      "ranked pairs structure"
+    ],
+    "real-world problem": [
+      "real-world problem"
+    ],
+    "result interpretation": [
+      "result interpretation"
+    ],
+    "richer data use": [
+      "richer data use"
+    ],
+    "running python code": [
+      "running python code"
+    ],
+    "schema identifier uniqueness": [
+      "schema identifier uniqueness"
+    ],
+    "schema:location value invalid literal": [
+      "schema:location value invalid literal"
+    ],
+    "schema:location value is iri": [
+      "schema:location value is iri"
+    ],
+    "scope of knowledge graph grow": [
+      "scope of knowledge graph grow"
+    ],
+    "search engine": [
+      "search engine"
+    ],
+    "search option": [
+      "search option"
+    ],
+    "searching linked data": [
+      "searching linked data"
+    ],
+    "self-referential calculation": [
+      "self-referential calculation"
+    ],
+    "semantic knowledge graph": [
+      "semantic knowledge graph"
+    ],
+    "semantic type": [
+      "semantic type"
+    ],
+    "semantify page": [
+      "semantify page"
+    ],
+    "services like analytic": [
+      "services like analytic"
+    ],
+    "shortest path printing": [
+      "shortest path printing"
+    ],
+    "significant business value": [
+      "significant business value"
+    ],
+    "significant organizational cost": [
+      "significant organizational cost"
+    ],
+    "similar result": [
+      "similar result"
+    ],
+    "similarity": [
+      "similarity"
+    ],
+    "snomed_is_a relationship": [
+      "snomed_is_a relationship"
+    ],
+    "sparql query returns false": [
+      "sparql query returns false"
+    ],
+    "sparql query returns true": [
+      "sparql query returns true"
+    ],
+    "string similarity measure": [
+      "string similarity measure"
+    ],
+    "syntactic errors in property identifier": [
+      "syntactic errors in property identifier"
+    ],
+    "training process": [
+      "training process"
+    ],
+    "transferring knowledge": [
+      "transferring knowledge"
+    ],
+    "triplet concept": [
+      "triplet concept"
+    ],
+    "type having multiple immediate supertype": [
+      "type having multiple immediate supertype"
+    ],
+    "updated edge data": [
+      "updated edge data"
+    ],
+    "user": [
+      "user"
+    ],
+    "user to focus on domain": [
+      "user to focus on domain"
+    ],
+    "value 3 being within range [1,5]": [
+      "value 3 being within range [1,5]"
+    ],
+    "virtual assistants carry task": [
+      "virtual assistants carry task"
+    ],
+    "world wide web": [
+      "world wide web"
+    ]
+  },
+  "meta": {
+    "created_utc": "2026-03-26T03:21:45Z",
+    "edge_count": 75,
+    "node_count": 151,
+    "source_graph_path": "runs/run_20260325_215039/Step_4_GraphBuilding/graph.json"
+  },
+  "relation_to_edges": {
+    "address": [
+      "edge_62"
+    ],
+    "adjusts": [
+      "edge_31"
+    ],
+    "boosts": [
+      "edge_48"
+    ],
+    "cause": [
+      "edge_29"
+    ],
+    "causes": [
+      "edge_10",
+      "edge_14",
+      "edge_15",
+      "edge_16",
+      "edge_17",
+      "edge_19",
+      "edge_22",
+      "edge_23",
+      "edge_28",
+      "edge_30",
+      "edge_34",
+      "edge_35",
+      "edge_39",
+      "edge_4",
+      "edge_55",
+      "edge_57",
+      "edge_69",
+      "edge_7",
+      "edge_70"
+    ],
+    "contributed to": [
+      "edge_40"
+    ],
+    "creates": [
+      "edge_61"
+    ],
+    "disambiguates": [
+      "edge_36"
+    ],
+    "drives": [
+      "edge_46"
+    ],
+    "enable": [
+      "edge_24",
+      "edge_27"
+    ],
+    "enables": [
+      "edge_12",
+      "edge_26",
+      "edge_3",
+      "edge_33",
+      "edge_37",
+      "edge_38",
+      "edge_41",
+      "edge_44",
+      "edge_47",
+      "edge_50",
+      "edge_51",
+      "edge_58",
+      "edge_6",
+      "edge_64",
+      "edge_65",
+      "edge_66",
+      "edge_71",
+      "edge_73",
+      "edge_76",
+      "edge_77",
+      "edge_78"
+    ],
+    "enables addressing": [
+      "edge_75"
+    ],
+    "enables demonstration of": [
+      "edge_8"
+    ],
+    "enriches": [
+      "edge_45"
+    ],
+    "improves": [
+      "edge_74"
+    ],
+    "infers": [
+      "edge_9"
+    ],
+    "is necessary for": [
+      "edge_2"
+    ],
+    "leads to": [
+      "edge_49"
+    ],
+    "maintains": [
+      "edge_59"
+    ],
+    "necessitates": [
+      "edge_25"
+    ],
+    "powers": [
+      "edge_11"
+    ],
+    "prevents": [
+      "edge_0",
+      "edge_63"
+    ],
+    "produces": [
+      "edge_42",
+      "edge_43",
+      "edge_54"
+    ],
+    "propagates": [
+      "edge_72"
+    ],
+    "provide": [
+      "edge_1"
+    ],
+    "provides": [
+      "edge_52"
+    ],
+    "requires": [
+      "edge_21"
+    ],
+    "results in": [
+      "edge_18"
+    ],
+    "returns": [
+      "edge_53"
+    ],
+    "solves": [
+      "edge_67"
+    ],
+    "trigger": [
+      "edge_13"
+    ],
+    "triggers": [
+      "edge_20",
+      "edge_32"
+    ]
+  },
+  "s_components": {
+    "2": [
+      [
+        "edge_51"
+      ],
+      [
+        "edge_61"
+      ],
+      [
+        "edge_6"
+      ],
+      [
+        "edge_59"
+      ],
+      [
+        "edge_58"
+      ],
+      [
+        "edge_57"
+      ],
+      [
+        "edge_55"
+      ],
+      [
+        "edge_54"
+      ],
+      [
+        "edge_53"
+      ],
+      [
+        "edge_52"
+      ],
+      [
+        "edge_62"
+      ],
+      [
+        "edge_50"
+      ],
+      [
+        "edge_49"
+      ],
+      [
+        "edge_48"
+      ],
+      [
+        "edge_47"
+      ],
+      [
+        "edge_46"
+      ],
+      [
+        "edge_45"
+      ],
+      [
+        "edge_44"
+      ],
+      [
+        "edge_43"
+      ],
+      [
+        "edge_71"
+      ],
+      [
+        "edge_9"
+      ],
+      [
+        "edge_8"
+      ],
+      [
+        "edge_78"
+      ],
+      [
+        "edge_77"
+      ],
+      [
+        "edge_76"
+      ],
+      [
+        "edge_75"
+      ],
+      [
+        "edge_74"
+      ],
+      [
+        "edge_73"
+      ],
+      [
+        "edge_72"
+      ],
+      [
+        "edge_42"
+      ],
+      [
+        "edge_70"
+      ],
+      [
+        "edge_7"
+      ],
+      [
+        "edge_69"
+      ],
+      [
+        "edge_67"
+      ],
+      [
+        "edge_66"
+      ],
+      [
+        "edge_65"
+      ],
+      [
+        "edge_64"
+      ],
+      [
+        "edge_63"
+      ],
+      [
+        "edge_17"
+      ],
+      [
+        "edge_25"
+      ],
+      [
+        "edge_24"
+      ],
+      [
+        "edge_23"
+      ],
+      [
+        "edge_22"
+      ],
+      [
+        "edge_21"
+      ],
+      [
+        "edge_20"
+      ],
+      [
+        "edge_2"
+      ],
+      [
+        "edge_19"
+      ],
+      [
+        "edge_18"
+      ],
+      [
+        "edge_26"
+      ],
+      [
+        "edge_16"
+      ],
+      [
+        "edge_15"
+      ],
+      [
+        "edge_14"
+      ],
+      [
+        "edge_13"
+      ],
+      [
+        "edge_12"
+      ],
+      [
+        "edge_11"
+      ],
+      [
+        "edge_10"
+      ],
+      [
+        "edge_1"
+      ],
+      [
+        "edge_34"
+      ],
+      [
+        "edge_41"
+      ],
+      [
+        "edge_40"
+      ],
+      [
+        "edge_4"
+      ],
+      [
+        "edge_39"
+      ],
+      [
+        "edge_38"
+      ],
+      [
+        "edge_37"
+      ],
+      [
+        "edge_36"
+      ],
+      [
+        "edge_35"
+      ],
+      [
+        "edge_0"
+      ],
+      [
+        "edge_33"
+      ],
+      [
+        "edge_32"
+      ],
+      [
+        "edge_31"
+      ],
+      [
+        "edge_30"
+      ],
+      [
+        "edge_3"
+      ],
+      [
+        "edge_29"
+      ],
+      [
+        "edge_28"
+      ],
+      [
+        "edge_27"
+      ]
+    ],
+    "3": [
+      [
+        "edge_51"
+      ],
+      [
+        "edge_61"
+      ],
+      [
+        "edge_6"
+      ],
+      [
+        "edge_59"
+      ],
+      [
+        "edge_58"
+      ],
+      [
+        "edge_57"
+      ],
+      [
+        "edge_55"
+      ],
+      [
+        "edge_54"
+      ],
+      [
+        "edge_53"
+      ],
+      [
+        "edge_52"
+      ],
+      [
+        "edge_62"
+      ],
+      [
+        "edge_50"
+      ],
+      [
+        "edge_49"
+      ],
+      [
+        "edge_48"
+      ],
+      [
+        "edge_47"
+      ],
+      [
+        "edge_46"
+      ],
+      [
+        "edge_45"
+      ],
+      [
+        "edge_44"
+      ],
+      [
+        "edge_43"
+      ],
+      [
+        "edge_71"
+      ],
+      [
+        "edge_9"
+      ],
+      [
+        "edge_8"
+      ],
+      [
+        "edge_78"
+      ],
+      [
+        "edge_77"
+      ],
+      [
+        "edge_76"
+      ],
+      [
+        "edge_75"
+      ],
+      [
+        "edge_74"
+      ],
+      [
+        "edge_73"
+      ],
+      [
+        "edge_72"
+      ],
+      [
+        "edge_42"
+      ],
+      [
+        "edge_70"
+      ],
+      [
+        "edge_7"
+      ],
+      [
+        "edge_69"
+      ],
+      [
+        "edge_67"
+      ],
+      [
+        "edge_66"
+      ],
+      [
+        "edge_65"
+      ],
+      [
+        "edge_64"
+      ],
+      [
+        "edge_63"
+      ],
+      [
+        "edge_17"
+      ],
+      [
+        "edge_25"
+      ],
+      [
+        "edge_24"
+      ],
+      [
+        "edge_23"
+      ],
+      [
+        "edge_22"
+      ],
+      [
+        "edge_21"
+      ],
+      [
+        "edge_20"
+      ],
+      [
+        "edge_2"
+      ],
+      [
+        "edge_19"
+      ],
+      [
+        "edge_18"
+      ],
+      [
+        "edge_26"
+      ],
+      [
+        "edge_16"
+      ],
+      [
+        "edge_15"
+      ],
+      [
+        "edge_14"
+      ],
+      [
+        "edge_13"
+      ],
+      [
+        "edge_12"
+      ],
+      [
+        "edge_11"
+      ],
+      [
+        "edge_10"
+      ],
+      [
+        "edge_1"
+      ],
+      [
+        "edge_34"
+      ],
+      [
+        "edge_41"
+      ],
+      [
+        "edge_40"
+      ],
+      [
+        "edge_4"
+      ],
+      [
+        "edge_39"
+      ],
+      [
+        "edge_38"
+      ],
+      [
+        "edge_37"
+      ],
+      [
+        "edge_36"
+      ],
+      [
+        "edge_35"
+      ],
+      [
+        "edge_0"
+      ],
+      [
+        "edge_33"
+      ],
+      [
+        "edge_32"
+      ],
+      [
+        "edge_31"
+      ],
+      [
+        "edge_30"
+      ],
+      [
+        "edge_3"
+      ],
+      [
+        "edge_29"
+      ],
+      [
+        "edge_28"
+      ],
+      [
+        "edge_27"
+      ]
+    ],
+    "4": [
+      [
+        "edge_51"
+      ],
+      [
+        "edge_61"
+      ],
+      [
+        "edge_6"
+      ],
+      [
+        "edge_59"
+      ],
+      [
+        "edge_58"
+      ],
+      [
+        "edge_57"
+      ],
+      [
+        "edge_55"
+      ],
+      [
+        "edge_54"
+      ],
+      [
+        "edge_53"
+      ],
+      [
+        "edge_52"
+      ],
+      [
+        "edge_62"
+      ],
+      [
+        "edge_50"
+      ],
+      [
+        "edge_49"
+      ],
+      [
+        "edge_48"
+      ],
+      [
+        "edge_47"
+      ],
+      [
+        "edge_46"
+      ],
+      [
+        "edge_45"
+      ],
+      [
+        "edge_44"
+      ],
+      [
+        "edge_43"
+      ],
+      [
+        "edge_71"
+      ],
+      [
+        "edge_9"
+      ],
+      [
+        "edge_8"
+      ],
+      [
+        "edge_78"
+      ],
+      [
+        "edge_77"
+      ],
+      [
+        "edge_76"
+      ],
+      [
+        "edge_75"
+      ],
+      [
+        "edge_74"
+      ],
+      [
+        "edge_73"
+      ],
+      [
+        "edge_72"
+      ],
+      [
+        "edge_42"
+      ],
+      [
+        "edge_70"
+      ],
+      [
+        "edge_7"
+      ],
+      [
+        "edge_69"
+      ],
+      [
+        "edge_67"
+      ],
+      [
+        "edge_66"
+      ],
+      [
+        "edge_65"
+      ],
+      [
+        "edge_64"
+      ],
+      [
+        "edge_63"
+      ],
+      [
+        "edge_17"
+      ],
+      [
+        "edge_25"
+      ],
+      [
+        "edge_24"
+      ],
+      [
+        "edge_23"
+      ],
+      [
+        "edge_22"
+      ],
+      [
+        "edge_21"
+      ],
+      [
+        "edge_20"
+      ],
+      [
+        "edge_2"
+      ],
+      [
+        "edge_19"
+      ],
+      [
+        "edge_18"
+      ],
+      [
+        "edge_26"
+      ],
+      [
+        "edge_16"
+      ],
+      [
+        "edge_15"
+      ],
+      [
+        "edge_14"
+      ],
+      [
+        "edge_13"
+      ],
+      [
+        "edge_12"
+      ],
+      [
+        "edge_11"
+      ],
+      [
+        "edge_10"
+      ],
+      [
+        "edge_1"
+      ],
+      [
+        "edge_34"
+      ],
+      [
+        "edge_41"
+      ],
+      [
+        "edge_40"
+      ],
+      [
+        "edge_4"
+      ],
+      [
+        "edge_39"
+      ],
+      [
+        "edge_38"
+      ],
+      [
+        "edge_37"
+      ],
+      [
+        "edge_36"
+      ],
+      [
+        "edge_35"
+      ],
+      [
+        "edge_0"
+      ],
+      [
+        "edge_33"
+      ],
+      [
+        "edge_32"
+      ],
+      [
+        "edge_31"
+      ],
+      [
+        "edge_30"
+      ],
+      [
+        "edge_3"
+      ],
+      [
+        "edge_29"
+      ],
+      [
+        "edge_28"
+      ],
+      [
+        "edge_27"
+      ]
+    ]
+  }
+}
