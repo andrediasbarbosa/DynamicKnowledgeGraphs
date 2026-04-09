@@ -119,19 +119,19 @@ This path is intentionally smaller in scope than `kg`: it extracts a graph and g
 
 Maintained docs:
 
-- [`docs/QUICK_START.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUICK_START.md)
-- [`docs/CLI_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CLI_REFERENCE.md)
-- [`docs/PIPELINE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PIPELINE.md)
-- [`docs/OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md)
-- [`docs/QUALITY_CONTROL.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUALITY_CONTROL.md)
-- [`docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md)
-- [`docs/DEPLOYMENT.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/DEPLOYMENT.md)
-- [`docs/TROUBLESHOOTING.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/TROUBLESHOOTING.md)
-- [`docs/PROJECT_OVERVIEW.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PROJECT_OVERVIEW.md)
-- [`src/graph_rag_tool/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/README.md)
-- [`src/graph_rag_tool/backend/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/README.md)
-- [`src/graph_rag_tool/backend/docs/API_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/graph_rag_tool/backend/docs/API_REFERENCE.md)
-- [`src/python_porting/README.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/src/python_porting/README.md)
+- [`docs/QUICK_START.md`](docs/QUICK_START.md)
+- [`docs/CLI_REFERENCE.md`](docs/CLI_REFERENCE.md)
+- [`docs/PIPELINE.md`](docs/PIPELINE.md)
+- [`docs/OUTPUT_FOLDER_STRUCTURE.md`](docs/OUTPUT_FOLDER_STRUCTURE.md)
+- [`docs/QUALITY_CONTROL.md`](docs/QUALITY_CONTROL.md)
+- [`docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md`](docs/KNOWLEDGE_DISCOVERY_CATEGORIES.md)
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
+- [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md)
+- [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md)
+- [`src/graph_rag_tool/README.md`](src/graph_rag_tool/README.md)
+- [`src/graph_rag_tool/backend/README.md`](src/graph_rag_tool/backend/README.md)
+- [`src/graph_rag_tool/backend/docs/API_REFERENCE.md`](src/graph_rag_tool/backend/docs/API_REFERENCE.md)
+- [`src/python_porting/README.md`](src/python_porting/README.md)
 
 Generated artifacts such as `runs/*/Step_5_Discovery/report.md` and `output/report.md` are runtime outputs, not canonical project documentation.
 
