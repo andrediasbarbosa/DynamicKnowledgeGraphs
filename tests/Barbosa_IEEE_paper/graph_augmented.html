@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE article An Advanced Satellite 2008 - Barbosa et al Knowledge Discovery (Augmented)</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.75.0/dist/3d-force-graph.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            overflow: hidden;
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #header h1 { font-size: 1.5em; font-weight: 500; }
+        #stats { font-size: 0.9em; opacity: 0.8; }
+        #graph { width: 100vw; height: 100vh; }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        #controls label { display: block; margin-bottom: 8px; font-size: 0.85em; }
+        #controls input[type="range"] { width: 150px; }
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 16px;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            font-size: 0.9em;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #tooltip h3 { margin-bottom: 6px; color: #4fc3f7; }
+        #tooltip .detail { color: #aaa; margin: 3px 0; }
+        #legend {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.85em;
+        }
+        #legend h3 { margin-bottom: 10px; font-size: 1em; }
+        .legend-item { display: flex; align-items: center; margin: 6px 0; }
+        .legend-color { width: 16px; height: 16px; border-radius: 3px; margin-right: 10px; }
+        .kg-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+        .kg-input {
+            width: 220px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: #eee;
+            outline: none;
+        }
+        .kg-input::placeholder { color: rgba(255,255,255,0.55); }
+        .kg-btn {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            color: #eee;
+            cursor: pointer;
+            user-select: none;
+        }
+        .kg-btn:hover { background: rgba(255,255,255,0.12); }
+        .kg-btn:active { transform: translateY(1px); }
+        #kgHud {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            z-index: 120;
+            pointer-events: none;
+        }
+        #kgOverlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        #kgOverlay.show { opacity: 1; pointer-events: all; }
+        #kgOverlay .panel {
+            background: rgba(0,0,0,0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 16px 18px;
+            width: min(520px, 92vw);
+            color: #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        #kgOverlay .title { font-size: 14px; color: #4fc3f7; margin-bottom: 8px; }
+        #kgOverlay .sub { font-size: 12px; color: rgba(255,255,255,0.75); }
+        .aug-section {
+            border-top: 1px solid #e040fb;
+            margin-top: 12px;
+            padding-top: 10px;
+        }
+        .aug-section > label:first-child { color: #e040fb; font-weight: 600; }
+        #augDetails {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(224, 64, 251, 0.1);
+            border-radius: 8px;
+            font-size: 0.8em;
+            display: none;
+        }
+        #augDetails.show { display: block; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>IEEE article An Advanced Satellite 2008 - Barbosa et al Knowledge Discovery (Augmented)</h1>
+        <div id="stats">
+            Entities: 73 |
+            Relations: 9 |
+            Augmentations: 104
+        </div>
+    </div>
+
+    <div id="graph"></div>
+
+    <div id="controls">
+        <label>
+            Min Entity Degree: <span id="degreeValue">5</span>
+            <input type="range" id="minDegree" min="1" max="20" step="1" value="5">
+        </label>
+        <label>
+            Link Strength:
+            <input type="range" id="linkStrength" min="0.1" max="2" step="0.1" value="0.5">
+        </label>
+        <label>
+            Node Repulsion:
+            <input type="range" id="repulsion" min="100" max="1000" step="50" value="400">
+        </label>
+        <label>
+            <input type="checkbox" id="showLabels"> Show Labels (high-degree only)
+        </label>
+        <div id="filterStats" style="margin-top: 10px; font-size: 0.8em; color: #aaa;">
+            Showing: <span id="visibleNodes">0</span> nodes, <span id="visibleLinks">0</span> links
+        </div>
+    </div>
+
+    <div id="legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7;"></div>
+            <span>Entity Node</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800;"></div>
+            <span>Relation (Hyperedge)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb;"></div>
+            <span>Augmentation (Insight)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4A90E2;"></div>
+            <span>Class (General Concept)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #7ED321;"></div>
+            <span>Instance (Specific Example)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4fc3f7; width: 30px; height: 3px;"></div>
+            <span>Source Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff9800; width: 30px; height: 3px;"></div>
+            <span>Target Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e040fb; width: 30px; height: 3px; border-style: dashed;"></div>
+            <span>Augmentation Link</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #9E9E9E; width: 30px; height: 3px; border-style: dashed; border-width: 2px;"></div>
+            <span>Hierarchy (instance_of, subclass_of, is_a)</span>
+        </div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script>
+        const data = {
+            nodes: [{"degree":0,"id":"advanced satellite system","label":"advanced satellite systems","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"application performance","label":"application performance","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"artemis satellite","label":"ARTEMIS satellite","properties":{"node_level":"instance"},"type":"entity"},{"degree":0,"id":"ascom ltd.","label":"Ascom Ltd.","properties":{"node_level":"instance"},"type":"entity"},{"degree":2,"id":"atb","label":"ATB","properties":{"node_level":"instance"},"type":"entity"},{"degree":2,"id":"awgn","label":"AWGN","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"awgn channel","label":"AWGN channel","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ber","label":"BER","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ber performance","label":"BER performance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"cdma","label":"CDMA","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"channel impairment","label":"channel impairments","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"deep shadowing effect","label":"deep shadowing effects","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"demodulator reacquisition time","label":"demodulator reacquisition time","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"diversity gain","label":"diversity gains","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"eb/no","label":"Eb/No","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"effective erasure rate","label":"effective erasure rate","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"es/no","label":"Es/No","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"european commission","label":"European Commission","properties":{"node_level":"instance"},"type":"entity"},{"degree":1,"id":"eutelsat w2a","label":"EUTELSAT W2A","properties":{"node_level":"instance"},"type":"entity"},{"degree":0,"id":"fec capability","label":"FEC capability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fer performance","label":"FER performance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fer value","label":"FER values","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"field trial","label":"field trials","properties":{"node_level":"instance"},"type":"entity"},{"degree":0,"id":"fixed and mobile service","label":"fixed and mobile services","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fl capacity","label":"FL capacity","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"fl performance","label":"FL performance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"imdu","label":"IMDU","properties":{"node_level":"instance"},"type":"entity"},{"degree":1,"id":"inclined orbit","label":"inclined orbit","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"information technology","label":"information technology","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"interleaver size","label":"interleaver size","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"interleaving length","label":"interleaving lengths","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"ku-band antenna","label":"Ku-band antenna","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"lan","label":"LAN","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"landis and gyr u.s. scholarship","label":"Landis and Gyr U.S. scholarship","properties":{"node_level":"instance"},"type":"entity"},{"degree":0,"id":"latency","label":"latency","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"link margin","label":"link margin","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"location tracking","label":"location tracking","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"measurements database","label":"measurements database","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"minirack","label":"minirack","properties":{"node_level":"instance"},"type":"entity"},{"degree":0,"id":"mission-critical communication","label":"mission-critical communications","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"mobile service","label":"mobile services","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"mpeg4","label":"MPEG4","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"mt diversity gain","label":"MT","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"multicast application","label":"multicast applications","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"multimedia equipment","label":"multimedia equipment","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"navigation system","label":"navigation system","properties":{"node_level":"instance"},"type":"entity"},{"degree":1,"id":"negative eb/no","label":"negative Eb/No","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"open environment","label":"open environment","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"packet reception probability","label":"packet reception probability","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pdrodch","label":"PDRoDCH","properties":{"node_level":"instance"},"type":"entity"},{"degree":1,"id":"performance","label":"performance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pilot acquisition","label":"pilot acquisition","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"power control","label":"power control","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"preamble misdetection","label":"preamble misdetections","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"pros and con","label":"pros and cons","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"receiver operation","label":"receiver operation","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"research activity","label":"research activities","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"rf front trial","label":"RF front trials","properties":{"node_level":"class"},"type":"entity"},{"degree":2,"id":"rician fading","label":"Rician fading","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"s-umts","label":"S-UMTS","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"satb","label":"SATB","properties":{"node_level":"instance"},"type":"entity"},{"degree":1,"id":"satellite","label":"satellite","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"satisfactory performance","label":"satisfactory performance","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"signal blockage","label":"signal blockage","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"signal quality","label":"signal quality","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"spatial diversity","label":"spatial diversity","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"system availability","label":"system availability","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"testbed element","label":"testbed elements","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"turbo-coded pdrodch","label":"turbo-coded PDRoDCH","properties":{"node_level":"instance"},"type":"entity"},{"degree":0,"id":"tx chain","label":"TX chain","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"ul-fec advantage","label":"UL-FEC advantages","properties":{"node_level":"class"},"type":"entity"},{"degree":1,"id":"ul-fec block size","label":"UL-FEC block size","properties":{"node_level":"class"},"type":"entity"},{"degree":0,"id":"w-cdma","label":"W-CDMA","properties":{"node_level":"class"},"type":"entity"}],
+            hyperedges: [{"confidence":0.9,"id":"edge_12","relation":"affects","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["awgn","rician fading"],"targets":["ber"]},{"confidence":0.9,"id":"edge_13","relation":"affects","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["rician fading","awgn"],"targets":["es/no"]},{"confidence":0.9,"id":"edge_23","relation":"launches","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["eutelsat w2a"],"targets":["satellite"]},{"confidence":0.9,"id":"edge_3","relation":"operates","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_3","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["artemis satellite"],"targets":["inclined orbit"]},{"confidence":0.9,"id":"edge_36","relation":"provides","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["ul-fec block size","link margin"],"targets":["satisfactory performance"]},{"confidence":0.85,"id":"edge_47","relation":"allows","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["negative eb/no"],"targets":["receiver operation"]},{"confidence":0.8,"id":"edge_51","relation":"affects","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["preamble misdetection"],"targets":["ber performance"]},{"confidence":0.9,"id":"edge_7","relation":"includes","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["satb","atb"],"targets":["testbed element"]},{"confidence":0.9,"id":"edge_9","relation":"measures","source_chunk_id":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","source_document":"IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al","sources":["atb"],"targets":["performance"]}]
+        };
+
+        const augData = {"links":[{"is_new":true,"source":"mission-critical communication","target":"aug:n:000001","type":"source"},{"is_new":true,"source":"location tracking","target":"aug:n:000002","type":"source"},{"is_new":true,"source":"advanced satellite system","target":"aug:n:000003","type":"source"},{"is_new":true,"source":"latency","target":"aug:n:000004","type":"source"},{"is_new":true,"source":"landis and gyr u.s. scholarship","target":"aug:n:000005","type":"source"},{"is_new":true,"source":"lan","target":"aug:n:000006","type":"source"},{"is_new":true,"source":"mt diversity gain","target":"aug:n:000007","type":"source"},{"is_new":true,"source":"minirack","target":"aug:n:000008","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"satisfactory performance","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"ul-fec block size","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000009","type":"source"},{"is_new":true,"source":"measurements database","target":"aug:n:000010","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000011","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000012","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000013","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000014","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000015","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000016","type":"source"},{"is_new":true,"source":"mobile service","target":"aug:n:000017","type":"source"},{"is_new":true,"source":"mpeg4","target":"aug:n:000018","type":"source"},{"is_new":true,"source":"pdrodch","target":"aug:n:000019","type":"source"},{"is_new":true,"source":"multicast application","target":"aug:n:000020","type":"source"},{"is_new":true,"source":"multimedia equipment","target":"aug:n:000021","type":"source"},{"is_new":true,"source":"open environment","target":"aug:n:000022","type":"source"},{"is_new":true,"source":"packet reception probability","target":"aug:n:000023","type":"source"},{"is_new":true,"source":"pilot acquisition","target":"aug:n:000024","type":"source"},{"is_new":true,"source":"power control","target":"aug:n:000025","type":"source"},{"is_new":true,"source":"pros and con","target":"aug:n:000026","type":"source"},{"is_new":true,"source":"navigation system","target":"aug:n:000027","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000028","type":"source"},{"is_new":true,"source":"ul-fec block size","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"satisfactory performance","target":"aug:n:000029","type":"source"},{"is_new":true,"source":"artemis satellite","target":"aug:n:000030","type":"source"},{"is_new":true,"source":"eutelsat w2a","target":"aug:n:000031","type":"source"},{"is_new":true,"source":"ul-fec block size","target":"aug:n:000032","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000033","type":"source"},{"is_new":true,"source":"eutelsat w2a","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"satellite","target":"aug:n:000034","type":"source"},{"is_new":true,"source":"artemis satellite","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"inclined orbit","target":"aug:n:000035","type":"source"},{"is_new":true,"source":"negative eb/no","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"receiver operation","target":"aug:n:000036","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000037","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000038","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000038","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000039","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000040","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000041","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000042","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000043","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000044","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000045","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000046","type":"source"},{"is_new":true,"source":"preamble misdetection","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000047","type":"source"},{"is_new":true,"source":"negative eb/no","target":"aug:n:000048","type":"source"},{"is_new":true,"source":"application performance","target":"aug:n:000049","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000050","type":"source"},{"is_new":true,"source":"fer performance","target":"aug:n:000051","type":"source"},{"is_new":true,"source":"satisfactory performance","target":"aug:n:000052","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000053","type":"source"},{"is_new":true,"source":"effective erasure rate","target":"aug:n:000054","type":"source"},{"is_new":true,"source":"diversity gain","target":"aug:n:000055","type":"source"},{"is_new":true,"source":"deep shadowing effect","target":"aug:n:000056","type":"source"},{"is_new":true,"source":"fl performance","target":"aug:n:000057","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000058","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000059","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000060","type":"source"},{"is_new":true,"source":"eb/no","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"negative eb/no","target":"aug:n:000061","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000062","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000063","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000064","type":"source"},{"is_new":true,"source":"ul-fec block size","target":"aug:n:000065","type":"source"},{"is_new":true,"source":"satisfactory performance","target":"aug:n:000066","type":"source"},{"is_new":true,"source":"link margin","target":"aug:n:000067","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000068","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000069","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000070","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000071","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000072","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000073","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000074","type":"source"},{"is_new":true,"source":"rician fading","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"preamble misdetection","target":"aug:n:000075","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000076","type":"source"},{"is_new":true,"source":"awgn","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"preamble misdetection","target":"aug:n:000077","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000078","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000078","type":"source"},{"is_new":true,"source":"aug:n:000078","target":"awgn","type":"target"},{"is_new":true,"source":"aug:n:000078","target":"rician fading","type":"target"},{"is_new":true,"source":"awgn","target":"aug:n:000079","type":"source"},{"is_new":true,"source":"awgn channel","target":"aug:n:000079","type":"source"},{"is_new":true,"source":"satisfactory performance","target":"aug:n:000080","type":"source"},{"is_new":true,"source":"fixed and mobile service","target":"aug:n:000081","type":"source"},{"is_new":true,"source":"mobile service","target":"aug:n:000081","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000082","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000083","type":"source"},{"is_new":true,"source":"atb","target":"aug:n:000083","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000084","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000085","type":"source"},{"is_new":true,"source":"preamble misdetection","target":"aug:n:000085","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000086","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000086","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000087","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000087","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000088","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000088","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000089","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000089","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000090","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000090","type":"source"},{"is_new":true,"source":"es/no","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"preamble misdetection","target":"aug:n:000091","type":"source"},{"is_new":true,"source":"ber","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000092","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"testbed element","target":"aug:n:000093","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000094","type":"source"},{"is_new":true,"source":"performance","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"satb","target":"aug:n:000095","type":"source"},{"is_new":true,"source":"cdma","target":"aug:n:000096","type":"source"},{"is_new":true,"source":"w-cdma","target":"aug:n:000096","type":"source"},{"is_new":true,"source":"satellite","target":"aug:n:000097","type":"source"},{"is_new":true,"source":"artemis satellite","target":"aug:n:000098","type":"source"},{"is_new":true,"source":"inclined orbit","target":"aug:n:000099","type":"source"},{"is_new":true,"source":"ber performance","target":"aug:n:000100","type":"source"},{"is_new":true,"source":"negative eb/no","target":"aug:n:000101","type":"source"},{"is_new":true,"source":"eutelsat w2a","target":"aug:n:000102","type":"source"},{"is_new":true,"source":"preamble misdetection","target":"aug:n:000103","type":"source"},{"is_new":true,"source":"receiver operation","target":"aug:n:000104","type":"source"}],"meta":{"created_utc":"2026-04-18T15:48:10Z","notes":"Overlay candidates only; not ground truth.","run_id":"run_20260418_154456","schema":"unified","source":"kg render","version":"2.0"},"nodes":[{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000001","insight_id":"run_20260418_154456:core_periphery:000040","is_new":true,"label":"mission-critical communications","properties":{"confidence":"1.000000","original_label":"Periphery: mission-critical communications"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000002","insight_id":"run_20260418_154456:core_periphery:000049","is_new":true,"label":"location tracking","properties":{"confidence":"1.000000","original_label":"Periphery: location tracking"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000003","insight_id":"run_20260418_154456:core_periphery:000037","is_new":true,"label":"advanced satellite systems","properties":{"confidence":"1.000000","original_label":"Periphery: advanced satellite systems"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000004","insight_id":"run_20260418_154456:core_periphery:000036","is_new":true,"label":"latency","properties":{"confidence":"1.000000","original_label":"Periphery: latency"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000005","insight_id":"run_20260418_154456:core_periphery:000035","is_new":true,"label":"Landis and Gyr U.S. scholarship","properties":{"confidence":"1.000000","original_label":"Periphery: Landis and Gyr U.S. scholarship"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000006","insight_id":"run_20260418_154456:core_periphery:000034","is_new":true,"label":"LAN","properties":{"confidence":"1.000000","original_label":"Periphery: LAN"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000007","insight_id":"run_20260418_154456:core_periphery:000043","is_new":true,"label":"MT","properties":{"confidence":"1.000000","original_label":"Periphery: MT"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000008","insight_id":"run_20260418_154456:core_periphery:000039","is_new":true,"label":"minirack","properties":{"confidence":"1.000000","original_label":"Periphery: minirack"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000009","insight_id":"run_20260418_154456:meta_pattern:000223","is_new":true,"label":"AWGN","properties":{"confidence":"1.000000","full_description":"Meta-pattern: 12 similar 2-node structures detected","insight_type":"meta_pattern"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000010","insight_id":"run_20260418_154456:core_periphery:000038","is_new":true,"label":"measurements database","properties":{"confidence":"1.000000","original_label":"Periphery: measurements database"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000011","insight_id":"run_20260418_154456:community_detection:000083","is_new":true,"label":"ATB","properties":{"confidence":"1.000000","full_description":"Community: ATB","insight_type":"community"},"type":"relation","witness_edges":["edge_9","edge_7"]},{"confidence":1.0,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000012","insight_id":"run_20260418_154456:community_detection:000084","is_new":true,"label":"AWGN","properties":{"confidence":"1.000000","full_description":"Community: AWGN","insight_type":"community"},"type":"relation","witness_edges":["edge_13","edge_12"]},{"confidence":1.0,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000013","insight_id":"run_20260418_154456:k_truss:000085","is_new":true,"label":"AWGN Rician fading","properties":{"confidence":"1.000000","original_label":"k-Truss: AWGN — Rician fading"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":1.0,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000014","insight_id":"run_20260418_154456:centrality:000053","is_new":true,"label":"ATB","properties":{"confidence":"1.000000","full_description":"Centrality: ATB","insight_type":"centrality"},"type":"relation","witness_edges":["edge_7","edge_9"]},{"confidence":1.0,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000015","insight_id":"run_20260418_154456:core_periphery:000014","is_new":true,"label":"AWGN","properties":{"confidence":"1.000000","original_label":"Core: AWGN"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":1.0,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000016","insight_id":"run_20260418_154456:core_periphery:000013","is_new":true,"label":"Rician fading","properties":{"confidence":"1.000000","original_label":"Core: Rician fading"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000017","insight_id":"run_20260418_154456:core_periphery:000041","is_new":true,"label":"mobile services","properties":{"confidence":"1.000000","original_label":"Periphery: mobile services"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000018","insight_id":"run_20260418_154456:core_periphery:000042","is_new":true,"label":"MPEG4","properties":{"confidence":"1.000000","original_label":"Periphery: MPEG4"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000019","insight_id":"run_20260418_154456:core_periphery:000033","is_new":true,"label":"PDRoDCH","properties":{"confidence":"1.000000","original_label":"Periphery: PDRoDCH"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000020","insight_id":"run_20260418_154456:core_periphery:000044","is_new":true,"label":"multicast applications","properties":{"confidence":"1.000000","original_label":"Periphery: multicast applications"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000021","insight_id":"run_20260418_154456:core_periphery:000045","is_new":true,"label":"multimedia equipment","properties":{"confidence":"1.000000","original_label":"Periphery: multimedia equipment"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000022","insight_id":"run_20260418_154456:core_periphery:000047","is_new":true,"label":"open environment","properties":{"confidence":"1.000000","original_label":"Periphery: open environment"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000023","insight_id":"run_20260418_154456:core_periphery:000048","is_new":true,"label":"packet reception probability","properties":{"confidence":"1.000000","original_label":"Periphery: packet reception probability"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000024","insight_id":"run_20260418_154456:core_periphery:000050","is_new":true,"label":"pilot acquisition","properties":{"confidence":"1.000000","original_label":"Periphery: pilot acquisition"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000025","insight_id":"run_20260418_154456:core_periphery:000051","is_new":true,"label":"power control","properties":{"confidence":"1.000000","original_label":"Periphery: power control"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000026","insight_id":"run_20260418_154456:core_periphery:000052","is_new":true,"label":"pros and cons","properties":{"confidence":"1.000000","original_label":"Periphery: pros and cons"},"type":"relation","witness_edges":[]},{"confidence":1.0,"evidence_chunk_ids":[],"id":"aug:n:000027","insight_id":"run_20260418_154456:core_periphery:000046","is_new":true,"label":"navigation system","properties":{"confidence":"1.000000","original_label":"Periphery: navigation system"},"type":"relation","witness_edges":[]},{"confidence":0.9333333333333333,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000028","insight_id":"run_20260418_154456:evidence_debt:000226","is_new":true,"label":"AWGN","properties":{"confidence":"0.933333","full_description":"Evidence debt: 'AWGN' is highly influential in downstream insights but is supported by narrow provenance (sources=1, chunks=3) and should be treated as under-validated.","insight_type":"evidence_debt"},"type":"relation","witness_edges":["edge_12","edge_13","edge_12","edge_13","edge_12","edge_13","edge_12","edge_13"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000029","insight_id":"run_20260418_154456:claim_stance:000178","is_new":true,"label":"Claim Supports UL-FEC block size sati...","properties":{"confidence":"0.900000","original_label":"Claim (Supports): UL-FEC block size → satisfactory performance"},"type":"relation","witness_edges":["edge_36"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_3"],"id":"aug:n:000030","insight_id":"run_20260418_154456:relation_induction:000187","is_new":true,"label":"ARTEMIS satellite","properties":{"confidence":"0.900000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_3"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000031","insight_id":"run_20260418_154456:relation_induction:000188","is_new":true,"label":"EUTELSAT W2A","properties":{"confidence":"0.900000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_23"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000032","insight_id":"run_20260418_154456:relation_induction:000186","is_new":true,"label":"UL-FEC block size","properties":{"confidence":"0.900000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_36"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000033","insight_id":"run_20260418_154456:claim_stance:000174","is_new":true,"label":"Claim Supports AWGN BER","properties":{"confidence":"0.900000","original_label":"Claim (Supports): AWGN → BER"},"type":"relation","witness_edges":["edge_12"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000034","insight_id":"run_20260418_154456:claim_stance:000176","is_new":true,"label":"Claim Supports EUTELSAT W2A satellite","properties":{"confidence":"0.900000","original_label":"Claim (Supports): EUTELSAT W2A → satellite"},"type":"relation","witness_edges":["edge_23"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_3"],"id":"aug:n:000035","insight_id":"run_20260418_154456:claim_stance:000177","is_new":true,"label":"Claim Supports ARTEMIS satellite incl...","properties":{"confidence":"0.900000","original_label":"Claim (Supports): ARTEMIS satellite → inclined orbit"},"type":"relation","witness_edges":["edge_3"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000036","insight_id":"run_20260418_154456:claim_stance:000179","is_new":true,"label":"Claim Opposes negative EbNo receiver ...","properties":{"confidence":"0.900000","original_label":"Claim (Opposes): negative Eb/No → receiver operation"},"type":"relation","witness_edges":["edge_47"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000037","insight_id":"run_20260418_154456:claim_stance:000181","is_new":true,"label":"Claim Supports SATB testbed elements","properties":{"confidence":"0.900000","original_label":"Claim (Supports): SATB → testbed elements"},"type":"relation","witness_edges":["edge_7"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000038","insight_id":"run_20260418_154456:claim_stance:000182","is_new":true,"label":"Claim Supports ATB performance","properties":{"confidence":"0.900000","original_label":"Claim (Supports): ATB → performance"},"type":"relation","witness_edges":["edge_9"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000039","insight_id":"run_20260418_154456:relation_induction:000185","is_new":true,"label":"SATB","properties":{"confidence":"0.900000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_7"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000040","insight_id":"run_20260418_154456:relation_induction:000183","is_new":true,"label":"AWGN","properties":{"confidence":"0.900000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_12","edge_13","edge_51"]},{"confidence":0.9,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000041","insight_id":"run_20260418_154456:relation_induction:000184","is_new":true,"label":"ATB","properties":{"confidence":"0.900000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_9"]},{"confidence":0.8666666666666667,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000042","insight_id":"run_20260418_154456:evidence_debt:000228","is_new":true,"label":"Rician fading","properties":{"confidence":"0.866667","full_description":"Evidence debt: 'Rician fading' is highly influential in downstream insights but is supported by narrow provenance (sources=1, chunks=3) and should be treated as under-validated.","insight_type":"evidence_debt"},"type":"relation","witness_edges":["edge_12","edge_13","edge_12","edge_13","edge_12","edge_13","edge_12","edge_13"]},{"confidence":0.8666666666666667,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000043","insight_id":"run_20260418_154456:evidence_debt:000227","is_new":true,"label":"BER","properties":{"confidence":"0.866667","full_description":"Evidence debt: 'BER' is highly influential in downstream insights but is supported by narrow provenance (sources=1, chunks=3) and should be treated as under-validated.","insight_type":"evidence_debt"},"type":"relation","witness_edges":["edge_12","edge_12","edge_13","edge_12","edge_12","edge_12","edge_12","edge_51"]},{"confidence":0.852053907599307,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000044","insight_id":"run_20260418_154456:centrality:000055","is_new":true,"label":"AWGN","properties":{"confidence":"0.852054","full_description":"Centrality: AWGN","insight_type":"centrality"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":0.852053907599307,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000045","insight_id":"run_20260418_154456:centrality:000054","is_new":true,"label":"Rician fading","properties":{"confidence":"0.852054","full_description":"Centrality: Rician fading","insight_type":"centrality"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":0.85,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000046","insight_id":"run_20260418_154456:claim_stance:000175","is_new":true,"label":"Claim Supports Rician fading EsNo","properties":{"confidence":"0.850000","original_label":"Claim (Supports): Rician fading → Es/No"},"type":"relation","witness_edges":["edge_13"]},{"confidence":0.85,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000047","insight_id":"run_20260418_154456:claim_stance:000180","is_new":true,"label":"Claim Supports preamble misdetections...","properties":{"confidence":"0.850000","original_label":"Claim (Supports): preamble misdetections → BER performance"},"type":"relation","witness_edges":["edge_51"]},{"confidence":0.85,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000048","insight_id":"run_20260418_154456:relation_induction:000189","is_new":true,"label":"negative EbNo","properties":{"confidence":"0.850000","full_description":"Relation Induction","insight_type":"relation_induction"},"type":"relation","witness_edges":["edge_47"]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000049","insight_id":"run_20260418_154456:method_outcome:000168","is_new":true,"label":"Outcome application performance","properties":{"confidence":"0.800000","original_label":"Outcome: application performance"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000050","insight_id":"run_20260418_154456:concept_drift:000274","is_new":true,"label":"ATB","properties":{"confidence":"0.800000","full_description":"Concept drift: 'ATB' is used with materially different local meanings across the graph (neighborhood_divergence=1.00, community_spread=1.00).","insight_type":"concept_drift"},"type":"relation","witness_edges":["edge_7","edge_9","edge_7","edge_9","edge_7","edge_9","edge_9","edge_7"]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000051","insight_id":"run_20260418_154456:method_outcome:000172","is_new":true,"label":"Outcome FER performance","properties":{"confidence":"0.800000","original_label":"Outcome: FER performance"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000052","insight_id":"run_20260418_154456:method_outcome:000167","is_new":true,"label":"Outcome satisfactory performance","properties":{"confidence":"0.800000","original_label":"Outcome: satisfactory performance"},"type":"relation","witness_edges":["edge_36"]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000053","insight_id":"run_20260418_154456:cross_community_bridge_map:000222","is_new":true,"label":"ATB","properties":{"confidence":"0.800000","full_description":"Bridge 'ATB' connects 4 communities","insight_type":"cross_community_bridge_map"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000054","insight_id":"run_20260418_154456:method_outcome:000171","is_new":true,"label":"Outcome effective erasure rate","properties":{"confidence":"0.800000","original_label":"Outcome: effective erasure rate"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000055","insight_id":"run_20260418_154456:method_outcome:000170","is_new":true,"label":"Outcome diversity gains","properties":{"confidence":"0.800000","original_label":"Outcome: diversity gains"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000056","insight_id":"run_20260418_154456:method_outcome:000169","is_new":true,"label":"Outcome deep shadowing effects","properties":{"confidence":"0.800000","original_label":"Outcome: deep shadowing effects"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":[],"id":"aug:n:000057","insight_id":"run_20260418_154456:method_outcome:000173","is_new":true,"label":"Outcome FL performance","properties":{"confidence":"0.800000","original_label":"Outcome: FL performance"},"type":"relation","witness_edges":[]},{"confidence":0.8,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000058","insight_id":"run_20260418_154456:method_outcome:000166","is_new":true,"label":"Outcome performance","properties":{"confidence":"0.800000","original_label":"Outcome: performance"},"type":"relation","witness_edges":["edge_9"]},{"confidence":0.8,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000059","insight_id":"run_20260418_154456:method_outcome:000165","is_new":true,"label":"Outcome BER performance","properties":{"confidence":"0.800000","original_label":"Outcome: BER performance"},"type":"relation","witness_edges":["edge_51"]},{"confidence":0.7814311277776569,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000060","insight_id":"run_20260418_154456:text_similarity:000147","is_new":true,"label":"BER BER performance","properties":{"confidence":"0.781431","original_label":"Text Similar: BER ~ BER performance"},"type":"relation","witness_edges":["edge_12","edge_51"]},{"confidence":0.7800175344093608,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000061","insight_id":"run_20260418_154456:text_similarity:000148","is_new":true,"label":"EbNo negative EbNo","properties":{"confidence":"0.780018","original_label":"Text Similar: Eb/No ~ negative Eb/No"},"type":"relation","witness_edges":["edge_47"]},{"confidence":0.776,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000062","insight_id":"run_20260418_154456:failure_mode_topology:000259","is_new":true,"label":"EsNo","properties":{"confidence":"0.776000","full_description":"Failure mode: 'Es/No' appears in 12 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_13","edge_13","edge_13","edge_13","edge_12","edge_13","edge_12","edge_13"]},{"confidence":0.776,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000063","insight_id":"run_20260418_154456:failure_mode_topology:000260","is_new":true,"label":"BER","properties":{"confidence":"0.776000","full_description":"Failure mode: 'BER' appears in 12 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_12","edge_12","edge_12","edge_12","edge_51","edge_12","edge_13","edge_12"]},{"confidence":0.7666666666666667,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000064","insight_id":"run_20260418_154456:evidence_debt:000229","is_new":true,"label":"EsNo","properties":{"confidence":"0.766667","full_description":"Evidence debt: 'Es/No' is highly influential in downstream insights but is supported by narrow provenance (sources=1, chunks=3) and should be treated as under-validated.","insight_type":"evidence_debt"},"type":"relation","witness_edges":["edge_13","edge_13","edge_13","edge_13","edge_13","edge_12","edge_13","edge_12"]},{"confidence":0.755,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000065","insight_id":"run_20260418_154456:failure_mode_topology:000263","is_new":true,"label":"UL-FEC block size","properties":{"confidence":"0.755000","full_description":"Failure mode: 'UL-FEC block size' appears in 11 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36"]},{"confidence":0.755,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000066","insight_id":"run_20260418_154456:failure_mode_topology:000262","is_new":true,"label":"satisfactory performance","properties":{"confidence":"0.755000","full_description":"Failure mode: 'satisfactory performance' appears in 11 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36"]},{"confidence":0.755,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000067","insight_id":"run_20260418_154456:failure_mode_topology:000261","is_new":true,"label":"link margin","properties":{"confidence":"0.755000","full_description":"Failure mode: 'link margin' appears in 9 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36"]},{"confidence":0.74,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000068","insight_id":"run_20260418_154456:failure_mode_topology:000268","is_new":true,"label":"SATB","properties":{"confidence":"0.740000","full_description":"Failure mode: 'SATB' appears in 6 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_7","edge_7","edge_7","edge_7","edge_9","edge_7","edge_7","edge_7"]},{"confidence":0.74,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000069","insight_id":"run_20260418_154456:failure_mode_topology:000269","is_new":true,"label":"performance","properties":{"confidence":"0.740000","full_description":"Failure mode: 'performance' appears in 6 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_9","edge_9","edge_9","edge_7","edge_9","edge_7","edge_9","edge_9"]},{"confidence":0.74,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000070","insight_id":"run_20260418_154456:failure_mode_topology:000264","is_new":true,"label":"Rician fading","properties":{"confidence":"0.740000","full_description":"Failure mode: 'Rician fading' appears in 13 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_13","edge_12","edge_13","edge_12","edge_13","edge_13","edge_13","edge_13"]},{"confidence":0.74,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000071","insight_id":"run_20260418_154456:failure_mode_topology:000266","is_new":true,"label":"AWGN","properties":{"confidence":"0.740000","full_description":"Failure mode: 'AWGN' appears in 12 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_12","edge_12","edge_13","edge_12","edge_13","edge_12","edge_13","edge_12"]},{"confidence":0.74,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000072","insight_id":"run_20260418_154456:failure_mode_topology:000265","is_new":true,"label":"testbed elements","properties":{"confidence":"0.740000","full_description":"Failure mode: 'testbed elements' appears in 6 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_7"]},{"confidence":0.74,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000073","insight_id":"run_20260418_154456:failure_mode_topology:000267","is_new":true,"label":"ATB","properties":{"confidence":"0.740000","full_description":"Failure mode: 'ATB' appears in 7 contradiction or low-confidence insights, suggesting a recurring failure pattern.","insight_type":"failure_mode_topology"},"type":"relation","witness_edges":["edge_9","edge_7","edge_9","edge_7","edge_9","edge_7","edge_9","edge_9"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000074","insight_id":"run_20260418_154456:community_link:000203","is_new":true,"label":"Rician fading - BER performance","properties":{"confidence":"0.721284","original_label":"Community: Rician fading <-> BER performance"},"type":"relation","witness_edges":["edge_12","edge_13","edge_51"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000075","insight_id":"run_20260418_154456:community_link:000204","is_new":true,"label":"Rician fading - preamble misdetections","properties":{"confidence":"0.721284","original_label":"Community: Rician fading <-> preamble misdetections"},"type":"relation","witness_edges":["edge_12","edge_13","edge_51"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000076","insight_id":"run_20260418_154456:community_link:000205","is_new":true,"label":"AWGN - BER performance","properties":{"confidence":"0.721284","original_label":"Community: AWGN <-> BER performance"},"type":"relation","witness_edges":["edge_12","edge_13","edge_51"]},{"confidence":0.7212843676229435,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000077","insight_id":"run_20260418_154456:community_link:000206","is_new":true,"label":"AWGN - preamble misdetections","properties":{"confidence":"0.721284","original_label":"Community: AWGN <-> preamble misdetections"},"type":"relation","witness_edges":["edge_12","edge_13","edge_51"]},{"confidence":0.7125,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000078","insight_id":"run_20260418_154456:hypotheses_2:000211","is_new":true,"label":"Hypothesis EsNo - BER","properties":{"confidence":"0.712500","original_label":"Hypothesis: Es/No <-> BER"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":0.7071067811865475,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000079","insight_id":"run_20260418_154456:text_similarity:000149","is_new":true,"label":"AWGN AWGN channel","properties":{"confidence":"0.707107","original_label":"Text Similar: AWGN ~ AWGN channel"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":0.705164276674888,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_9"],"id":"aug:n:000080","insight_id":"run_20260418_154456:boundary_condition_map:000256","is_new":true,"label":"satisfactory performance","properties":{"confidence":"0.705164","full_description":"Boundary condition: 'satisfactory performance' shows high score variance across method-outcome insights (condition_specificity=0.80), suggesting its effectiveness is strongly context-dependent.","insight_type":"boundary_condition_map"},"type":"relation","witness_edges":["edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36","edge_36"]},{"confidence":0.7010005302981186,"evidence_chunk_ids":[],"id":"aug:n:000081","insight_id":"run_20260418_154456:text_similarity:000150","is_new":true,"label":"fixed and mobile services mobile serv...","properties":{"confidence":"0.701001","original_label":"Text Similar: fixed and mobile services ~ mobile services"},"type":"relation","witness_edges":[]},{"confidence":0.7000000000000001,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000082","insight_id":"run_20260418_154456:evidence_debt:000230","is_new":true,"label":"ATB","properties":{"confidence":"0.700000","full_description":"Evidence debt: 'ATB' is highly influential in downstream insights but is supported by narrow provenance (sources=1, chunks=2) and should be treated as under-validated.","insight_type":"evidence_debt"},"type":"relation","witness_edges":["edge_7","edge_9","edge_7","edge_9","edge_7","edge_9","edge_9","edge_7"]},{"confidence":0.7,"evidence_chunk_ids":[],"id":"aug:n:000083","insight_id":"run_20260418_154456:taxonomy:000135","is_new":true,"label":"Taxonomy testbed elements includes ATB","properties":{"confidence":"0.700000","original_label":"Taxonomy: 'testbed elements' includes 'ATB'"},"type":"relation","witness_edges":["edge_7"]},{"confidence":0.7,"evidence_chunk_ids":[],"id":"aug:n:000084","insight_id":"run_20260418_154456:taxonomy:000134","is_new":true,"label":"Taxonomy testbed elements includes SATB","properties":{"confidence":"0.700000","original_label":"Taxonomy: 'testbed elements' includes 'SATB'"},"type":"relation","witness_edges":["edge_7"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000085","insight_id":"run_20260418_154456:community_link:000210","is_new":true,"label":"BER - preamble misdetections","properties":{"confidence":"0.688503","original_label":"Community: BER <-> preamble misdetections"},"type":"relation","witness_edges":["edge_12","edge_51"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000086","insight_id":"run_20260418_154456:argument_support:000164","is_new":true,"label":"BER - EsNo","properties":{"confidence":"0.688503","original_label":"Argument: BER -> Es/No"},"type":"relation","witness_edges":["edge_12","edge_13"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000087","insight_id":"run_20260418_154456:argument_support:000157","is_new":true,"label":"testbed elements - performance","properties":{"confidence":"0.688503","original_label":"Argument: testbed elements -> performance"},"type":"relation","witness_edges":["edge_7","edge_9"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000088","insight_id":"run_20260418_154456:argument_support:000159","is_new":true,"label":"EsNo - BER","properties":{"confidence":"0.688503","original_label":"Argument: Es/No -> BER"},"type":"relation","witness_edges":["edge_13","edge_12"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000089","insight_id":"run_20260418_154456:argument_support:000160","is_new":true,"label":"EsNo - BER","properties":{"confidence":"0.688503","original_label":"Argument: Es/No -> BER"},"type":"relation","witness_edges":["edge_13","edge_12"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000090","insight_id":"run_20260418_154456:community_link:000207","is_new":true,"label":"EsNo - BER performance","properties":{"confidence":"0.688503","original_label":"Community: Es/No <-> BER performance"},"type":"relation","witness_edges":["edge_13","edge_51"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_6"],"id":"aug:n:000091","insight_id":"run_20260418_154456:community_link:000208","is_new":true,"label":"EsNo - preamble misdetections","properties":{"confidence":"0.688503","original_label":"Community: Es/No <-> preamble misdetections"},"type":"relation","witness_edges":["edge_13","edge_51"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_4"],"id":"aug:n:000092","insight_id":"run_20260418_154456:community_link:000209","is_new":true,"label":"BER - BER performance","properties":{"confidence":"0.688503","original_label":"Community: BER <-> BER performance"},"type":"relation","witness_edges":["edge_12","edge_51"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000093","insight_id":"run_20260418_154456:argument_support:000161","is_new":true,"label":"performance - testbed elements","properties":{"confidence":"0.688503","original_label":"Argument: performance -> testbed elements"},"type":"relation","witness_edges":["edge_9","edge_7"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2"],"id":"aug:n:000094","insight_id":"run_20260418_154456:argument_support:000158","is_new":true,"label":"SATB - performance","properties":{"confidence":"0.688503","original_label":"Argument: SATB -> performance"},"type":"relation","witness_edges":["edge_7","edge_9"]},{"confidence":0.6885025291752752,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_2","IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000095","insight_id":"run_20260418_154456:argument_support:000162","is_new":true,"label":"performance - SATB","properties":{"confidence":"0.688503","original_label":"Argument: performance -> SATB"},"type":"relation","witness_edges":["edge_9","edge_7"]},{"confidence":0.6738746490004381,"evidence_chunk_ids":[],"id":"aug:n:000096","insight_id":"run_20260418_154456:text_similarity:000151","is_new":true,"label":"CDMA W-CDMA","properties":{"confidence":"0.673875","original_label":"Text Similar: CDMA ~ W-CDMA"},"type":"relation","witness_edges":[]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000097","insight_id":"run_20260418_154456:centrality:000057","is_new":true,"label":"satellite","properties":{"confidence":"0.671723","full_description":"Centrality: satellite","insight_type":"centrality"},"type":"relation","witness_edges":["edge_23"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_3"],"id":"aug:n:000098","insight_id":"run_20260418_154456:centrality:000063","is_new":true,"label":"ARTEMIS satellite","properties":{"confidence":"0.671723","full_description":"Centrality: ARTEMIS satellite","insight_type":"centrality"},"type":"relation","witness_edges":["edge_3"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_3"],"id":"aug:n:000099","insight_id":"run_20260418_154456:centrality:000062","is_new":true,"label":"inclined orbit","properties":{"confidence":"0.671723","full_description":"Centrality: inclined orbit","insight_type":"centrality"},"type":"relation","witness_edges":["edge_3"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000100","insight_id":"run_20260418_154456:centrality:000061","is_new":true,"label":"BER performance","properties":{"confidence":"0.671723","full_description":"Centrality: BER performance","insight_type":"centrality"},"type":"relation","witness_edges":["edge_51"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000101","insight_id":"run_20260418_154456:centrality:000059","is_new":true,"label":"negative EbNo","properties":{"confidence":"0.671723","full_description":"Centrality: negative Eb/No","insight_type":"centrality"},"type":"relation","witness_edges":["edge_47"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_1"],"id":"aug:n:000102","insight_id":"run_20260418_154456:centrality:000058","is_new":true,"label":"EUTELSAT W2A","properties":{"confidence":"0.671723","full_description":"Centrality: EUTELSAT W2A","insight_type":"centrality"},"type":"relation","witness_edges":["edge_23"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000103","insight_id":"run_20260418_154456:centrality:000056","is_new":true,"label":"preamble misdetections","properties":{"confidence":"0.671723","full_description":"Centrality: preamble misdetections","insight_type":"centrality"},"type":"relation","witness_edges":["edge_51"]},{"confidence":0.671722992906373,"evidence_chunk_ids":["IEEE_article_An_Advanced_Satellite_2008_-_Barbosa_et_al_chunk_5"],"id":"aug:n:000104","insight_id":"run_20260418_154456:centrality:000060","is_new":true,"label":"receiver operation","properties":{"confidence":"0.671723","full_description":"Centrality: receiver operation","insight_type":"centrality"},"type":"relation","witness_edges":["edge_47"]}]};
+
+        // Reify hyperedges: each entry in data.hyperedges becomes a relation node in data.nodes
+        // and two binary links in data.links (entity→relation, relation→entity).
+        // This mirrors the graph.json on-disk format (nodes + hyperedges with sources[]/targets[]).
+        // augData.nodes/links are merged separately by mergeAugmentation() after this step.
+        function reifyHyperedges(d) {
+            const idToIdx = new Map();
+            d.nodes.forEach((n, i) => idToIdx.set(n.id, i));
+            d.links = [];
+            let idx = d.nodes.length;
+            for (const he of (d.hyperedges || [])) {
+                const relNode = {
+                    id: he.id, label: he.relation, type: 'relation',
+                    confidence: he.confidence,
+                    source_document: he.source_document || '',
+                    source_chunk_id: he.source_chunk_id || '',
+                    sources: he.sources, targets: he.targets
+                };
+                if (he.properties) relNode.properties = he.properties;
+                d.nodes.push(relNode);
+                const relIdx = idx++;
+                idToIdx.set(he.id, relIdx);
+                for (const src of (he.sources || [])) {
+                    const si = idToIdx.get(src);
+                    if (si !== undefined) d.links.push({ source: si, target: relIdx, type: 'source' });
+                }
+                for (const tgt of (he.targets || [])) {
+                    const ti = idToIdx.get(tgt);
+                    if (ti !== undefined) d.links.push({ source: relIdx, target: ti, type: 'target' });
+                }
+            }
+        }
+        reifyHyperedges(data);
+
+        (() => {
+            const graphDiv = document.getElementById('graph');
+            const controls = document.getElementById('controls');
+
+            if (typeof ForceGraph3D !== 'function' || typeof THREE === 'undefined') {
+                alert('Missing WebGL libs. Serve via http://localhost.');
+                return;
+            }
+
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const ric = window.requestIdleCallback || ((cb) => setTimeout(() => cb({ timeRemaining: () => 0 }), 0));
+            const rafThrottle = (fn) => {
+                let scheduled = false;
+                return (...args) => {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(() => { scheduled = false; fn(...args); });
+                };
+            };
+
+            // Overlay
+            let overlay = document.getElementById('kgOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'kgOverlay';
+                overlay.innerHTML = '<div class="panel"><div class="title">Working...</div><div class="sub">Building subgraph</div></div>';
+                document.body.appendChild(overlay);
+            }
+            const overlayTitle = overlay.querySelector('.title');
+            const overlaySub = overlay.querySelector('.sub');
+
+            function showOverlay(title, sub) {
+                if (overlayTitle) overlayTitle.textContent = title || 'Working...';
+                if (overlaySub) overlaySub.textContent = sub || '';
+                overlay.classList.add('show');
+            }
+            function hideOverlay() { overlay.classList.remove('show'); }
+
+            let hud = document.getElementById('kgHud');
+            if (!hud) {
+                hud = document.createElement('div');
+                hud.id = 'kgHud';
+                hud.textContent = '3D: initializing...';
+                document.body.appendChild(hud);
+            }
+
+            // Add extra controls - matching graph.html with augmentation additions
+            controls.insertAdjacentHTML('beforeend', `
+                <div class="kg-row">
+                    <input class="kg-input" id="kgSearch" placeholder="Search node (press /)..." />
+                    <button class="kg-btn" id="kgGo">Go</button>
+                </div>
+                <div class="kg-row">
+                    <button class="kg-btn" id="kgExpand1">+ 1 hop</button>
+                    <button class="kg-btn" id="kgExpand2">+ 2 hops</button>
+                    <button class="kg-btn" id="kgReset">Reset</button>
+                    <button class="kg-btn" id="kgCamReset">Reset camera</button>
+                </div>
+                <label style="margin-top:10px;">
+                    <input type="checkbox" id="kgAutoFreeze" checked> Auto-freeze physics
+                </label>
+                <label>
+                    <input type="checkbox" id="kgArrows"> Directional arrows
+                </label>
+                <label>
+                    Max nodes: <span id="kgMaxNodesVal">2500</span>
+                    <input type="range" id="kgMaxNodes" min="200" max="8000" step="100" value="2500">
+                </label>
+                <label>
+                    Depth spread: <span id="kgDepthVal">120</span>
+                    <input type="range" id="kgDepth" min="0" max="600" step="10" value="120">
+                </label>
+
+                <div style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                    <label style="font-weight:600; color:#4fc3f7;">Clustering</label>
+                    <label style="margin-top:6px;">
+                        <input type="checkbox" id="kgClusterOn" checked> Cluster coloring
+                    </label>
+                    <label>
+                        Clustering mode:
+                        <select id="kgClusterMode" class="kg-input" style="width: 180px;">
+                            <option value="topology" selected>Topology (Louvain)</option>
+                            <option value="spatial">Spatial (DBSCAN)</option>
+                        </select>
+                    </label>
+                    <label id="kgTopoResRow">
+                        Resolution: <span id="kgTopoResVal">1.00</span>
+                        <input type="range" id="kgTopoRes" min="0.20" max="3.00" step="0.05" value="1.00">
+                    </label>
+                    <label id="kgSpatialRadiusRow" style="display:none;">
+                        Cluster radius: <span id="kgClusterRadiusVal">40</span>
+                        <input type="range" id="kgClusterRadius" min="10" max="200" step="2" value="40">
+                    </label>
+                    <label id="kgSpatialMinRow" style="display:none;">
+                        Min cluster size: <span id="kgMinClusterVal">5</span>
+                        <input type="range" id="kgMinCluster" min="3" max="200" step="1" value="5">
+                    </label>
+                    <label>
+                        Palette:
+                        <select id="kgPalette" class="kg-input" style="width: 180px;">
+                            <option value="classic" selected>Classic</option>
+                            <option value="pastel">Pastel</option>
+                            <option value="neon">Neon</option>
+                            <option value="mono">Mono + accent</option>
+                        </select>
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="kgRecluster">Cluster now</button>
+                        <label style="margin:0;">
+                            <input type="checkbox" id="kgAutoCluster" checked> Auto (on freeze)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="aug-section" style="border-top:1px solid #444; margin-top:12px; padding-top:10px;">
+                    <label style="font-weight:600; color:#e040fb;">Augmentation Layer</label>
+                    <label style="margin-top:8px;">
+                        <input type="checkbox" id="showAug"> Show Augmentations
+                    </label>
+                    <label>
+                        Aug Opacity: <span id="augOpacityVal">1.0</span>
+                        <input type="range" id="augOpacity" min="0.1" max="1" step="0.1" value="1.0">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="augOnlyMode"> Augmentation-only mode
+                    </label>
+                    <div class="kg-row">
+                        <button class="kg-btn" id="focusAug">Focus Aug</button>
+                    </div>
+                    <div id="augDetails">
+                        <strong>Insight Details</strong>
+                        <div id="augInfo">Click an augmentation node.</div>
+                    </div>
+                </div>
+
+                <div id="kgDetails" style="margin-top:10px; font-size:0.82em; color:#cfcfcf; line-height:1.35;"></div>
+            `);
+
+            const minDegreeEl = document.getElementById('minDegree');
+            const degreeValueEl = document.getElementById('degreeValue');
+            const linkStrengthEl = document.getElementById('linkStrength');
+            const repulsionEl = document.getElementById('repulsion');
+            const showLabelsEl = document.getElementById('showLabels');
+            const searchEl = document.getElementById('kgSearch');
+            const goBtn = document.getElementById('kgGo');
+            const exp1Btn = document.getElementById('kgExpand1');
+            const exp2Btn = document.getElementById('kgExpand2');
+            const resetBtn = document.getElementById('kgReset');
+            const camResetBtn = document.getElementById('kgCamReset');
+            const autoFreezeEl = document.getElementById('kgAutoFreeze');
+            const arrowsEl = document.getElementById('kgArrows');
+            const maxNodesEl = document.getElementById('kgMaxNodes');
+            const maxNodesValEl = document.getElementById('kgMaxNodesVal');
+            const depthEl = document.getElementById('kgDepth');
+            const depthValEl = document.getElementById('kgDepthVal');
+            const detailsEl = document.getElementById('kgDetails');
+            console.log('detailsEl found:', detailsEl);
+
+            // Clustering controls
+            const clusterOnEl = document.getElementById('kgClusterOn');
+            const clusterModeEl = document.getElementById('kgClusterMode');
+            const clusterRadiusEl = document.getElementById('kgClusterRadius');
+            const clusterRadiusValEl = document.getElementById('kgClusterRadiusVal');
+            const minClusterEl = document.getElementById('kgMinCluster');
+            const minClusterValEl = document.getElementById('kgMinClusterVal');
+            const topoResEl = document.getElementById('kgTopoRes');
+            const topoResValEl = document.getElementById('kgTopoResVal');
+            const paletteEl = document.getElementById('kgPalette');
+            const reclusterBtn = document.getElementById('kgRecluster');
+            const autoClusterEl = document.getElementById('kgAutoCluster');
+            const topoResRow = document.getElementById('kgTopoResRow');
+            const spatialRadiusRow = document.getElementById('kgSpatialRadiusRow');
+            const spatialMinRow = document.getElementById('kgSpatialMinRow');
+
+            // Augmentation controls
+            const showAugEl = document.getElementById('showAug');
+            const augOpacityEl = document.getElementById('augOpacity');
+            const augOpacityValEl = document.getElementById('augOpacityVal');
+            const augOnlyEl = document.getElementById('augOnlyMode');
+            const focusAugBtn = document.getElementById('focusAug');
+            const augDetailsEl = document.getElementById('augDetails');
+            const augInfoEl = document.getElementById('augInfo');
+
+            // ---- PHASE 1: Index base graph only (fast) ----
+            const N = data.nodes.length;
+            for (let i = 0; i < N; i++) {
+                const n = data.nodes[i];
+                n.gid = i;
+                n.isAug = false;
+            }
+
+            // Build base edges index
+            let edges = new Array(data.links.length);
+            let incident = Array.from({ length: N }, () => []);
+            for (let i = 0; i < data.links.length; i++) {
+                const l = data.links[i];
+                const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                edges[i] = { s, t, type: l.type, isAug: false };
+                incident[s].push(i);
+                incident[t].push(i);
+            }
+
+            // Build entity degree list for filtering
+            const entityByDegree = [];
+            for (let i = 0; i < N; i++) {
+                if (data.nodes[i].type === 'entity') entityByDegree.push(i);
+            }
+            entityByDegree.sort((a, b) => ((data.nodes[b].degree || 0) - (data.nodes[a].degree || 0)));
+
+            let labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+
+            // Store augmentation data for later merge
+            let augmentationMerged = false;
+            const nodeIdToIdx = new Map();
+            for (let i = 0; i < N; i++) nodeIdToIdx.set(data.nodes[i].id, i);
+
+            // Function to merge augmentation data (called on demand)
+            function mergeAugmentation() {
+                if (augmentationMerged) return;
+                augmentationMerged = true;
+                console.log('Merging augmentation data...');
+
+                const augNodeIdToIdx = new Map();
+                for (const augNode of augData.nodes) {
+                    const newIdx = data.nodes.length;
+                    data.nodes.push({
+                        gid: newIdx,
+                        id: augNode.id,
+                        label: augNode.label,
+                        type: 'relation',
+                        isAug: true,
+                        insightId: augNode.insight_id,
+                        confidence: augNode.confidence,
+                        evidenceChunks: augNode.evidence_chunk_ids || [],
+                        witnessEdges: augNode.witness_edges || []
+                    });
+                    augNodeIdToIdx.set(augNode.id, newIdx);
+                }
+
+                for (const augLink of augData.links) {
+                    let srcIdx = nodeIdToIdx.get(augLink.source);
+                    if (srcIdx === undefined) srcIdx = augNodeIdToIdx.get(augLink.source);
+                    let tgtIdx = nodeIdToIdx.get(augLink.target);
+                    if (tgtIdx === undefined) tgtIdx = augNodeIdToIdx.get(augLink.target);
+
+                    if (srcIdx !== undefined && tgtIdx !== undefined) {
+                        data.links.push({ source: srcIdx, target: tgtIdx, type: augLink.type, isAug: true });
+
+                        // Populate sources/targets on aug relation nodes so the info panel can show them
+                        const augNodeIdx = augNodeIdToIdx.get(augLink.source);
+                        const augNodeIdx2 = augNodeIdToIdx.get(augLink.target);
+                        if (augLink.type === 'source' && augNodeIdx2 !== undefined) {
+                            // entity (augLink.source) -> aug node (augLink.target): entity is a source of this relation
+                            const n = data.nodes[augNodeIdx2];
+                            if (!n.sources) n.sources = [];
+                            n.sources.push(augLink.source);
+                        } else if (augLink.type === 'target' && augNodeIdx !== undefined) {
+                            // aug node (augLink.source) -> entity (augLink.target): entity is a target of this relation
+                            const n = data.nodes[augNodeIdx];
+                            if (!n.targets) n.targets = [];
+                            n.targets.push(augLink.target);
+                        }
+                    }
+                }
+
+                // Rebuild edges and incident arrays
+                edges = new Array(data.links.length);
+                incident = Array.from({ length: data.nodes.length }, () => []);
+                for (let i = 0; i < data.links.length; i++) {
+                    const l = data.links[i];
+                    const s = +((typeof l.source === 'object') ? l.source.index : l.source);
+                    const t = +((typeof l.target === 'object') ? l.target.index : l.target);
+                    edges[i] = { s, t, type: l.type, isAug: !!l.isAug };
+                    incident[s].push(i);
+                    incident[t].push(i);
+                }
+
+                labelsLower = data.nodes.map(n => (n.label || n.id || '').toLowerCase());
+                console.log(`After merge: ${data.nodes.length} nodes, ${data.links.length} links`);
+            }
+
+            // State - matching graph.html with augmentation additions
+            const state = {
+                minDegree: +minDegreeEl.value,
+                linkStrength: +linkStrengthEl.value,
+                repulsion: +repulsionEl.value,
+                showLabels: !!showLabelsEl.checked,
+                autoFreeze: true,
+                showArrows: false,
+                maxNodes: +maxNodesEl.value,
+                depthSpread: +depthEl.value,
+                selectedGid: null,
+                visible: new Set(),
+                subNodes: [],
+                subLinks: [],
+                subNodesByGid: new Map(),
+                graph: null,
+                fps: { t0: performance.now(), frames: 0, value: 0 },
+                // Clustering state
+                clusterOn: true,
+                clusterMode: 'topology',
+                clusterRadius: 40,
+                minClusterSize: 5,
+                topoResolution: 1.0,
+                palette: 'classic',
+                autoCluster: true,
+                clusters: [],
+                clusterLabels: [],
+                // Augmentation state
+                showAug: true,  // Start in augmentation-only mode
+                augOpacity: 1.0,
+                augOnlyMode: true,
+                degreeDebounce: null
+            };
+
+            function applyDepth() {
+                const spread = state.depthSpread;
+                for (let i = 0; i < data.nodes.length; i++) {
+                    const n = data.nodes[i];
+                    const base = n.isAug ? 0.6 : (n.type === 'relation' ? 0.45 : 1.0);
+                    n.z = (Math.random() - 0.5) * spread * base;
+                    if (n.isAug) n.z += spread * 0.3; // Float augmentation slightly above
+                }
+            }
+
+            function seedVisibleByDegree(minDegree, maxNodes) {
+                const vis = new Set();
+
+                // Always include augmentation nodes if enabled or in aug-only mode
+                if (state.showAug || state.augOnlyMode) {
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug) vis.add(i);
+                    }
+                }
+
+                if (state.augOnlyMode) {
+                    // Only show augmentation and connected nodes
+                    for (let i = 0; i < data.nodes.length; i++) {
+                        if (data.nodes[i].isAug && incident[i]) {
+                            vis.add(i);  // Ensure the aug node itself is added
+                            for (const ei of incident[i]) {
+                                const e = edges[ei];
+                                if (!e) continue;
+                                const other = (e.s === i) ? e.t : e.s;
+                                vis.add(other);
+                            }
+                        }
+                    }
+                    return vis;
+                }
+
+                if (!state.augOnlyMode) {
+                    for (let k = 0; k < entityByDegree.length && vis.size < maxNodes; k++) {
+                        const idx = entityByDegree[k];
+                        const n = data.nodes[idx];
+                        if ((n.degree || 0) >= minDegree) vis.add(idx);
+                        else break;
+                    }
+                }
+
+                if (!state.augOnlyMode && vis.size < 50) {
+                    for (let k = 0; k < Math.min(200, entityByDegree.length) && vis.size < Math.min(maxNodes, 200); k++) {
+                        vis.add(entityByDegree[k]);
+                    }
+                }
+
+                const relQueue = [];
+                for (const idx of vis) {
+                    if (!incident[idx]) continue;
+                    for (const ei of incident[idx]) {
+                        const e = edges[ei];
+                        if (!e) continue;
+                        const other = (e.s === idx) ? e.t : e.s;
+                        if (data.nodes[other] && (data.nodes[other].type === 'relation' || data.nodes[other].isAug) && !vis.has(other)) {
+                            relQueue.push(other);
+                        }
+                    }
+                }
+                for (let i = 0; i < relQueue.length && vis.size < maxNodes; i++) vis.add(relQueue[i]);
+
+                if (state.selectedGid != null) vis.add(state.selectedGid);
+                return vis;
+            }
+
+            function buildSubgraphFromVisible() {
+                const subNodes = [];
+                state.visible.forEach(i => {
+                    if (data.nodes[i]) subNodes.push(data.nodes[i]);
+                });
+
+                const edgeIds = new Set();
+                for (const i of state.visible) {
+                    if (incident[i]) {
+                        for (const ei of incident[i]) edgeIds.add(ei);
+                    }
+                }
+
+                const subLinks = [];
+                edgeIds.forEach(ei => {
+                    const e = edges[ei];
+                    if (!e) return;
+                    if (state.visible.has(e.s) && state.visible.has(e.t)) {
+                        // Filter augmentation links if showAug is off
+                        if (e.isAug && !state.showAug) return;
+                        subLinks.push(e);
+                    }
+                });
+
+                state.subNodes = subNodes;
+                state.subLinks = subLinks;
+
+                const vn = document.getElementById('visibleNodes');
+                const vl = document.getElementById('visibleLinks');
+                if (vn) vn.textContent = String(subNodes.length);
+                if (vl) vl.textContent = String(subLinks.length);
+            }
+
+            function rebuildSubgraphIndex() {
+                state.subNodesByGid = new Map();
+                for (const n of state.subNodes) state.subNodesByGid.set(n.gid, n);
+            }
+
+            function updateDetails(node) {
+                if (!detailsEl) return;
+                if (!node) {
+                    detailsEl.innerHTML = '<span style="opacity:0.8;">Click a node to see details.</span>';
+                    augDetailsEl.classList.remove('show');
+                    return;
+                }
+
+                const lines = [];
+                lines.push(`<div><b>${escapeHtml(node.label || node.id || 'Node')}</b></div>`);
+                lines.push(`<div style="opacity:0.85;">type: <code>${escapeHtml(node.type || '')}</code></div>`);
+
+                if (node.isAug) {
+                    augDetailsEl.classList.add('show');
+                    let augHtml = `<strong>${escapeHtml(node.label)}</strong><br>`;
+                    if (node.insightId) augHtml += `Insight: ${escapeHtml(node.insightId)}<br>`;
+                    if (typeof node.confidence === 'number') augHtml += `Confidence: ${node.confidence.toFixed(3)}<br>`;
+                    if (node.evidenceChunks && node.evidenceChunks.length) {
+                        augHtml += `Evidence: ${escapeHtml(node.evidenceChunks.slice(0, 3).join(', '))}`;
+                        if (node.evidenceChunks.length > 3) augHtml += '...';
+                    }
+                    augInfoEl.innerHTML = augHtml;
+                    // Also show degree and relation info for augmented nodes
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                    }
+                } else {
+                    augDetailsEl.classList.remove('show');
+                    if (typeof node.degree === 'number') lines.push(`<div style="opacity:0.85;">degree: <code>${node.degree}</code></div>`);
+                    if (node.type === 'relation') {
+                        if (node.sources && node.sources.length) lines.push(`<div style="opacity:0.85;">sources: <code>${escapeHtml(node.sources.slice(0, 8).join(', '))}${node.sources.length>8?' ...':''}</code></div>`);
+                        if (node.targets && node.targets.length) lines.push(`<div style="opacity:0.85;">targets: <code>${escapeHtml(node.targets.slice(0, 8).join(', '))}${node.targets.length>8?' ...':''}</code></div>`);
+                        if (typeof node.confidence === 'number') lines.push(`<div style="opacity:0.85;">confidence: <code>${node.confidence}</code></div>`);
+                    }
+                }
+                detailsEl.innerHTML = lines.join('');
+            }
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            }
+
+            function expandSelected(hops) {
+                if (state.selectedGid == null) return;
+
+                const maxNodes = state.maxNodes;
+                const q = [state.selectedGid];
+                const dist = new Map([[state.selectedGid, 0]]);
+
+                while (q.length) {
+                    const u = q.shift();
+                    const d = dist.get(u) || 0;
+                    if (d >= hops) continue;
+
+                    for (const ei of incident[u]) {
+                        const e = edges[ei];
+                        const v = (e.s === u) ? e.t : e.s;
+                        if (!dist.has(v)) {
+                            dist.set(v, d + 1);
+                            q.push(v);
+                        }
+                        if (state.visible.size < maxNodes) state.visible.add(v);
+                    }
+                    if (state.visible.size >= maxNodes) break;
+                }
+
+                rebuildAndRender('Expanding neighborhood...');
+            }
+
+            // Graph init
+            graphDiv.innerHTML = '';
+
+            const Graph = ForceGraph3D()(graphDiv)
+                .nodeId('gid')
+                .nodeLabel(n => (n.label || n.id || ''))
+                .backgroundColor('rgba(0,0,0,0)')
+                .showNavInfo(false)
+                .enableNodeDrag(true)
+                .linkSource('source')
+                .linkTarget('target')
+                .cooldownTime(2000)  // Prevent runaway physics simulation
+                .warmupTicks(0);     // Don't pre-calculate - let rebuildAndRender handle it
+
+            state.graph = Graph;
+
+            // -------------------- CLUSTERING (from graph.html) --------------------
+            const PALETTES = {
+                classic: ['#4fc3f7','#ff9800','#ab47bc','#66bb6a','#ef5350','#ffa726','#26c6da','#8d6e63','#78909c','#d4e157'],
+                pastel:  ['#a3d5ff','#ffd6a5','#bdb2ff','#caffbf','#ffadad','#fdffb6','#9bf6ff','#ffc6ff','#b8f2e6','#f1c0e8'],
+                neon:    ['#00e5ff','#ffea00','#ff1744','#76ff03','#e040fb','#ff9100','#1de9b6','#f500ff','#00c853','#2979ff'],
+                mono:    ['#4fc3f7','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc','#cfd8dc']
+            };
+
+            function getClusterColor(cid) {
+                if (cid == null || cid < 0) return '#4fc3f7';
+                const pal = PALETTES[state.palette] || PALETTES.classic;
+                return pal[cid % pal.length];
+            }
+
+            function clearClusterLabels() {
+                if (!state.clusterLabels?.length) return;
+                const scene = Graph.scene();
+                for (const s of state.clusterLabels) scene.remove(s);
+                state.clusterLabels = [];
+            }
+
+            function drawClusterLabels() {
+                clearClusterLabels();
+                if (!state.clusterOn || typeof SpriteText === 'undefined') return;
+
+                const scene = Graph.scene();
+                for (const cl of state.clusters) {
+                    const rep = state.subNodesByGid.get(cl.repGid);
+                    if (!rep) continue;
+
+                    const labelTxt = (rep.label || rep.id || `Cluster ${cl.id}`);
+                    const sprite = new SpriteText(labelTxt);
+                    sprite.fontFace = 'Arial Black';
+                    sprite.textHeight = 10;
+                    sprite.color = 'rgba(255,255,255,0.95)';
+                    sprite.backgroundColor = 'rgba(0,0,0,0.50)';
+                    sprite.padding = 6;
+                    sprite.borderRadius = 10;
+                    sprite.material.depthWrite = false;
+
+                    sprite.position.set(rep.x || 0, (rep.y || 0) + 18, rep.z || 0);
+                    scene.add(sprite);
+                    state.clusterLabels.push(sprite);
+                }
+            }
+
+            function chooseRepresentative(clusterNodeGids) {
+                let cx = 0, cy = 0, cz = 0, cnt = 0;
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n) continue;
+                    cx += (n.x || 0); cy += (n.y || 0); cz += (n.z || 0);
+                    cnt++;
+                }
+                if (!cnt) return clusterNodeGids[0] ?? null;
+                cx /= cnt; cy /= cnt; cz /= cnt;
+
+                let bestGid = null;
+                let bestD = Infinity;
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n || n.type !== 'entity') continue;
+                    const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+                    const d2 = dx*dx + dy*dy + dz*dz;
+                    if (d2 < bestD) { bestD = d2; bestGid = gid; }
+                }
+                if (bestGid != null) return bestGid;
+
+                for (const gid of clusterNodeGids) {
+                    const n = state.subNodesByGid.get(gid);
+                    if (!n) continue;
+                    const dx = (n.x || 0) - cx, dy = (n.y || 0) - cy, dz = (n.z || 0) - cz;
+                    const d2 = dx*dx + dy*dy + dz*dz;
+                    if (d2 < bestD) { bestD = d2; bestGid = gid; }
+                }
+                return bestGid;
+            }
+
+            // DBSCAN spatial clustering
+            function clusterSpatialDBSCAN() {
+                const eps = state.clusterRadius;
+                const minPts = state.minClusterSize;
+
+                const nodes = state.subNodes.filter(n => !n.isAug); // Exclude aug nodes
+                const n = nodes.length;
+                const labels = new Array(n).fill(0);
+                let cid = 0;
+
+                const eps2 = eps * eps;
+                function regionQuery(i) {
+                    const ni = nodes[i];
+                    const xi = ni.x || 0, yi = ni.y || 0, zi = ni.z || 0;
+                    const res = [];
+                    for (let j = 0; j < n; j++) {
+                        const nj = nodes[j];
+                        const dx = (nj.x || 0) - xi, dy = (nj.y || 0) - yi, dz = (nj.z || 0) - zi;
+                        if ((dx*dx + dy*dy + dz*dz) <= eps2) res.push(j);
+                    }
+                    return res;
+                }
+
+                function expandCluster(i, neighbors, cid) {
+                    labels[i] = cid;
+                    for (let k = 0; k < neighbors.length; k++) {
+                        const j = neighbors[k];
+                        if (labels[j] === -1) labels[j] = cid;
+                        if (labels[j] !== 0) continue;
+                        labels[j] = cid;
+                        const n2 = regionQuery(j);
+                        if (n2.length >= minPts) {
+                            for (const x of n2) neighbors.push(x);
+                        }
+                    }
+                }
+
+                for (let i = 0; i < n; i++) {
+                    if (labels[i] !== 0) continue;
+                    const neighbors = regionQuery(i);
+                    if (neighbors.length < minPts) {
+                        labels[i] = -1;
+                    } else {
+                        cid++;
+                        expandCluster(i, neighbors, cid);
+                    }
+                }
+
+                for (let i = 0; i < n; i++) {
+                    nodes[i].__cluster = labels[i] > 0 ? (labels[i] - 1) : -1;
+                }
+                // Set aug nodes to no cluster
+                for (const node of state.subNodes) {
+                    if (node.isAug) node.__cluster = -1;
+                }
+
+                const groups = new Map();
+                for (const node of nodes) {
+                    const c = node.__cluster ?? -1;
+                    if (c < 0) continue;
+                    if (!groups.has(c)) groups.set(c, []);
+                    groups.get(c).push(node.gid);
+                }
+
+                state.clusters = [];
+                for (const [id, gids] of groups.entries()) {
+                    const rep = chooseRepresentative(gids);
+                    state.clusters.push({ id, nodes: gids, repGid: rep });
+                }
+            }
+
+            // Louvain-style topology clustering
+            function clusterTopologyLouvain() {
+                // Cluster only entity nodes; use ALL links (including aug) so that
+                // augmentation-only mode still has connectivity to project through
+                const nodes = state.subNodes.filter(n => n.type === 'entity' && !n.isAug);
+                if (nodes.length === 0) { state.clusters = []; return; }
+
+                const idxByGid = new Map();
+                for (let i = 0; i < nodes.length; i++) idxByGid.set(nodes[i].gid, i);
+
+                // Build entity co-occurrence by projecting through ALL relation intermediaries
+                // (both base-graph relation nodes and aug nodes, which are type='relation')
+                const adj = Array.from({ length: nodes.length }, () => new Map());
+
+                // Collect entity lists incident to each relation/aug node
+                const nodeByGid = new Map();
+                for (const n of state.subNodes) nodeByGid.set(n.gid, n);
+
+                const relToEntities = new Map();
+                for (const e of state.subLinks) {  // include aug links
+                    const src = nodeByGid.get(e.s);
+                    const tgt = nodeByGid.get(e.t);
+                    if (!src || !tgt) continue;
+                    // entity -> relation (base or aug)
+                    if (src.type === 'entity' && !src.isAug && tgt.type === 'relation') {
+                        if (!relToEntities.has(e.t)) relToEntities.set(e.t, []);
+                        relToEntities.get(e.t).push(e.s);
+                    }
+                    // relation (base or aug) -> entity
+                    if (tgt.type === 'entity' && !tgt.isAug && src.type === 'relation') {
+                        if (!relToEntities.has(e.s)) relToEntities.set(e.s, []);
+                        relToEntities.get(e.s).push(e.t);
+                    }
+                }
+
+                // Project: entities sharing a relation node get a co-occurrence edge
+                for (const entityGids of relToEntities.values()) {
+                    const eIdxs = entityGids.map(g => idxByGid.get(g)).filter(i => i !== undefined);
+                    for (let p = 0; p < eIdxs.length; p++) {
+                        for (let q = p + 1; q < eIdxs.length; q++) {
+                            const a = eIdxs[p], b = eIdxs[q];
+                            adj[a].set(b, (adj[a].get(b) || 0) + 1);
+                            adj[b].set(a, (adj[b].get(a) || 0) + 1);
+                        }
+                    }
+                }
+
+                const resolution = state.topoResolution;
+                const n = nodes.length;
+                let community = new Array(n);
+                for (let i = 0; i < n; i++) community[i] = i;
+
+                let k = new Array(n).fill(0);
+                let m2 = 0;
+                for (let i = 0; i < n; i++) {
+                    let sum = 0;
+                    for (const w of adj[i].values()) sum += w;
+                    k[i] = sum;
+                    m2 += sum;
+                }
+                if (m2 === 0) {
+                    for (const node of state.subNodes) node.__cluster = -1;
+                    state.clusters = [];
+                    return;
+                }
+
+                let tot = new Array(n).fill(0);
+                for (let i = 0; i < n; i++) tot[community[i]] += k[i];
+
+                function neighCommWeights(i) {
+                    const map = new Map();
+                    for (const [j, w] of adj[i].entries()) {
+                        const cj = community[j];
+                        map.set(cj, (map.get(cj) || 0) + w);
+                    }
+                    return map;
+                }
+
+                let changed = true;
+                let iter = 0;
+                while (changed && iter < 30) {
+                    changed = false;
+                    iter++;
+                    for (let i = 0; i < n; i++) {
+                        const ci = community[i];
+                        const ki = k[i];
+                        tot[ci] -= ki;
+                        const ncw = neighCommWeights(i);
+                        let bestC = ci;
+                        let bestGain = 0;
+                        for (const [c, wic] of ncw.entries()) {
+                            const totC = tot[c];
+                            const gain = wic - resolution * ki * totC / m2;
+                            if (gain > bestGain) { bestGain = gain; bestC = c; }
+                        }
+                        community[i] = bestC;
+                        tot[bestC] += ki;
+                        if (bestC !== ci) changed = true;
+                    }
+                }
+
+                const remap = new Map();
+                let nextId = 0;
+                for (let i = 0; i < n; i++) {
+                    const c = community[i];
+                    if (!remap.has(c)) remap.set(c, nextId++);
+                    nodes[i].__cluster = remap.get(c);
+                }
+                // Aug nodes are never part of a cluster
+                for (const node of state.subNodes) {
+                    if (node.isAug) node.__cluster = -1;
+                }
+
+                const groups = new Map();
+                for (const node of nodes) {
+                    const c = node.__cluster ?? -1;
+                    if (c < 0) continue;
+                    if (!groups.has(c)) groups.set(c, []);
+                    groups.get(c).push(node.gid);
+                }
+
+                state.clusters = [];
+                for (const [id, gids] of groups.entries()) {
+                    const rep = chooseRepresentative(gids);
+                    state.clusters.push({ id, nodes: gids, repGid: rep });
+                }
+            }
+
+            function runClustering() {
+                if (state.clusterMode === 'spatial') {
+                    clusterSpatialDBSCAN();
+                } else {
+                    clusterTopologyLouvain();
+                }
+                applyStyles();
+                drawClusterLabels();
+            }
+
+            function applyStyles() {
+                const showAug = state.showAug;
+                const opacity = state.augOpacity;
+                const clusteringEnabled = !!state.clusterOn;
+
+                Graph
+                    .nodeColor(n => {
+                        // Augmentation nodes always purple
+                        if (n.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity})` : 'rgba(224, 64, 251, 0.1)';
+                        }
+                        // If clustering enabled, use cluster color
+                        if (clusteringEnabled) {
+                            const cid = n.__cluster ?? -1;
+                            return getClusterColor(cid);
+                        }
+                        // Ontology: Color by class/instance level
+                        if (n.properties && n.properties.node_level) {
+                            if (n.properties.node_level === 'class') {
+                                return '#4A90E2';  // Blue for classes
+                            } else if (n.properties.node_level === 'instance') {
+                                return '#7ED321';  // Green for instances
+                            }
+                        }
+                        // Default coloring
+                        return n.type === 'relation' ? '#ff9800' : '#4fc3f7';
+                    })
+                    .nodeVal(n => {
+                        if (n.isAug) return showAug ? 4 : 1;
+                        return n.type === 'relation' ? 1.5 : Math.max(1.2, 1 + (n.degree || 0) * 0.06);
+                    })
+                    .linkColor(l => {
+                        // Augmentation links always purple
+                        if (l.isAug) {
+                            return showAug ? `rgba(224, 64, 251, ${opacity * 0.7})` : 'rgba(224, 64, 251, 0.05)';
+                        }
+                        // If clustering enabled, color by cluster
+                        if (clusteringEnabled) {
+                            const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                            const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                            const ca = a ? (a.__cluster ?? -1) : -1;
+                            const cb = b ? (b.__cluster ?? -1) : -1;
+
+                            if (ca >= 0 && ca === cb) return getClusterColor(ca);
+                            return 'rgba(255,255,255,0.10)';
+                        }
+                        return l.type === 'source' ? 'rgba(79,195,247,0.55)' : 'rgba(255,152,0,0.55)';
+                    })
+                    .linkWidth(l => {
+                        if (l.isAug) return 1.5;
+                        if (clusteringEnabled) {
+                            const a = state.subNodesByGid.get(l.source) || state.subNodesByGid.get(l.source?.gid) || null;
+                            const b = state.subNodesByGid.get(l.target) || state.subNodesByGid.get(l.target?.gid) || null;
+                            const ca = a ? (a.__cluster ?? -1) : -1;
+                            const cb = b ? (b.__cluster ?? -1) : -1;
+                            return (ca >= 0 && ca === cb) ? 0.9 : 0.35;
+                        }
+                        return 0.6;
+                    })
+                    .linkDirectionalArrowLength(state.showArrows ? 3 : 0)
+                    .linkDirectionalArrowRelPos(0.5);
+
+                if (Graph.linkLineDash) {
+                    Graph.linkLineDash(l => {
+                        // Augmentation links: dashed
+                        if (l.isAug) return [2, 2];
+                        // Phase 2: Hierarchical relations (instance_of, subclass_of, is_a): dashed
+                        if (l.properties && l.properties.relation_type === 'hierarchical') {
+                            return [4, 4];  // Slightly longer dashes for hierarchy
+                        }
+                        return null;  // Solid line for regular relations
+                    });
+                }
+
+                Graph.refresh();
+            }
+
+            // Apply 3D text labels only to important/selected nodes (prevents performance freeze)
+            function applyLabels() {
+                state.showLabels = !!showLabelsEl.checked;
+                if (typeof SpriteText === 'undefined') return;
+
+                Graph.nodeThreeObject(node => {
+                    if (!state.showLabels) return null;
+
+                    const isSelected = (state.selectedGid != null && node.gid === state.selectedGid);
+                    // Only show labels for high-degree entities or augmentation nodes
+                    const important = (node.type === 'entity' && (node.degree || 0) >= Math.max(40, state.minDegree));
+                    const isAugNode = node.isAug;
+                    if (!isSelected && !important && !isAugNode) return null;
+
+                    const sprite = new SpriteText(node.label || node.id || '');
+                    sprite.textHeight = isSelected ? 6 : (isAugNode ? 5 : 4);
+                    sprite.color = isAugNode ? 'rgba(224, 64, 251, 0.95)' : 'rgba(255,255,255,0.9)';
+                    sprite.backgroundColor = 'rgba(0,0,0,0.35)';
+                    sprite.padding = 2;
+                    sprite.borderRadius = 6;
+                    sprite.material.depthWrite = false;
+                    sprite.position.y = 8;
+                    return sprite;
+                }).nodeThreeObjectExtend(true);
+
+                Graph.refresh();
+            }
+
+            // Apply physics forces (matching graph.html)
+            function applyForces() {
+                if (Graph.d3Force('charge')) Graph.d3Force('charge').strength(-state.repulsion);
+                if (Graph.d3Force('link')) Graph.d3Force('link').strength(state.linkStrength);
+            }
+
+            // Apply freeze settings
+            function applyFreeze() {
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+            }
+
+            function rebuildAndRender(msg) {
+                showOverlay(msg || 'Updating...', 'Filtering & rebuilding visible subgraph');
+
+                ric(() => {
+                    buildSubgraphFromVisible();
+                    rebuildSubgraphIndex();
+
+                    const gdata = {
+                        nodes: state.subNodes,
+                        links: state.subLinks.map(e => ({ source: e.s, target: e.t, type: e.type, isAug: e.isAug }))
+                    };
+
+                    Graph.graphData(gdata);
+                    applyForces();
+                    applyFreeze();
+                    applyStyles();
+                    applyLabels();
+
+                    Graph.d3ReheatSimulation();
+
+                    // Cluster after a short delay for layout to settle
+                    if (state.autoCluster && state.clusterOn) {
+                        setTimeout(() => runClustering(), 1400);
+                    }
+
+                    hideOverlay();
+                    updateHud();
+                });
+            }
+
+            function rebuildFromDegree() {
+                showOverlay('Seeding visible subgraph...', 'Using degree threshold + caps');
+                ric(() => {
+                    state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+                    if (state.selectedGid != null) state.visible.add(state.selectedGid);
+                    rebuildAndRender('Rendering subgraph...');
+                });
+            }
+
+            function updateHud() {
+                const now = performance.now();
+                state.fps.frames++;
+                const dt = now - state.fps.t0;
+                if (dt >= 800) {
+                    state.fps.value = Math.round((state.fps.frames * 1000) / dt);
+                    state.fps.frames = 0;
+                    state.fps.t0 = now;
+                }
+                const augCount = state.subNodes.filter(n => n.isAug).length;
+                hud.textContent = `3D | ${state.subNodes.length} nodes | ${state.subLinks.length} links | ${augCount} aug | ${state.fps.value} fps`;
+            }
+
+            // Camera reset function
+            function resetCamera() {
+                Graph.cameraPosition({ x: 0, y: 0, z: 420 }, { x: 0, y: 0, z: 0 }, 700);
+            }
+
+            // Event handlers
+            Graph.onNodeClick(node => {
+                console.log('Node clicked:', node);
+                state.selectedGid = node ? node.gid : null;
+                console.log('Calling updateDetails with node:', node ? node.label : null);
+                updateDetails(node);
+            });
+
+            // Debounced degree filter - uses rebuildFromDegree to properly seed visible nodes
+            minDegreeEl.addEventListener('input', () => {
+                state.minDegree = +minDegreeEl.value;
+                degreeValueEl.textContent = String(state.minDegree);
+                if (state.degreeDebounce) clearTimeout(state.degreeDebounce);
+                state.degreeDebounce = setTimeout(() => rebuildFromDegree(), 150);
+            });
+
+            linkStrengthEl.addEventListener('input', () => {
+                state.linkStrength = +linkStrengthEl.value;
+                applyForces();
+                Graph.d3ReheatSimulation();
+            });
+
+            repulsionEl.addEventListener('input', () => {
+                state.repulsion = +repulsionEl.value;
+                applyForces();
+                Graph.d3ReheatSimulation();
+            });
+
+            // Debounced max nodes control
+            maxNodesEl.addEventListener('input', () => {
+                state.maxNodes = +maxNodesEl.value;
+                maxNodesValEl.textContent = String(state.maxNodes);
+                if (state.maxNodesDebounce) clearTimeout(state.maxNodesDebounce);
+                state.maxNodesDebounce = setTimeout(() => rebuildFromDegree(), 200);
+            });
+
+            depthEl.addEventListener('input', () => {
+                state.depthSpread = +depthEl.value;
+                depthValEl.textContent = String(state.depthSpread);
+                applyDepth();
+                Graph.refresh();
+            });
+
+            goBtn.addEventListener('click', () => {
+                const q = (searchEl.value || '').trim().toLowerCase();
+                if (!q) return;
+                let idx = labelsLower.indexOf(q);
+                if (idx === -1) {
+                    for (let i = 0; i < labelsLower.length; i++) {
+                        if (labelsLower[i].includes(q)) { idx = i; break; }
+                    }
+                }
+                if (idx === -1) {
+                    detailsEl.innerHTML = `<div style="color:#ffb74d;">No match for "${escapeHtml(q)}".</div>`;
+                    return;
+                }
+                state.selectedGid = idx;
+                state.visible.add(idx);
+                rebuildAndRender('Searching...');
+                updateDetails(data.nodes[idx]);
+            });
+
+            searchEl.addEventListener('keydown', e => { if (e.key === 'Enter') goBtn.click(); });
+
+            exp1Btn.addEventListener('click', () => expandSelected(1));
+            exp2Btn.addEventListener('click', () => expandSelected(2));
+            resetBtn.addEventListener('click', () => {
+                state.selectedGid = null;
+                updateDetails(null);
+                rebuildAndRender('Resetting view...');
+            });
+            camResetBtn.addEventListener('click', resetCamera);
+
+            showAugEl.addEventListener('change', () => {
+                state.showAug = showAugEl.checked;
+                if (state.showAug) mergeAugmentation();  // Merge aug data on first enable
+                rebuildAndRender('Toggling augmentation...');
+            });
+
+            augOpacityEl.addEventListener('input', () => {
+                state.augOpacity = +augOpacityEl.value;
+                augOpacityValEl.textContent = state.augOpacity.toFixed(1);
+                applyStyles();
+            });
+
+            augOnlyEl.addEventListener('change', () => {
+                state.augOnlyMode = augOnlyEl.checked;
+                if (state.augOnlyMode) {
+                    mergeAugmentation();  // Merge aug data if entering aug-only mode
+                    // Also enable showAug when entering aug-only mode
+                    state.showAug = true;
+                    showAugEl.checked = true;
+                } else {
+                    state.showAug = false;
+                    if (showAugEl) showAugEl.checked = false;
+                }
+                // Reseed visible nodes so we return to the same base-graph view as graph.html.
+                rebuildFromDegree();
+            });
+
+            focusAugBtn.addEventListener('click', () => {
+                const augNodes = state.subNodes.filter(n => n.isAug);
+                if (augNodes.length === 0) return;
+
+                let cx = 0, cy = 0, cz = 0;
+                for (const n of augNodes) {
+                    cx += n.x || 0;
+                    cy += n.y || 0;
+                    cz += n.z || 0;
+                }
+                cx /= augNodes.length;
+                cy /= augNodes.length;
+                cz /= augNodes.length;
+
+                Graph.cameraPosition({ x: cx, y: cy, z: cz + 300 }, { x: cx, y: cy, z: cz }, 1000);
+            });
+
+            // Directional arrows toggle
+            arrowsEl.addEventListener('change', () => {
+                state.showArrows = !!arrowsEl.checked;
+                applyStyles();
+            });
+
+            // Show labels toggle (only renders labels for high-degree/selected nodes)
+            showLabelsEl.addEventListener('change', () => {
+                applyLabels();
+            });
+
+            // Clustering event handlers
+            clusterOnEl.addEventListener('change', () => {
+                state.clusterOn = !!clusterOnEl.checked;
+                if (state.clusterOn) runClustering();
+                else {
+                    clearClusterLabels();
+                    applyStyles();
+                }
+            });
+
+            clusterModeEl.addEventListener('change', () => {
+                state.clusterMode = clusterModeEl.value;
+                if (state.clusterMode === 'spatial') {
+                    topoResRow.style.display = 'none';
+                    spatialRadiusRow.style.display = '';
+                    spatialMinRow.style.display = '';
+                } else {
+                    topoResRow.style.display = '';
+                    spatialRadiusRow.style.display = 'none';
+                    spatialMinRow.style.display = 'none';
+                }
+                if (state.clusterOn) runClustering();
+            });
+
+            clusterRadiusEl.addEventListener('input', () => {
+                state.clusterRadius = +clusterRadiusEl.value;
+                clusterRadiusValEl.textContent = String(state.clusterRadius);
+            });
+            clusterRadiusEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            minClusterEl.addEventListener('input', () => {
+                state.minClusterSize = +minClusterEl.value;
+                minClusterValEl.textContent = String(state.minClusterSize);
+            });
+            minClusterEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            topoResEl.addEventListener('input', () => {
+                state.topoResolution = +topoResEl.value;
+                topoResValEl.textContent = state.topoResolution.toFixed(2);
+            });
+            topoResEl.addEventListener('change', () => { if (state.clusterOn) runClustering(); });
+
+            paletteEl.addEventListener('change', () => {
+                state.palette = paletteEl.value;
+                applyStyles();
+                drawClusterLabels();
+            });
+
+            reclusterBtn.addEventListener('click', () => runClustering());
+
+            autoClusterEl.addEventListener('change', () => {
+                state.autoCluster = !!autoClusterEl.checked;
+            });
+
+            // Tooltip hover
+            Graph.onNodeHover(rafThrottle((node) => {
+                const tt = document.getElementById('tooltip');
+                if (!tt) return;
+                if (!node) { tt.style.opacity = 0; return; }
+                tt.style.opacity = 1;
+                let info = `<strong>${escapeHtml(node.label || node.id || '')}</strong><br/>`;
+                info += `<span style="opacity:0.85;">${escapeHtml(node.type || '')}`;
+                if (typeof node.degree === 'number') info += ` deg ${node.degree}`;
+                if (node.isAug && typeof node.confidence === 'number') info += ` conf ${node.confidence.toFixed(2)}`;
+                info += '</span>';
+                // Show base classes for instance nodes
+                if (node.properties && node.properties.node_level === 'instance' && node.properties.base_classes) {
+                    info += `<br/><span style="opacity:0.75; color:#7ED321;">⬆ ${escapeHtml(node.properties.base_classes)}</span>`;
+                }
+                // V2: Show full description for augmented nodes with properties
+                if (node.isAug && node.properties && node.properties.full_description) {
+                    info += `<br/><span style="opacity:0.7; color:#90caf9; font-size:0.9em;">${escapeHtml(node.properties.full_description)}</span>`;
+                }
+                tt.innerHTML = info;
+            }));
+
+            // Auto-freeze handler
+            autoFreezeEl.addEventListener('change', () => {
+                state.autoFreeze = !!autoFreezeEl.checked;
+                if (state.autoFreeze) {
+                    Graph.cooldownTime(2000);
+                } else {
+                    Graph.cooldownTime(Infinity);
+                }
+                Graph.d3ReheatSimulation();
+            });
+
+            // FPS counter
+            if (Graph.onRenderFramePost) {
+                Graph.onRenderFramePost(updateHud);
+            } else {
+                setInterval(updateHud, 250);
+            }
+
+            // Window resize
+            window.addEventListener('resize', () => {
+                Graph.width(window.innerWidth);
+                Graph.height(window.innerHeight);
+            });
+
+            // ---- Boot sequence (matching graph.html exactly) ----
+            // Start in augmentation-only mode, but allow user to toggle back
+            state.showAug = true;
+            state.augOnlyMode = true;
+            if (showAugEl) showAugEl.checked = true;
+            if (augOnlyEl) augOnlyEl.checked = true;
+            mergeAugmentation();
+
+            // Function to update cluster mode UI (matching graph.html)
+            function updateClusterModeUI() {
+                if (state.clusterMode === 'spatial') {
+                    if (topoResRow) topoResRow.style.display = 'none';
+                    if (spatialRadiusRow) spatialRadiusRow.style.display = '';
+                    if (spatialMinRow) spatialMinRow.style.display = '';
+                } else {
+                    if (topoResRow) topoResRow.style.display = '';
+                    if (spatialRadiusRow) spatialRadiusRow.style.display = 'none';
+                    if (spatialMinRow) spatialMinRow.style.display = 'none';
+                }
+            }
+
+            // Initialize UI (matching graph.html boot sequence exactly)
+            updateDetails(null);
+            if (maxNodesValEl) maxNodesValEl.textContent = String(state.maxNodes);
+            if (depthValEl) depthValEl.textContent = String(state.depthSpread);
+            if (clusterRadiusValEl) clusterRadiusValEl.textContent = String(state.clusterRadius);
+            if (minClusterValEl) minClusterValEl.textContent = String(state.minClusterSize);
+            if (topoResValEl) topoResValEl.textContent = state.topoResolution.toFixed(2);
+            updateClusterModeUI();
+
+            applyDepth();
+            resetCamera();
+            console.log(`Boot: minDegree=${state.minDegree}, maxNodes=${state.maxNodes}`);
+            state.visible = seedVisibleByDegree(state.minDegree, state.maxNodes);
+            console.log(`After seedVisibleByDegree: ${state.visible.size} visible nodes`);
+            buildSubgraphFromVisible();
+            console.log(`After buildSubgraph: ${state.subNodes.length} subNodes, ${state.subLinks.length} subLinks`);
+
+            hideOverlay();
+            rebuildAndRender('Rendering initial 3D view...');
+        })();
+    </script>
+</body>
+</html>
