@@ -32,6 +32,7 @@ Representative insight types:
 - K-Truss
 - Community Detection
 - Core-Periphery
+- Centrality
 - Taxonomy
 - Compositional Reasoning
 - Transitive Closure

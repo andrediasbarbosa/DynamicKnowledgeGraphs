@@ -1,0 +1,374 @@
+--- graph_rag.html	(original)
++++ graph_rag.html	(with multi-hop)
+@@ -85,6 +85,60 @@
+ #sendBtn:hover{background:#81d4fa}
+ #sendBtn:disabled{background:#444;color:#888;cursor:not-allowed}
+
++/* ── Multi-Hop Reasoning Trace ── */
++.reasoning-trace {
++    background: rgba(79, 195, 247, 0.05);
++    border: 1px solid rgba(79, 195, 247, 0.2);
++    border-radius: 8px;
++    padding: 12px;
++    margin: 10px 0;
++    font-size: 0.85em;
++}
++
++.trace-step {
++    background: rgba(0, 0, 0, 0.3);
++    border-left: 3px solid #4fc3f7;
++    padding: 10px;
++    margin-bottom: 10px;
++    border-radius: 4px;
++}
++
++.trace-header {
++    color: #4fc3f7;
++    font-weight: 600;
++    margin-bottom: 6px;
++}
++
++.trace-label {
++    display: inline-block;
++    min-width: 100px;
++    color: #aaa;
++    font-weight: 500;
++}
++
++.trace-observation pre {
++    background: rgba(0, 0, 0, 0.4);
++    padding: 8px;
++    border-radius: 4px;
++    overflow-x: auto;
++    font-size: 0.9em;
++    margin: 4px 0 0 0;
++}
++
++.trace-toggle {
++    cursor: pointer;
++    padding: 8px 12px;
++    background: rgba(79, 195, 247, 0.1);
++    border-radius: 6px;
++    display: flex;
++    justify-content: space-between;
++}
++
++.trace-content {
++    max-height: 0;
++    overflow: hidden;
++    transition: max-height 0.3s ease;
++}
++.trace-content.open { max-height: 2000px; }
++
+ </style>
+ </head>
+ <body>
+@@ -145,6 +199,12 @@
+             <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+           </select>
+
++          <label style="margin-top:10px">
++            <input type="checkbox" id="cfgMultiHop" style="width:auto;margin-right:5px">
++            Enable Multi-Hop Reasoning
++          </label>
++          <div style="font-size:0.8em;color:#888;margin-top:4px">Step-by-step graph navigation (slower but more thorough)</div>
++
+           <div id="cfgBaseUrlRow" style="display:none;margin-top:8px">
+             <label>Base URL (for openai-compatible)
+               <input id="cfgBaseUrl" placeholder="http://localhost:11434/v1">
+@@ -1090,6 +1150,195 @@
+             return j.choices[0].message.content;
+         }
+
++        // ════════════════════════════════════════════════════════════════════
++        // MULTI-HOP REASONING IMPLEMENTATION
++        // ════════════════════════════════════════════════════════════════════
++
++        class GraphOperations {
++            constructor(graphData, insightsData) {
++                this.data = graphData;
++                this.insights = insightsData || [];
++                this.nodeMap = new Map();
++                this.data.nodes.forEach(n => this.nodeMap.set(n.gid, n));
++            }
++
++            search(keywords, maxResults = 10) {
++                const kws = keywords.toLowerCase().split(/\s+/).filter(w => w.length > 2);
++                const scores = new Map();
++
++                this.data.nodes.forEach(n => {
++                    const label = (n.label || '').toLowerCase();
++                    let score = 0;
++                    kws.forEach(kw => {
++                        if (label === kw) score += 5;
++                        else if (label.includes(kw)) score += 2;
++                    });
++                    if (score > 0) scores.set(n.gid, score);
++                });
++
++                return Array.from(scores.entries())
++                    .sort((a, b) => b[1] - a[1])
++                    .slice(0, maxResults)
++                    .map(([gid, score]) => ({
++                        gid, label: this.nodeMap.get(gid).label, score
++                    }));
++            }
++
++            expand(nodeId, maxNeighbors = 10) {
++                const node = this.nodeMap.get(nodeId);
++                if (!node) return { error: 'Node not found' };
++
++                const neighbors = [];
++                this.data.links.forEach(link => {
++                    const srcId = typeof link.source === 'object' ? link.source.gid : link.source;
++                    const tgtId = typeof link.target === 'object' ? link.target.gid : link.target;
++
++                    if (srcId === nodeId) {
++                        neighbors.push({
++                            direction: 'outgoing',
++                            relation: link.relation || 'related',
++                            neighbor: this.nodeMap.get(tgtId)?.label,
++                            neighbor_id: tgtId
++                        });
++                    }
++                    if (tgtId === nodeId) {
++                        neighbors.push({
++                            direction: 'incoming',
++                            relation: link.relation || 'related',
++                            neighbor: this.nodeMap.get(srcId)?.label,
++                            neighbor_id: srcId
++                        });
++                    }
++                });
++
++                return { node: node.label, neighbors: neighbors.slice(0, maxNeighbors) };
++            }
++
++            findPath(startId, endId, maxDepth = 5) {
++                if (!this.nodeMap.has(startId) || !this.nodeMap.has(endId)) {
++                    return { error: 'Node not found' };
++                }
++
++                const queue = [[startId]];
++                const visited = new Set([startId]);
++
++                while (queue.length > 0) {
++                    const path = queue.shift();
++                    const current = path[path.length - 1];
++
++                    if (current === endId) {
++                        return {
++                            found: true,
++                            path: path.map(id => this.nodeMap.get(id).label),
++                            path_ids: path
++                        };
++                    }
++
++                    if (path.length >= maxDepth) continue;
++
++                    const neighbors = this.getNeighborIds(current);
++                    for (const n of neighbors) {
++                        if (!visited.has(n)) {
++                            visited.add(n);
++                            queue.push([...path, n]);
++                        }
++                    }
++                }
++
++                return { found: false };
++            }
++
++            getNeighborIds(nodeId) {
++                const neighbors = new Set();
++                this.data.links.forEach(link => {
++                    const srcId = typeof link.source === 'object' ? link.source.gid : link.source;
++                    const tgtId = typeof link.target === 'object' ? link.target.gid : link.target;
++                    if (srcId === nodeId) neighbors.add(tgtId);
++                    if (tgtId === nodeId) neighbors.add(srcId);
++                });
++                return Array.from(neighbors);
++            }
++        }
++
++        class GraphReActAgent {
++            constructor(graphOps, llmCaller, options = {}) {
++                this.ops = graphOps;
++                this.callLLM = llmCaller;
++                this.maxSteps = options.maxSteps || 6;
++                this.trace = [];
++            }
++
++            async query(question) {
++                this.trace = [];
++                const systemPrompt = `You are a graph reasoning agent. Available actions:
++SEARCH(keywords) - Find nodes
++EXPAND(node_id) - Get neighbors
++PATH(node1_id, node2_id) - Find path
++ANSWER(text) - Final answer
++
++Format: THOUGHT: [reasoning] ACTION: [NAME]([params])
++When ready to answer, use: THOUGHT: I can now answer ACTION: ANSWER(your answer)`;
++
++                let context = '';
++                let finalAnswer = null;
++
++                for (let step = 0; step < this.maxSteps; step++) {
++                    const msgs = [
++                        { role: 'system', content: systemPrompt },
++                        { role: 'user', content: `Previous context:\n${context}\n\nQuestion: ${question}` }
++                    ];
++
++                    const response = await this.callLLM(msgs);
++                    const action = this.parseAction(response);
++
++                    this.trace.push({ step: step + 1, ...action });
++
++                    if (action.action === 'ANSWER') {
++                        finalAnswer = action.params;
++                        this.trace[this.trace.length - 1].observation = 'Final answer';
++                        break;
++                    }
++
++                    const obs = await this.executeAction(action);
++                    this.trace[this.trace.length - 1].observation = obs;
++                    context += `\nStep ${step + 1}: ${action.action}(${action.params}) → ${JSON.stringify(obs)}\n`;
++                }
++
++                return { answer: finalAnswer || 'No answer found', trace: this.trace, steps: this.trace.length };
++            }
++
++            parseAction(response) {
++                const thoughtMatch = response.match(/THOUGHT:\s*(.+?)(?=ACTION:|$)/is);
++                const actionMatch = response.match(/ACTION:\s*(\w+)\s*\(([^)]*)\)/i);
++
++                if (!actionMatch) {
++                    return { thought: 'Completing', action: 'ANSWER', params: response };
++                }
++
++                return {
++                    thought: thoughtMatch ? thoughtMatch[1].trim() : '',
++                    action: actionMatch[1].toUpperCase(),
++                    params: actionMatch[2].trim()
++                };
++            }
++
++            async executeAction(action) {
++                switch (action.action) {
++                    case 'SEARCH': return this.ops.search(action.params);
++                    case 'EXPAND': return this.ops.expand(action.params);
++                    case 'PATH':
++                        const [start, end] = action.params.split(',').map(s => s.trim());
++                        return this.ops.findPath(start, end);
++                    default: return { error: 'Unknown action' };
++                }
++            }
++
++            getTraceHTML() {
++                return this.trace.map((s, i) => `
++                    <div class="trace-step">
++                        <div class="trace-header">Step ${i + 1}</div>
++                        <div><span class="trace-label">💭 Thought:</span> ${s.thought}</div>
++                        <div><span class="trace-label">⚡ Action:</span> ${s.action}(${s.params})</div>
++                        <div><span class="trace-label">👁️ Observation:</span> <pre>${JSON.stringify(s.observation, null, 2)}</pre></div>
++                    </div>
++                `).join('');
++            }
++        }
++
+         function parseHighlightedEntities(text) {
+             const m=text.match(/HIGHLIGHTED_ENTITIES:\s*(.+?)(?:\n|$)/i);
+             return m?m[1].split(',').map(s=>s.trim()).filter(Boolean):[];
+@@ -1103,6 +1352,7 @@
+         const cfgModel    = document.getElementById('cfgModel');
+         const cfgBaseUrl  = document.getElementById('cfgBaseUrl');
+         const cfgBaseRow  = document.getElementById('cfgBaseUrlRow');
++        const cfgMultiHop = document.getElementById('cfgMultiHop');
+         const chatHistory = document.getElementById('chatHistory');
+         const queryInput  = document.getElementById('queryInput');
+         const sendBtn     = document.getElementById('sendBtn');
+@@ -1142,32 +1392,65 @@
+             return div;
+         }
+
++        function appendReasoningTrace(traceHTML, stepCount) {
++            const div = document.createElement('div');
++            div.className = 'chat-msg assistant';
++            div.innerHTML = `
++                <div class="trace-toggle" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.trace-arrow').textContent = this.nextElementSibling.classList.contains('open') ? '▲' : '▼';">
++                    <span>🔍 Reasoning Process (${stepCount} steps)</span>
++                    <span class="trace-arrow">▼</span>
++                </div>
++                <div class="trace-content"><div class="reasoning-trace">${traceHTML}</div></div>
++            `;
++            chatHistory.appendChild(div);
++            chatHistory.scrollTop = chatHistory.scrollHeight;
++        }
++
+         async function handleQuery(){
+             const query=queryInput.value.trim(); if(!query) return;
+             queryInput.value=''; sendBtn.disabled=true;
+             appendMessage('user',query);
+-            const rel=findRelevantNodes(query);
+-            const paths=findConnectingPaths(rel,4,12);
+-            const ctx=buildContext(rel,paths);
++
+             const thinking=appendThinking();
+-            const msgs=[{role:'system',content:SYSTEM_PROMPT},{role:'user',content:ctx},{role:'assistant',content:'I have noted the graph context. Please ask your question.'},...conversationHistory,{role:'user',content:query}];
++
+             try{
+-                const resp=await callLLM(msgs);
++                let resp, ents, clean;
++
++                if (cfgMultiHop.checked) {
++                    // ═══ MULTI-HOP MODE ═══
++                    const graphOps = new GraphOperations(data, insights);
++                    const agent = new GraphReActAgent(graphOps, callLLM, { maxSteps: 6 });
++                    const result = await agent.query(query);
++
++                    thinking.remove();
++                    appendReasoningTrace(agent.getTraceHTML(), result.steps);
++
++                    ents = parseHighlightedEntities(result.answer);
++                    clean = cleanResponse(result.answer);
++                } else {
++                    // ═══ SINGLE-HOP MODE ═══
++                    const rel = findRelevantNodes(query);
++                    const paths = findConnectingPaths(rel, 4, 12);
++                    const ctx = buildContext(rel, paths);
++                    const msgs = [{role:'system',content:SYSTEM_PROMPT},{role:'user',content:ctx},{role:'assistant',content:'I have noted the graph context.'},...conversationHistory,{role:'user',content:query}];
++
++                    resp = await callLLM(msgs);
++                    thinking.remove();
++
++                    ents = parseHighlightedEntities(resp);
++                    clean = cleanResponse(resp);
++                }
++
++                conversationHistory.push({role:'user',content:query},{role:'assistant',content:clean});
++                if(conversationHistory.length>12) conversationHistory.splice(0,2);
++
++                appendMessage('assistant',clean,ents);
++                if(ents.length) applyHighlights(ents);
++            } catch(err) {
+                 thinking.remove();
+-                const ents=parseHighlightedEntities(resp);
+-                const clean=cleanResponse(resp);
+-                conversationHistory.push({role:'user',content:query},{role:'assistant',content:clean});
+-                if(conversationHistory.length>12) conversationHistory.splice(0,2);
+-                appendMessage('assistant',clean,ents);
+-                if(ents.length) applyHighlights(ents);
+-            }catch(err){
+-                thinking.remove();
+-                appendMessage('assistant',`Error: ${err.message}\n\nCheck your API key and provider settings.`);
+-            }finally{
+-                sendBtn.disabled=false; queryInput.focus();
++                appendMessage('assistant',`Error: ${err.message}`);
++            } finally {
++                sendBtn.disabled=false;
++                queryInput.focus();
+             }
+         }
+-
+
+         </script>
+ </body>

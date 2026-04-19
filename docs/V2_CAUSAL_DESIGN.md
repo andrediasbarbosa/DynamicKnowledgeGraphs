@@ -2,7 +2,7 @@
 
 **Version:** 2.0.0-alpha
 **Date:** 2026-03-22
-**Status:** Design Phase
+**Status:** Phase 2 (Causal Metadata) implemented; Phases 3-8 in progress
 **Authors:** Research Team + Claude Sonnet 4.5
 
 ---
@@ -976,11 +976,14 @@ Trade-off: Justified if research completeness is critical
 ## 13. Next Steps
 
 **Immediate Actions (Week 1):**
-1. ✅ Review and approve design document
-2. ⬜ Set up V2 development branch: `git checkout -b v2-causal-inference`
-3. ⬜ Create feature flags in config for gradual rollout
-4. ⬜ Begin Phase 1: Enhanced chunking implementation
-5. ⬜ Set up benchmark dataset for causal extraction evaluation
+1. Done: Review and approve design document
+2. Done: Set up V2 development branch (`v2-causal-inference`)
+3. Done: `CausalMetadata` struct and `CausalRelationType` enum implemented (`include/llm/causal_metadata.hpp`)
+4. Done: `--causal` extraction flag integrated into `kg run`
+5. Done: Causal discovery operators (`causal_chains`, `intervention_points`, `feedback_loops`, `confounders`) added to registry
+6. Pending: Enhanced chunking with percentage-based overlap (Phase 1)
+7. Pending: Causal DAG construction and do-calculus (Phases 4-5)
+8. Pending: Benchmark dataset for causal extraction evaluation (Phase 7)
 
 **Decision Points:**
 - **Overlap percentage**: Confirm 15% as default or run ablation study (10%, 15%, 20%)?

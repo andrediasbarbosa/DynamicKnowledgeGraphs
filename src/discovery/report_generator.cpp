@@ -17,6 +17,1417 @@ namespace {
 int capped_max_examples(const ReportConfig& config) {
     return std::max(1, std::min(10, config.max_examples_per_type));
 }
+
+using InsightTypeGroups = std::map<InsightType, std::vector<Insight>>;
+using InsightTypeCounts = std::map<InsightType, int>;
+using CategoryCounts = std::map<InsightCategory, int>;
+using CategoryAverageScores = std::map<InsightCategory, double>;
+using FeaturedInsight = std::pair<InsightCategory, Insight>;
+
+struct ReportInsightIndex {
+    InsightTypeGroups by_type;
+    InsightTypeCounts counts;
+};
+
+struct Hypotheses2Split {
+    std::vector<Insight> intersection_bridge;
+    std::vector<Insight> regular;
+};
+
+struct CategoryMetrics {
+    CategoryCounts counts;
+    CategoryAverageScores average_scores;
+};
+
+struct VisualSummaryTypeNode {
+    std::string full_label;
+    std::string short_label;
+    int count = 0;
+};
+
+using CategoryTypeBuckets = std::map<InsightCategory, std::vector<VisualSummaryTypeNode>>;
+
+struct HtmlReportContext {
+    ReportInsightIndex insight_index;
+    Hypotheses2Split hypotheses_2;
+    CategoryMetrics category_metrics;
+    std::vector<FeaturedInsight> featured_insights;
+    HypergraphStatistics graph_stats;
+};
+
+bool has_novelty_tag(const Insight& insight, const std::string& tag) {
+    return std::find(insight.novelty_tags.begin(), insight.novelty_tags.end(), tag) != insight.novelty_tags.end();
+}
+
+template <typename Key, typename Value>
+Value lookup_or_default(const std::map<Key, Value>& values, const Key& key, Value fallback = Value{}) {
+    const auto it = values.find(key);
+    return it != values.end() ? it->second : fallback;
+}
+
+ReportInsightIndex build_report_insight_index(const InsightCollection& insights) {
+    ReportInsightIndex index;
+    for (const auto& insight : insights.insights) {
+        index.by_type[insight.type].push_back(insight);
+        index.counts[insight.type]++;
+    }
+    return index;
+}
+
+Hypotheses2Split split_hypotheses_2(const std::vector<Insight>& hypotheses_2) {
+    Hypotheses2Split split;
+    for (const auto& insight : hypotheses_2) {
+        if (has_novelty_tag(insight, "intersection_bridge")) {
+            split.intersection_bridge.push_back(insight);
+        } else {
+            split.regular.push_back(insight);
+        }
+    }
+    return split;
+}
+
+CategoryMetrics compute_category_metrics(const InsightCollection& insights) {
+    CategoryMetrics metrics;
+    for (const auto& insight : insights.insights) {
+        metrics.counts[insight.category]++;
+        metrics.average_scores[insight.category] += insight.score;
+    }
+
+    for (auto& [category, total_score] : metrics.average_scores) {
+        const int count = metrics.counts[category];
+        if (count > 0) {
+            total_score /= count;
+        }
+    }
+
+    return metrics;
+}
+
+std::vector<FeaturedInsight> select_featured_insights(const InsightCollection& insights) {
+    std::map<InsightCategory, std::vector<Insight>> by_category;
+    for (const auto& insight : insights.insights) {
+        if (!insight.witness_edges.empty()) {
+            by_category[insight.category].push_back(insight);
+        }
+    }
+
+    for (auto& [category, grouped_insights] : by_category) {
+        (void)category;
+        std::sort(grouped_insights.begin(), grouped_insights.end(),
+                  [](const Insight& a, const Insight& b) { return a.score > b.score; });
+    }
+
+    std::vector<FeaturedInsight> featured;
+    for (const auto category : {InsightCategory::EXPLORATORY, InsightCategory::TRANSFORMATIONAL, InsightCategory::COMBINATORIAL}) {
+        const auto it = by_category.find(category);
+        if (it != by_category.end() && !it->second.empty()) {
+            featured.emplace_back(category, it->second.front());
+        }
+    }
+
+    if (featured.size() < 4) {
+        std::vector<Insight> remaining;
+        for (const auto& insight : insights.insights) {
+            if (insight.witness_edges.empty()) {
+                continue;
+            }
+
+            bool already_featured = false;
+            for (const auto& [category, featured_insight] : featured) {
+                (void)category;
+                if (featured_insight.seed_labels == insight.seed_labels &&
+                    featured_insight.type == insight.type) {
+                    already_featured = true;
+                    break;
+                }
+            }
+
+            if (!already_featured) {
+                remaining.push_back(insight);
+            }
+        }
+
+        std::sort(remaining.begin(), remaining.end(),
+                  [](const Insight& a, const Insight& b) { return a.score > b.score; });
+
+        for (const auto& insight : remaining) {
+            if (featured.size() >= 4) {
+                break;
+            }
+            featured.emplace_back(insight.category, insight);
+        }
+    }
+
+    return featured;
+}
+
+HtmlReportContext build_html_report_context(const InsightCollection& insights, const Hypergraph& graph) {
+    HtmlReportContext context;
+    context.insight_index = build_report_insight_index(insights);
+    const auto hypotheses_2_it = context.insight_index.by_type.find(InsightType::HYPOTHESES_2);
+    if (hypotheses_2_it != context.insight_index.by_type.end()) {
+        context.hypotheses_2 = split_hypotheses_2(hypotheses_2_it->second);
+    }
+    context.category_metrics = compute_category_metrics(insights);
+    context.featured_insights = select_featured_insights(insights);
+    context.graph_stats = graph.compute_statistics();
+    return context;
+}
+
+void append_html_document_head(
+    std::ostream& html,
+    const ReportConfig& config,
+    const InsightCollection& insights,
+    const HypergraphStatistics& stats,
+    const std::string& timestamp
+) {
+    html << R"(<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>)" << config.title << R"(</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4fc3f7;
+            --secondary: #fbbf24;
+            --accent: #e879f9;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.2);
+            --theme-surprise: #e879f9;
+            --theme-gap: #fbbf24;
+            --theme-rule: #818cf8;
+            --theme-motif: #4ade80;
+            --theme-path: #38bdf8;
+            --theme-longchain: #a3e635;
+            --theme-metapath: #38bdf8;
+            --theme-community: #f97316;
+            --theme-hypothesis: #22d3ee;
+            --theme-mechanism: #22d3ee;
+            --theme-intersection-bridge: #06b6d4;
+            --theme-fusion: #06b6d4;
+            --theme-anomaly: #fb7185;
+            --theme-bottleneck: #f97316;
+            --theme-competing: #8b5cf6;
+            --theme-repair: #10b981;
+            --theme-crosscommunity: #0ea5e9;
+            --theme-author: #facc15;
+            --theme-contradiction: #f87171;
+            --theme-resolution: #34d399;
+            --theme-core: #60a5fa;
+            --theme-text: #a78bfa;
+            --theme-argument: #38bdf8;
+            --theme-active: #f59e0b;
+            --theme-method: #10b981;
+            --theme-centrality: #14b8a6;
+            --theme-community-detect: #3b82f6;
+            --theme-k-core: #f59e0b;
+            --theme-k-truss: #84cc16;
+            --theme-claim: #ec4899;
+            --theme-relation: #0ea5e9;
+            --theme-analogy: #a855f7;
+            --theme-uncertainty: #f97316;
+            --theme-counterfactual: #64748b;
+            --theme-hyperedge: #22c55e;
+            --theme-constrained: #eab308;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+        header h1 {
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .meta span { margin: 0 10px; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        .card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+        .card-link:hover .card {
+            border-color: rgba(79, 195, 247, 0.5);
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            color: var(--primary);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .card .value {
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        .card.bridges .value { color: var(--primary); }
+        .card.surprises .value { color: var(--theme-surprise); }
+        .card.completions .value { color: var(--theme-gap); }
+        .card.motifs .value { color: var(--theme-motif); }
+        .card.community .value { color: var(--theme-community); }
+        .card.pathrank .value { color: var(--theme-path); }
+        .card.longchain .value { color: var(--theme-longchain); }
+        .card.metapathpattern .value { color: var(--theme-metapath); }
+        .card.rules .value { color: var(--theme-rule); }
+        .card.embedding .value { color: var(--secondary); }
+        .card.hypothesis .value { color: var(--theme-hypothesis); }
+        .card.mechanism .value { color: var(--theme-mechanism); }
+        .card.intersectionbridge .value { color: var(--theme-intersection-bridge); }
+        .card.fusion .value { color: var(--theme-fusion); }
+        .card.anomaly .value { color: var(--theme-anomaly); }
+        .card.bottleneck .value { color: var(--theme-bottleneck); }
+        .card.competing .value { color: var(--theme-competing); }
+        .card.repair .value { color: var(--theme-repair); }
+        .card.crosscommunity .value { color: var(--theme-crosscommunity); }
+        .card.authorchain .value { color: var(--theme-author); }
+        .card.coauthorship .value { color: var(--theme-author); }
+        .card.citations .value { color: var(--theme-author); }
+        .card.contradiction .value { color: var(--theme-contradiction); }
+        .card.resolution .value { color: var(--theme-resolution); }
+        .card.coreperiphery .value { color: var(--theme-core); }
+        .card.textsimilarity .value { color: var(--theme-text); }
+        .card.argumentsupport .value { color: var(--theme-argument); }
+        .card.activelearning .value { color: var(--theme-active); }
+        .card.methodoutcome .value { color: var(--theme-method); }
+        .card.centrality .value { color: var(--theme-centrality); }
+        .card.communitydetect .value { color: var(--theme-community-detect); }
+        .card.kcore .value { color: var(--theme-k-core); }
+        .card.ktruss .value { color: var(--theme-k-truss); }
+        .card.claimstance .value { color: var(--theme-claim); }
+        .card.relationinduction .value { color: var(--theme-relation); }
+        .card.analogical .value { color: var(--theme-analogy); }
+        .card.uncertainty .value { color: var(--theme-uncertainty); }
+        .card.counterfactual .value { color: var(--theme-counterfactual); }
+        .card.hyperedge .value { color: var(--theme-hyperedge); }
+        .card.constrainedrule .value { color: var(--theme-constrained); }
+
+        /* Category overview styles */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+        .category-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            border-color: rgba(79, 195, 247, 0.4);
+            transform: translateY(-4px);
+        }
+        .category-card.combinatorial {
+            border-left: 4px solid #4ade80;
+        }
+        .category-card.exploratory {
+            border-left: 4px solid #4fc3f7;
+        }
+        .category-card.transformational {
+            border-left: 4px solid #e879f9;
+        }
+        .category-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+        .category-card h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+        .category-card.combinatorial h3 { color: #4ade80; }
+        .category-card.exploratory h3 { color: #4fc3f7; }
+        .category-card.transformational h3 { color: #e879f9; }
+        .category-card .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .category-card .description {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .category-card .stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .category-card .stat-item {
+            text-align: center;
+        }
+        .category-card .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .category-card.combinatorial .stat-value { color: #4ade80; }
+        .category-card.exploratory .stat-value { color: #4fc3f7; }
+        .category-card.transformational .stat-value { color: #e879f9; }
+        .category-card .stat-label {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+        section h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        section > p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .insight {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .insight.surprise { border-left-color: var(--accent); }
+        .insight.completion { border-left-color: var(--secondary); }
+        .insight.motif { border-left-color: #66bb6a; }
+        .insight.rule { border-left-color: #ab47bc; }
+        .insight.contradiction { border-left-color: var(--theme-contradiction); }
+        .insight.entity-resolution { border-left-color: var(--theme-resolution); }
+        .insight.core-periphery { border-left-color: var(--theme-core); }
+        .insight.text-similarity { border-left-color: var(--theme-text); }
+        .insight.argument-support { border-left-color: var(--theme-argument); }
+        .insight.active-learning { border-left-color: var(--theme-active); }
+        .insight.method-outcome { border-left-color: var(--theme-method); }
+        .insight h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .insight.surprise h4 { color: var(--accent); }
+        .insight.contradiction h4 { color: var(--theme-contradiction); }
+        .insight.entity-resolution h4 { color: var(--theme-resolution); }
+        .insight.core-periphery h4 { color: var(--theme-core); }
+        .insight.text-similarity h4 { color: var(--theme-text); }
+        .insight.argument-support h4 { color: var(--theme-argument); }
+        .insight.active-learning h4 { color: var(--theme-active); }
+        .insight.method-outcome h4 { color: var(--theme-method); }
+        .insight p { margin-bottom: 10px; }
+        .evidence {
+            font-size: 0.85em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .entity {
+            background: rgba(79, 195, 247, 0.2);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .module {
+            background: rgba(15, 23, 42, 0.65);
+            border-radius: 14px;
+            padding: 24px;
+            margin: 30px 0;
+            border: 1px solid var(--border);
+            border-left-width: 4px;
+        }
+        .module-header h2 {
+            margin-bottom: 8px;
+        }
+        .module-header .definition {
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .module-header .count {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+        .spotlight {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 10px;
+            padding: 16px;
+            margin: 18px 0;
+        }
+        .spotlight h3 {
+            margin-bottom: 8px;
+            font-size: 1.05em;
+            color: var(--text);
+        }
+        .spotlight .narrative {
+            font-size: 1.05em;
+            color: var(--text);
+        }
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 10px 0 30px;
+        }
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .stat .label {
+            font-size: 0.78em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .stat .value {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 8px;
+        }
+        .data-table th, .data-table td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table th {
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .data-table td:last-child {
+            text-align: right;
+            font-weight: 500;
+        }
+        .recommendations {
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .recommendations h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .recommendations ol {
+            margin-left: 20px;
+        }
+        .recommendations li {
+            margin: 10px 0;
+        }
+        .recommendations strong {
+            color: var(--primary);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        .toc {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .toc h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: var(--primary);
+        }
+        .toc .count {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        .toc .category-toc > a {
+            font-weight: 600;
+            font-size: 1.05em;
+            display: block;
+            margin: 12px 0 8px 0;
+            color: var(--primary);
+        }
+        .toc .sub-toc {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        .toc .sub-toc li {
+            margin: 6px 0;
+        }
+
+        /* Category section headers */
+        .category-section-header {
+            margin: 50px 0 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            border-radius: 16px;
+            border-left: 5px solid var(--primary);
+        }
+        .category-section-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+            color: var(--primary);
+        }
+        .category-section-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1.1em;
+        }
+
+        /* Interactive features CSS */
+        .search-controls {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .search-controls input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .search-controls input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .filter-group {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-group label {
+            cursor: pointer;
+            padding: 6px 12px;
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .filter-group label:hover {
+            background: rgba(79, 195, 247, 0.2);
+        }
+        .filter-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+        .highlighted {
+            background: rgba(251, 191, 36, 0.3) !important;
+            box-shadow: 0 0 0 2px var(--theme-gap);
+            animation: pulse 0.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .entity, .data-table td:first-child {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .entity:hover, .data-table td:first-child:hover {
+            background: rgba(79, 195, 247, 0.15);
+        }
+        /* Framework badges */
+        .badges { margin: 12px 0 16px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8em;
+            font-weight: 600;
+            line-height: 1;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .badge-stage {
+            background: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            border: 1px solid rgba(125, 211, 252, 0.3);
+        }
+        .badge-stability {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fcd34d;
+            border: 1px solid rgba(252, 211, 77, 0.3);
+        }
+        .badge-risk {
+            background: rgba(248, 113, 113, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(252, 165, 165, 0.3);
+        }
+        .badge-mechanism {
+            background: rgba(139, 92, 246, 0.25);
+            color: #8b5cf6;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>)" << config.title << R"(</h1>
+            <div class="meta">
+                <span>Generated: )" << timestamp << R"(</span>
+                <span>|</span>
+                <span>Source: )" << (config.source_document.empty() ? "Unknown" : config.source_document) << R"(</span>
+                <span>|</span>
+                <span>Run ID: )" << insights.run_id << R"(</span>
+            </div>
+        </header>
+
+        <section id="statistics" class="stats-bar">
+            <div class="stat">
+                <div class="label">Total Entities</div>
+                <div class="value">)" << stats.num_nodes << R"(</div>
+            </div>
+            <div class="stat">
+                <div class="label">Total Relationships</div>
+                <div class="value">)" << stats.num_edges << R"(</div>
+            </div>
+            <div class="stat">
+                <div class="label">Average Degree</div>
+                <div class="value">)" << std::fixed << std::setprecision(2) << stats.avg_node_degree << R"(</div>
+            </div>
+            <div class="stat">
+                <div class="label">Insights Discovered</div>
+                <div class="value">)" << insights.insights.size() << R"(</div>
+            </div>
+        </section>
+)";
+}
+
+void append_future_work_section_intro(std::ostream& html) {
+    html << R"HTML(
+        <!-- Suggested Future Work Section -->
+        <style>
+            #future-work .module-content p {
+                text-align: justify;
+                line-height: 1.75;
+                margin-top: 0;
+                margin-bottom: 1.1em;
+            }
+            #future-work .module-content h3 {
+                margin-top: 1.8em;
+                margin-bottom: 0.5em;
+            }
+            #future-work .module-content ul {
+                margin-top: 0;
+                margin-bottom: 1.1em;
+                padding-left: 1.6em;
+            }
+            #future-work .module-content li {
+                text-align: justify;
+                line-height: 1.7;
+                margin-bottom: 0.55em;
+            }
+            #future-work .module-content li ul {
+                margin-top: 0.4em;
+                margin-bottom: 0;
+            }
+        </style>
+        <section id="future-work" class="module" style="border-left-color: var(--theme-misc)">
+            <div class="module-header">
+                <h2 style="color: var(--theme-misc)">Suggested Future Work</h2>
+                <p class="definition">Tailored research directions based on the epistemological distribution and gaps in this analysis</p>
+            </div>
+            <div class="module-content">
+)HTML";
+}
+
+void append_report_footer(std::ostream& html) {
+    html << R"HTML(
+        <footer>
+            <p>This report was automatically generated by the Knowledge Discovery Engine.<br>
+            All insights should be validated by domain experts before taking action.</p>
+        </footer>
+    )HTML";
+}
+
+void append_interactive_html_tail(std::ostream& html) {
+    html << R"HTML(
+    </div>
+
+    <!-- Export Button -->
+    <button class="export-btn" id="exportBtn">Export PDF</button>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Interactive Features JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ====================================================================
+        // 0. BUTTON EVENT LISTENERS
+        // ====================================================================
+        const expandAllBtn = document.getElementById('expandAllBtn');
+        const collapseAllBtn = document.getElementById('collapseAllBtn');
+        const exportBtn = document.getElementById('exportBtn');
+
+        if (expandAllBtn) {
+            expandAllBtn.addEventListener('click', function() {
+                document.querySelectorAll('section:not(#statistics)').forEach(s => {
+                    s.classList.remove('collapsed');
+                    Array.from(s.children).forEach((child, idx) => {
+                        if (idx > 0) child.style.display = '';
+                    });
+                });
+            });
+        }
+
+        if (collapseAllBtn) {
+            collapseAllBtn.addEventListener('click', function() {
+                document.querySelectorAll('section:not(#statistics)').forEach(s => {
+                    s.classList.add('collapsed');
+                    Array.from(s.children).forEach((child, idx) => {
+                        if (idx > 0) child.style.display = 'none';
+                    });
+                });
+            });
+        }
+
+        if (exportBtn) {
+            exportBtn.addEventListener('click', function() {
+                window.print();
+            });
+        }
+
+        // ====================================================================
+        // 1. COLLAPSIBLE SECTIONS
+        // ====================================================================
+        const allSections = Array.from(document.querySelectorAll('section:not(#statistics)'));
+        allSections.forEach((section, index) => {
+            const header = section.querySelector('h2');
+            if (!header) return;
+
+            // Start all sections collapsed
+            section.classList.add('collapsed');
+            const children = Array.from(section.children);
+            children.forEach((child, idx) => {
+                if (idx > 0) {
+                    child.style.display = 'none';
+                }
+            });
+
+            // Expand the first two sections
+            if (index < 2) {
+                section.classList.remove('collapsed');
+                children.forEach((child, idx) => {
+                    if (idx > 0) {
+                        child.style.display = '';
+                    }
+                });
+            }
+
+            header.addEventListener('click', function() {
+                section.classList.toggle('collapsed');
+                const children = Array.from(section.children);
+                children.forEach((child, idx) => {
+                    if (idx > 0) {
+                        child.style.display = section.classList.contains('collapsed') ? 'none' : '';
+                    }
+                });
+            });
+        });
+
+        // ====================================================================
+        // 2. SEARCH FUNCTIONALITY
+        // ====================================================================
+        const searchBox = document.getElementById('searchBox');
+        if (searchBox) {
+            searchBox.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+
+                document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    const matches = text.includes(query);
+                    row.style.display = matches ? '' : 'none';
+                });
+
+                document.querySelectorAll('.cluster').forEach(cluster => {
+                    const text = cluster.textContent.toLowerCase();
+                    cluster.style.display = text.includes(query) ? '' : 'none';
+                });
+
+                document.querySelectorAll('section[id^="module-"]').forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    section.style.display = (query === '' || text.includes(query)) ? '' : 'none';
+                });
+
+                updateVisibleCounts();
+            });
+        }
+
+        // ====================================================================
+        // 3. CONFIDENCE FILTERING
+        // ====================================================================
+        document.querySelectorAll('.filter-score').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const activeFilters = Array.from(document.querySelectorAll('.filter-score:checked'))
+                    .map(cb => cb.value);
+
+                document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                    const scoreCell = row.querySelector('td:nth-child(2)');
+                    if (!scoreCell) return;
+
+                    const scoreText = scoreCell.textContent.trim();
+                    const score = parseFloat(scoreText);
+
+                    if (isNaN(score)) {
+                        row.style.display = '';
+                        return;
+                    }
+
+                    let show = false;
+                    if (activeFilters.includes('high') && score >= 0.7) show = true;
+                    if (activeFilters.includes('med') && score >= 0.4 && score < 0.7) show = true;
+                    if (activeFilters.includes('low') && score < 0.4) show = true;
+
+                    row.style.display = show ? '' : 'none';
+                });
+
+                updateVisibleCounts();
+            });
+        });
+
+        function updateVisibleCounts() {
+            document.querySelectorAll('section[id^="module-"]').forEach(section => {
+                const table = section.querySelector('.data-table tbody');
+                if (!table) return;
+
+                const total = table.querySelectorAll('tr').length;
+                const visible = table.querySelectorAll('tr:not([style*="display: none"])').length;
+
+                const countEl = section.querySelector('.module-header .count');
+                if (countEl && total > 0) {
+                    const originalText = countEl.textContent;
+                    if (visible < total) {
+                        countEl.textContent = originalText.replace(/Total: \d+/, `Showing: ${visible} / ${total}`);
+                    } else {
+                        countEl.textContent = originalText.replace(/Showing: \d+ \/ /, 'Total: ');
+                    }
+                }
+            });
+        }
+
+        // ====================================================================
+        // 4. ENTITY HIGHLIGHTING
+        // ====================================================================
+        function highlightEntity(entityName) {
+            document.querySelectorAll('.highlighted').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+
+            if (!entityName) return;
+
+            const normalizedSearch = entityName.toLowerCase().trim();
+            let firstMatch = null;
+
+            document.querySelectorAll('.data-table td').forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(normalizedSearch)) {
+                    cell.classList.add('highlighted');
+                    if (!firstMatch) firstMatch = cell;
+                }
+            });
+
+            document.querySelectorAll('.entity').forEach(badge => {
+                if (badge.textContent.toLowerCase().includes(normalizedSearch)) {
+                    badge.classList.add('highlighted');
+                    if (!firstMatch) firstMatch = badge;
+                }
+            });
+
+            if (firstMatch) {
+                firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        document.querySelectorAll('.entity, .data-table td:first-child').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const entityName = this.textContent.trim();
+                highlightEntity(entityName);
+            });
+        });
+
+        // ====================================================================
+        // 5. LAZY LOADING FOR LARGE TABLES
+        // ====================================================================
+        document.querySelectorAll('.data-table tbody').forEach(tbody => {
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const INITIAL_ROWS = 20;
+
+            if (rows.length <= INITIAL_ROWS) return;
+
+            rows.slice(INITIAL_ROWS).forEach(row => {
+                row.style.display = 'none';
+                row.dataset.lazyHidden = 'true';
+            });
+
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.className = 'load-more-btn';
+            loadMoreBtn.textContent = `Load ${rows.length - INITIAL_ROWS} more...`;
+
+            loadMoreBtn.addEventListener('click', function() {
+                rows.forEach(row => {
+                    if (row.dataset.lazyHidden === 'true') {
+                        row.style.display = '';
+                        delete row.dataset.lazyHidden;
+                    }
+                });
+                this.remove();
+            });
+
+            tbody.parentElement.insertAdjacentElement('afterend', loadMoreBtn);
+        });
+
+        // ====================================================================
+        // 6. INTERACTIVE CHART
+        // ====================================================================
+        const chartCanvas = document.getElementById('insightChart');
+        if (chartCanvas && typeof Chart !== 'undefined') {
+            const categoryData = {
+                'Combinatorial': 0,
+                'Exploratory': 0,
+                'Transformational': 0
+            };
+
+            document.querySelectorAll('.category-card').forEach(card => {
+                const title = card.querySelector('h3');
+                const statItems = card.querySelectorAll('.stat-item');
+                if (title && statItems.length > 0) {
+                    const categoryName = title.textContent.trim();
+                    const countValue = statItems[0].querySelector('.stat-value');
+                    const count = countValue ? parseInt(countValue.textContent.trim()) || 0 : 0;
+                    if (categoryData.hasOwnProperty(categoryName)) {
+                        categoryData[categoryName] = count;
+                    }
+                }
+            });
+
+            const totalInsights = Object.values(categoryData).reduce((a, b) => a + b, 0);
+
+            if (totalInsights > 0) {
+                new Chart(chartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Combinatorial', 'Exploratory', 'Transformational'],
+                        datasets: [{
+                            label: 'Number of Insights',
+                            data: [
+                                categoryData['Combinatorial'],
+                                categoryData['Exploratory'],
+                                categoryData['Transformational']
+                            ],
+                            backgroundColor: [
+                                'rgba(74, 222, 128, 0.7)',
+                                'rgba(79, 195, 247, 0.7)',
+                                'rgba(232, 121, 249, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(74, 222, 128, 1)',
+                                'rgba(79, 195, 247, 1)',
+                                'rgba(232, 121, 249, 1)'
+                            ],
+                            borderWidth: 2,
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Insight Distribution by Category',
+                                color: '#f8fafc',
+                                font: { size: 16, weight: 'bold' },
+                                padding: { bottom: 20 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                padding: 12,
+                                titleColor: '#f8fafc',
+                                bodyColor: '#f8fafc',
+                                borderColor: 'rgba(148, 163, 184, 0.3)',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        const value = context.parsed.x || 0;
+                                        const percentage = ((value / totalInsights) * 100).toFixed(1);
+                                        return `${value} insights (${percentage}%)`;
+                                    },
+                                    afterLabel: function(context) {
+                                        const descriptions = [
+                                            'Pattern Detection & Structural Combinations',
+                                            'Path Finding & Connection Discovery',
+                                            'Reframing & Perspective Shifts'
+                                        ];
+                                        return descriptions[context.dataIndex];
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 11 }
+                                },
+                                grid: {
+                                    color: 'rgba(148, 163, 184, 0.1)'
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#f8fafc',
+                                    font: { size: 13, weight: '600' },
+                                    padding: 10
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        onClick: (event, activeElements) => {
+                            if (activeElements.length > 0) {
+                                const index = activeElements[0].index;
+                                const sectionIds = [
+                                    '#combinatorial-section',
+                                    '#exploratory-section',
+                                    '#transformational-section'
+                                ];
+                                const section = document.querySelector(sectionIds[index]);
+                                if (section) {
+                                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // ====================================================================
+        // 7. KEYBOARD SHORTCUTS
+        // ====================================================================
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                if (searchBox) searchBox.focus();
+            }
+
+            if (e.key === 'Escape') {
+                if (searchBox) {
+                    searchBox.value = '';
+                    searchBox.dispatchEvent(new Event('input'));
+                }
+                highlightEntity(null);
+            }
+        });
+
+        console.log('Interactive report features loaded successfully');
+    })();
+    </script>
+)HTML";
+}
+
+std::string escape_svg_text(const std::string& text) {
+    std::string escaped;
+    escaped.reserve(text.size());
+    for (char c : text) {
+        switch (c) {
+            case '&': escaped += "&amp;"; break;
+            case '<': escaped += "&lt;"; break;
+            case '>': escaped += "&gt;"; break;
+            case '"': escaped += "&quot;"; break;
+            case '\'': escaped += "&apos;"; break;
+            default: escaped.push_back(c); break;
+        }
+    }
+    return escaped;
+}
+
+std::string shorten_visual_summary_label(const std::string& label, std::size_t max_chars = 21) {
+    if (label.size() <= max_chars) {
+        return label;
+    }
+
+    if (max_chars <= 3) {
+        return label.substr(0, max_chars);
+    }
+
+    return label.substr(0, max_chars - 3) + "...";
+}
+
+std::string category_display_name(InsightCategory category) {
+    switch (category) {
+        case InsightCategory::COMBINATORIAL: return "Combinatorial";
+        case InsightCategory::EXPLORATORY: return "Exploratory";
+        case InsightCategory::TRANSFORMATIONAL: return "Transformational";
+        default: return "Unknown";
+    }
+}
+
+std::string category_summary_blurb(InsightCategory category) {
+    switch (category) {
+        case InsightCategory::COMBINATORIAL: return "Patterns and recurring structures";
+        case InsightCategory::EXPLORATORY: return "Connections, bridges, and traversals";
+        case InsightCategory::TRANSFORMATIONAL: return "Reframes, challenges, and synthesis";
+        default: return "Mixed discovery patterns";
+    }
+}
+
+std::string category_hex_color(InsightCategory category) {
+    switch (category) {
+        case InsightCategory::COMBINATORIAL: return "#4ade80";
+        case InsightCategory::EXPLORATORY: return "#38bdf8";
+        case InsightCategory::TRANSFORMATIONAL: return "#e879f9";
+        default: return "#94a3b8";
+    }
+}
+
+std::string category_fill_color(InsightCategory category) {
+    switch (category) {
+        case InsightCategory::COMBINATORIAL: return "rgba(74, 222, 128, 0.12)";
+        case InsightCategory::EXPLORATORY: return "rgba(56, 189, 248, 0.12)";
+        case InsightCategory::TRANSFORMATIONAL: return "rgba(232, 121, 249, 0.12)";
+        default: return "rgba(148, 163, 184, 0.12)";
+    }
+}
+
+std::string generate_visual_summary_diagram_html(
+    const CategoryTypeBuckets& buckets,
+    const CategoryCounts& category_counts,
+    const HypergraphStatistics& stats,
+    std::size_t total_insights
+) {
+    const std::vector<InsightCategory> ordered_categories = {
+        InsightCategory::COMBINATORIAL,
+        InsightCategory::EXPLORATORY,
+        InsightCategory::TRANSFORMATIONAL
+    };
+
+    std::size_t active_type_count = 0;
+    std::size_t max_rows = 1;
+
+    for (const auto category : ordered_categories) {
+        const auto it = buckets.find(category);
+        const std::size_t bucket_size = (it != buckets.end()) ? it->second.size() : 0;
+        active_type_count += bucket_size;
+        max_rows = std::max(max_rows, (bucket_size + 1) / 2);
+    }
+
+    const int diagram_width = 1180;
+    const int panel_width = 360;
+    const int panel_gap = 20;
+    const int panel_y = 176;
+    const int panel_height = 158 + static_cast<int>(max_rows) * 50;
+    const int diagram_height = panel_y + panel_height + 50;
+
+    std::stringstream html;
+    html << R"HTML(
+        <section id="visual-summary-atlas" class="module" style="border-left-color: #38bdf8; background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.92) 100%);">
+            <div class="module-header">
+                <h2 style="color: #7dd3fc;">Insight Atlas</h2>
+                <p class="definition">A final diagram of every active finding type in this report, grouped by discovery mode and scaled by how often it appears.</p>
+            </div>
+            <div style="overflow-x: auto; padding-bottom: 8px;">
+                <svg viewBox="0 0 )HTML" << diagram_width << " " << diagram_height << R"HTML(" role="img" aria-label="Visual summary diagram of report findings grouped by category" style="width: 100%; min-width: 980px; height: auto; display: block;">
+                    <defs>
+                        <linearGradient id="atlasBackdrop" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0f172a"/>
+                            <stop offset="100%" stop-color="#111827"/>
+                        </linearGradient>
+                        <filter id="atlasGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="8" result="glow"/>
+                            <feMerge>
+                                <feMergeNode in="glow"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <rect x="0" y="0" width=")HTML" << diagram_width << R"HTML(" height=")HTML" << diagram_height << R"HTML(" rx="28" fill="url(#atlasBackdrop)" stroke="rgba(148, 163, 184, 0.18)" />
+                    <circle cx="170" cy="70" r="120" fill="rgba(56, 189, 248, 0.06)" />
+                    <circle cx="1020" cy="80" r="150" fill="rgba(232, 121, 249, 0.05)" />
+                    <circle cx="590" cy=")HTML" << (diagram_height - 80) << R"HTML(" r="180" fill="rgba(74, 222, 128, 0.04)" />
+
+                    <rect x="340" y="24" width="500" height="96" rx="24" fill="rgba(15, 23, 42, 0.82)" stroke="rgba(125, 211, 252, 0.35)" />
+                    <text x="590" y="58" text-anchor="middle" font-size="27" font-weight="700" fill="#f8fafc">Visual Summary of Findings</text>
+                    <text x="590" y="86" text-anchor="middle" font-size="15" fill="#7dd3fc">)HTML" << total_insights << R"HTML( insights across )HTML" << active_type_count << R"HTML( active finding types</text>
+                    <text x="590" y="106" text-anchor="middle" font-size="12.5" fill="#94a3b8">)HTML"
+         << stats.num_nodes << R"HTML( entities • )HTML" << stats.num_edges << R"HTML( relationships • grouped by discovery mode</text>
+)HTML";
+
+    for (std::size_t index = 0; index < ordered_categories.size(); ++index) {
+        const InsightCategory category = ordered_categories[index];
+        const int panel_x = 30 + static_cast<int>(index) * (panel_width + panel_gap);
+        const int orb_cx = panel_x + panel_width / 2;
+        const int orb_cy = panel_y + 58;
+        const std::string accent = category_hex_color(category);
+        const std::string fill = category_fill_color(category);
+        const std::string label = category_display_name(category);
+        const std::string blurb = category_summary_blurb(category);
+        const int category_total = lookup_or_default(category_counts, category, 0);
+        const double category_pct = total_insights > 0
+            ? (100.0 * static_cast<double>(category_total) / static_cast<double>(total_insights))
+            : 0.0;
+
+        const auto bucket_it = buckets.find(category);
+        const std::vector<VisualSummaryTypeNode> empty_bucket;
+        const auto& nodes = (bucket_it != buckets.end()) ? bucket_it->second : empty_bucket;
+
+        int panel_max = 1;
+        for (const auto& node : nodes) {
+            panel_max = std::max(panel_max, node.count);
+        }
+
+        html << R"HTML(
+                    <path d="M 590 120 C )HTML" << orb_cx << R"HTML( 140, )HTML" << orb_cx << R"HTML( 150, )HTML" << orb_cx << " " << (orb_cy - 34)
+             << R"HTML(" stroke=")HTML" << accent << R"HTML(" stroke-opacity="0.28" stroke-width="3" fill="none" />
+                    <rect x=")HTML" << panel_x << R"HTML(" y=")HTML" << panel_y << R"HTML(" width=")HTML" << panel_width << R"HTML(" height=")HTML" << panel_height
+             << R"HTML(" rx="24" fill="rgba(15, 23, 42, 0.78)" stroke=")HTML" << accent << R"HTML(" stroke-opacity="0.35" />
+                    <rect x=")HTML" << panel_x << R"HTML(" y=")HTML" << panel_y << R"HTML(" width=")HTML" << panel_width << R"HTML(" height="8" rx="8" fill=")HTML" << accent << R"HTML(" fill-opacity="0.65" />
+                    <circle cx=")HTML" << orb_cx << R"HTML(" cy=")HTML" << orb_cy << R"HTML(" r="40" fill=")HTML" << fill << R"HTML(" stroke=")HTML" << accent << R"HTML(" stroke-width="2.5" filter="url(#atlasGlow)" />
+                    <text x=")HTML" << orb_cx << R"HTML(" y=")HTML" << (orb_cy - 8) << R"HTML(" text-anchor="middle" font-size="13" font-weight="600" fill="#e2e8f0">)HTML"
+             << escape_svg_text(label) << R"HTML(</text>
+                    <text x=")HTML" << orb_cx << R"HTML(" y=")HTML" << (orb_cy + 16) << R"HTML(" text-anchor="middle" font-size="28" font-weight="700" fill=")HTML"
+             << accent << R"HTML(">)HTML" << category_total << R"HTML(</text>
+                    <text x=")HTML" << orb_cx << R"HTML(" y=")HTML" << (orb_cy + 42) << R"HTML(" text-anchor="middle" font-size="11" fill="#94a3b8">)HTML"
+             << std::fixed << std::setprecision(1) << category_pct << R"HTML(% of report</text>
+                    <text x=")HTML" << orb_cx << R"HTML(" y=")HTML" << (panel_y + 126) << R"HTML(" text-anchor="middle" font-size="11.5" fill="#cbd5e1">)HTML"
+             << escape_svg_text(blurb) << R"HTML(</text>
+)HTML";
+
+        if (nodes.empty()) {
+            html << R"HTML(
+                    <rect x=")HTML" << (panel_x + 24) << R"HTML(" y=")HTML" << (panel_y + 154) << R"HTML(" width=")HTML" << (panel_width - 48)
+                 << R"HTML(" height="48" rx="14" fill="rgba(15, 23, 42, 0.88)" stroke=")HTML" << accent << R"HTML(" stroke-opacity="0.25" stroke-dasharray="5 5" />
+                    <text x=")HTML" << (panel_x + panel_width / 2) << R"HTML(" y=")HTML" << (panel_y + 184) << R"HTML(" text-anchor="middle" font-size="12" fill="#94a3b8">No active finding types in this run</text>
+)HTML";
+            continue;
+        }
+
+        for (std::size_t node_index = 0; node_index < nodes.size(); ++node_index) {
+            const auto& node = nodes[node_index];
+            const int column = static_cast<int>(node_index % 2);
+            const int row = static_cast<int>(node_index / 2);
+            const int chip_x = panel_x + 18 + column * 168;
+            const int chip_y = panel_y + 148 + row * 50;
+            const int chip_width = 156;
+            const int chip_height = 38;
+            const int bar_width = std::max(16, static_cast<int>(92.0 * static_cast<double>(node.count) / static_cast<double>(panel_max)));
+
+            html << R"HTML(
+                    <g>
+                        <title>)HTML" << escape_svg_text(node.full_label) << ": " << node.count << R"HTML( findings</title>
+                        <rect x=")HTML" << chip_x << R"HTML(" y=")HTML" << chip_y << R"HTML(" width=")HTML" << chip_width << R"HTML(" height=")HTML" << chip_height
+                 << R"HTML(" rx="12" fill="rgba(2, 6, 23, 0.74)" stroke=")HTML" << accent << R"HTML(" stroke-opacity="0.32" />
+                        <rect x=")HTML" << (chip_x + 12) << R"HTML(" y=")HTML" << (chip_y + chip_height - 11) << R"HTML(" width="92" height="4" rx="2" fill="rgba(148, 163, 184, 0.14)" />
+                        <rect x=")HTML" << (chip_x + 12) << R"HTML(" y=")HTML" << (chip_y + chip_height - 11) << R"HTML(" width=")HTML" << bar_width << R"HTML(" height="4" rx="2" fill=")HTML" << accent << R"HTML(" />
+                        <text x=")HTML" << (chip_x + 12) << R"HTML(" y=")HTML" << (chip_y + 16) << R"HTML(" font-size="10.8" font-weight="600" fill="#f8fafc">)HTML"
+                 << escape_svg_text(node.short_label) << R"HTML(</text>
+                        <circle cx=")HTML" << (chip_x + chip_width - 17) << R"HTML(" cy=")HTML" << (chip_y + 17) << R"HTML(" r="12" fill=")HTML" << accent << R"HTML(" fill-opacity="0.22" stroke=")HTML" << accent << R"HTML(" stroke-opacity="0.55" />
+                        <text x=")HTML" << (chip_x + chip_width - 17) << R"HTML(" y=")HTML" << (chip_y + 21) << R"HTML(" text-anchor="middle" font-size="11" font-weight="700" fill=")HTML" << accent << R"HTML(">)HTML"
+                 << node.count << R"HTML(</text>
+                    </g>
+)HTML";
+        }
+    }
+
+    html << R"HTML(
+                </svg>
+            </div>
+            <p style="margin-top: 14px; color: var(--text-muted); font-size: 0.92em;">
+                Each capsule represents an active finding type in this run. Categories summarize discovery mode, count badges show frequency, and the baseline bar inside each capsule scales relative to the most frequent type in that category.
+            </p>
+        </section>
+)HTML";
+
+    return html.str();
+}
 }  // namespace
 
 std::string ReportGenerator::get_node_label(const std::string& node_id) const {
@@ -2002,22 +3413,9 @@ std::string ReportGenerator::generate_statistics_section(const InsightCollection
 
 std::string ReportGenerator::generate_category_overview(const InsightCollection& insights, const ReportConfig& config) {
     std::stringstream ss;
-
-    // Count insights by category
-    std::map<InsightCategory, int> category_counts;
-    std::map<InsightCategory, double> category_avg_scores;
-
-    for (const auto& insight : insights.insights) {
-        category_counts[insight.category]++;
-        category_avg_scores[insight.category] += insight.score;
-    }
-
-    // Calculate averages
-    for (auto& [cat, total_score] : category_avg_scores) {
-        if (category_counts[cat] > 0) {
-            total_score /= category_counts[cat];
-        }
-    }
+    const auto metrics = compute_category_metrics(insights);
+    auto category_counts = metrics.counts;
+    auto category_avg_scores = metrics.average_scores;
 
     if (config.markdown_format) {
         ss << "## Knowledge Discovery Categories\n\n";
@@ -4977,12 +6375,8 @@ std::string ReportGenerator::generate_conclusions(const InsightCollection& insig
 
 std::string ReportGenerator::generate(const InsightCollection& insights, const ReportConfig& config) {
     std::stringstream report;
-
-    // Group insights by type
-    std::map<InsightType, std::vector<Insight>> by_type;
-    for (const auto& insight : insights.insights) {
-        by_type[insight.type].push_back(insight);
-    }
+    const auto index = build_report_insight_index(insights);
+    auto by_type = index.by_type;
 
     // Generate sections
     report << generate_header(insights, config);
@@ -5142,744 +6536,43 @@ static DynamicLimits calculate_dynamic_limits(size_t insight_count, const Report
 
 std::string ReportGenerator::generate_html(const InsightCollection& insights, const ReportConfig& config) {
     std::stringstream html;
-
-    auto has_novelty_tag = [](const Insight& insight, const std::string& tag) {
-        return std::find(insight.novelty_tags.begin(), insight.novelty_tags.end(), tag) != insight.novelty_tags.end();
-    };
-
-    // Group insights by type
-    std::map<InsightType, std::vector<Insight>> by_type;
-    for (const auto& insight : insights.insights) {
-        by_type[insight.type].push_back(insight);
-    }
-
-    // Count by type
-    std::map<InsightType, int> counts;
-    for (const auto& insight : insights.insights) {
-        counts[insight.type]++;
-    }
-
-    // Split out intersection-constrained hypotheses from generic H2 chains.
-    std::vector<Insight> intersection_bridge_hypotheses;
-    std::vector<Insight> regular_h2_hypotheses;
-    for (const auto& insight : by_type[InsightType::HYPOTHESES_2]) {
-        if (has_novelty_tag(insight, "intersection_bridge")) {
-            intersection_bridge_hypotheses.push_back(insight);
-        } else {
-            regular_h2_hypotheses.push_back(insight);
-        }
-    }
+    const auto context = build_html_report_context(insights, graph_);
+    auto by_type = context.insight_index.by_type;
+    auto counts = context.insight_index.counts;
+    const auto& intersection_bridge_hypotheses = context.hypotheses_2.intersection_bridge;
+    const auto& regular_h2_hypotheses = context.hypotheses_2.regular;
     const int intersection_bridge_count = static_cast<int>(intersection_bridge_hypotheses.size());
     const int regular_h2_count = static_cast<int>(regular_h2_hypotheses.size());
+    auto category_counts = context.category_metrics.counts;
+    auto category_avg_scores = context.category_metrics.average_scores;
+    const auto& stats = context.graph_stats;
+    const auto& featured_insights = context.featured_insights;
 
-    auto stats = graph_.compute_statistics();
-
-    // HTML Header with styling
-    html << R"(<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>)" << config.title << R"(</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4fc3f7;
-            --secondary: #fbbf24;
-            --accent: #e879f9;
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: rgba(148, 163, 184, 0.2);
-            --theme-surprise: #e879f9;
-            --theme-gap: #fbbf24;
-            --theme-rule: #818cf8;
-            --theme-motif: #4ade80;
-            --theme-path: #38bdf8;
-            --theme-longchain: #a3e635;
-            --theme-metapath: #38bdf8;
-            --theme-community: #f97316;
-            --theme-hypothesis: #22d3ee;
-            --theme-mechanism: #22d3ee;
-            --theme-intersection-bridge: #06b6d4;
-            --theme-fusion: #06b6d4;
-            --theme-anomaly: #fb7185;
-            --theme-bottleneck: #f97316;
-            --theme-competing: #8b5cf6;
-            --theme-repair: #10b981;
-            --theme-crosscommunity: #0ea5e9;
-            --theme-author: #facc15;
-            --theme-contradiction: #f87171;
-            --theme-resolution: #34d399;
-            --theme-core: #60a5fa;
-            --theme-text: #a78bfa;
-            --theme-argument: #38bdf8;
-            --theme-active: #f59e0b;
-            --theme-method: #10b981;
-            --theme-centrality: #14b8a6;
-            --theme-community-detect: #3b82f6;
-            --theme-k-core: #f59e0b;
-            --theme-k-truss: #84cc16;
-            --theme-claim: #ec4899;
-            --theme-relation: #0ea5e9;
-            --theme-analogy: #a855f7;
-            --theme-uncertainty: #f97316;
-            --theme-counterfactual: #64748b;
-            --theme-hyperedge: #22c55e;
-            --theme-constrained: #eab308;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-card) 100%);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid var(--border);
-        }
-        header h1 {
-            font-size: 2.5em;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .meta {
-            color: var(--text-muted);
-            font-size: 0.9em;
-        }
-        .meta span { margin: 0 10px; }
-        .summary-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        .card {
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border);
-        }
-        .card-link {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.15s ease, border-color 0.15s ease;
-        }
-        .card-link:hover .card {
-            border-color: rgba(79, 195, 247, 0.5);
-            transform: translateY(-2px);
-        }
-        .card h3 {
-            color: var(--primary);
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-        .card .value {
-            font-size: 2.5em;
-            font-weight: 600;
-        }
-        .card.bridges .value { color: var(--primary); }
-        .card.surprises .value { color: var(--theme-surprise); }
-        .card.completions .value { color: var(--theme-gap); }
-        .card.motifs .value { color: var(--theme-motif); }
-        .card.community .value { color: var(--theme-community); }
-        .card.pathrank .value { color: var(--theme-path); }
-        .card.longchain .value { color: var(--theme-longchain); }
-        .card.metapathpattern .value { color: var(--theme-metapath); }
-        .card.rules .value { color: var(--theme-rule); }
-        .card.embedding .value { color: var(--secondary); }
-        .card.hypothesis .value { color: var(--theme-hypothesis); }
-        .card.mechanism .value { color: var(--theme-mechanism); }
-        .card.intersectionbridge .value { color: var(--theme-intersection-bridge); }
-        .card.fusion .value { color: var(--theme-fusion); }
-        .card.anomaly .value { color: var(--theme-anomaly); }
-        .card.bottleneck .value { color: var(--theme-bottleneck); }
-        .card.competing .value { color: var(--theme-competing); }
-        .card.repair .value { color: var(--theme-repair); }
-        .card.crosscommunity .value { color: var(--theme-crosscommunity); }
-        .card.authorchain .value { color: var(--theme-author); }
-        .card.coauthorship .value { color: var(--theme-author); }
-        .card.citations .value { color: var(--theme-author); }
-        .card.contradiction .value { color: var(--theme-contradiction); }
-        .card.resolution .value { color: var(--theme-resolution); }
-        .card.coreperiphery .value { color: var(--theme-core); }
-        .card.textsimilarity .value { color: var(--theme-text); }
-        .card.argumentsupport .value { color: var(--theme-argument); }
-        .card.activelearning .value { color: var(--theme-active); }
-        .card.methodoutcome .value { color: var(--theme-method); }
-        .card.centrality .value { color: var(--theme-centrality); }
-        .card.communitydetect .value { color: var(--theme-community-detect); }
-        .card.kcore .value { color: var(--theme-k-core); }
-        .card.ktruss .value { color: var(--theme-k-truss); }
-        .card.claimstance .value { color: var(--theme-claim); }
-        .card.relationinduction .value { color: var(--theme-relation); }
-        .card.analogical .value { color: var(--theme-analogy); }
-        .card.uncertainty .value { color: var(--theme-uncertainty); }
-        .card.counterfactual .value { color: var(--theme-counterfactual); }
-        .card.hyperedge .value { color: var(--theme-hyperedge); }
-        .card.constrainedrule .value { color: var(--theme-constrained); }
-
-        /* Category overview styles */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin: 30px 0;
-        }
-        .category-card {
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 12px;
-            padding: 24px;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        .category-card:hover {
-            border-color: rgba(79, 195, 247, 0.4);
-            transform: translateY(-4px);
-        }
-        .category-card.combinatorial {
-            border-left: 4px solid #4ade80;
-        }
-        .category-card.exploratory {
-            border-left: 4px solid #4fc3f7;
-        }
-        .category-card.transformational {
-            border-left: 4px solid #e879f9;
-        }
-        .category-card .icon {
-            font-size: 2.5em;
-            margin-bottom: 12px;
-        }
-        .category-card h3 {
-            color: var(--primary);
-            font-size: 1.3em;
-            margin-bottom: 8px;
-        }
-        .category-card.combinatorial h3 { color: #4ade80; }
-        .category-card.exploratory h3 { color: #4fc3f7; }
-        .category-card.transformational h3 { color: #e879f9; }
-        .category-card .subtitle {
-            color: var(--text-muted);
-            font-size: 0.9em;
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-        .category-card .description {
-            color: var(--text-muted);
-            font-size: 0.9em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .category-card .stats {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-        }
-        .category-card .stat-item {
-            text-align: center;
-        }
-        .category-card .stat-value {
-            font-size: 2em;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .category-card.combinatorial .stat-value { color: #4ade80; }
-        .category-card.exploratory .stat-value { color: #4fc3f7; }
-        .category-card.transformational .stat-value { color: #e879f9; }
-        .category-card .stat-label {
-            font-size: 0.75em;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+    CategoryTypeBuckets visual_summary_buckets;
+    for (const auto& [type, grouped_insights] : by_type) {
+        if (grouped_insights.empty()) {
+            continue;
         }
 
-        section {
-            margin: 40px 0;
-        }
-        section h2 {
-            color: var(--primary);
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary);
-        }
-        section > p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-        .insight {
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 4px solid var(--primary);
-        }
-        .insight.surprise { border-left-color: var(--accent); }
-        .insight.completion { border-left-color: var(--secondary); }
-        .insight.motif { border-left-color: #66bb6a; }
-        .insight.rule { border-left-color: #ab47bc; }
-        .insight.contradiction { border-left-color: var(--theme-contradiction); }
-        .insight.entity-resolution { border-left-color: var(--theme-resolution); }
-        .insight.core-periphery { border-left-color: var(--theme-core); }
-        .insight.text-similarity { border-left-color: var(--theme-text); }
-        .insight.argument-support { border-left-color: var(--theme-argument); }
-        .insight.active-learning { border-left-color: var(--theme-active); }
-        .insight.method-outcome { border-left-color: var(--theme-method); }
-        .insight h4 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .insight.surprise h4 { color: var(--accent); }
-        .insight.contradiction h4 { color: var(--theme-contradiction); }
-        .insight.entity-resolution h4 { color: var(--theme-resolution); }
-        .insight.core-periphery h4 { color: var(--theme-core); }
-        .insight.text-similarity h4 { color: var(--theme-text); }
-        .insight.argument-support h4 { color: var(--theme-argument); }
-        .insight.active-learning h4 { color: var(--theme-active); }
-        .insight.method-outcome h4 { color: var(--theme-method); }
-        .insight p { margin-bottom: 10px; }
-        .evidence {
-            font-size: 0.85em;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-        .entity {
-            background: rgba(79, 195, 247, 0.2);
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        .module {
-            background: rgba(15, 23, 42, 0.65);
-            border-radius: 14px;
-            padding: 24px;
-            margin: 30px 0;
-            border: 1px solid var(--border);
-            border-left-width: 4px;
-        }
-        .module-header h2 {
-            margin-bottom: 8px;
-        }
-        .module-header .definition {
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-        .module-header .count {
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-        .spotlight {
-            background: rgba(15, 23, 42, 0.7);
-            border-radius: 10px;
-            padding: 16px;
-            margin: 18px 0;
-        }
-        .spotlight h3 {
-            margin-bottom: 8px;
-            font-size: 1.05em;
-            color: var(--text);
-        }
-        .spotlight .narrative {
-            font-size: 1.05em;
-            color: var(--text);
-        }
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            margin: 10px 0 30px;
-        }
-        .stat {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .stat .label {
-            font-size: 0.78em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
-        .stat .value {
-            font-size: 1.4em;
-            font-weight: 600;
-            color: var(--text);
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0 8px;
-        }
-        .data-table th, .data-table td {
-            padding: 12px 14px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        .data-table th {
-            background: rgba(15, 23, 42, 0.6);
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-        }
-        .data-table td:last-child {
-            text-align: right;
-            font-weight: 500;
-        }
-        .recommendations {
-            background: rgba(79, 195, 247, 0.1);
-            border-radius: 12px;
-            padding: 25px;
-            margin: 30px 0;
-        }
-        .recommendations h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .recommendations ol {
-            margin-left: 20px;
-        }
-        .recommendations li {
-            margin: 10px 0;
-        }
-        .recommendations strong {
-            color: var(--primary);
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            font-size: 0.85em;
-            border-top: 1px solid var(--border);
-            margin-top: 40px;
-        }
-        .toc {
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .toc h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .toc ul {
-            list-style: none;
-        }
-        .toc li {
-            margin: 8px 0;
-        }
-        .toc a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .toc a:hover {
-            color: var(--primary);
-        }
-        .toc .count {
-            color: var(--text-muted);
-            font-size: 0.9em;
-        }
-        .toc .category-toc > a {
-            font-weight: 600;
-            font-size: 1.05em;
-            display: block;
-            margin: 12px 0 8px 0;
-            color: var(--primary);
-        }
-        .toc .sub-toc {
-            margin-left: 20px;
-            margin-top: 8px;
-        }
-        .toc .sub-toc li {
-            margin: 6px 0;
-        }
+        const std::string full_label = get_insight_type_name(type);
+        visual_summary_buckets[grouped_insights.front().category].push_back({
+            full_label,
+            shorten_visual_summary_label(full_label),
+            static_cast<int>(grouped_insights.size())
+        });
+    }
 
-        /* Category section headers */
-        .category-section-header {
-            margin: 50px 0 30px 0;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-            border-radius: 16px;
-            border-left: 5px solid var(--primary);
-        }
-        .category-section-header h2 {
-            margin: 0 0 10px 0;
-            font-size: 2em;
-            color: var(--primary);
-        }
-        .category-section-header p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 1.1em;
-        }
-
-        /* Interactive features CSS */
-        .search-controls {
-            margin: 25px 0;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        .search-controls input[type="text"] {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 1em;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        .search-controls input[type="text"]:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        .filter-group {
-            margin-top: 15px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .filter-group label {
-            cursor: pointer;
-            padding: 6px 12px;
-            background: rgba(79, 195, 247, 0.1);
-            border-radius: 6px;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .filter-group label:hover {
-            background: rgba(79, 195, 247, 0.2);
-        }
-        .filter-group input[type="checkbox"] {
-            cursor: pointer;
-        }
-        .highlighted {
-            background: rgba(251, 191, 36, 0.3) !important;
-            box-shadow: 0 0 0 2px var(--theme-gap);
-            animation: pulse 0.5s ease-in-out;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        .entity, .data-table td:first-child {
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .entity:hover, .data-table td:first-child:hover {
-            background: rgba(79, 195, 247, 0.15);
-        }
-        section h2 {
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-            padding-left: 30px;
-        }
-        section h2::before {
-            content: '▼';
-            position: absolute;
-            left: 0;
-            transition: transform 0.2s;
-        }
-        section.collapsed h2::before {
-            transform: rotate(-90deg);
-        }
-        .export-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background: var(--primary);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95em;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .export-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-        }
-        .load-more-btn {
-            margin: 15px auto;
-            display: block;
-            padding: 10px 20px;
-            background: var(--primary);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .load-more-btn:hover {
-            background: rgba(79, 195, 247, 0.8);
-        }
-        .chart-container {
-            max-width: 700px;
-            min-height: 250px;
-            margin: 30px auto;
-            padding: 25px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        @media print {
-            .search-controls, .export-btn, .load-more-btn, .chart-container {
-                display: none !important;
+    for (auto& [category, nodes] : visual_summary_buckets) {
+        (void)category;
+        std::sort(nodes.begin(), nodes.end(), [](const VisualSummaryTypeNode& a, const VisualSummaryTypeNode& b) {
+            if (a.count != b.count) {
+                return a.count > b.count;
             }
-            section.collapsed > *:not(h2) {
-                display: block !important;
-            }
-            section h2::before {
-                content: '' !important;
-            }
-        }
+            return a.full_label < b.full_label;
+        });
+    }
 
-        /* Phase 2: Causal Metadata Badges */
-        .causal-badges {
-            display: inline-flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-left: 8px;
-        }
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        /* Strength badges */
-        .badge-strength-deterministic {
-            background: rgba(34, 197, 94, 0.25);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.4);
-        }
-        .badge-strength-strong {
-            background: rgba(132, 204, 22, 0.25);
-            color: #84cc16;
-            border: 1px solid rgba(132, 204, 22, 0.4);
-        }
-        .badge-strength-moderate {
-            background: rgba(251, 191, 36, 0.25);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.4);
-        }
-        .badge-strength-weak {
-            background: rgba(248, 113, 113, 0.25);
-            color: #f87171;
-            border: 1px solid rgba(248, 113, 113, 0.4);
-        }
-        /* Type badges */
-        .badge-type {
-            background: rgba(79, 195, 247, 0.25);
-            color: #4fc3f7;
-            border: 1px solid rgba(79, 195, 247, 0.4);
-        }
-        .badge-type-necessary {
-            background: rgba(220, 38, 38, 0.25);
-            color: #ff6b6b;
-            border: 1px solid rgba(220, 38, 38, 0.4);
-        }
-        .badge-type-sufficient {
-            background: rgba(168, 85, 247, 0.25);
-            color: #a855f7;
-            border: 1px solid rgba(168, 85, 247, 0.4);
-        }
-        /* Temporality badges */
-        .badge-temporality {
-            background: rgba(148, 163, 184, 0.25);
-            color: #94a3b8;
-            border: 1px solid rgba(148, 163, 184, 0.4);
-        }
-        .badge-immediate {
-            background: rgba(34, 211, 238, 0.25);
-            color: #22d3ee;
-            border: 1px solid rgba(34, 211, 238, 0.4);
-        }
-        .badge-delayed {
-            background: rgba(251, 146, 60, 0.25);
-            color: #fb923c;
-            border: 1px solid rgba(251, 146, 60, 0.4);
-        }
-        /* Mechanism badge */
-        .badge-mechanism {
-            background: rgba(139, 92, 246, 0.25);
-            color: #8b5cf6;
-            border: 1px solid rgba(139, 92, 246, 0.4);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>)" << config.title << R"(</h1>
-            <div class="meta">
-                <span>Generated: )" << get_current_timestamp() << R"(</span>
-                <span>|</span>
-                <span>Source: )" << (config.source_document.empty() ? "Unknown" : config.source_document) << R"(</span>
-                <span>|</span>
-                <span>Run ID: )" << insights.run_id << R"(</span>
-            </div>
-        </header>
-
-        <section id="statistics" class="stats-bar">
-            <div class="stat">
-                <div class="label">Total Entities</div>
-                <div class="value">)" << stats.num_nodes << R"(</div>
-            </div>
-            <div class="stat">
-                <div class="label">Total Relationships</div>
-                <div class="value">)" << stats.num_edges << R"(</div>
-            </div>
-            <div class="stat">
-                <div class="label">Average Degree</div>
-                <div class="value">)" << std::fixed << std::setprecision(2) << stats.avg_node_degree << R"(</div>
-            </div>
-            <div class="stat">
-                <div class="label">Insights Discovered</div>
-                <div class="value">)" << insights.insights.size() << R"(</div>
-            </div>
-        </section>
-)";
+    append_html_document_head(html, config, insights, stats, get_current_timestamp());
 
     // V2: Add deduplication statistics if available
     if (!config.pipeline_stats.empty() && config.pipeline_stats.contains("relations_before_dedup")) {
@@ -6095,22 +6788,6 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
 
             <div class="categories-grid">
 )";
-
-    // Count by category
-    std::map<InsightCategory, int> category_counts;
-    std::map<InsightCategory, double> category_avg_scores;
-
-    for (const auto& insight : insights.insights) {
-        category_counts[insight.category]++;
-        category_avg_scores[insight.category] += insight.score;
-    }
-
-    // Calculate averages
-    for (auto& [cat, total_score] : category_avg_scores) {
-        if (category_counts[cat] > 0) {
-            total_score /= category_counts[cat];
-        }
-    }
 
     // Combinatorial card
     html << R"(
@@ -6759,53 +7436,6 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                 </p>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;">
 )";
-
-    // Select diverse insights from different categories
-    std::map<InsightCategory, std::vector<Insight>> by_category;
-    for (const auto& insight : insights.insights) {
-        if (!insight.witness_edges.empty()) {
-            by_category[insight.category].push_back(insight);
-        }
-    }
-
-    // Sort within each category by score
-    for (auto& [cat, insights_vec] : by_category) {
-        std::sort(insights_vec.begin(), insights_vec.end(),
-                  [](const Insight& a, const Insight& b) { return a.score > b.score; });
-    }
-
-    // Select top insight from each category (max 4 - ensure diversity)
-    std::vector<std::pair<InsightCategory, Insight>> featured_insights;
-    for (const auto& cat : {InsightCategory::EXPLORATORY, InsightCategory::TRANSFORMATIONAL, InsightCategory::COMBINATORIAL}) {
-        if (by_category.count(cat) && !by_category[cat].empty()) {
-            featured_insights.push_back({cat, by_category[cat][0]});
-        }
-    }
-
-    // If we have less than 4, add more from different types within categories
-    if (featured_insights.size() < 4) {
-        std::vector<Insight> remaining;
-        for (const auto& insight : insights.insights) {
-            if (insight.witness_edges.empty()) continue;
-            bool already_featured = false;
-            for (const auto& [cat, fi] : featured_insights) {
-                if (fi.seed_labels == insight.seed_labels && fi.type == insight.type) {
-                    already_featured = true;
-                    break;
-                }
-            }
-            if (!already_featured) {
-                remaining.push_back(insight);
-            }
-        }
-        std::sort(remaining.begin(), remaining.end(),
-                  [](const Insight& a, const Insight& b) { return a.score > b.score; });
-
-        for (const auto& insight : remaining) {
-            if (featured_insights.size() >= 4) break;
-            featured_insights.push_back({insight.category, insight});
-        }
-    }
 
     // Render featured insights
     for (const auto& [category, insight] : featured_insights) {
@@ -11437,41 +12067,7 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
     // SUGGESTED FUTURE WORK - Dynamic based on actual findings
     // ========================================================================
 
-    html << R"HTML(
-        <!-- Suggested Future Work Section -->
-        <style>
-            #future-work .module-content p {
-                text-align: justify;
-                line-height: 1.75;
-                margin-top: 0;
-                margin-bottom: 1.1em;
-            }
-            #future-work .module-content h3 {
-                margin-top: 1.8em;
-                margin-bottom: 0.5em;
-            }
-            #future-work .module-content ul {
-                margin-top: 0;
-                margin-bottom: 1.1em;
-                padding-left: 1.6em;
-            }
-            #future-work .module-content li {
-                text-align: justify;
-                line-height: 1.7;
-                margin-bottom: 0.55em;
-            }
-            #future-work .module-content li ul {
-                margin-top: 0.4em;
-                margin-bottom: 0;
-            }
-        </style>
-        <section id="future-work" class="module" style="border-left-color: var(--theme-misc)">
-            <div class="module-header">
-                <h2 style="color: var(--theme-misc)">Suggested Future Work</h2>
-                <p class="definition">Tailored research directions based on the epistemological distribution and gaps in this analysis</p>
-            </div>
-            <div class="module-content">
-)HTML";
+    append_future_work_section_intro(html);
 
     // Calculate total insights and percentages
     int total_insights = static_cast<int>(insights.insights.size());
@@ -11792,428 +12388,23 @@ std::string ReportGenerator::generate_html(const InsightCollection& insights, co
                 </div>
             </div>
         </section>
+)HTML";
 
-        <footer>
-            <p>This report was automatically generated by the Knowledge Discovery Engine.<br>
-            All insights should be validated by domain experts before taking action.</p>
-        </footer>
-    </div>
+    append_report_footer(html);
 
-    <!-- Export Button -->
-    <button class="export-btn" id="exportBtn">Export PDF</button>
+    html << generate_visual_summary_diagram_html(
+        visual_summary_buckets,
+        category_counts,
+        stats,
+        insights.insights.size()
+    );
 
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-    <!-- Interactive Features JavaScript -->
-    <script>
-    (function() {
-        'use strict';
-
-        // ====================================================================
-        // 0. BUTTON EVENT LISTENERS
-        // ====================================================================
-        const expandAllBtn = document.getElementById('expandAllBtn');
-        const collapseAllBtn = document.getElementById('collapseAllBtn');
-        const exportBtn = document.getElementById('exportBtn');
-
-        if (expandAllBtn) {
-            expandAllBtn.addEventListener('click', function() {
-                document.querySelectorAll('section:not(#statistics)').forEach(s => {
-                    s.classList.remove('collapsed');
-                    Array.from(s.children).forEach((child, idx) => {
-                        if (idx > 0) child.style.display = '';
-                    });
-                });
-            });
-        }
-
-        if (collapseAllBtn) {
-            collapseAllBtn.addEventListener('click', function() {
-                document.querySelectorAll('section:not(#statistics)').forEach(s => {
-                    s.classList.add('collapsed');
-                    Array.from(s.children).forEach((child, idx) => {
-                        if (idx > 0) child.style.display = 'none';
-                    });
-                });
-            });
-        }
-
-        if (exportBtn) {
-            exportBtn.addEventListener('click', function() {
-                window.print();
-            });
-        }
-
-        // ====================================================================
-        // 1. COLLAPSIBLE SECTIONS
-        // ====================================================================
-        const allSections = Array.from(document.querySelectorAll('section:not(#statistics)'));
-        allSections.forEach((section, index) => {
-            const header = section.querySelector('h2');
-            if (!header) return;
-
-            // Start all sections collapsed
-            section.classList.add('collapsed');
-            const children = Array.from(section.children);
-            children.forEach((child, idx) => {
-                if (idx > 0) { // Skip the h2
-                    child.style.display = 'none';
-                }
-            });
-
-            // Expand the first two sections (categories overview and executive summary)
-            if (index < 2) {
-                section.classList.remove('collapsed');
-                children.forEach((child, idx) => {
-                    if (idx > 0) {
-                        child.style.display = '';
-                    }
-                });
-            }
-
-            header.addEventListener('click', function() {
-                section.classList.toggle('collapsed');
-                const children = Array.from(section.children);
-                children.forEach((child, idx) => {
-                    if (idx > 0) { // Skip the h2
-                        child.style.display = section.classList.contains('collapsed') ? 'none' : '';
-                    }
-                });
-            });
-        });
-
-        // ====================================================================
-        // 2. SEARCH FUNCTIONALITY
-        // ====================================================================
-        const searchBox = document.getElementById('searchBox');
-        if (searchBox) {
-            searchBox.addEventListener('input', function(e) {
-                const query = e.target.value.toLowerCase();
-                let visibleCount = 0;
-
-                // Search through table rows
-                document.querySelectorAll('.data-table tbody tr').forEach(row => {
-                    const text = row.textContent.toLowerCase();
-                    const matches = text.includes(query);
-                    row.style.display = matches ? '' : 'none';
-                    if (matches) visibleCount++;
-                });
-
-                // Search through clusters
-                document.querySelectorAll('.cluster').forEach(cluster => {
-                    const text = cluster.textContent.toLowerCase();
-                    cluster.style.display = text.includes(query) ? '' : 'none';
-                });
-
-                // Search through module sections - show/hide entire sections
-                document.querySelectorAll('section[id^="module-"]').forEach(section => {
-                    const text = section.textContent.toLowerCase();
-                    if (query === '') {
-                        section.style.display = '';
-                    } else {
-                        section.style.display = text.includes(query) ? '' : 'none';
-                    }
-                });
-
-                updateVisibleCounts();
-            });
-        }
-
-        // ====================================================================
-        // 3. CONFIDENCE FILTERING
-        // ====================================================================
-        document.querySelectorAll('.filter-score').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const activeFilters = Array.from(document.querySelectorAll('.filter-score:checked'))
-                    .map(cb => cb.value);
-
-                document.querySelectorAll('.data-table tbody tr').forEach(row => {
-                    const scoreCell = row.querySelector('td:nth-child(2)');
-                    if (!scoreCell) return;
-
-                    const scoreText = scoreCell.textContent.trim();
-                    const score = parseFloat(scoreText);
-
-                    if (isNaN(score)) {
-                        row.style.display = '';
-                        return;
-                    }
-
-                    let show = false;
-                    if (activeFilters.includes('high') && score >= 0.7) show = true;
-                    if (activeFilters.includes('med') && score >= 0.4 && score < 0.7) show = true;
-                    if (activeFilters.includes('low') && score < 0.4) show = true;
-
-                    row.style.display = show ? '' : 'none';
-                });
-
-                updateVisibleCounts();
-            });
-        });
-
-        function updateVisibleCounts() {
-            document.querySelectorAll('section[id^="module-"]').forEach(section => {
-                const table = section.querySelector('.data-table tbody');
-                if (!table) return;
-
-                const total = table.querySelectorAll('tr').length;
-                const visible = table.querySelectorAll('tr:not([style*="display: none"])').length;
-
-                const countEl = section.querySelector('.module-header .count');
-                if (countEl && total > 0) {
-                    const originalText = countEl.textContent;
-                    if (visible < total) {
-                        countEl.textContent = originalText.replace(/Total: \d+/, `Showing: ${visible} / ${total}`);
-                    } else {
-                        countEl.textContent = originalText.replace(/Showing: \d+ \/ /, 'Total: ');
-                    }
-                }
-            });
-        }
-
-        // ====================================================================
-        // 4. ENTITY HIGHLIGHTING (Cross-Reference)
-        // ====================================================================
-        function highlightEntity(entityName) {
-            // Clear previous highlights
-            document.querySelectorAll('.highlighted').forEach(el => {
-                el.classList.remove('highlighted');
-            });
-
-            if (!entityName) return;
-
-            const normalizedSearch = entityName.toLowerCase().trim();
-            let firstMatch = null;
-
-            // Highlight in tables
-            document.querySelectorAll('.data-table td').forEach(cell => {
-                if (cell.textContent.toLowerCase().includes(normalizedSearch)) {
-                    cell.classList.add('highlighted');
-                    if (!firstMatch) firstMatch = cell;
-                }
-            });
-
-            // Highlight entity badges
-            document.querySelectorAll('.entity').forEach(badge => {
-                if (badge.textContent.toLowerCase().includes(normalizedSearch)) {
-                    badge.classList.add('highlighted');
-                    if (!firstMatch) firstMatch = badge;
-                }
-            });
-
-            // Scroll to first match
-            if (firstMatch) {
-                firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        // Add click handlers to entities
-        document.querySelectorAll('.entity, .data-table td:first-child').forEach(el => {
-            el.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const entityName = this.textContent.trim();
-                highlightEntity(entityName);
-            });
-        });
-
-        // ====================================================================
-        // 5. LAZY LOADING FOR LARGE TABLES
-        // ====================================================================
-        document.querySelectorAll('.data-table tbody').forEach(tbody => {
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            const INITIAL_ROWS = 20;
-
-            if (rows.length <= INITIAL_ROWS) return; // Skip small sections
-
-            // Hide rows after INITIAL_ROWS
-            rows.slice(INITIAL_ROWS).forEach(row => {
-                row.style.display = 'none';
-                row.dataset.lazyHidden = 'true';
-            });
-
-            // Create "Load More" button
-            const loadMoreBtn = document.createElement('button');
-            loadMoreBtn.className = 'load-more-btn';
-            loadMoreBtn.textContent = `Load ${rows.length - INITIAL_ROWS} more...`;
-
-            loadMoreBtn.addEventListener('click', function() {
-                rows.forEach(row => {
-                    if (row.dataset.lazyHidden === 'true') {
-                        row.style.display = '';
-                        delete row.dataset.lazyHidden;
-                    }
-                });
-                this.remove();
-            });
-
-            tbody.parentElement.insertAdjacentElement('afterend', loadMoreBtn);
-        });
-
-        // ====================================================================
-        // 6. INTERACTIVE CHART
-        // ====================================================================
-        const chartCanvas = document.getElementById('insightChart');
-        if (chartCanvas && typeof Chart !== 'undefined') {
-            // Collect category counts from category cards
-            const categoryData = {
-                'Combinatorial': 0,
-                'Exploratory': 0,
-                'Transformational': 0
-            };
-
-            // Get data from the category overview cards
-            document.querySelectorAll('.category-card').forEach(card => {
-                const title = card.querySelector('h3');
-                const statItems = card.querySelectorAll('.stat-item');
-                if (title && statItems.length > 0) {
-                    const categoryName = title.textContent.trim();
-                    // First stat-item contains the count
-                    const countValue = statItems[0].querySelector('.stat-value');
-                    const count = countValue ? parseInt(countValue.textContent.trim()) || 0 : 0;
-                    if (categoryData.hasOwnProperty(categoryName)) {
-                        categoryData[categoryName] = count;
-                    }
-                }
-            });
-
-            const totalInsights = Object.values(categoryData).reduce((a, b) => a + b, 0);
-
-            if (totalInsights > 0) {
-                new Chart(chartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: ['🧩 Combinatorial', '🔍 Exploratory', '🔄 Transformational'],
-                        datasets: [{
-                            label: 'Number of Insights',
-                            data: [
-                                categoryData['Combinatorial'],
-                                categoryData['Exploratory'],
-                                categoryData['Transformational']
-                            ],
-                            backgroundColor: [
-                                'rgba(74, 222, 128, 0.7)',   // Green for Combinatorial
-                                'rgba(79, 195, 247, 0.7)',   // Blue for Exploratory
-                                'rgba(232, 121, 249, 0.7)'   // Purple for Transformational
-                            ],
-                            borderColor: [
-                                'rgba(74, 222, 128, 1)',
-                                'rgba(79, 195, 247, 1)',
-                                'rgba(232, 121, 249, 1)'
-                            ],
-                            borderWidth: 2,
-                            borderRadius: 8
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Insight Distribution by Category',
-                                color: '#f8fafc',
-                                font: { size: 16, weight: 'bold' },
-                                padding: { bottom: 20 }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                padding: 12,
-                                titleColor: '#f8fafc',
-                                bodyColor: '#f8fafc',
-                                borderColor: 'rgba(148, 163, 184, 0.3)',
-                                borderWidth: 1,
-                                callbacks: {
-                                    label: function(context) {
-                                        const value = context.parsed.x || 0;
-                                        const percentage = ((value / totalInsights) * 100).toFixed(1);
-                                        return `${value} insights (${percentage}%)`;
-                                    },
-                                    afterLabel: function(context) {
-                                        const descriptions = [
-                                            'Pattern Detection & Structural Combinations',
-                                            'Path Finding & Connection Discovery',
-                                            'Reframing & Perspective Shifts'
-                                        ];
-                                        return descriptions[context.dataIndex];
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: { size: 11 }
-                                },
-                                grid: {
-                                    color: 'rgba(148, 163, 184, 0.1)'
-                                }
-                            },
-                            y: {
-                                ticks: {
-                                    color: '#f8fafc',
-                                    font: { size: 13, weight: '600' },
-                                    padding: 10
-                                },
-                                grid: {
-                                    display: false
-                                }
-                            }
-                        },
-                        onClick: (event, activeElements) => {
-                            if (activeElements.length > 0) {
-                                const index = activeElements[0].index;
-                                const sectionIds = [
-                                    '#combinatorial-section',
-                                    '#exploratory-section',
-                                    '#transformational-section'
-                                ];
-                                const section = document.querySelector(sectionIds[index]);
-                                if (section) {
-                                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        // ====================================================================
-        // 7. KEYBOARD SHORTCUTS
-        // ====================================================================
-        document.addEventListener('keydown', function(e) {
-            // Ctrl/Cmd + K: Focus search
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                if (searchBox) searchBox.focus();
-            }
-
-            // Escape: Clear search and highlights
-            if (e.key === 'Escape') {
-                if (searchBox) {
-                    searchBox.value = '';
-                    searchBox.dispatchEvent(new Event('input'));
-                }
-                highlightEntity(null);
-            }
-        });
-
-        console.log('Interactive report features loaded successfully');
-    })();
-    </script>
-)";
+    append_interactive_html_tail(html);
 
     // Add Chart.js visualization
     html << generate_chart_js_data(counts, insights);
 
-    html << R"(
+    html << R"HTML(
 </body>
 </html>
 )HTML";

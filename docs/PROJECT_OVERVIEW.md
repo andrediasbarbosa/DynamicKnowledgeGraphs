@@ -79,4 +79,4 @@ The C++ pipeline writes stage-oriented artifacts:
 - `Step_4_GraphBuilding/`
 - `Step_5_Discovery/`
 
-See [`OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md) for the exact layout.
+See [`OUTPUT_FOLDER_STRUCTURE.md`](OUTPUT_FOLDER_STRUCTURE.md) for the exact layout.

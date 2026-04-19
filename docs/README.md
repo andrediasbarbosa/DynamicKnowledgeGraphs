@@ -5,6 +5,7 @@ This folder now contains the maintained, code-facing documentation for the repos
 ## Core Docs
 
 - [`QUICK_START.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUICK_START.md): shortest path to a working `kg` run
+- [`KG_USAGE_GUIDE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/KG_USAGE_GUIDE.md): one-page task-oriented `kg` cheatsheet
 - [`CLI_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CLI_REFERENCE.md): command and option reference for `kg`
 - [`PIPELINE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PIPELINE.md): stage ordering, inputs, outputs, and resume behavior
 - [`OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md): canonical run artifact layout

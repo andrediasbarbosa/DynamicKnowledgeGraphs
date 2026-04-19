@@ -128,6 +128,26 @@ struct CleanableRelation {
 };
 
 /**
+ * @brief Hyperedge with metadata for cleaning
+ */
+struct CleanableHyperedge {
+    std::string id;
+    std::vector<std::string> sources;
+    std::string relation;
+    std::vector<std::string> targets;
+    double confidence = 1.0;
+    bool is_valid = true;
+    std::string removal_reason;
+
+    std::set<std::string> get_all_nodes() const {
+        std::set<std::string> nodes;
+        nodes.insert(sources.begin(), sources.end());
+        nodes.insert(targets.begin(), targets.end());
+        return nodes;
+    }
+};
+
+/**
  * @brief Main graph cleaning engine with 3-level validation
  */
 class GraphCleaner {
@@ -150,10 +170,20 @@ public:
         std::shared_ptr<LLMProvider> llm = nullptr
     );
 
+    /**
+     * @brief Clean entities and hyperedges while preserving higher-order structure
+     */
+    CleaningReport clean(
+        std::vector<CleanableEntity>& entities,
+        std::vector<CleanableHyperedge>& hyperedges,
+        const CleaningConfig& config,
+        std::shared_ptr<LLMProvider> llm = nullptr
+    );
+
     // Individual level operations
     void level1_rule_based_filtering(
         std::vector<CleanableEntity>& entities,
-        std::vector<CleanableRelation>& relations,
+        std::vector<CleanableHyperedge>& hyperedges,
         const CleaningConfig& config,
         CleaningReport& report
     );
@@ -166,7 +196,7 @@ public:
 
     void level15_semantic_deduplication(
         std::vector<CleanableEntity>& entities,
-        std::vector<CleanableRelation>& relations,
+        std::vector<CleanableHyperedge>& hyperedges,
         const CleaningConfig& config,
         std::shared_ptr<LLMProvider> llm,
         CleaningReport& report
@@ -174,14 +204,14 @@ public:
 
     void level2_statistical_filtering(
         std::vector<CleanableEntity>& entities,
-        std::vector<CleanableRelation>& relations,
+        std::vector<CleanableHyperedge>& hyperedges,
         const CleaningConfig& config,
         CleaningReport& report
     );
 
     void level3_llm_validation(
         std::vector<CleanableEntity>& entities,
-        std::vector<CleanableRelation>& relations,
+        std::vector<CleanableHyperedge>& hyperedges,
         const CleaningConfig& config,
         std::shared_ptr<LLMProvider> llm,
         CleaningReport& report
@@ -199,13 +229,13 @@ private:
     // Level 2: Statistical helpers
     void compute_node_degrees(
         const std::vector<CleanableEntity>& entities,
-        const std::vector<CleanableRelation>& relations,
+        const std::vector<CleanableHyperedge>& hyperedges,
         std::map<std::string, int>& degree_map
     ) const;
 
     void compute_importance_scores(
         std::vector<CleanableEntity>& entities,
-        const std::vector<CleanableRelation>& relations
+        const std::vector<CleanableHyperedge>& hyperedges
     ) const;
 
     bool is_statistical_outlier(const CleanableEntity& entity, double threshold) const;
@@ -246,7 +276,7 @@ private:
     // Graph connectivity analysis
     void analyze_connectivity(
         const std::vector<CleanableEntity>& entities,
-        const std::vector<CleanableRelation>& relations,
+        const std::vector<CleanableHyperedge>& hyperedges,
         CleaningReport& report
     ) const;
 
@@ -254,8 +284,8 @@ private:
     std::string to_lowercase(const std::string& s) const;
     std::string trim(const std::string& s) const;
     void remove_invalid_entities(std::vector<CleanableEntity>& entities);
-    void remove_invalid_relations(
-        std::vector<CleanableRelation>& relations,
+    void remove_invalid_hyperedges(
+        std::vector<CleanableHyperedge>& hyperedges,
         const std::set<std::string>& valid_entity_ids
     );
 

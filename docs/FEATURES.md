@@ -287,28 +287,6 @@ Enter source and target entities
 → Entities auto-highlighted in 3D graph
 ```
 
-### Documents Tab
-
-**Document Explorer:**
-- Dropdown list of all source documents
-- Statistics per document:
-  - Entity count
-  - Max degree entity
-  - Top entity name
-- Entity list from selected document
-- Filter entities by name
-- Click entity to highlight in graph
-
-**Usage:**
-```
-Click "📁 Load Documents" button
-→ Select document from dropdown
-→ View statistics
-→ Browse entity list
-→ Click entity to highlight in 3D graph
-→ Use filter to search within document
-```
-
 ---
 
 ## 3D Graph Visualization

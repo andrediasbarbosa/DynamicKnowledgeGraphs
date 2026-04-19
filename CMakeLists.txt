@@ -177,6 +177,7 @@ target_link_libraries(discovery PUBLIC
 
 add_executable(kg
     src/main.cpp
+    src/pipeline/pipeline_runner.cpp
 )
 
 target_link_libraries(kg PRIVATE
@@ -303,18 +304,22 @@ if(BUILD_TESTS)
     if(GTest_FOUND)
         message(STATUS "Google Test found, building tests")
 
-        # Unit tests
-        add_executable(test_hypergraph
-            tests/unit/test_hypergraph.cpp
-        )
+        if(EXISTS "${CMAKE_SOURCE_DIR}/tests/unit/test_hypergraph.cpp")
+            # Unit tests
+            add_executable(test_hypergraph
+                tests/unit/test_hypergraph.cpp
+            )
 
-        target_link_libraries(test_hypergraph PRIVATE
-            hypergraph
-            GTest::gtest
-            GTest::gtest_main
-        )
+            target_link_libraries(test_hypergraph PRIVATE
+                hypergraph
+                GTest::gtest
+                GTest::gtest_main
+            )
 
-        add_test(NAME HypergraphTests COMMAND test_hypergraph)
+            add_test(NAME HypergraphTests COMMAND test_hypergraph)
+        else()
+            message(STATUS "Skipping test_hypergraph (tests/unit/test_hypergraph.cpp not present)")
+        endif()
 
         # V2: Deduplication tests (disabled - file not present)
         # add_executable(test_deduplication
