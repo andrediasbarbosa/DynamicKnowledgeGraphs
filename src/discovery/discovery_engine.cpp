@@ -2,6 +2,7 @@
 #include "discovery/operator_registry.hpp"
 #include "llm/llm_provider.hpp"
 #include <algorithm>
+#include <functional>
 #include <unordered_set>
 #include <unordered_map>
 #include <queue>
@@ -5694,163 +5695,91 @@ InsightCollection DiscoveryEngine::run_operators(const std::vector<std::string>&
     ss << std::put_time(std::gmtime(&time), "%Y-%m-%dT%H:%M:%SZ");
     collection.created_utc = ss.str();
 
+    const std::unordered_map<std::string, std::function<std::vector<Insight>()>> handlers = {
+        {"bridges", [this]() { return find_bridges(); }},
+        {"completions", [this]() { return find_completions(); }},
+        {"motifs", [this]() { return find_motifs(); }},
+        {"substitutions", [this]() { return find_substitutions(); }},
+        {"contradictions", [this]() { return find_contradictions(); }},
+        {"entity_resolution", [this]() { return find_entity_resolutions(); }},
+        {"core_periphery", [this]() { return find_core_periphery(); }},
+        {"text_similarity", [this]() { return find_text_similarity_links(); }},
+        {"argument_support", [this]() { return find_argument_support_relations(); }},
+        {"active_learning", [this]() { return find_active_learning_queries(); }},
+        {"method_outcome", [this]() { return find_method_outcome_nodes(); }},
+        {"centrality", [this]() { return find_centrality_nodes(); }},
+        {"community_detection", [this]() { return find_community_structures(); }},
+        {"k_core", [this]() { return find_k_core_nodes(); }},
+        {"k_truss", [this]() { return find_k_truss_edges(); }},
+        {"claim_stance", [this]() { return find_claim_stances(); }},
+        {"relation_induction", [this]() { return find_relation_induction(); }},
+        {"analogical_transfer", []() { return std::vector<Insight>{}; }},
+        {"uncertainty_sampling", [this]() { return find_uncertainty_samples(); }},
+        {"counterfactual", [this]() { return find_counterfactual_probes(); }},
+        {"hyperedge_prediction", [this]() { return find_hyperedge_predictions(); }},
+        {"diffusion", [this]() { return find_diffusions(); }},
+        {"surprise", [this]() { return find_surprise_edges(); }},
+        {"rules", [this]() { return find_rules(); }},
+        {"community", [this]() { return find_community_links(); }},
+        {"hypotheses_1", [this, &collection]() { return find_hypotheses_1(collection); }},
+        {"hypotheses_2", [this, &collection]() { return find_hypotheses_2(collection); }},
+        {"hypotheses_3", [this, &collection]() { return find_hypotheses_3(collection); }},
+        {"causal_chains", [this]() { return find_causal_chains(); }},
+        {"intervention_points", [this]() { return find_intervention_points(); }},
+        {"feedback_loops", [this]() { return find_feedback_loops(); }},
+        {"confounders", [this]() { return find_confounders(); }},
+        {"taxonomy", [this]() { return find_taxonomy_induction(); }},
+        {"domain_bridge", [this]() { return find_domain_bridges(); }},
+        {"logical_entailment", [this]() { return find_logical_entailments(); }},
+        {"compositional_reasoning", [this]() { return find_compositional_reasoning(); }},
+        {"explanatory_chain", [this]() { return find_explanatory_chains(); }},
+        {"schema_violation", [this]() { return find_schema_violations(); }},
+        {"transitive_closure", [this]() { return find_transitive_closure_gaps(); }},
+        {"meta_path", [this]() { return find_meta_path_links(); }},
+        {"meta_path_pattern", [this]() { return find_meta_path_patterns(); }},
+        {"hypotheses", []() { return std::vector<Insight>{}; }},
+        {"pathrank", [this]() { return find_path_rankings(); }},
+        {"intersection_bridge", [this]() { return find_intersection_hypothesis_bridges(); }},
+        {"long_chain", [this]() { return find_long_chains(); }},
+        {"embedding", [this]() { return find_embedding_links(); }},
+        {"author_chain", [this]() { return find_author_reference_chains(); }},
+        {"citation_impact", [this]() { return find_citation_impact(); }},
+        {"multi_resolution_community", [this]() { return find_multi_resolution_communities(); }},
+        {"cross_community_bridge_map", [this, &collection]() { return find_cross_community_bridge_maps(collection); }},
+        {"meta_pattern", [this, &collection]() { return find_meta_patterns(collection); }},
+        {"bridge_analogies", [this, &collection]() { return find_bridge_analogies(collection); }},
+        {"bias_audit", [this, &collection]() { return compute_bias_audit(collection); }},
+        {"community_recommendation", [this, &collection]() { return generate_community_recommendations(collection); }},
+        {"mechanism_consolidation", []() { return std::vector<Insight>{}; }},
+        {"evidence_fusion", [this, &collection]() { return find_evidence_fusion_links(collection); }},
+        {"meta_path_anomaly", [this, &collection]() { return find_meta_path_anomalies(collection); }},
+        {"intervention_bottleneck", []() { return std::vector<Insight>{}; }},
+        {"competing_mechanisms", [this, &collection]() { return find_competing_mechanisms(collection); }},
+        {"schema_repair", [this, &collection]() { return find_schema_repairs(collection); }},
+        {"cross_community_mechanism_bridge", [this, &collection]() { return find_cross_community_mechanism_bridges(collection); }},
+        {"evidence_debt", [this, &collection]() { return find_evidence_debt(collection); }},
+        {"consensus_frontier", [this, &collection]() { return find_consensus_frontier(collection); }},
+        {"boundary_condition_map", [this, &collection]() { return find_boundary_condition_map(collection); }},
+        {"failure_mode_topology", [this, &collection]() { return find_failure_mode_topology(collection); }},
+        {"benchmark_dependence", [this, &collection]() { return find_benchmark_dependence(collection); }},
+        {"concept_drift", [this, &collection]() { return find_concept_drift(collection); }},
+        {"premise_bottleneck", [this, &collection]() { return find_premise_bottleneck(collection); }},
+        {"translation_gap", [this, &collection]() { return find_translation_gap(collection); }},
+    };
+
     for (const auto& op : operators) {
         std::vector<Insight> insights;
+        const auto resolved = resolve_discovery_operator(op);
+        if (!resolved) {
+            continue;
+        }
 
-        bool is_author_chain_op = (op == "author_chain" || op == "authorchain" || op == "author-chains");
+        const auto& canonical_op = *resolved;
+        const bool is_author_chain_op = canonical_op == "author_chain";
 
-        if (op == "bridges" || op == "bridge") {
-            insights = find_bridges();
-        } else if (op == "completions" || op == "completion") {
-            insights = find_completions();
-        } else if (op == "motifs" || op == "motif") {
-            insights = find_motifs();
-        } else if (op == "substitutions" || op == "substitution") {
-            insights = find_substitutions();
-        } else if (op == "contradictions" || op == "contradiction") {
-            insights = find_contradictions();
-        } else if (op == "entity_resolution" || op == "entity-resolution" || op == "entityresolution" || op == "dedup") {
-            insights = find_entity_resolutions();
-        } else if (op == "core_periphery" || op == "core-periphery" || op == "coreperiphery" ||
-                   op == "hub_authority" || op == "hub-authority") {
-            insights = find_core_periphery();
-        } else if (op == "text_similarity" || op == "text-similarity" || op == "textsimilarity" ||
-                   op == "semantic" || op == "semantic_similarity") {
-            insights = find_text_similarity_links();
-        } else if (op == "argument_support" || op == "argument-support" || op == "argument") {
-            insights = find_argument_support_relations();
-        } else if (op == "active_learning" || op == "active-learning" || op == "active") {
-            insights = find_active_learning_queries();
-        } else if (op == "method_outcome" || op == "method-outcome" || op == "method" || op == "outcome") {
-            insights = find_method_outcome_nodes();
-        } else if (op == "centrality" || op == "centrality_rank" || op == "centrality_rankings") {
-            insights = find_centrality_nodes();
-        } else if (op == "community_detection" || op == "community-detection" || op == "communities") {
-            insights = find_community_structures();
-        } else if (op == "k_core" || op == "k-core" || op == "core") {
-            insights = find_k_core_nodes();
-        } else if (op == "k_truss" || op == "k-truss" || op == "truss") {
-            insights = find_k_truss_edges();
-        } else if (op == "claim_stance" || op == "claim-stance" || op == "stance") {
-            insights = find_claim_stances();
-        } else if (op == "relation_induction" || op == "relation-induction" || op == "relation_type") {
-            insights = find_relation_induction();
-        // REMOVED: analogical_transfer (low-value: 2 insights across 9 runs)
-        // } else if (op == "analogical_transfer" || op == "analogical-transfer" || op == "analogy") {
-        //     insights = find_analogical_transfers();
-        } else if (op == "uncertainty_sampling" || op == "uncertainty-sampling" || op == "uncertainty") {
-            insights = find_uncertainty_samples();
-        } else if (op == "counterfactual" || op == "counterfactual-probing") {
-            insights = find_counterfactual_probes();
-        } else if (op == "hyperedge_prediction" || op == "hyperedge-prediction" || op == "hyperedge") {
-            insights = find_hyperedge_predictions();
-        } else if (op == "diffusion" || op == "diffusions") {
-            insights = find_diffusions();
-        } else if (op == "surprise" || op == "surprises") {
-            insights = find_surprise_edges();
-        } else if (op == "rules" || op == "rule") {
-            insights = find_rules();
-        } else if (op == "community" || op == "community_link" || op == "community-links") {
-            insights = find_community_links();
-        } else if (op == "hypotheses_1" || op == "hypotheses-1" || op == "bayesian_hypotheses") {
-            insights = find_hypotheses_1(collection);
-        } else if (op == "hypotheses_2" || op == "hypotheses-2" || op == "mechanistic_hypotheses") {
-            insights = find_hypotheses_2(collection);
-        } else if (op == "hypotheses_3" || op == "hypotheses-3" || op == "counterfactual_hypotheses") {
-            insights = find_hypotheses_3(collection);
-        } else if (op == "causal_chain" || op == "causal-chain" || op == "causal_chains" || op == "causal-chains") {
-            insights = find_causal_chains();
-        } else if (op == "intervention_point" || op == "intervention-point" || op == "intervention_points" || op == "intervention-points") {
-            insights = find_intervention_points();
-        } else if (op == "feedback_loop" || op == "feedback-loop" || op == "feedback_loops" || op == "feedback-loops") {
-            insights = find_feedback_loops();
-        } else if (op == "confounder" || op == "confounders") {
-            insights = find_confounders();
-        } else if (op == "taxonomy" || op == "taxonomy_induction" || op == "taxonomy-induction") {
-            insights = find_taxonomy_induction();
-        } else if (op == "domain_bridge" || op == "domain-bridge" || op == "domain_bridges" || op == "domain-bridges") {
-            insights = find_domain_bridges();
-        } else if (op == "logical_entailment" || op == "logical-entailment" || op == "logical_entailments" || op == "logical-entailments") {
-            insights = find_logical_entailments();
-        } else if (op == "compositional_reasoning" || op == "compositional-reasoning" || op == "composition") {
-            insights = find_compositional_reasoning();
-        } else if (op == "explanatory_chain" || op == "explanatory-chain" || op == "explanatory_chains" || op == "explanatory-chains" || op == "explanation") {
-            insights = find_explanatory_chains();
-        } else if (op == "schema_violation" || op == "schema-violation" || op == "schema_violations" || op == "schema-violations" || op == "schema") {
-            insights = find_schema_violations();
-        } else if (op == "transitive_closure" || op == "transitive-closure" || op == "transitive" || op == "closure") {
-            insights = find_transitive_closure_gaps();
-        } else if (op == "meta_path" || op == "meta-path" || op == "meta_paths" || op == "meta-paths" || op == "metapath") {
-            insights = find_meta_path_links();
-        } else if (op == "meta_path_pattern" || op == "meta-path-pattern" || op == "meta_path_patterns" || op == "meta-path-patterns") {
-            insights = find_meta_path_patterns();
-        } else if (op == "hypothesis" || op == "hypotheses") {
-            // Old find_hypotheses replaced with find_hypotheses_1, _2, _3
-            // Use run_all() or specify individual operators
-        } else if (op == "pathrank" || op == "path_rank" || op == "path-ranking") {
-            insights = find_path_rankings();
-        } else if (op == "intersection_bridge" || op == "intersection-bridge" ||
-                   op == "intersection_hypothesis_bridge" || op == "intersection-hypothesis-bridge" ||
-                   op == "higher_order_bridge" || op == "higher-order-bridge" ||
-                   op == "hypergraph_traversal" || op == "hypergraph-traversal") {
-            insights = find_intersection_hypothesis_bridges();
-        } else if (op == "long_chain" || op == "long-chain" || op == "longchain") {
-            insights = find_long_chains();
-        } else if (op == "embedding" || op == "embedding_link" || op == "transe" || op == "embeddings") {
-            insights = find_embedding_links();
-        } else if (is_author_chain_op) {
-            insights = find_author_reference_chains();
-        // REMOVED: co_authorship (low-value: 1 insight across 9 runs)
-        // } else if (op == "co_authorship" || op == "co-authorship" || op == "coauthorship" || op == "collaboration") {
-        //     insights = find_co_authorship_networks();
-        } else if (op == "citation_impact" || op == "citation-impact" || op == "citations" || op == "impact") {
-            insights = find_citation_impact();
-        } else if (op == "multi_resolution_community" || op == "multi-resolution-community" || op == "multiresolution" || op == "hierarchical_community") {
-            insights = find_multi_resolution_communities();
-        } else if (op == "cross_community_bridge_map" || op == "cross-community-bridge-map" || op == "community_bridge_map" || op == "bridge_map") {
-            insights = find_cross_community_bridge_maps(collection);
-        } else if (op == "meta_pattern" || op == "meta-pattern" || op == "metapattern" || op == "pattern_of_patterns") {
-            insights = find_meta_patterns(collection);
-        } else if (op == "bridge_analogies" || op == "bridge-analogies" || op == "bridge_analogy" || op == "analogy" || op == "analogies") {
-            insights = find_bridge_analogies(collection);
-        } else if (op == "bias_audit" || op == "bias-audit" || op == "bias" || op == "fairness" || op == "representation") {
-            insights = compute_bias_audit(collection);
-        } else if (op == "community_recommendation" || op == "community-recommendation" || op == "recommend" || op == "recommendations") {
-            insights = generate_community_recommendations(collection);
-        // REMOVED: mechanism_consolidation (low-value: 2 insights across 9 runs)
-        // } else if (op == "mechanism_consolidation" || op == "mechanism-consolidation" || op == "mechanism_cluster" || op == "mechanism-cluster") {
-        //     insights = find_mechanism_consolidations(collection);
-        } else if (op == "evidence_fusion" || op == "evidence-fusion" || op == "evidence_fusion_link" || op == "evidence-fusion-link") {
-            insights = find_evidence_fusion_links(collection);
-        } else if (op == "meta_path_anomaly" || op == "meta-path-anomaly" || op == "metapath_anomaly" || op == "metapath-anomaly") {
-            insights = find_meta_path_anomalies(collection);
-        // REMOVED: intervention_bottleneck (low-value: 2 insights across 9 runs)
-        // } else if (op == "intervention_bottleneck" || op == "intervention-bottleneck") {
-        //     insights = find_intervention_bottlenecks(collection);
-        } else if (op == "competing_mechanism" || op == "competing-mechanism" ||
-                   op == "competing_mechanisms" || op == "competing-mechanisms") {
-            insights = find_competing_mechanisms(collection);
-        } else if (op == "schema_repair" || op == "schema-repair" || op == "schema_repairs" || op == "schema-repairs") {
-            insights = find_schema_repairs(collection);
-        } else if (op == "cross_community_mechanism_bridge" || op == "cross-community-mechanism-bridge" ||
-                   op == "cross_community_bridge" || op == "cross-community-bridge") {
-            insights = find_cross_community_mechanism_bridges(collection);
-        } else if (op == "evidence_debt" || op == "evidence-debt") {
-            insights = find_evidence_debt(collection);
-        } else if (op == "consensus_frontier" || op == "consensus-frontier") {
-            insights = find_consensus_frontier(collection);
-        } else if (op == "boundary_condition_map" || op == "boundary-condition-map" || op == "boundary_condition") {
-            insights = find_boundary_condition_map(collection);
-        } else if (op == "failure_mode_topology" || op == "failure-mode-topology" || op == "failure_mode") {
-            insights = find_failure_mode_topology(collection);
-        } else if (op == "benchmark_dependence" || op == "benchmark-dependence") {
-            insights = find_benchmark_dependence(collection);
-        } else if (op == "concept_drift" || op == "concept-drift") {
-            insights = find_concept_drift(collection);
-        } else if (op == "premise_bottleneck" || op == "premise-bottleneck") {
-            insights = find_premise_bottleneck(collection);
-        } else if (op == "translation_gap" || op == "translation-gap") {
-            insights = find_translation_gap(collection);
+        const auto handler_it = handlers.find(canonical_op);
+        if (handler_it != handlers.end()) {
+            insights = handler_it->second();
         }
 
         if (!is_author_chain_op) {

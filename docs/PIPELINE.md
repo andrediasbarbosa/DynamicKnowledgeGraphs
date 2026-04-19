@@ -179,6 +179,6 @@ Rules enforced by the CLI:
 
 ## Related Docs
 
-- [`CLI_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CLI_REFERENCE.md)
-- [`OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md)
-- [`QUALITY_CONTROL.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/QUALITY_CONTROL.md)
+- [`CLI_REFERENCE.md`](CLI_REFERENCE.md)
+- [`OUTPUT_FOLDER_STRUCTURE.md`](OUTPUT_FOLDER_STRUCTURE.md)
+- [`QUALITY_CONTROL.md`](QUALITY_CONTROL.md)

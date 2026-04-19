@@ -597,7 +597,7 @@ Total (internal team): ~$8K (API + compute only)
 
 ---
 
-**Roadmap Status:** ✅ Approved for implementation
-**Next Action:** Create `v2-causal-inference` branch and begin Phase 1
-**Owner:** Research Lead + Development Team
-**Review Date:** Weekly (every Monday 10am)
+**Roadmap Status:** In progress — Phase 2 (Causal Metadata) complete; Phase 1 (Chunking), Phases 3-8 pending
+**Branch:** `v2-causal-inference` (active)
+**Completed:** `CausalMetadata` struct, `CausalRelationType` enum, causal extraction prompt (`--causal`), causal operators in default registry
+**Next:** Enhanced chunking with percentage-based overlap (Phase 1); Causal DAG construction (Phase 4)

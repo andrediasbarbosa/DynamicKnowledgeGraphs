@@ -61,3 +61,8 @@ test_connectivity2/
 runs_test/
 integration_test_output.log
 paper/.venv/
+src/graph_rag_tool/backend/__pycache__/
+src/graph_rag_tool/backend/venv/
+src/graph_rag_tool/backend/graph_rag_db
+src/graph_rag_tool/deployment/__pycache__/
+src/graph_rag_tool/deployment/graph_rag_db/

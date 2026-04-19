@@ -260,7 +260,7 @@ After cleaning, the system analyzes the graph structure to provide insights into
    - Percentage of total nodes
    - Indicates main knowledge cluster
 
-3. **Hub Node** 🆕
+3. **Hub Node**
    - Identifies the node with highest degree in the largest component
    - Shows the label and degree of the most connected entity
    - Represents the central concept in the knowledge graph
@@ -440,60 +440,31 @@ Respond in JSON format:
 
 ---
 
-## Future Enhancements
+## Potential Improvements
 
-### **Potential Improvements**
-1. **Embedding-based deduplication**: Remove semantic duplicates
-2. **Domain-specific stopword lists**: Adapt to different fields
-3. **Relation validation**: Validate (subject, relation, object) triples
-4. **Confidence boosting**: Increase confidence of validated entities
-5. **Interactive mode**: Let user review suspicious entities
-
-### **Advanced Features**
-- **Fuzzy matching**: Detect near-duplicates (e.g., "ML" vs "Machine Learning")
-- **Context-aware validation**: Use surrounding relations to validate
-- **Incremental cleaning**: Only clean new entities in graph updates
-- **Whitelist/blacklist**: User-defined valid/invalid entity lists
+- **Domain-specific stopword lists**: Adapt stopword filtering to different fields
+- **Relation validation**: Validate (subject, relation, object) triples, not just entities
+- **Confidence boosting**: Increase confidence of entities validated by multiple passes
+- **Interactive mode**: Let user review and override suspicious entity decisions
+- **Context-aware validation**: Use surrounding relations to inform entity validity
+- **Incremental cleaning**: Only clean new entities when updating an existing graph
+- **Whitelist/blacklist**: User-defined valid/invalid entity overrides
 
 ---
 
-## Testing
+## Usage Examples
 
 ```bash
-# Test with default settings
-kg run --input tests/1page.pdf --output test_runs/
+# Default settings (Levels 1 + 2 only)
+./build/bin/kg run -i paper.pdf
 
-# Test with stricter filtering
-kg run --input tests/1page.pdf --output test_runs/ \
-    --min-node-length 3 \
-    --min-degree 2
+# Stricter filtering
+./build/bin/kg run -i paper.pdf --min-node-length 3 --min-degree 2
 
-# Test with LLM validation
-kg run --input tests/1page.pdf --output test_runs/ \
-    --llm-validate \
-    --validation-mode all
+# Enable LLM validation (Level 3)
+./build/bin/kg run -i paper.pdf --llm-validate --validation-mode all
 
-# Check results
-cat test_runs/run_*/Step_3_QualityControl/cleaning_report.json
+# Inspect results
+cat runs/run_*/Step_3_QualityControl/cleaning_report.json
 ```
 
----
-
-**Status:** ✅ Implemented, tested, and enhanced
-**Integration:** ✅ Stage 1.75 in pipeline
-**Documentation:** ✅ Complete and up-to-date
-**CLI Flags:** ✅ All flags registered
-
-**Recent Enhancements (2026-03-25):**
-- ✅ Level 1.2: Label Simplification
-- ✅ Hub Node Identification in Connectivity Analysis
-- ✅ Enhanced HTML reports with hub node display
-- ✅ Improved JSON output structure
-
----
-
-*Completed: 2026-03-23*
-*Enhanced: 2026-03-25*
-*Feature: 5-Level Graph Quality Control + Connectivity Analysis*
-*Lines Added: ~1,400*
-*Impact: High - significantly improves graph quality and provides structural insights*

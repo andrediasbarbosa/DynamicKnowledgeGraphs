@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### Changed (2026-04-19)
+- **Documentation sync**: Updated all `docs/` markdown files to match current code state
+  - Fixed absolute file paths to relative links in `QUICK_START.md`, `PIPELINE.md`, `PROJECT_OVERVIEW.md`
+  - Replaced `tests/` path references with `papers/` in `QUICK_START.md` (tests/ is gitignored)
+  - Removed "Embedding-based deduplication" from `QUALITY_CONTROL.md` future-enhancements list — already implemented as Level 1.5
+  - Replaced test-binary CLI examples in `QUALITY_CONTROL.md` with correct `./build/bin/kg` invocations
+  - Removed stale Documents Tab section from `FEATURES.md` (tab was removed 2026-02-21)
+  - Updated `V2_CAUSAL_DESIGN.md` status from "Design Phase" to reflect that Phase 2 (CausalMetadata) is implemented
+  - Updated `V2_IMPLEMENTATION_ROADMAP.md` to reflect branch creation and completed Phase 2
+
+- **Cleanup**: Removed `tests/unit/` directory and `tests/CS_Papers_Sample/` test data from repo history
+
 ### Fixed (2026-04-02)
 - **3D Viewer: Clustering Labels Missing in All Three Viewers**
   - Root cause: `clusterTopologyLouvain()` built adjacency from `subLinks` which in the reified hyperedge format are only entity→relation and relation→entity edges. This bipartite star structure produces Louvain communities of size 2-3, all below the `minClusterSize` threshold, so no labels were drawn.

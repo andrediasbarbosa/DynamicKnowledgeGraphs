@@ -44,19 +44,19 @@ What happens:
 Run all operators with preprocessing:
 
 ```bash
-./build/bin/kg run -i tests/ -p all --preprocess
+./build/bin/kg run -i papers/ -p all --preprocess
 ```
 
 Enable ontology classification:
 
 ```bash
-./build/bin/kg run -i tests/ --with-ontology
+./build/bin/kg run -i papers/ --with-ontology
 ```
 
 Enable semantic deduplication:
 
 ```bash
-./build/bin/kg run -i tests/ --semantic-dedup
+./build/bin/kg run -i papers/ --semantic-dedup
 ```
 
 Resume an existing run from discovery:
@@ -73,7 +73,7 @@ Inspect operators:
 
 ## Outputs
 
-Each run creates a timestamped folder under `runs/` by default. The canonical artifact layout is documented in [`OUTPUT_FOLDER_STRUCTURE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/OUTPUT_FOLDER_STRUCTURE.md).
+Each run creates a timestamped folder under `runs/` by default. The canonical artifact layout is documented in [`OUTPUT_FOLDER_STRUCTURE.md`](OUTPUT_FOLDER_STRUCTURE.md).
 
 The main results are typically:
 
@@ -84,6 +84,6 @@ The main results are typically:
 
 ## Next Docs
 
-- [`CLI_REFERENCE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/CLI_REFERENCE.md)
-- [`PIPELINE.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/PIPELINE.md)
-- [`TROUBLESHOOTING.md`](/mnt/c/Users/homea/Documents/PhD/DynamicKGs/Batch4/docs/TROUBLESHOOTING.md)
+- [`CLI_REFERENCE.md`](CLI_REFERENCE.md)
+- [`PIPELINE.md`](PIPELINE.md)
+- [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md)

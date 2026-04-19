@@ -633,15 +633,58 @@ CleaningReport GraphCleaner::clean(
     const CleaningConfig& config,
     std::shared_ptr<LLMProvider> llm
 ) {
+    std::vector<CleanableHyperedge> hyperedges;
+    hyperedges.reserve(relations.size());
+    for (const auto& relation : relations) {
+        CleanableHyperedge hyperedge;
+        hyperedge.id = relation.id;
+        hyperedge.sources = {relation.source};
+        hyperedge.relation = relation.relation;
+        hyperedge.targets = {relation.target};
+        hyperedge.confidence = relation.confidence;
+        hyperedge.is_valid = relation.is_valid;
+        hyperedge.removal_reason = relation.removal_reason;
+        hyperedges.push_back(std::move(hyperedge));
+    }
+
+    CleaningReport report = clean(entities, hyperedges, config, std::move(llm));
+
+    relations.clear();
+    relations.reserve(hyperedges.size());
+    for (const auto& hyperedge : hyperedges) {
+        if (!hyperedge.is_valid || hyperedge.sources.empty() || hyperedge.targets.empty()) {
+            continue;
+        }
+
+        CleanableRelation relation;
+        relation.id = hyperedge.id;
+        relation.source = hyperedge.sources.front();
+        relation.relation = hyperedge.relation;
+        relation.target = hyperedge.targets.front();
+        relation.confidence = hyperedge.confidence;
+        relation.is_valid = hyperedge.is_valid;
+        relation.removal_reason = hyperedge.removal_reason;
+        relations.push_back(std::move(relation));
+    }
+
+    return report;
+}
+
+CleaningReport GraphCleaner::clean(
+    std::vector<CleanableEntity>& entities,
+    std::vector<CleanableHyperedge>& hyperedges,
+    const CleaningConfig& config,
+    std::shared_ptr<LLMProvider> llm
+) {
     auto start_time = std::chrono::steady_clock::now();
 
     CleaningReport report;
     report.initial_nodes = entities.size();
-    report.initial_edges = relations.size();
+    report.initial_edges = hyperedges.size();
 
     // Level 1: Rule-based filtering (fast, removes obvious noise)
     if (config.enable_rule_based) {
-        level1_rule_based_filtering(entities, relations, config, report);
+        level1_rule_based_filtering(entities, hyperedges, config, report);
     }
 
     // Level 1.2: Simplify verbose labels (reduces noise from overly descriptive names)
@@ -651,26 +694,26 @@ CleaningReport GraphCleaner::clean(
 
     // Level 1.5: Semantic deduplication (merges semantically similar entities)
     if (config.enable_semantic_dedup && llm) {
-        level15_semantic_deduplication(entities, relations, config, llm, report);
+        level15_semantic_deduplication(entities, hyperedges, config, llm, report);
     }
 
     // Level 2: Statistical filtering (medium speed, removes outliers)
     if (config.enable_statistical) {
-        level2_statistical_filtering(entities, relations, config, report);
+        level2_statistical_filtering(entities, hyperedges, config, report);
     }
 
     // Level 3: LLM validation (slow but accurate)
     if (config.enable_llm_validation && llm) {
-        level3_llm_validation(entities, relations, config, llm, report);
+        level3_llm_validation(entities, hyperedges, config, llm, report);
     }
 
     report.final_nodes = std::count_if(entities.begin(), entities.end(),
                                        [](const auto& e) { return e.is_valid; });
-    report.final_edges = std::count_if(relations.begin(), relations.end(),
-                                       [](const auto& r) { return r.is_valid; });
+    report.final_edges = std::count_if(hyperedges.begin(), hyperedges.end(),
+                                       [](const auto& hyperedge) { return hyperedge.is_valid; });
 
     // Analyze graph connectivity
-    analyze_connectivity(entities, relations, report);
+    analyze_connectivity(entities, hyperedges, report);
 
     auto end_time = std::chrono::steady_clock::now();
     report.cleaning_time_ms = std::chrono::duration<double, std::milli>(end_time - start_time).count();
@@ -684,7 +727,7 @@ CleaningReport GraphCleaner::clean(
 
 void GraphCleaner::level1_rule_based_filtering(
     std::vector<CleanableEntity>& entities,
-    std::vector<CleanableRelation>& relations,
+    std::vector<CleanableHyperedge>& hyperedges,
     const CleaningConfig& config,
     CleaningReport& report
 ) {
@@ -768,7 +811,7 @@ void GraphCleaner::level1_rule_based_filtering(
     for (const auto& e : entities) {
         valid_ids.insert(e.id);
     }
-    remove_invalid_relations(relations, valid_ids);
+    remove_invalid_hyperedges(hyperedges, valid_ids);
 }
 
 // ============================================================================
@@ -906,7 +949,7 @@ std::string GraphCleaner::normalize_plural(const std::string& label) {
 
 void GraphCleaner::level15_semantic_deduplication(
     std::vector<CleanableEntity>& entities,
-    std::vector<CleanableRelation>& relations,
+    std::vector<CleanableHyperedge>& hyperedges,
     const CleaningConfig& config,
     std::shared_ptr<LLMProvider> llm,
     CleaningReport& report
@@ -1045,7 +1088,7 @@ void GraphCleaner::level15_semantic_deduplication(
             valid_ids.insert(e.id);
         }
     }
-    remove_invalid_relations(relations, valid_ids);
+    remove_invalid_hyperedges(hyperedges, valid_ids);
 }
 
 std::vector<GraphCleaner::SemanticDuplicateGroup> GraphCleaner::identify_semantic_duplicates(
@@ -1151,7 +1194,7 @@ std::vector<GraphCleaner::SemanticDuplicateGroup> GraphCleaner::identify_semanti
 
 void GraphCleaner::level2_statistical_filtering(
     std::vector<CleanableEntity>& entities,
-    std::vector<CleanableRelation>& relations,
+    std::vector<CleanableHyperedge>& hyperedges,
     const CleaningConfig& config,
     CleaningReport& report
 ) {
@@ -1161,7 +1204,7 @@ void GraphCleaner::level2_statistical_filtering(
 
     // Compute node degrees
     std::map<std::string, int> degree_map;
-    compute_node_degrees(entities, relations, degree_map);
+    compute_node_degrees(entities, hyperedges, degree_map);
 
     // Update entity degrees
     for (auto& entity : entities) {
@@ -1169,7 +1212,7 @@ void GraphCleaner::level2_statistical_filtering(
     }
 
     // Compute importance scores (simple version: normalized degree)
-    compute_importance_scores(entities, relations);
+    compute_importance_scores(entities, hyperedges);
 
     // Filter by degree
     int processed = 0;
@@ -1213,7 +1256,7 @@ void GraphCleaner::level2_statistical_filtering(
     for (const auto& e : entities) {
         valid_ids.insert(e.id);
     }
-    remove_invalid_relations(relations, valid_ids);
+    remove_invalid_hyperedges(hyperedges, valid_ids);
 }
 
 // ============================================================================
@@ -1222,7 +1265,7 @@ void GraphCleaner::level2_statistical_filtering(
 
 void GraphCleaner::level3_llm_validation(
     std::vector<CleanableEntity>& entities,
-    std::vector<CleanableRelation>& relations,
+    std::vector<CleanableHyperedge>& hyperedges,
     const CleaningConfig& config,
     std::shared_ptr<LLMProvider> llm,
     CleaningReport& report
@@ -1288,7 +1331,7 @@ void GraphCleaner::level3_llm_validation(
     for (const auto& e : entities) {
         valid_ids.insert(e.id);
     }
-    remove_invalid_relations(relations, valid_ids);
+    remove_invalid_hyperedges(hyperedges, valid_ids);
 }
 
 // ============================================================================
@@ -1362,7 +1405,7 @@ bool GraphCleaner::is_single_char(const std::string& s) const {
 
 void GraphCleaner::compute_node_degrees(
     const std::vector<CleanableEntity>& entities,
-    const std::vector<CleanableRelation>& relations,
+    const std::vector<CleanableHyperedge>& hyperedges,
     std::map<std::string, int>& degree_map
 ) const {
     // Initialize
@@ -1371,18 +1414,20 @@ void GraphCleaner::compute_node_degrees(
     }
 
     // Count degrees
-    for (const auto& r : relations) {
-        if (r.is_valid) {
-            degree_map[r.source]++;
-            degree_map[r.target]++;
+    for (const auto& hyperedge : hyperedges) {
+        if (hyperedge.is_valid) {
+            for (const auto& node_id : hyperedge.get_all_nodes()) {
+                degree_map[node_id]++;
+            }
         }
     }
 }
 
 void GraphCleaner::compute_importance_scores(
     std::vector<CleanableEntity>& entities,
-    const std::vector<CleanableRelation>& relations
+    const std::vector<CleanableHyperedge>& hyperedges
 ) const {
+    (void)hyperedges;
     // Simple importance: normalized degree * confidence
     int max_degree = 1;
     for (const auto& e : entities) {
@@ -1502,17 +1547,19 @@ std::string GraphCleaner::build_relation_validation_prompt(
 
 void GraphCleaner::analyze_connectivity(
     const std::vector<CleanableEntity>& entities,
-    const std::vector<CleanableRelation>& relations,
+    const std::vector<CleanableHyperedge>& hyperedges,
     CleaningReport& report
 ) const {
     // Only analyze valid entities and relations
     std::vector<std::string> valid_entity_ids;
     std::map<std::string, int> entity_index;
+    std::map<std::string, std::string> entity_labels;
 
     for (const auto& e : entities) {
         if (e.is_valid) {
             entity_index[e.id] = valid_entity_ids.size();
             valid_entity_ids.push_back(e.id);
+            entity_labels[e.id] = e.label;
         }
     }
 
@@ -1531,13 +1578,28 @@ void GraphCleaner::analyze_connectivity(
     std::vector<std::set<int>> adj(num_nodes);
     int num_edges = 0;
 
-    for (const auto& r : relations) {
-        if (r.is_valid && entity_index.count(r.source) && entity_index.count(r.target)) {
-            int src_idx = entity_index[r.source];
-            int tgt_idx = entity_index[r.target];
-            adj[src_idx].insert(tgt_idx);
-            adj[tgt_idx].insert(src_idx);  // Treat as undirected for connectivity
-            num_edges++;
+    for (const auto& hyperedge : hyperedges) {
+        if (!hyperedge.is_valid) {
+            continue;
+        }
+
+        std::vector<int> nodes_in_hyperedge;
+        for (const auto& node_id : hyperedge.get_all_nodes()) {
+            auto it = entity_index.find(node_id);
+            if (it != entity_index.end()) {
+                nodes_in_hyperedge.push_back(it->second);
+            }
+        }
+
+        for (size_t i = 0; i < nodes_in_hyperedge.size(); ++i) {
+            for (size_t j = i + 1; j < nodes_in_hyperedge.size(); ++j) {
+                int src_idx = nodes_in_hyperedge[i];
+                int tgt_idx = nodes_in_hyperedge[j];
+                if (adj[src_idx].insert(tgt_idx).second) {
+                    adj[tgt_idx].insert(src_idx);  // Treat as undirected for connectivity
+                    num_edges++;
+                }
+            }
         }
     }
 
@@ -1597,7 +1659,9 @@ void GraphCleaner::analyze_connectivity(
             }
         }
         if (hub_node_idx >= 0) {
-            report.hub_node_label = valid_entity_ids[hub_node_idx];
+            const auto& hub_node_id = valid_entity_ids[hub_node_idx];
+            auto label_it = entity_labels.find(hub_node_id);
+            report.hub_node_label = label_it != entity_labels.end() ? label_it->second : hub_node_id;
             report.hub_node_degree = max_degree;
         }
     }
@@ -1689,20 +1753,23 @@ void GraphCleaner::remove_invalid_entities(std::vector<CleanableEntity>& entitie
     );
 }
 
-void GraphCleaner::remove_invalid_relations(
-    std::vector<CleanableRelation>& relations,
+void GraphCleaner::remove_invalid_hyperedges(
+    std::vector<CleanableHyperedge>& hyperedges,
     const std::set<std::string>& valid_entity_ids
 ) {
-    for (auto& r : relations) {
-        if (valid_entity_ids.count(r.source) == 0 || valid_entity_ids.count(r.target) == 0) {
-            r.is_valid = false;
+    for (auto& hyperedge : hyperedges) {
+        for (const auto& node_id : hyperedge.get_all_nodes()) {
+            if (valid_entity_ids.count(node_id) == 0) {
+                hyperedge.is_valid = false;
+                break;
+            }
         }
     }
 
-    relations.erase(
-        std::remove_if(relations.begin(), relations.end(),
-                      [](const CleanableRelation& r) { return !r.is_valid; }),
-        relations.end()
+    hyperedges.erase(
+        std::remove_if(hyperedges.begin(), hyperedges.end(),
+                      [](const CleanableHyperedge& hyperedge) { return !hyperedge.is_valid; }),
+        hyperedges.end()
     );
 }
 
